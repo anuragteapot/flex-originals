@@ -9,7 +9,7 @@
 
 <h2 align="center">Lazy Drive</h2>
   
-**Note:** This loopback branch is under develophment because of addition of new UI, Loopback,Docker, Microservices and many more cool new features but, this was managed my small community :( LAMO Its me only :P
+**Note:** This loopback branch is under development because of addition of new UI, Loopback,Docker, Micro service and many more cool new features but, this was managed my small community :( LAMO Its me only :P
 
 **Lazy Drive** is an **opensource** project. Contributions are welcome
 

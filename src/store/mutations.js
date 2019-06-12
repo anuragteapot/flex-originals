@@ -1,11 +1,11 @@
-import * as types from "./mutation-types";
+import * as types from './mutation-types'
 
 // The only way to actually change state in a store is by committing a mutation.
 // Mutations are very similar to events: each mutation has a string type and a handler.
 // The handler function is where we perform actual state modifications, and it will receive the state as the first argument.
 
 // The grid item sizes
-const gridItemSizes = ["xs", "sm", "md", "lg", "xl"];
+const gridItemSizes = ['xs', 'sm', 'md', 'lg', 'xl']
 
 export default {
   /**
@@ -14,7 +14,7 @@ export default {
    * @param payload
    */
   [types.SELECT_DIRECTORY]: (state, payload) => {
-    state.selectedDirectory = payload;
+    state.selectedDirectory = payload
   },
 
   /**
@@ -23,7 +23,7 @@ export default {
    * @param payload
    */
   [types.SET_SETTINGS]: (state, payload) => {
-    state.settings = payload.data.settings;
+    state.settings = payload.data.settings
   },
 
   /**
@@ -32,8 +32,8 @@ export default {
    * @param payload
    */
   [types.LOAD_CONTENTS_SUCCESS]: (state, payload) => {
-    state.contents = payload;
-    state.isContentsLoaded = true;
+    state.contents = payload
+    state.isContentsLoaded = true
   },
 
   /**
@@ -42,7 +42,7 @@ export default {
    * @param payload
    */
   [types.LOAD_MORE_CONTENTS_SUCCESS]: (state, payload) => {
-    state.contents.push(payload);
+    state.contents.push(payload)
   },
 
   /**
@@ -75,22 +75,22 @@ export default {
    * @param payload
    */
   [types.DELETE_SUCCESS]: (state, payload) => {
-    const item = payload;
+    const item = payload
 
     // Delete file
-    if (item.type === "file") {
+    if (item.type === 'file') {
       state.files.splice(
         state.files.findIndex(file => file.path === item.path),
         1
-      );
+      )
     }
 
     // Delete dir
-    if (item.type === "dir") {
+    if (item.type === 'dir') {
       state.directories.splice(
         state.directories.findIndex(directory => directory.path === item.path),
         1
-      );
+      )
     }
   },
 
@@ -100,7 +100,7 @@ export default {
    * @param payload the item
    */
   [types.SELECT_BROWSER_ITEM]: (state, payload) => {
-    state.selectedItems.push(payload);
+    state.selectedItems.push(payload)
   },
 
   /**
@@ -109,7 +109,7 @@ export default {
    * @param payload the items
    */
   [types.SELECT_BROWSER_ITEMS]: (state, payload) => {
-    state.selectedItems = payload;
+    state.selectedItems = payload
   },
 
   /**
@@ -118,13 +118,13 @@ export default {
    * @param payload the item
    */
   [types.UNSELECT_BROWSER_ITEM]: (state, payload) => {
-    const item = payload;
+    const item = payload
     state.selectedItems.splice(
       state.selectedItems.findIndex(
         selectedItem => selectedItem.id === item.id
       ),
       1
-    );
+    )
   },
 
   /**
@@ -134,14 +134,14 @@ export default {
    */
   // eslint-disable-next-line
   [types.UNSELECT_ALL_BROWSER_ITEMS]: (state, payload) => {
-    state.selectAllFile = false;
-    state.selectAllFolder = false;
+    state.selectAllFile = false
+    state.selectAllFolder = false
     if (payload) {
       state.selectedItems.splice(
         state.selectedItems.findIndex(file => file.type === payload.type)
-      );
+      )
     } else {
-      state.selectedItems = [];
+      state.selectedItems = []
     }
   },
 
@@ -150,8 +150,8 @@ export default {
    * @param state
    */
   [types.SHOW_CREATE_FOLDER_MODAL]: state => {
-    state.modelBackdrop = true;
-    state.showCreateFolderModal = true;
+    state.modelBackdrop = true
+    state.showCreateFolderModal = true
   },
 
   /**
@@ -159,8 +159,8 @@ export default {
    * @param state
    */
   [types.HIDE_CREATE_FOLDER_MODAL]: state => {
-    state.modelBackdrop = false;
-    state.showCreateFolderModal = false;
+    state.modelBackdrop = false
+    state.showCreateFolderModal = false
   },
 
   /**
@@ -168,7 +168,7 @@ export default {
    * @param state
    */
   [types.SHOW_TOOL_MODAL]: state => {
-    state.showToolModal = true;
+    state.showToolModal = true
   },
 
   /**
@@ -176,7 +176,7 @@ export default {
    * @param state
    */
   [types.HIDE_TOOL_MODAL]: state => {
-    state.showToolModal = false;
+    state.showToolModal = false
   },
 
   /**
@@ -184,11 +184,11 @@ export default {
    * @param state
    */
   [types.SHOW_MENU]: (state, payload) => {
-    var e = payload.event || window.event;
-    e.preventDefault();
+    var e = payload.event || window.event
+    e.preventDefault()
 
-    state.showMenu.x = e.clientX;
-    state.showMenu.y = e.clientY;
+    state.showMenu.x = e.clientX
+    state.showMenu.y = e.clientY
   },
 
   /**
@@ -196,7 +196,7 @@ export default {
    * @param state
    */
   [types.HIDE_MENU]: state => {
-    state.showMenu.state = false;
+    state.showMenu.state = false
   },
 
   /**
@@ -204,7 +204,7 @@ export default {
    * @param state
    */
   [types.SHOW_INFOBAR]: state => {
-    state.showInfoBar = true;
+    state.showInfoBar = true
   },
 
   /**
@@ -212,7 +212,7 @@ export default {
    * @param state
    */
   [types.HIDE_INFOBAR]: state => {
-    state.showInfoBar = false;
+    state.showInfoBar = false
   },
 
   /**
@@ -220,7 +220,7 @@ export default {
    * @param state
    */
   [types.CHANGE_VIEW]: (state, view) => {
-    state.view = view;
+    state.view = view
   },
 
   /**
@@ -229,7 +229,7 @@ export default {
    * @param payload
    */
   [types.LOAD_FULL_CONTENTS_SUCCESS]: (state, payload) => {
-    state.previewItem = payload;
+    state.previewItem = payload
   },
 
   /**
@@ -237,8 +237,8 @@ export default {
    * @param state
    */
   [types.SHOW_PREVIEW_MODAL]: state => {
-    state.modelBackdrop = true;
-    state.showPreviewModal = true;
+    state.modelBackdrop = true
+    state.showPreviewModal = true
   },
 
   /**
@@ -246,8 +246,8 @@ export default {
    * @param state
    */
   [types.HIDE_PREVIEW_MODAL]: state => {
-    state.modelBackdrop = false;
-    state.showPreviewModal = false;
+    state.modelBackdrop = false
+    state.showPreviewModal = false
   },
 
   /**
@@ -255,7 +255,7 @@ export default {
    * @param state
    */
   [types.SET_IS_LOADING]: (state, payload) => {
-    state.isLoading = payload;
+    state.isLoading = payload
   },
 
   /**
@@ -263,7 +263,7 @@ export default {
    * @param state
    */
   [types.SET_IS_UPLOADING]: (state, payload) => {
-    state.isUploading = payload;
+    state.isUploading = payload
   },
 
   /**
@@ -271,7 +271,7 @@ export default {
    * @param state
    */
   [types.IS_MOBILE]: (state, payload) => {
-    state.isMobile = payload;
+    state.isMobile = payload
   },
 
   /**
@@ -279,8 +279,8 @@ export default {
    * @param state
    */
   [types.SET_IS_LOADING_MORE]: (state, payload) => {
-    state.loadMoreProgress = payload.value;
-    state.loadingValue = payload.per;
+    state.loadMoreProgress = payload.value
+    state.loadingValue = payload.per
   },
 
   /**
@@ -288,8 +288,8 @@ export default {
    * @param state
    */
   [types.SHOW_RENAME_MODAL]: state => {
-    state.modelBackdrop = true;
-    state.showRenameModal = true;
+    state.modelBackdrop = true
+    state.showRenameModal = true
   },
 
   /**
@@ -297,8 +297,8 @@ export default {
    * @param state
    */
   [types.HIDE_RENAME_MODAL]: state => {
-    state.showRenameModal = false;
-    state.modelBackdrop = false;
+    state.showRenameModal = false
+    state.modelBackdrop = false
   },
 
   /**
@@ -306,7 +306,7 @@ export default {
    * @param state
    */
   [types.SHOW_SETTINGS]: state => {
-    state.showSettings = true;
+    state.showSettings = true
   },
 
   /**
@@ -314,7 +314,7 @@ export default {
    * @param state
    */
   [types.HIDE_SETTINGS]: state => {
-    state.showSettings = false;
+    state.showSettings = false
   },
 
   /**
@@ -322,15 +322,15 @@ export default {
    * @param state
    */
   [types.SHOW_SNACKBAR]: (state, payload) => {
-    state.showsnackbar.state = true;
-    state.showsnackbar.data = payload.data;
+    state.showsnackbar.state = true
+    state.showsnackbar.data = payload.data
 
     if (payload.color) {
-      state.showsnackbar.color = payload.color;
+      state.showsnackbar.color = payload.color
     }
 
     if (payload.time == 0) {
-      state.showsnackbar.time = payload.time;
+      state.showsnackbar.time = payload.time
     }
   },
 
@@ -339,8 +339,8 @@ export default {
    * @param state
    */
   [types.HIDE_SNACKBAR]: state => {
-    state.showsnackbar.state = false;
-    state.showsnackbar.data = "";
+    state.showsnackbar.state = false
+    state.showsnackbar.data = ''
   },
 
   /**
@@ -348,7 +348,7 @@ export default {
    * @param state
    */
   [types.SHOW_SHARE_MODAL]: state => {
-    state.showShareModal = true;
+    state.showShareModal = true
   },
 
   /**
@@ -356,7 +356,7 @@ export default {
    * @param state
    */
   [types.HIDE_SHARE_MODAL]: state => {
-    state.showShareModal = false;
+    state.showShareModal = false
   },
 
   /**
@@ -364,9 +364,9 @@ export default {
    * @param state
    */
   [types.INCREASE_GRID_SIZE]: state => {
-    let currentSizeIndex = gridItemSizes.indexOf(state.gridSize);
+    let currentSizeIndex = gridItemSizes.indexOf(state.gridSize)
     if (currentSizeIndex >= 0 && currentSizeIndex < gridItemSizes.length - 1) {
-      state.gridSize = gridItemSizes[++currentSizeIndex];
+      state.gridSize = gridItemSizes[++currentSizeIndex]
     }
   },
 
@@ -375,9 +375,9 @@ export default {
    * @param state
    */
   [types.DECREASE_GRID_SIZE]: state => {
-    let currentSizeIndex = gridItemSizes.indexOf(state.gridSize);
+    let currentSizeIndex = gridItemSizes.indexOf(state.gridSize)
     if (currentSizeIndex > 0 && currentSizeIndex < gridItemSizes.length) {
-      state.gridSize = gridItemSizes[--currentSizeIndex];
+      state.gridSize = gridItemSizes[--currentSizeIndex]
     }
   },
 
@@ -387,7 +387,7 @@ export default {
    * @param query
    */
   [types.SET_SEARCH_QUERY]: (state, query) => {
-    state.search = query;
+    state.search = query
   },
 
   /**
@@ -395,8 +395,8 @@ export default {
    * @param state
    */
   [types.SHOW_CONFIRM_DELETE_MODAL]: state => {
-    state.modelBackdrop = true;
-    state.showConfirmDeleteModal = true;
+    state.modelBackdrop = true
+    state.showConfirmDeleteModal = true
   },
 
   /**
@@ -404,7 +404,7 @@ export default {
    * @param state
    */
   [types.HIDE_CONFIRM_DELETE_MODAL]: state => {
-    state.modelBackdrop = false;
-    state.showConfirmDeleteModal = false;
+    state.modelBackdrop = false
+    state.showConfirmDeleteModal = false
   }
-};
+}

@@ -13,10 +13,10 @@
 </template>
 
 <script>
-import * as types from "./../../store/mutation-types";
+import * as types from './../../store/mutation-types'
 
 export default {
-  name: "snackbar",
+  name: 'snackbar',
   props: {
     timeout: {
       type: Number,
@@ -28,50 +28,50 @@ export default {
     },
     position: {
       type: String,
-      default: "bottom-left"
+      default: 'bottom-left'
     }
   },
-  data() {
+  data () {
     return {
       timer: null
-    };
+    }
   },
   watch: {
-    active() {
-      this.setTimer();
+    active () {
+      this.setTimer()
     }
   },
   computed: {
-    classes() {
+    classes () {
       return {
         [`snackbar--${this.position}`]: true
-      };
+      }
     },
-    active() {
-      return this.$store.state.showsnackbar.state;
+    active () {
+      return this.$store.state.showsnackbar.state
     },
-    color() {
-      return this.$store.state.showsnackbar.color;
+    color () {
+      return this.$store.state.showsnackbar.color
     },
-    messagedata() {
-      return this.$store.state.showsnackbar.data || "Empty Message.";
+    messagedata () {
+      return this.$store.state.showsnackbar.data || 'Empty Message.'
     }
   },
   methods: {
-    hide() {
-      this.$store.commit(types.HIDE_SNACKBAR);
+    hide () {
+      this.$store.commit(types.HIDE_SNACKBAR)
     },
-    setTimer() {
-      if (this.timer) clearTimeout(this.timer);
+    setTimer () {
+      if (this.timer) clearTimeout(this.timer)
 
-      if (this.infinity) return;
+      if (this.infinity) return
 
       this.timer = setTimeout(() => {
         if (this.active) {
-          this.hide();
+          this.hide()
         }
-      }, this.timeout);
+      }, this.timeout)
     }
   }
-};
+}
 </script>

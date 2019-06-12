@@ -17,6 +17,8 @@ coverage
 node_modules
 npm-debug.log
 .nyc_output
+tests
+docs
 
 .git
 db

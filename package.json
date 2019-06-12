@@ -75,7 +75,7 @@
   },
   "license": "UNLICENSED",
   "lint-staged": {
-    "*.{js,vue}": [
+    "./src/*.{js,vue}": [
       "vue-cli-service lint",
       "git add"
     ]

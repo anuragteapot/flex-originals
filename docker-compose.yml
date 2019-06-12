@@ -1,34 +1,16 @@
-version: "2"
+version: '2'
 services:
-  server:
-    image: node:8.12.0
-    restart: on-failure
+  app:
+    container_name: lazydrive
+    restart: always
+    build: .
     ports:
-      - "3344:3344"
+      - '80:3344'
     links:
-      - mongodb
-    depends_on:
-      - mongodb
-    volumes:
-      - ./:/home/node/src/
-    working_dir: /home/node/src
-    command: npm run prod
-    logging:
-      driver: "json-file"
-      options:
-        max-size: "100MB"
-        max-file: "3"
+      - mongo
 
-  mongodb:
-    image: mongo:4.1.3
+  mongo:
+    container_name: mongo
+    image: mongo
     ports:
-      - "27017:27017"
-    volumes:
-      - mongodb:/data/db/
-    networks:
-      - backend
-    logging:
-      driver: "json-file"
-      options:
-        max-size: "100MB"
-        max-file: "3"
+      - '27017:27017'

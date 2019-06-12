@@ -9,35 +9,57 @@ const _ = require('underscore')
  */
 if (!window.localStorage) {
   window.localStorage = {
-    getItem: function (sKey) {
+    getItem: function(sKey) {
       if (!sKey || !this.hasOwnProperty(sKey)) {
-        return null;
+        return null
       }
-      return unescape(document.cookie.replace(new RegExp("(?:^|.*;\\s*)" + escape(sKey).replace(/[\-\.\+\*]/g, "\\$&") + "\\s*\\=\\s*((?:[^;](?!;))*[^;]?).*"), "$1"));
+      return unescape(
+        document.cookie.replace(
+          new RegExp(
+            '(?:^|.*;\\s*)' +
+              escape(sKey).replace(/[\-\.\+\*]/g, '\\$&') +
+              '\\s*\\=\\s*((?:[^;](?!;))*[^;]?).*'
+          ),
+          '$1'
+        )
+      )
     },
-    key: function (nKeyId) {
-      return unescape(document.cookie.replace(/\s*\=(?:.(?!;))*$/, "").split(/\s*\=(?:[^;](?!;))*[^;]?;\s*/)[nKeyId]);
+    key: function(nKeyId) {
+      return unescape(
+        document.cookie
+          .replace(/\s*\=(?:.(?!;))*$/, '')
+          .split(/\s*\=(?:[^;](?!;))*[^;]?;\s*/)[nKeyId]
+      )
     },
-    setItem: function (sKey, sValue) {
+    setItem: function(sKey, sValue) {
       if (!sKey) {
-        return;
+        return
       }
-      document.cookie = escape(sKey) + "=" + escape(sValue) + "; expires=Tue, 19 Jan 2038 03:14:07 GMT; path=/";
-      this.length = document.cookie.match(/\=/g).length;
+      document.cookie =
+        escape(sKey) +
+        '=' +
+        escape(sValue) +
+        '; expires=Tue, 19 Jan 2038 03:14:07 GMT; path=/'
+      this.length = document.cookie.match(/\=/g).length
     },
     length: 0,
-    removeItem: function (sKey) {
+    removeItem: function(sKey) {
       if (!sKey || !this.hasOwnProperty(sKey)) {
-        return;
+        return
       }
-      document.cookie = escape(sKey) + "=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/";
-      this.length--;
+      document.cookie =
+        escape(sKey) + '=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/'
+      this.length--
     },
-    hasOwnProperty: function (sKey) {
-      return (new RegExp("(?:^|;\\s*)" + escape(sKey).replace(/[\-\.\+\*]/g, "\\$&") + "\\s*\\=")).test(document.cookie);
+    hasOwnProperty: function(sKey) {
+      return new RegExp(
+        '(?:^|;\\s*)' + escape(sKey).replace(/[\-\.\+\*]/g, '\\$&') + '\\s*\\='
+      ).test(document.cookie)
     }
-  };
-  window.localStorage.length = (document.cookie.match(/\=/g) || window.localStorage).length;
+  }
+  window.localStorage.length = (
+    document.cookie.match(/\=/g) || window.localStorage
+  ).length
 }
 
 /* eslint-enable */
@@ -52,14 +74,14 @@ export const cookies = {
    *
    * @return String|null
    */
-  getAll: function () {
+  getAll: function() {
     var cookies = {}
     _(document.cookie.split(';'))
       .chain()
-      .map(function (m) {
+      .map(function(m) {
         return m.replace(/^\s+/, '').replace(/\s+$/, '')
       })
-      .each(function (c) {
+      .each(function(c) {
         var arr = c.split('=')
         var key = arr[0]
         var value = null
@@ -78,11 +100,11 @@ export const cookies = {
    * @param name
    * @return String|null
    */
-  get: function (name) {
+  get: function(name) {
     var cookie = null
     var list = this.getAll()
 
-    _.each(list, function (value, key) {
+    _.each(list, function(value, key) {
       if (key === name) cookie = value
     })
     return cookie
@@ -96,18 +118,21 @@ export const cookies = {
    * @param time
    * @return String|null
    */
-  set: function (name, value, time) {
+  set: function(name, value, time) {
     var today = new Date()
-    var offset = (typeof time === 'undefined') ? (1000 * 60 * 60 * 24) : (time * 1000)
+    var offset = typeof time === 'undefined' ? 1000 * 60 * 60 * 24 : time * 1000
     var expires_at = new Date(today.getTime() + offset)
 
-    var cookie = _.map({
-      name: escape(value),
-      expires: expires_at.toGMTString(),
-      path: '/'
-    }, function (value, key) {
-      return [(key == 'name') ? name : key, value].join('=')
-    }).join(';')
+    var cookie = _.map(
+      {
+        name: escape(value),
+        expires: expires_at.toGMTString(),
+        path: '/'
+      },
+      function(value, key) {
+        return [key == 'name' ? name : key, value].join('=')
+      }
+    ).join(';')
 
     document.cookie = cookie
     return this
@@ -118,7 +143,7 @@ export const cookies = {
    *
    * @param name
    */
-  destroy: function (name) {
+  destroy: function(name) {
     if (this.get(name) != '' || this.get(name) != null) {
       this.set(name, null, -1000000)
     }
@@ -136,9 +161,8 @@ export const local = {
    *
    * @return String|null
    */
-  getAll: function () {
-    const items = { ...localStorage
-    }
+  getAll: function() {
+    const items = { ...localStorage }
     return items
   },
 
@@ -148,7 +172,7 @@ export const local = {
    * @param name
    * @return String|null
    */
-  get: function (name) {
+  get: function(name) {
     var item = null
     item = localStorage.getItem(name)
     return item
@@ -161,7 +185,7 @@ export const local = {
    * @param value
    * @return this
    */
-  set: function (name, value) {
+  set: function(name, value) {
     localStorage.setItem(name, value)
     return this
   },
@@ -172,7 +196,7 @@ export const local = {
    * @param name
    * @return this
    */
-  destroy: function (name) {
+  destroy: function(name) {
     if (this.get(name) != '' || this.get(name) != null) {
       localStorage.removeItem(name)
     }
@@ -190,9 +214,8 @@ export const session = {
    *
    * @return String|null
    */
-  getAll: function () {
-    const items = { ...sessionStorage
-    }
+  getAll: function() {
+    const items = { ...sessionStorage }
     return items
   },
 
@@ -202,7 +225,7 @@ export const session = {
    * @param name
    * @return String|null
    */
-  get: function (name) {
+  get: function(name) {
     var item = null
     item = sessionStorage.getItem(name)
     return item
@@ -215,7 +238,7 @@ export const session = {
    * @param value
    * @return this
    */
-  set: function (name, value) {
+  set: function(name, value) {
     sessionStorage.setItem(name, value)
     return this
   },
@@ -226,7 +249,7 @@ export const session = {
    * @param name
    * @return this
    */
-  destroy: function (name) {
+  destroy: function(name) {
     if (this.get(name) != '' || this.get(name) != null) {
       sessionStorage.removeItem(name)
     }
@@ -239,7 +262,7 @@ export const session = {
    * @param name
    * @return this
    */
-  destroyAll: function () {
+  destroyAll: function() {
     sessionStorage.clear()
   }
 }

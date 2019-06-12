@@ -35,7 +35,9 @@
   "parse": {},
   "routes": {
     "loopback#rest": {
-      "paths": ["${restApiRoot}"]
+      "paths": [
+        "${restApiRoot}"
+      ]
     }
   },
   "files": {
@@ -44,8 +46,9 @@
         "params": "$!../client"
       },
       {
-        "name": "public",
-        "paths": ["/public"],
+        "paths": [
+          "/public"
+        ],
         "params": "$!../assets"
       }
     ]

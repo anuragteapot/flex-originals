@@ -1,7 +1,9 @@
 {
   "name": "lazyDrive",
-  "version": "1.0.0",
-  "description": "dashboard-generic",
+  "version": "0.0.1",
+  "private": true,
+  "author": "Anurag Kumar (anu1601cs)",
+  "description": "A file sharing community.",
   "scripts": {
     "lint": "vue-cli-service lint",
     "dev": "npm run lb-start & npm run vue-serve",
@@ -53,13 +55,15 @@
     "cypress": "^3.1.5",
     "eslint": "^5.16.0",
     "eslint-config-loopback": "^8.0.0",
-    "eslint-plugin-vue": "^5.0.0",
+    "eslint-loader": "^2.1.2",
+    "eslint-plugin-vue": "^5.2.2",
     "less": "^3.0.4",
     "less-loader": "^4.1.0",
     "lint-staged": "^8.1.5",
     "node-sass": "^4.11.0",
     "nodemon": "^1.19.1",
     "nsp": "^3.2.1",
+    "prettier": "^1.18.2",
     "sass-loader": "^7.1.0",
     "vue-template-compiler": "^2.6.10"
   },

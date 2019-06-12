@@ -157,6 +157,7 @@
           d="M-273 409.1c-4.1 0-6.8-.6-7.9-1.7-.5-.6-.6-1.1-.6-1.3 0-.7.1-2.9.6-3.8.1-.3.5-1 4.5-2.4-1.6-1.4-2.6-4-2.6-7.1 0-4.2 2.3-7 5.9-7.1h.1c3.6.1 5.9 2.8 5.9 7.1 0 3.1-1 5.7-2.6 7.1 4 1.4 4.4 2.1 4.5 2.4.4.9.5 3.1.6 3.8 0 .2 0 .7-.6 1.3-1.1 1.1-3.7 1.7-7.8 1.7zm0-2c5.1 0 6.2-.9 6.4-1.1-.1-1.1-.2-2.3-.3-2.7-.6-.4-2.9-1.3-4.8-1.9l-.7-.2-.1-2 .7-.3c1.7-.6 2.8-3.1 2.8-6.1 0-3.1-1.5-5-3.9-5.1-2.5 0-4 2-4 5.1 0 3 1.1 5.5 2.8 6.1l.7.3-.1 2-.7.2c-1.9.6-4.2 1.5-4.8 1.9-.1.4-.3 1.6-.3 2.7.1.2 1.3 1.1 6.3 1.1z"
           class="st0"
         ></path>
+
         <g id="g7" class="st1" opacity=".6">
           <path
             id="path9"
@@ -215,94 +216,94 @@
 </template>
 
 <script>
-import * as types from './.././../store/mutation-types.js'
-import mainContent from './../Browser/Content/MainContent'
-import breadCrumb from './../Tool/BreadCrumb'
+import * as types from "./.././../store/mutation-types.js";
+import mainContent from "./../Browser/Content/MainContent";
+import breadCrumb from "./../Tool/BreadCrumb";
 
 export default {
-  name: 'media-browser',
-  data () {
-    return {}
+  name: "media-browser",
+  data() {
+    return {};
   },
   components: {
-    'media-main-content': mainContent,
-    'lazy-breadcrumb': breadCrumb
+    "media-main-content": mainContent,
+    "lazy-breadcrumb": breadCrumb
   },
   methods: {
-    processUpload: async function (type) {
-      let uploadSuccess = 0
-      this.$store.commit(types.SET_IS_UPLOADING, true)
+    processUpload: async function(type) {
+      let uploadSuccess = 0;
+      this.$store.commit(types.SET_IS_UPLOADING, true);
       while (this.$store.state.uploadItems.length > 0) {
-        const item = this.$store.state.uploadItems.shift()
-        const formData = item.file
-        const uploadPath = item.path
-        const id = item.id
-        const type = item.type
+        const item = this.$store.state.uploadItems.shift();
+        const formData = item.file;
+        const uploadPath = item.path;
+        const id = item.id;
+        const type = item.type;
 
         try {
-          await this.$store.dispatch('upload', {
+          await this.$store.dispatch("upload", {
             formData,
             uploadPath,
             id,
             type
-          })
-          uploadSuccess = uploadSuccess + 1
+          });
+          uploadSuccess = uploadSuccess + 1;
         } catch (error) {
-          console.error(error)
+          console.error(error);
         }
 
         if (uploadSuccess % 2 == 0) {
-          this.$store.dispatch('update', {
+          this.$store.dispatch("update", {
             path: this.$store.state.selectedDirectory
-          })
+          });
         }
       }
 
-      this.$store.dispatch('update', {
+      this.$store.dispatch("update", {
         path: this.$store.state.selectedDirectory
-      })
+      });
 
       var data = {
         data: `${uploadSuccess} files uploaded.`,
-        color: 'success'
-      }
+        color: "success"
+      };
 
-      this.$store.commit(types.SHOW_SNACKBAR, data)
-      this.$store.commit(types.SET_IS_UPLOADING, 2)
+      this.$store.commit(types.SHOW_SNACKBAR, data);
+      this.$store.commit(types.SET_IS_UPLOADING, 2);
 
-      if (type == 'file') {
-        this.$refs.formFile.reset()
-      } else if (type == 'folder') {
-        this.$refs.formFolder.reset()
+      if (type == "file") {
+        this.$refs.formFile.reset();
+      } else if (type == "folder") {
+        this.$refs.formFolder.reset();
       }
     },
-    selectFile: function () {
-      const inputFile = this.$refs.inputFile
+    selectFile: function() {
+      const inputFile = this.$refs.inputFile;
       if (inputFile) {
-        inputFile.click()
+        inputFile.click();
       } else {
-        console.log('error')
+        console.log("error");
       }
     },
-    selectFolder: function () {
-      const inputFolder = this.$refs.inputFolder
+    selectFolder: function() {
+      const inputFolder = this.$refs.inputFolder;
       if (inputFolder) {
-        inputFolder.click()
+        inputFolder.click();
       } else {
-        console.log('error')
+        console.log("error");
       }
     },
-    processFile: function () {
-      var files = this.$refs.inputFile.files
-      const uploadPath = this.$store.state.selectedDirectory
+    processFile: function() {
+      var files = this.$refs.inputFile.files;
+      const uploadPath = this.$store.state.selectedDirectory;
 
       for (var i = 0; i < files.length; i++) {
-        const item = {}
-        let file = files[i]
-        file.id = i
+        const item = {};
+        let file = files[i];
+        file.id = i;
 
-        const formData = new FormData()
-        formData.append('files', file)
+        const formData = new FormData();
+        formData.append("files", file);
 
         item.id =
           file.name +
@@ -310,55 +311,55 @@ export default {
           file.lastModified +
           Math.random() +
           file.size +
-          Date.now()
-        item.icon = 'assessment'
-        item.file = formData
-        item.path = uploadPath
+          Date.now();
+        item.icon = "assessment";
+        item.file = formData;
+        item.path = uploadPath;
 
-        item.type = 'file'
-        item.iconClass = 'grey lighten-1 white--text'
-        item.title = file.name
-        item.subtitle = ''
-        item.uploadPercent = 0
-        item.size = file.size
+        item.type = "file";
+        item.iconClass = "grey lighten-1 white--text";
+        item.title = file.name;
+        item.subtitle = "";
+        item.uploadPercent = 0;
+        item.size = file.size;
 
-        this.$store.state.uploadItems.push(item)
-        this.$store.state.uploadItemsMenu.push(item)
+        this.$store.state.uploadItems.push(item);
+        this.$store.state.uploadItemsMenu.push(item);
       }
 
       if (this.$store.state.isUploading !== true) {
-        this.processUpload('file')
+        this.processUpload("file");
       }
     },
-    processFolder: async function () {
-      var files = this.$refs.inputFolder.files
-      let selectedPath = this.$store.state.selectedDirectory
+    processFolder: async function() {
+      var files = this.$refs.inputFolder.files;
+      let selectedPath = this.$store.state.selectedDirectory;
 
       // let size = 0;
       for (var i = 0; i < files.length; i++) {
-        const item = {}
-        let file = files[i]
-        file.id = i
+        const item = {};
+        let file = files[i];
+        file.id = i;
 
-        const formData = new FormData()
-        formData.append('files', file)
+        const formData = new FormData();
+        formData.append("files", file);
 
-        let encodePath = ''
-        if (selectedPath == 'my-drive') {
+        let encodePath = "";
+        if (selectedPath == "my-drive") {
           encodePath = `uploads/${file.webkitRelativePath.substring(
             0,
-            file.webkitRelativePath.lastIndexOf('/')
-          )}`
+            file.webkitRelativePath.lastIndexOf("/")
+          )}`;
         } else {
-          encodePath = `${Buffer.from(selectedPath, 'base64').toString(
-            'ascii'
+          encodePath = `${Buffer.from(selectedPath, "base64").toString(
+            "ascii"
           )}/${file.webkitRelativePath.substring(
             0,
-            file.webkitRelativePath.lastIndexOf('/')
-          )}`
+            file.webkitRelativePath.lastIndexOf("/")
+          )}`;
         }
 
-        const uploadPath = Buffer.from(encodePath).toString('base64')
+        const uploadPath = Buffer.from(encodePath).toString("base64");
 
         item.id =
           file.name +
@@ -366,26 +367,26 @@ export default {
           Math.random() +
           file.lastModified +
           file.size +
-          Date.now()
-        item.icon = 'assessment'
-        item.file = formData
-        item.path = uploadPath
+          Date.now();
+        item.icon = "assessment";
+        item.file = formData;
+        item.path = uploadPath;
 
-        item.type = 'file'
-        item.iconClass = 'grey lighten-1 white--text'
-        item.title = file.name
-        item.subtitle = ''
-        item.uploadPercent = 0
-        item.size = file.size
+        item.type = "file";
+        item.iconClass = "grey lighten-1 white--text";
+        item.title = file.name;
+        item.subtitle = "";
+        item.uploadPercent = 0;
+        item.size = file.size;
 
-        this.$store.state.uploadItems.push(item)
-        this.$store.state.uploadItemsMenu.push(item)
+        this.$store.state.uploadItems.push(item);
+        this.$store.state.uploadItemsMenu.push(item);
       }
 
       if (this.$store.state.isUploading !== true) {
-        this.processUpload('folder')
+        this.processUpload("folder");
       }
     }
   }
-}
+};
 </script>

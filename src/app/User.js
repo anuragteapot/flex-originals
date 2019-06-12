@@ -1,3 +1,5 @@
+/** @format */
+
 import * as jwt_decode from 'jwt-decode'
 import * as mediaManagerStorage from './Storage'
 
@@ -8,12 +10,12 @@ class User {
   /**
    * User constructor
    */
-  constructor () {
+  constructor() {
     this.token = mediaManagerStorage.cookies.get('token')
     this.userData = this.getTokenData()
   }
 
-  getTokenData () {
+  getTokenData() {
     try {
       return jwt_decode(this.token)
     } catch (Error) {

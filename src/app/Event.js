@@ -7,7 +7,7 @@ export default class Event {
   /**
    * Media Event constructor
    */
-  constructor () {
+  constructor() {
     this.vue = new Vue()
   }
 
@@ -16,7 +16,7 @@ export default class Event {
    * @param event
    * @param data
    */
-  fire (event, data = null) {
+  fire(event, data = null) {
     this.vue.$emit(event, data)
   }
 
@@ -25,7 +25,7 @@ export default class Event {
    * @param event
    * @param callback
    */
-  listen (event, callback) {
+  listen(event, callback) {
     this.vue.$on(event, callback)
   }
 }

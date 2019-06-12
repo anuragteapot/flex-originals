@@ -1,3 +1,5 @@
+/** @format */
+
 import axios from 'axios'
 import store from '@/store/store'
 import router from '@/router'
@@ -15,7 +17,7 @@ class Api {
   /**
    * Store constructor
    */
-  constructor () {
+  constructor() {
     this.mediastorage = mediaManagerStorage
     this.auth = auth.services
     this.user = user
@@ -23,8 +25,8 @@ class Api {
     this.service = service
   }
 
-  getUidV4 () {
-    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+  getUidV4() {
+    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
       var r = (Math.random() * 16) | 0
       var v = c == 'x' ? r : (r & 0x3) | 0x8
       return v.toString(16)
@@ -32,12 +34,12 @@ class Api {
   }
 
   // Debounce Api
-  debounce (func, wait, immediate) {
+  debounce(func, wait, immediate) {
     var timeout
-    return function () {
+    return function() {
       var context = this
       var args = arguments
-      var later = function () {
+      var later = function() {
         timeout = null
         if (!immediate) func.apply(context, args)
       }
@@ -48,7 +50,7 @@ class Api {
     }
   }
 
-  time_ago (previousDate) {
+  time_ago(previousDate) {
     var current = new Date()
     var msPerMinute = 60 * 1000
     var msPerHour = msPerMinute * 60
@@ -76,14 +78,14 @@ class Api {
   /**
    * Set the axios settings.
    */
-  axios () {
+  axios() {
     axios.defaults.headers.common[
       'Authorization'
     ] = `Bearer ${this.mediastorage.cookies.get('token')}`
     axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest'
     axios.defaults.headers.common['csrfToken'] = process.env.VUE_APP_SECRET
 
-    axios.interceptors.response.use(undefined, function axiosRetryInterceptor (
+    axios.interceptors.response.use(undefined, function axiosRetryInterceptor(
       err
     ) {
       var config = err.config
@@ -103,14 +105,14 @@ class Api {
       config.__retryCount += 1
 
       // Create new promise to handle exponential backoff
-      var backoff = new Promise(function (resolve) {
-        setTimeout(function () {
+      var backoff = new Promise(function(resolve) {
+        setTimeout(function() {
           resolve()
         }, config.retryDelay || 1)
       })
 
       // Return the promise in which recalls axios to retry the request
-      return backoff.then(function () {
+      return backoff.then(function() {
         return axios(config)
       })
     })
@@ -123,7 +125,7 @@ class Api {
    * @param error
    *
    */
-  _handleError (error) {
+  _handleError(error) {
     var errorData = {
       data: error.response.data.message,
       color: 'error'

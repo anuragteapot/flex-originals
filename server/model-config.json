@@ -20,5 +20,13 @@
   "ACL": {
     "dataSource": "mongodb",
     "public": false
+  },
+  "action": {
+    "dataSource": "mongodb",
+    "public": true
+  },
+  "permission": {
+    "dataSource": "mongodb",
+    "public": true
   }
 }

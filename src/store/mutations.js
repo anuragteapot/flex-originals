@@ -1,3 +1,5 @@
+/** @format */
+
 import * as types from './mutation-types'
 
 // The only way to actually change state in a store is by committing a mutation.

@@ -7,7 +7,7 @@ module.exports = {
     msTileColor: '#586069'
   },
   devServer: {
-    proxy: 'http://localhost:3000'
+    proxy: 'http://localhost:3344'
   },
   pluginOptions: {
     electronBuilder: {

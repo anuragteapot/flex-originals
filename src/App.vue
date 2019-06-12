@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <router-view/>
-    <media-alert></media-alert>
+    <lazy-snack-bar position="top-center"></lazy-snack-bar>
     <lazy-model></lazy-model>
     <!-- <lazy-context></lazy-context> -->
   </div>

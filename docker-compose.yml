@@ -1,11 +1,11 @@
 version: '2'
 services:
-  app:
+  lazydrive:
     container_name: lazydrive
     restart: always
     build: .
     ports:
-      - '80:3344'
+      - '3344:3344'
     links:
       - mongo
 

@@ -9,7 +9,7 @@
     "dev": "npm run lb-start & npm run vue-serve",
     "lb-start": "nodemon",
     "posttest": "npm run lint && nsp check",
-    "prod": "npm run vue-build && npm start",
+    "prod": "environment=production npm run vue-build && npm start",
     "start": "node .",
     "vue-build": "vue-cli-service build",
     "vue-serve": "vue-cli-service serve"

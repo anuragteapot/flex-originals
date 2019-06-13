@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 importScripts(
-  "/precache-manifest.b1c70655fc806c7e77bf5252064bdded.js"
+  "/precache-manifest.f549f05b5f5616e03306a5b4f55bfac3.js"
 );
 
 workbox.core.setCacheNameDetails({prefix: "lazyDrive"});

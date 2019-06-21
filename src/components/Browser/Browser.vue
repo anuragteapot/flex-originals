@@ -1,7 +1,16 @@
 <template>
   <div class="lazy__browser">
+    <!-- <div class="nav-offcanvas open">
+      <div class="nav-offcanvas-menu lazy__browser">
+        <lazy-aside-action></lazy-aside-action>
+        <lazy-aside-des></lazy-aside-des>
+      </div>
+    </div>
+    <div class="offcanvas-overlay"></div>-->
+
     <lazy-aside-action></lazy-aside-action>
     <lazy-aside-des></lazy-aside-des>
+
     <div class="vert-container">
       <div class="media-action">
         <div class="file">

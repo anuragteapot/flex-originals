@@ -12,7 +12,7 @@ export default [{
   name: 'my-drive',
   component: () => import('./../views/myDrive.vue'),
   meta: {
-    requiresAuth: true
+    requiresAuth: false
   }
 },
 {

@@ -13,17 +13,18 @@ html,
 body {
   background-repeat: no-repeat, repeat;
   backface-visibility: none;
-  background-position: center; 
-  background-repeat: no-repeat; 
-  background-size: cover; 
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
   user-select: none;
   color: #FFF;
-  font-family: "Roboto";
+  font-family: "Roboto", sans-serif;
   font-size: 16px;
   height: 100%;
 }
 
-.container {
+.container,
+.lazy__browser {
   height: 100%;
   width: 100%;
   display: flex;
@@ -59,40 +60,12 @@ body {
 }
 
 .features .features-header {
-  cursor: pointer;
   display: flex;
   align-items: center;
   flex: 0 0 56px;
   padding: 2px 24px;
-  box-shadow: 0 1px 0 #24272b, inset 0 -1px 0 rgba(0, 0, 0, 0.1);
+  box-shadow: 0 1px 0 0 rgba(0, 0, 0, 0.1);
   transition: background 0.15s ease;
-}
-
-.features .features-header .features-header-dropdown {
-  width: 18px;
-  height: 18px;
-  margin-left: auto;
-  pointer-events: none;
-}
-
-.features .features-header .features-header-dropdown use {
-  stroke-dasharray: 7;
-  -webkit-transform-origin: 50%;
-  transform-origin: 50%;
-  transition: stroke-dasharray 0.2s ease, -webkit-transform 0.2s ease;
-  transition: stroke-dasharray 0.2s ease, transform 0.2s ease;
-  transition: stroke-dasharray 0.2s ease, transform 0.2s ease, -webkit-transform 0.2s ease;
-}
-
-.features .features-header:hover,
-.features .features-header:focus {
-  background: #282b2f;
-}
-
-.features .features-header:focus use {
-  stroke-dasharray: 14;
-  -webkit-transform: rotate(-90deg);
-  transform: rotate(-90deg);
 }
 
 .features .features-list-text,
@@ -222,7 +195,6 @@ body {
   height: 10px;
   opacity: 0.3;
   transition: opacity 0.2s linear;
-  background: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMCAxMCI+PHBhdGggZmlsbD0iI2ZmZiIgZD0iTTguOTksMy45OUg2LjAxVjEuMDFDNi4wMSwwLjQ1Miw1LjU1OCwwLDUsMFMzLjk5LDAuNDUyLDMuOTksMS4wMVYzLjk5SDEuMDFDMC40NTIsMy45OSwwLDQuNDQyLDAsNWMwLDAuNTU4LDAuNDUyLDEuMDEsMS4wMSwxLjAxSDMuOTlWOC45OUMzLjk5LDkuNTQ4LDQuNDQyLDEwLDUsMTBzMS4wMS0wLjQ1MiwxLjAxLTEuMDFWNi4wMUg4Ljk5QzkuNTQ4LDYuMDEsMTAsNS41NTgsMTAsNUMxMCw0LjQ0Miw5LjU0OCwzLjk5LDguOTksMy45OXoiLz48L3N2Zz4=) no-repeat 50%;
 }
 
 .features .features-footer {
@@ -363,7 +335,7 @@ body {
 }
 
 .server.server-friends::after {
-  content: "2 ONLINE";
+  content: "Lazy Drive";
   color: rgba(255, 255, 255, 0.3);
   pointer-events: none;
   font-weight: 300;
@@ -552,11 +524,11 @@ svg[id] {
   color: black !important;
 }
 
-.four_zero_four{
+.four_zero_four {
   text-align: center;
   margin: auto;
 }
 
 .four_zero_four h1 {
-  color: black!important;
+  color: black !important;
 }

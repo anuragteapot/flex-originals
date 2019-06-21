@@ -1,6 +1,6 @@
 {
   "mongodb": {
-    "host": "mongo",
+    "host": "localhost",
     "port": 27017,
     "url": "",
     "database": "lazydrive",

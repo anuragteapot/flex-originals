@@ -1,23 +1,15 @@
-# General files
-*.csv
-*.dat
-*.iml
-*.log
-*.out
-*.pid
-*.seed
-*.swo
-*.swp
-*.tgz
-*.xml
-coverage
 .DS_Store
 node_modules
-dist
+/server/node_modules
+/server/uploads
+/dist
+/build
+/client/*
+/.cache/*
+/uploads/*
 
-# build files
-client/dist
-client/node_modules
+/tests/e2e/videos/
+/tests/e2e/screenshots/
 
 # local env files
 .env.local
@@ -31,11 +23,11 @@ yarn-error.log*
 # Editor directories and files
 .idea
 .vscode
-.project
-.strong-pm
-*.sublime-*
 *.suo
 *.ntvs*
 *.njsproj
 *.sln
 *.sw*
+
+#Electron-builder output
+/dist_electron

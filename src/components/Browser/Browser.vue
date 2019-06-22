@@ -35,15 +35,24 @@
           </form>
         </div>
       </div>
-      <div class="media-toolbar">
-        <div class="media-loader" v-if="this.$store.state.isLoading"></div>
-      </div>
       <menu type="toolbar" class="menu">
         <div v-if="isMobile" @click="openMenu">
           <i class="fa fa-align-justify"></i>
         </div>
         <lazy-breadcrumb v-else></lazy-breadcrumb>
+        <div class="menu-right">
+          <input type="text" placeholder="Search...">
+          <span class="icon">
+            <i class="fa fa-bell"></i>
+          </span>
+          <span class="icon">
+            <i class="fa fa-ellipsis-v"></i>
+          </span>
+        </div>
       </menu>
+      <div class="progress" v-if="loading">
+        <div class="indeterminate"></div>
+      </div>
       <media-main-content></media-main-content>
     </div>
   </div>
@@ -73,6 +82,9 @@ export default {
     },
     sideNav: function() {
       return this.$store.state.sideNav;
+    },
+    loading: function() {
+      return this.$store.state.isLoading;
     }
   },
   methods: {

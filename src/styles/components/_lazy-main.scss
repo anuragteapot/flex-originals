@@ -29,6 +29,7 @@ body {
 .vert-container {
   height: 100%;
   width: 100%;
+  overflow: hidden;
   display: flex;
   flex-direction: column;
 }
@@ -258,6 +259,7 @@ body {
   background: #36393E;
   border-bottom: 1px solid #303337;
   display: flex;
+  min-width: 200px;
   align-items: center;
 }
 
@@ -301,6 +303,15 @@ body {
   display: flex;
   width: 100%;
   height: 100%;
+}
+
+.inner {
+  padding: 10px;
+  min-width: 500px;
+}
+
+.content .inner {
+  overflow-y: scroll;
 }
 
 .server {
@@ -452,12 +463,12 @@ svg[id] {
   }
 
   80% {
-    background-color: #7289DA;
+    background-color: rgb(134, 130, 130);
   }
 
   100% {
     border-radius: 15px;
-    background-color: #7289DA;
+    background-color: rgb(134, 130, 130);
   }
 }
 
@@ -476,19 +487,19 @@ svg[id] {
   }
 
   80% {
-    background-color: #7289DA;
+    background-color: rgb(134, 130, 130);
   }
 
   100% {
     border-radius: 15px;
-    background-color: #7289DA;
+    background-color: rgb(134, 130, 130);
   }
 }
 
 @-webkit-keyframes server-hover-out {
   0% {
     border-radius: 15px;
-    background-color: #7289DA;
+    background-color: rgb(134, 130, 130);
   }
 
   45% {
@@ -512,7 +523,7 @@ svg[id] {
 @keyframes server-hover-out {
   0% {
     border-radius: 15px;
-    background-color: #7289DA;
+    background-color: rgb(134, 130, 130);
   }
 
   45% {

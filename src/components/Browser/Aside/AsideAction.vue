@@ -10,6 +10,16 @@
 
     <div class="lazy-collection">
       <div class="server focusable" role="button" aria-label="My Server" aria-selected="true">
+        <div class="server-icon">
+          <i class="fa fa-google" style="font-size:25px; color:#44a451;"></i>
+        </div>
+      </div>
+      <div class="server focusable" role="button" aria-label="My Server" aria-selected="true">
+        <div class="server-icon">
+          <i class="fa fa-dropbox" style="font-size:25px; color:#0062ff;"></i>
+        </div>
+      </div>
+      <div class="server focusable" role="button" aria-label="My Server" aria-selected="true">
         <div class="server-icon" @click="fileUpload">
           <i class="fa fa-arrow-up" style="font-size:25px; color:#00ffe7;"></i>
         </div>

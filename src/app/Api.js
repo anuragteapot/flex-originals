@@ -126,9 +126,14 @@ class Api {
    *
    */
   _handleError(error) {
-    var errorData = {
-      data: error.response.data.message,
-      color: 'error'
+    try {
+      var errorData = {
+        data: error.response.data.message,
+        color: 'error'
+      }
+      store.commit(types.SET_IS_LOADING, false)
+    } catch (err) {
+      store.commit(types.SET_IS_LOADING, false)
     }
 
     switch (error.response.status) {

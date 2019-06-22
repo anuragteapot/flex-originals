@@ -17,10 +17,6 @@
     "dataSource": "mongodb",
     "public": true
   },
-  "ACL": {
-    "dataSource": "mongodb",
-    "public": false
-  },
   "action": {
     "dataSource": "mongodb",
     "public": true

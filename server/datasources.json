@@ -9,5 +9,21 @@
     "user": "root",
     "useNewUrlParser": true,
     "connector": "mongodb"
+  },
+  "email": {
+    "name": "email",
+    "connector": "mail",
+    "transports": [
+      {
+        "type": "smtp",
+        "host": "smtp.private.com",
+        "secure": true,
+        "port": 465,
+        "auth": {
+          "user": "me@private.com",
+          "pass": "password"
+        }
+      }
+    ]
   }
 }

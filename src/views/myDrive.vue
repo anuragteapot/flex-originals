@@ -36,16 +36,16 @@ export default {
     payload.action = 'get'
     payload.settings = api.user.userData
 
-    this.$store.dispatch('settings', payload)
+    // this.$store.dispatch('settings', payload)
 
     if (this.$route.name == 'my-drive') {
       const dir = this.$route.params.dir
       const path = this.$route.params.path
 
       if (dir !== undefined && path == 'folder') {
-        this.$store.dispatch('getContents', { path: dir })
+        // this.$store.dispatch('getContents', { path: dir })
       } else {
-        this.$store.dispatch('getContents', { path: 'my-drive' })
+        // this.$store.dispatch('getContents', { path: 'my-drive' })
       }
     }
   },

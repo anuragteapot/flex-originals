@@ -1,57 +1,8 @@
 <template>
   <section class="content">
     <div class="inner">
-      <div class="music christian">
-        <!-- <i class="fa fa-book fa-4x" aria-hidden="true"></i> -->
-        <p class="c">Christian</p>
-      </div>
-      <div class="music pop">
-        <!-- <i class="fa fa-fire fa-4x" aria-hidden="true"></i> -->
-        <p class="c">Pop</p>
-      </div>
-      <div class="music mood">
-        <!-- <i class="fa fa-meh-o fa-4x" aria-hidden="true"></i> -->
-        <p class="c">Mood</p>
-      </div>
-      <div class="music hiphop">
-        <!-- <i class="fa fa-link fa-4x" aria-hidden="true"></i> -->
-        <p class="c">Hip Hop</p>
-      </div>
-      <div class="music chill">
-        <p class="c">Chill</p>
-        <!-- <i class="fa fa-snowflake-o fa-4x" aria-hidden="true"></i> -->
-      </div>
-      <div class="music latino">
-        <!-- <i class="fa fa-volume-up fa-4x" aria-hidden="true"></i> -->
-        <p class="c">Latino</p>
-      </div>
-      <div class="music electronic">
-        <!-- <i class="fa fa-diamond fa-4x" aria-hidden="true"></i> -->
-        <p class="c">Electronic x Dance</p>
-      </div>
-      <div class="music country">
-        <!-- <i class="fa fa-star fa-4x" aria-hidden="true"></i> -->
-        <p class="c">Country</p>
-      </div>
-      <div class="music rock">
-        <!-- <i class="fa fa-bolt fa-4x" aria-hidden="true"></i> -->
-        <p class="c">Rock</p>
-      </div>
-      <div class="music focus">
-        <!-- <i class="fa fa-desktop fa-4x" aria-hidden="true"></i> -->
-        <p class="c">Focus</p>
-      </div>
-      <div class="music randb">
-        <!-- <i class="fa fa-music fa-4x" aria-hidden="true"></i> -->
-        <p class="c">RnB</p>
-      </div>
-      <div class="music party">
-        <!-- <i class="fa fa-headphones fa-4x" aria-hidden="true"></i> -->
-        <p class="c">Party</p>
-      </div>
+      <lazy-grid></lazy-grid>
     </div>
-
-    <!-- <lazy-grid></lazy-grid> -->
   </section>
 </template>
 
@@ -62,7 +13,9 @@ import ContentGrid from "./Grid/ContentGrid";
 
 export default {
   name: "media-content",
-  data: () => ({}),
+  data: () => ({
+    active: false
+  }),
   computed: {
     diskLoaded: function() {
       return this.$store.state.diskLoaded;
@@ -196,130 +149,3 @@ export default {
   }
 };
 </script>
-
-<style scoped>
-i {
-  margin: 0 auto;
-  position: absolute;
-  top: 60px;
-  color: white;
-  right: 65px;
-}
-
-.music {
-  width: 200px;
-  height: 200px;
-  border-radius: 5px;
-  padding: 2px;
-  text-align: center;
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: cover;
-  display: inline-block;
-  margin: 5px 13px 50px 13px;
-  position: relative;
-}
-
-@media only screen and (max-width: 700px) {
-  .music {
-    width: 160px;
-    height: 160px;
-    margin: 0px 5px 40px 5px;
-  }
-
-  i {
-    margin: auto;
-    position: absolute;
-    font-size: 40px;
-    color: white;
-  }
-}
-
-.music::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-}
-
-.christian {
-  background-image: url("https://static.pexels.com/photos/134/light-creative-abstract-colorful.jpg");
-  background-size: cover;
-  background-position: center;
-}
-
-p {
-  position: absolute;
-  bottom: -30px;
-  color: white;
-  width: 100%;
-}
-
-.pop {
-  background-image: url("https://static.pexels.com/photos/134/light-creative-abstract-colorful.jpg");
-  background-size: cover;
-  background-position: center;
-}
-
-.mood {
-  background-image: url("https://static.pexels.com/photos/134/light-creative-abstract-colorful.jpg");
-  background-size: cover;
-  background-position: center;
-}
-
-.hiphop {
-  background-image: url("https://static.pexels.com/photos/134/light-creative-abstract-colorful.jpg");
-  background-size: cover;
-  background-position: center;
-}
-
-.chill {
-  background-image: url("https://static.pexels.com/photos/134/light-creative-abstract-colorful.jpg");
-  background-size: cover;
-  background-position: center;
-}
-
-.latino {
-  background-image: url("https://static.pexels.com/photos/134/light-creative-abstract-colorful.jpg");
-  background-size: cover;
-  background-position: center;
-}
-
-.electronic {
-  background-image: url("https://static.pexels.com/photos/134/light-creative-abstract-colorful.jpg");
-  background-size: cover;
-  background-position: center;
-}
-
-.country {
-  background-image: url("https://static.pexels.com/photos/134/light-creative-abstract-colorful.jpg");
-  background-size: cover;
-  background-position: center;
-}
-
-.rock {
-  background-image: url("https://static.pexels.com/photos/134/light-creative-abstract-colorful.jpg");
-  background-size: cover;
-  background-position: center;
-}
-
-.focus {
-  background-image: url("https://static.pexels.com/photos/134/light-creative-abstract-colorful.jpg");
-  background-size: cover;
-  background-position: center;
-}
-
-.randb {
-  background-image: url("https://static.pexels.com/photos/134/light-creative-abstract-colorful.jpg");
-  background-size: cover;
-  background-position: center;
-}
-
-.party {
-  background-image: url("https://static.pexels.com/photos/134/light-creative-abstract-colorful.jpg");
-  background-size: cover;
-  background-position: center;
-}
-</style>

@@ -1,5 +1,8 @@
 <template>
-  <div class="image lazy-background">
+  <div class="image lazy-background" ref="lazyBackground">
+    <div class="loader-1 center">
+      <span></span>
+    </div>
     <!-- <i class="fa fa-book fa-4x" aria-hidden="true"></i> -->
     <p>Christian</p>
   </div>
@@ -13,7 +16,7 @@ export default {
   name: "media-file",
   data() {
     return {
-      active: false,
+      active: true,
       iconsMap: {
         mp3: "library_music",
         zip: "archive",
@@ -65,16 +68,15 @@ export default {
   },
   methods: {
     lazyLoad() {
-      var lazyBackgrounds = [].slice.call(
-        document.querySelectorAll(".lazy-background")
-      );
+      var lazyBackground = this.$refs.lazyBackground;
 
       if ("IntersectionObserver" in window) {
         let lazyBackgroundObserver = new IntersectionObserver(function(
           entries,
           observer
         ) {
-          entries.forEach(function(entry) {
+          entries.forEach(entry => {
+            console.log(entry);
             if (entry.isIntersecting) {
               entry.target.classList.add("visible");
               lazyBackgroundObserver.unobserve(entry.target);
@@ -82,9 +84,7 @@ export default {
           });
         });
 
-        lazyBackgrounds.forEach(function(lazyBackground) {
-          lazyBackgroundObserver.observe(lazyBackground);
-        });
+        lazyBackgroundObserver.observe(lazyBackground);
       }
     },
     show: function(event, item) {

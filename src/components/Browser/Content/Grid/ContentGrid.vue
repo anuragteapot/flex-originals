@@ -16,10 +16,6 @@
         <lazy-file></lazy-file>
         <lazy-file></lazy-file>
         <lazy-file></lazy-file>
-        <lazy-file></lazy-file>
-        <lazy-file></lazy-file>
-        <lazy-file></lazy-file>
-        <lazy-file></lazy-file>
       </div>
       <span class="clear"></span>
     </div>

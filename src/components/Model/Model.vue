@@ -1,21 +1,23 @@
 <template>
   <div class="media-model">
-    <lazy-preview-model></lazy-preview-model>
+    <div :class="`modal ${modal ? 'open' : ''}`">
+      <div class="modal-inner">Anurag</div>
+    </div>
   </div>
 </template>
 
 <script>
-import previewModel from './Preview/PreviewModel'
+import previewModel from "./Preview/PreviewModel";
 
 export default {
-  name: 'media-model',
+  name: "lazy-model",
   components: {
-    'lazy-preview-model': previewModel
+    "lazy-preview-model": previewModel
   },
   computed: {
-    isActivePreview () {
-      return this.$store.state.showPreviewModal
+    modal() {
+      return this.$store.state.modal.state;
     }
   }
-}
+};
 </script>

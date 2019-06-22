@@ -1,5 +1,5 @@
 <template>
-  <div v-if="isActive" class="modal media-preview-modal">
+  <div v-if="isActive" class="modal">
     <lazy-switch v-model="val" :sid="1"></lazy-switch>
     <lazy-switch :sid="2"></lazy-switch>
     <p v-if="val">ANurag</p>

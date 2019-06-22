@@ -11,6 +11,7 @@ export default {
     dropbox: {},
     google: {}
   },
+  sideNav: false,
   // The currently selected items
   selectedItems: [],
   // The currently selected items
@@ -24,17 +25,10 @@ export default {
   // The currently selected dir
   selectedDirectory: 'my-drive',
   // The state of confirm delete model
-  showConfirmDeleteModal: false,
-  // The state of create folder model
-  showCreateFolderModal: false,
-  // The state of showUploadMenu
-  showUploadMenu: false,
-  // The state of preview model
-  showPreviewModal: false,
-  // The state of share model
-  showShareModal: false,
-  // The state of  model
-  showRenameModal: false,
+  modal: {
+    state: false,
+    type: null
+  },
   // The state of  settings
   showSettings: false,
   // The state of file menu
@@ -43,8 +37,6 @@ export default {
     x: 0,
     y: 0
   },
-  // The state of x in settings
-  showToolModal: false,
   // The state of the infobar
   showInfoBar: false,
   // The snackbar
@@ -54,10 +46,6 @@ export default {
     color: 'default',
     time: 6000
   },
-  // The snackbar
-  previewItem: null,
-  // The backdrop
-  modelBackdrop: false,
   // The loading state
   isLoading: false,
   // The loading state

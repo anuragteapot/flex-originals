@@ -1,5 +1,5 @@
 <template>
-  <section class="chat">
+  <section class="content">
     <lazy-grid></lazy-grid>
   </section>
 </template>

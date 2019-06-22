@@ -185,12 +185,8 @@ export default {
    * Show the menu
    * @param state
    */
-  [types.SHOW_MENU]: (state, payload) => {
-    var e = payload.event || window.event
-    e.preventDefault()
-
-    state.showMenu.x = e.clientX
-    state.showMenu.y = e.clientY
+  [types.SHOW_MENU]: state => {
+    state.sideNav = true
   },
 
   /**
@@ -198,7 +194,7 @@ export default {
    * @param state
    */
   [types.HIDE_MENU]: state => {
-    state.showMenu.state = false
+    state.sideNav = false
   },
 
   /**

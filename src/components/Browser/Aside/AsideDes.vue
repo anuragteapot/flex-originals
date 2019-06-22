@@ -11,50 +11,36 @@
 
       <ul class="features-list-text">
         <li class="channel channel-text">
-          <span class="channel-name" @click="selectFile()">Upload File</span>
+          <span class="channel-name">Machine Learning</span>
           <button class="button" role="button" aria-label="settings">
-            <svg>
-              <use xlink:href="#icon-channel-settings"></use>
-            </svg>
+            <i class="fa fa-cog"></i>
           </button>
         </li>
 
         <li class="channel focusable channel-text">
-          <span class="channel-name" @click="selectFolder()">Upload Folder</span>
+          <span class="channel-name">Funny Videos</span>
           <button class="button" role="button" aria-label="settings">
-            <svg>
-              <use xlink:href="#icon-channel-settings"></use>
-            </svg>
+            <i class="fa fa-cog"></i>
           </button>
         </li>
       </ul>
     </section>
 
     <footer class="features-footer">
-      <img
-        class="avatar"
-        alt="Avatar"
-        src="https://discordapp.com/assets/0e291f67c9274a1abdddeb3fd919cbaa.png"
-      >
+      <img class="avatar" alt="Avatar" src="/public/logo.svg">
       <div class="features-footer-details">
         <span class="username">Anurag Kumar</span>
         <span class="tag">anu1601cs</span>
       </div>
       <div class="features-footer-controls button-group">
         <button role="button" aria-label="Mute" class="button button-mute">
-          <svg>
-            <use xlink:href="#icon-mute"></use>
-          </svg>
+          <i class="fa fa-headphones"></i>
         </button>
         <button role="button" aria-label="Deafen" class="button button-deafen">
-          <svg>
-            <use xlink:href="#icon-deafen"></use>
-          </svg>
+          <i class="fa fa-microphone"></i>
         </button>
         <button role="button" aria-label="Settings" class="button button-settings">
-          <svg>
-            <use xlink:href="#icon-settings"></use>
-          </svg>
+          <i class="fa fa-cog"></i>
         </button>
       </div>
     </footer>
@@ -62,7 +48,13 @@
 </template>
 
 <script>
+import * as types from "./../../../store/mutation-types";
 export default {
-  name: "lazy-aside"
+  name: "lazy-aside",
+  methods: {
+    closeMenu: function() {
+      this.$store.commit(types.HIDE_MENU);
+    }
+  }
 };
 </script>

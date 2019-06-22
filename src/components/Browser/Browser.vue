@@ -1,16 +1,18 @@
 <template>
   <div class="lazy__browser">
-    <!-- <div class="nav-offcanvas open">
+    <div v-if="isMobile" :class="`nav-offcanvas ${sideNav ? 'open' : ''}`">
       <div class="nav-offcanvas-menu lazy__browser">
-        <lazy-aside-action></lazy-aside-action>
+        <lazy-aside-action @tiggerSelectFile="selectFile" @tiggerSelectFolder="selectFolder"></lazy-aside-action>
         <lazy-aside-des></lazy-aside-des>
       </div>
     </div>
-    <div class="offcanvas-overlay"></div>-->
-
-    <lazy-aside-action></lazy-aside-action>
-    <lazy-aside-des></lazy-aside-des>
-
+    <div v-if="isMobile" :class="`offcanvas-overlay ${sideNav ? 'on' : ''}`" @click="closeMenu"></div>
+    <lazy-aside-action
+      v-if="!isMobile"
+      @tiggerSelectFile="selectFile"
+      @tiggerSelectFolder="selectFolder"
+    ></lazy-aside-action>
+    <lazy-aside-des v-if="!isMobile"></lazy-aside-des>
     <div class="vert-container">
       <div class="media-action">
         <div class="file">
@@ -37,7 +39,10 @@
         <div class="media-loader" v-if="this.$store.state.isLoading"></div>
       </div>
       <menu type="toolbar" class="menu">
-        <lazy-breadcrumb></lazy-breadcrumb>
+        <div v-if="isMobile" @click="openMenu">
+          <i class="fa fa-align-justify"></i>
+        </div>
+        <lazy-breadcrumb v-else></lazy-breadcrumb>
       </menu>
       <media-main-content></media-main-content>
     </div>
@@ -62,7 +67,21 @@ export default {
     lazyAsideAction: AsideAction,
     lazyAsideDes: AsideDes
   },
+  computed: {
+    isMobile() {
+      return this.$store.state.isMobile;
+    },
+    sideNav: function() {
+      return this.$store.state.sideNav;
+    }
+  },
   methods: {
+    openMenu: function() {
+      this.$store.commit(types.SHOW_MENU);
+    },
+    closeMenu: function() {
+      this.$store.commit(types.HIDE_MENU);
+    },
     processUpload: async function(type) {
       let uploadSuccess = 0;
       this.$store.commit(types.SET_IS_UPLOADING, true);

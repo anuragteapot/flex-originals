@@ -3,7 +3,7 @@ services:
   lazydrive:
     container_name: lazydrive
     image: lazydrive
-    # restart: always
+    restart: always
     build: .
     ports:
       - '3344:3344'

@@ -16,6 +16,12 @@
         <lazy-file :src="src"></lazy-file>
         <lazy-file :src="src"></lazy-file>
         <lazy-file :src="src"></lazy-file>
+        <lazy-file :src="src"></lazy-file>
+
+        <lazy-file :src="src"></lazy-file>
+        <lazy-file :src="src"></lazy-file>
+        <lazy-file :src="src"></lazy-file>
+        <lazy-file :src="src"></lazy-file>
       </div>
       <span class="clear"></span>
     </div>

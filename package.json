@@ -10,7 +10,7 @@
     "dev": "cross-env NODE_ENV=development npm run lb-start & npm run vue-serve",
     "lb-start": "nodemon",
     "posttest": "npm run lint && nsp check",
-    "prod": "cross-env NODE_ENV=production npm run vue-build && npm start",
+    "prod": "npm run vue-build && cross-env NODE_ENV=production npm start",
     "start": "node .",
     "vue-build": "vue-cli-service build",
     "vue-serve": "vue-cli-service serve"

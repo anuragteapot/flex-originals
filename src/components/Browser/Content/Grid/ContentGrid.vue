@@ -8,7 +8,7 @@
       <span class="clear"></span>
     </div>
     <div class="grid_section files" v-if="files.length >= 0">
-      <h1>Files</h1>
+      <h1>Music</h1>
       <div class="lazy_files_container">
         <!-- <lazy-file v-for="item in files" :item="item" :key="item.id"></lazy-file> -->
         <lazy-file :src="src"></lazy-file>
@@ -38,8 +38,8 @@ export default {
   name: "media-content-grid",
   data: () => ({
     src:
-      "http://localhost:3344/public/sample.jpeg",
-    lazySrc: "http://localhost:3344/public/atom.svg"
+      "/public/sample.jpeg",
+    lazySrc: "/public/atom.svg"
   }),
   components: {
     "lazy-folder": itemFolder,

@@ -41,7 +41,10 @@
         </div>
         <lazy-breadcrumb v-else></lazy-breadcrumb>
         <div class="menu-right">
-          <input type="text" placeholder="Search...">
+          <!-- <input type="text" placeholder="Search..."> -->
+          <span class="icon">
+            <i class="fa fa-search"></i>
+          </span>
           <span class="icon">
             <i class="fa fa-bell"></i>
           </span>

@@ -1,7 +1,7 @@
 <template>
   <div class="lazy__browser">
     <div v-if="isMobile" :class="`nav-offcanvas ${sideNav ? 'open' : ''}`">
-      <div class="nav-offcanvas-menu lazy__browser">
+      <div class="nav-offcanvas-menu">
         <lazy-aside-action @tiggerSelectFile="selectFile" @tiggerSelectFolder="selectFolder"></lazy-aside-action>
         <lazy-aside-des></lazy-aside-des>
       </div>

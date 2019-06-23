@@ -12,12 +12,12 @@
 
 /* Track */
 ::-webkit-scrollbar-track {
-  background: #36393e;
+  background: #04a2ca;
 }
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: #888;
+  background: rgb(158, 157, 157);
 }
 
 /* Handle on hover */
@@ -42,7 +42,7 @@ body {
   background-repeat: no-repeat;
   background-size: cover;
   user-select: none;
-  color: #FFF;
+  color: white;
   font-family: "Roboto", sans-serif;
   font-size: 16px;
   height: 100%;
@@ -287,7 +287,8 @@ body {
   flex: 0 0 57px;
   padding: 0 20px 0 20px;
   background: #36393E;
-  border-bottom: 1px solid #303337;
+  background-image: linear-gradient(to right, #36393E, #04a2ca);
+  // border-bottom: 1px solid #303337;
   display: flex;
   min-width: 200px;
   align-items: center;
@@ -312,7 +313,6 @@ body {
 }
 
 .menu .menu-right input {
-  background: #4e5159;
   color: white;
   height: 2rem;
   border-radius: 0.25rem;
@@ -330,7 +330,7 @@ body {
 
 .content {
   background: #36393E;
-  background-image: linear-gradient(to right, #36393E,  #04a2ca);
+  background-image: linear-gradient(to right, #36393E, #04a2ca);
   display: flex;
   width: 100%;
   height: 100%;
@@ -594,35 +594,14 @@ svg[id] {
   color: black !important;
 }
 
-.content-wrapper {
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  background: linear-gradient(135deg, #ff5f6d 0%, #ffc371 100%);
-}
-
-.hamburger {
-  position: absolute;
-  left: 20px;
-  top: 20px;
-  cursor: pointer;
-
-  i {
-    font-size: 25px;
-    color: white;
-  }
-}
-
 // Left Nav
+
 
 .nav {
   &-offcanvas {
     height: 100%;
     position: fixed;
-    overflow-x: auto;
+    overflow-x: hidden;
     z-index: 200;
     top: 0;
     left: -300px;
@@ -632,6 +611,12 @@ svg[id] {
       left: 0;
     }
   }
+}
+
+.nav-offcanvas-menu {
+  width: 100%;
+  height: 100%;
+  display: flex;
 }
 
 .offcanvas-overlay {

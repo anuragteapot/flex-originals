@@ -11,12 +11,12 @@
     <div class="lazy-collection">
       <div class="server focusable" role="button" aria-label="My Server" aria-selected="true">
         <div class="server-icon">
-          <i class="fa fa-google" style="font-size:25px; color:#44a451;"></i>
+          <i class="fa fa-video-camera" style="font-size:25px; color:red;"></i>
         </div>
       </div>
       <div class="server focusable" role="button" aria-label="My Server" aria-selected="true">
         <div class="server-icon">
-          <i class="fa fa-dropbox" style="font-size:25px; color:#0062ff;"></i>
+          <i class="fa fa-music" style="font-size:25px;"></i>
         </div>
       </div>
       <div class="server focusable" role="button" aria-label="My Server" aria-selected="true">

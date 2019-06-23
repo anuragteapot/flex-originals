@@ -26,17 +26,16 @@
     color: white;
     right: 65px;
   }
+}
 
-  .image::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-  }
-
-
+.lazy-background::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  background: rgba(0, 0, 0, 0.1);
+  right: 0;
+  bottom: 0;
+  left: 0;
 }
 
 @media only screen and (max-width: 700px) {
@@ -52,16 +51,4 @@
       color: white;
     }
   }
-}
-
-.lazy-background {
-  background-image: url("/public/atom.svg");
-  background-size: cover;
-  background-position: center;
-}
-
-.visible {
-  background-image: url("https://www.gstatic.com/webp/gallery/1.jpg");
-  background-size: cover;
-  background-position: center;
 }

@@ -1,6 +1,6 @@
 <template>
   <div class="image lazy-background" ref="lazyBackground">
-    <div class="loader-1 center">
+    <div v-if="isLoading" class="loader-1 center">
       <span></span>
     </div>
     <!-- <i class="fa fa-book fa-4x" aria-hidden="true"></i> -->
@@ -9,121 +9,134 @@
 </template>
 
 <script>
-import * as types from "./../../../store/mutation-types";
-import { api } from "./../../../app/Api.js";
-
 export default {
-  name: "media-file",
+  name: "lazy-image",
   data() {
     return {
-      active: true,
-      iconsMap: {
-        mp3: "library_music",
-        zip: "archive",
-        mp4: "music_video",
-        default: "insert_drive_file"
-      }
+      currentSrc: "",
+      isLoading: true,
+      calculatedAspectRatio: ""
     };
   },
-  props: ["item", "src", "srcset"],
-  mounted() {
-    this.lazyLoad();
+  props: {
+    alt: String,
+    contain: Boolean,
+    src: {
+      type: [String, Object],
+      default: ""
+    },
+    gradient: String,
+    lazySrc: String,
+    srcset: String,
+    sizes: String
   },
   computed: {
-    selectedState: function() {
-      var res = this.$store.state.selectedItems.filter(file => {
-        return file.id === this.item.id;
-      });
-
-      if (res.length != 0) {
-        return true;
-      } else {
-        return false;
-      }
+    computedAspectRatio() {
+      return this.normalisedSrc.aspect;
     },
-    getName: function() {
-      const len = this.$store.state.isMobile ? 13 : 15;
-      if (this.item.name.length >= len) {
-        return this.item.name.substring(0, len) + "..";
-      } else {
-        return this.item.name;
-      }
-    },
-    menuState: function() {
-      return this.$store.state.showInfoBar;
-    },
-    isMobile: function() {
-      return this.$store.state.isMobile;
-    },
-    icon: function() {
-      if (
-        this.iconsMap[this.item.extension] &&
-        this.iconsMap[this.item.extension] != ""
-      ) {
-        return this.iconsMap[this.item.extension];
-      } else {
-        return this.iconsMap["default"];
-      }
+    normalisedSrc() {
+      return typeof this.src === "string"
+        ? {
+            src: this.src,
+            srcset: this.srcset,
+            lazySrc: this.lazySrc,
+            aspect: Number(this.aspectRatio || this.calculatedAspectRatio)
+          }
+        : {
+            src: this.src.src,
+            srcset: this.srcset || this.src.srcset,
+            lazySrc: this.lazySrc || this.src.lazySrc,
+            aspect: Number(
+              this.aspectRatio || this.src.aspect || this.calculatedAspectRatio
+            )
+          };
     }
   },
+  mounted() {
+    this.init();
+  },
   methods: {
-    lazyLoad() {
-      var lazyBackground = this.$refs.lazyBackground;
-
-      if ("IntersectionObserver" in window) {
-        let lazyBackgroundObserver = new IntersectionObserver(function(
-          entries,
-          observer
-        ) {
-          entries.forEach(entry => {
-            console.log(entry);
-            if (entry.isIntersecting) {
-              entry.target.classList.add("visible");
-              lazyBackgroundObserver.unobserve(entry.target);
-            }
-          });
-        });
-
-        lazyBackgroundObserver.observe(lazyBackground);
-      }
+    cachedImage() {
+      if (!(this.normalisedSrc.src || this.normalisedSrc.lazySrc)) return [];
+      const src = this.isLoading ? this.normalisedSrc.lazySrc : this.currentSrc;
+      this.$refs.lazyBackground.classList.remove("lazy-background");
+      this.$refs.lazyBackground.style.backgroundImage = `url("${src}")`;
     },
-    show: function(event, item) {
-      var e = event || window.event;
-      e.preventDefault();
-
-      if (!(e.shiftKey || e.ctrlKey) || item.type == "quick") {
-        this.select(e, this.item);
+    init() {
+      if (this.normalisedSrc.lazySrc) {
+        const lazyImg = new Image();
+        lazyImg.src = this.normalisedSrc.lazySrc;
+        this.pollForSize(lazyImg, null);
+        this.$refs.lazyBackground.style.backgroundImage = `url("${this.normalisedSrc.lazySrc}")`;
       }
 
-      this.$store.commit(types.HIDE_MENU);
-      this.$store.commit(types.SHOW_MENU, { event: e });
-
-      this.$nextTick(() => {
-        this.$store.state.showMenu.state = true;
-      });
+      if (this.normalisedSrc.src) this.loadImage();
     },
-    getTime: function(_time) {
-      return api.time_ago(new Date(_time));
+    onLoad() {
+      this.getSrc();
+      this.isLoading = false;
+      this.cachedImage();
     },
-    select: function(event, item) {
-      var e = event || window.event;
-      e.preventDefault();
-
-      if (!(e.shiftKey || e.ctrlKey) || item.type == "quick") {
-        // this.$store.state.selectAllFile = false;
-        // this.$store.state.selectAllFolder = false;
-        this.$store.commit(types.UNSELECT_ALL_BROWSER_ITEMS);
-      }
-
-      if (this.selectedState) {
-        this.$store.commit(types.UNSELECT_BROWSER_ITEM, item);
-      } else {
-        this.$store.commit(types.SELECT_BROWSER_ITEM, item);
-      }
+    onError() {
+      console.log(
+        `Image load failed\n\n` + `src: ${this.normalisedSrc.src}`,
+        this
+      );
+      this.$emit("error", this.src);
     },
-    preview: function() {
-      this.$store.commit(types.LOAD_FULL_CONTENTS_SUCCESS, this.item);
-      this.$store.commit(types.SHOW_PREVIEW_MODAL);
+    getSrc() {
+      /* istanbul ignore else */
+      if (this.image) this.currentSrc = this.image.currentSrc || this.image.src;
+    },
+    loadImage() {
+      const image = new Image();
+      this.image = image;
+
+      image.onload = () => {
+        /* istanbul ignore if */
+        if (image.decode) {
+          image
+            .decode()
+            .catch(err => {
+              console.log(
+                `Failed to decode image, trying to render anyway\n\n` +
+                  `src: ${this.normalisedSrc.src}` +
+                  (err.message ? `\nOriginal error: ${err.message}` : ""),
+                this
+              );
+            })
+            .then(this.onLoad);
+        } else {
+          this.onLoad();
+        }
+      };
+      image.onerror = this.onError;
+
+      image.src = this.normalisedSrc.src;
+      this.sizes && (image.sizes = this.sizes);
+      this.normalisedSrc.srcset && (image.srcset = this.normalisedSrc.srcset);
+
+      this.aspectRatio || this.pollForSize(image);
+      this.getSrc();
+    },
+    pollForSize(img, timeout = 100) {
+      const poll = () => {
+        const { naturalHeight, naturalWidth } = img;
+
+        if (naturalHeight || naturalWidth) {
+          this.calculatedAspectRatio = naturalWidth / naturalHeight;
+        } else {
+          timeout != null && setTimeout(poll, timeout);
+        }
+      };
+
+      poll();
+    }
+  },
+  watch: {
+    src() {
+      if (!this.isLoading) this.init();
+      else this.loadImage();
     }
   }
 };

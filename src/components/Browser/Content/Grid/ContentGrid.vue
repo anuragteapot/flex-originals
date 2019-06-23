@@ -11,11 +11,11 @@
       <h3>Files</h3>
       <div class="lazy_files_container">
         <!-- <lazy-file v-for="item in files" :item="item" :key="item.id"></lazy-file> -->
-        <lazy-file></lazy-file>
-        <lazy-file></lazy-file>
-        <lazy-file></lazy-file>
-        <lazy-file></lazy-file>
-        <lazy-file></lazy-file>
+        <lazy-file :src="src"></lazy-file>
+        <lazy-file :src="src"></lazy-file>
+        <lazy-file :src="src"></lazy-file>
+        <lazy-file :src="src"></lazy-file>
+        <lazy-file :src="src"></lazy-file>
       </div>
       <span class="clear"></span>
     </div>
@@ -30,7 +30,11 @@ import itemFile from "./../../Items/File";
 
 export default {
   name: "media-content-grid",
-  data: () => ({}),
+  data: () => ({
+    src:
+      "https://static.pexels.com/photos/134/light-creative-abstract-colorful.jpg",
+    lazySrc: "http://localhost:3344/public/atom.svg"
+  }),
   components: {
     "lazy-folder": itemFolder,
     "lazy-file": itemFile

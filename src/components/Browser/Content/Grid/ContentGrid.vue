@@ -8,7 +8,7 @@
       <span class="clear"></span>
     </div>
     <div class="grid_section files" v-if="files.length >= 0">
-      <h3>Files</h3>
+      <h1>Files</h1>
       <div class="lazy_files_container">
         <!-- <lazy-file v-for="item in files" :item="item" :key="item.id"></lazy-file> -->
         <lazy-file :src="src"></lazy-file>

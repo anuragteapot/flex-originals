@@ -1,5 +1,8 @@
-.image {
+.grid_section h1 {
+  padding: 11px;
+}
 
+.image {
   width: 200px;
   height: 200px;
   border-radius: 5px;
@@ -11,6 +14,9 @@
   display: inline-block;
   margin: 5px 13px 50px 13px;
   position: relative;
+  cursor: pointer;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+	box-shadow: 0 5px 5px rgba(0, 0, 0, 0.15);
 
   p {
     position: absolute;
@@ -37,6 +43,7 @@
   bottom: 0;
   left: 0;
 }
+
 
 @media only screen and (max-width: 700px) {
   .image {

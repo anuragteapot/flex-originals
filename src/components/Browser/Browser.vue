@@ -53,7 +53,7 @@
           </span>
         </div>
       </menu>
-      <div class="progress" v-if="loading">
+      <div class="progress">
         <div class="indeterminate"></div>
       </div>
       <media-main-content></media-main-content>

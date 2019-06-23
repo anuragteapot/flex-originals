@@ -38,7 +38,7 @@ export default {
   name: "media-content-grid",
   data: () => ({
     src:
-      "https://static.pexels.com/photos/134/light-creative-abstract-colorful.jpg",
+      "http://localhost:3344/public/sample.jpeg",
     lazySrc: "http://localhost:3344/public/atom.svg"
   }),
   components: {

@@ -6,10 +6,11 @@
   "description": "A file sharing community.",
   "scripts": {
     "lint": "vue-cli-service lint",
-    "dev": "npm run lb-start & npm run vue-serve",
+    "test": "vue-cli-service lint & npm run vue-build",
+    "dev": "cross-env NODE_ENV=development npm run lb-start & npm run vue-serve",
     "lb-start": "nodemon",
     "posttest": "npm run lint && nsp check",
-    "prod": "environment=production npm run vue-build && npm start",
+    "prod": "cross-env NODE_ENV=production npm run vue-build && npm start",
     "start": "node .",
     "vue-build": "vue-cli-service build",
     "vue-serve": "vue-cli-service serve"

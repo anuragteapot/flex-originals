@@ -1,5 +1,5 @@
 {
-  "name": "action",
+  "name": "Action",
   "base": "PersistedModel",
   "idInjection": true,
   "options": {

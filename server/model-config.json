@@ -13,16 +13,29 @@
       "./mixins"
     ]
   },
-  "user": {
-    "dataSource": "mongodb",
-    "public": true
+  "User": {
+    "dataSource": "mongodb"
   },
-  "action": {
+  "AccessToken": {
     "dataSource": "mongodb",
-    "public": true
+    "public": false
   },
-  "permission": {
+  "ACL": {
     "dataSource": "mongodb",
-    "public": true
+    "public": false
+  },
+  "RoleMapping": {
+    "dataSource": "mongodb",
+    "public": false,
+    "options": {
+      "strictObjectIDCoercion": true
+    }
+  },
+  "Role": {
+    "dataSource": "mongodb",
+    "public": false
+  },
+  "Action": {
+    "dataSource": "mongodb"
   }
 }

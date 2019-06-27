@@ -22,12 +22,12 @@
         aria-hidden="true"
       ></i>
       <div class="slider_container">
+        <span class="time">{{ currentTime | fancyTimeFormat }}</span>
         <input v-model="currentProgressBar" type="range" min="0" max="100" class="slider time">
+        <span class="time">{{ trackDuration | fancyTimeFormat }}</span>
+        <i class="audio-icon fa fa-volume-up"></i>
         <input v-model="volume" type="range" min="0" max="10" class="slider audio">
       </div>
-      <span class="currentTime">{{ currentTime | fancyTimeFormat }}</span>
-      /
-      <span class="totalTime">{{ trackDuration | fancyTimeFormat }}</span>
       <i class="fa fa-random" aria-hidden="true"></i>
       <i class="fa fa-retweet" aria-hidden="true"></i>
       <i class="fa fa-list" aria-hidden="true"></i>

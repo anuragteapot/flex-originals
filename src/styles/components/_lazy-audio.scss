@@ -3,7 +3,7 @@
   bottom: 0;
   display: block;
   width: 100%;
-  padding: 8px;
+  padding: 15px;
   background-image: linear-gradient(to right, #36393e, #04a2ca);
 
   .inner {
@@ -37,11 +37,20 @@
       position: relative;
       display: inline-flex;
 
+      .audio-icon {
+        font-size: 20px;
+      }
+
+      .time {
+        margin: 0 20px;
+      }
+
       .slider {
         appearance: none;
         outline: none;
         width: 90%;
         height: 4px;
+        margin: 8px;
         background: $color-active;
         border-radius: 4px;
 

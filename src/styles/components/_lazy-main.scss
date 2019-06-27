@@ -42,7 +42,7 @@ body {
   background-repeat: no-repeat;
   background-size: cover;
   user-select: none;
-  color: white!important;
+  color: white !important;
   font-family: "Roboto", sans-serif;
   font-size: 16px;
   height: 100%;
@@ -101,15 +101,27 @@ body {
   display: flex;
   flex-direction: column;
   flex: 0 0 230px;
-}
 
-.features .features-header {
-  display: flex;
-  align-items: center;
-  flex: 0 0 56px;
-  padding: 2px 24px;
-  box-shadow: 0 1px 0 0 rgba(0, 0, 0, 0.1);
-  transition: background 0.15s ease;
+  input {
+    color: white;
+    height: 2em;
+    border-radius: 0.25rem;
+    padding: 0 0.5rem;
+    border: none;
+    outline: none;
+    margin: 0 5px 0 0;
+    background-color: #2a2e32;
+    border-radius: 0.25rem;
+  }
+
+  .features-header {
+    display: flex;
+    align-items: center;
+    flex: 0 0 56px;
+    padding: 2px 24px;
+    box-shadow: 0 1px 0 0 rgba(0, 0, 0, 0.1);
+    transition: background 0.15s ease;
+  }
 }
 
 .features .features-list-text,
@@ -187,11 +199,6 @@ body {
   position: absolute;
   left: 0;
   background: #7289da;
-}
-
-.features .channel-text:not(.active):focus::before,
-.features .channel-text:not(.active):hover::before {
-  opacity: 0.25;
 }
 
 .features .channel-text .channel-name::before {
@@ -392,7 +399,7 @@ body {
   justify-content: center;
 }
 
-.server .server-icon > img {
+.server .server-icon>img {
   border-radius: inherit;
   max-width: 100%;
 }
@@ -471,8 +478,8 @@ body {
   user-select: none;
 }
 
-.button > svg,
-.button > img {
+.button>svg,
+.button>img {
   max-width: 100%;
   max-height: 100%;
 }
@@ -486,7 +493,7 @@ body {
   border-right: 1px solid #1c1e21;
 }
 
-.button-group .button + .button {
+.button-group .button+.button {
   box-shadow: inset 1px 0 0 #393c41;
 }
 

@@ -1,23 +1,23 @@
 <template>
-  <section class="show lazy_login">
-    <form ref="form">
-      <h1>Welcome Back!</h1>
-      <p>We're so excited to see you again!</p>
-      <label for="email">
-        Email
-        <span></span>
-      </label>
-      <input id="email" name="email" type="email" v-model="email">
-      <label for="password">
-        Password
-        <span></span>
-      </label>
-      <input autocomplete id="password" name="password" type="password" v-model="password">
-      <input type="submit" value="Login" @click.prevent="submit()">
-      <a href="/forgot">Forgot your password?</a>
-      <a href="/signup">Register an account</a>
-    </form>
-  </section>
+  <div>
+    <label class="switch">
+      <input type="checkbox">
+      <div></div>
+    </label>
+    <div class="radio">
+      <input id="1" type="radio" name="b" checked>
+      <label for="1">Option 1</label>
+    </div>
+    <div class="radio">
+      <input id="2" type="radio" name="b">
+      <label for="2">Option 2</label>
+    </div>
+    <div class="checkbox">
+      <input id="one" type="checkbox">
+      <span class="check"></span>
+      <label for="one">Check me!</label>
+    </div>
+  </div>
 </template>
 <script>
 import { api } from "./../../app/Api";

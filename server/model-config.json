@@ -37,5 +37,9 @@
   },
   "Action": {
     "dataSource": "mongodb"
+  },
+  "Signup": {
+    "dataSource": "mongodb",
+    "public": true
   }
 }

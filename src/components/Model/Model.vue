@@ -23,7 +23,7 @@ export default {
   },
   computed: {
     layout() {
-      return "MPreview";
+      return this.$store.state.modal.type;
     },
     modal() {
       return this.$store.state.modal.state;

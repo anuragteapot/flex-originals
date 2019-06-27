@@ -1,8 +1,4 @@
-* {
-  color: $color-secondary;
-}
-
-.lazy_login {
+.form {
   position: absolute;
   top: 0;
   left: 0;
@@ -15,97 +11,93 @@
   background-position: center;
   background-attachment: fixed;
   background-size: cover;
-  opacity: 0;
   transform-origin: top center;
   transform: translateY(-100vh);
+  transform: translateY(#{$header-height});
 
-  &.show {
-    opacity: 1;
-    transform: translateY(#{$header-height});
-  }
-
-  form {
-    padding: 50px;
-    min-width: 300px;
-    width: 25%;
-    max-width: 600px;
+  .inner {
+    width: 450px;
     border-radius: $radius;
-    background-color: lighten($color-primary, 4);
+    background-color: lighten($color-primary, 2);
     text-align: center;
 
-    &>* {
+    & > * {
       width: 100%;
     }
-  }
 
-  h1,
-  p {
-    margin: 0;
-    padding: 0;
-  }
-
-  h1 {
-    font-size: 26px;
-    font-weight: normal;
-  }
-
-  p {
-    margin: 15px 0 25px 0;
-    color: lighten($color-primary, 30);
-  }
-
-  label {
-    display: block;
-    margin-bottom: 7px;
-    font-size: 12px;
-    text-align: left;
-    text-transform: uppercase;
-
-    &>span {
-      padding-left: 10px;
-      text-transform: normal;
-      color: $color-error;
+    .header {
+      padding: 15px 30px;
+      text-align: left;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-weight: 500;
     }
-  }
+    .body {
+      padding: 20px 30px;
+      font-weight: 400;
+      text-align: left;
+      color: rgb(213, 214, 214);
 
-  input {
-    padding: 10px;
-    width: 100%;
-    border-radius: $radius;
-    border: 1px solid transparent;
-    background-color: $color-primary;
-    font-size: 16px;
+      label {
+        display: block;
+        margin-bottom: 7px;
+        font-size: 12px;
+        text-align: left;
+        text-transform: uppercase;
 
-    &:not([type="submit"]) {
-      margin-bottom: 20px;
-      box-shadow: inset 0 0 10px 0 rgba(0, 0, 0, 0.2);
-
-      &:hover {
-        border-color: rgba(0, 0, 0, 0.2);
+        & > span {
+          padding-left: 10px;
+          text-transform: normal;
+          color: $color-error;
+        }
       }
 
-      &:focus,
-      &:active {
-        border-color: $color-special;
+      input {
+        padding: 10px;
+        width: 100%;
+        outline: none;
+        border-radius: $radius;
+        border: 1px solid transparent;
+        background-color: $color-primary;
+        font-size: 16px;
+        color: white;
+
+        &:not([type="submit"]) {
+          margin-bottom: 20px;
+          box-shadow: inset 0 0 10px 0 rgba(0, 0, 0, 0.2);
+
+          &:hover {
+            border-color: rgba(0, 0, 0, 0.2);
+          }
+
+          &:focus,
+          &:active {
+            border-color: $color-special;
+          }
+        }
       }
     }
 
-    &[type="submit"] {
-      margin-bottom: 5px;
-      padding: 15px;
-      background-color: $color-special;
-      font-size: 16px;
-      cursor: pointer;
-    }
-  }
+    .footer {
+      flex: 0 0 auto;
+      padding: 10px;
+      background-color: $color-primary;
 
-  a {
-    display: block;
-    margin-top: 10px;
-    font-size: 14px;
-    font-weight: bold;
-    text-align: left;
-    text-decoration: none;
-    color: $color-special;
+      button {
+        background-color: $color-primary;
+        color: #fff;
+        border: 0;
+        outline: 0;
+        cursor: pointer;
+        font-size: 15px;
+        padding: 10px 30px;
+        margin: 5px;
+        border-radius: 3px;
+      }
+
+      button:hover {
+        opacity: 0.8;
+      }
+    }
   }
 }

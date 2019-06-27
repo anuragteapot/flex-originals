@@ -1,70 +1,61 @@
 <template>
-  <div class="media-rename">
-    <v-dialog v-model="this.$store.state.showRenameModal" persistent width="500px" transition="fade-transition">
-      <v-card>
-        <v-card-title class="grey lighten-4 title">Rename
-          <v-spacer></v-spacer>
-          <v-icon>folder</v-icon>
-        </v-card-title>
-        <v-container>
-          <v-flex>
-            <v-text-field
-              v-model="selectedName"
-              solo
-              @focus="$event.target.select()"
-              autofocus
-              label="Folder name"
-            ></v-text-field>
-          </v-flex>
-        </v-container>
-        <v-card-actions>
-          <v-spacer></v-spacer>
-          <v-btn flat color="error" @click.prevent="hideRenameModal()">Cancel</v-btn>
-          <v-btn flat color="success" @click.prevent="rename()">Ok</v-btn>
-        </v-card-actions>
-      </v-card>
-    </v-dialog>
+  <div class="lazy-rename">
+    <section class="form">
+      <div class="inner">
+        <div class="header">Leave 'FlareTV Community'</div>
+        <div class="body">
+          Are you sure you want to leave
+          <strong>FlareTV Community</strong>? You won't be able to rejoin this server unless you are re-invited.
+        </div>
+        <div class="footer">
+          <div style="text-align:right">
+            <button type="button">Cancel</button>
+            <button type="submit" class="danger">Submit</button>
+          </div>
+        </div>
+      </div>
+    </section>
   </div>
 </template>
 
 <script>
-import * as types from './../../../store/mutation-types'
+import * as types from "./../../../store/mutation-types";
 
 export default {
-  name: 'media-rename',
+  name: "lazy-rename",
   data: () => ({
-    defaultData: ''
+    defaultData: ""
   }),
 
   computed: {
     selectedName: {
-      get: function () {
+      get: function() {
         if (this.$store.state.showRenameModal) {
-          return this.$store.state.selectedItems[0].name
+          return this.$store.state.selectedItems[0].name;
         } else {
-          return ''
+          return "";
         }
       },
-      set: function (data) {
-        this.defaultData = data
+      set: function(data) {
+        this.defaultData = data;
       }
     }
   },
   methods: {
-    hideRenameModal: function () {
-      this.$store.commit(types.HIDE_RENAME_MODAL)
+    hideRenameModal: function() {
+      this.$store.commit(types.HIDE_RENAME_MODAL);
     },
-    rename: function () {
-      if (this.defaultData != '') {
-        const item = this.$store.state.selectedItems[0]
-        item.newName = this.defaultData
-        this.$store.dispatch('rename', item)
+    rename: function() {
+      if (this.defaultData != "") {
+        const item = this.$store.state.selectedItems[0];
+        item.newName = this.defaultData;
+        this.$store.dispatch("rename", item);
       } else {
-        this.hideRenameModal()
+        this.hideRenameModal();
       }
     }
   }
-}
+};
 </script>
 <style>
 .confirm-text {

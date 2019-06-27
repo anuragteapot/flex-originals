@@ -49,6 +49,22 @@ body {
   width: 100%;
 }
 
+.info {
+  background-color: $color-special !important;
+}
+
+.success {
+  background-color: $color-active !important;
+}
+
+.warning {
+  background-color: $color-warn !important;
+}
+
+.danger {
+  background-color: $color-error !important;
+}
+
 .container,
 .lazy__browser {
   height: 100%;
@@ -66,7 +82,7 @@ body {
 
 .lazy {
   height: 100%;
-  background: #1E2124;
+  background: #1e2124;
   flex: 0 0 70px;
   display: flex;
   flex-direction: column;
@@ -81,7 +97,7 @@ body {
 }
 
 .features {
-  background: #2E3136;
+  background: #2e3136;
   display: flex;
   flex-direction: column;
   flex: 0 0 230px;
@@ -170,7 +186,7 @@ body {
   height: 100%;
   position: absolute;
   left: 0;
-  background: #7289DA;
+  background: #7289da;
 }
 
 .features .channel-text:not(.active):focus::before,
@@ -206,7 +222,7 @@ body {
 
 .features .features-list .features-list-header:hover,
 .features .features-list .features-list-header:focus {
-  color: #FFF;
+  color: #fff;
 }
 
 .features .features-list .features-list-header:hover::after,
@@ -286,8 +302,8 @@ body {
 .menu {
   flex: 0 0 57px;
   padding: 0 20px 0 20px;
-  background: #36393E;
-  background-image: linear-gradient(to right, #36393E, #04a2ca);
+  background: #36393e;
+  background-image: linear-gradient(to right, #36393e, #04a2ca);
   // border-bottom: 1px solid #303337;
   display: flex;
   min-width: 200px;
@@ -305,7 +321,7 @@ body {
 .menu .menu-name::before {
   margin-right: 2px;
   font-weight: 300;
-  color: #8A8E94;
+  color: #8a8e94;
 }
 
 .menu-right {
@@ -329,27 +345,27 @@ body {
 }
 
 .content {
-  background: #36393E;
-  background-image: linear-gradient(to right, #36393E, #04a2ca);
+  background: #36393e;
+  background-image: linear-gradient(to right, #36393e, #04a2ca);
   display: flex;
   width: 100%;
   height: 100%;
-}
 
-.inner {
-  padding: 10px;
-  min-width: 500px;
-}
+  .inner {
+    padding: 10px;
+    min-width: 500px;
+  }
 
-.content .inner {
-  overflow-y: scroll;
+  .inner {
+    overflow-y: scroll;
+  }
 }
 
 .server {
   width: 50px;
   height: 50px;
   border-radius: 25px;
-  background-color: #2E3136;
+  background-color: #2e3136;
   background-repeat: no-repeat;
   margin-bottom: 8px;
   cursor: pointer;
@@ -376,7 +392,7 @@ body {
   justify-content: center;
 }
 
-.server .server-icon>img {
+.server .server-icon > img {
   border-radius: inherit;
   max-width: 100%;
 }
@@ -421,15 +437,15 @@ body {
 
 .server.active {
   border-radius: 15px;
-  background-color: #7289DA;
+  background-color: #7289da;
 }
 
 .server.unread::before {
-  background: #8A8E94;
+  background: #8a8e94;
 }
 
 .server.active::before {
-  background: #FFF;
+  background: #fff;
   height: 40px;
   top: 5px;
 }
@@ -439,7 +455,7 @@ body {
 }
 
 .button {
-  background: #2E3136;
+  background: #2e3136;
   border: 0;
   color: inherit;
   cursor: pointer;
@@ -455,8 +471,8 @@ body {
   user-select: none;
 }
 
-.button>svg,
-.button>img {
+.button > svg,
+.button > img {
   max-width: 100%;
   max-height: 100%;
 }
@@ -470,7 +486,7 @@ body {
   border-right: 1px solid #1c1e21;
 }
 
-.button-group .button+.button {
+.button-group .button + .button {
   box-shadow: inset 1px 0 0 #393c41;
 }
 
@@ -482,7 +498,7 @@ svg[id] {
 @-webkit-keyframes server-hover-in {
   0% {
     border-radius: 25px;
-    background-color: #2E3136;
+    background-color: #2e3136;
   }
 
   40% {
@@ -506,7 +522,7 @@ svg[id] {
 @keyframes server-hover-in {
   0% {
     border-radius: 25px;
-    background-color: #2E3136;
+    background-color: #2e3136;
   }
 
   40% {
@@ -535,7 +551,7 @@ svg[id] {
 
   45% {
     border-radius: 25px;
-    background-color: #2E3136;
+    background-color: #2e3136;
   }
 
   65% {
@@ -559,7 +575,7 @@ svg[id] {
 
   45% {
     border-radius: 25px;
-    background-color: #2E3136;
+    background-color: #2e3136;
   }
 
   65% {
@@ -596,7 +612,6 @@ svg[id] {
 
 // Left Nav
 
-
 .nav {
   &-offcanvas {
     height: 100%;
@@ -605,7 +620,7 @@ svg[id] {
     z-index: 200;
     top: 0;
     left: -300px;
-    transition: .3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    transition: 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 
     &.open {
       left: 0;
@@ -624,9 +639,9 @@ svg[id] {
   top: 0;
   width: 100%;
   height: 100vh;
-  background: #1E2124;
+  background: #1e2124;
   z-index: 199;
-  transition: .3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  transition: 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   visibility: hidden;
   opacity: 0;
 
@@ -635,7 +650,6 @@ svg[id] {
     visibility: visible;
   }
 }
-
 
 .media-content-grid {
   padding: 50px 100px;

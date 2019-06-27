@@ -39,7 +39,7 @@
         <div v-if="isMobile" @click="openMenu">
           <i class="fa fa-align-justify"></i>
         </div>
-        <lazy-breadcrumb v-else></lazy-breadcrumb>
+        <!-- <lazy-breadcrumb v-else></lazy-breadcrumb> -->
         <div class="menu-right">
           <!-- <input type="text" placeholder="Search..."> -->
           <span class="icon">
@@ -64,7 +64,7 @@
 <script>
 import * as types from "./.././../store/mutation-types.js";
 import mainContent from "./../Browser/Content/MainContent";
-import breadCrumb from "./../Tool/BreadCrumb";
+// import breadCrumb from "./../Tool/BreadCrumb";
 import AsideAction from "./Aside/AsideAction";
 import AsideDes from "./Aside/AsideDes";
 
@@ -75,7 +75,7 @@ export default {
   },
   components: {
     mediaMainContent: mainContent,
-    lazyBreadcrumb: breadCrumb,
+    // lazyBreadcrumb: breadCrumb,
     lazyAsideAction: AsideAction,
     lazyAsideDes: AsideDes
   },

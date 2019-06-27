@@ -18,11 +18,11 @@
       overflow: visible;
       -webkit-appearance: none;
 
-      &:checked+.slider {
+      &:checked + .slider {
         background-color: #40e0d0;
 
         &:before {
-          content: '';
+          content: "";
           transform: translateX(36px);
         }
       }
@@ -47,7 +47,61 @@
         background-color: #126e64;
         border-radius: 100%;
         transition: ease 0.3s;
-        content: '';
+        content: "";
+      }
+    }
+  }
+}
+
+.music_player {
+  position: fixed;
+  bottom: 0;
+  display: block;
+  width: 100%;
+  padding: 8px;
+  background-image: linear-gradient(to right, #36393e, #04a2ca);
+
+  .inner {
+    padding: 10px;
+    width: 100%;
+    text-align: left;
+    color: white;
+
+    i {
+      margin: 0 10px;
+      cursor: pointer;
+    }
+
+    input {
+      display: block;
+      margin-right: 10px;
+      float: left;
+    }
+
+    .slider_container {
+      width: 50%;
+      margin-left: 20px;
+      border-radius: 4px;
+      position: relative;
+      display: inline-flex;
+
+      .slider {
+        appearance: none;
+        outline: none;
+        width: 90%;
+        height: 4px;
+        background: $color-active;
+        border-radius: 4px;
+      }
+
+      .slider::-webkit-slider-thumb {
+        appearance: none;
+        width: 20px;
+        height: 20px;
+        background: #fff;
+        border: 2px solid $color-active;
+        border-radius: 50%;
+        cursor: pointer;
       }
     }
   }

@@ -2,6 +2,16 @@
   <section class="content">
     <div class="inner">
       <lazy-grid></lazy-grid>
+      <div class="music_player">
+        <div class="inner">
+          <i class="fa fa-chevron-circle-left fa-2x" aria-hidden="true"></i>
+          <i class="fa fa-play fa-2x" aria-hidden="true"></i>
+          <i class="fa fa-chevron-circle-right fa-2x" aria-hidden="true"></i>
+          <div class="slider_container">
+            <input type="range" min="1" max="100" value="50" class="slider">
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 </template>

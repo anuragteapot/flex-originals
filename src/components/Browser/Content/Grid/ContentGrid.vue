@@ -8,6 +8,12 @@
       <span class="clear"></span>
     </div>
     <div class="grid_section files" v-if="files.length >= 0">
+      <h1>Recents</h1>
+      <div class="lazy_files_container">
+        <!-- <lazy-file v-for="item in files" :item="item" :key="item.id"></lazy-file> -->
+        <lazy-file :src="src"></lazy-file>
+        <lazy-file :src="src"></lazy-file>
+      </div>
       <h1>Music</h1>
       <div class="lazy_files_container">
         <!-- <lazy-file v-for="item in files" :item="item" :key="item.id"></lazy-file> -->
@@ -18,6 +24,17 @@
         <lazy-file :src="src"></lazy-file>
         <lazy-file :src="src"></lazy-file>
 
+        <lazy-file :src="src"></lazy-file>
+        <lazy-file :src="src"></lazy-file>
+        <lazy-file :src="src"></lazy-file>
+        <lazy-file :src="src"></lazy-file>
+      </div>
+
+      <h1>Videos</h1>
+      <div class="lazy_files_container">
+        <!-- <lazy-file v-for="item in files" :item="item" :key="item.id"></lazy-file> -->
+        <lazy-file :src="src"></lazy-file>
+        <lazy-file :src="src"></lazy-file>
         <lazy-file :src="src"></lazy-file>
         <lazy-file :src="src"></lazy-file>
         <lazy-file :src="src"></lazy-file>
@@ -37,8 +54,7 @@ import itemFile from "./../../Items/File";
 export default {
   name: "media-content-grid",
   data: () => ({
-    src:
-      "/public/sample.jpeg",
+    src: "/public/sample.jpeg",
     lazySrc: "/public/atom.svg"
   }),
   components: {

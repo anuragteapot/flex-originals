@@ -4,12 +4,15 @@
       <lazy-grid></lazy-grid>
       <div class="music_player">
         <div class="inner">
-          <i class="fa fa-chevron-circle-left fa-2x" aria-hidden="true"></i>
-          <i class="fa fa-play fa-2x" aria-hidden="true"></i>
-          <i class="fa fa-chevron-circle-right fa-2x" aria-hidden="true"></i>
+          <i class="fa fa-step-backward" aria-hidden="true"></i>
+          <i class="fa fa-pause" aria-hidden="true"></i>
+          <i class="fa fa-step-forward" aria-hidden="true"></i>
           <div class="slider_container">
-            <input type="range" min="1" max="100" value="50" class="slider">
+            <input type="range" min="1" max="100" value="50" class="slider time">
+            <input type="range" min="1" max="100" value="50" class="slider audio">
           </div>
+          <i class="fa fa-random" aria-hidden="true"></i>
+          <i class="fa fa-retweet" aria-hidden="true"></i>
         </div>
       </div>
     </div>

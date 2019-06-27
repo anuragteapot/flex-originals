@@ -22,7 +22,7 @@
 import * as types from "./../../../store/mutation-types";
 
 export default {
-  name: "lazy-rename",
+  name: "model-rename",
   data: () => ({
     defaultData: ""
   }),

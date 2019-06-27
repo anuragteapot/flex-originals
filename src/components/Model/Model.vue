@@ -7,18 +7,23 @@
     </div>
   </div>
 </template>
-
 <script>
-import rename from "./Rename/RenameModel";
+import MRename from "./Rename/Rename";
+import MDelete from "./Delete/Delete";
+import MNewFolder from "./NewFolder/NewFolder";
+import MPreview from "./Preview/Preview";
 
 export default {
   name: "lazy-model",
   components: {
-    rename
+    MRename,
+    MDelete,
+    MNewFolder,
+    MPreview
   },
   computed: {
     layout() {
-      return "rename";
+      return "MPreview";
     },
     modal() {
       return this.$store.state.modal.state;

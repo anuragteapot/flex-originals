@@ -19,7 +19,9 @@
         <span class="time">{{ currentTime }}</span>
         <div class="slider" ref="progress" @mousedown="scrub">
           <div class="buffer" :style="`width:${bufferPercent}%`">
-            <div class="progress" :style="`width:${currentProgressBar}%`"></div>
+            <div class="progress" :style="`width:${currentProgressBar}%`">
+              <span class="circle"></span>
+            </div>
           </div>
         </div>
         <span class="time">{{ trackDuration }}</span>

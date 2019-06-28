@@ -23,6 +23,13 @@ class Api {
     this.user = user
     this.config = config
     this.service = service
+    const cssRule =
+      'color: red;' +
+      'font-size: 60px;' +
+      'font-weight: bold;' +
+      'text-shadow: 1px 1px 5px rgb(249, 162, 34);' +
+      'filter: dropshadow(color=rgb(249, 162, 34), offx=1, offy=1);'
+    setTimeout(console.log.bind(console, '%cStop!', cssRule), 0)
   }
 
   getUidV4() {

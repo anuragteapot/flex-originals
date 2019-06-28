@@ -1,6 +1,6 @@
 <template>
   <div class="video-player">
-    <video @click="togglePlay" ref="videoViewer" class="player__video viewer" :src="src"></video>
+    <video @click="togglePlay" ref="videoViewer" class="player__video" :src="src"></video>
     <div class="player__controls">
       <div class="progress" ref="progress" @click="scrub">
         <div class="progress__filled" :style="`flexBasis:${progressBar}`"></div>

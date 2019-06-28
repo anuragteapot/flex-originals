@@ -1,12 +1,8 @@
 .video-player {
-  max-width: 750px;
-  border: 5px solid rgba(0, 0, 0, 0.2);
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
   position: relative;
-  font-size: 0;
   overflow: hidden;
+  font-size: 0;
 
-  /* This css is only applied when fullscreen is active. */
   &:fullscreen {
     max-width: none;
     width: 100%;
@@ -19,6 +15,7 @@
 
   .player__video {
     width: 100%;
+    height: auto;
   }
 
   .player__button {

@@ -49,11 +49,28 @@
       .slider {
         appearance: none;
         outline: none;
-        width: 90%;
-        height: 4px;
+        width: 100%;
         margin: 8px;
-        background: $color-active;
+        height: 4px;
+        cursor: pointer;
         border-radius: 4px;
+        background: rgb(104, 103, 103);
+
+        .buffer {
+          appearance: none;
+          outline: none;
+          height: 4px;
+          border-radius: 4px;
+          background: grey;
+
+          .progress {
+            appearance: none;
+            outline: none;
+            height: 4px;
+            border-radius: 4px;
+            background: $color-active;
+          }
+        }
 
         &.audio {
           width: 15%;

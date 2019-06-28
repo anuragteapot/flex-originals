@@ -1,6 +1,7 @@
 <template>
   <div
     :class="`video ${videoActive? 'active' : ''}`"
+    ref="player"
     @mouseover="videoActive = true"
     @mouseleave="videoActive = false"
   >
@@ -42,7 +43,7 @@
         </span>
         <i class="fa fa-expand fullscreen" @click="toggleFullscreen"></i>
       </div>
-      <div class="seek" ref="progress" @click="scrub">
+      <div class="seek" ref="progress" @mousedown="scrub">
         <div class="buffer" :style="`width:${bufferPercent}%`"></div>
         <div class="watched" :style="`width: ${progressBar};`">
           <i class="handle"></i>
@@ -89,6 +90,9 @@ export default {
     },
     progress() {
       return this.$refs.progress;
+    },
+    player() {
+      return this.$refs.player;
     }
   },
   methods: {
@@ -119,12 +123,12 @@ export default {
       this.video.currentTime = scrubTime;
     },
     toggleFullscreen() {
-      if (this.video.requestFullScreen) {
-        this.video.requestFullScreen();
-      } else if (this.video.webkitRequestFullScreen) {
-        this.video.webkitRequestFullScreen();
-      } else if (this.video.mozRequestFullScreen) {
-        this.video.mozRequestFullScreen();
+      if (this.player.requestFullScreen) {
+        this.player.requestFullScreen();
+      } else if (this.player.webkitRequestFullScreen) {
+        this.player.webkitRequestFullScreen();
+      } else if (this.player.mozRequestFullScreen) {
+        this.player.mozRequestFullScreen();
       }
     },
     currentTime() {
@@ -198,6 +202,8 @@ export default {
 
       if (this.bufferPercent) {
         this.bufferPercent = 100 * Math.min(1, Math.max(0, this.bufferPercent));
+      } else {
+        this.bufferPercent = 100;
       }
     }
   },

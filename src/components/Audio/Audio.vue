@@ -17,9 +17,19 @@
       ></i>
       <div class="slider_container">
         <span class="time">{{ currentTime }}</span>
-        <input v-model="currentProgressBar" type="range" min="0" max="100" class="slider time">
+        <div class="slider" ref="progress" @mousedown="scrub">
+          <div class="buffer" :style="`width:${bufferPercent}%`">
+            <div class="progress" :style="`width:${currentProgressBar}%`"></div>
+          </div>
+        </div>
         <span class="time">{{ trackDuration }}</span>
-        <i class="audio-icon fa fa-volume-up"></i>
+        <i v-show="volume" class="audio-icon fa fa-volume-up" @click="volume = 0"></i>
+        <i
+          v-show="!volume"
+          class="audio-icon fa fa-volume-off"
+          aria-hidden="true"
+          @click="volume = 6"
+        ></i>
         <input v-model="volume" type="range" min="0" max="10" class="slider audio">
       </div>
       <i class="fa fa-random" aria-hidden="true"></i>
@@ -42,11 +52,10 @@ export default {
       trackDuration: "00:00",
       currentProgressBar: 0,
       volume: 7,
+      bufferPercent: 0,
       isPlaylistActive: false,
       currentSong: 0,
-      debug: false,
-      audioFile: "",
-      audioExt: ["mp3", "webm"]
+      audioFile: ""
     };
   },
   watch: {
@@ -69,9 +78,46 @@ export default {
     },
     audio() {
       return new Audio();
+    },
+    progress() {
+      return this.$refs.progress;
     }
   },
   methods: {
+    scrub(e) {
+      const scrubTime =
+        (e.offsetX / this.progress.offsetWidth) * this.audio.duration;
+      this.audio.currentTime = scrubTime;
+    },
+    updateBuffer() {
+      if (
+        this.audio &&
+        this.audio.buffered &&
+        this.audio.buffered.length > 0 &&
+        this.audio.buffered.end &&
+        this.audio.duration
+      ) {
+        this.bufferPercent = this.audio.buffered.end(0) / this.audio.duration;
+      }
+      // Some browsers (e.g., FF3.6 and Safari 5) cannot calculate target.bufferered.end()
+      // to be anything other than 0. If the byte count is available we use this instead.
+      // Browsers that support the else if do not seem to have the bufferedBytes value and
+      // should skip to there. Tested in Safari 5, Webkit head, FF3.6, Chrome 6, IE 7/8.
+      else if (
+        this.audio &&
+        this.audio.bytesTotal != undefined &&
+        this.audio.bytesTotal > 0 &&
+        this.audio.bufferedBytes != undefined
+      ) {
+        this.bufferPercent = this.audio.bufferedBytes / this.audio.bytesTotal;
+      }
+
+      if (this.bufferPercent) {
+        this.bufferPercent = 100 * Math.min(1, Math.max(0, this.bufferPercent));
+      } else {
+        this.bufferPercent = 100;
+      }
+    },
     togglePlaylist: function() {
       this.isPlaylistActive = !this.isPlaylistActive;
     },
@@ -174,6 +220,7 @@ export default {
     this.audio.loop = false;
     this.audio.addEventListener("ended", this.handleEnded);
     this.audio.addEventListener("timeupdate", this.currTime);
+    this.audio.addEventListener("progress", this.updateBuffer);
     this.audio.addEventListener("timeupdate", this.handleProgress);
   },
   filters: {
@@ -184,6 +231,7 @@ export default {
   beforeDestroy: function() {
     this.audio.removeEventListener("ended", this.handleEnded);
     this.audio.removeEventListener("timeupdate", this.currTime);
+    this.audio.removeEventListener("progress", this.updateBuffer);
     this.audio.removeEventListener("timeupdate", this.handleProgress);
     clearTimeout(this.checkingCurrentPositionInTrack);
   }

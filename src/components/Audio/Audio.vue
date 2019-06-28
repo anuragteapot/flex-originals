@@ -1,12 +1,6 @@
 <template>
   <div class="music_player">
     <div class="inner">
-      <!-- <img
-        @load="onImageLoaded()"
-        :src="musicPlaylist[currentSong].image"
-        :key="currentSong"
-        class="albumImage"
-      >-->
       <i
         :disabled="!currentSong"
         @click="prevSong()"
@@ -22,9 +16,9 @@
         aria-hidden="true"
       ></i>
       <div class="slider_container">
-        <span class="time">{{ currentTime | fancyTimeFormat }}</span>
+        <span class="time">{{ currentTime }}</span>
         <input v-model="currentProgressBar" type="range" min="0" max="100" class="slider time">
-        <span class="time">{{ trackDuration | fancyTimeFormat }}</span>
+        <span class="time">{{ trackDuration }}</span>
         <i class="audio-icon fa fa-volume-up"></i>
         <input v-model="volume" type="range" min="0" max="10" class="slider audio">
       </div>
@@ -40,13 +34,12 @@ export default {
   name: "lazy-audio-player",
   data() {
     return {
-      audio: "",
       imgLoaded: false,
       currentlyPlaying: false,
       currentlyStopped: false,
-      currentTime: 0,
+      currentTime: "00:00",
       checkingCurrentPositionInTrack: "",
-      trackDuration: 0,
+      trackDuration: "00:00",
       currentProgressBar: 0,
       volume: 7,
       isPlaylistActive: false,
@@ -56,13 +49,9 @@ export default {
       audioExt: ["mp3", "webm"]
     };
   },
-  mounted: function() {
-    this.changeSong();
-    this.audio.loop = false;
-  },
-  filters: {
-    fancyTimeFormat: function(s) {
-      return (s - (s %= 60)) / 60 + (9 < s ? ":" : ":0") + s;
+  watch: {
+    volume: function(val) {
+      this.audio.volume = val / 10;
     }
   },
   computed: {
@@ -74,7 +63,12 @@ export default {
       file.image = "https://source.unsplash.com/crs2vlkSe98";
       file.artist = "Daniel Simion";
       files.push(file);
+      file.url = "/public/music/Luis Fonsi - Despacito ft. Daddy Yankee.mp3";
+      files.push(file);
       return files;
+    },
+    audio() {
+      return new Audio();
     }
   },
   methods: {
@@ -96,13 +90,8 @@ export default {
         this.currentSong = index;
       }
       this.audioFile = this.musicPlaylist[this.currentSong].url;
-      this.audio = new Audio(this.audioFile);
+      this.audio.src = this.audioFile;
       this.audio.volume = this.volume / 10;
-      var localThis = this;
-      this.audio.addEventListener("loadedmetadata", function() {
-        localThis.trackDuration = Math.round(this.duration);
-      });
-      this.audio.addEventListener("ended", this.handleEnded);
       if (wasPlaying) {
         this.playAudio();
       }
@@ -125,7 +114,6 @@ export default {
         this.changeSong();
       }
       if (!this.currentlyPlaying) {
-        this.getCurrentTimeEverySecond(true);
         this.currentlyPlaying = true;
         this.audio.play();
       } else {
@@ -153,33 +141,50 @@ export default {
     onImageLoaded: function() {
       this.imgLoaded = true;
     },
-    getCurrentTimeEverySecond: function() {
-      var localThis = this;
-      this.checkingCurrentPositionInTrack = setTimeout(
-        function() {
-          localThis.currentTime = localThis.audio.currentTime;
-          localThis.currentProgressBar =
-            (localThis.audio.currentTime / localThis.trackDuration) * 100;
-          localThis.getCurrentTimeEverySecond(true);
-        }.bind(this),
-        1000
-      );
-    },
     pausedMusic: function() {
       clearTimeout(this.checkingCurrentPositionInTrack);
+    },
+    currTime() {
+      var curmins = Math.floor(this.audio.currentTime / 60);
+      var cursecs = Math.floor(this.audio.currentTime - curmins * 60);
+      var durmins = Math.floor(this.audio.duration / 60);
+      var dursecs = Math.floor(this.audio.duration - durmins * 60);
+      if (cursecs < 10) {
+        cursecs = "0" + cursecs;
+      }
+      if (dursecs < 10) {
+        dursecs = "0" + dursecs;
+      }
+      if (curmins < 10) {
+        curmins = "0" + curmins;
+      }
+      if (durmins < 10) {
+        durmins = "0" + durmins;
+      }
+      this.currentTime = curmins + ":" + cursecs;
+      this.trackDuration = durmins + ":" + dursecs;
+    },
+    handleProgress() {
+      const percent = (this.audio.currentTime / this.audio.duration) * 100;
+      this.currentProgressBar = parseInt(percent);
     }
   },
-  watch: {
-    currentTime: function() {
-      this.currentTime = Math.round(this.currentTime);
-    },
-    volume: function(val) {
-      this.audio.volume = val / 10;
+  mounted: function() {
+    this.changeSong();
+    this.audio.loop = false;
+    this.audio.addEventListener("ended", this.handleEnded);
+    this.audio.addEventListener("timeupdate", this.currTime);
+    this.audio.addEventListener("timeupdate", this.handleProgress);
+  },
+  filters: {
+    fancyTimeFormat: function(s) {
+      return (s - (s %= 60)) / 60 + (9 < s ? ":" : ":0") + s;
     }
   },
   beforeDestroy: function() {
     this.audio.removeEventListener("ended", this.handleEnded);
-    this.audio.removeEventListener("loadedmetadata", this.handleEnded);
+    this.audio.removeEventListener("timeupdate", this.currTime);
+    this.audio.removeEventListener("timeupdate", this.handleProgress);
     clearTimeout(this.checkingCurrentPositionInTrack);
   }
 };

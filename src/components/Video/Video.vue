@@ -1,35 +1,53 @@
 <template>
-  <div class="video-player">
-    <video @click="togglePlay" ref="videoViewer" class="player__video" :src="src"></video>
-    <div class="player__controls">
-      <div class="progress" ref="progress" @click="scrub">
-        <div class="progress__filled" :style="`flexBasis:${progressBar}`"></div>
+  <div
+    :class="`video ${videoActive? 'active' : ''}`"
+    @mouseover="videoActive = true"
+    @mouseleave="videoActive = false"
+  >
+    <video
+      :src="src"
+      :style="`${loading ? 'opacity: 0.1!important;' : ''}`"
+      class="visible"
+      ref="videoViewer"
+      @click="togglePlay"
+    ></video>
+    <span :class="`large-play ${!isPlaying && !loading ? '' : 'hidden'}`">
+      <i @click="togglePlay" class="fa fa-play" aria-hidden="true"></i>
+    </span>
+    <div v-show="loading" class="loader-2 center">
+      <span></span>
+    </div>
+    <div :class="`control-bar ${videoActive? 'active' : ''}`">
+      <div class="button-bar">
+        <i v-show="!isPlaying" @click="togglePlay" class="fa fa-play" aria-hidden="true"></i>
+        <i v-show="isPlaying" @click="togglePlay" class="fa fa-pause" aria-hidden="true"></i>
+        <div
+          :class="`volume ${audioActive ? 'shift' : ''}`"
+          @mouseover="audioActive = true"
+          @mouseleave="audioActive = false"
+        >
+          <i class="fa fa-volume-up toggle" aria-hidden="true"></i>
+          <div class="rail" ref="rail" @click="findVolume">
+            <div ref="inaudible" class="inaudible"></div>
+            <div ref="audible" class="audible"></div>
+            <div ref="grip" class="grip"></div>
+          </div>
+        </div>
+        <span :class="`time ${audioActive ? 'shift' : ''}`">
+          <span>{{curTime}}</span>
+          &nbsp;
+          <span>/</span>
+          &nbsp;
+          <span>{{durTime}}</span>
+        </span>
+        <i class="fa fa-expand fullscreen" @click="toggleFullscreen"></i>
       </div>
-      <button class="player__button" title="Toggle Play" @click="togglePlay">
-        <i v-show="!isPlaying" class="fa fa-play" aria-hidden="true"></i>
-        <i v-show="isPlaying" class="fa fa-pause" aria-hidden="true"></i>
-      </button>
-      <input type="range" class="player__slider" v-model="volume" min="0" max="1" step="0.05">
-      <input
-        v-model="playbackRate"
-        type="range"
-        class="player__slider"
-        min="0.5"
-        max="2"
-        step="0.1"
-      >
-      <span class="current">{{curTime}}</span> /
-      <span class="duration">{{durTime}}</span>
-      <button @click="skipBack" class="player__button">
-        <i class="fa fa-backward" aria-hidden="true"></i>10s
-      </button>
-      <button @click="skipForward" class="player__button">
-        20s
-        <i class="fa fa-forward" aria-hidden="true"></i>
-      </button>
-      <button class="fullscreen-btn" @click="toggleFullscreen">
-        <i class="fa fa-square-o" aria-hidden="true"></i>
-      </button>
+      <div class="seek" ref="progress" @click="scrub">
+        <div class="buffer" :style="`width:${bufferPercent}%`"></div>
+        <div class="watched" :style="`width: ${progressBar};`">
+          <i class="handle"></i>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -38,11 +56,16 @@ export default {
   name: "lazy-video",
   data() {
     return {
+      audioActive: false,
+      videoActive: false,
+      loading: true,
       isPlaying: false,
       mousedown: false,
       curTime: "00:00",
       durTime: "00:00",
       volume: 0.5,
+      hasEnded: false,
+      bufferPercent: 0,
       progressBar: "0%",
       playbackRate: 1
     };
@@ -77,6 +100,18 @@ export default {
         this.video.pause();
         this.isPlaying = false;
       }
+    },
+    findVolume(event) {
+      var perc = Math.floor(
+        (event.offsetX / this.$refs.rail.offsetWidth) * 100
+      );
+      this.$refs.grip.style.left = `${perc}%`;
+
+      var vol = this.video.volume;
+      if (perc > 1 && perc < 99) {
+        vol = perc / 100;
+      }
+      this.video.volume = vol;
     },
     scrub(e) {
       const scrubTime =
@@ -113,11 +148,13 @@ export default {
       this.durTime = durmins + ":" + dursecs;
     },
     handleProgress() {
+      this.loadeddata();
       const percent = (this.video.currentTime / this.video.duration) * 100;
       this.progressBar = `${percent}%`;
     },
     detectKeypress(event) {
       if (event.keyCode == 32) {
+        event.preventDefault();
         this.togglePlay();
       }
     },
@@ -126,15 +163,61 @@ export default {
     },
     skipForward() {
       this.video.currentTime += parseFloat(+10);
+    },
+    handleEnded() {
+      this.hasEnded = true;
+    },
+    loadeddata() {
+      this.loading = false;
+    },
+    stalled() {
+      this.loading = true;
+    },
+    updateBuffer() {
+      if (
+        this.video &&
+        this.video.buffered &&
+        this.video.buffered.length > 0 &&
+        this.video.buffered.end &&
+        this.video.duration
+      ) {
+        this.bufferPercent = this.video.buffered.end(0) / this.video.duration;
+      }
+      // Some browsers (e.g., FF3.6 and Safari 5) cannot calculate target.bufferered.end()
+      // to be anything other than 0. If the byte count is available we use this instead.
+      // Browsers that support the else if do not seem to have the bufferedBytes value and
+      // should skip to there. Tested in Safari 5, Webkit head, FF3.6, Chrome 6, IE 7/8.
+      else if (
+        this.video &&
+        this.video.bytesTotal != undefined &&
+        this.video.bytesTotal > 0 &&
+        this.video.bufferedBytes != undefined
+      ) {
+        this.bufferPercent = this.video.bufferedBytes / this.video.bytesTotal;
+      }
+
+      if (this.bufferPercent) {
+        this.bufferPercent = 100 * Math.min(1, Math.max(0, this.bufferPercent));
+      }
     }
   },
   mounted() {
     window.addEventListener("keydown", this.detectKeypress);
     this.video.addEventListener("timeupdate", this.currentTime);
     this.video.addEventListener("timeupdate", this.handleProgress);
+    this.video.addEventListener("ended", this.handleEnded);
+    this.video.addEventListener("loadeddata", this.loadeddata);
+    this.video.addEventListener("progress", this.updateBuffer);
+    this.video.addEventListener("stalled", this.stalled);
   },
   destroyed() {
     window.removeEventListener("keydown", this.detectKeypress);
+    this.video.removeEventListener("timeupdate", this.currentTime);
+    this.video.removeEventListener("timeupdate", this.handleProgress);
+    this.video.removeEventListener("ended", this.handleEnded);
+    this.video.removeEventListener("loadeddata", this.loadeddata);
+    this.video.removeEventListener("progress", this.updateBuffer);
+    this.video.removeEventListener("stalled", this.stalled);
   }
 };
 </script>

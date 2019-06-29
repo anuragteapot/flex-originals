@@ -6,9 +6,11 @@
     @mouseleave="videoActive = false"
   >
     <video
+      @contextmenu.prevent
       :src="src"
       :style="`${loading ? 'opacity: 0.1!important;' : ''}`"
       class="visible"
+      controlslist="nodownload"
       ref="videoViewer"
       @click="togglePlay"
     ></video>
@@ -184,6 +186,12 @@ export default {
       if (event.keyCode == 32) {
         event.preventDefault();
         this.togglePlay();
+      } else if (event.keyCode == 39) {
+        event.preventDefault();
+        this.skipForward();
+      } else if (event.keyCode == 37) {
+        event.preventDefault();
+        this.skipBack();
       }
     },
     skipBack() {

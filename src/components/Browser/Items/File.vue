@@ -78,7 +78,7 @@ export default {
       this.cachedImage();
     },
     onError() {
-      console.log(
+      console.error(
         `Image load failed\n\n` + `src: ${this.normalisedSrc.src}`,
         this
       );

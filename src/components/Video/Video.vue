@@ -154,6 +154,7 @@ export default {
   methods: {
     reset() {
       this.changePlayBack = false;
+      this.changeQuality = false;
     },
     handleError() {
       this.errorOccured = true;
@@ -238,10 +239,10 @@ export default {
       }
     },
     skipBack() {
-      this.video.currentTime += parseFloat(-10);
+      this.video.currentTime += parseFloat(-5);
     },
     skipForward() {
-      this.video.currentTime += parseFloat(+10);
+      this.video.currentTime += parseFloat(+5);
     },
     handleEnded() {
       this.hasEnded = true;

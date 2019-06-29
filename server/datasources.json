@@ -10,18 +10,21 @@
     "useNewUrlParser": true,
     "connector": "mongodb"
   },
-  "email": {
-    "name": "email",
+  "emailDs": {
+    "name": "emailDs",
     "connector": "mail",
     "transports": [
       {
         "type": "smtp",
-        "host": "smtp.private.com",
+        "host": "smtp.gmail.com",
         "secure": true,
         "port": 465,
+        "tls": {
+          "rejectUnauthorized": true
+        },
         "auth": {
-          "user": "me@private.com",
-          "pass": "password"
+          "user": "iitpcabshare@gmail.com",
+          "pass": "iitpcabshare@123"
         }
       }
     ]

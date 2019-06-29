@@ -1,0 +1,23 @@
+{
+  "name": "accessToken",
+  "plural": "accessTokens",
+  "base": "AccessToken",
+  "indexes": {
+    "user_id_idx_on_access_token": {
+      "keys": {
+        "userId": 1
+      }
+    }
+  },
+  "properties": {},
+  "validations": [],
+  "relations": {
+    "user": {
+      "type": "belongsTo",
+      "model": "user",
+      "foreignKey": "userId"
+    }
+  },
+  "acls": [],
+  "methods": {}
+}

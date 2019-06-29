@@ -1,6 +1,6 @@
 <template>
   <div
-    :class="`video ${videoActive? 'active' : ''}`"
+    :class="`video ${videoActive || !isPlaying ? 'active' : ''}`"
     ref="player"
     @mouseover="videoActive = true"
     @mouseleave="videoActive = false"
@@ -18,7 +18,7 @@
     <div v-show="loading" class="loader-2 center">
       <span></span>
     </div>
-    <div :class="`control-bar ${videoActive? 'active' : ''}`">
+    <div :class="`control-bar ${videoActive || !isPlaying ? 'active' : ''}`">
       <div class="button-bar">
         <i v-show="!isPlaying" @click="togglePlay" class="fa fa-play" aria-hidden="true"></i>
         <i v-show="isPlaying" @click="togglePlay" class="fa fa-pause" aria-hidden="true"></i>
@@ -41,6 +41,21 @@
           &nbsp;
           <span>{{durTime}}</span>
         </span>
+
+        <div class="dropup">
+          <button
+            class="dropbtn"
+            @click="changePlayBack = !changePlayBack"
+          >{{currentPlayBackRates == 1 ? 'Normal' : currentPlayBackRates + 'x'}}</button>
+          <div :class="`dropup-content ${changePlayBack ? 'open' : ''}`">
+            <a
+              v-for="speed in playbackRates"
+              :key="speed"
+              @click="setPlayBackRates(speed); changePlayBack = !changePlayBack"
+            >{{ speed == 1 ? 'Normal' : speed + 'x' }}</a>
+          </div>
+        </div>
+
         <i class="fa fa-expand fullscreen" @click="toggleFullscreen"></i>
       </div>
       <div class="seek" ref="progress" @mousedown="scrub">
@@ -60,6 +75,9 @@ export default {
       audioActive: false,
       videoActive: false,
       loading: true,
+      changePlayBack: false,
+      playbackRates: [0.25, 0.5, 0.75, 1.0, 1.25, 1.5, 1.75],
+      currentPlayBackRates: 1.0,
       isPlaying: false,
       mousedown: false,
       curTime: "00:00",
@@ -82,6 +100,9 @@ export default {
     src(val) {
       this.video.src = val;
       this.video.load();
+    },
+    videoActive() {
+      this.reset();
     }
   },
   computed: {
@@ -96,6 +117,9 @@ export default {
     }
   },
   methods: {
+    reset() {
+      this.changePlayBack = false;
+    },
     togglePlay() {
       if (this.video.paused) {
         this.video.play();
@@ -176,6 +200,9 @@ export default {
     },
     stalled() {
       this.loading = true;
+    },
+    setPlayBackRates(val) {
+      this.video.playbackRate = val;
     },
     updateBuffer() {
       if (

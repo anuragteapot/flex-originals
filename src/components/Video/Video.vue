@@ -22,8 +22,9 @@
     </div>
     <div :class="`control-bar ${videoActive || !isPlaying ? 'active' : ''}`">
       <div class="button-bar">
-        <i v-show="!isPlaying" @click="togglePlay" class="fa fa-play" aria-hidden="true"></i>
-        <i v-show="isPlaying" @click="togglePlay" class="fa fa-pause" aria-hidden="true"></i>
+        <i v-if="hasEnded" @click="togglePlay" class="fa fa-repeat" aria-hidden="true"></i>
+        <i v-else-if="!isPlaying" @click="togglePlay" class="fa fa-play" aria-hidden="true"></i>
+        <i v-else-if="isPlaying" @click="togglePlay" class="fa fa-pause" aria-hidden="true"></i>
         <div
           :class="`volume ${audioActive ? 'shift' : ''}`"
           @mouseover="audioActive = true"
@@ -125,9 +126,11 @@ export default {
     togglePlay() {
       if (this.video.paused) {
         this.video.play();
+        this.hasEnded = false;
         this.isPlaying = true;
       } else {
         this.video.pause();
+        this.hasEnded = false;
         this.isPlaying = false;
       }
     },
@@ -202,6 +205,7 @@ export default {
     },
     handleEnded() {
       this.hasEnded = true;
+      this.isPlaying = false;
     },
     loadeddata() {
       this.loading = false;

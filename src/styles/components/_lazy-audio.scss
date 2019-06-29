@@ -53,6 +53,7 @@
         margin: 8px;
         height: 4px;
         cursor: pointer;
+        z-index: 7;
         border-radius: 4px;
         background: rgb(104, 103, 103);
 
@@ -60,6 +61,7 @@
           appearance: none;
           outline: none;
           height: 4px;
+          z-index: 9;
           border-radius: 4px;
           background: grey;
 
@@ -68,6 +70,7 @@
             outline: none;
             height: 4px;
             border-radius: 4px;
+            z-index: 9;
             background: $color-active;
 
             .circle {

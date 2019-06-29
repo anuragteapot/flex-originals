@@ -45,11 +45,22 @@
           <span>{{durTime}}</span>
         </span>
 
+        <div class="dropup v-quality">
+          <button class="dropbtn" @click="changeQuality = !changeQuality">{{videoQualityName}}</button>
+          <div :class="`dropup-content ${changeQuality ? 'open' : ''}`">
+            <a
+              v-for="quality in videoQuality"
+              :key="quality.name"
+              @click="setQuality(quality); changeQuality = !changeQuality"
+            >{{ quality.name }}</a>
+          </div>
+        </div>
+
         <div class="dropup">
           <button
             class="dropbtn"
             @click="changePlayBack = !changePlayBack"
-          >{{currentPlayBackRates == 1 ? 'Normal' : currentPlayBackRates + 'x'}}</button>
+          >{{playbackRate == 1 ? 'Normal' : playbackRate + 'x'}}</button>
           <div :class="`dropup-content ${changePlayBack ? 'open' : ''}`">
             <a
               v-for="speed in playbackRates"
@@ -75,12 +86,14 @@ export default {
   name: "lazy-video",
   data() {
     return {
+      videoQualityName: "Auto",
       audioActive: false,
       videoActive: false,
       loading: true,
+      errorOccured: false,
       changePlayBack: false,
-      playbackRates: [0.25, 0.5, 0.75, 1.0, 1.25, 1.5, 1.75],
-      currentPlayBackRates: 1.0,
+      changeQuality: false,
+      playbackRate: 1.0,
       isPlaying: false,
       mousedown: false,
       curTime: "00:00",
@@ -88,11 +101,30 @@ export default {
       volume: 0.5,
       hasEnded: false,
       bufferPercent: 0,
-      progressBar: "0%",
-      playbackRate: 1
+      progressBar: "0%"
     };
   },
-  props: ["src"],
+  props: {
+    src: String,
+    playbackRates: {
+      type: Array,
+      default: function() {
+        return [0.25, 0.5, 0.75, 1.0, 1.25, 1.5, 1.75];
+      }
+    },
+    videoQuality: {
+      type: Array,
+      default: function() {
+        return [
+          {
+            name: "1080p",
+            src:
+              "https://player.vimeo.com/external/194837908.sd.mp4?s=c350076905b78c67f74d7ee39fdb4fef01d12420&profile_id=164"
+          }
+        ];
+      }
+    }
+  },
   watch: {
     volume(val) {
       this.video.volume = val;
@@ -123,6 +155,9 @@ export default {
     reset() {
       this.changePlayBack = false;
     },
+    handleError() {
+      this.errorOccured = true;
+    },
     togglePlay() {
       if (this.video.paused) {
         this.video.play();
@@ -133,6 +168,14 @@ export default {
         this.hasEnded = false;
         this.isPlaying = false;
       }
+    },
+    setQuality(quality) {
+      const storeTime = this.video.currentTime;
+      this.video.src = quality.src;
+      this.video.currentTime = storeTime;
+      this.videoQualityName = quality.name;
+      this.video.load();
+      this.togglePlay();
     },
     findVolume(event) {
       var perc = Math.floor(
@@ -163,27 +206,24 @@ export default {
     currentTime() {
       var curmins = Math.floor(this.video.currentTime / 60);
       var cursecs = Math.floor(this.video.currentTime - curmins * 60);
-      var durmins = Math.floor(this.video.duration / 60);
-      var dursecs = Math.floor(this.video.duration - durmins * 60);
+
       if (cursecs < 10) {
         cursecs = "0" + cursecs;
       }
-      if (dursecs < 10) {
-        dursecs = "0" + dursecs;
-      }
+
       if (curmins < 10) {
         curmins = "0" + curmins;
       }
-      if (durmins < 10) {
-        durmins = "0" + durmins;
-      }
       this.curTime = curmins + ":" + cursecs;
-      this.durTime = durmins + ":" + dursecs;
     },
     handleProgress() {
-      this.loadeddata();
       const percent = (this.video.currentTime / this.video.duration) * 100;
       this.progressBar = `${percent}%`;
+      if (this.errorOccured) {
+        this.loading = true;
+      } else {
+        this.loading = false;
+      }
     },
     detectKeypress(event) {
       if (event.keyCode == 32) {
@@ -210,11 +250,23 @@ export default {
     loadeddata() {
       this.loading = false;
     },
+    loadedmetadata() {
+      var durmins = Math.floor(this.video.duration / 60);
+      var dursecs = Math.floor(this.video.duration - durmins * 60);
+      if (dursecs < 10) {
+        dursecs = "0" + dursecs;
+      }
+      if (durmins < 10) {
+        durmins = "0" + durmins;
+      }
+      this.durTime = durmins + ":" + dursecs;
+    },
     stalled() {
       this.loading = true;
     },
     setPlayBackRates(val) {
       this.video.playbackRate = val;
+      this.playbackRate = val;
     },
     updateBuffer() {
       if (
@@ -251,7 +303,9 @@ export default {
     this.video.addEventListener("timeupdate", this.currentTime);
     this.video.addEventListener("timeupdate", this.handleProgress);
     this.video.addEventListener("ended", this.handleEnded);
+    this.video.addEventListener("error", this.handleError);
     this.video.addEventListener("loadeddata", this.loadeddata);
+    this.video.addEventListener("loadedmetadata", this.loadedmetadata);
     this.video.addEventListener("progress", this.updateBuffer);
     this.video.addEventListener("stalled", this.stalled);
   },
@@ -260,7 +314,9 @@ export default {
     this.video.removeEventListener("timeupdate", this.currentTime);
     this.video.removeEventListener("timeupdate", this.handleProgress);
     this.video.removeEventListener("ended", this.handleEnded);
+    this.video.removeEventListener("error", this.handleError);
     this.video.removeEventListener("loadeddata", this.loadeddata);
+    this.video.removeEventListener("loadedmetadata", this.loadedmetadata);
     this.video.removeEventListener("progress", this.updateBuffer);
     this.video.removeEventListener("stalled", this.stalled);
   }

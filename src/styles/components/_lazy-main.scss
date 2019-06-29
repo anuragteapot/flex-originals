@@ -42,7 +42,6 @@ body {
   background-repeat: no-repeat;
   background-size: cover;
   user-select: none;
-  color: white !important;
   font-family: "Roboto", sans-serif;
   font-size: 16px;
   height: 100%;
@@ -70,6 +69,10 @@ body {
   height: 100%;
   width: 100%;
   display: flex;
+}
+
+.lazy__browser {
+  color: white !important;
 }
 
 .vert-container {

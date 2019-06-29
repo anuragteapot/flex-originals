@@ -1,24 +1,32 @@
 <template>
-  <div>
-    <lazy-video-player
-      src="https://player.vimeo.com/external/194837908.sd.mp4?s=c350076905b78c67f74d7ee39fdb4fef01d12420&profile_id=164"
-    ></lazy-video-player>
-    <label class="switch">
-      <input type="checkbox">
-      <div></div>
-    </label>
-    <div class="radio">
-      <input id="1" type="radio" name="b" checked>
-      <label for="1">Option 1</label>
+  <div class="login">
+    <div class="header">
+      <h1>Welcome back!</h1>
+      <div class="social">
+        <div class="box">
+          <i class="fa fa-facebook" aria-hidden="true"></i>
+        </div>
+        <div class="box">
+          <i class="fa fa-google" aria-hidden="true"></i>
+        </div>
+        <div class="box">
+          <i class="fa fa-twitter" aria-hidden="true"></i>
+        </div>
+      </div>
     </div>
-    <div class="radio">
-      <input id="2" type="radio" name="b">
-      <label for="2">Option 2</label>
+    <div class="body">
+      <p>We're so excited to see you again!</p>
+      <form @submit.prevent="submit">
+        <input v-model="email" type="email" placeholder="Email">
+        <input v-model="password" type="password" placeholder="Password">
+        <button class="btn-hover color">Login</button>
+      </form>
     </div>
-    <div class="checkbox">
-      <input id="one" type="checkbox">
-      <span class="check"></span>
-      <label for="one">Check me!</label>
+    <div class="footer">
+      <p>
+        Don't have an account?
+        <a href="/signup">Sign up</a>
+      </p>
     </div>
   </div>
 </template>

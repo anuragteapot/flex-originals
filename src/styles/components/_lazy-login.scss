@@ -1,0 +1,106 @@
+.lazy__home {
+  width: 100%;
+  height: 100%;
+  display: block;
+  position: relative;
+
+  .login {
+    width: 100%;
+    height: 100%;
+    max-width: 500px;
+    margin: auto;
+    text-align: center;
+    color: rgb(44, 62, 80) !important;
+
+    .header {
+      width: 100%;
+      margin: auto;
+      padding: 30px 30px 10px 30px;
+      text-align: center;
+
+      .social {
+        padding: 10px;
+
+        .box {
+          display: inline-block;
+          width: 40px;
+          height: 40px;
+          cursor: pointer;
+          text-align: center;
+          padding: 10px;
+          margin: 10px;
+          border-radius: 50%;
+          border: 1px solid grey;
+
+          &:hover {
+            background-color: rgba(52, 247, 152, 0.5);
+            transition: 0.2s ease-in-out;
+          }
+        }
+      }
+    }
+
+    .body {
+      width: 100%;
+      padding: 10px 20px 30px 20px;
+      position: relative;
+
+      input {
+        margin-top: 20px;
+        border: 2px solid gainsboro;
+        height: 55px;
+        font-size: 17px;
+        font-weight: 500;
+        outline: none;
+        padding: 15px;
+        border-radius: 5px;
+        width: 100%;
+      }
+
+      .btn-hover {
+        width: 200px;
+        font-size: 16px;
+        font-weight: 600;
+        color: #fff;
+        cursor: pointer;
+        margin: 20px;
+        height: 55px;
+        text-align: center;
+        border: none;
+        background-size: 300% 100%;
+
+        border-radius: 50px;
+        moz-transition: all .4s ease-in-out;
+        -o-transition: all .4s ease-in-out;
+        -webkit-transition: all .4s ease-in-out;
+        transition: all .4s ease-in-out;
+      }
+
+      .btn-hover:hover {
+        background-position: 100% 0;
+        moz-transition: all .4s ease-in-out;
+        -o-transition: all .4s ease-in-out;
+        -webkit-transition: all .4s ease-in-out;
+        transition: all .4s ease-in-out;
+      }
+
+      .btn-hover:focus {
+        outline: none;
+      }
+
+      .btn-hover.color {
+        background-image: linear-gradient(to right, #25aae1, #40e495, #30dd8a, #2bb673);
+        box-shadow: 0 4px 15px 0 rgba(49, 196, 190, 0.75);
+      }
+    }
+
+    .footer {
+      padding-bottom: 30px;
+
+      a{
+        text-decoration: none;
+      }
+    }
+  }
+
+}

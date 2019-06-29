@@ -1,5 +1,5 @@
 <template>
-  <div class="lazy__signup">
+  <div class="lazy__home">
     <media-signup></media-signup>
   </div>
 </template>

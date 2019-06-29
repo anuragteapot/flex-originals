@@ -102,7 +102,7 @@ export const login = (context, payload) => {
   return new Promise((resolve, reject) => {
     api
       .axios()
-      .post('/user/login', payload)
+      .post('/api/users/login', payload)
       .then(response => {
         resolve(response)
       })
@@ -237,7 +237,7 @@ export const signup = (context, payload) => {
   return new Promise((resolve, reject) => {
     api
       .axios()
-      .post('/user/signup', payload)
+      .post('/api/users', payload)
       .then(response => {
         var data = {
           data: response.data.message,

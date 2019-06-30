@@ -1,25 +1,102 @@
 <template>
-  <div class="lazy__home">
-    <lazy-login></lazy-login>
+  <div class="lazy_main_home">
+    <div class="home__header">
+      <div class="home__navbar">
+        <a href="/">Home</a>
+        <a href="/signup">Sign Up</a>
+        <a href="/login">Login</a>
+      </div>
+    </div>
+    <div class="home__body">
+      <section>
+        <div class="background-shapes-wrapper">
+          <div class="background-shapes-container">
+            <div class="background-shape square-one"></div>
+            <div class="background-shape square-two"></div>
+            <div class="background-shape square-three"></div>
+            <div class="background-shape square-four"></div>
+          </div>
+        </div>
+        <div class="home__container">
+          <div class="home__inner">
+            <h1>Built for developers</h1>
+            <p>
+              GitHub is a development platform inspired by the way you work. From
+              <a
+                href="/open-source"
+                class="text-white jumbotron-link"
+              >open source</a> to
+              <a href="/business" class="text-white jumbotron-link">business</a>, you can host and review code, manage projects, and build software alongside 36 million&nbsp;developers.
+            </p>
+          </div>
+        </div>
+      </section>
+      <section>
+        <div class="home__container">
+          <div class="home__inner">
+            <button class="btn-hover color">Get Started</button>
+          </div>
+        </div>
+      </section>
+    </div>
+    <div class="home_footer">
+      <div class="contain">
+        <div class="col">
+          <h1>Company</h1>
+          <ul>
+            <li>About</li>
+            <li>Mission</li>
+            <li>Services</li>
+            <li>Social</li>
+            <li>Get in touch</li>
+          </ul>
+        </div>
+        <div class="col">
+          <h1>Products</h1>
+          <ul>
+            <li>About</li>
+            <li>Mission</li>
+            <li>Services</li>
+            <li>Social</li>
+            <li>Get in touch</li>
+          </ul>
+        </div>
+        <div class="col">
+          <h1>Support</h1>
+          <ul>
+            <li>Contact us</li>
+            <li>Web chat</li>
+            <li>Open ticket</li>
+          </ul>
+        </div>
+        <div class="col social">
+          <h1>Social</h1>
+          <ul>
+            <li>
+              <i class="fa fa-facebook"></i>
+            </li>
+            <li>
+              <i class="fa fa-instagram"></i>
+            </li>
+            <li>
+              <i class="fa fa-twitter"></i>
+            </li>
+            <li>
+              <i class="fa fa-google"></i>
+            </li>
+            <li>
+              <i class="fa fa-github"></i>
+            </li>
+          </ul>
+        </div>
+        <div class="clearfix"></div>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
-import { api } from './../app/Api'
-import LoginForm from '@/components/Account/LoginForm'
-
 export default {
-  name: 'media-home',
-  data () {
-    return {}
-  },
-  components: {
-    'lazy-login': LoginForm
-  },
-  computed: {
-    isLoggedIn: function () {
-      return api.auth.loggedIn()
-    }
-  }
-}
+  name: "media-home"
+};
 </script>

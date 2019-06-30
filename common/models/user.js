@@ -45,6 +45,17 @@ module.exports = function(User) {
     return next()
   })
 
+  User.afterRemote('prototype.confirm', function(ctx, next) {
+    console.log('Cannot speak! after', ctx);
+    next();
+  });
+
+  User.beforeRemote('prototype.confirm', function(ctx, next) {
+    console.log('Cannot speak before!', ctx);
+    next();
+  });
+
+
   //send password reset link when requested
   User.on('resetPasswordRequest', function(info) {
     var url = 'http://' + config.host + ':' + config.port + '/reset-password'

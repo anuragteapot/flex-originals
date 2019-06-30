@@ -8,17 +8,26 @@
         <div class="background-shape square-four"></div>
       </div>
     </div>
-    <media-signup></media-signup>
+    <lazy-login></lazy-login>
   </div>
 </template>
 
 <script>
-import SignupForm from "@/components/Account/SignupForm";
+import { api } from "./../app/Api";
+import LoginForm from "@/components/Account/LoginForm";
 
 export default {
-  name: "media-main-signup",
+  name: "media-home",
+  data() {
+    return {};
+  },
   components: {
-    "media-signup": SignupForm
+    "lazy-login": LoginForm
+  },
+  computed: {
+    isLoggedIn: function() {
+      return api.auth.loggedIn();
+    }
   }
 };
 </script>

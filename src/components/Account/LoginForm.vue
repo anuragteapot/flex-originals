@@ -84,11 +84,10 @@ export default {
       }
     },
     finalize(response) {
-      api.mediastorage.cookies.set("created", response.data.created.name, 5000);
-      api.mediastorage.cookies.set("accessToken", response.data.id, 5000);
-      api.mediastorage.cookies.set("ttl", response.data.ttl, 5000);
-      api.mediastorage.cookies.set("userId", response.data.userId, 5000);
-      this.$store.state.token = response.data.id;
+      api.webStorage.local.set("created", response.data.created, 5000);
+      api.webStorage.local.set("accessToken", response.data.id, 5000);
+      api.webStorage.local.set("ttl", response.data.ttl, 5000);
+      api.webStorage.local.set("userId", response.data.userId, 5000);
       this.$store.state.isUserLoggedIn = true;
       this.$router.push("/drive/u/0/my-drive");
     },

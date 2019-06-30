@@ -2,9 +2,10 @@
   <div class="lazy_main_home">
     <div class="home__header">
       <div class="home__navbar">
+        <a v-show="!loggedIn" href="/signup">Sign Up</a>
+        <a v-show="!loggedIn" href="/login">Login</a>
+        <a href @click.prevent="logout()" v-show="loggedIn">Logout</a>
         <a href="/">Home</a>
-        <a href="/signup">Sign Up</a>
-        <a href="/login">Login</a>
       </div>
     </div>
     <div class="home__body">
@@ -96,7 +97,25 @@
 </template>
 
 <script>
+import { api } from "./../app/Api";
+
 export default {
-  name: "media-home"
+  name: "media-home",
+  computed: {
+    loggedIn() {
+      return api.auth.loggedIn();
+    }
+  },
+  methods: {
+    async logout() {
+      try {
+        await this.$store.dispatch("logout");
+        api.auth.logout();
+        window.location.href = "";
+      } catch (err) {
+        console.log(err);
+      }
+    }
+  }
 };
 </script>

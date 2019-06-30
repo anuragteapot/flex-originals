@@ -5,7 +5,7 @@ import axios from 'axios'
 import store from '@/store/store'
 import router from '@/router'
 import * as types from './../store/mutation-types'
-import * as mediaManagerStorage from './Storage'
+import * as webStorage from './Storage'
 import * as auth from './Auth'
 import { service } from './Service'
 import { user } from './User'
@@ -19,7 +19,7 @@ class Api {
    * Store constructor
    */
   constructor() {
-    this.mediastorage = mediaManagerStorage
+    this.webStorage = webStorage
     this.auth = auth.services
     this.user = user
     this.config = config
@@ -93,8 +93,8 @@ class Api {
    */
   axios() {
     axios.defaults.headers.common[
-      'Authorization'
-    ] = `Bearer ${this.mediastorage.cookies.get('token')}`
+      'authorization'
+    ] = `${this.webStorage.local.get('accessToken')}`
     axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest'
     axios.defaults.headers.common['csrfToken'] = process.env.VUE_APP_SECRET
 

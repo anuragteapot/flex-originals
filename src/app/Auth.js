@@ -1,15 +1,13 @@
 // import Api from '@/services/Api'
-import * as mediaManagerStorage from './Storage.js'
+import * as webStorage from './Storage.js'
 
 export const services = {
-
   /**
    * Get the contents of a directory from the server
    * @returns {Promise}
    */
-  loggedIn () {
-    if ((mediaManagerStorage.cookies.get('email') !== '' && mediaManagerStorage.cookies.get('email') !== null) &&
-      (mediaManagerStorage.cookies.get('token') !== '' && mediaManagerStorage.cookies.get('token') !== null)) {
+  loggedIn() {
+    if (webStorage.local.get('accessToken')) {
       return true
     } else {
       return false
@@ -20,9 +18,9 @@ export const services = {
    * Get the contents of a directory from the server
    * @returns {Promise}
    */
-  logout () {
-    mediaManagerStorage.cookies.destroy('email')
-    mediaManagerStorage.cookies.destroy('token')
-    return true
+  logout() {
+    if (webStorage.local.destroy('accessToken')) {
+      return true
+    }
   }
 }

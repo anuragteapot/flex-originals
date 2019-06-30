@@ -111,6 +111,19 @@ export const login = async (context, payload) => {
  * @param commit
  * @param payload
  */
+export const logout = async () => {
+  try {
+    return await api.axios().post('/api/users/logout')
+  } catch (err) {
+    api._handleError(err)
+  }
+}
+
+/**
+ * Login
+ * @param commit
+ * @param payload
+ */
 export const log = (context, payload) => {
   api
     .axios()

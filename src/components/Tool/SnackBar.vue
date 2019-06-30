@@ -28,7 +28,7 @@ export default {
     },
     position: {
       type: String,
-      default: "bottom-left"
+      default: "bottom-center"
     }
   },
   data() {

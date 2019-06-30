@@ -21,10 +21,8 @@
       <label for="one">Check me!</label>
     </div>
     </div>
-  </div>
 </template>
 <script>
-import pdf from "vue-pdf";
 export default {
   data() {
     return {
@@ -33,9 +31,6 @@ export default {
       page: 1,
       loadedRatio: 1
     };
-  },
-  components: {
-    pdf: pdf
   },
   mounted() {
     this.pdfContent =

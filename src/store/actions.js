@@ -229,28 +229,17 @@ export const rename = (context, payload) => {
 }
 
 /**
- * Login
+ * Signiup
+ *
  * @param commit
  * @param payload
  */
-export const signup = (context, payload) => {
-  return new Promise((resolve, reject) => {
-    api
-      .axios()
-      .post('/api/users', payload)
-      .then(response => {
-        var data = {
-          data: response.data.message,
-          color: 'success'
-        }
-        context.commit(types.SHOW_SNACKBAR, data)
-        resolve(response)
-      })
-      .catch(error => {
-        reject(error)
-        api._handleError(error)
-      })
-  })
+export const signup = async (context, payload) => {
+  try {
+    return await api.axios().post('/api/users', payload)
+  } catch (err) {
+    api._handleError(err)
+  }
 }
 
 /**

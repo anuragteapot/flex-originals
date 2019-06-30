@@ -17,8 +17,13 @@
     <div class="body">
       <p>We're so excited to see you again!</p>
       <form @submit.prevent="submit">
-        <input v-model="email" type="email" placeholder="Email">
-        <input v-model="password" type="password" placeholder="Password">
+        <div class="email">
+          <input v-model="email" type="email" placeholder="Email" />
+        </div>
+        <div class="password">
+          <input v-model="password" type="password" placeholder="Password" />
+          <span>Forget Password ?</span>
+        </div>
         <button class="btn-hover color">Login</button>
       </form>
     </div>

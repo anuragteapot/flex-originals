@@ -135,18 +135,14 @@ class Api {
   _handleError(error) {
     try {
       var errorData = {
-        data: error.response.data.message,
+        data: error.response.data.error.message,
         color: 'error'
       }
-      store.commit(types.SET_IS_LOADING, false)
     } catch (err) {
-      store.commit(types.SET_IS_LOADING, false)
+      console.log(err)
     }
 
     switch (error.response.status) {
-      case 409:
-        store.commit(types.SHOW_SNACKBAR, errorData)
-        break
       case 404:
         store.state.errorState = true
         errorData.data = 'Something went wrong.'
@@ -157,11 +153,8 @@ class Api {
         router.push('/')
         store.commit(types.SHOW_SNACKBAR, errorData)
         break
-      case 403:
-        store.commit(types.SHOW_SNACKBAR, errorData)
-        break
       case 500:
-        errorData.data = 'Server Internal Error.'
+        errorData.data = error.response.statusText
         store.commit(types.SHOW_SNACKBAR, errorData)
         break
       default:

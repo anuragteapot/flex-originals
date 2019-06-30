@@ -98,18 +98,12 @@ export const upload = (context, payload) => {
  * @param commit
  * @param payload
  */
-export const login = (context, payload) => {
-  return new Promise((resolve, reject) => {
-    api
-      .axios()
-      .post('/api/users/login', payload)
-      .then(response => {
-        resolve(response)
-      })
-      .catch(error => {
-        reject(error)
-      })
-  })
+export const login = async (context, payload) => {
+  try {
+    return await api.axios().post('/api/users/login', payload)
+  } catch (err) {
+    api._handleError(err)
+  }
 }
 
 /**

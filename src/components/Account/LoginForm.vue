@@ -24,7 +24,14 @@
           <input v-model="password" type="password" placeholder="Password" />
           <span>Forget Password ?</span>
         </div>
-        <button class="btn-hover color">Login</button>
+        <button class="btn-hover color" :disabled="loading">
+          <span v-show="!loading">Login</span>
+          <div v-show="loading" class="loading-dots">
+            <div class="loading-dots--dot"></div>
+            <div class="loading-dots--dot"></div>
+            <div class="loading-dots--dot"></div>
+          </div>
+        </button>
       </form>
     </div>
     <div class="footer">
@@ -42,62 +49,48 @@ export default {
   name: "lazy-login",
   data() {
     return {
-      password: "",
       loading: false,
+      password: "",
       email: ""
     };
   },
+  computed: {
+    Vname: function() {
+      if (!this.name) return true;
+      return api.regName.test(this.name);
+    },
+    Vemail: function() {
+      if (!this.email) return true;
+      return api.regEmail.test(this.email);
+    },
+    VmobileNumber: function() {
+      if (!this.mobileNumber) return true;
+      return api.regMobile.test(this.mobileNumber);
+    }
+  },
   methods: {
-    submit() {
+    async submit() {
+      this.loading = true;
       const data = {
         email: this.email,
         password: this.password
       };
-      this.loading = true;
-      this.$store
-        .dispatch("login", data)
-        .then(result => {
-          this.finalize(result);
-        })
-        .catch(err => {
-          this.loading = false;
-          api._handleError(err);
-        });
+      try {
+        const user = await this.$store.dispatch("login", data);
+        this.finalize(user);
+        this.loading = false;
+      } catch (err) {
+        this.loading = false;
+      }
     },
     finalize(response) {
-      api.mediastorage.cookies.set("name", response.data.userData.name, 5000);
-      api.mediastorage.cookies.set("email", response.data.userData.email, 5000);
-      api.mediastorage.cookies.set("token", response.data.token, 5000);
-      api.mediastorage.session.set("name", response.data.userData.name);
-      api.mediastorage.session.set("email", response.data.userData.email);
-      api.mediastorage.session.set("token", response.data.token);
-      this.$store.state.token = response.data.token;
+      api.mediastorage.cookies.set("created", response.data.created.name, 5000);
+      api.mediastorage.cookies.set("accessToken", response.data.id, 5000);
+      api.mediastorage.cookies.set("ttl", response.data.ttl, 5000);
+      api.mediastorage.cookies.set("userId", response.data.userId, 5000);
+      this.$store.state.token = response.data.id;
       this.$store.state.isUserLoggedIn = true;
-
-      var timer = setInterval(
-        function() {
-          if (api.auth.loggedIn()) {
-            clearInterval(timer);
-            if (response.status == 200) {
-              const payload = {};
-
-              payload.action = "get";
-              payload.settings = response.data.userData;
-
-              this.$store
-                .dispatch("settings", payload)
-                .then(() => {
-                  this.$router.push("/drive/u/0/my-drive");
-                })
-                .catch(err => {
-                  api._handleError(err);
-                });
-              this.loading = false;
-            }
-          }
-        }.bind(this),
-        500
-      );
+      this.$router.push("/drive/u/0/my-drive");
     },
     clear() {
       this.$refs.form.reset();

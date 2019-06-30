@@ -1,3 +1,4 @@
+/* eslint-disable no-useless-escape */
 /** @format */
 
 import axios from 'axios'
@@ -30,6 +31,11 @@ class Api {
       'text-shadow: 1px 1px 5px rgb(249, 162, 34);' +
       'filter: dropshadow(color=rgb(249, 162, 34), offx=1, offy=1);'
     setTimeout(console.log.bind(console, '%cStop!', cssRule), 0)
+
+    this.regMobile = /^\d{10}$/
+    this.regName = /^[a-zA-Z ]*$/
+    this.regEmail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/
+    this.regDate = /^\d{4}[./-]\d{2}[./-]\d{2}$/
   }
 
   getUidV4() {

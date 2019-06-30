@@ -17,11 +17,18 @@
     <div class="body">
       <p>or use your email for registration</p>
       <form @submit.prevent="submit">
-        <input v-model="username" type="text" placeholder="Username">
-        <input v-model="name" type="text" placeholder="Name">
-        <input v-model="email" type="email" placeholder="Email">
-        <input v-model="password" type="password" placeholder="Password">
-        <button class="btn-hover color">Sign Up</button>
+        <input v-model="username" type="text" placeholder="Username" />
+        <input v-model="name" type="text" placeholder="Name" />
+        <input v-model="email" type="email" placeholder="Email" />
+        <input v-model="password" type="password" placeholder="Password" />
+        <button class="btn-hover color" :disabled="loading">
+          <span v-show="!loading">Sign Up</span>
+          <div v-show="loading" class="loading-dots">
+            <div class="loading-dots--dot"></div>
+            <div class="loading-dots--dot"></div>
+            <div class="loading-dots--dot"></div>
+          </div>
+        </button>
       </form>
     </div>
     <div class="footer">
@@ -42,13 +49,14 @@ export default {
       loading: false,
       password: "",
       username: "",
-      password: "",
       name: "",
       email: ""
     };
   },
   methods: {
-    submit() {
+    async submit() {
+      this.loading = true;
+
       const data = {
         realm: this.name,
         username: this.username,
@@ -56,16 +64,14 @@ export default {
         email: this.email,
         password: this.password
       };
-      this.loading = true;
-      this.$store
-        .dispatch("signup", data)
-        .then(result => {
-          this.finalize(result);
-        })
-        .catch(err => {
-          this.loading = false;
-          api._handleError(err);
-        });
+
+      try {
+        const val = await this.$store.dispatch("signup", data);
+        console.log(val);
+        this.loading = false;
+      } catch (err) {
+        this.loading = false;
+      }
     },
     finalize(response) {
       api.mediastorage.cookies.set("name", response.data.userData.name, 5000);

@@ -10,5 +10,7 @@ module.exports = function(server) {
   var router = server.loopback.Router();
   router.get('/error', server.loopback.status());
 
+  router.get('/verified', server.loopback.status());
+
   server.use(router);
 };

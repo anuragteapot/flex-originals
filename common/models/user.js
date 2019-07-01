@@ -1,104 +1,106 @@
-var config = require('../../server/config.json')
+const config = require("../../server/config.json");
+// const path = require("path");
 
 //Replace this address with your actual address
-var senderAddress = 'noreply@loopback.com'
+const senderAddress = "noreply@loopback.com";
 
 module.exports = function(User) {
   //send verification email after registration
-  User.afterRemote('create', function(context, user, next) {
+  User.afterRemote("create", function(context, user, next) {
     var options = {
-      type: 'email',
+      type: "email",
       to: user.email,
       from: senderAddress,
-      subject: 'Thanks for registering.',
-      redirect: '/verified',
+      subject: "Thanks for registering.",
+      // template: pa   th.resolve(__dirname, "../../server/views/mails/verify.ejs"),
+      redirect: "/",
+      restApiRoot: "/",
       user: user
-    }
+    };
 
     user.verify(options, function(err) {
       if (err) {
-        User.deleteById(user.id)
-        return next(err)
+        User.deleteById(user.id);
+        return next(err);
       }
       context.result = {
-        title: 'Signed up successfully',
+        title: "Signed up successfully",
         content:
-          'Please check your email and click on the verification link ' +
-          'before logging in.',
-        redirectTo: '/'
-      }
-      return next()
-    })
-  })
+          "Please check your email and click on the verification link " +
+          "before logging in.",
+        redirectTo: "/"
+      };
+      return next();
+    });
+  });
 
   // Method to render
-  User.afterRemote('prototype.verify', function(context, user, next) {
+  User.afterRemote("prototype.verify", function(context, user, next) {
     context.result = {
       title:
-        'A Link to reverify your identity has been sent ' +
-        'to your email successfully',
+        "A Link to reverify your identity has been sent " +
+        "to your email successfully",
       content:
-        'Please check your email and click on the verification link ' +
-        'before logging in',
-      redirectTo: '/'
-    }
-    return next()
-  })
+        "Please check your email and click on the verification link " +
+        "before logging in",
+      redirectTo: "/"
+    };
+    return next();
+  });
 
-  User.afterRemote('prototype.confirm', function(ctx, next) {
-    console.log('Cannot speak! after', ctx);
+  User.afterRemote("prototype.confirm", function(ctx, next) {
+    console.log("Cannot speak! after", ctx);
     next();
   });
 
-  User.beforeRemote('prototype.confirm', function(ctx, next) {
-    console.log('Cannot speak before!', ctx);
+  User.beforeRemote("prototype.confirm", function(ctx, next) {
+    console.log("Cannot speak before!", ctx);
     next();
   });
-
 
   //send password reset link when requested
-  User.on('resetPasswordRequest', function(info) {
-    var url = 'http://' + config.host + ':' + config.port + '/reset-password'
+  User.on("resetPasswordRequest", function(ctx) {
+    var url = "http://" + config.host + ":" + config.port + "/reset-password";
     var html =
       'Click <a href="' +
       url +
-      '?access_token=' +
-      info.accessToken.id +
-      '">here</a> to reset your password'
+      "?access_token=" +
+      ctx.accessToken.id +
+      '">here</a> to reset your password';
 
     User.app.models.Email.send(
       {
-        to: info.email,
+        to: ctx.email,
         from: senderAddress,
-        subject: 'Password reset',
+        subject: "Password reset",
         html: html
       },
       function(err) {
-        if (err) return console.log('> error sending password reset email')
-        console.log('> sending password reset email to:', info.email)
+        if (err) return console.log("> error sending password reset email");
+        console.log("> sending password reset email to:", ctx.email);
       }
-    )
-  })
+    );
+  });
 
   //render UI page after password change
-  User.afterRemote('changePassword', function(context, user, next) {
+  User.afterRemote("changePassword", function(context, user, next) {
     context.result = {
-      title: 'Password changed successfully',
-      content: 'Please login again withu new password',
-      redirectTo: '/',
-      redirectToLinkText: 'Log in'
-    }
-    return next()
-  })
+      title: "Password changed successfully",
+      content: "Please login again withu new password",
+      redirectTo: "/",
+      redirectToLinkText: "Log in"
+    };
+    return next();
+  });
 
   //render UI page after password reset
-  User.afterRemote('setPassword', function(context, user, next) {
+  User.afterRemote("setPassword", function(context, user, next) {
     context.result = {
-      title: 'Password reset success',
-      content: 'Your password has been reset successfully',
-      redirectTo: '/',
-      redirectToLinkText: 'Log in'
-    }
-    return next()
-  })
-}
+      title: "Password reset success",
+      content: "Your password has been reset successfully",
+      redirectTo: "/",
+      redirectToLinkText: "Log in"
+    };
+    return next();
+  });
+};

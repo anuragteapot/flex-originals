@@ -156,7 +156,7 @@ class Api {
         break
       case 401:
         this.auth.logout()
-        router.push('/')
+        router.push('/login')
         store.commit(types.SHOW_SNACKBAR, errorData)
         break
       case 500:

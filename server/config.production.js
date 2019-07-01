@@ -1,9 +1,9 @@
-'use strict'
+"use strict";
 
 module.exports = {
-  restApiRoot: '/api',
-  host: '0.0.0.0',
-  port: 3000,
+  restApiRoot: "/api",
+  host: "0.0.0.0",
+  port: 3333,
   remoting: {
     context: false,
     rest: {
@@ -13,12 +13,15 @@ module.exports = {
     },
     json: {
       strict: false,
-      limit: '100kb'
+      limit: "100kb"
     },
     urlencoded: {
       extended: true,
-      limit: '100kb'
+      limit: "100kb"
     },
-    cors: false
+    cors: false,
+    errorHandler: {
+      disableStackTrace: true
+    }
   }
-}
+};

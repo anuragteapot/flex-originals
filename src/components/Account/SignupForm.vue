@@ -17,10 +17,54 @@
     <div class="body">
       <p>or use your email for registration</p>
       <form @submit.prevent="submit">
-        <input v-model="username" type="text" placeholder="Username" />
-        <input v-model="name" type="text" placeholder="Name" />
-        <input v-model="email" type="email" placeholder="Email" />
-        <input v-model="password" type="password" placeholder="Password" />
+        <div class="username">
+          <input
+            autocapitalize="off"
+            autocomplete="off"
+            autocorrect="off"
+            autofocus="autofocus"
+            name="username"
+            v-model="username"
+            type="text"
+            placeholder="Username"
+          >
+        </div>
+        <div class="name">
+          <input
+            autocapitalize="off"
+            autocomplete="off"
+            autocorrect="off"
+            autofocus="autofocus"
+            name="name"
+            v-model="name"
+            type="text"
+            placeholder="Name"
+          >
+        </div>
+        <div class="email">
+          <input
+            autocapitalize="off"
+            autocomplete="off"
+            autocorrect="off"
+            autofocus="autofocus"
+            name="email"
+            v-model="email"
+            type="email"
+            placeholder="Email"
+          >
+        </div>
+        <div class="password">
+          <input
+            autocapitalize="off"
+            autocomplete="off"
+            autocorrect="off"
+            autofocus="autofocus"
+            name="password"
+            v-model="password"
+            type="password"
+            placeholder="Password"
+          >
+        </div>
         <button class="btn-hover color" :disabled="loading">
           <span v-show="!loading">Sign Up</span>
           <div v-show="loading" class="loading-dots">

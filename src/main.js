@@ -11,9 +11,13 @@ import Switch from "@/components/Tool/Switch";
 import Model from "@/components/Model/Model";
 import AudioPlayer from "@/components/Audio/Audio";
 import VideoPlayer from "@/components/Video/Video";
+import app from "./app";
 
 import "./styles/lazydrive.scss";
 
+Vue.use(app, {
+  name: "Anurag"
+});
 Vue.use(VueAnalytics, {
   id: "UA-131081167-1",
   router

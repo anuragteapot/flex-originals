@@ -18,10 +18,28 @@
       <p>We're so excited to see you again!</p>
       <form @submit.prevent="submit">
         <div class="email">
-          <input v-model="email" type="email" placeholder="Email" />
+          <input
+            autocapitalize="off"
+            autocomplete="off"
+            autocorrect="off"
+            autofocus="autofocus"
+            name="email"
+            v-model="email"
+            type="email"
+            placeholder="Email"
+          >
         </div>
         <div class="password">
-          <input v-model="password" type="password" placeholder="Password" />
+          <input
+            autocapitalize="off"
+            autocomplete="off"
+            autocorrect="off"
+            autofocus="autofocus"
+            name="password"
+            v-model="password"
+            type="password"
+            placeholder="Password"
+          >
           <span>Forget Password ?</span>
         </div>
         <button class="btn-hover color" :disabled="loading">
@@ -43,8 +61,6 @@
   </div>
 </template>
 <script>
-import { api } from "./../../app/Api";
-
 export default {
   name: "lazy-login",
   data() {
@@ -57,15 +73,15 @@ export default {
   computed: {
     Vname: function() {
       if (!this.name) return true;
-      return api.regName.test(this.name);
+      return this.$api.regName.test(this.name);
     },
     Vemail: function() {
       if (!this.email) return true;
-      return api.regEmail.test(this.email);
+      return this.$api.regEmail.test(this.email);
     },
     VmobileNumber: function() {
       if (!this.mobileNumber) return true;
-      return api.regMobile.test(this.mobileNumber);
+      return this.$api.regMobile.test(this.mobileNumber);
     }
   },
   methods: {
@@ -84,10 +100,10 @@ export default {
       }
     },
     finalize(response) {
-      api.webStorage.local.set("created", response.data.created, 5000);
-      api.webStorage.local.set("accessToken", response.data.id, 5000);
-      api.webStorage.local.set("ttl", response.data.ttl, 5000);
-      api.webStorage.local.set("userId", response.data.userId, 5000);
+      this.$api.webStorage.local.set("created", response.data.created, 5000);
+      this.$api.webStorage.local.set("accessToken", response.data.id, 5000);
+      this.$api.webStorage.local.set("ttl", response.data.ttl, 5000);
+      this.$api.webStorage.local.set("userId", response.data.userId, 5000);
       this.$store.state.isUserLoggedIn = true;
       this.$router.push("/drive/u/0/my-drive");
     },

@@ -3,7 +3,7 @@
     <div v-if="isLoading" class="loader-1 center">
       <span></span>
     </div>
-    <i class="fa fa-play fa-4x file-icon" aria-hidden="true"></i>
+    <i class="fas fa-play fa-3x file-icon" aria-hidden="true"></i>
     <p>Christian</p>
   </div>
 </template>

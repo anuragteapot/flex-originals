@@ -1,5 +1,5 @@
 {
-  "name": "lazyDrive",
+  "name": "Creator",
   "version": "0.0.1",
   "private": true,
   "author": "Anurag Kumar (anu1601cs)",
@@ -7,10 +7,10 @@
   "scripts": {
     "lint": "vue-cli-service lint",
     "test": "vue-cli-service lint & npm run vue-build",
-    "dev": "cross-env NODE_ENV=development npm run lb-start & npm run vue-serve",
+    "dev": "cross-env NODE_ENV=development CPORT=8080 npm run lb-start & npm run vue-serve",
     "lb-start": "nodemon",
     "posttest": "npm run lint && nsp check",
-    "prod": "npm run vue-build && cross-env NODE_ENV=production npm start",
+    "prod": "npm run vue-build && cross-env NODE_ENV=production CPORT=80 npm start",
     "start": "node .",
     "vue-build": "vue-cli-service build",
     "vue-serve": "vue-cli-service serve"

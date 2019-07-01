@@ -97,7 +97,6 @@
 
       i {
         font-style: normal;
-        font-weight: 100;
         color: white;
         position: absolute;
         width: 2em;
@@ -119,7 +118,6 @@
         }
 
         &.fullscreen {
-          left: auto;
           right: 1em;
         }
       }
@@ -181,7 +179,7 @@
             left: 0;
             top: 50%;
             margin-top: -0.15em;
-            background: #2bffdf;
+            background: $color-active;
           }
 
           .inaudible {
@@ -206,6 +204,23 @@
           transition: all 0.2s ease-out;
         }
       }
+    }
+
+    .tooltip .tooltiptext {
+      visibility: hidden;
+      width: 50px;
+      background-color: black;
+      color: #fff;
+      text-align: center;
+      padding: 5px 0;
+      position: absolute;
+      z-index: 1;
+      bottom: 105%;
+      left: 0%;
+    }
+
+    .tooltip:hover .tooltiptext {
+      visibility: visible;
     }
 
     .seek {
@@ -236,7 +251,7 @@
         width: 0%;
         height: 100%;
         z-index: 8;
-        background: #2bffdf;
+        background: $color-active;
         overflow: visible !important;
 
         &:before,
@@ -246,13 +261,13 @@
           right: 10px;
           height: 100%;
           width: 10px;
-          background: lighten(#2bffdf, 10%);
+          background: lighten($color-active, 10%);
           border-radius: 6px/3px;
         }
 
         &:after {
           right: 0px;
-          background: lighten(#2bffdf, 20%);
+          background: lighten($color-active, 20%);
         }
 
         .handle {

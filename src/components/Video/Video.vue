@@ -15,16 +15,16 @@
       @click="togglePlay"
     ></video>
     <span :class="`large-play ${!isPlaying && !loading ? '' : 'hidden'}`">
-      <i @click="togglePlay" class="fa fa-play" aria-hidden="true"></i>
+      <i @click="togglePlay" class="fas fa-play" aria-hidden="true"></i>
     </span>
     <div v-show="loading" class="loader-2 center">
       <span></span>
     </div>
     <div :class="`control-bar ${videoActive || !isPlaying ? 'active' : ''}`">
       <div class="button-bar">
-        <i v-if="hasEnded" @click="togglePlay" class="fa fa-repeat" aria-hidden="true"></i>
-        <i v-else-if="!isPlaying" @click="togglePlay" class="fa fa-play" aria-hidden="true"></i>
-        <i v-else-if="isPlaying" @click="togglePlay" class="fa fa-pause" aria-hidden="true"></i>
+        <i v-if="hasEnded" @click="togglePlay" class="fas fa-redo" aria-hidden="true"></i>
+        <i v-else-if="!isPlaying" @click="togglePlay" class="fas fa-play" aria-hidden="true"></i>
+        <i v-else-if="isPlaying" @click="togglePlay" class="fas fa-pause" aria-hidden="true"></i>
         <div
           :class="`volume ${audioActive ? 'shift' : ''}`"
           @mouseover="audioActive = true"
@@ -69,10 +69,12 @@
             >{{ speed == 1 ? 'Normal' : speed + 'x' }}</a>
           </div>
         </div>
-
-        <i class="fa fa-expand fullscreen" @click="toggleFullscreen"></i>
+        <div class="full">
+          <i class="fas fa-expand fullscreen" @click="toggleFullscreen"></i>
+        </div>
       </div>
-      <div class="seek" ref="progress" @mousedown="scrub">
+      <div class="seek tooltip" ref="progress" @mousedown="scrub" @mousemove="scrubForTime">
+        <span class="tooltiptext">2:22</span>
         <div class="buffer" :style="`width:${bufferPercent}%`"></div>
         <div class="watched" :style="`width: ${progressBar};`">
           <i class="handle"></i>
@@ -194,6 +196,13 @@ export default {
       const scrubTime =
         (e.offsetX / this.progress.offsetWidth) * this.video.duration;
       this.video.currentTime = scrubTime;
+    },
+    scrubForTime(e) {
+      const scrubTime =
+        (e.offsetX / this.progress.offsetWidth) * this.video.duration;
+      const x = scrubTime / 60;
+      const decimals = x - Math.floor(x);
+      console.log(decimals.toFixed(2));
     },
     toggleFullscreen() {
       if (this.player.requestFullScreen) {

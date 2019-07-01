@@ -1,9 +1,9 @@
 <template>
   <section class="content">
     <div class="inner">
-      <lazy-grid></lazy-grid>
-      <lazy-audio-player />
+      <lazy-grid />
     </div>
+    <lazy-audio-player />
   </section>
 </template>
 

@@ -4,13 +4,13 @@
       <h1>Welcome back!</h1>
       <div class="social">
         <div class="box">
-          <i class="fa fa-facebook" aria-hidden="true"></i>
+          <i class="fab fa-facebook-f" aria-hidden="true"></i>
         </div>
         <div class="box">
-          <i class="fa fa-google" aria-hidden="true"></i>
+          <i class="fab fa-google" aria-hidden="true"></i>
         </div>
         <div class="box">
-          <i class="fa fa-twitter" aria-hidden="true"></i>
+          <i class="fab fa-twitter" aria-hidden="true"></i>
         </div>
       </div>
     </div>

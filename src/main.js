@@ -15,9 +15,7 @@ import app from "./app";
 
 import "./styles/lazydrive.scss";
 
-Vue.use(app, {
-  name: "Anurag"
-});
+Vue.use(app);
 Vue.use(VueAnalytics, {
   id: "UA-131081167-1",
   router

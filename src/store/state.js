@@ -1,5 +1,3 @@
-/** @format */
-
 // The initial state
 export default {
   // The loaded files

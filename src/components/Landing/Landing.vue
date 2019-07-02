@@ -33,6 +33,7 @@
         </div>
       </section>
       <section>
+        <slot></slot>
         <div class="home__container">
           <div class="home__inner">
             <button class="btn-hover color">Get Started</button>
@@ -74,19 +75,19 @@
           <h1>Social</h1>
           <ul>
             <li>
-              <i class="fa fa-facebook"></i>
+              <i class="fab fa-facebook-f"></i>
             </li>
             <li>
-              <i class="fa fa-instagram"></i>
+              <i class="fab fa-instagram"></i>
             </li>
             <li>
-              <i class="fa fa-twitter"></i>
+              <i class="fab fa-twitter"></i>
             </li>
             <li>
-              <i class="fa fa-google"></i>
+              <i class="fab fa-google"></i>
             </li>
             <li>
-              <i class="fa fa-github"></i>
+              <i class="fab fa-github"></i>
             </li>
           </ul>
         </div>
@@ -97,20 +98,18 @@
 </template>
 
 <script>
-import { api } from "./../app/Api";
-
 export default {
   name: "media-home",
   computed: {
     loggedIn() {
-      return api.auth.loggedIn();
+      return this.$api.auth.loggedIn();
     }
   },
   methods: {
     async logout() {
       try {
         await this.$store.dispatch("logout");
-        api.auth.logout();
+        this.$api.auth.logout();
         window.location.href = "";
       } catch (err) {
         console.log(err);

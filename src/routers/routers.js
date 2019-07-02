@@ -1,59 +1,62 @@
-// route level code-splitting
-// this generates a separate chunk (about.[hash].js) for this route
-// which is lazy-loaded when the route is visited.
-
-export default [{
-  path: '/',
-  name: 'home',
-  component: () => import('./../views/Home.vue')
-},
-{
-  path: '/drive/u/:adapter/:path/:dir?',
-  name: 'my-drive',
-  component: () => import('./../views/myDrive.vue'),
-  meta: {
-    requiresAuth: false
+export default [
+  {
+    path: "/",
+    name: "Landing",
+    component: () =>
+      import(/* webpackChunkName: "landing" */ "./../views/Landing.vue")
+  },
+  {
+    path: "/app/@profile",
+    name: "@profile",
+    component: () =>
+      import(/* webpackChunkName: "Browser" */ "./../views/Browser.vue"),
+    meta: {
+      requiresAuth: true
+    }
+  },
+  {
+    path: "/app/@home",
+    name: "@home",
+    component: () =>
+      import(/* webpackChunkName: "Browser" */ "./../views/Browser.vue")
+  },
+  {
+    path: "/login",
+    name: "login",
+    component: () =>
+      import(/* webpackChunkName: "Login" */ "./../views/Login.vue"),
+    meta: {
+      requiresAuth: true
+    }
+  },
+  {
+    path: "/auth",
+    name: "auth",
+    component: () =>
+      import(/* webpackChunkName: "Auth" */ "./../views/Auth.vue")
+  },
+  {
+    path: "/signup",
+    name: "signup",
+    component: () =>
+      import(/* webpackChunkName: "Signup" */ "./../views/Signup.vue"),
+    meta: {
+      requiresAuth: true
+    }
+  },
+  {
+    path: "/test",
+    name: "test",
+    component: () => import("./../views/Test.vue")
+  },
+  {
+    path: "/@error",
+    name: "@error",
+    component: () => import("./../views/Error.vue")
+  },
+  {
+    path: "*",
+    name: "@pageNotFound",
+    component: () => import("./../views/Error.vue")
   }
-},
-{
-  path: '/login',
-  name: 'login',
-  component: () => import('./../views/Login.vue'),
-  meta: {
-    requiresAuth: true
-  }
-},
-{
-  path: '/auth',
-  name: 'auth',
-  component: () => import('./../views/Auth.vue')
-},
-{
-  path: '/signup',
-  name: 'signup',
-  component: () => import('./../views/Signup.vue'),
-  meta: {
-    requiresAuth: true
-  }
-},
-{
-  path: '/test',
-  name: 'test',
-  component: () => import('./../views/Test.vue')
-},
-{
-  path: '/drive/open',
-  name: 'open',
-  component: () => import('./../views/Open.vue')
-},
-{
-  path: '/PageNotFound',
-  name: 'NotFound',
-  component: () => import('./../views/PageNotFound.vue')
-},
-{
-  path: '*',
-  name: 'PageNotFound',
-  component: () => import('./../views/PageNotFound.vue')
-}
-]
+];

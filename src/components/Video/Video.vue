@@ -73,7 +73,7 @@
           <i class="fas fa-expand fullscreen" @click="toggleFullscreen"></i>
         </div>
       </div>
-      <div class="seek tooltip" ref="progress" @mousedown="scrub" @mousemove="scrubForTime">
+      <div class="seek tooltip" ref="progress" @mousedown="scrub">
         <span class="tooltiptext">2:22</span>
         <div class="buffer" :style="`width:${bufferPercent}%`"></div>
         <div class="watched" :style="`width: ${progressBar};`">
@@ -287,12 +287,7 @@ export default {
         this.video.duration
       ) {
         this.bufferPercent = this.video.buffered.end(0) / this.video.duration;
-      }
-      // Some browsers (e.g., FF3.6 and Safari 5) cannot calculate target.bufferered.end()
-      // to be anything other than 0. If the byte count is available we use this instead.
-      // Browsers that support the else if do not seem to have the bufferedBytes value and
-      // should skip to there. Tested in Safari 5, Webkit head, FF3.6, Chrome 6, IE 7/8.
-      else if (
+      } else if (
         this.video &&
         this.video.bytesTotal != undefined &&
         this.video.bytesTotal > 0 &&
@@ -306,6 +301,12 @@ export default {
       } else {
         this.bufferPercent = 100;
       }
+    },
+    seeked() {
+      this.loading = false;
+    },
+    seeking() {
+      this.loading = true;
     }
   },
   mounted() {
@@ -318,6 +319,8 @@ export default {
     this.video.addEventListener("loadedmetadata", this.loadedmetadata);
     this.video.addEventListener("progress", this.updateBuffer);
     this.video.addEventListener("stalled", this.stalled);
+    this.video.addEventListener("seeking", this.seeking);
+    this.video.addEventListener("seeked", this.seeked);
   },
   destroyed() {
     window.removeEventListener("keydown", this.detectKeypress);
@@ -329,6 +332,8 @@ export default {
     this.video.removeEventListener("loadedmetadata", this.loadedmetadata);
     this.video.removeEventListener("progress", this.updateBuffer);
     this.video.removeEventListener("stalled", this.stalled);
+    this.video.removeEventListener("seeking", this.seeking);
+    this.video.removeEventListener("seeked", this.seeked);
   }
 };
 </script>

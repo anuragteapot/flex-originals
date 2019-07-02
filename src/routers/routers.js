@@ -30,12 +30,6 @@ export default [
     }
   },
   {
-    path: "/auth",
-    name: "auth",
-    component: () =>
-      import(/* webpackChunkName: "Auth" */ "./../views/Auth.vue")
-  },
-  {
     path: "/signup",
     name: "signup",
     component: () =>
@@ -43,6 +37,18 @@ export default [
     meta: {
       requiresAuth: true
     }
+  },
+  {
+    path: "/verify/users/:type",
+    name: "verify",
+    component: () =>
+      import(/* webpackChunkName: "Auth" */ "./../views/Verify.vue")
+  },
+  {
+    path: "/auth",
+    name: "auth",
+    component: () =>
+      import(/* webpackChunkName: "Auth" */ "./../views/Auth.vue")
   },
   {
     path: "/test",

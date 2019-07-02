@@ -27,7 +27,7 @@
         </div>
       </section>
       <section>
-        <div class="home__container" v-if="!type">
+        <div class="home__container" v-if="type == 'verified'">
           <div class="home__inner">
             <a href="/login">
               <button class="btn-hover color">Get Started</button>

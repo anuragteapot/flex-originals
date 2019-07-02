@@ -9,7 +9,7 @@ export default [
     path: "/app/@profile",
     name: "@profile",
     component: () =>
-      import(/* webpackChunkName: "Browser" */ "./../views/Browser.vue"),
+      import(/* webpackChunkName: "browser" */ "./../views/Browser.vue"),
     meta: {
       requiresAuth: true
     }
@@ -18,13 +18,13 @@ export default [
     path: "/app/@home",
     name: "@home",
     component: () =>
-      import(/* webpackChunkName: "Browser" */ "./../views/Browser.vue")
+      import(/* webpackChunkName: "browser" */ "./../views/Browser.vue")
   },
   {
     path: "/login",
     name: "login",
     component: () =>
-      import(/* webpackChunkName: "Login" */ "./../views/Login.vue"),
+      import(/* webpackChunkName: "login" */ "./../views/Login.vue"),
     meta: {
       requiresAuth: true
     }
@@ -33,7 +33,7 @@ export default [
     path: "/signup",
     name: "signup",
     component: () =>
-      import(/* webpackChunkName: "Signup" */ "./../views/Signup.vue"),
+      import(/* webpackChunkName: "signup" */ "./../views/Signup.vue"),
     meta: {
       requiresAuth: true
     }
@@ -42,27 +42,27 @@ export default [
     path: "/verify/users/:type",
     name: "verify",
     component: () =>
-      import(/* webpackChunkName: "Auth" */ "./../views/Verify.vue")
+      import(/* webpackChunkName: "verify" */ "./../views/Verify.vue")
   },
   {
     path: "/auth",
     name: "auth",
     component: () =>
-      import(/* webpackChunkName: "Auth" */ "./../views/Auth.vue")
+      import(/* webpackChunkName: "auth" */ "./../views/Auth.vue")
   },
   {
     path: "/test",
     name: "test",
-    component: () => import("./../views/Test.vue")
+    component: () => import(/* webpackChunkName: "test" */ "./../views/Test.vue")
   },
   {
     path: "/@error",
     name: "@error",
-    component: () => import("./../views/Error.vue")
+    component: () => import( /* webpackChunkName: "error" */ "./../views/Error.vue")
   },
   {
     path: "*",
     name: "@pageNotFound",
-    component: () => import("./../views/Error.vue")
+    component: () => import(/* webpackChunkName: "error" */ "./../views/Error.vue")
   }
 ];

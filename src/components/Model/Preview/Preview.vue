@@ -4,7 +4,7 @@
 
 <script>
 import * as types from "./../../../store/mutation-types";
-import pdf from "vue-pdf";
+// import pdf from "vue-pdf";
 
 export default {
   name: "modal-preview",

@@ -16,7 +16,7 @@
     </div>
     <div class="body">
       <p>or use your email for registration</p>
-      <form @submit.prevent="submit">
+      <form @submit.prevent="submit" ref="form">
         <div class="username">
           <input
             autocapitalize="off"
@@ -27,7 +27,7 @@
             v-model="username"
             type="text"
             placeholder="Username"
-          >
+          />
         </div>
         <div class="name">
           <input
@@ -39,7 +39,7 @@
             v-model="name"
             type="text"
             placeholder="Name"
-          >
+          />
         </div>
         <div class="email">
           <input
@@ -51,7 +51,7 @@
             v-model="email"
             type="email"
             placeholder="Email"
-          >
+          />
         </div>
         <div class="password">
           <input
@@ -63,7 +63,7 @@
             v-model="password"
             type="password"
             placeholder="Password"
-          >
+          />
         </div>
         <button class="btn-hover color" :disabled="loading">
           <span v-show="!loading">Sign Up</span>
@@ -117,6 +117,8 @@ export default {
             data: val.data.content,
             color: "success"
           });
+          this.clear();
+          this.$router.push("/login");
         }
         this.loading = false;
       } catch (err) {

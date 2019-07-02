@@ -7,10 +7,10 @@
   "scripts": {
     "lint": "vue-cli-service lint",
     "test": "vue-cli-service lint & npm run vue-build",
-    "dev": "cross-env NODE_ENV=development CPORT=8080 npm run lb-start & npm run vue-serve",
+    "dev": "cross-env NODE_ENV=development npm run lb-start & npm run vue-serve",
     "lb-start": "nodemon",
     "posttest": "npm run lint && nsp check",
-    "prod": "npm run vue-build && cross-env NODE_ENV=production CPORT=80 npm start",
+    "prod": "npm run vue-build && cross-env NODE_ENV=production npm start",
     "start": "node .",
     "vue-build": "vue-cli-service build",
     "vue-serve": "vue-cli-service serve"
@@ -37,8 +37,6 @@
     "strong-error-handler": "^2.0.0",
     "underscore": "^1.9.1",
     "vue": "^2.6.10",
-    "vue-analytics": "^5.17.0",
-    "vue-pdf": "^4.0.7",
     "vue-router": "^3.0.6",
     "vuex": "^3.1.1",
     "vuex-persistedstate": "^2.5.4"

@@ -105,7 +105,7 @@ export default {
       this.$api.webStorage.local.set("ttl", response.data.ttl, 5000);
       this.$api.webStorage.local.set("userId", response.data.userId, 5000);
       this.$store.state.isUserLoggedIn = true;
-      this.$router.push("/drive/u/0/my-drive");
+      this.$router.push("/app/@home");
     },
     clear() {
       this.$refs.form.reset();

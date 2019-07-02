@@ -20,7 +20,7 @@ export default {
   props: {
     timeout: {
       type: Number,
-      default: 3000
+      default: 5000
     },
     infinity: {
       type: Boolean,

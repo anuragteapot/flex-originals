@@ -1,6 +1,4 @@
 /* eslint-disable no-useless-escape */
-/** @format */
-
 import axios from "axios";
 import store from "@/store/store";
 import router from "@/router";
@@ -36,6 +34,29 @@ class Api {
     this.regName = /^[a-zA-Z ]*$/;
     this.regEmail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
     this.regDate = /^\d{4}[./-]\d{2}[./-]\d{2}$/;
+
+    window.addEventListener("online", this.updateOnlineStatus);
+    window.addEventListener("offline", this.updateOnlineStatus);
+  }
+
+  updateOnlineStatus() {
+    const state = navigator.onLine || false;
+
+    if (state == true) {
+      const data = {
+        data: "You are online",
+        color: "success"
+      };
+
+      store.commit(types.SHOW_SNACKBAR, data);
+    } else {
+      const data = {
+        data: "You are offline",
+        color: "info"
+      };
+
+      store.commit(types.SHOW_SNACKBAR, data);
+    }
   }
 
   getUidV4() {

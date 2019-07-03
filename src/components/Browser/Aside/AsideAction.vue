@@ -2,7 +2,7 @@
   <aside class="lazy">
     <div class="lazy-collection">
       <div class="server focusable server-friends unread" role="button" aria-label="Friends unread">
-        <div class="server-icon">
+        <div class="server-icon" @click="$router.push('/app/@home')">
           <img src="/public/atom.svg" alt="logo" />
         </div>
       </div>

@@ -3,6 +3,5 @@
     <router-view/>
     <lazy-snack-bar></lazy-snack-bar>
     <lazy-model></lazy-model>
-    <!-- <lazy-context></lazy-context> -->
   </div>
 </template>

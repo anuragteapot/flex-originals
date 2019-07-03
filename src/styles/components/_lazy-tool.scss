@@ -16,14 +16,14 @@
     height: 1em;
     width: 1em;
     border-radius: 1em;
-    background: #FFF;
+    background: #fff;
     box-shadow: 0 0.1em 0.3em rgba(0, 0, 0, 0.5);
     -webkit-transition: all 300ms;
     -moz-transition: all 300ms;
     transition: all 300ms;
   }
 
-  input:checked+div {
+  input:checked + div {
     -webkit-transform: translate3d(100%, 0, 0);
     -moz-transform: translate3d(100%, 0, 0);
     transform: translate3d(100%, 0, 0);
@@ -41,12 +41,12 @@
   input[type="radio"] {
     display: none;
 
-    &:checked+label:before {
+    &:checked + label:before {
       border-color: $color-special;
       animation: ripple 0.2s linear forwards;
     }
 
-    &:checked+label:after {
+    &:checked + label:after {
       transform: scale(1);
     }
   }
@@ -54,7 +54,6 @@
   label {
     display: inline-block;
     height: $radio-size;
-    color: $color-primary;
     position: relative;
     padding: 0 ($radio-size + 10px);
     margin-bottom: 0;
@@ -64,9 +63,9 @@
     &:before,
     &:after {
       position: absolute;
-      content: '';
+      content: "";
       border-radius: 50%;
-      transition: all .3s ease;
+      transition: all 0.3s ease;
       transition-property: transform, border-color;
     }
 
@@ -90,7 +89,7 @@
 
   @keyframes ripple {
     0% {
-      box-shadow: 0px 0px 0px 1px rgba(0, 0, 0, 0.0);
+      box-shadow: 0px 0px 0px 1px rgba(0, 0, 0, 0);
     }
 
     50% {
@@ -111,7 +110,6 @@
   user-select: none;
 
   label {
-    color: $color-primary;
     position: absolute;
     z-index: 10;
     padding-left: 30px;
@@ -124,8 +122,7 @@
     position: absolute;
 
     &:checked {
-
-      ~.check {
+      ~ .check {
         border-color: rgb(0, 255, 157);
         box-shadow: 0px 0px 0px 15px rgb(0, 255, 157) inset;
 
@@ -145,13 +142,13 @@
     align-items: center;
     position: relative;
     border-radius: 100px;
-    background-color: #FFF;
+    background-color: rgb(131, 128, 128);
     border: 2px solid rgb(0, 255, 157);
     box-shadow: 0px 0px 0px 0px rgb(1, 255, 157) inset;
     transition: all 0.15s cubic-bezier(0, 1.05, 0.72, 1.07);
 
     &::after {
-      content: '';
+      content: "";
       width: 100%;
       height: 100%;
       opacity: 0;
@@ -159,7 +156,7 @@
       position: absolute;
       transform: scale(0);
       background-size: 50%;
-      background-image: url('http://moiza.ir/checkmark.svg');
+      background-image: url("http://moiza.ir/checkmark.svg");
       background-repeat: no-repeat;
       background-position: center;
       transition-delay: 0.2s !important;
@@ -178,7 +175,7 @@
 .square-one {
   width: 50px;
   height: 50px;
-  background: url('/public/icons/002-play.svg');
+  background: url("/public/icons/002-play.svg");
   top: 5%;
   left: 2%;
   -webkit-transform: rotate(-65deg);
@@ -189,7 +186,7 @@
   width: 50px;
   height: 50px;
   top: 55%;
-  background: url('/public/icons/004-tv.svg');
+  background: url("/public/icons/004-tv.svg");
   right: 10%;
   -webkit-transform: rotate(-65deg);
   transform: rotate(-65deg);
@@ -199,7 +196,7 @@
   width: 50px;
   height: 50px;
   top: 20%;
-  background: url('/public/icons/003-microphone.svg');
+  background: url("/public/icons/003-microphone.svg");
   right: 15%;
   -webkit-transform: rotate(-65deg);
   transform: rotate(-65deg);
@@ -209,12 +206,11 @@
   width: 50px;
   height: 50px;
   bottom: 5%;
-  background: url('/public/icons/picture.svg');
+  background: url("/public/icons/picture.svg");
   left: 5%;
   -webkit-transform: rotate(-65deg);
   transform: rotate(-65deg);
 }
-
 
 .btn-hover {
   width: 200px;
@@ -229,18 +225,18 @@
   background-size: 300% 100%;
 
   border-radius: 50px;
-  moz-transition: all .4s ease-in-out;
-  -o-transition: all .4s ease-in-out;
-  -webkit-transition: all .4s ease-in-out;
-  transition: all .4s ease-in-out;
+  moz-transition: all 0.4s ease-in-out;
+  -o-transition: all 0.4s ease-in-out;
+  -webkit-transition: all 0.4s ease-in-out;
+  transition: all 0.4s ease-in-out;
 }
 
 .btn-hover:hover {
   background-position: 100% 0;
-  moz-transition: all .4s ease-in-out;
-  -o-transition: all .4s ease-in-out;
-  -webkit-transition: all .4s ease-in-out;
-  transition: all .4s ease-in-out;
+  moz-transition: all 0.4s ease-in-out;
+  -o-transition: all 0.4s ease-in-out;
+  -webkit-transition: all 0.4s ease-in-out;
+  transition: all 0.4s ease-in-out;
 }
 
 .btn-hover:focus {
@@ -248,6 +244,12 @@
 }
 
 .btn-hover.color {
-  background-image: linear-gradient(to right, #25aae1, #40e495, #30dd8a, #2bb673);
+  background-image: linear-gradient(
+    to right,
+    #25aae1,
+    #40e495,
+    #30dd8a,
+    #2bb673
+  );
   box-shadow: 0 1px 10px 0 rgba(49, 196, 190, 0.75);
 }

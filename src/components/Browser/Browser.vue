@@ -2,22 +2,22 @@
   <div class="lazy__browser">
     <div v-if="isMobile" :class="`nav-offcanvas ${sideNav ? 'open' : ''}`">
       <div class="nav-offcanvas-menu">
-        <lazy-aside-action @tiggerSelectFile="selectFile" @tiggerSelectFolder="selectFolder"></lazy-aside-action>
-        <lazy-aside-des></lazy-aside-des>
+        <aside-action @tiggerSelectFile="selectFile" @tiggerSelectFolder="selectFolder"></aside-action>
+        <aside-des></aside-des>
       </div>
     </div>
     <div v-if="isMobile" :class="`offcanvas-overlay ${sideNav ? 'on' : ''}`" @click="closeMenu"></div>
-    <lazy-aside-action
+    <aside-action
       v-if="!isMobile"
       @tiggerSelectFile="selectFile"
       @tiggerSelectFolder="selectFolder"
-    ></lazy-aside-action>
-    <lazy-aside-des v-if="!isMobile"></lazy-aside-des>
+    ></aside-action>
+    <aside-des v-if="!isMobile"></aside-des>
     <div class="vert-container">
       <div class="media-action">
         <div class="file">
           <form enctype="multipart/form-data" ref="formFile">
-            <input multiple type="file" hidden ref="inputFile" @change="processFile">
+            <input multiple type="file" hidden ref="inputFile" @change="processFile" />
           </form>
         </div>
         <div class="folder">
@@ -31,7 +31,7 @@
               hidden
               ref="inputFolder"
               @change="processFolder"
-            >
+            />
           </form>
         </div>
       </div>
@@ -39,9 +39,7 @@
         <div v-if="isMobile" @click="openMenu">
           <i class="fa fa-align-justify"></i>
         </div>
-        <!-- <lazy-breadcrumb v-else></lazy-breadcrumb> -->
         <div class="menu-right">
-          <!-- <input type="text" placeholder="Search..."> -->
           <span class="icon">
             <i class="fa fa-search"></i>
           </span>
@@ -56,17 +54,17 @@
       <div class="progress" v-if="loading">
         <div class="indeterminate"></div>
       </div>
-      <media-main-content></media-main-content>
+      <component v-bind:is="layout"></component>
     </div>
   </div>
 </template>
 
 <script>
 import * as types from "./.././../store/mutation-types.js";
-import mainContent from "./../Browser/Content/MainContent";
-// import breadCrumb from "./../Tool/BreadCrumb";
-import AsideAction from "./Aside/AsideAction";
-import AsideDes from "./Aside/AsideDes";
+import home from "./../Browser/Content/MainContent";
+import profile from "./Settings/Profile";
+import asideAction from "./Aside/AsideAction";
+import asideDes from "./Aside/AsideDes";
 
 export default {
   name: "media-browser",
@@ -74,14 +72,22 @@ export default {
     return {};
   },
   components: {
-    mediaMainContent: mainContent,
-    // lazyBreadcrumb: breadCrumb,
-    lazyAsideAction: AsideAction,
-    lazyAsideDes: AsideDes
+    home,
+    profile,
+    asideAction,
+    asideDes
   },
   computed: {
     isMobile() {
       return this.$store.state.isMobile;
+    },
+    layout() {
+      const name = this.$route.name;
+      if (name.split("@")[1]) {
+        return name.split("@")[1];
+      } else {
+        return "home";
+      }
     },
     sideNav: function() {
       return this.$store.state.sideNav;

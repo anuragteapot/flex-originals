@@ -46,7 +46,7 @@ export default [
   },
   {
     path: "/verify/users/verified",
-    name: "verify",
+    name: "verified",
     component: () =>
       import(/* webpackChunkName: "verified" */ "./../views/Verified.vue")
   },

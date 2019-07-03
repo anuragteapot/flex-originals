@@ -2,36 +2,18 @@
   <div class="lazy__browser">
     <div v-if="isMobile" :class="`nav-offcanvas ${sideNav ? 'open' : ''}`">
       <div class="nav-offcanvas-menu">
-        <aside-action @tiggerSelectFile="selectFile" @tiggerSelectFolder="selectFolder"></aside-action>
+        <aside-action @tiggerSelectFile="$refs.inputFile.click()"></aside-action>
         <aside-des></aside-des>
       </div>
     </div>
     <div v-if="isMobile" :class="`offcanvas-overlay ${sideNav ? 'on' : ''}`" @click="closeMenu"></div>
-    <aside-action
-      v-if="!isMobile"
-      @tiggerSelectFile="selectFile"
-      @tiggerSelectFolder="selectFolder"
-    ></aside-action>
+    <aside-action v-if="!isMobile" @tiggerSelectFile="$refs.inputFile.click()"></aside-action>
     <aside-des v-if="!isMobile"></aside-des>
     <div class="vert-container">
       <div class="media-action">
         <div class="file">
           <form enctype="multipart/form-data" ref="formFile">
             <input multiple type="file" hidden ref="inputFile" @change="processFile" />
-          </form>
-        </div>
-        <div class="folder">
-          <form enctype="multipart/form-data" ref="formFolder">
-            <input
-              multiple
-              type="file"
-              directory
-              webkitdirectory
-              mozdirectory
-              hidden
-              ref="inputFolder"
-              @change="processFolder"
-            />
           </form>
         </div>
       </div>
@@ -51,7 +33,7 @@
           </span>
         </div>
       </menu>
-      <div class="progress" v-if="loading">
+      <div class="progress" v-if="isLoading">
         <div class="indeterminate"></div>
       </div>
       <component v-bind:is="layout"></component>
@@ -65,6 +47,7 @@ import home from "./../Browser/Content/MainContent";
 import profile from "./Settings/Profile";
 import asideAction from "./Aside/AsideAction";
 import asideDes from "./Aside/AsideDes";
+import { mapGetters } from "vuex";
 
 export default {
   name: "media-browser",
@@ -78,9 +61,7 @@ export default {
     asideDes
   },
   computed: {
-    isMobile() {
-      return this.$store.state.isMobile;
-    },
+    ...mapGetters(["isMobile", "isLoading", "sideNav"]),
     layout() {
       const name = this.$route.name;
       if (name.split("@")[1]) {
@@ -88,12 +69,6 @@ export default {
       } else {
         return "home";
       }
-    },
-    sideNav: function() {
-      return this.$store.state.sideNav;
-    },
-    loading: function() {
-      return this.$store.state.isLoading;
     }
   },
   methods: {
@@ -103,7 +78,7 @@ export default {
     closeMenu: function() {
       this.$store.commit(types.HIDE_MENU);
     },
-    processUpload: async function(type) {
+    processUpload: async function() {
       let uploadSuccess = 0;
       this.$store.commit(types.SET_IS_UPLOADING, true);
       while (this.$store.state.uploadItems.length > 0) {
@@ -124,17 +99,7 @@ export default {
         } catch (error) {
           console.error(error);
         }
-
-        if (uploadSuccess % 2 == 0) {
-          this.$store.dispatch("update", {
-            path: this.$store.state.selectedDirectory
-          });
-        }
       }
-
-      this.$store.dispatch("update", {
-        path: this.$store.state.selectedDirectory
-      });
 
       var data = {
         data: `${uploadSuccess} files uploaded.`,
@@ -143,28 +108,7 @@ export default {
 
       this.$store.commit(types.SHOW_SNACKBAR, data);
       this.$store.commit(types.SET_IS_UPLOADING, 2);
-
-      if (type == "file") {
-        this.$refs.formFile.reset();
-      } else if (type == "folder") {
-        this.$refs.formFolder.reset();
-      }
-    },
-    selectFile: function() {
-      const inputFile = this.$refs.inputFile;
-      if (inputFile) {
-        inputFile.click();
-      } else {
-        console.log("error");
-      }
-    },
-    selectFolder: function() {
-      const inputFolder = this.$refs.inputFolder;
-      if (inputFolder) {
-        inputFolder.click();
-      } else {
-        console.log("error");
-      }
+      this.$refs.formFile.reset();
     },
     processFile: function() {
       var files = this.$refs.inputFile.files;
@@ -176,15 +120,9 @@ export default {
         file.id = i;
 
         const formData = new FormData();
-        formData.append("files", file);
+        formData.append("file", file);
 
-        item.id =
-          file.name +
-          i +
-          file.lastModified +
-          Math.random() +
-          file.size +
-          Date.now();
+        item.id = this.$api.getUidV4();
         item.icon = "assessment";
         item.file = formData;
         item.path = uploadPath;
@@ -202,62 +140,6 @@ export default {
 
       if (this.$store.state.isUploading !== true) {
         this.processUpload("file");
-      }
-    },
-    processFolder: async function() {
-      var files = this.$refs.inputFolder.files;
-      let selectedPath = this.$store.state.selectedDirectory;
-
-      // let size = 0;
-      for (var i = 0; i < files.length; i++) {
-        const item = {};
-        let file = files[i];
-        file.id = i;
-
-        const formData = new FormData();
-        formData.append("files", file);
-
-        let encodePath = "";
-        if (selectedPath == "my-drive") {
-          encodePath = `uploads/${file.webkitRelativePath.substring(
-            0,
-            file.webkitRelativePath.lastIndexOf("/")
-          )}`;
-        } else {
-          encodePath = `${Buffer.from(selectedPath, "base64").toString(
-            "ascii"
-          )}/${file.webkitRelativePath.substring(
-            0,
-            file.webkitRelativePath.lastIndexOf("/")
-          )}`;
-        }
-
-        const uploadPath = Buffer.from(encodePath).toString("base64");
-
-        item.id =
-          file.name +
-          i +
-          Math.random() +
-          file.lastModified +
-          file.size +
-          Date.now();
-        item.icon = "assessment";
-        item.file = formData;
-        item.path = uploadPath;
-
-        item.type = "file";
-        item.iconClass = "grey lighten-1 white--text";
-        item.title = file.name;
-        item.subtitle = "";
-        item.uploadPercent = 0;
-        item.size = file.size;
-
-        this.$store.state.uploadItems.push(item);
-        this.$store.state.uploadItemsMenu.push(item);
-      }
-
-      if (this.$store.state.isUploading !== true) {
-        this.processUpload("folder");
       }
     }
   }

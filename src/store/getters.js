@@ -1,18 +1,36 @@
 /**
-* Get the currently selected directory
-* @param state
-* @returns {*}
-*/
-// export const getSelectedDirectory = (state) => {
-//     return state.directories.find(directory => (directory.path === state.selectedDirectory));
-// }
+ * Get the mobile or not ?
+ * @param state
+ * @returns {*}
+ */
+export const isMobile = state => {
+  return state.isMobile;
+};
 
 /**
-* Get the sudirectories of the currently selected directory
-* @param state
-* @param getters
-* @returns {Array|directories|{/}|computed.directories|*|Object}
-*/
+ * Get the is loading.
+ * @param state
+ * @returns {*}
+ */
+export const isLoading = state => {
+  return state.isLoading;
+};
+
+/**
+ * Get the is loading.
+ * @param state
+ * @returns {*}
+ */
+export const sideNav = state => {
+  return state.sideNav;
+};
+
+/**
+ * Get the sudirectories of the currently selected directory
+ * @param state
+ * @param getters
+ * @returns {Array|directories|{/}|computed.directories|*|Object}
+ */
 // export const getSelectedDirectoryDirectories = (state) => {
 //     return state.directories.filter(
 //         directory => (directory.directory === state.selectedDirectory)
@@ -20,11 +38,11 @@
 // }
 
 /**
-* Get the files of the currently selected directory
-* @param state
-* @param getters
-* @returns {Array|files|{}|FileList|*}
-*/
+ * Get the files of the currently selected directory
+ * @param state
+ * @param getters
+ * @returns {Array|files|{}|FileList|*}
+ */
 // export const getSelectedDirectoryFiles = (state) => {
 // console.log(state)
 // state.contents.files.forEach(function(element) {
@@ -33,11 +51,11 @@
 // }
 
 /**
-* Whether or not all items of the current directory are selected
-* @param state
-* @param getters
-* @returns Array
-*/
+ * Whether or not all items of the current directory are selected
+ * @param state
+ * @param getters
+ * @returns Array
+ */
 // export const getSelectedDirectoryContents = (state, getters) => {
 
 // return [

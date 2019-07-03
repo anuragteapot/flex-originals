@@ -67,30 +67,22 @@ export const upload = (context, payload) => {
   const foundIndex = context.state.uploadItemsMenu.findIndex(
     x => x.id == payload.id && x.type == "file"
   );
-  return new Promise((resolve, reject) => {
-    api
-      .axios()
-      .post(`/api/upload/${payload.uploadPath}`, payload.formData, {
-        retry: 3,
-        retryDelay: 1000,
-        onUploadProgress: e => {
-          if (foundIndex !== -1) {
-            context.state.uploadItemsMenu[
-              foundIndex
-            ].uploadPercent = Math.round((e.loaded * 100) / e.total);
-          }
+
+  try {
+    return api.axios().post(`/api/actions/upload`, payload.formData, {
+      retry: 3,
+      retryDelay: 1000,
+      onUploadProgress: e => {
+        if (foundIndex !== -1) {
+          context.state.uploadItemsMenu[foundIndex].uploadPercent = Math.round(
+            (e.loaded * 100) / e.total
+          );
         }
-      })
-      .then(response => {
-        setInterval(() => {
-          resolve(response);
-        }, 1000);
-      })
-      .catch(error => {
-        api._handleError(error);
-        reject(error);
-      });
-  });
+      }
+    });
+  } catch (err) {
+    api._handleError(err);
+  }
 };
 
 /**

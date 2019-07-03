@@ -39,10 +39,16 @@ export default [
     }
   },
   {
-    path: "/verify/users/:type",
+    path: "/verify/users/confirm",
     name: "verify",
     component: () =>
       import(/* webpackChunkName: "verify" */ "./../views/Verify.vue")
+  },
+  {
+    path: "/verify/users/verified",
+    name: "verify",
+    component: () =>
+      import(/* webpackChunkName: "verified" */ "./../views/Verified.vue")
   },
   {
     path: "/auth",

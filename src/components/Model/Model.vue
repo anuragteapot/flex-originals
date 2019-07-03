@@ -11,15 +11,13 @@
 import MRename from "./Rename/Rename";
 import MDelete from "./Delete/Delete";
 import MNewFolder from "./NewFolder/NewFolder";
-import MPreview from "./Preview/Preview";
 
 export default {
   name: "lazy-model",
   components: {
     MRename,
     MDelete,
-    MNewFolder,
-    MPreview
+    MNewFolder
   },
   computed: {
     layout() {

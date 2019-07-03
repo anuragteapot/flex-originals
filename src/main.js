@@ -5,7 +5,6 @@ import store from "./store/store";
 import "./registerServiceWorker";
 import Snackbar from "@/components/Tool/SnackBar";
 import ContextMenu from "@/components/Tool/ContextMenu";
-import Switch from "@/components/Tool/Switch";
 import Model from "@/components/Model/Model";
 import AudioPlayer from "@/components/Audio/Audio";
 import VideoPlayer from "@/components/Video/Video";
@@ -19,7 +18,6 @@ Vue.use(app);
 Vue.component("lazySnackBar", Snackbar);
 Vue.component("lazyModel", Model);
 Vue.component("lazyContext", ContextMenu);
-Vue.component("lazySwitch", Switch);
 Vue.component("lazyAudioPlayer", AudioPlayer);
 Vue.component("lazyVideoPlayer", VideoPlayer);
 

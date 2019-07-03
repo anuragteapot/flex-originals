@@ -4,7 +4,7 @@
   font-size: 20px;
   height: 1em;
   width: 2em;
-  background: $color-special;
+  background: black;
   border-radius: 1em;
 
   input {
@@ -27,7 +27,7 @@
     -webkit-transform: translate3d(100%, 0, 0);
     -moz-transform: translate3d(100%, 0, 0);
     transform: translate3d(100%, 0, 0);
-    background-color: rgb(0, 255, 157);
+    background-color: $color-active;
   }
 }
 
@@ -42,7 +42,7 @@
     display: none;
 
     &:checked + label:before {
-      border-color: $color-special;
+      border-color: $color-active;
       animation: ripple 0.2s linear forwards;
     }
 
@@ -83,7 +83,7 @@
       width: $radio-checked-size;
       height: $radio-checked-size;
       transform: scale(0);
-      background: $color-special;
+      background: $color-active;
     }
   }
 
@@ -93,7 +93,7 @@
     }
 
     50% {
-      box-shadow: 0px 0px 0px $radio-ripple-size rgba(0, 0, 0, 0.1);
+      box-shadow: 0px 0px 0px $radio-ripple-size rgba(78, 209, 84, 0.1);
     }
 
     100% {
@@ -123,8 +123,8 @@
 
     &:checked {
       ~ .check {
-        border-color: rgb(0, 255, 157);
-        box-shadow: 0px 0px 0px 15px rgb(0, 255, 157) inset;
+        border-color: $color-active;
+        box-shadow: 0px 0px 0px 15px $color-active inset;
 
         &::after {
           opacity: 1;
@@ -142,8 +142,8 @@
     align-items: center;
     position: relative;
     border-radius: 100px;
-    background-color: rgb(131, 128, 128);
-    border: 2px solid rgb(0, 255, 157);
+    background-color: $color-primary;
+    border: 2px solid black;
     box-shadow: 0px 0px 0px 0px rgb(1, 255, 157) inset;
     transition: all 0.15s cubic-bezier(0, 1.05, 0.72, 1.07);
 

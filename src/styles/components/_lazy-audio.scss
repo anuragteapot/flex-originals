@@ -66,7 +66,7 @@
           border-radius: 4px;
           background: grey;
 
-          .progress {
+          .audio-progress {
             outline: none;
             height: 4px;
             border-radius: 4px;
@@ -74,10 +74,11 @@
             background: $color-active;
 
             .circle {
-              position: absolute;
-              right: 0;
-              width: 5px;
-              height: 5px;
+              position: relative;
+              top: -3px;
+              width: 10px;
+              height: 10px;
+              float: right;
               background: #fff;
               border-radius: 50%;
             }
@@ -95,15 +96,13 @@
         width: 15px;
         height: 15px;
         background: #fff;
-        border: 2px solid $color-active;
         border-radius: 50%;
         cursor: pointer;
       }
 
       .audio::-webkit-slider-thumb {
-        width: 15px;
-        height: 15px;
-        border: 2px solid $color-active;
+        width: 10px;
+        height: 10px;
       }
     }
   }

@@ -1,6 +1,6 @@
 <template>
   <div class="image lazy-background" ref="lazyBackground">
-    <div v-if="isLoading" class="loader-1 center">
+    <div v-if="isLoading && !lazySrc" class="loader-1 center">
       <span></span>
     </div>
     <i class="fas fa-play fa-3x file-icon" aria-hidden="true"></i>
@@ -78,7 +78,7 @@ export default {
       this.cachedImage();
     },
     onError() {
-      console.error(
+      console.warn(
         `Image load failed\n\n` + `src: ${this.normalisedSrc.src}`,
         this
       );

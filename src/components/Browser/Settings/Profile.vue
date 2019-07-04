@@ -129,7 +129,7 @@
                 <p>
                   <small>If the available memory goes below this amount, the status bar text will turn red.</small>
                 </p>
-                <button class="danger">Log Out</button>
+                <button class="danger" @click="logout">Log Out</button>
               </div>
             </div>
           </div>
@@ -141,6 +141,18 @@
 
 <script>
 export default {
-  name: "media-content"
+  name: "media-settings",
+  methods: {
+    async logout() {
+      try {
+        await this.$store.dispatch("logout");
+        this.$router.push("/app/@home?u=logout");
+        this.$api.auth.logout();
+      } catch (err) {
+        this.$router.push("/app/@home?u=logout");
+        this.$api.auth.logout();
+      }
+    }
+  }
 };
 </script>

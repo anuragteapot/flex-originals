@@ -3,7 +3,7 @@
     <header class="features-header focusable">
       <h3 role="header" class="features-header-name">My Server</h3>
     </header>
-    <input type="text" placeholder="Search...">
+    <input type="text" placeholder="Search..." />
     <section class="features-list">
       <header class="features-list-header focusable">
         <h5>Suscriptions</h5>
@@ -27,7 +27,7 @@
     </section>
 
     <footer class="features-footer">
-      <img class="avatar" alt="Avatar" src="/public/atom.svg">
+      <img class="avatar" alt="Avatar" src="/public/atom.svg" />
       <div class="features-footer-details">
         <span class="username">Anurag Kumar</span>
         <span class="tag">anu1601cs</span>
@@ -39,7 +39,12 @@
         <button role="button" aria-label="Deafen" class="button button-deafen">
           <i class="fa fa-microphone"></i>
         </button>
-        <button role="button" aria-label="Settings" class="button button-settings" @click="$router.push('/app/@profile')">
+        <button
+          role="button"
+          aria-label="Settings"
+          class="button button-settings"
+          @click="$router.push('/app/@profile')"
+        >
           <i class="fa fa-cog"></i>
         </button>
       </div>
@@ -48,13 +53,8 @@
 </template>
 
 <script>
-import * as types from "./../../../store/mutation-types";
 export default {
   name: "lazy-aside",
-  methods: {
-    closeMenu: function() {
-      this.$store.commit(types.HIDE_MENU);
-    }
-  }
+  methods: {}
 };
 </script>

@@ -21,8 +21,8 @@ export const isLoading = state => {
  * @param state
  * @returns {*}
  */
-export const sideNav = state => {
-  return state.sideNav;
+export const appDrawer = state => {
+  return state.appDrawer;
 };
 
 /**

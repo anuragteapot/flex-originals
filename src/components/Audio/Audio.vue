@@ -231,6 +231,7 @@ export default {
     }
   },
   beforeDestroy: function() {
+    this.stopAudio();
     this.audio.removeEventListener("ended", this.handleEnded);
     this.audio.removeEventListener("timeupdate", this.currTime);
     this.audio.removeEventListener("progress", this.updateBuffer);

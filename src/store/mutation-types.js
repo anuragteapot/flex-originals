@@ -32,8 +32,8 @@ export const SHOW_CONFIRM_DELETE_MODAL = "SHOW_CONFIRM_DELETE_MODAL";
 export const HIDE_CONFIRM_DELETE_MODAL = "HIDE_CONFIRM_DELETE_MODAL";
 
 // Confirm Folder Menu
-export const SHOW_MENU = "SHOW_MENU";
-export const HIDE_MENU = "HIDE_MENU";
+export const APP_DRAWER = "APP_DRAWER";
+
 // Tool Modal
 export const SHOW_TOOL_MODAL = "SHOW_TOOL_MODAL";
 export const HIDE_TOOL_MODAL = "HIDE_TOOL_MODAL";

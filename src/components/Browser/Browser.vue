@@ -1,14 +1,20 @@
 <template>
   <div class="lazy__browser">
-    <div v-if="isMobile" :class="`nav-offcanvas ${sideNav ? 'open' : ''}`">
+    <div v-if="isMobile" :class="`nav-offcanvas ${appDrawer.mobileState ? 'open' : ''}`">
       <div class="nav-offcanvas-menu">
         <aside-action @tiggerSelectFile="$refs.inputFile.click()"></aside-action>
         <aside-des></aside-des>
       </div>
     </div>
-    <div v-if="isMobile" :class="`offcanvas-overlay ${sideNav ? 'on' : ''}`" @click="closeMenu"></div>
+    <div
+      v-if="isMobile"
+      :class="`offcanvas-overlay ${appDrawer.mobileState ? 'on' : ''}`"
+      @click="toggleMenu"
+    ></div>
+
     <aside-action v-if="!isMobile" @tiggerSelectFile="$refs.inputFile.click()"></aside-action>
-    <aside-des v-if="!isMobile"></aside-des>
+    <aside-des v-if="!isMobile && appDrawer.des"></aside-des>
+
     <div class="vert-container">
       <div class="media-action">
         <div class="file">
@@ -18,18 +24,18 @@
         </div>
       </div>
       <menu type="toolbar" class="menu">
-        <div v-if="isMobile" @click="openMenu">
-          <i class="fa fa-align-justify"></i>
+        <div @click="toggleMenu" style="cursor: pointer;">
+          <i class="fas fa-align-justify"></i>
         </div>
         <div class="menu-right">
           <span class="icon">
-            <i class="fa fa-search"></i>
+            <i class="fas fa-search"></i>
           </span>
           <span class="icon">
-            <i class="fa fa-bell"></i>
+            <i class="fas fa-bell"></i>
           </span>
           <span class="icon">
-            <i class="fa fa-ellipsis-v"></i>
+            <i class="fas fa-ellipsis-v"></i>
           </span>
         </div>
       </menu>
@@ -61,7 +67,7 @@ export default {
     asideDes
   },
   computed: {
-    ...mapGetters(["isMobile", "isLoading", "sideNav"]),
+    ...mapGetters(["isMobile", "isLoading", "appDrawer"]),
     layout() {
       const name = this.$route.name;
       if (name.split("@")[1]) {
@@ -72,11 +78,26 @@ export default {
     }
   },
   methods: {
-    openMenu: function() {
-      this.$store.commit(types.SHOW_MENU);
-    },
-    closeMenu: function() {
-      this.$store.commit(types.HIDE_MENU);
+    toggleMenu: function() {
+      if (this.isMobile && !this.appDrawer.mobileState) {
+        this.$store.commit(types.APP_DRAWER, {
+          action: true,
+          des: true,
+          mobileState: true
+        });
+      } else if (this.appDrawer.action) {
+        this.$store.commit(types.APP_DRAWER, {
+          action: false,
+          des: false,
+          mobileState: false
+        });
+      } else {
+        this.$store.commit(types.APP_DRAWER, {
+          action: true,
+          des: true,
+          mobileState: true
+        });
+      }
     },
     processUpload: async function() {
       let uploadSuccess = 0;

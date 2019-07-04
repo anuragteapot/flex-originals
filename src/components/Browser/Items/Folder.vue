@@ -51,8 +51,8 @@ export default {
         this.select(e, this.item)
       }
 
-      this.$store.commit(types.HIDE_MENU)
-      this.$store.commit(types.SHOW_MENU, { event: e })
+      // this.$store.commit(types.HIDE_MENU)
+      // this.$store.commit(types.SHOW_MENU, { event: e })
 
       this.$nextTick(() => {
         this.$store.state.showMenu.state = true

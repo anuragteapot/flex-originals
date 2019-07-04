@@ -205,16 +205,10 @@ export default {
    * Show the menu
    * @param state
    */
-  [types.SHOW_MENU]: state => {
-    state.sideNav = true;
-  },
-
-  /**
-   * Hide the menu
-   * @param state
-   */
-  [types.HIDE_MENU]: state => {
-    state.sideNav = false;
+  [types.APP_DRAWER]: (state, payload) => {
+    state.appDrawer.action = payload.action;
+    state.appDrawer.des = payload.des;
+    state.appDrawer.mobileState = payload.mobileState;
   },
 
   /**

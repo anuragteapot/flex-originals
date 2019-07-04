@@ -340,13 +340,18 @@ i:hover {
 
   .menu .menu-right input {
     color: white;
-    height: 2rem;
+    height: 1.9rem;
     border-radius: 0.25rem;
     padding: 0 0.5rem;
     border: none;
+    background: #18191a;
     outline: none;
     margin: 0 5px 0 0;
     border-radius: 0.25rem;
+  }
+
+  .menu .menu-right input:focus {
+    width: 300px;
   }
 
   .menu .menu-right .icon {

@@ -28,9 +28,7 @@
           <i class="fas fa-align-justify"></i>
         </div>
         <div class="menu-right">
-          <span class="icon">
-            <i class="fas fa-search"></i>
-          </span>
+          <input type="text" placeholder="Search...." />
           <span class="icon">
             <i class="fas fa-bell"></i>
           </span>

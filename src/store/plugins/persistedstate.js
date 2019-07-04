@@ -1,13 +1,10 @@
 // The options for persisting state
 export const persistedStateOptions = {
-  key: 'mediamanager',
+  key: 'creater',
   paths: [
-    'selectedDirectory',
-    'showInfoBar',
-    'view',
     'token',
+    'appDrawer',
     'isUserLoggedIn',
-    'settings'
   ],
   storage: window.sessionStorage
 }

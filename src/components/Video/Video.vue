@@ -73,8 +73,8 @@
           <i class="fas fa-expand fullscreen" @click="toggleFullscreen"></i>
         </div>
       </div>
-      <div class="seek tooltip" ref="progress" @mousedown="scrub">
-        <span class="tooltiptext">2:22</span>
+      <div class="seek tooltip" ref="progress" @mousedown="scrub" @mousemove="scrubForTime">
+        <span class="tooltiptext" :style="`left:${tooltipPercent}`">{{tooltipTime}}</span>
         <div class="buffer" :style="`width:${bufferPercent}%`"></div>
         <div class="watched" :style="`width: ${progressBar};`">
           <i class="handle"></i>
@@ -103,7 +103,9 @@ export default {
       volume: 0.5,
       hasEnded: false,
       bufferPercent: 0,
-      progressBar: "0%"
+      progressBar: "0%",
+      tooltipTime: "0%",
+      tooltipPercent: "0%"
     };
   },
   props: {
@@ -200,9 +202,20 @@ export default {
     scrubForTime(e) {
       const scrubTime =
         (e.offsetX / this.progress.offsetWidth) * this.video.duration;
-      const x = scrubTime / 60;
-      const decimals = x - Math.floor(x);
-      console.log(decimals.toFixed(2));
+      const percent = (scrubTime / this.video.duration) * 100;
+
+      let curmins = Math.floor(scrubTime / 60);
+      let cursecs = Math.floor(scrubTime - curmins * 60);
+
+      if (cursecs < 10) {
+        cursecs = "0" + cursecs;
+      }
+
+      if (curmins < 10) {
+        curmins = "0" + curmins;
+      }
+      this.tooltipTime = curmins + ":" + cursecs;
+      this.tooltipPercent = `${percent - 2}%`;
     },
     toggleFullscreen() {
       if (this.player.requestFullScreen) {

@@ -39,9 +39,6 @@
           </span>
         </div>
       </menu>
-      <div class="progress" v-if="isLoading">
-        <div class="indeterminate"></div>
-      </div>
       <component v-bind:is="layout"></component>
     </div>
   </div>

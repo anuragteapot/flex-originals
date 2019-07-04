@@ -1,0 +1,212 @@
+.settings {
+
+  .inner {
+    padding: 0 !important;
+    width: 100%;
+
+    $red: #EA6759;
+    $yellow: #FFCC00;
+    $green: #2DCC72;
+    $blue: #00a8ff;
+    $purple: #7d69df;
+
+    @function dark($color) {
+      @return desaturate(darken($color, 15%), 30%);
+    }
+
+    $primary: $purple;
+    $primary--dark: dark($primary);
+
+    $time: 300ms;
+
+    @mixin transition {
+      transition: all $time ease;
+    }
+
+    h3 {
+      margin: 4rem 0 3rem;
+    }
+
+    p {
+      margin-bottom: 2rem;
+    }
+
+    .card {
+      display: block;
+      width: 100%;
+      margin: auto;
+      color: white;
+      margin-bottom: 2rem;
+
+      &__header {
+        padding: 2rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      &__body {
+        padding: 3rem 7rem 7rem;
+
+        @media screen and (max-width: 900px) {
+          padding: 5rem 2rem 7rem;
+        }
+      }
+    }
+
+    .container {
+      display: flex;
+      width: 100%;
+      flex-wrap: wrap;
+      flex-direction: row;
+      justify-content: space-between;
+
+      @media screen and (max-width: 900px) {
+        flex-direction: column;
+      }
+
+      button {
+        background-color: $color-primary;
+        color: #fff;
+        border: 0;
+        outline: 0;
+        cursor: pointer;
+        font-size: 15px;
+        padding: 10px 30px;
+        margin: 5px;
+        border-radius: 3px;
+      }
+
+      button:hover {
+        opacity: 0.8;
+      }
+
+      .close__settings {
+        padding-right: 2rem;
+        font-size: 30px;
+      }
+    }
+
+    .grid {
+      flex: 1;
+      padding-left: 2rem;
+      padding-right: 2rem;
+      position: relative;
+
+      @media screen and (max-width: 900px) {
+        max-width: 100%;
+      }
+    }
+
+    .toggle {
+      $toggleWidth: 62px;
+      $toggleHeight: 32px;
+      $toggleMargin: 4px;
+      $toggleHandleSize: $toggleHeight - ($toggleMargin*2);
+      max-width: $toggleWidth;
+      height: $toggleHeight;
+      background: $primary--dark;
+      border-radius: 999px;
+      position: relative;
+      @include transition;
+      cursor: pointer;
+
+      &__handle {
+        height: $toggleHandleSize;
+        width: $toggleHandleSize;
+        position: absolute;
+        top: 50%;
+        left: $toggleMargin;
+        transform: translateY(-50%);
+        background: white;
+        border-radius: 50%;
+        @include transition;
+      }
+
+      &.is-on {
+        background: white;
+        @include transition;
+
+        .toggle__handle {
+          left: ($toggleWidth - $toggleMargin) - $toggleHandleSize;
+          background: $primary;
+          @include transition;
+        }
+      }
+    }
+
+    .form-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.5rem;
+      flex-wrap: wrap;
+
+      &__control {
+        width: 40%;
+        text-align: right;
+      }
+    }
+
+    .control {
+      background: transparent;
+      color: inherit;
+      display: block;
+      cursor: pointer;
+      width: 100%;
+      border-radius: .3rem;
+      padding: .4rem;
+      border: 1px solid rgba(white, .3);
+
+      option {
+        color: black;
+      }
+    }
+
+    .slider {
+      width: 100%;
+      position: relative;
+
+      &__positive {
+        width: 100%;
+        height: 5px;
+        background: white;
+        position: absolute;
+        top: 80%;
+        transform: translateY(-50%);
+        pointer-events: none;
+      }
+
+      &__input {
+        margin-top: 0.9rem;
+        display: block;
+        -webkit-appearance: none;
+        appearance: none;
+        width: 100%;
+        height: 5px;
+        background: $primary--dark;
+        outline: none;
+        @include transition;
+
+        &::-webkit-slider-thumb {
+          -webkit-appearance: none;
+          appearance: none;
+          width: 24px;
+          height: 24px;
+          border-radius: 50%;
+          border: 4px solid white;
+          background: white;
+          cursor: pointer;
+          position: relative;
+          @include transition;
+
+          &:focus,
+          &:active {
+            box-shadow: 0px 3px 12px rgba(black, .2);
+            @include transition;
+          }
+        }
+      }
+    }
+  }
+}

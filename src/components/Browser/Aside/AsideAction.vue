@@ -52,11 +52,12 @@
 export default {
   name: "lazy-aside",
   methods: {
-    folderUpload: function() {
-      this.$emit("tiggerSelectFolder");
-    },
     fileUpload: function() {
-      this.$emit("tiggerSelectFile");
+      if (this.$api.auth.loggedIn()) {
+        this.$emit("tiggerSelectFile");
+      } else {
+        this.$router.push(`/login?redirect=${this.$route.fullPath}`);
+      }
     }
   }
 };

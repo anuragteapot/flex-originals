@@ -17,6 +17,11 @@ export default {
     creatorBody,
     creatorFooter,
     creatorHeader
+  },
+  beforeMount() {
+    if (this.$api.auth.loggedIn()) {
+      this.$router.push("/app/@home");
+    }
   }
 };
 </script>

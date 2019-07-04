@@ -26,7 +26,9 @@
     <section>
       <div class="home__container">
         <div class="home__inner">
-          <button class="btn-hover color">Get Started</button>
+          <a href="/app/@home">
+            <button class="btn-hover color">Get Started</button>
+          </a>
         </div>
       </div>
     </section>

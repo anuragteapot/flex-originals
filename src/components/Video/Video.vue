@@ -105,7 +105,7 @@ export default {
       bufferPercent: 0,
       progressBar: "0%",
       tooltipTime: "0%",
-      tooltipPercent: "0%"
+      tooltipPercent: "3%"
     };
   },
   props: {
@@ -215,7 +215,7 @@ export default {
         curmins = "0" + curmins;
       }
       this.tooltipTime = curmins + ":" + cursecs;
-      this.tooltipPercent = `${percent - 2}%`;
+      this.tooltipPercent = `${percent - 1.7}%`;
     },
     toggleFullscreen() {
       if (this.player.requestFullScreen) {

@@ -48,6 +48,14 @@ body {
   width: 100%;
 }
 
+i {
+  cursor: pointer;
+}
+
+i:hover {
+  opacity: 0.8;
+}
+
 .info {
   background-color: $color-special !important;
 }
@@ -289,11 +297,10 @@ body {
       .username,
       .tag {
         display: block;
-        font-weight: 300;
       }
 
       .username {
-        font-size: 0.9rem;
+        font-size: 0.8rem;
       }
 
       .tag {

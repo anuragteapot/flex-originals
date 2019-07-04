@@ -27,7 +27,7 @@
             v-model="email"
             type="email"
             placeholder="Email"
-          >
+          />
         </div>
         <div class="password">
           <input
@@ -39,7 +39,7 @@
             v-model="password"
             type="password"
             placeholder="Password"
-          >
+          />
           <span>Forget Password ?</span>
         </div>
         <button class="btn-hover color" :disabled="loading">
@@ -105,7 +105,7 @@ export default {
       this.$api.webStorage.local.set("ttl", response.data.ttl, 5000);
       this.$api.webStorage.local.set("userId", response.data.userId, 5000);
       this.$store.state.isUserLoggedIn = true;
-      this.$router.push("/app/@home");
+      this.$router.push(this.$route.query.redirect || "/app/@home");
     },
     clear() {
       this.$refs.form.reset();

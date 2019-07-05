@@ -368,7 +368,7 @@ i:hover {
 
     .inner {
       padding: 10px;
-      min-width: 500px;
+      width: 100%;
     }
 
     .inner {
@@ -407,7 +407,7 @@ i:hover {
     justify-content: center;
   }
 
-  .server .server-icon>img {
+  .server .server-icon > img {
     border-radius: inherit;
     max-width: 100%;
   }
@@ -486,8 +486,8 @@ i:hover {
     user-select: none;
   }
 
-  .button>svg,
-  .button>img {
+  .button > svg,
+  .button > img {
     max-width: 100%;
     max-height: 100%;
   }
@@ -501,7 +501,7 @@ i:hover {
     border-right: 1px solid #1c1e21;
   }
 
-  .button-group .button+.button {
+  .button-group .button + .button {
     box-shadow: inset 1px 0 0 #393c41;
   }
 
@@ -625,7 +625,6 @@ i:hover {
     color: black !important;
   }
 
-
   .media-content-grid {
     padding: 0 100px 120px 100px;
   }
@@ -635,5 +634,4 @@ i:hover {
       padding: 10px 0px 50px 0px;
     }
   }
-
 }

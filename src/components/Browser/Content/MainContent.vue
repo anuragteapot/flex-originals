@@ -1,7 +1,7 @@
 <template>
   <section class="content">
     <div class="inner">
-      <lazy-grid />
+      <video-viewer></video-viewer>
     </div>
     <lazy-audio-player />
   </section>
@@ -11,6 +11,7 @@
 import * as types from "./../../../store/mutation-types";
 import { api } from "./../../../app/Api.js";
 import ContentGrid from "./Grid/ContentGrid";
+import videoViewer from "../videoViewer/videoViewer";
 
 export default {
   name: "media-content",
@@ -23,7 +24,8 @@ export default {
     }
   },
   components: {
-    "lazy-grid": ContentGrid
+    "lazy-grid": ContentGrid,
+    videoViewer
   },
   methods: {
     doThis: function(path) {

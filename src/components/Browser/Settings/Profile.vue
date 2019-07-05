@@ -88,7 +88,7 @@
                   </div>
                   <div class="slider">
                     <input class="slider__input" type="range" value="50" min="0" max="100" />
-                    <div ref="sliderPos" class="slider__positive" style="width: 50%;"></div>
+                    <!-- <div ref="sliderPos" class="slider__positive" style="width: 50%;"></div>  -->
                   </div>
                 </div>
                 <p>

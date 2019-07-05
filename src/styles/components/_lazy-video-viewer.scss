@@ -1,0 +1,62 @@
+.video-viewer {
+  .inner {
+    width: 100%;
+
+    .card {
+      display: block;
+      width: 100%;
+      margin: auto;
+      color: white;
+      margin-bottom: 2rem;
+    }
+
+    .container {
+      display: flex;
+      width: 100%;
+      flex-wrap: wrap;
+      flex-direction: row;
+      justify-content: space-between;
+
+      @media screen and (max-width: 900px) {
+        flex-direction: column;
+      }
+    }
+
+    .grid {
+      padding: 10px;
+      position: relative;
+
+      @media screen and (max-width: 900px) {
+        max-width: 100%;
+      }
+    }
+
+    .left {
+      width: 75%;
+
+      @media screen and (max-width: 900px) {
+        width: 100%;
+      }
+    }
+
+    .right {
+      flex: 1;
+      overflow-y: scroll;
+    }
+
+    .control {
+      background: transparent;
+      color: inherit;
+      display: block;
+      cursor: pointer;
+      width: 100%;
+      border-radius: 0.3rem;
+      padding: 0.4rem;
+      border: 1px solid rgba(white, 0.3);
+
+      option {
+        color: black;
+      }
+    }
+  }
+}

@@ -51,7 +51,7 @@
 import * as types from "./../../../../store/mutation-types";
 
 import itemFolder from "./../../Items/Folder";
-import itemFile from "./../../Items/File";
+import itemFile from "./../../Items/musicItem";
 
 export default {
   name: "media-content-grid",

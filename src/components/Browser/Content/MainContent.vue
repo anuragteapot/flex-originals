@@ -3,7 +3,7 @@
     <div class="inner">
       <video-viewer></video-viewer>
     </div>
-    <lazy-audio-player />
+    <!-- <lazy-audio-player /> -->
   </section>
 </template>
 

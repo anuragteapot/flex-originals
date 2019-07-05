@@ -42,20 +42,33 @@
     .right {
       flex: 1;
       overflow-y: scroll;
-    }
 
-    .control {
-      background: transparent;
-      color: inherit;
-      display: block;
-      cursor: pointer;
-      width: 100%;
-      border-radius: 0.3rem;
-      padding: 0.4rem;
-      border: 1px solid rgba(white, 0.3);
+      .thumb {
+        display: flex;
+        width: 100%;
+        flex-wrap: wrap;
+        flex-direction: row;
+        justify-content: space-between;
 
-      option {
-        color: black;
+        .video__thumbnail {
+          width: 200px;
+          height: 120px;
+          border-radius: 5px;
+          padding: 2px;
+          text-align: center;
+          background-repeat: no-repeat;
+          background-position: center;
+          background-size: cover;
+          display: inline-block;
+          margin-bottom: 10px;
+          position: relative;
+          cursor: pointer;
+          box-shadow: 0 1px 5px rgba(0, 0, 0, 0.3);
+
+          .video__info {
+            flex: 1;
+          }
+        }
       }
     }
   }

@@ -32,7 +32,7 @@
 </template>
 
 <script>
-import itemFile from "./../Items/File";
+import itemFile from "./../Items/videoItem";
 
 export default {
   name: "media-settings",

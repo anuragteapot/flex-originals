@@ -8,6 +8,8 @@
     </div>
     <div class="video__info">
       <p>Christian</p>
+      <p>Christian</p>
+      <span>Christian</span>
     </div>
   </div>
 </template>

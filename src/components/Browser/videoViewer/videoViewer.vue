@@ -9,6 +9,10 @@
                 <lazy-video-player
                   src="https://player.vimeo.com/external/194837908.sd.mp4?s=c350076905b78c67f74d7ee39fdb4fef01d12420&profile_id=164"
                 ></lazy-video-player>
+                <div class="video_actions">
+                  <p>Anurag</p>
+                  <span>111111views</span>
+                </div>
               </div>
               <div class="grid grid--half right">
                 <lazy-file :src="src" :lazySrc="lazySrc"></lazy-file>

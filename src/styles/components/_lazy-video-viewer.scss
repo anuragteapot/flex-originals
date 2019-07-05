@@ -34,6 +34,11 @@
     .left {
       width: 75%;
 
+      .video_actions {
+        padding: 20px 0;
+        border-bottom: 1px solid grey;
+      }
+
       @media screen and (max-width: 900px) {
         width: 100%;
       }
@@ -48,7 +53,6 @@
         width: 100%;
         flex-wrap: wrap;
         flex-direction: row;
-        justify-content: space-between;
 
         .video__thumbnail {
           width: 200px;
@@ -64,9 +68,15 @@
           position: relative;
           cursor: pointer;
           box-shadow: 0 1px 5px rgba(0, 0, 0, 0.3);
+        }
 
-          .video__info {
-            flex: 1;
+        .video__info {
+          font-weight: 500;
+          margin-left: 10px;
+
+          span {
+            color: gray;
+            font-size: 15px;
           }
         }
       }

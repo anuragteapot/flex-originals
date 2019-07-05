@@ -8,7 +8,7 @@
       <span class="clear"></span>
     </div>
     <div class="grid_section files" v-if="files.length >= 0">
-      <!-- <lazy-video-player src="https://player.vimeo.com/external/194837908.sd.mp4?s=c350076905b78c67f74d7ee39fdb4fef01d12420&profile_id=164"></lazy-video-player> -->
+      <lazy-video-player src="https://player.vimeo.com/external/194837908.sd.mp4?s=c350076905b78c67f74d7ee39fdb4fef01d12420&profile_id=164"></lazy-video-player>
       <h1>Recents</h1>
       <div class="lazy_files_container">
         <!-- <lazy-file v-for="item in files" :item="item" :key="item.id"></lazy-file> -->

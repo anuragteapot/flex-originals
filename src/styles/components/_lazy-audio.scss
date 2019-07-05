@@ -3,11 +3,10 @@
   bottom: 0;
   display: block;
   width: 100%;
-  z-index: 30;
+  z-index: 50;
   padding: 0.9em;
   background: #252a2e;
   border-top: 1px solid #18191a;
-  // background-image: linear-gradient(to right, #36393e, #04a2ca);
 
   .inner {
     padding: 10px;
@@ -55,14 +54,14 @@
         margin: auto;
         height: 4px;
         cursor: pointer;
-        z-index: 7;
+        z-index: 47;
         border-radius: 4px;
         background: rgb(104, 103, 103);
 
         .buffer {
           outline: none;
           height: 4px;
-          z-index: 9;
+          z-index: 49;
           border-radius: 4px;
           background: grey;
 
@@ -70,7 +69,7 @@
             outline: none;
             height: 4px;
             border-radius: 4px;
-            z-index: 9;
+            z-index: 49;
             background: $color-active;
 
             .circle {

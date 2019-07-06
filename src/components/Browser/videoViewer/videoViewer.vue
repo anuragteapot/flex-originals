@@ -208,7 +208,7 @@ import itemFile from "./../Items/videoItem";
 export default {
   name: "media-settings",
   data: () => ({
-    src: "/public/sample.jpeg",
+    src: "/public/qq.webp",
     lazySrc: "/public/icons/music.svg"
   }),
   components: {

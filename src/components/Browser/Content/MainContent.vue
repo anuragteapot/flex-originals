@@ -1,6 +1,6 @@
 <template>
   <section class="content">
-    <div class="inner">
+    <div class="inner video__viewer">
       <video-viewer></video-viewer>
     </div>
     <!-- <lazy-audio-player /> -->

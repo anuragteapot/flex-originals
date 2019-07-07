@@ -1,18 +1,16 @@
 .music_player {
-  position: fixed;
+  flex: 1;
   bottom: 0;
-  display: block;
+  display: flex;
   width: 100%;
   z-index: 50;
-  padding: 0.9em;
+  padding: 0.9em 0px;
   background: #252a2e;
   border-top: 1px solid #18191a;
 
   .inner {
-    padding: 10px;
     width: 100%;
-    align-items: center;
-    text-align: left;
+    text-align: center;
     color: white;
 
     .albumImage {

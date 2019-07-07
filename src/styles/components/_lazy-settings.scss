@@ -3,11 +3,6 @@
   .inner {
     padding: 0 !important;
     width: 100%;
-
-    $red: #EA6759;
-    $yellow: #FFCC00;
-    $green: #2DCC72;
-    $blue: #00a8ff;
     $purple: #7d69df;
 
     @function dark($color) {

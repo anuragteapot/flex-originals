@@ -17,7 +17,7 @@
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: rgb(158, 157, 157);
+  background: rgb(71, 71, 71);
 }
 
 /* Handle on hover */
@@ -606,32 +606,11 @@ i:hover {
     }
   }
 
-  .clear {
-    clear: left;
-    display: block;
-  }
-
-  .selected {
-    background: #7fdab1 !important;
-    color: black !important;
-  }
-
-  .four_zero_four {
-    text-align: center;
-    margin: auto;
-  }
-
-  .four_zero_four h1 {
-    color: black !important;
-  }
-
   .media-content-grid {
-    padding: 0 100px 120px 100px;
-  }
+    padding: 0 50px 50px 50px;
 
-  @media only screen and (max-width: 700px) {
-    .media-content-grid {
-      padding: 10px 0px 50px 0px;
+    @media only screen and (max-width: 700px) {
+      padding: 0px 0px 50px 0;
     }
   }
 }

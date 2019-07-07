@@ -1,17 +1,16 @@
 <template>
   <section class="content">
-    <div class="inner video__viewer">
-      <video-viewer></video-viewer>
+    <div class="inner">
+      <content-grid></content-grid>
     </div>
-    <!-- <lazy-audio-player /> -->
+    <lazy-audio-player v-if="layout == 'song'" />
   </section>
 </template>
 
 <script>
 import * as types from "./../../../store/mutation-types";
 import { api } from "./../../../app/Api.js";
-import ContentGrid from "./Grid/ContentGrid";
-import videoViewer from "../videoViewer/videoViewer";
+import contentGrid from "./Grid/ContentGrid";
 
 export default {
   name: "media-content",
@@ -19,13 +18,17 @@ export default {
     active: false
   }),
   computed: {
-    diskLoaded: function() {
-      return this.$store.state.diskLoaded;
+    layout() {
+      const name = this.$route.name;
+      if (name.split("@")[1]) {
+        return name.split("@")[1];
+      } else {
+        return null;
+      }
     }
   },
   components: {
-    "lazy-grid": ContentGrid,
-    videoViewer
+    contentGrid
   },
   methods: {
     doThis: function(path) {

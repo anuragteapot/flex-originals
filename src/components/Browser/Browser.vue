@@ -45,7 +45,8 @@
 <script>
 import * as types from "./.././../store/mutation-types.js";
 import home from "./../Browser/Content/MainContent";
-import profile from "./Settings/Profile";
+import settings from "./Settings/Profile";
+import watch from "./videoViewer/videoViewer";
 import asideAction from "./Aside/AsideAction";
 import asideDes from "./Aside/AsideDes";
 import { mapGetters } from "vuex";
@@ -57,7 +58,8 @@ export default {
   },
   components: {
     home,
-    profile,
+    settings,
+    watch,
     asideAction,
     asideDes
   },
@@ -66,7 +68,11 @@ export default {
     layout() {
       const name = this.$route.name;
       if (name.split("@")[1]) {
-        return name.split("@")[1];
+        if (name.split("@")[1] == "song") {
+          return "home";
+        } else {
+          return name.split("@")[1];
+        }
       } else {
         return "home";
       }

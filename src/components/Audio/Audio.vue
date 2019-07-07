@@ -32,7 +32,7 @@
           aria-hidden="true"
           @click="volume = 6"
         ></i>
-        <input v-model="volume" type="range" min="0" max="10" class="slider audio">
+        <input v-model="volume" type="range" min="0" max="10" class="slider audio" />
       </div>
       <i class="fa fa-random" aria-hidden="true"></i>
       <i class="fa fa-retweet" aria-hidden="true"></i>
@@ -67,7 +67,7 @@ export default {
   },
   computed: {
     musicPlaylist: function() {
-      var files = [];
+      const files = [];
       const file = {};
       file.url = "/public/music/Shinchan - Ending Theme(MyMp3Song).mp3";
       file.title = "Anurag";
@@ -131,7 +131,7 @@ export default {
       if (this.currentSong > 0) this.changeSong(this.currentSong - 1);
     },
     changeSong: function(index) {
-      var wasPlaying = this.currentlyPlaying;
+      const wasPlaying = this.currentlyPlaying;
       this.imageLoaded = false;
       if (index !== undefined) {
         this.stopAudio();
@@ -193,36 +193,56 @@ export default {
       clearTimeout(this.checkingCurrentPositionInTrack);
     },
     currTime() {
-      var curmins = Math.floor(this.audio.currentTime / 60);
-      var cursecs = Math.floor(this.audio.currentTime - curmins * 60);
-      var durmins = Math.floor(this.audio.duration / 60);
-      var dursecs = Math.floor(this.audio.duration - durmins * 60);
+      let curmins = Math.floor(this.audio.currentTime / 60);
+      let cursecs = Math.floor(this.audio.currentTime - curmins * 60);
+
       if (cursecs < 10) {
         cursecs = "0" + cursecs;
       }
-      if (dursecs < 10) {
-        dursecs = "0" + dursecs;
-      }
+
       if (curmins < 10) {
         curmins = "0" + curmins;
+      }
+
+      this.currentTime = curmins + ":" + cursecs;
+    },
+    loadedmetadata() {
+      let durmins = Math.floor(this.audio.duration / 60);
+      let dursecs = Math.floor(this.audio.duration - durmins * 60);
+
+      if (dursecs < 10) {
+        dursecs = "0" + dursecs;
       }
       if (durmins < 10) {
         durmins = "0" + durmins;
       }
-      this.currentTime = curmins + ":" + cursecs;
       this.trackDuration = durmins + ":" + dursecs;
     },
     handleProgress() {
       const percent = (this.audio.currentTime / this.audio.duration) * 100;
       this.currentProgressBar = parseInt(percent);
+    },
+    detectKeypress(event) {
+      if (event.keyCode == 32) {
+        event.preventDefault();
+        this.playAudio();
+      } else if (event.keyCode == 39) {
+        event.preventDefault();
+        this.nextSong();
+      } else if (event.keyCode == 37) {
+        event.preventDefault();
+        this.prevSong();
+      }
     }
   },
   mounted: function() {
     this.changeSong();
     this.audio.loop = false;
+    window.addEventListener("keydown", this.detectKeypress);
     this.audio.addEventListener("ended", this.handleEnded);
     this.audio.addEventListener("timeupdate", this.currTime);
     this.audio.addEventListener("progress", this.updateBuffer);
+    this.audio.addEventListener("loadedmetadata", this.loadedmetadata);
     this.audio.addEventListener("timeupdate", this.handleProgress);
   },
   filters: {
@@ -232,9 +252,11 @@ export default {
   },
   beforeDestroy: function() {
     this.stopAudio();
+    window.removeEventListener("keydown", this.detectKeypress);
     this.audio.removeEventListener("ended", this.handleEnded);
     this.audio.removeEventListener("timeupdate", this.currTime);
     this.audio.removeEventListener("progress", this.updateBuffer);
+    this.audio.removeEventListener("loadedmetadata", this.loadedmetadata);
     this.audio.removeEventListener("timeupdate", this.handleProgress);
     clearTimeout(this.checkingCurrentPositionInTrack);
   }

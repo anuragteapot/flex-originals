@@ -43,7 +43,7 @@
           role="button"
           aria-label="Settings"
           class="button button-settings"
-          @click="$router.push('/app/@profile')"
+          @click="$router.push('/app/@settings')"
         >
           <i class="fa fa-cog"></i>
         </button>

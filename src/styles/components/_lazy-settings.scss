@@ -93,6 +93,33 @@
       padding-right: 2rem;
       position: relative;
 
+      .account__info {
+        display: flex;
+        width: 100%;
+        flex-wrap: wrap;
+        flex-direction: row;
+        background-color: #1e2124;
+        padding: 10px 10px 0 10px;
+        border-radius: 5px;
+
+        .account__avatar {
+          width: 80px;
+          height: 80px;
+          cursor: pointer;
+          border-radius: 50%;
+
+          &:hover {
+            opacity: 0.8;
+          }
+        }
+
+        .email__info {
+          margin-left: 20px;
+          display: block;
+          flex: 1;
+        }
+      }
+
       @media screen and (max-width: 900px) {
         max-width: 100%;
       }

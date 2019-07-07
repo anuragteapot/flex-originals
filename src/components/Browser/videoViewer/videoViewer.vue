@@ -58,12 +58,12 @@
                     </div>
                     <div class="right">
                       <span class="follow">
-                        <i class="far fa-heart"></i>
+                        <i class="far fa-star"></i>
                         Follow
                       </span>
-                      <span>
+                      <!-- <span>
                         <i class="far fa-bell"></i>
-                      </span>
+                      </span>-->
                     </div>
                   </div>
                   <div class="video__comments">
@@ -177,6 +177,9 @@
                           </div>
                         </li>
                       </ul>
+                    </div>
+                    <div class="load__more">
+                      <button>Load More</button>
                     </div>
                   </div>
                 </div>

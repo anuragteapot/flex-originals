@@ -14,25 +14,39 @@
               <div class="grid grid--half">
                 <h3>General</h3>
                 <div class="form-item">
-                  <label class="form-item__label">Start at login</label>
+                  <div class="account__info">
+                    <div class="avatar">
+                      <img class="account__avatar" src="/public/atom.svg" />
+                      <!-- <span class="avatar__change">Change Avatar</span> -->
+                    </div>
+                    <div class="email__info">
+                      <p>anuragvns1111@gmail.com</p>
+                      <p>Anurag Kumar</p>
+                    </div>
+                    <div class="username__info">
+                      <p>http://creatar.com/creator/@anu1601cs</p>
+                      <button class="info" @click="logout">Log Out</button>
+                    </div>
+                  </div>
+                  <!-- <label class="form-item__label">Start at login</label>
+                  <div class="form-item__control toggle">
+                    <div class="toggle__handle"></div>
+                  </div>-->
+                </div>
+                <div class="form-item">
+                  <label class="form-item__label">Enable Email Notifications</label>
                   <div class="form-item__control toggle">
                     <div class="toggle__handle"></div>
                   </div>
                 </div>
                 <div class="form-item">
-                  <label class="form-item__label">Hide window at start up</label>
+                  <label class="form-item__label">Enable Desktop Notifications</label>
                   <div class="form-item__control toggle">
                     <div class="toggle__handle"></div>
                   </div>
                 </div>
                 <div class="form-item">
-                  <label class="form-item__label">Keep window visible as bg app</label>
-                  <div class="form-item__control toggle">
-                    <div class="toggle__handle"></div>
-                  </div>
-                </div>
-                <div class="form-item">
-                  <label class="form-item__label">Keep window above other apps</label>
+                  <label class="form-item__label">Theme ( Light/Dark )</label>
                   <div class="form-item__control toggle">
                     <div class="toggle__handle"></div>
                   </div>
@@ -129,7 +143,27 @@
                 <p>
                   <small>If the available memory goes below this amount, the status bar text will turn red.</small>
                 </p>
-                <button class="danger" @click="logout">Log Out</button>
+                <h3>Security</h3>
+                <p>Two-factor authentication</p>
+                <p>
+                  <small>This will sign you out of sessions in other browsers or on other computers.</small>
+                </p>
+                <button class="success">Enable Two-Factor Auth</button>
+
+                <p>Sign out of all other sessions</p>
+                <p>
+                  <small>This will sign you out of sessions in other browsers or on other computers.</small>
+                </p>
+                <button class="warning">Sign out other sessions</button>
+                <h3>Danger Zone</h3>
+                <p>
+                  <small>
+                    Delete this repository
+                    Once you delete a repository, there is no going back. Please be certain.
+                  </small>
+                </p>
+                <button class="danger">Delete Account</button>
+                <button class="danger">Disable Account</button>
               </div>
             </div>
           </div>

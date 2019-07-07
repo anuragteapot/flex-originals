@@ -7,8 +7,8 @@
             <div class="container">
               <div class="grid">
                 <h1>Settings</h1>
-              </div>
               <i @click="$router.push('/app/@home')" class="far fa-times-circle close__settings"></i>
+              </div>
             </div>
             <div class="container">
               <div class="grid grid--half">
@@ -20,8 +20,8 @@
                       <!-- <span class="avatar__change">Change Avatar</span> -->
                     </div>
                     <div class="email__info">
-                      <p>anuragvns1111@gmail.com</p>
                       <p>Anurag Kumar</p>
+                      <p>anuragvns1111@gmail.com</p>
                     </div>
                     <div class="username__info">
                       <p>http://creatar.com/creator/@anu1601cs</p>
@@ -162,8 +162,8 @@
                     Once you delete a repository, there is no going back. Please be certain.
                   </small>
                 </p>
+                <button class="danger">Deactivate Account</button>
                 <button class="danger">Delete Account</button>
-                <button class="danger">Disable Account</button>
               </div>
             </div>
           </div>

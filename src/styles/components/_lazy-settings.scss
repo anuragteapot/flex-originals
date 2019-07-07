@@ -3,14 +3,6 @@
   .inner {
     padding: 0 !important;
     width: 100%;
-    $purple: #7d69df;
-
-    @function dark($color) {
-      @return desaturate(darken($color, 15%), 30%);
-    }
-
-    $primary: $purple;
-    $primary--dark: dark($primary);
 
     $time: 300ms;
 
@@ -44,7 +36,7 @@
         padding: 3rem 7rem 7rem;
 
         @media screen and (max-width: 900px) {
-          padding: 5rem 2rem 7rem;
+          padding: 5rem 0;
         }
       }
     }
@@ -78,7 +70,10 @@
 
       .close__settings {
         padding-right: 2rem;
-        font-size: 30px;
+        font-size: 40px;
+        position: absolute;
+        top: 0;
+        right: 0;
       }
     }
 
@@ -87,6 +82,11 @@
       padding-left: 2rem;
       padding-right: 2rem;
       position: relative;
+
+      @media screen and (max-width: 900px) {
+        padding-left: 1rem;
+        padding-right: 1rem;
+      }
 
       .account__info {
         display: flex;
@@ -127,7 +127,7 @@
       $toggleHandleSize: $toggleHeight - ($toggleMargin*2);
       max-width: $toggleWidth;
       height: $toggleHeight;
-      background: $primary--dark;
+      background: $color-special;
       border-radius: 999px;
       position: relative;
       @include transition;
@@ -151,7 +151,7 @@
 
         .toggle__handle {
           left: ($toggleWidth - $toggleMargin) - $toggleHandleSize;
-          background: $primary;
+          background: $color-special;
           @include transition;
         }
       }
@@ -206,7 +206,7 @@
         appearance: none;
         width: 100%;
         height: 5px;
-        background: $primary--dark;
+        background: $color-special;
         outline: none;
         @include transition;
 

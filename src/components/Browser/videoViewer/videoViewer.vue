@@ -48,14 +48,8 @@
                           ></i>
                         </div>
                       </div>
-                      <div class="full__video__desctiption">
-                        Presenting Bekhayali full video song, In the voice of Arijit Singh, a song that evokes the emotion of heartbreak & love at once.
-                        The upcoming Bollywood movie Kabir Singh is starring Shahid Kapoor and Kiara Advani.
-                        The film is directed by Sandeep Reddy Vanga. The film is produced by Bhushan Kumar, Murad Khetani,
-                        Krishan Kumar & Ashwin Varde.
-                      </div>
-                      <p class="show__more">Show More</p>
                     </div>
+
                     <div class="right">
                       <span class="follow">
                         <i class="far fa-star"></i>
@@ -65,6 +59,13 @@
                         <i class="far fa-bell"></i>
                       </span>-->
                     </div>
+                    <div class="full__video__desctiption">
+                      Presenting Bekhayali full video song, In the voice of Arijit Singh, a song that evokes the emotion of heartbreak & love at once.
+                      The upcoming Bollywood movie Kabir Singh is starring Shahid Kapoor and Kiara Advani.
+                      The film is directed by Sandeep Reddy Vanga. The film is produced by Bhushan Kumar, Murad Khetani,
+                      Krishan Kumar & Ashwin Varde.
+                    </div>
+                    <p class="show__more">Show More</p>
                   </div>
                   <div class="video__comments">
                     <div class="v-comment">

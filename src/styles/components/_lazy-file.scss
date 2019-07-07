@@ -27,8 +27,8 @@
   i {
     margin: 0 auto;
     position: absolute;
-    top: 70px;
     color: white;
+    top: 70px;
     right: 70px;
   }
 }
@@ -63,8 +63,8 @@
 
 @media only screen and (max-width: 700px) {
   .image {
-    width: 160px;
-    height: 160px;
+    width: 150px;
+    height: 150px;
     margin: 0px 5px 40px 5px;
 
     i {
@@ -72,6 +72,8 @@
       position: absolute;
       font-size: 40px;
       color: white;
+      top: 50px;
+      left: 60px;
     }
   }
 }

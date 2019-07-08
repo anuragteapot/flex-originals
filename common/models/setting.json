@@ -1,0 +1,41 @@
+{
+  "name": "setting",
+  "plural": "settings",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "userId": {
+      "type": "number",
+      "required": true
+    },
+    "emailNotification": {
+      "type": "boolean",
+      "required": true,
+      "default": true
+    },
+    "desktopNotification": {
+      "type": "boolean",
+      "required": true,
+      "default": false
+    },
+    "theme": {
+      "type": "string",
+      "required": true,
+      "default": "dark"
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "$owner",
+      "permission": "ALLOW"
+    }
+  ],
+  "methods": {}
+}

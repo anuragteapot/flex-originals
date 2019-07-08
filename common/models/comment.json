@@ -1,0 +1,50 @@
+{
+  "name": "comment",
+  "plural": "comments",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "userId": {
+      "type": "number",
+      "required": true
+    },
+    "videoId": {
+      "type": "number",
+      "required": true
+    },
+    "comment": {
+      "type": "string"
+    },
+    "likes": {
+      "type": "number",
+      "required": true,
+      "default": 0
+    },
+    "love": {
+      "type": "boolean",
+      "required": true,
+      "default": false
+    },
+    "share": {
+      "type": "number",
+      "required": true,
+      "default": 0
+    },
+    "report": {
+      "type": "number",
+      "required": true,
+      "default": 0
+    },
+    "audioId": {
+      "type": "number",
+      "required": true
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}

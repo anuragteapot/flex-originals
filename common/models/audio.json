@@ -1,0 +1,73 @@
+{
+  "name": "audio",
+  "plural": "audios",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "userId": {
+      "type": "number",
+      "required": true
+    },
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "videoMeta": {
+      "type": "object",
+      "required": true
+    },
+    "videoFile": {
+      "type": "string",
+      "required": true
+    },
+    "visibility": {
+      "type": "number",
+      "required": true,
+      "default": 1
+    },
+    "description": {
+      "type": "string",
+      "required": true
+    },
+    "thumbImage": {
+      "type": "string",
+      "required": true
+    },
+    "tags": {
+      "type": "string",
+      "required": true
+    },
+    "playlist": {
+      "type": "object",
+      "required": true
+    },
+    "location": {
+      "type": "string",
+      "required": true
+    },
+    "category": {
+      "type": "string"
+    },
+    "allowComments": {
+      "type": "boolean",
+      "required": true,
+      "default": true
+    },
+    "agerestriction": {
+      "type": "boolean",
+      "required": true,
+      "default": false
+    },
+    "ratings": {
+      "type": "number",
+      "required": true
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}

@@ -46,5 +46,25 @@
     "dataSource": "mongodb",
     "public": true,
     "options": {}
+  },
+  "settings": {
+    "dataSource": "mongodb",
+    "public": true
+  },
+  "videos": {
+    "dataSource": "mongodb",
+    "public": true
+  },
+  "audio": {
+    "dataSource": "mongodb",
+    "public": true
+  },
+  "videoAnalytic": {
+    "dataSource": "mongodb",
+    "public": true
+  },
+  "comment": {
+    "dataSource": "mongodb",
+    "public": true
   }
 }

@@ -317,6 +317,18 @@ i:hover {
     border-bottom: 1px solid #18191a;
     display: flex;
     align-items: center;
+
+    .menu__button {
+      padding: 5px 20px;
+      margin: 0 0 0 30px;
+      border-radius: 5px;
+      cursor: pointer;
+      background-color: #1e2124;
+
+      &:hover {
+        background-color: #18191a;
+      }
+    }
   }
 
   .menu .menu-name {
@@ -406,7 +418,7 @@ i:hover {
     justify-content: center;
   }
 
-  .server .server-icon > img {
+  .server .server-icon>img {
     border-radius: inherit;
     max-width: 100%;
   }
@@ -485,8 +497,8 @@ i:hover {
     user-select: none;
   }
 
-  .button > svg,
-  .button > img {
+  .button>svg,
+  .button>img {
     max-width: 100%;
     max-height: 100%;
   }
@@ -500,7 +512,7 @@ i:hover {
     border-right: 1px solid #1c1e21;
   }
 
-  .button-group .button + .button {
+  .button-group .button+.button {
     box-shadow: inset 1px 0 0 #393c41;
   }
 

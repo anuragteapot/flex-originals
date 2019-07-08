@@ -23,20 +23,7 @@
           </form>
         </div>
       </div>
-      <menu type="toolbar" class="menu">
-        <div @click="toggleMenu" style="cursor: pointer;">
-          <i class="fas fa-align-justify"></i>
-        </div>
-        <div class="menu-right">
-          <input type="text" placeholder="Search...." />
-          <span class="icon">
-            <i class="fas fa-bell"></i>
-          </span>
-          <span class="icon">
-            <i class="fas fa-ellipsis-v"></i>
-          </span>
-        </div>
-      </menu>
+      <toolbar></toolbar>
       <component v-bind:is="layout"></component>
     </div>
   </div>
@@ -49,6 +36,7 @@ import settings from "./Settings/Profile";
 import watch from "./videoViewer/videoViewer";
 import asideAction from "./Aside/AsideAction";
 import asideDes from "./Aside/AsideDes";
+import toolbar from "./../Browser/Tollbar/Toolbar";
 import { mapGetters } from "vuex";
 
 export default {
@@ -61,7 +49,8 @@ export default {
     settings,
     watch,
     asideAction,
-    asideDes
+    asideDes,
+    toolbar
   },
   computed: {
     ...mapGetters(["isMobile", "isLoading", "appDrawer"]),
@@ -79,27 +68,6 @@ export default {
     }
   },
   methods: {
-    toggleMenu: function() {
-      if (this.isMobile && !this.appDrawer.mobileState) {
-        this.$store.commit(types.APP_DRAWER, {
-          action: true,
-          des: true,
-          mobileState: true
-        });
-      } else if (this.appDrawer.action) {
-        this.$store.commit(types.APP_DRAWER, {
-          action: false,
-          des: false,
-          mobileState: false
-        });
-      } else {
-        this.$store.commit(types.APP_DRAWER, {
-          action: true,
-          des: true,
-          mobileState: true
-        });
-      }
-    },
     processUpload: async function() {
       let uploadSuccess = 0;
       this.$store.commit(types.SET_IS_UPLOADING, true);

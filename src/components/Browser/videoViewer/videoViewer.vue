@@ -180,7 +180,7 @@
                       </ul>
                     </div>
                     <div class="load__more">
-                      <button>Load More</button>
+                      <p>Load More</p>
                     </div>
                   </div>
                 </div>

@@ -133,19 +133,11 @@
           .load__more {
             text-align: center;
             padding: 10px;
+            cursor: pointer;
+            font-weight: 500;
 
-            button {
-              border: 0;
-              outline: 0;
-              cursor: pointer;
-              font-size: 15px;
-              padding: 10px 30px;
-              margin: 5px;
-              border-radius: 3px;
-
-              &:hover {
-                opacity: 0.8;
-              }
+            &:hover {
+              opacity: 0.8;
             }
           }
 

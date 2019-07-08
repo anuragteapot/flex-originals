@@ -1,16 +1,18 @@
 <template>
-  <div class="image lazy-background" ref="lazyBackground">
-    <div v-if="isLoading && !lazySrc" class="loader-1 center">
-      <span></span>
+  <div class="m-thumb">
+    <div class="music__thumbnail lazy-background" ref="lazyBackground">
+      <div v-if="isLoading && !lazySrc" class="loader-1 center">
+        <span></span>
+      </div>
+      <i class="fas fa-play fa-3x file-icon" aria-hidden="true"></i>
+      <p>Christian</p>
     </div>
-    <i class="fas fa-play fa-3x file-icon" aria-hidden="true"></i>
-    <p>Christian</p>
   </div>
 </template>
 
 <script>
 export default {
-  name: "lazy-image",
+  name: "music-thumnail",
   data() {
     return {
       currentSrc: "",

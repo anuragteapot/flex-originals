@@ -1,0 +1,79 @@
+.m-thumb {
+  display: inline-block;
+  
+  .music__thumbnail {
+    width: 180px;
+    height: 180px;
+    text-align: center;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    display: inline-block;
+    margin: 5px 10px 50px 10px;
+    position: relative;
+    cursor: pointer;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+
+    p {
+      position: absolute;
+      bottom: -30px;
+      color: white;
+      width: 100%;
+    }
+
+    i {
+      margin: auto;
+      top: 50%;
+      left: 50%;
+      margin-left: -20px;
+      margin-top: -20px;
+      position: absolute;
+      color: white;
+    }
+  }
+
+  .lazy-background::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    background: rgba(0, 0, 0, 0.1);
+    right: 0;
+    bottom: 0;
+    left: 0;
+  }
+
+  .file-icon {
+    display: none;
+  }
+
+  .music__thumbnail:hover::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    background: rgba(0, 0, 0, 0.3);
+    right: 0;
+    bottom: 0;
+    left: 0;
+  }
+
+  .music__thumbnail:hover .file-icon {
+    display: block;
+  }
+
+  @media only screen and (max-width: 700px) {
+    .music__thumbnail {
+      width: 150px;
+      height: 150px;
+      margin: 0px 5px 40px 5px;
+
+      i {
+        margin: auto;
+        position: absolute;
+        font-size: 40px;
+        color: white;
+        top: 50px;
+        left: 60px;
+      }
+    }
+  }
+}

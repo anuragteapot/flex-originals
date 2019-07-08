@@ -11,35 +11,34 @@
       <!-- <lazy-video-player src="https://player.vimeo.com/external/194837908.sd.mp4?s=c350076905b78c67f74d7ee39fdb4fef01d12420&profile_id=164"></lazy-video-player> -->
       <h1>Recents</h1>
       <div class="lazy_files_container">
-        <!-- <lazy-file v-for="item in files" :item="item" :key="item.id"></lazy-file> -->
-        <lazy-file :src="src" :lazySrc="lazySrc"></lazy-file>
-        <lazy-file :src="src" :lazySrc="lazySrc"></lazy-file>
+        <!-- <music-thumb v-for="item in files" :item="item" :key="item.id"></music-thumb> -->
+        <music-thumb :src="src" :lazySrc="lazySrc"></music-thumb>
+        <music-thumb :src="src" :lazySrc="lazySrc"></music-thumb>
       </div>
       <h1>Music</h1>
       <div class="lazy_files_container">
-        <!-- <lazy-file v-for="item in files" :item="item" :key="item.id"></lazy-file> -->
-        <lazy-file :src="src" :lazySrc="lazySrc"></lazy-file>
-        <lazy-file :src="src" :lazySrc="lazySrc"></lazy-file>
-        <lazy-file :src="src" :lazySrc="lazySrc"></lazy-file>
-        <lazy-file :src="src" :lazySrc="lazySrc"></lazy-file>
-        <lazy-file :src="src" :lazySrc="lazySrc"></lazy-file>
-        <lazy-file :src="src" :lazySrc="lazySrc"></lazy-file>
+        <!-- <music-thumb v-for="item in files" :item="item" :key="item.id"></music-thumb> -->
+        <music-thumb :src="src" :lazySrc="lazySrc"></music-thumb>
+        <music-thumb :src="src" :lazySrc="lazySrc"></music-thumb>
+        <music-thumb :src="src" :lazySrc="lazySrc"></music-thumb>
+        <music-thumb :src="src" :lazySrc="lazySrc"></music-thumb>
+        <music-thumb :src="src" :lazySrc="lazySrc"></music-thumb>
+        <music-thumb :src="src" :lazySrc="lazySrc"></music-thumb>
 
-        <lazy-file :src="src" :lazySrc="lazySrc"></lazy-file>
-        <lazy-file :src="src" :lazySrc="lazySrc"></lazy-file>
-        <lazy-file :src="src" :lazySrc="lazySrc"></lazy-file>
-        <lazy-file :src="src" :lazySrc="lazySrc"></lazy-file>
+        <music-thumb :src="src" :lazySrc="lazySrc"></music-thumb>
+        <music-thumb :src="src" :lazySrc="lazySrc"></music-thumb>
+        <music-thumb :src="src" :lazySrc="lazySrc"></music-thumb>
+        <music-thumb :src="src" :lazySrc="lazySrc"></music-thumb>
       </div>
 
       <h1>Videos</h1>
       <div class="lazy_files_container">
-        <!-- <lazy-file v-for="item in files" :item="item" :key="item.id"></lazy-file> -->
-        <lazy-file :src="src" :lazySrc="lazySrc"></lazy-file>
-        <lazy-file :src="src" :lazySrc="lazySrc"></lazy-file>
-        <lazy-file :src="src" :lazySrc="lazySrc"></lazy-file>
-        <lazy-file :src="src" :lazySrc="lazySrc"></lazy-file>
-        <lazy-file :src="src" :lazySrc="lazySrc"></lazy-file>
-        <lazy-file :src="src" :lazySrc="lazySrc"></lazy-file>
+        <music-thumb :src="src" :lazySrc="lazySrc"></music-thumb>
+        <music-thumb :src="src" :lazySrc="lazySrc"></music-thumb>
+        <music-thumb :src="src" :lazySrc="lazySrc"></music-thumb>
+        <music-thumb :src="src" :lazySrc="lazySrc"></music-thumb>
+        <music-thumb :src="src" :lazySrc="lazySrc"></music-thumb>
+        <music-thumb :src="src" :lazySrc="lazySrc"></music-thumb>
       </div>
 
       <span class="clear"></span>
@@ -49,9 +48,8 @@
 
 <script>
 import * as types from "./../../../../store/mutation-types";
-
-import itemFolder from "./../../Items/Folder";
-import itemFile from "./../../Items/musicItem";
+import musicThumb from "./../../Items/musicItem";
+import videoThumb from "./../../Items/videoItem";
 
 export default {
   name: "media-content-grid",
@@ -60,8 +58,8 @@ export default {
     lazySrc: "/public/icons/music.svg"
   }),
   components: {
-    "lazy-folder": itemFolder,
-    "lazy-file": itemFile
+    videoThumb,
+    musicThumb
   },
   watch: {
     selectAllFile: function(val) {

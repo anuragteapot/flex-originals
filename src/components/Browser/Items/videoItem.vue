@@ -16,7 +16,7 @@
 
 <script>
 export default {
-  name: "lazy-image",
+  name: "video thumbnail",
   data() {
     return {
       currentSrc: "",

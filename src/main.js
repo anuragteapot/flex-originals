@@ -7,6 +7,7 @@ import Snackbar from "@/components/Tool/SnackBar";
 import Model from "@/components/Model/Model";
 import AudioPlayer from "@/components/Audio/Audio";
 import VideoPlayer from "@/components/Video/Video";
+import lazyImage from "@/components/LazyImage/LazyImage";
 import app from "./app";
 
 import "./styles/creator.scss";
@@ -18,6 +19,7 @@ Vue.component("lazySnackBar", Snackbar);
 Vue.component("lazyModel", Model);
 Vue.component("lazyAudioPlayer", AudioPlayer);
 Vue.component("lazyVideoPlayer", VideoPlayer);
+Vue.component("lazyImage", lazyImage);
 
 Vue.config.productionTip = false;
 

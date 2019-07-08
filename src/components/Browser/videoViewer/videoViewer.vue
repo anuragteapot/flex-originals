@@ -186,17 +186,17 @@
                 </div>
               </div>
               <div class="grid grid--half right">
-                <lazy-file :src="src" :lazySrc="lazySrc"></lazy-file>
-                <lazy-file :src="src" :lazySrc="lazySrc"></lazy-file>
-                <lazy-file :src="src" :lazySrc="lazySrc"></lazy-file>
-                <lazy-file :src="src" :lazySrc="lazySrc"></lazy-file>
-                <lazy-file :src="src" :lazySrc="lazySrc"></lazy-file>
-                <lazy-file :src="src" :lazySrc="lazySrc"></lazy-file>
+                <video-suggestions :src="src" :lazySrc="lazySrc"></video-suggestions>
+                <video-suggestions :src="src" :lazySrc="lazySrc"></video-suggestions>
+                <video-suggestions :src="src" :lazySrc="lazySrc"></video-suggestions>
+                <video-suggestions :src="src" :lazySrc="lazySrc"></video-suggestions>
+                <video-suggestions :src="src" :lazySrc="lazySrc"></video-suggestions>
+                <video-suggestions :src="src" :lazySrc="lazySrc"></video-suggestions>
 
-                <lazy-file :src="src" :lazySrc="lazySrc"></lazy-file>
-                <lazy-file :src="src" :lazySrc="lazySrc"></lazy-file>
-                <lazy-file :src="src" :lazySrc="lazySrc"></lazy-file>
-                <lazy-file :src="src" :lazySrc="lazySrc"></lazy-file>
+                <video-suggestions :src="src" :lazySrc="lazySrc"></video-suggestions>
+                <video-suggestions :src="src" :lazySrc="lazySrc"></video-suggestions>
+                <video-suggestions :src="src" :lazySrc="lazySrc"></video-suggestions>
+                <video-suggestions :src="src" :lazySrc="lazySrc"></video-suggestions>
               </div>
             </div>
           </div>
@@ -207,7 +207,7 @@
 </template>
 
 <script>
-import itemFile from "./../Items/videoItem";
+import videoSuggestions from "./videoSuggestions";
 
 export default {
   name: "media-settings",
@@ -216,7 +216,7 @@ export default {
     lazySrc: "/public/icons/music.svg"
   }),
   components: {
-    "lazy-file": itemFile
+    videoSuggestions
   },
   methods: {
     async logout() {

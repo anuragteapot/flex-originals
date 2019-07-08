@@ -55,14 +55,12 @@
             @media screen and (max-width: 700px) {
               display: none;
             }
-
           }
 
           .right {
             text-align: end;
 
             span {
-
               margin: 0 5px;
 
               i {
@@ -116,7 +114,6 @@
             }
           }
 
-
           .full__video__desctiption {
             padding: 10px 0;
           }
@@ -131,7 +128,6 @@
         }
 
         .video__comments {
-
           border-bottom: 1px solid #909192;
 
           .load__more {
@@ -160,7 +156,6 @@
               margin: 0 10px;
             }
           }
-
 
           ul {
             list-style-type: none;
@@ -198,7 +193,7 @@
           }
 
           .comments-list li:after {
-            content: '';
+            content: "";
             display: block;
             clear: both;
             height: 0;
@@ -242,7 +237,7 @@
           }
 
           .comment-main-level:after {
-            content: '';
+            content: "";
             width: 0;
             height: 0;
             display: block;
@@ -273,7 +268,7 @@
             margin-left: 14px;
             position: relative;
             top: 2px;
-            color: #A6A6A6;
+            color: #a6a6a6;
             cursor: pointer;
             -webkit-transition: color 0.3s ease;
             -o-transition: color 0.3s ease;
@@ -321,9 +316,9 @@
           }
 
           .comment-box .comment-name.by-author:after {
-            content: 'autor';
+            content: "autor";
             background: #03658c;
-            color: #FFF;
+            color: #fff;
             font-size: 12px;
             padding: 3px 5px;
             font-weight: 700;
@@ -344,7 +339,7 @@
       flex: 1;
       overflow-y: scroll;
 
-      .thumb {
+      .v-thumb {
         display: flex;
         width: 100%;
         flex-wrap: wrap;

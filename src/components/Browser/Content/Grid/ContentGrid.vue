@@ -1,23 +1,22 @@
 <template>
   <div class="media-content-grid">
-    <div class="grid_section folders" v-if="folders.length > 0">
-      <h3>Folders</h3>
-      <div class="lazy_folders_container">
-        <lazy-folder v-for="item in folders" :item="item" :key="item.id"></lazy-folder>
-      </div>
-      <span class="clear"></span>
-    </div>
-    <div class="grid_section files" v-if="files.length >= 0">
-      <!-- <lazy-video-player src="https://player.vimeo.com/external/194837908.sd.mp4?s=c350076905b78c67f74d7ee39fdb4fef01d12420&profile_id=164"></lazy-video-player> -->
+    <div class="grid_section files">
       <h1>Recents</h1>
       <div class="lazy_files_container">
-        <!-- <music-thumb v-for="item in files" :item="item" :key="item.id"></music-thumb> -->
         <music-thumb :src="src" :lazySrc="lazySrc"></music-thumb>
         <music-thumb :src="src" :lazySrc="lazySrc"></music-thumb>
+      </div>
+      <h1>Videos</h1>
+      <div class="lazy_files_container">
+        <video-thumb :src="srcv" :lazySrc="lazySrc"></video-thumb>
+        <video-thumb :src="srcv" :lazySrc="lazySrc"></video-thumb>
+        <video-thumb :src="srcv" :lazySrc="lazySrc"></video-thumb>
+        <video-thumb :src="srcv" :lazySrc="lazySrc"></video-thumb>
+        <video-thumb :src="srcv" :lazySrc="lazySrc"></video-thumb>
+        <video-thumb :src="srcv" :lazySrc="lazySrc"></video-thumb>
       </div>
       <h1>Music</h1>
       <div class="lazy_files_container">
-        <!-- <music-thumb v-for="item in files" :item="item" :key="item.id"></music-thumb> -->
         <music-thumb :src="src" :lazySrc="lazySrc"></music-thumb>
         <music-thumb :src="src" :lazySrc="lazySrc"></music-thumb>
         <music-thumb :src="src" :lazySrc="lazySrc"></music-thumb>
@@ -30,17 +29,6 @@
         <music-thumb :src="src" :lazySrc="lazySrc"></music-thumb>
         <music-thumb :src="src" :lazySrc="lazySrc"></music-thumb>
       </div>
-
-      <h1>Videos</h1>
-      <div class="lazy_files_container">
-        <music-thumb :src="src" :lazySrc="lazySrc"></music-thumb>
-        <music-thumb :src="src" :lazySrc="lazySrc"></music-thumb>
-        <music-thumb :src="src" :lazySrc="lazySrc"></music-thumb>
-        <music-thumb :src="src" :lazySrc="lazySrc"></music-thumb>
-        <music-thumb :src="src" :lazySrc="lazySrc"></music-thumb>
-        <music-thumb :src="src" :lazySrc="lazySrc"></music-thumb>
-      </div>
-
       <span class="clear"></span>
     </div>
   </div>
@@ -55,6 +43,7 @@ export default {
   name: "media-content-grid",
   data: () => ({
     src: "/public/sample.jpeg",
+    srcv: "/public/qq.webp",
     lazySrc: "/public/icons/music.svg"
   }),
   components: {

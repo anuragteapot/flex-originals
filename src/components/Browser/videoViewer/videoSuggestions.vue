@@ -1,18 +1,19 @@
 <template>
-  <div class="content-v-thumb">
+  <div class="v-thumb">
     <div class="video__thumbnail">
       <lazy-image :src="src" :lazySrc="lazySrc"></lazy-image>
-      <i class="fas fa-play fa-2x file-icon" aria-hidden="true"></i>
-      <div class="video__info">
-        <p>Christian</p>
-      </div>
+    </div>
+    <div class="video__info">
+      <p>Christian</p>
+      <p>Christian</p>
+      <span>Christian</span>
     </div>
   </div>
-</template>
+</template> 
 
 <script>
 export default {
-  name: "videoThumbs",
+  name: "videoViewerSuggestions",
   data() {
     return {};
   },

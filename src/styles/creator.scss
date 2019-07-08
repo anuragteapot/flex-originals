@@ -3,7 +3,8 @@
 
 // Components
 @import "components/lazy-main";
-@import "components/lazy-music";
+@import "components/lazy-music-item";
+@import "components/lazy-video-item";
 @import "components/lazy-folder";
 @import "components/lazy-home";
 @import "components/lazy-form";
@@ -17,3 +18,4 @@
 @import "components/lazy-offcanvas";
 @import "components/lazy-settings";
 @import "components/lazy-video-viewer";
+@import "components/lazy-image";

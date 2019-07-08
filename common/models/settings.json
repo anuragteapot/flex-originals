@@ -1,5 +1,5 @@
 {
-  "name": "setting",
+  "name": "settings",
   "plural": "settings",
   "base": "PersistedModel",
   "idInjection": true,

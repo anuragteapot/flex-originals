@@ -72,6 +72,27 @@ export default {
     }
   },
   methods: {
+    toggleMenu: function() {
+      if (this.isMobile && !this.appDrawer.mobileState) {
+        this.$store.commit(types.APP_DRAWER, {
+          action: true,
+          des: true,
+          mobileState: true
+        });
+      } else if (this.appDrawer.action) {
+        this.$store.commit(types.APP_DRAWER, {
+          action: false,
+          des: false,
+          mobileState: false
+        });
+      } else {
+        this.$store.commit(types.APP_DRAWER, {
+          action: true,
+          des: true,
+          mobileState: true
+        });
+      }
+    },
     processUpload: async function() {
       let uploadSuccess = 0;
       this.$store.commit(types.SET_IS_UPLOADING, true);

@@ -7,11 +7,11 @@
             <img src="/public/atom.svg" />
           </div>
           <div class="social__media">
-            <i class="fab fa-facebook-square fa-2x"></i>
-            <i class="fab fa-instagram fa-2x"></i>
-            <i class="fab fa-twitter-square fa-2x"></i>
-            <i class="fab fa-reddit-square fa-2x"></i>
-            <i class="fab fa-linkedin fa-2x"></i>
+            <i class="fab fa-facebook-square" style="font-size:20px"></i>
+            <i class="fab fa-instagram" style="font-size:20px"></i>
+            <i class="fab fa-twitter-square" style="font-size:20px"></i>
+            <i class="fab fa-reddit-square" style="font-size:20px"></i>
+            <i class="fab fa-linkedin" style="font-size:20px"></i>
           </div>
           <p class="channel__name">
             Anurag Kumar

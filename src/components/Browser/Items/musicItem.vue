@@ -16,6 +16,7 @@ export default {
   },
   props: {
     alt: String,
+    circle: Boolean,
     contain: Boolean,
     src: {
       type: [String, Object],

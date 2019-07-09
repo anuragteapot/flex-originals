@@ -394,6 +394,73 @@ i:hover {
     .inner {
       padding: 10px;
       width: 100%;
+
+      .profile__banner {
+        width: 100%;
+        height: 250px;
+
+        &__background {
+          width: 100%;
+          height: 100%;
+          background: url('/public/b1.jpg');
+          background-position: center;
+          background-repeat: no-repeat;
+          background-size: cover;
+          position: relative;
+
+          .profile__avatar {
+            display: inline-block;
+            border-radius: 50%;
+            background-color: #1e2124;
+            padding: 10px;
+            margin: 10px;
+
+            img {
+              width: 100px;
+              height: 100px;
+            }
+          }
+
+          .follow {
+            border-radius: 5px;
+            outline: none;
+            border: none;
+            color: white;
+            border-radius: 20px;
+            display: inline-block;
+            padding: 10px 30px;
+            margin: 5px 20px;
+            cursor: pointer;
+            background-color: #43b581;
+
+            &:hover {
+              opacity: 0.8;
+            }
+          }
+
+          .followers {
+            color: #cecbcb;
+            font-weight: 800;
+          }
+
+          .channel__name {
+            font-weight: 500;
+            font-size: 25px;
+            padding: 10px 20px;
+          }
+
+          .social__media {
+            padding: 5px;
+            float: right;
+            display: inline-block;
+            background-color: #252a2e;
+
+            i {
+              margin: 5px;
+            }
+          }
+        }
+      }
     }
 
     .inner {
@@ -432,7 +499,7 @@ i:hover {
     justify-content: center;
   }
 
-  .server .server-icon > img {
+  .server .server-icon>img {
     border-radius: inherit;
     max-width: 100%;
   }
@@ -498,8 +565,8 @@ i:hover {
     user-select: none;
   }
 
-  .button > svg,
-  .button > img {
+  .button>svg,
+  .button>img {
     max-width: 100%;
     max-height: 100%;
   }
@@ -513,7 +580,7 @@ i:hover {
     border-right: 1px solid #1c1e21;
   }
 
-  .button-group .button + .button {
+  .button-group .button+.button {
     box-shadow: inset 1px 0 0 #393c41;
   }
 
@@ -615,26 +682,6 @@ i:hover {
 
     100% {
       border-radius: 25px;
-    }
-  }
-
-  .media-content-grid {
-    padding: 10px 10% 50px 10%;
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    text-align: left;
-
-    h1 {
-      padding: 10px;
-    }
-
-    @media only screen and (max-width: 1000px) {
-      padding: 0px 0px 50px 0;
-    }
-
-    @media only screen and (max-width: 700px) {
-      padding: 0px 0px 50px 0;
     }
   }
 }

@@ -4,23 +4,31 @@
       src="https://player.vimeo.com/external/194837908.sd.mp4?s=c350076905b78c67f74d7ee39fdb4fef01d12420&profile_id=164"
     ></lazy-video-player>
     <label class="switch">
-      <input type="checkbox">
+      <input type="checkbox" />
       <div></div>
     </label>
     <div class="radio">
-      <input id="1" type="radio" name="b" checked>
+      <input id="1" type="radio" name="b" checked />
       <label for="1">Option 1</label>
     </div>
     <div class="radio">
-      <input id="2" type="radio" name="b">
+      <input id="2" type="radio" name="b" />
       <label for="2">Option 2</label>
     </div>
+    <ol class="list list-view-filter">
+      <li>List item 1</li>
+      <li>List item 2</li>
+      <li>List item 3</li>
+      <li>List item 4</li>
+      <li>List item 5</li>
+      <li>List item 6</li>
+    </ol>
     <div class="checkbox">
-      <input id="one" type="checkbox">
+      <input id="one" type="checkbox" />
       <span class="check"></span>
       <label for="one">Check me!</label>
     </div>
-    </div>
+  </div>
 </template>
 <script>
 export default {

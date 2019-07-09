@@ -1,0 +1,183 @@
+<template>
+  <section class="content">
+    <div class="inner">
+      <div class="profile__banner">
+        <div class="profile__banner__background">
+          <div class="profile__avatar">
+            <img src="/public/atom.svg" />
+          </div>
+          <div class="social__media">
+            <i class="fab fa-facebook-square fa-2x"></i>
+            <i class="fab fa-instagram fa-2x"></i>
+            <i class="fab fa-twitter-square fa-2x"></i>
+            <i class="fab fa-reddit-square fa-2x"></i>
+            <i class="fab fa-linkedin fa-2x"></i>
+          </div>
+          <p class="channel__name">
+            Anurag Kumar
+            <i
+              aria-label="verified"
+              class="fas fa-certificate"
+              style="color: lightgreen;"
+            ></i>
+          </p>
+          <button class="follow">
+            <i class="far fa-star"></i> Follow
+          </button>
+          <span class="followers">1212121212 followers</span>
+        </div>
+      </div>
+      <content-grid></content-grid>
+    </div>
+    <lazy-audio-player v-if="layout == 'song'" />
+  </section>
+</template>
+
+<script>
+import * as types from "./../../../store/mutation-types";
+import { api } from "./../../../app/Api.js";
+import contentGrid from "./../Content/Grid/ContentGrid";
+
+export default {
+  name: "media-content",
+  data: () => ({
+    active: false
+  }),
+  computed: {
+    layout() {
+      const name = this.$route.name;
+      if (name.split("@")[1]) {
+        return name.split("@")[1];
+      } else {
+        return null;
+      }
+    }
+  },
+  components: {
+    contentGrid
+  },
+  methods: {
+    doThis: function(path) {
+      if (path) {
+        this.$router.push({
+          path: `/drive/u/0/folder/${path}`
+        });
+      } else {
+        this.$router.push({
+          path: `/drive/u/0/my-drive`
+        });
+      }
+    },
+    onScroll: api.debounce(function() {
+      if (window.innerHeight + window.scrollY >= document.body.scrollHeight) {
+        this.$store.state.loadLimit = this.$store.state.loadLimit + 10;
+
+        const dir = this.$route.params.dir;
+        const path = this.$route.params.path;
+
+        this.$store.commit(types.SET_IS_LOADING, true);
+        if (dir !== undefined && path == "folder") {
+          this.$store.dispatch("update", { path: dir });
+        } else {
+          this.$store.dispatch("update", { path: "my-drive" });
+        }
+      }
+    }, 300),
+    // Listeners for drag and drop
+    onDragEnter: function(event) {
+      event.stopPropagation();
+      return false;
+    },
+
+    // Notify user when file is over the drop area
+    onDragOver: function(event) {
+      event.preventDefault();
+      document.querySelector(".media-dragoutline").classList.add("active");
+      return false;
+    },
+
+    /* Upload files */
+    dragUpload: async function() {
+      let uploadSuccess = 0;
+      while (this.$store.state.uploadItems.length > 0) {
+        const item = this.$store.state.uploadItems.shift();
+        const formData = item.file;
+        const uploadPath = item.path;
+
+        try {
+          await this.$store.dispatch("upload", { formData, uploadPath });
+          uploadSuccess = uploadSuccess + 1;
+        } catch (error) {
+          console.error(error);
+        }
+
+        this.$store.dispatch("update", {
+          path: this.$store.state.selectedDirectory
+        });
+      }
+      var data = {
+        data: `${uploadSuccess} files uploaded.`,
+        color: "success"
+      };
+
+      this.$store.commit(types.SHOW_SNACKBAR, data);
+      this.$store.commit(types.SET_IS_UPLOADING, 2);
+    },
+
+    onDrop: function(event) {
+      event.preventDefault();
+      const uploadPath = this.$store.state.selectedDirectory;
+
+      if (
+        event.dataTransfer &&
+        event.dataTransfer.files &&
+        event.dataTransfer.files.length > 0
+      ) {
+        for (var i = 0; i < event.dataTransfer.files.length; i++) {
+          let file = event.dataTransfer.files[i];
+          document
+            .querySelector(".media-dragoutline")
+            .classList.remove("active");
+
+          const formData = new FormData();
+          const item = {};
+
+          formData.append("files", file);
+          item.id = file.name + i + file.lastModified + file.size + Date.now();
+          item.icon = "assessment";
+          item.file = formData;
+          item.path = uploadPath;
+          item.type = "file";
+          item.iconClass = "grey lighten-1 white--text";
+          item.title = file.name;
+          item.subtitle = "";
+          item.size = file.size;
+          item.uploadPercent = 0;
+
+          this.$store.state.uploadItems.push(item);
+          this.$store.state.uploadItemsMenu.push(item);
+        }
+        if (this.$store.state.isUploading !== true) {
+          this.$emit("tiggerdragUpload");
+        }
+      }
+
+      document.querySelector(".media-dragoutline").classList.remove("active");
+    },
+
+    // Reset the drop area border
+    onDragLeave: function(event) {
+      event.stopPropagation();
+      event.preventDefault();
+      document.querySelector(".media-dragoutline").classList.remove("active");
+      return false;
+    }
+  },
+  created() {
+    window.addEventListener("scroll", this.onScroll, false);
+  },
+  destroyed() {
+    window.removeEventListener("scroll", this.onScroll, false);
+  }
+};
+</script>

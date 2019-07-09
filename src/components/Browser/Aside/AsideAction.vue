@@ -39,6 +39,22 @@
           <i class="fas fa-search" style="color:#f19600"></i>
         </div>
       </div>
+
+      <div class="server focusable" role="button" aria-label="My Server" aria-selected="true">
+        <div class="server-icon">
+          <i class="fas fa-trash" style="color:red;"></i>
+        </div>
+      </div>
+      <div class="server focusable" role="button" aria-label="My Server" aria-selected="true">
+        <div class="server-icon">
+          <i class="fas fa-share-alt"></i>
+        </div>
+      </div>
+      <div class="server focusable" role="button" aria-label="My Server" aria-selected="true">
+        <div class="server-icon">
+          <i class="fas fa-eye" style="color:lightgreen;"></i>
+        </div>
+      </div>
       <div class="server focusable" role="button" aria-label="My Server" aria-selected="true">
         <div class="server-icon">
           <i class="fas fa-plus" style="color:#00b0f4;"></i>

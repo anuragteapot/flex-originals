@@ -27,7 +27,13 @@
     </section>
 
     <footer class="features-footer">
-      <img class="avatar" alt="Avatar" src="/public/atom.svg" />
+      <img
+        class="avatar"
+        alt="Avatar"
+        src="/public/atom.svg"
+        @click="$router.push('/app/@profile')"
+        style="cursor:pointer"
+      />
       <div class="features-footer-details">
         <span class="username">Anurag Kumar</span>
         <span class="tag">anu1601cs</span>

@@ -32,6 +32,10 @@
     }
   }
 
+  .circle {
+    border-radius: 100% !important;
+  }
+
   .lazy-background::before {
     content: "";
     position: absolute;

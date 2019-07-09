@@ -88,13 +88,75 @@
         padding-right: 1rem;
       }
 
+      .video__upload__progress {
+        width: 100%;
+        height: 30px;
+        margin: 20px 0;
+        background-color: #1e2124;
+
+        .upload__progress {
+          position: relative;
+          height: 30px;
+          background-color: $color-special;
+          width: 70%;
+          padding: 5px;
+          text-align: center;
+          -webkit-transition: width 1s;
+          transition: width 1s;
+        }
+      }
+
+      .video__thumbnails {
+        width: 200px;
+        height: 120px;
+        cursor: pointer;
+        box-shadow: 0 5px 10px #1e2124;
+      }
+
+      .upload__video__settings {
+
+        .video__description,
+        .video__tags,
+        .video__title {
+          padding-top: 20px;
+
+          textarea,
+          input {
+            padding: 10px;
+            width: 100%;
+            outline: none;
+            margin: 10px 0;
+            border-radius: $radius;
+            border: 1px solid transparent;
+            background-color: $color-primary;
+            font-size: 16px;
+            color: white;
+
+            &:not([type="submit"]) {
+              margin-bottom: 20px;
+              box-shadow: inset 0 0 10px 0 rgba(0, 0, 0, 0.2);
+
+              &:hover {
+                border-color: rgba(0, 0, 0, 0.2);
+              }
+
+              &:focus,
+              &:active {
+                border-color: $color-special;
+              }
+            }
+          }
+        }
+
+      }
+
       .account__info {
         display: flex;
         width: 100%;
         flex-wrap: wrap;
         flex-direction: row;
         background-color: #1e2124;
-        padding: 10px 10px 0 10px;
+        padding: 20px;
         border-radius: 5px;
 
         .account__avatar {

@@ -33,6 +33,7 @@
 import * as types from "./.././../store/mutation-types.js";
 import home from "./../Browser/Content/MainContent";
 import settings from "./Settings/Profile";
+import upload from "./Upload/Upload";
 import watch from "./videoViewer/videoViewer";
 import asideAction from "./Aside/AsideAction";
 import asideDes from "./Aside/AsideDes";
@@ -47,6 +48,7 @@ export default {
   components: {
     home,
     settings,
+    upload,
     watch,
     asideAction,
     asideDes,

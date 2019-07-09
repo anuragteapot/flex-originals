@@ -117,6 +117,10 @@ i:hover {
       border: none;
       outline: none;
       background-color: #1e2124;
+
+      &:focus {
+        background-color: #0e0f0f;
+      }
     }
 
     .features-header {
@@ -325,8 +329,9 @@ i:hover {
       cursor: pointer;
       background-color: #1e2124;
 
+      &.active,
       &:hover {
-        background-color: #18191a;
+        background-color: #0e0f0f;
       }
 
       i {
@@ -371,6 +376,7 @@ i:hover {
 
   .menu .menu-right input:focus {
     width: 300px;
+    background-color: #0e0f0f;
   }
 
   .menu .menu-right .icon {
@@ -432,7 +438,7 @@ i:hover {
   }
 
   .server.server-friends {
-    margin-bottom: 46px;
+    margin-bottom: 20px;
     text-align: center;
   }
 
@@ -443,19 +449,6 @@ i:hover {
 
   .server.server-friends.active::before {
     display: none;
-  }
-
-  .server.server-friends::after {
-    content: "Lazy Drive";
-    color: rgba(255, 255, 255, 0.3);
-    pointer-events: none;
-    font-weight: 300;
-    font-size: 0.65rem;
-    position: absolute;
-    bottom: -35px;
-    left: 3px;
-    padding-bottom: 10px;
-    border-bottom: 2px solid #2a2e32;
   }
 
   .server::before {
@@ -544,12 +537,12 @@ i:hover {
     }
 
     80% {
-      background-color: rgb(134, 130, 130);
+      background-color: #0e0f0f;
     }
 
     100% {
       border-radius: 15px;
-      background-color: rgb(134, 130, 130);
+      background-color: #0e0f0f;
     }
   }
 
@@ -568,12 +561,12 @@ i:hover {
     }
 
     80% {
-      background-color: rgb(134, 130, 130);
+      background-color: #0e0f0f;
     }
 
     100% {
       border-radius: 15px;
-      background-color: rgb(134, 130, 130);
+      background-color: #0e0f0f;
     }
   }
 

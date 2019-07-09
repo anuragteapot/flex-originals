@@ -12,11 +12,18 @@
             </div>
             <div class="container">
               <div class="grid grid--half">
-                <h3>Thumbnail</h3>
+                <h3>Uploading Progress</h3>
                 <div class="video__upload__progress">
                   <div class="upload__progress">
                     <p>10%</p>
                   </div>
+                </div>
+                <h3>Select Thumbnail</h3>
+                <div class="video__thumbnails">
+                  <img class="lazy__image" src="/public/qq.webp" alt="thumbnail" />
+                </div>
+                <div class="video__thumbnails">
+                  <img class="lazy__image" src="/public/qq.webp" alt="thumbnail" />
                 </div>
                 <div class="video__thumbnails">
                   <img class="lazy__image" src="/public/qq.webp" alt="thumbnail" />

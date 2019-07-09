@@ -39,6 +39,12 @@ export default [
       import(/* webpackChunkName: "browser" */ "./../views/Browser.vue")
   },
   {
+    path: "/app/@channel",
+    name: "@channel",
+    component: () =>
+      import(/* webpackChunkName: "browser" */ "./../views/Browser.vue")
+  },
+  {
     path: "/login",
     name: "login",
     component: () =>

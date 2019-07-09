@@ -44,7 +44,7 @@ export default {
   data: () => ({
     src: "/public/sample.jpeg",
     srcv: "/public/qq.webp",
-    lazySrc: "/public/icons/music.svg"
+    lazySrc: "/public/icons/disk.svg"
   }),
   components: {
     videoThumb,

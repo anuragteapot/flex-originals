@@ -32,7 +32,8 @@
 <script>
 import * as types from "./.././../store/mutation-types.js";
 import home from "./../Browser/Content/MainContent";
-import settings from "./Settings/Profile";
+import settings from "./Settings/Settings";
+import channel from "./UserProfile/UserProfile";
 import upload from "./Upload/Upload";
 import watch from "./videoViewer/videoViewer";
 import asideAction from "./Aside/AsideAction";
@@ -50,6 +51,7 @@ export default {
     settings,
     upload,
     watch,
+    channel,
     asideAction,
     asideDes,
     toolbar

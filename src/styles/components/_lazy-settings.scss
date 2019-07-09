@@ -70,7 +70,7 @@
 
       .close__settings {
         padding-right: 2rem;
-        font-size: 40px;
+        font-size: 30px;
         position: absolute;
         top: 0;
         right: 0;
@@ -121,8 +121,8 @@
     }
 
     .toggle {
-      $toggleWidth: 62px;
-      $toggleHeight: 32px;
+      $toggleWidth: 60px;
+      $toggleHeight: 30px;
       $toggleMargin: 4px;
       $toggleHandleSize: $toggleHeight - ($toggleMargin*2);
       max-width: $toggleWidth;

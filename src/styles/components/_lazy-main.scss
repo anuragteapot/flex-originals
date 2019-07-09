@@ -43,7 +43,7 @@ body {
   background-size: cover;
   user-select: none;
   font-family: "Roboto", sans-serif;
-  font-size: 16px;
+  font-size: 15px;
   height: 100%;
   width: 100%;
 }
@@ -319,7 +319,7 @@ i:hover {
     align-items: center;
 
     .menu__button {
-      padding: 5px 20px;
+      padding: 5px 15px;
       margin: 0 0 0 30px;
       border-radius: 5px;
       cursor: pointer;
@@ -327,6 +327,14 @@ i:hover {
 
       &:hover {
         background-color: #18191a;
+      }
+
+      i {
+        margin: 0 5px;
+      }
+
+      @media only screen and (max-width: 1000px) {
+        display: none;
       }
     }
   }
@@ -418,7 +426,7 @@ i:hover {
     justify-content: center;
   }
 
-  .server .server-icon>img {
+  .server .server-icon > img {
     border-radius: inherit;
     max-width: 100%;
   }
@@ -497,8 +505,8 @@ i:hover {
     user-select: none;
   }
 
-  .button>svg,
-  .button>img {
+  .button > svg,
+  .button > img {
     max-width: 100%;
     max-height: 100%;
   }
@@ -512,7 +520,7 @@ i:hover {
     border-right: 1px solid #1c1e21;
   }
 
-  .button-group .button+.button {
+  .button-group .button + .button {
     box-shadow: inset 1px 0 0 #393c41;
   }
 
@@ -618,8 +626,11 @@ i:hover {
   }
 
   .media-content-grid {
-    padding: 10px 100px 50px 100px;
-    min-width: 400px;
+    padding: 10px 10% 50px 10%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    text-align: left;
 
     h1 {
       padding: 10px;

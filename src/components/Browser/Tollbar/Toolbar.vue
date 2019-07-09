@@ -3,10 +3,18 @@
     <div @click="toggleMenu" style="cursor: pointer;">
       <i class="fas fa-align-justify"></i>
     </div>
-    <span class="menu__button">Trending</span>
-    <span class="menu__button">Watch Later</span>
-    <span class="menu__button">Liked Videos</span>
-    <span class="menu__button">New Releases</span>
+    <span class="menu__button">
+      <i class="fas fa-fire"></i>Trending
+    </span>
+    <span class="menu__button">
+      <i class="far fa-clock"></i>Watch Later
+    </span>
+    <span class="menu__button">
+      <i class="far fa-heart"></i>Liked Videos
+    </span>
+    <span class="menu__button">
+      <i class="fab fa-rev"></i>New Releases
+    </span>
     <div class="menu-right">
       <input type="text" placeholder="Search...." />
       <span class="icon">

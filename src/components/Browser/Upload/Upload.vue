@@ -1,21 +1,31 @@
 <template>
   <div class="settings content">
     <div class="inner">
+      <div class="media-action">
+        <div class="file">
+          <form enctype="multipart/form-data" ref="formFile">
+            <input type="file" hidden ref="inputFile" @change="processFile" />
+          </form>
+        </div>
+      </div>
       <div class="settings__wrapper">
         <div class="card">
           <div class="card__body">
-            <div class="container">
+            <div class="upload__icon__body" v-show="!isUploading">
+              <img src="/public/icons/up-arrow.svg" alt="upload" @click="$refs.inputFile.click()" />
+            </div>
+            <div class="container" v-show="isUploading">
               <div class="grid">
                 <h1>Upload Status</h1>
                 <i @click="$router.push('/app/@home')" class="far fa-times-circle close__settings"></i>
               </div>
             </div>
-            <div class="container">
+            <div class="container" v-show="isUploading">
               <div class="grid grid--half">
                 <h3>Uploading Progress</h3>
                 <div class="video__upload__progress">
-                  <div class="upload__progress">
-                    <p>10%</p>
+                  <div class="upload__progress" :style="`width:${uploadPercent}%`">
+                    <p>{{uploadPercent}}%</p>
                   </div>
                 </div>
                 <h3>Select Thumbnail</h3>
@@ -119,8 +129,17 @@
 </template>
 
 <script>
+import * as types from "./../../../store/mutation-types";
+import { setTimeout } from "timers";
+
 export default {
-  name: "media-settings",
+  name: "upload",
+  data() {
+    return {
+      isUploading: false,
+      uploadPercent: 0
+    };
+  },
   methods: {
     async logout() {
       try {
@@ -131,6 +150,38 @@ export default {
         this.$router.push("/app/@home?u=logout");
         this.$api.auth.logout();
       }
+    },
+    processUpload: async function(formData) {
+      try {
+        await this.$api.axios().post(`/api/actions/upload`, formData, {
+          retry: 3,
+          retryDelay: 1000,
+          onUploadProgress: e => {
+            this.uploadPercent = Math.round((e.loaded * 100) / e.total);
+          }
+        });
+      } catch (err) {
+        this.$api._handleError(err);
+      }
+
+      const data = {
+        data: `Video Uploaded.`,
+        color: "success"
+      };
+
+      this.$store.commit(types.SHOW_SNACKBAR, data);
+      this.$refs.formFile.reset();
+    },
+    processFile: function() {
+      this.isUploading = true;
+      var file = this.$refs.inputFile.files;
+
+      const formData = new FormData();
+      formData.append("file", file);
+
+      setTimeout(() => {
+        this.processUpload(formData);
+      }, 1000);
     }
   }
 };

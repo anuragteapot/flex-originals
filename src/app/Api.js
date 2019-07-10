@@ -37,6 +37,15 @@ class Api {
 
     window.addEventListener("online", this.updateOnlineStatus);
     window.addEventListener("offline", this.updateOnlineStatus);
+
+    if (!("Notification" in window)) {
+      console.log("This browser does not support notifications!");
+      return;
+    }
+
+    Notification.requestPermission(status => {
+      console.log("Notification permission status:", status);
+    });
   }
 
   updateOnlineStatus() {

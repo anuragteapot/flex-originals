@@ -70,7 +70,7 @@ export default {
   methods: {
     fileUpload: function() {
       if (this.$api.auth.loggedIn()) {
-        this.$emit("tiggerSelectFile");
+        this.$router.push(`/app/@upload`);
       } else {
         this.$router.push(`/login?redirect=${this.$route.fullPath}`);
       }

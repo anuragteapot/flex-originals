@@ -36,7 +36,10 @@ export default [
     path: '/app/@upload',
     name: '@upload',
     component: () =>
-      import(/* webpackChunkName: "browser" */ './../views/Browser.vue')
+      import(/* webpackChunkName: "browser" */ './../views/Browser.vue'),
+    meta: {
+      requiresAuth: true
+    }
   },
   {
     path: '/app/@channel',

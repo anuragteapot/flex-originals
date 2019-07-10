@@ -21,10 +21,34 @@
       "required": true,
       "default": false
     },
+    "verifiedChannel": {
+      "type": "boolean",
+      "required": true,
+      "default": false
+    },
+    "followers": {
+      "type": "number",
+      "required": true
+    },
     "theme": {
       "type": "string",
       "required": true,
       "default": "dark"
+    },
+    "facebook": {
+      "type": "string"
+    },
+    "instagram": {
+      "type": "string"
+    },
+    "twitter": {
+      "type": "string"
+    },
+    "redit": {
+      "type": "string"
+    },
+    "linkedin": {
+      "type": "string"
     }
   },
   "validations": [],
@@ -34,6 +58,12 @@
       "accessType": "*",
       "principalType": "ROLE",
       "principalId": "$owner",
+      "permission": "ALLOW"
+    },
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "$authenticated",
       "permission": "ALLOW"
     }
   ],

@@ -1,50 +1,49 @@
-/* eslint-disable no-unused-vars */
-"use strict";
+'use strict'
 
-var multer = require("multer");
-var fs = require("fs-extra");
+const multer = require('multer')
+const fs = require('fs-extra')
 
 module.exports = function(Action) {
   const storage = multer.diskStorage({
     destination: (req, file, cb) => {
-      var dirPath = "uploads/";
+      const dirPath = 'uploads/'
       if (!fs.existsSync(dirPath)) {
-        fs.mkdirSync(dirPath);
+        fs.mkdirSync(dirPath)
       }
-      cb(null, dirPath + "/");
+      cb(null, dirPath + '/')
     },
 
     filename: (req, file, cb) => {
-      cb(null, file.originalname);
+      cb(null, file.originalname)
     }
-  });
+  })
 
   Action.upload = (req, res) => {
-    var upload = multer({
+    const upload = multer({
       storage: storage
-    }).single("file");
+    }).single('file')
 
     upload(req, res, function(err) {
       if (err) {
-        return res.json(err);
+        return res.json(err)
       } else {
         return res.json({
-          res: "done"
-        });
+          res: 'done'
+        })
       }
-    });
-  };
+    })
+  }
 
-  Action.remoteMethod("upload", {
-    description: "Upload a file",
+  Action.remoteMethod('upload', {
+    description: 'Upload a file',
     accepts: [
-      { arg: "req", type: "object", http: { source: "req" } },
-      { arg: "res", type: "object", http: { source: "res" } }
+      { arg: 'req', type: 'object', http: { source: 'req' } },
+      { arg: 'res', type: 'object', http: { source: 'res' } }
     ],
     returns: {
-      arg: "result",
-      type: "string"
+      arg: 'result',
+      type: 'string'
     },
-    http: { verb: "post" }
-  });
-};
+    http: { verb: 'post' }
+  })
+}

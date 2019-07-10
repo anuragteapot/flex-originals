@@ -45,12 +45,6 @@ export default [
       import(/* webpackChunkName: "browser" */ './../views/Browser.vue')
   },
   {
-    path: '/app/@profile',
-    name: '@profile',
-    component: () =>
-      import(/* webpackChunkName: "browser" */ './../views/Browser.vue')
-  },
-  {
     path: '/login',
     name: 'login',
     component: () =>

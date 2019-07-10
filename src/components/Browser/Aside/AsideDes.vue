@@ -31,7 +31,7 @@
         class="avatar"
         alt="Avatar"
         src="/public/atom.svg"
-        @click="$router.push('/app/@profile')"
+        @click="$router.push('/app/@channel')"
         style="cursor:pointer"
       />
       <div class="features-footer-details">

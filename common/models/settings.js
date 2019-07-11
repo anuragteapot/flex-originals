@@ -5,7 +5,6 @@ module.exports = function(Settings) {
     if (!userId) {
       throw new Error('User Id is required.', {}, 500)
     }
-
     return await Settings.find({ where: { userId: userId } })
   }
 

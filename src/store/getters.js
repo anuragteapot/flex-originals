@@ -4,8 +4,8 @@
  * @returns {*}
  */
 export const isMobile = state => {
-  return state.isMobile;
-};
+  return state.isMobile
+}
 
 /**
  * Get the is loading.
@@ -13,8 +13,8 @@ export const isMobile = state => {
  * @returns {*}
  */
 export const isLoading = state => {
-  return state.isLoading;
-};
+  return state.isLoading
+}
 
 /**
  * Get the is loading.
@@ -22,8 +22,17 @@ export const isLoading = state => {
  * @returns {*}
  */
 export const appDrawer = state => {
-  return state.appDrawer;
-};
+  return state.appDrawer
+}
+
+/**
+ * Get the is loading.
+ * @param state
+ * @returns {*}
+ */
+export const isAuthenticated = state => {
+  return state.isAuthenticated
+}
 
 /**
  * Get the sudirectories of the currently selected directory

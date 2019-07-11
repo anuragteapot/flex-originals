@@ -4,7 +4,7 @@ export const persistedStateOptions = {
   paths: [
     'token',
     'appDrawer',
-    'isUserLoggedIn',
+    'isAuthenticated',
   ],
   storage: window.sessionStorage
 }

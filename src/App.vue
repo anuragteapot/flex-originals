@@ -11,10 +11,19 @@
 
 <script>
 import { mapGetters } from "vuex";
+import * as types from "./store/mutation-types";
+
 export default {
   name: "app",
   computed: {
     ...mapGetters(["isLoading"])
+  },
+  async beforeMount() {
+    if (await this.$api.isLogged()) {
+      this.$store.commit(types.IS_AUTHENTICATED, true);
+    } else {
+      this.$store.commit(types.IS_AUTHENTICATED, false);
+    }
   }
 };
 </script>

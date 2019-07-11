@@ -13,8 +13,9 @@
 </template>
 
 <script>
-import { api } from "./../app/Api";
 import LoginForm from "@/components/Account/LoginForm";
+
+import { mapGetters } from "vuex";
 
 export default {
   name: "media-home",
@@ -25,9 +26,7 @@ export default {
     "lazy-login": LoginForm
   },
   computed: {
-    isLoggedIn: function() {
-      return api.auth.loggedIn();
-    }
+    ...mapGetters(["isAuthenticated"])
   }
 };
 </script>

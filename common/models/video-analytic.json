@@ -8,8 +8,7 @@
   },
   "properties": {
     "userId": {
-      "type": "number",
-      "required": true
+      "type": "number"
     },
     "videoId": {
       "type": "number",

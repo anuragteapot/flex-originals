@@ -7,7 +7,7 @@
             <div class="container">
               <div class="grid">
                 <h1>Settings</h1>
-              <i @click="$router.push('/app/@home')" class="far fa-times-circle close__settings"></i>
+                <i @click="$router.push('/app/@home')" class="far fa-times-circle close__settings"></i>
               </div>
             </div>
             <div class="container">
@@ -178,14 +178,8 @@ export default {
   name: "media-settings",
   methods: {
     async logout() {
-      try {
-        await this.$store.dispatch("logout");
-        this.$router.push("/app/@home?u=logout");
-        this.$api.auth.logout();
-      } catch (err) {
-        this.$router.push("/app/@home?u=logout");
-        this.$api.auth.logout();
-      }
+      await this.$api.logout();
+      this.$router.push("/app/@home?u=logout");
     }
   }
 };

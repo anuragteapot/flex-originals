@@ -4,7 +4,6 @@ import store from '@/store/store'
 import router from '@/router'
 import * as types from './../store/mutation-types'
 import * as webStorage from './Storage'
-import * as auth from './Auth'
 import { service } from './Service'
 import { user } from './User'
 import { config } from './Config'
@@ -18,7 +17,6 @@ class Api {
    */
   constructor() {
     this.webStorage = webStorage
-    this.auth = auth.services
     this.user = user
     this.config = config
     this.service = service
@@ -145,7 +143,7 @@ class Api {
   axios() {
     axios.defaults.headers.common[
       'authorization'
-    ] = `${this.webStorage.local.get('accessToken')}`
+    ] = `${this.webStorage.local.get('$accessToken')}`
     axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest'
     axios.defaults.headers.common['csrfToken'] = process.env.VUE_APP_SECRET
 
@@ -185,6 +183,43 @@ class Api {
   }
 
   /**
+   * Check for logged in.
+   *
+   */
+  async isLogged() {
+    if (
+      webStorage.local.get('$accessToken') &&
+      webStorage.local.get('$userId')
+    ) {
+      const userId = webStorage.local.get('$userId')
+      try {
+        await this.axios().get(`/api/users/${userId}`)
+        store.commit(types.IS_AUTHENTICATED, true)
+        return Promise.resolve(true)
+      } catch (err) {
+        this._handleError(err)
+      }
+    }
+
+    return Promise.resolve(false)
+  }
+
+  /**
+   * Logout
+   *
+   */
+  async logout() {
+    await this.axios().post('/api/users/logout')
+    webStorage.local.destroy('$accessToken')
+    webStorage.local.destroy('$userId')
+    webStorage.local.destroy('user')
+    webStorage.local.destroy('created')
+    webStorage.local.destroy('ttl')
+
+    return Promise.resolve(true)
+  }
+
+  /**
    * Handle errors
    * @param error
    *
@@ -201,7 +236,7 @@ class Api {
 
     switch (error.response.status) {
       case 400:
-        this.auth.logout()
+        this.logout()
         errorData.data = 'Invalid Request.'
         store.commit(types.SHOW_SNACKBAR, errorData)
         break
@@ -211,7 +246,7 @@ class Api {
         store.commit(types.SHOW_SNACKBAR, errorData)
         break
       case 401:
-        this.auth.logout()
+        this.logout()
         router.push('/login')
         store.commit(types.SHOW_SNACKBAR, errorData)
         break

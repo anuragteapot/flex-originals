@@ -100,12 +100,14 @@ export default {
       }
     },
     finalize(response) {
-      this.$api.webStorage.local.set("created", response.data.created, 5000);
-      this.$api.webStorage.local.set("accessToken", response.data.id, 5000);
-      this.$api.webStorage.local.set("ttl", response.data.ttl, 5000);
-      this.$api.webStorage.local.set("userId", response.data.userId, 5000);
-      this.$store.state.isUserLoggedIn = true;
-      this.$router.push(this.$route.query.redirect || "/app/@home");
+      this.$api.webStorage.local.set("created", response.data.created);
+      this.$api.webStorage.local.set("$accessToken", response.data.id);
+      this.$api.webStorage.local.set("ttl", response.data.ttl);
+      this.$api.webStorage.local.set("$userId", response.data.userId);
+      this.$api.webStorage.local.set("user", JSON.stringify(response.data));
+      this.$nextTick(() => {
+        this.$router.push(this.$route.query.redirect || "/app/@home");
+      });
     },
     clear() {
       this.$refs.form.reset();

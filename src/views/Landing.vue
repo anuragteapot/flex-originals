@@ -18,8 +18,8 @@ export default {
     creatorFooter,
     creatorHeader
   },
-  beforeMount() {
-    if (this.$api.auth.loggedIn()) {
+  async beforeMount() {
+    if (await this.$api.isLogged()) {
       this.$router.push("/app/@home");
     }
   }

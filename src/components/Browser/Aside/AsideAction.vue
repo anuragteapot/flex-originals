@@ -68,8 +68,8 @@
 export default {
   name: "lazy-aside",
   methods: {
-    fileUpload: function() {
-      if (this.$api.auth.loggedIn()) {
+    fileUpload: async function() {
+      if (await this.$api.isLogged()) {
         this.$router.push(`/app/@upload`);
       } else {
         this.$router.push(`/login?redirect=${this.$route.fullPath}`);

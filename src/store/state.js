@@ -3,7 +3,7 @@ export default {
   // The loaded files
   contents: [],
   // Files loaded limit
-  loadLimit: 30,
+  isAuthenticated: false,
   // Settings
   settings: {
     dropbox: {},
@@ -12,20 +12,20 @@ export default {
   appDrawer: {
     action: true,
     des: true,
-    mobileState: false,
-  },  
+    mobileState: false
+  },
   // The currently selected items
   selectedItems: [],
   // The currently selected items
   uploadItems: [],
   // View
-  view: "grid",
+  view: 'grid',
   // The currently selected items
   uploadItemsMenu: [],
   // The currently selected items
   diskLoaded: [],
   // The currently selected dir
-  selectedDirectory: "my-drive",
+  selectedDirectory: 'my-drive',
   // The state of confirm delete model
   modal: {
     state: false,
@@ -44,8 +44,8 @@ export default {
   // The snackbar
   showsnackbar: {
     state: false,
-    data: "",
-    color: "default",
+    data: '',
+    color: 'default',
     time: 6000
   },
   // The loading state
@@ -55,15 +55,13 @@ export default {
   // Is mobile
   isMobile: false,
   // Token
-  token: "",
+  token: '',
   // Select all files
   selectAllFile: false,
   // Select all files
   selectAll: false,
   // Select all folders
   selectAllFolder: false,
-  // Islogged in
-  isUserLoggedIn: false,
   // The Search Query
-  search: ""
-};
+  search: ''
+}

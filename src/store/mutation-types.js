@@ -63,6 +63,9 @@ export const SET_SETTINGS = "SET_SETTINGS";
 // Is mobile
 export const IS_MOBILE = "IS_MOBILE";
 
+// Is Authenticated
+export const IS_AUTHENTICATED = "IS_AUTHENTICATED";
+
 // List view
 export const CHANGE_VIEW = "CHANGE_VIEW";
 

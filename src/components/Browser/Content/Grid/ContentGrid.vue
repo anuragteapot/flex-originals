@@ -3,31 +3,31 @@
     <div class="grid_section files">
       <h1>Recents</h1>
       <div class="lazy_files_container">
-        <music-thumb :src="src" :lazySrc="lazySrc"></music-thumb>
-        <music-thumb :src="src" :lazySrc="lazySrc"></music-thumb>
+        <music-thumb :src="src" :lazySrc="lazySrc" ></music-thumb>
+        <music-thumb :src="src" :lazySrc="lazySrc" ></music-thumb>
       </div>
       <h1>Videos</h1>
       <div class="lazy_files_container">
-        <video-thumb :src="srcv" :lazySrc="lazySrc"></video-thumb>
-        <video-thumb :src="srcv" :lazySrc="lazySrc"></video-thumb>
-        <video-thumb :src="srcv" :lazySrc="lazySrc"></video-thumb>
-        <video-thumb :src="srcv" :lazySrc="lazySrc"></video-thumb>
-        <video-thumb :src="srcv" :lazySrc="lazySrc"></video-thumb>
-        <video-thumb :src="srcv" :lazySrc="lazySrc"></video-thumb>
+        <video-thumb :src="srcv" :lazySrc="lazySrc" hover></video-thumb>
+        <video-thumb :src="srcv" :lazySrc="lazySrc" hover></video-thumb>
+        <video-thumb :src="srcv" :lazySrc="lazySrc" hover></video-thumb>
+        <video-thumb :src="srcv" :lazySrc="lazySrc" hover></video-thumb>
+        <video-thumb :src="srcv" :lazySrc="lazySrc" hover></video-thumb>
+        <video-thumb :src="srcv" :lazySrc="lazySrc" hover></video-thumb>
       </div>
       <h1>Music</h1>
       <div class="lazy_files_container">
-        <music-thumb :src="src" :lazySrc="lazySrc"></music-thumb>
-        <music-thumb :src="src" :lazySrc="lazySrc"></music-thumb>
-        <music-thumb :src="src" :lazySrc="lazySrc"></music-thumb>
-        <music-thumb :src="src" :lazySrc="lazySrc"></music-thumb>
-        <music-thumb :src="src" :lazySrc="lazySrc"></music-thumb>
+        <music-thumb :src="src" :lazySrc="lazySrc" hover></music-thumb>
+        <music-thumb :src="src" :lazySrc="lazySrc" hover></music-thumb>
+        <music-thumb :src="src" :lazySrc="lazySrc" hover></music-thumb>
+        <music-thumb :src="src" :lazySrc="lazySrc" hover></music-thumb>
+        <music-thumb :src="src" :lazySrc="lazySrc" hover></music-thumb>
         <music-thumb :src="src" :lazySrc="lazySrc"></music-thumb>
 
-        <music-thumb :src="src" :lazySrc="lazySrc"></music-thumb>
-        <music-thumb :src="src" :lazySrc="lazySrc"></music-thumb>
-        <music-thumb :src="src" :lazySrc="lazySrc"></music-thumb>
-        <music-thumb :src="src" :lazySrc="lazySrc"></music-thumb>
+        <music-thumb :src="src" :lazySrc="lazySrc" hover></music-thumb>
+        <music-thumb :src="src" :lazySrc="lazySrc" hover></music-thumb>
+        <music-thumb :src="src" :lazySrc="lazySrc" hover></music-thumb>
+        <music-thumb :src="src" :lazySrc="lazySrc" hover></music-thumb>
       </div>
       <span class="clear"></span>
     </div>

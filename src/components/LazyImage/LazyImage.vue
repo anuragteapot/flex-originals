@@ -1,5 +1,9 @@
 <template>
-  <div class="lazy__image lazy__background" ref="lazyBackground" :alt="alt">
+  <div
+    :class="`lazy__image lazy__background ${hover ? 'hover' : 'not'}`"
+    ref="lazyBackground"
+    :alt="alt"
+  >
     <div v-if="isLoading && !lazySrc" class="loader-1 center">
       <span></span>
     </div>
@@ -23,7 +27,7 @@ export default {
       type: [String, Object],
       default: ""
     },
-    gradient: String,
+    hover: Boolean,
     lazySrc: String,
     srcset: String
   },

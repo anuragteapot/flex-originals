@@ -5,7 +5,6 @@ import router from '@/router'
 import * as types from './../store/mutation-types'
 import * as webStorage from './Storage'
 import { service } from './Service'
-import { user } from './User'
 import { config } from './Config'
 
 /**
@@ -17,7 +16,6 @@ class Api {
    */
   constructor() {
     this.webStorage = webStorage
-    this.user = user
     this.config = config
     this.service = service
     const cssRule =

@@ -154,7 +154,7 @@
                 <p>
                   <small>This will sign you out of sessions in other browsers or on other computers.</small>
                 </p>
-                <button class="warning">Sign out other sessions</button>
+                <button class="warning" @click="deleteAllSession">Sign out other sessions</button>
                 <h3>Danger Zone</h3>
                 <p>
                   <small>
@@ -174,12 +174,17 @@
 </template>
 
 <script>
+import * as types from "./../../../store/mutation-types";
+
 export default {
   name: "media-settings",
   methods: {
     async logout() {
       await this.$api.logout();
       this.$router.push("/app/@home?u=logout");
+    },
+    deleteAllSession() {
+      this.$store.commit(types.SHOW_MODAL, { state: true, type: "MDelete" });
     }
   }
 };

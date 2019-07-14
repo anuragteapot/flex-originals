@@ -1,6 +1,8 @@
 <template>
   <div class="music_player">
     <div class="inner">
+      <p>{{musicPlaylist[currentSong].title}}</p>
+      <br />
       <i
         :disabled="!currentSong"
         @click="prevSong()"

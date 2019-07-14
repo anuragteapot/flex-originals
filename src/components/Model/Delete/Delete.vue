@@ -9,7 +9,7 @@
         </div>
         <div class="footer">
           <div style="text-align:right">
-            <button type="button">Cancel</button>
+            <button type="button" @click="hide">Cancel</button>
             <button type="submit" class="danger">Delete</button>
           </div>
         </div>
@@ -36,8 +36,8 @@ export default {
   computed: {},
 
   methods: {
-    hideConfirmDeleteModal: function() {
-      this.$store.commit(types.HIDE_CONFIRM_DELETE_MODAL);
+    hide: function() {
+      this.$store.commit(types.HIDE_MODAL);
     },
     deleteFile: async function() {
       this.$store.commit(types.SET_IS_LOADING, true);

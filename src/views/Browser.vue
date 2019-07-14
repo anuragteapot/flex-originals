@@ -1,92 +1,25 @@
 <template>
-  <lazy-browser></lazy-browser>
+  <browser></browser>
 </template>
 
 <script>
-import * as types from './../store/mutation-types'
-import Browser from './../components/Browser/Browser'
-
-import { api } from './../app/Api'
+import * as types from "./../store/mutation-types";
+import Browser from "./../components/Browser/Browser";
 
 export default {
-  name: 'lazy-drive',
+  name: "browserView",
   components: {
-    'lazy-browser': Browser
+    Browser
   },
-  created () {
+  created() {
+    window.addEventListener("resize", this.onResize);
     if (this.isMobile()) {
-      this.$store.commit(types.IS_MOBILE, true)
+      this.$store.commit(types.IS_MOBILE, true);
     } else {
-      this.$store.commit(types.IS_MOBILE, false)
-    }
-
-    if (this.$route.params.dir) {
-      this.findDisk(this.$route)
-    } else {
-      const disk = {}
-      this.$store.state.diskLoaded = []
-      disk.text = 'my-drive'
-      disk.href = `/drive/u/0/my-drive/`
-      disk.disabled = true
-      this.$store.state.diskLoaded.push(disk)
-    }
-
-    const payload = {}
-
-    payload.action = 'get'
-    payload.settings = api.user.userData
-
-    // this.$store.dispatch('settings', payload)
-
-    if (this.$route.name == 'my-drive') {
-      const dir = this.$route.params.dir
-      const path = this.$route.params.path
-
-      if (dir !== undefined && path == 'folder') {
-        // this.$store.dispatch('getContents', { path: dir })
-      } else {
-        // this.$store.dispatch('getContents', { path: 'my-drive' })
-      }
+      this.$store.commit(types.IS_MOBILE, false);
     }
   },
   methods: {
-    findDisk: function (to) {
-      if (to.params.dir) {
-        const diskPath = Buffer.from(to.params.dir, 'base64').toString('ascii')
-
-        const splitedPath = diskPath.split('/')
-        this.$store.state.diskLoaded = []
-
-        let count = 0
-        while (splitedPath.length > 0) {
-          const disk = {}
-          const joinDisk = splitedPath.join('/')
-          const encodePath = Buffer.from(joinDisk).toString('base64')
-          const name = splitedPath.pop()
-
-          if (name != 'uploads') {
-            disk.text = name
-            disk.href = `/drive/u/0/folder/${encodePath}`
-            disk.path = encodePath
-          } else {
-            disk.text = 'my-drive'
-            disk.href = `/drive/u/0/my-drive/`
-          }
-          if (count == 0) {
-            disk.disabled = true
-          }
-          ++count
-          this.$store.state.diskLoaded.unshift(disk)
-        }
-      } else {
-        const disk = {}
-        this.$store.state.diskLoaded = []
-        disk.text = 'my-drive'
-        disk.href = `/drive/u/0/my-drive/`
-        disk.disabled = true
-        this.$store.state.diskLoaded.push(disk)
-      }
-    },
     /* eslint-disable */
     isMobile: function() {
       var check = false;
@@ -103,36 +36,16 @@ export default {
       })(navigator.userAgent || navigator.vendor || window.opera);
       return check;
     },
-    /* eslint-enable */
-    routeUpdated: function (to, from) {
-      this.findDisk(to, from)
-      this.$store.commit(types.UNSELECT_ALL_BROWSER_ITEMS)
-      this.$store.state.loadLimit = 30
+    onResize() {
+      if (this.isMobile()) {
+        this.$store.commit(types.IS_MOBILE, true);
+      } else {
+        this.$store.commit(types.IS_MOBILE, false);
+      }
     }
   },
-  beforeRouteUpdate (to, from, next) {
-    /* eslint-disable */
-    if (to.params.dir) {
-      this.$store
-        .dispatch("getContents", { path: to.params.dir })
-        .then(response => {
-          this.routeUpdated(to, from);
-          next();
-        })
-        .catch(err => {
-          console.log(err);
-        });
-    } else {
-      this.$store
-        .dispatch("getContents", { path: "my-drive" })
-        .then(response => {
-          this.routeUpdated(to, from);
-          next();
-        })
-        .catch(err => {
-          console.log(err);
-        });
-    }
+  beforeDestroy: function() {
+    window.removeEventListener("resize", this.onResize);
   }
 };
 </script>

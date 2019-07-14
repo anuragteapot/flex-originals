@@ -16,6 +16,9 @@
       <i class="fab fa-rev"></i>New Releases
     </span>
     <div class="menu-right">
+      <span class="icon">
+        <i class="fas fa-search search__icon"></i>
+      </span>
       <input type="text" placeholder="Search...." />
       <span class="icon">
         <i class="fas fa-bell"></i>

@@ -7,10 +7,6 @@
     "validateUpsert": true
   },
   "properties": {
-    "userId": {
-      "type": "number",
-      "required": true
-    },
     "emailNotification": {
       "type": "boolean",
       "required": true,
@@ -28,7 +24,8 @@
     },
     "followers": {
       "type": "number",
-      "required": true
+      "required": true,
+      "default": 0
     },
     "theme": {
       "type": "string",
@@ -52,7 +49,20 @@
     }
   },
   "validations": [],
-  "relations": {},
-  "acls": [],
+  "relations": {
+    "userId": {
+      "type": "hasOne",
+      "model": "user",
+      "foreignKey": "settings_user_id"
+    }
+  },
+  "acls": [
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "$owner",
+      "permission": "ALLOW"
+    }
+  ],
   "methods": {}
 }

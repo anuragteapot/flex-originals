@@ -118,7 +118,7 @@
                     </select>
                   </div>
                 </div>
-                <button class="success">Publish</button>
+                <button class="success" @click="finilize">Publish</button>
               </div>
             </div>
           </div>
@@ -137,7 +137,8 @@ export default {
   data() {
     return {
       isUploading: false,
-      uploadPercent: 0
+      uploadPercent: 0,
+      done: false
     };
   },
   methods: {
@@ -182,7 +183,28 @@ export default {
       setTimeout(() => {
         this.processUpload(formData);
       }, 1000);
+    },
+    beforeunload(event) {
+      event = event || window.event;
+      // event.preventDefault();
+
+      // For IE and Firefox prior to version 4
+      if (event && !this.done) {
+        event.returnValue = "Sure?";
+      }
+
+      // For Safari
+      if (!this.done) {
+        return "Sure?";
+      }
+    },
+    finilize() {
+      this.done = true;
+      window.removeEventListener("beforeunload");
     }
+  },
+  created() {
+    window.addEventListener("beforeunload", this.beforeunload);
   }
 };
 </script>

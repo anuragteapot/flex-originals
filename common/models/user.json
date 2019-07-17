@@ -6,16 +6,7 @@
   "emailVerificationRequired": true,
   "properties": {},
   "validations": [],
-  "relations": {
-    "userId": {
-      "type": "hasOne",
-      "model": "settings",
-      "foreignKey": "",
-      "options": {
-        "nestRemoting": true
-      }
-    }
-  },
+  "relations": {},
   "acls": [
     {
       "accessType": "*",

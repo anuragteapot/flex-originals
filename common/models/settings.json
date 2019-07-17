@@ -50,18 +50,25 @@
   },
   "validations": [],
   "relations": {
-    "userId": {
-      "type": "hasOne",
+    "user": {
+      "type": "belongsTo",
       "model": "user",
-      "foreignKey": "settings_user_id"
+      "foreignKey": "ownerId"
     }
   },
   "acls": [
     {
       "accessType": "*",
       "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "DENY"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
       "principalId": "$owner",
-      "permission": "ALLOW"
+      "permission": "ALLOW",
+      "property": "findSetting"
     }
   ],
   "methods": {}

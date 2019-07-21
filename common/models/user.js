@@ -7,7 +7,7 @@ const senderAddress = 'noreply@loopback.com'
 
 module.exports = function(User) {
   //send verification email after registration
-  const Settings = app.models.Settings
+  // const Settings = app.models.Settings
 
   User.afterRemote('create', function(context, user, next) {
     var options = {
@@ -22,8 +22,6 @@ module.exports = function(User) {
       restApiRoot: '/verify',
       user: user
     }
-
-    Settings.create({ userId: user.id })
 
     user.verify(options, function(err) {
       if (err) {

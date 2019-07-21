@@ -1,44 +1,24 @@
 /* Progress Bar */
 .progress {
+  margin: auto;
   position: absolute;
-  height: 2px;
-  display: block;
-  width: 100%;
+  display: inline-block;
   overflow: hidden;
-  border-radius: 2px;
+  top: 60px;
+  left: 45%;
+  border-radius: 5px;
   background-color: white;
+  z-index: 1000;
+  box-shadow: 0px 2px 20px rgb(131, 130, 130);
 
   .indeterminate {
-    background-color: rgb(0, 255, 170);
-  }
+    background-color: rgba(0, 255, 170, 0.5);
+    color: green;
+    padding: 15px 20px;
+    text-align: center;
 
-  .indeterminate:before {
-    content: "";
-    position: absolute;
-    background-color: inherit;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    will-change: left, right;
-    -webkit-animation: indeterminate 1.5s cubic-bezier(0.55, 0.715, 0.635, 0.295)
-      infinite;
-    animation: indeterminate 1.5s cubic-bezier(0.55, 0.715, 0.635, 0.295) infinite;
-  }
-
-  @keyframes indeterminate {
-    0% {
-      left: -35%;
-      right: 100%;
-    }
-
-    60% {
-      left: 100%;
-      right: -90%;
-    }
-
-    100% {
-      left: 100%;
-      right: -90%;
+    i {
+      margin: 0 5px;
     }
   }
 }
@@ -827,8 +807,7 @@
   border: 2px solid #fff;
   border-radius: 50%;
   opacity: 0;
-  -webkit-animation: loader-6-1 1.5s cubic-bezier(0.075, 0.82, 0.165, 1)
-    infinite;
+  -webkit-animation: loader-6-1 1.5s cubic-bezier(0.075, 0.82, 0.165, 1) infinite;
   animation: loader-6-1 1.5s cubic-bezier(0.075, 0.82, 0.165, 1) infinite;
 }
 
@@ -857,8 +836,7 @@
 }
 
 .loader-6 span::after {
-  -webkit-animation: loader-6-2 1.5s cubic-bezier(0.075, 0.82, 0.165, 1) 0.25s
-    infinite;
+  -webkit-animation: loader-6-2 1.5s cubic-bezier(0.075, 0.82, 0.165, 1) 0.25s infinite;
   animation: loader-6-2 1.5s cubic-bezier(0.075, 0.82, 0.165, 1) 0.25s infinite;
 }
 

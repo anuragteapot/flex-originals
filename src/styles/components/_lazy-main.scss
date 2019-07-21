@@ -7,15 +7,7 @@
 
 /* width */
 ::-webkit-scrollbar {
-  width: 10px;
-}
-
-@media only screen and (max-width: 700px) {
-
-  /* width */
-  ::-webkit-scrollbar {
-    width: 5px;
-  }
+  width: 5px;
 }
 
 /* Track */
@@ -345,7 +337,7 @@ i:hover {
         margin: 0 5px;
       }
 
-      @media only screen and (max-width: 1000px) {
+      @media only screen and (max-width: 1300px) {
         display: none;
       }
     }
@@ -414,10 +406,6 @@ i:hover {
     .inner {
       padding: 10px;
       width: 100%;
-
-      @media only screen and (max-width: 700px) {
-        padding: 0;
-      }
 
       .profile__banner {
         width: 100%;

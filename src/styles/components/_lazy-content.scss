@@ -68,7 +68,15 @@
     padding: 0px 0px 50px 0;
   }
 
-  @media only screen and (max-width: 700px) {
-    padding: 0px 0px 50px 0;
+  .lazy_files_container {
+    &::-webkit-scrollbar {
+      display: none;
+    }
+
+    @media only screen and (max-width: 1000px) {
+      display: flex;
+      flex-direction: row;
+      overflow: auto;
+    }
   }
 }

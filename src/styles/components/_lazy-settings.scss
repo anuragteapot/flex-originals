@@ -37,23 +37,6 @@
         @media screen and (max-width: 900px) {
           padding: 5rem 0;
         }
-
-        .upload__icon__body {
-          display: flex;
-          flex: 1;
-
-          img {
-            cursor: pointer;
-            margin: auto;
-            max-width: 100px;
-            max-height: 100px;
-            border-radius: 100%;
-
-            &:hover {
-              box-shadow: 0 1px 20px lightgreen;
-            }
-          }
-        }
       }
     }
 

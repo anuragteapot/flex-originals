@@ -1,0 +1,25 @@
+.settings {
+  .upload__icon__body {
+    border: 2px dotted dodgerblue;
+    text-align: center;
+    padding: 290px 10px;
+    margin: 5px;
+
+    background-color: rgba(20, 141, 255, 0.1);
+
+    h1 {
+      display: inline-block;
+      margin: 20px 0;
+    }
+
+    p {
+      font-size: 10px;
+      color: rgb(212, 216, 219);
+    }
+  }
+
+  .active {
+    background-color: rgb(20, 141, 255);
+    transition: 0.2ms all;
+  }
+}

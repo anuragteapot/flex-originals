@@ -9,35 +9,6 @@ import * as FileSaver from "file-saver";
  * @param commit
  * @param payload
  */
-export const getContents = (context, payload) => {
-  return new Promise((resolve, reject) => {
-    context.commit(types.SET_IS_LOADING, true);
-    let path = payload.path || context.state.selectedDirectory;
-    let limit = payload.limit || context.state.loadLimit;
-    api
-      .axios()
-      .get(`/api/getFiles/${path}/${limit}`, {
-        retry: 3,
-        retryDelay: 1000
-      })
-      .then(response => {
-        context.state.selectedDirectory = path;
-        context.commit(types.LOAD_CONTENTS_SUCCESS, response.data.contents);
-        context.commit(types.SET_IS_LOADING, false);
-        resolve(response);
-      })
-      .catch(error => {
-        api._handleError(error);
-        reject(error);
-      });
-  });
-};
-
-/**
- * Get contents of a directory from the api
- * @param commit
- * @param payload
- */
 export const update = (context, payload) => {
   let path = payload.path || context.state.selectedDirectory;
   let limit = payload.limit || context.state.loadLimit;
@@ -128,22 +99,6 @@ export const verify = async (context, payload) => {
   }
 };
 
-/**
- * Login
- * @param commit
- * @param payload
- */
-export const log = (context, payload) => {
-  api
-    .axios()
-    .post("api/log", payload)
-    .then(() => {
-      // context.dispatch('update', {path: context.state.selectedDirectory});
-    })
-    .catch(error => {
-      api._handleError(error);
-    });
-};
 
 /**
  * Save Settings

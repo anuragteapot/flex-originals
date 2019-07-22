@@ -141,7 +141,7 @@ class Api {
   axios() {
     axios.defaults.headers.common[
       'authorization'
-    ] = `${this.webStorage.local.get('$accessToken')}`
+    ] = `${webStorage.local.get('$accessToken')}`
     axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest'
     axios.defaults.headers.common['csrfToken'] = process.env.VUE_APP_SECRET
 
@@ -189,13 +189,16 @@ class Api {
       webStorage.local.get('$accessToken') &&
       webStorage.local.get('$userId')
     ) {
-      const userId = webStorage.local.get('$userId')
-      try {
-        await this.axios().get(`/api/users/${userId}`)
-        store.commit(types.IS_AUTHENTICATED, true)
-        return Promise.resolve(true)
-      } catch (err) {
-        this._handleError(err)
+      const userId = await webStorage.local.get('$userId')
+
+      if (userId) {
+        try {
+          await this.axios().get(`/api/users/${userId}`)
+          store.commit(types.IS_AUTHENTICATED, true)
+          return Promise.resolve(true)
+        } catch (err) {
+          this._handleError(err)
+        }
       }
     }
 
@@ -207,13 +210,16 @@ class Api {
    *
    */
   async logout() {
-    await this.axios().post('/api/users/logout')
-    webStorage.local.destroy('$accessToken')
-    webStorage.local.destroy('$userId')
-    webStorage.local.destroy('user')
-    webStorage.local.destroy('created')
-    webStorage.local.destroy('ttl')
-
+    try {
+      await this.axios().post('/api/users/logout')
+    } catch (err) {
+      await webStorage.local.destroy('$accessToken')
+      await webStorage.local.destroy('$userId')
+      await webStorage.local.destroy('user')
+      await webStorage.local.destroy('created')
+      await webStorage.local.destroy('ttl')
+      router.push('/login')
+    }
     return Promise.resolve(true)
   }
 
@@ -239,13 +245,11 @@ class Api {
         store.commit(types.SHOW_SNACKBAR, errorData)
         break
       case 404:
-        store.state.errorState = true
         errorData.data = 'Something went wrong.'
         store.commit(types.SHOW_SNACKBAR, errorData)
         break
       case 401:
         this.logout()
-        router.push('/login')
         store.commit(types.SHOW_SNACKBAR, errorData)
         break
       case 500:

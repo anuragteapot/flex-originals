@@ -162,8 +162,9 @@ export const local = {
    * @return String|null
    */
   getAll: function() {
-    const items = { ...localStorage }
-    return items
+    return Promise.resolve().then(() => {
+      return { ...localStorage }
+    })
   },
 
   /**
@@ -173,9 +174,7 @@ export const local = {
    * @return String|null
    */
   get: function(name) {
-    var item = null
-    item = localStorage.getItem(name)
-    return item
+    return localStorage.getItem(name)
   },
 
   /**
@@ -186,8 +185,10 @@ export const local = {
    * @return this
    */
   set: function(name, value) {
-    localStorage.setItem(name, value)
-    return this
+    return Promise.resolve().then(() => {
+      localStorage.setItem(name, value)
+      return this
+    })
   },
 
   /**
@@ -197,10 +198,12 @@ export const local = {
    * @return this
    */
   destroy: function(name) {
-    if (this.get(name) != '' || this.get(name) != null) {
-      localStorage.removeItem(name)
-    }
-    return this
+    return Promise.resolve().then(() => {
+      if (this.get(name) != '' || this.get(name) != null) {
+        localStorage.removeItem(name)
+      }
+      return this
+    })
   }
 }
 

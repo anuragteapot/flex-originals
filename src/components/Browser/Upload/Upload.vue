@@ -260,6 +260,7 @@ export default {
     },
     processFile: function() {
       this.isUploading = true;
+      window.addEventListener("beforeunload", this.beforeunload);
       var file = this.$refs.inputFile.files;
 
       const formData = new FormData();
@@ -287,9 +288,6 @@ export default {
       this.done = true;
       window.removeEventListener("beforeunload", this.beforeunload);
     }
-  },
-  created() {
-    // window.addEventListener("beforeunload", this.beforeunload);
   }
 };
 </script>

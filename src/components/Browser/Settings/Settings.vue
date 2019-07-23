@@ -34,25 +34,41 @@
                 </div>
                 <div class="form-item">
                   <label class="form-item__label">Enable Email Notifications</label>
-                  <div class="form-item__control toggle">
+                  <div
+                    class="form-item__control toggle"
+                    :class="settings.emailNotification ? 'is-on' : ''"
+                    @click="settings.emailNotification = !settings.emailNotification"
+                  >
                     <div class="toggle__handle"></div>
                   </div>
                 </div>
                 <div class="form-item">
                   <label class="form-item__label">Enable Desktop Notifications</label>
-                  <div class="form-item__control toggle">
+                  <div
+                    class="form-item__control toggle"
+                    :class="settings.desktopNotification ? 'is-on' : ''"
+                    @click="settings.desktopNotification = !settings.desktopNotification"
+                  >
                     <div class="toggle__handle"></div>
                   </div>
                 </div>
                 <div class="form-item">
                   <label class="form-item__label">Theme ( Light/Dark )</label>
-                  <div class="form-item__control toggle">
+                  <div
+                    class="form-item__control toggle"
+                    :class="settings.emailNotification ? 'is-on' : ''"
+                    @click="settings.emailNotification = !settings.emailNotification"
+                  >
                     <div class="toggle__handle"></div>
                   </div>
                 </div>
                 <div class="form-item">
                   <label class="form-item__label">Show icon in dock</label>
-                  <div class="form-item__control toggle is-on">
+                  <div
+                    class="form-item__control toggle"
+                    :class="settings.emailNotification ? 'is-on' : ''"
+                    @click="settings.emailNotification = !settings.emailNotification"
+                  >
                     <div class="toggle__handle"></div>
                   </div>
                 </div>
@@ -177,6 +193,14 @@ import * as types from "./../../../store/mutation-types";
 
 export default {
   name: "media-settings",
+  data() {
+    return {};
+  },
+  computed: {
+    settings() {
+      return this.$store.state.settings;
+    }
+  },
   methods: {
     async logout() {
       await this.$api.logout();

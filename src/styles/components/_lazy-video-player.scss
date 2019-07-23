@@ -43,18 +43,22 @@
       position: absolute;
       display: inline-block;
     }
-    
+
     .v-quality {
       right: 120px;
     }
-    
+
     .dropbtn {
-      font-weight: 800; 
+      font-weight: 800;
       background-color: transparent;
       cursor: pointer;
       color: white;
       border: none;
       padding: 0.8em 0.6em;
+
+      @media only screen and (max-width: 700px) {
+        display: none;
+      }
     }
 
 
@@ -101,7 +105,7 @@
         font-size: 15px;
         text-align: center;
         top: 50%;
-        margin-left: 5px;  
+        margin-left: 5px;
         margin-top: -0.75em;
         cursor: pointer;
         transition: all 0.2s ease;

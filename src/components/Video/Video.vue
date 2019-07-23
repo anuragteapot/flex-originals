@@ -167,6 +167,7 @@ export default {
       if (this.video.paused) {
         this.video.play();
         this.hasEnded = false;
+        this.videoActive = false;
         this.isPlaying = true;
       } else {
         this.video.pause();

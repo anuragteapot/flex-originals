@@ -17,7 +17,7 @@
     <span :class="`large-play ${!isPlaying && !loading ? '' : 'hidden'}`">
       <i @click="togglePlay" class="fas fa-play" aria-hidden="true"></i>
     </span>
-    <div v-show="loading" class="loader-2 center">
+    <div v-show="loading" class="loader-3 center">
       <span></span>
     </div>
     <div :class="`control-bar ${videoActive || !isPlaying ? 'active' : ''}`">

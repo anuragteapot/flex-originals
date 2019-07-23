@@ -5,10 +5,7 @@ export default {
   // Files loaded limit
   isAuthenticated: false,
   // Settings
-  settings: {
-    dropbox: {},
-    google: {}
-  },
+  settings: {},
   appDrawer: {
     action: true,
     des: true,

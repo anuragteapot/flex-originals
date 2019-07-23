@@ -86,6 +86,13 @@ export default {
         });
       }
     }
+  },
+  async mounted() {
+    const settings = await this.$store.dispatch("findSettings", {
+      uid: this.$api.webStorage.local.get("$userId")
+    });
+
+    this.$store.commit(types.SET_SETTINGS, settings);
   }
 };
 </script>

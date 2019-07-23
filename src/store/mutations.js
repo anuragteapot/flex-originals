@@ -45,7 +45,7 @@ export default {
    * @param payload
    */
   [types.SET_SETTINGS]: (state, payload) => {
-    state.settings = payload.data.settings
+    state.settings = payload.data
   },
 
   /**

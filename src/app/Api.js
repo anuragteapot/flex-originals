@@ -4,7 +4,6 @@ import store from '@/store/store'
 import router from '@/router'
 import * as types from './../store/mutation-types'
 import * as webStorage from './Storage'
-import { service } from './Service'
 import { config } from './Config'
 
 /**
@@ -17,7 +16,6 @@ class Api {
   constructor() {
     this.webStorage = webStorage
     this.config = config
-    this.service = service
     const cssRule =
       'color: red;' +
       'font-size: 60px;' +

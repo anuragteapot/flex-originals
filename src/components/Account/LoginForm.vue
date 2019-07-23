@@ -108,6 +108,7 @@ export default {
         "user",
         JSON.stringify(response.data)
       );
+
       this.$nextTick(() => {
         this.$router.push(this.$route.query.redirect || "/app/@home");
       });

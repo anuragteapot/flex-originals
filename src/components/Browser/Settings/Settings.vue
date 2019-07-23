@@ -7,7 +7,6 @@
             <div class="container">
               <div class="grid">
                 <h1>Settings</h1>
-                <i @click="$router.push('/app/@home')" class="far fa-times-circle close__settings"></i>
               </div>
             </div>
             <div class="container">

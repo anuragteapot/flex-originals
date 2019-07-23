@@ -1,4 +1,4 @@
-.lazy__image {
+.fo-image {
   width: 100%;
   height: 100%;
   text-align: center;
@@ -9,7 +9,7 @@
   position: relative;
 }
 
-.lazy__image.hover:hover::before {
+.fo-image.hover:hover::before {
   content: "";
   position: absolute;
   top: 0;

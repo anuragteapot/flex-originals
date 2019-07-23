@@ -1,5 +1,5 @@
 <template>
-  <div class="lazy__browser">
+  <div class="fo-browser">
     <div v-if="isMobile" :class="`nav-offcanvas ${appDrawer.mobileState ? 'open' : ''}`">
       <div class="nav-offcanvas-menu">
         <aside-action></aside-action>
@@ -15,7 +15,7 @@
     <aside-action v-if="!isMobile"></aside-action>
     <aside-des v-if="!isMobile && appDrawer.des"></aside-des>
 
-    <div class="vert-container">
+    <div class="main-container">
       <toolbar></toolbar>
       <component v-bind:is="layout"></component>
     </div>

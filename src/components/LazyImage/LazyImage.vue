@@ -1,6 +1,6 @@
 <template>
   <div
-    :class="`lazy__image lazy__background ${hover ? 'hover' : 'not'}`"
+    :class="`fo-image fo-background ${hover ? 'hover' : 'not'}`"
     ref="lazyBackground"
     :alt="alt"
   >
@@ -60,7 +60,7 @@ export default {
     cachedImage() {
       if (!(this.normalisedSrc.src || this.normalisedSrc.lazySrc)) return [];
       const src = this.isLoading ? this.normalisedSrc.lazySrc : this.currentSrc;
-      this.$refs.lazyBackground.classList.remove("lazy__background");
+      this.$refs.lazyBackground.classList.remove("fo-background");
       this.$refs.lazyBackground.style.backgroundImage = `url("${src}")`;
     },
     init() {

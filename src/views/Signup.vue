@@ -1,5 +1,5 @@
 <template>
-  <div class="lazy__home">
+  <div class="fo-home">
     <div class="background-shapes-wrapper">
       <div class="background-shapes-container">
         <div class="background-shape square-one"></div>

@@ -22,12 +22,11 @@
   }
 
   .control-bar {
-    width: 100%;
-    height: 2.2em;
-    padding-bottom: 1px;
-    position: absolute;
-    bottom: -2.2em;
     left: 0;
+    bottom: -2.7em;
+    width: 100%;
+    height: 2.7em;
+    position: absolute;
     transition: bottom 0.3s ease-out;
 
     -webkit-touch-callout: none;
@@ -44,18 +43,18 @@
       position: absolute;
       display: inline-block;
     }
-
+    
     .v-quality {
       right: 120px;
     }
-
+    
     .dropbtn {
+      font-weight: 800; 
       background-color: transparent;
       cursor: pointer;
       color: white;
       border: none;
-      font-size: 14px;
-      padding: 0.5em 0.6em;
+      padding: 0.8em 0.6em;
     }
 
 
@@ -91,23 +90,21 @@
       padding: 0 10px;
       position: absolute;
       background: linear-gradient(to bottom,
-          rgba(0, 0, 0, 0.8) 0%,
-          rgba(0, 0, 0, 0.8) 100%);
+          rgba(0, 0, 0, 0) 0%,
+          rgba(0, 0, 0, 0.5) 100%);
       z-index: 2;
 
       i {
-        font-style: normal;
         color: white;
         position: absolute;
-        width: 2em;
-        height: 1.6em;
         line-height: 1.6em;
+        font-size: 15px;
         text-align: center;
         top: 50%;
+        margin-left: 5px;  
         margin-top: -0.75em;
         cursor: pointer;
         transition: all 0.2s ease;
-        text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.8);
         z-index: 2;
 
         &.play,
@@ -134,7 +131,6 @@
         top: 50%;
         margin-top: -0.75em;
         cursor: pointer;
-        text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.8);
         z-index: 2;
         overflow: hidden;
         left: 2.3em;
@@ -179,7 +175,7 @@
             left: 0;
             top: 50%;
             margin-top: -0.15em;
-            background: $color-active;
+            background: $color-error;
           }
 
           .inaudible {
@@ -190,13 +186,11 @@
 
       .time {
         color: #eee;
-        font-size: 0.8em;
-        text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.8);
         position: absolute;
         left: 7em;
+        font-weight: 800;
         height: 2.2em;
         line-height: 2.8em;
-
         transition: all 0.7s ease-in 0.2s;
 
         &.shift {
@@ -212,12 +206,12 @@
       background-color: black;
       color: #fff;
       text-align: center;
-      padding: 5px 0;
+      padding: 6px 0;
       font-size: 10px;
       position: absolute;
-      border-radius: 2px; 
+      border-radius: 2px;
       z-index: 1;
-      bottom: 105%;
+      bottom: 200%;
       left: 0%;
     }
 
@@ -253,7 +247,7 @@
         width: 0%;
         height: 100%;
         z-index: 8;
-        background: $color-active;
+        background: $color-error;
         overflow: visible !important;
 
         &:before,
@@ -261,13 +255,13 @@
           position: absolute;
           height: 100%;
           width: 10px;
-          background: lighten($color-active, 10%);
+          background: lighten($color-error, 10%);
           border-radius: 6px/3px;
         }
 
         &:after {
           right: 0px;
-          background: lighten($color-active, 20%);
+          background: lighten($color-error, 20%);
         }
 
         .handle {

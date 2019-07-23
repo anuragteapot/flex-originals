@@ -2,7 +2,7 @@
   "name": "settings",
   "plural": "settings",
   "base": "PersistedModel",
-  "idInjection": true,
+  "idInjection": false,
   "options": {
     "validateUpsert": true
   },
@@ -50,10 +50,10 @@
   },
   "validations": [],
   "relations": {
-    "user": {
+    "id": {
       "type": "belongsTo",
       "model": "user",
-      "foreignKey": "ownerId"
+      "foreignKey": "userId"
     }
   },
   "acls": [

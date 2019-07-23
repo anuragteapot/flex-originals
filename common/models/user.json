@@ -6,7 +6,18 @@
   "emailVerificationRequired": true,
   "properties": {},
   "validations": [],
-  "relations": {},
+  "relations": {
+    "projects": {
+      "type": "hasMany",
+      "model": "project",
+      "foreignKey": "ownerId"
+    },
+    "settings": {
+      "type": "hasOne",
+      "model": "settings",
+      "foreignKey": "ownerId"
+    }
+  },
   "acls": [
     {
       "accessType": "*",

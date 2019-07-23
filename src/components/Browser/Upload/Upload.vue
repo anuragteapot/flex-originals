@@ -40,13 +40,13 @@
                 </div>
                 <h3>Select Thumbnail</h3>
                 <div class="video__thumbnails">
-                  <img class="lazy__image" src="/public/qq.webp" alt="thumbnail" />
+                  <img class="fo-image" src="/public/qq.webp" alt="thumbnail" />
                 </div>
                 <div class="video__thumbnails">
-                  <img class="lazy__image" src="/public/qq.webp" alt="thumbnail" />
+                  <img class="fo-image" src="/public/qq.webp" alt="thumbnail" />
                 </div>
                 <div class="video__thumbnails">
-                  <img class="lazy__image" src="/public/qq.webp" alt="thumbnail" />
+                  <img class="fo-image" src="/public/qq.webp" alt="thumbnail" />
                 </div>
                 <div class="upload__video__settings">
                   <div class="video__title">

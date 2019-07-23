@@ -66,5 +66,9 @@
   "comment": {
     "dataSource": "mongodb",
     "public": true
+  },
+  "project": {
+    "dataSource": "mongodb",
+    "public": true
   }
 }

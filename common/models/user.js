@@ -6,10 +6,9 @@ const app = require('../../server/server')
 const senderAddress = 'noreply@loopback.com'
 
 module.exports = function(User) {
-  //send verification email after registration
-  // const Settings = app.models.Settings
-
   User.afterRemote('create', function(context, user, next) {
+    const Settings = app.models.Settings
+
     var options = {
       type: 'email',
       to: user.email,
@@ -22,6 +21,8 @@ module.exports = function(User) {
       restApiRoot: '/verify',
       user: user
     }
+
+    Settings.upsert({ id: user.id })
 
     user.verify(options, function(err) {
       if (err) {
@@ -107,31 +108,5 @@ module.exports = function(User) {
       redirectToLinkText: 'Log in'
     }
     return next()
-  })
-
-  User.findSetting = async (userId) => {
-    if (!userId) {
-      throw new Error('User Id is required.', {}, 500)
-    }
-    return await Settings.find({ where: { userId: userId } })
-  }
-
-  User.remoteMethod('findSetting', {
-    description: 'Method to get the user settings',
-    accepts: [
-      {
-        arg: 'userId',
-        type: 'number',
-        required: true
-      }
-    ],
-    returns: {
-      type: 'object',
-      root: true
-    },
-    http: {
-      path: '/findSetting/:userId',
-      verb: 'get'
-    }
   })
 }

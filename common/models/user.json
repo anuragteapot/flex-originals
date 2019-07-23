@@ -7,15 +7,20 @@
   "properties": {},
   "validations": [],
   "relations": {
-    "projects": {
-      "type": "hasMany",
-      "model": "project",
-      "foreignKey": "ownerId"
-    },
     "settings": {
       "type": "hasOne",
       "model": "settings",
       "foreignKey": "ownerId"
+    },
+    "audios": {
+      "type": "hasMany",
+      "model": "audio",
+      "foreignKey": "audioOwnerId"
+    },
+    "videos": {
+      "type": "hasMany",
+      "model": "videos",
+      "foreignKey": "videoOwnerId"
     }
   },
   "acls": [

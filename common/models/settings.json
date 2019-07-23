@@ -2,7 +2,7 @@
   "name": "settings",
   "plural": "settings",
   "base": "PersistedModel",
-  "idInjection": false,
+  "idInjection": true,
   "options": {
     "validateUpsert": true
   },
@@ -50,10 +50,10 @@
   },
   "validations": [],
   "relations": {
-    "id": {
+    "user": {
       "type": "belongsTo",
       "model": "user",
-      "foreignKey": "userId"
+      "foreignKey": "ownerId"
     }
   },
   "acls": [
@@ -62,13 +62,6 @@
       "principalType": "ROLE",
       "principalId": "$everyone",
       "permission": "DENY"
-    },
-    {
-      "accessType": "EXECUTE",
-      "principalType": "ROLE",
-      "principalId": "$owner",
-      "permission": "ALLOW",
-      "property": "findSetting"
     }
   ],
   "methods": {}

@@ -1,13 +1,13 @@
 {
-  "name": "videoAnalytic",
-  "plural": "videoAnalytics",
+  "name": "Audioanalytic",
+  "plural": "Audioanalytics",
   "base": "PersistedModel",
   "idInjection": true,
   "options": {
     "validateUpsert": true
   },
   "properties": {
-    "videoId": {
+    "audioId": {
       "type": "number",
       "required": true
     },

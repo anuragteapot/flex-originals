@@ -3,7 +3,7 @@ const path = require('path')
 const app = require('../../server/server')
 
 //Replace this address with your actual address
-const senderAddress = 'noreply@loopback.com'
+const senderAddress = 'noreply@flexoriginales.com'
 
 module.exports = function(User) {
   User.afterRemote('create', function(context, user, next) {
@@ -22,7 +22,7 @@ module.exports = function(User) {
       user: user
     }
 
-    Settings.upsert({ id: user.id })
+    Settings.upsert({ ownerId: user.id })
 
     user.verify(options, function(err) {
       if (err) {
@@ -86,6 +86,96 @@ module.exports = function(User) {
         console.log('> sending password reset email to:', ctx.email)
       }
     )
+  })
+
+  User.findSetting = async id => {
+    const Settings = app.models.Settings
+    if (!id) {
+      throw new Error('User Id is required.', {}, 500)
+    }
+    return await Settings.findOne({ where: { ownerId: id } })
+  }
+
+  User.remoteMethod('findSetting', {
+    description: 'Method to get the user settings',
+    accepts: [
+      {
+        arg: 'id',
+        type: 'string',
+        required: true
+      }
+    ],
+    returns: {
+      type: 'object',
+      root: true
+    },
+    http: {
+      path: '/findSetting/:id',
+      verb: 'get'
+    }
+  })
+
+  User.updateSetting = async (id, newSettings) => {
+    const Settings = app.models.Settings
+    if (!id) {
+      throw new Error('User Id is required.', {}, 500)
+    }
+    let userSettings = await Settings.findOne({ where: { ownerId: id } })
+    userSettings.desktopNotification = newSettings.desktopNotification
+      ? newSettings.desktopNotification
+      : userSettings.desktopNotification
+    userSettings.emailNotification = newSettings.emailNotification
+      ? newSettings.emailNotification
+      : userSettings.emailNotification
+    userSettings.verifiedChannel = newSettings.verifiedChannel
+      ? newSettings.verifiedChannel
+      : userSettings.verifiedChannel
+    userSettings.followers = newSettings.followers
+      ? newSettings.followers
+      : userSettings.followers
+    userSettings.theme = newSettings.theme
+      ? newSettings.theme
+      : userSettings.theme
+    userSettings.facebook = newSettings.facebook
+      ? newSettings.facebook
+      : userSettings.facebook
+    userSettings.instagram = newSettings.instagram
+      ? newSettings.instagram
+      : userSettings.instagram
+    userSettings.twitter = newSettings.twitter
+      ? newSettings.twitter
+      : userSettings.twitter
+    userSettings.redit = newSettings.redit
+      ? newSettings.redit
+      : userSettings.redit
+    userSettings.linkedin = newSettings.linkedin
+      ? newSettings.linkedin
+      : userSettings.linkedin
+    return userSettings.save()
+  }
+
+  User.remoteMethod('updateSetting', {
+    description: 'Method to get the user settings',
+    accepts: [
+      {
+        arg: 'id',
+        type: 'string',
+        required: true
+      },
+      {
+        arg: 'newSettings',
+        type: 'object',
+        required: true
+      }
+    ],
+    returns: {
+      type: 'object',
+      root: true
+    },
+    http: {
+      path: '/updateSettings',
+      verb: 'post'
+    }
   })
 
   //render UI page after password change

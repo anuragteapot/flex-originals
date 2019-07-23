@@ -69,7 +69,7 @@
             height: 4px;
             border-radius: 4px;
             z-index: 45;
-            background: $color-active;
+            background: $color-error;
 
             .circle {
               position: relative;
@@ -85,7 +85,7 @@
 
         &.audio {
           width: 15%;
-          background: $color-active;
+          background: $color-error;
         }
       }
 

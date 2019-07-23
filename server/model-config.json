@@ -67,7 +67,7 @@
     "dataSource": "mongodb",
     "public": true
   },
-  "project": {
+  "Audioanalytic": {
     "dataSource": "mongodb",
     "public": true
   }

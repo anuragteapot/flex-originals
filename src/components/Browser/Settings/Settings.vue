@@ -209,6 +209,13 @@ export default {
     deleteAllSession() {
       this.$store.commit(types.SHOW_MODAL, { state: true, type: "MDelete" });
     }
+  },
+  async created() {
+    const settings = await this.$store.dispatch("findSettings", {
+      uid: this.$api.webStorage.local.get("$userId")
+    });
+
+    this.$store.commit(types.SET_SETTINGS, settings);
   }
 };
 </script>

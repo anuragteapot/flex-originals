@@ -8,7 +8,7 @@ import Model from "@/components/Model/Model";
 import AudioPlayer from "@/components/Audio/Audio";
 import VideoPlayer from "@/components/Video/Video";
 import lazyImage from "@/components/LazyImage/LazyImage";
-import app from "./app";
+import app from "./app/index";
 
 import "./styles/creator.scss";
 

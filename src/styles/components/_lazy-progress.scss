@@ -1,19 +1,18 @@
 /* Progress Bar */
 .progress {
   margin: auto;
-  position: absolute;
-  display: inline-block;
   overflow: hidden;
   top: 60px;
-  left: 45%;
-  border-radius: 5px;
-  background-color: white;
+  left: 0;
+  right: 0;
+  position: fixed;
+  display: flex;
   z-index: 1000;
-  box-shadow: 0px 1px 15px #83828A;
 
   .indeterminate {
-    background-color: rgba(0, 255, 170, 0.5);
-    color: green;
+    background-color: rgb(0, 255, 170);
+    color: $color-primary;
+    margin: auto;
     padding: 15px 20px;
     text-align: center;
 

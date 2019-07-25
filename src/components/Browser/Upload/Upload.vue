@@ -10,7 +10,6 @@
       </div>
       <div class="settings__wrapper">
         <div class="card">
-          <div class="card__body">
             <div
               class="upload__icon__body dragoutline"
               v-show="!isUploading"
@@ -132,7 +131,6 @@
               </div>
             </div>
           </div>
-        </div>
       </div>
     </div>
   </div>

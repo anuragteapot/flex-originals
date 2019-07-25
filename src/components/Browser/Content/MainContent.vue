@@ -31,30 +31,19 @@ export default {
     contentGrid
   },
   methods: {
-    doThis: function(path) {
-      if (path) {
-        this.$router.push({
-          path: `/drive/u/0/folder/${path}`
-        });
-      } else {
-        this.$router.push({
-          path: `/drive/u/0/my-drive`
-        });
-      }
-    },
     onScroll: api.debounce(function() {
       if (window.innerHeight + window.scrollY >= document.body.scrollHeight) {
-        this.$store.state.loadLimit = this.$store.state.loadLimit + 10;
+        // this.$store.state.loadLimit = this.$store.state.loadLimit + 10;
 
-        const dir = this.$route.params.dir;
-        const path = this.$route.params.path;
+        // const dir = this.$route.params.dir;
+        // const path = this.$route.params.path;
 
-        this.$store.commit(types.SET_IS_LOADING, true);
-        if (dir !== undefined && path == "folder") {
-          this.$store.dispatch("update", { path: dir });
-        } else {
-          this.$store.dispatch("update", { path: "my-drive" });
-        }
+        // this.$store.commit(types.SET_IS_LOADING, true);
+        // if (dir !== undefined && path == "folder") {
+          // this.$store.dispatch("update", { path: dir });
+        // } else {
+          // this.$store.dispatch("update", { path: "my-drive" });
+        // }
       }
     }, 300),
     // Listeners for drag and drop

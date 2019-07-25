@@ -71,6 +71,8 @@
                     <div class="v-comment">
                       <i class="fas fa-comment"></i>
                       Comments
+                      <br>
+                      <input type="text" placeholder="Add your comment ">
                     </div>
 
                     <!-- Contenedor Principal -->

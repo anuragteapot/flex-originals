@@ -4,7 +4,8 @@
       <lazy-image :src="src" :lazySrc="lazySrc" hover></lazy-image>
       <i class="fas fa-play fa-2x file-icon" aria-hidden="true"></i>
       <div class="video__info">
-        <p>Christian</p>
+        <p class="title">Christian</p>
+        <p class="views">Alenter</p>
       </div>
     </div>
   </div>

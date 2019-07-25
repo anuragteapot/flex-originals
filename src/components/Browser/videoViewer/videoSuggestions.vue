@@ -4,9 +4,8 @@
       <lazy-image :src="src" :lazySrc="lazySrc"></lazy-image>
     </div>
     <div class="video__info">
-      <p>Christian</p>
-      <p>Christian</p>
-      <span>Christian</span>
+      <p class="title">Christian</p>
+      <p class="views">Alenter</p>
     </div>
   </div>
 </template> 

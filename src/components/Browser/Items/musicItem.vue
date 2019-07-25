@@ -3,7 +3,10 @@
     <div class="music__thumbnail">
       <lazy-image :src="src" :lazySrc="lazySrc" hover></lazy-image>
       <i class="fas fa-play fa-3x file-icon" aria-hidden="true"></i>
-      <p>Christian</p>
+      <div class="audio__info">
+        <p class="title">Christian</p>
+        <p class="views">alenter</p>
+      </div>
     </div>
   </div>
 </template>

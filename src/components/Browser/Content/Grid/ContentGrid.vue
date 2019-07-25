@@ -36,8 +36,8 @@
 
 <script>
 // import * as types from "./../../../../store/mutation-types";
-import musicThumb from "./../../Items/musicItem";
-import videoThumb from "./../../Items/videoItem";
+import musicThumb from "./../../Items/MusicItem";
+import videoThumb from "./../../Items/VideoItem";
 
 export default {
   name: "media-content-grid",

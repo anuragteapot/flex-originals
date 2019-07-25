@@ -1,8 +1,8 @@
 version: '2'
 services:
-  lazyDrive:
-    container_name: lazyDrive
-    image: lazyDrive
+  lazydrive:
+    container_name: lazydrive
+    image: lazydrive
     restart: always
     build: .
     ports:

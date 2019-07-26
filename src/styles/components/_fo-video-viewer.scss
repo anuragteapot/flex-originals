@@ -137,11 +137,18 @@
             width: 100%;
             height: 30px;
             outline: none;
+            margin: 10px 0 0 0;
+            padding: 10px;
             border: none;
             color: white;
             font-size: 15px; 
             border-bottom: 1px solid grey;
             background: transparent; 
+
+            &:focus{
+              border-bottom: 1px solid $color-error;
+              background: #283035;
+            }
           }
 
           .load__more {

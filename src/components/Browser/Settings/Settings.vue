@@ -23,7 +23,6 @@
                       <p>anuragvns1111@gmail.com</p>
                     </div>
                     <div class="username__info">
-                      <p>http://creatar.com/creator/@anu1601cs</p>
                       <button class="info" @click="logout">Log Out</button>
                     </div>
                   </div>
@@ -47,7 +46,7 @@
                   <div
                     class="form-item__control toggle"
                     :class="settings.desktopNotification ? 'is-on' : ''"
-                    @click="settings.desktopNotification = !settings.desktopNotification"
+                    @click="settings.desktopNotification = !settings.desktopNotification; save()"
                   >
                     <div class="toggle__handle"></div>
                   </div>
@@ -208,6 +207,12 @@ export default {
     },
     deleteAllSession() {
       this.$store.commit(types.SHOW_MODAL, { state: true, type: "MDelete" });
+    },
+    async save() {
+      const payload =  {};
+      payload.id = this.$api.webStorage.local.get("$userId");
+      payload.newSettings = this.settings;
+      await this.$store.dispatch("updateSettings", payload);
     }
   },
   async created() {

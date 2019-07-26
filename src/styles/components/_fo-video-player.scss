@@ -43,13 +43,14 @@
       position: absolute;
       display: inline-block;
     }
-
+    
     .v-quality {
       right: 120px;
     }
-
+    
     .dropbtn {
       font-weight: 800;
+      font-size: 12.5px; 
       background-color: transparent;
       cursor: pointer;
       color: white;

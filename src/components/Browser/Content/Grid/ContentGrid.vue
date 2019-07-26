@@ -29,7 +29,6 @@
         <music-thumb :src="src" :lazySrc="lazySrc" hover></music-thumb>
         <music-thumb :src="src" :lazySrc="lazySrc" hover></music-thumb>
       </div>
-      <span class="clear"></span>
     </div>
   </div>
 </template>

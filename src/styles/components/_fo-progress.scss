@@ -22,6 +22,47 @@
   }
 }
 
+/*--- Catch Up Spinner ---*/
+svg#catchup-spinner {
+  width: 5em;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  margin: auto;
+  transform-origin: center;
+  animation: rotate 2s linear infinite;
+  max-width: 5em;
+  display: block;
+}
+svg#catchup-spinner circle {
+  fill: none;
+  stroke: rgb(255, 255, 255);
+  stroke-width: 2;
+  stroke-dasharray: 1, 200;
+  stroke-dashoffset: 0;
+  stroke-linecap: round;
+  animation: dash 1.5s ease-in-out infinite;
+}
+@keyframes rotate {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+@keyframes dash {
+  0% {
+    stroke-dasharray: 1, 200;
+    stroke-dashoffset: 0;
+  }
+  50% {
+    stroke-dasharray: 90, 200;
+    stroke-dashoffset: -35px;
+  }
+  100% {
+    stroke-dashoffset: -125px;
+  }
+}
+
 /* Loader 1 */
 .loader-1 {
   height: 32px;
@@ -806,7 +847,8 @@
   border: 2px solid #fff;
   border-radius: 50%;
   opacity: 0;
-  -webkit-animation: loader-6-1 1.5s cubic-bezier(0.075, 0.82, 0.165, 1) infinite;
+  -webkit-animation: loader-6-1 1.5s cubic-bezier(0.075, 0.82, 0.165, 1)
+    infinite;
   animation: loader-6-1 1.5s cubic-bezier(0.075, 0.82, 0.165, 1) infinite;
 }
 
@@ -835,7 +877,8 @@
 }
 
 .loader-6 span::after {
-  -webkit-animation: loader-6-2 1.5s cubic-bezier(0.075, 0.82, 0.165, 1) 0.25s infinite;
+  -webkit-animation: loader-6-2 1.5s cubic-bezier(0.075, 0.82, 0.165, 1) 0.25s
+    infinite;
   animation: loader-6-2 1.5s cubic-bezier(0.075, 0.82, 0.165, 1) 0.25s infinite;
 }
 

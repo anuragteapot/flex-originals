@@ -71,60 +71,55 @@
                     <div class="v-comment">
                       <i class="fas fa-comment"></i>
                       Comments
-                      <br>
-                      <input type="text" placeholder="Add your comment ">
+                      <br />
+                      <input type="text" placeholder="Add your comment " />
                     </div>
-
-                    <!-- Contenedor Principal -->
                     <div class="comments-container">
                       <ul id="comments-list" class="comments-list">
                         <li>
                           <div class="comment-main-level">
-                            <!-- Avatar -->
                             <div class="comment-avatar">
                               <img
                                 src="http://i9.photobucket.com/albums/a88/creaticode/avatar_1_zps8e1c80cd.jpg"
                                 alt
                               />
                             </div>
-                            <!-- Contenedor del Comentario -->
                             <div class="comment-box">
                               <div class="comment-head">
                                 <h6 class="comment-name by-author">
-                                  <a href="http://creaticode.com/blog">Agustin Ortiz</a>
+                                  <a href="http://creaticode.com/blog">Anurag Kumar</a>
                                 </h6>
                                 <span>hace 20 minutos</span>
                                 <i class="fa fa-reply"></i>
                                 <i class="fa fa-heart"></i>
                               </div>
-                              <div
-                                class="comment-content"
-                              >Lorem ipsum dolor sit amet, consectetur adipisicing elit. Velit omnis animi et iure laudantium vitae, praesentium optio, sapiente distinctio illo?</div>
+                              <div class="comment-content">
+                                Presenting Bekhayali full video song, In the voice of Arijit Singh, a song that evokes the emotion of heartbreak & love at once.
+                                The upcoming Bollywood movie Kabir Singh is starring Shahid Kapoor and Kiara Advani.
+                              </div>
                             </div>
                           </div>
-                          <!-- Respuestas de los comentarios -->
                           <ul class="comments-list reply-list">
                             <li>
-                              <!-- Avatar -->
                               <div class="comment-avatar">
                                 <img
                                   src="http://i9.photobucket.com/albums/a88/creaticode/avatar_2_zps7de12f8b.jpg"
                                   alt
                                 />
                               </div>
-                              <!-- Contenedor del Comentario -->
                               <div class="comment-box">
                                 <div class="comment-head">
                                   <h6 class="comment-name">
-                                    <a href="http://creaticode.com/blog">Lorena Rojero</a>
+                                    <a href="http://creaticode.com/blog">Amit raj</a>
                                   </h6>
                                   <span>hace 10 minutos</span>
                                   <i class="fa fa-reply"></i>
                                   <i class="fa fa-heart"></i>
                                 </div>
-                                <div
-                                  class="comment-content"
-                                >Lorem ipsum dolor sit amet, consectetur adipisicing elit. Velit omnis animi et iure laudantium vitae, praesentium optio, sapiente distinctio illo?</div>
+                                <div class="comment-content">
+                                  Presenting Bekhayali full video song, In the voice of Arijit Singh, a song that evokes the emotion of heartbreak & love at once.
+                                  The upcoming Bollywood movie Kabir Singh is starring Shahid Kapoor and Kiara Advani.
+                                </div>
                               </div>
                             </li>
 
@@ -136,19 +131,19 @@
                                   alt
                                 />
                               </div>
-                              <!-- Contenedor del Comentario -->
                               <div class="comment-box">
                                 <div class="comment-head">
                                   <h6 class="comment-name by-author">
-                                    <a href="http://creaticode.com/blog">Agustin Ortiz</a>
+                                    <a href="http://creaticode.com/blog">Anurag Kumar</a>
                                   </h6>
                                   <span>hace 10 minutos</span>
                                   <i class="fa fa-reply"></i>
                                   <i class="fa fa-heart"></i>
                                 </div>
-                                <div
-                                  class="comment-content"
-                                >Lorem ipsum dolor sit amet, consectetur adipisicing elit. Velit omnis animi et iure laudantium vitae, praesentium optio, sapiente distinctio illo?</div>
+                                <div class="comment-content">
+                                  Presenting Bekhayali full video song, In the voice of Arijit Singh, a song that evokes the emotion of heartbreak & love at once.
+                                  The upcoming Bollywood movie Kabir Singh is starring Shahid Kapoor and Kiara Advani.
+                                </div>
                               </div>
                             </li>
                           </ul>
@@ -156,26 +151,25 @@
 
                         <li>
                           <div class="comment-main-level">
-                            <!-- Avatar -->
                             <div class="comment-avatar">
                               <img
                                 src="http://i9.photobucket.com/albums/a88/creaticode/avatar_2_zps7de12f8b.jpg"
                                 alt
                               />
                             </div>
-                            <!-- Contenedor del Comentario -->
                             <div class="comment-box">
                               <div class="comment-head">
                                 <h6 class="comment-name">
-                                  <a href="http://creaticode.com/blog">Lorena Rojero</a>
+                                  <a href="http://creaticode.com/blog">Amit Raj</a>
                                 </h6>
                                 <span>hace 10 minutos</span>
                                 <i class="fa fa-reply"></i>
                                 <i class="fa fa-heart"></i>
                               </div>
-                              <div
-                                class="comment-content"
-                              >Lorem ipsum dolor sit amet, consectetur adipisicing elit. Velit omnis animi et iure laudantium vitae, praesentium optio, sapiente distinctio illo?</div>
+                              <div class="comment-content">
+                                Presenting Bekhayali full video song, In the voice of Arijit Singh, a song that evokes the emotion of heartbreak & love at once.
+                                The upcoming Bollywood movie Kabir Singh is starring Shahid Kapoor and Kiara Advani.
+                              </div>
                             </div>
                           </div>
                         </li>

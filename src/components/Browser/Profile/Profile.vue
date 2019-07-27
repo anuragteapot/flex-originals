@@ -4,7 +4,7 @@
       <div class="profile__banner">
         <div class="profile__banner__background">
           <div class="profile__avatar">
-            <img src="/public/atom.svg" />
+            <img :src="settings.profileAvatar" />
           </div>
           <div class="social__media">
             <i class="fab fa-facebook-square" style="font-size:20px"></i>
@@ -51,6 +51,9 @@ export default {
       } else {
         return null;
       }
+    },
+    settings() {
+      return this.$store.state.settings;
     }
   },
   components: {

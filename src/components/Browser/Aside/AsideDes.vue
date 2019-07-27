@@ -30,7 +30,7 @@
       <img
         class="avatar"
         alt="Avatar"
-        src="/public/atom.svg"
+        :src="settings.profileAvatar"
         @click="$router.push('/app/@channel')"
         style="cursor:pointer"
       />
@@ -61,6 +61,11 @@
 <script>
 export default {
   name: "lazy-aside",
-  methods: {}
+  methods: {},
+  computed:{
+    settings() {
+      return this.$store.state.settings;
+    }
+  }
 };
 </script>

@@ -32,6 +32,10 @@
       "required": true,
       "default": "dark"
     },
+    "profileAvatar": {
+      "type": "string",
+      "required": true
+    },
     "facebook": {
       "type": "string"
     },
@@ -49,6 +53,7 @@
     }
   },
   "validations": [],
+  "hidden": ["id", "ownerId"],
   "relations": {
     "user": {
       "type": "belongsTo",

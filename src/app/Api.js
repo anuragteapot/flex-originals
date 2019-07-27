@@ -141,6 +141,7 @@ class Api {
       'authorization'
     ] = `${webStorage.local.get('$accessToken')}`
     axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest'
+    axios.defaults.headers.common['Content-Type'] = 'application/x-www-form-urlencoded'
     axios.defaults.headers.common['csrfToken'] = process.env.VUE_APP_SECRET
 
     axios.interceptors.response.use(undefined, function axiosRetryInterceptor(

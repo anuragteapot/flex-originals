@@ -6,6 +6,10 @@
   "options": {
     "validateUpsert": true
   },
+  "hidden": [
+    "id",
+    "ownerId"
+  ],
   "properties": {
     "emailNotification": {
       "type": "boolean",
@@ -53,7 +57,6 @@
     }
   },
   "validations": [],
-  "hidden": ["id", "ownerId"],
   "relations": {
     "user": {
       "type": "belongsTo",

@@ -60,6 +60,14 @@
     "ratings": {
       "type": "number",
       "required": true
+    },
+    "licence": {
+      "type": "string",
+      "required": true
+    },
+    "likedPrivate": {
+      "type": "boolean",
+      "required": true
     }
   },
   "validations": [],
@@ -76,6 +84,13 @@
       "principalType": "ROLE",
       "principalId": "$everyone",
       "permission": "DENY"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$owner",
+      "permission": "ALLOW",
+      "property": "publish"
     }
   ],
   "methods": {}

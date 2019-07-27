@@ -10,23 +10,23 @@
       </div>
       <div class="settings__wrapper">
         <div class="card">
-            <div
-              class="upload__icon__body dragoutline"
-              v-show="!isUploading"
-              @dragenter="onDragEnter"
-              @drop="onDrop"
-              @dragover="onDragOver"
-              @dragleave="onDragLeave"
-            >
-              <i class="fas fa-cloud-upload-alt fa-4x" @click="$refs.inputFile.click()"></i>
-              <br />
-              <h1>DRAG & DROP</h1>
-              <p>to upload your video/music or click</p>
-            </div>
+          <div
+            class="upload__icon__body dragoutline"
+            v-show="!isUploading"
+            @dragenter="onDragEnter"
+            @drop="onDrop"
+            @dragover="onDragOver"
+            @dragleave="onDragLeave"
+          >
+            <i class="fas fa-cloud-upload-alt fa-4x" @click="$refs.inputFile.click()"></i>
+            <br />
+            <h1>DRAG & DROP</h1>
+            <p>to upload your video/music or click</p>
+          </div>
+          <div class="card__body">
             <div class="container" v-show="isUploading">
               <div class="grid">
                 <h1>Upload Status</h1>
-                <i @click="$router.push('/app/@home')" class="far fa-times-circle close__settings"></i>
               </div>
             </div>
             <div class="container" v-show="isUploading">
@@ -131,6 +131,7 @@
               </div>
             </div>
           </div>
+        </div>
       </div>
     </div>
   </div>
@@ -161,33 +162,10 @@ export default {
       document.querySelector(".dragoutline").classList.add("active");
       return false;
     },
-    /* Upload files */
-    dragUpload: async function() {
-      let uploadSuccess = 0;
-      while (this.$store.state.uploadItems.length > 0) {
-        const item = this.$store.state.uploadItems.shift();
-        const formData = item.file;
-        const uploadPath = item.path;
-        try {
-          await this.$store.dispatch("upload", { formData, uploadPath });
-          uploadSuccess = uploadSuccess + 1;
-        } catch (error) {
-          console.error(error);
-        }
-        this.$store.dispatch("update", {
-          path: this.$store.state.selectedDirectory
-        });
-      }
-      var data = {
-        data: `${uploadSuccess} files uploaded.`,
-        color: "success"
-      };
-      this.$store.commit(types.SHOW_SNACKBAR, data);
-      this.$store.commit(types.SET_IS_UPLOADING, 2);
-    },
     onDrop: function(event) {
       event.preventDefault();
-      const uploadPath = this.$store.state.selectedDirectory;
+      this.isUploading = true;
+      window.addEventListener("beforeunload", this.beforeunload);
       if (
         event.dataTransfer &&
         event.dataTransfer.files &&
@@ -197,23 +175,10 @@ export default {
           let file = event.dataTransfer.files[i];
           document.querySelector(".dragoutline").classList.remove("active");
           const formData = new FormData();
-          const item = {};
           formData.append("files", file);
-          item.id = file.name + i + file.lastModified + file.size + Date.now();
-          item.icon = "assessment";
-          item.file = formData;
-          item.path = uploadPath;
-          item.type = "file";
-          item.iconClass = "grey lighten-1 white--text";
-          item.title = file.name;
-          item.subtitle = "";
-          item.size = file.size;
-          item.uploadPercent = 0;
-          this.$store.state.uploadItems.push(item);
-          this.$store.state.uploadItemsMenu.push(item);
-        }
-        if (this.$store.state.isUploading !== true) {
-          this.$emit("tiggerdragUpload");
+          setTimeout(() => {
+            this.processUpload(formData);
+          }, 1000);
         }
       }
       document.querySelector(".dragoutline").classList.remove("active");
@@ -249,7 +214,7 @@ export default {
       }
 
       const data = {
-        data: `Video Uploaded.`,
+        data: `File Uploaded.`,
         color: "success"
       };
 
@@ -259,10 +224,8 @@ export default {
     processFile: function() {
       this.isUploading = true;
       window.addEventListener("beforeunload", this.beforeunload);
-      var file = this.$refs.inputFile.files;
-
       const formData = new FormData();
-      formData.append("file", file);
+      formData.append("file", this.$refs.inputFile.files[0]);
 
       setTimeout(() => {
         this.processUpload(formData);

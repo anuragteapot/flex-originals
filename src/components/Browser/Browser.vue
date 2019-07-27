@@ -88,11 +88,13 @@ export default {
     }
   },
   async mounted() {
-    const settings = await this.$store.dispatch("findSettings", {
-      uid: this.$api.webStorage.local.get("$userId")
-    });
+    if (this.$api.webStorage.local.get("$userId")) {
+      const settings = await this.$store.dispatch("findSettings", {
+        uid: this.$api.webStorage.local.get("$userId")
+      });
 
-    this.$store.commit(types.SET_SETTINGS, settings);
+      this.$store.commit(types.SET_SETTINGS, settings);
+    }
   }
 };
 </script>

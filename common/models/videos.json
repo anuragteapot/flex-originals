@@ -6,6 +6,9 @@
   "options": {
     "validateUpsert": true
   },
+  "hidden": [
+    "videoOwnerId"
+  ],
   "properties": {
     "name": {
       "type": "string",

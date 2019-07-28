@@ -7,7 +7,7 @@ module.exports = function(Audio) {
     }
 
     let audio = await Audio.findOne({
-      where: { audioOwnerId: id, id: audioData.audioId }
+      where: { id }
     });
 
     audio.name = audioData.name;

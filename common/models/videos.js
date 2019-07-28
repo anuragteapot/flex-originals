@@ -7,7 +7,7 @@ module.exports = function(Videos) {
     }
 
     let video = await Videos.findOne({
-      where: { videoOwnerId: id, id: videoData.videoId }
+      where: { id }
     });
 
     video.name = videoData.name;

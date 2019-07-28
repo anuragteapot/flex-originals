@@ -9,11 +9,13 @@
   "properties": {
     "name": {
       "type": "string",
-      "required": true
+      "required": true,
+      "default": "Untitled"
     },
     "videoMeta": {
       "type": "object",
-      "required": true
+      "required": true,
+      "default": {}
     },
     "videoFile": {
       "type": "string",
@@ -25,24 +27,19 @@
       "default": 1
     },
     "description": {
-      "type": "string",
-      "required": true
+      "type": "string"
     },
     "thumbImage": {
-      "type": "string",
-      "required": true
+      "type": "string"
     },
     "tags": {
-      "type": "string",
-      "required": true
+      "type": "string"
     },
     "playlist": {
-      "type": "object",
-      "required": true
+      "type": "object"
     },
     "location": {
-      "type": "string",
-      "required": true
+      "type": "string"
     },
     "category": {
       "type": "string"
@@ -58,16 +55,17 @@
       "default": false
     },
     "ratings": {
-      "type": "number",
-      "required": true
+      "type": "number"
     },
     "licence": {
       "type": "string",
-      "required": true
+      "required": true,
+      "default": "Flex Originals"
     },
     "likedPrivate": {
       "type": "boolean",
-      "required": true
+      "required": true,
+      "default": false
     }
   },
   "validations": [],

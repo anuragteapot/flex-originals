@@ -95,6 +95,10 @@ export default {
 
       this.$store.commit(types.SET_SETTINGS, settings);
     }
+
+    const content = await this.$store.dispatch("getContent", {});
+    console.log(content.data);
+    this.$store.commit(types.SET_CONTENT, content.data);
   }
 };
 </script>

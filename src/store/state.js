@@ -1,7 +1,10 @@
 // The initial state
 export default {
   // The loaded files
-  contents: [],
+  content: {
+    video:[],
+    audio:[]
+  },
   // Files loaded limit
   isAuthenticated: false,
   // Settings

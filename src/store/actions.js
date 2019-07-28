@@ -1,61 +1,27 @@
 /** @format */
 
-import { api } from '../app/Api'
-import * as types from './mutation-types'
-import * as FileSaver from 'file-saver'
+import { api } from '../app/Api';
+import * as types from './mutation-types';
+import * as FileSaver from 'file-saver';
 
 /**
- * Get contents of a directory from the api
+ * Get contents
  * @param commit
  * @param payload
  */
-export const update = (context, payload) => {
-  let path = payload.path || context.state.selectedDirectory
-  let limit = payload.limit || context.state.loadLimit
-  const state =
-    context.state.isUploading === true ? 'subscribe' : 'eventCacheUpdate'
-  api
-    .axios()
-    .get(`/api/getFiles/${path}/${limit}/update/nocache/${state}`, {
-      retry: 3,
-      retryDelay: 1000
-    })
-    .then(response => {
-      context.commit(types.LOAD_CONTENTS_SUCCESS, response.data.contents)
-      context.commit(types.SET_IS_LOADING, false)
-    })
-    .catch(error => {
-      api._handleError(error)
-    })
-}
-
-/**
- * Create a new folder
- * @param commit
- * @param payload object with the new folder name and its parent directory
- */
-export const upload = (context, payload) => {
-  const foundIndex = context.state.uploadItemsMenu.findIndex(
-    x => x.id == payload.id && x.type == 'file'
-  )
-
+export const getContent = async (context, payload) => {
   try {
-    return api.axios().post(`/api/actions/upload`, payload.formData, {
-      retry: 3,
-      retryDelay: 1000,
-      onUploadProgress: e => {
-        if (foundIndex !== -1) {
-          context.state.uploadItemsMenu[foundIndex].uploadPercent = Math.round(
-            (e.loaded * 100) / e.total
-          )
-        }
-      }
-    })
+    return await api
+      .axios()
+      .get(
+        `/api/actions/getContent/${payload.limit || 30}/${
+          payload.userId ? payload.userId : ''
+        }`
+      );
   } catch (err) {
-    api._handleError(err)
+    api._handleError(err);
   }
-}
-
+};
 /**
  * Login
  * @param commit
@@ -63,11 +29,11 @@ export const upload = (context, payload) => {
  */
 export const login = async (context, payload) => {
   try {
-    return await api.axios().post('/api/users/login', payload)
+    return await api.axios().post('/api/users/login', payload);
   } catch (err) {
-    api._handleError(err)
+    api._handleError(err);
   }
-}
+};
 
 /**
  * Logout
@@ -76,11 +42,11 @@ export const login = async (context, payload) => {
  */
 export const logout = async () => {
   try {
-    return await api.axios().post('/api/users/logout')
+    return await api.axios().post('/api/users/logout');
   } catch (err) {
-    api._handleError(err)
+    api._handleError(err);
   }
-}
+};
 
 /**
  * Verify
@@ -93,11 +59,11 @@ export const verify = async (context, payload) => {
       .axios()
       .get(
         `/api/users/confirm?uid=${payload.uid}&redirect=${payload.redirect}&token=${payload.token}`
-      )
+      );
   } catch (err) {
-    api._handleError(err)
+    api._handleError(err);
   }
-}
+};
 
 /**
  * Get Settings
@@ -106,11 +72,11 @@ export const verify = async (context, payload) => {
  */
 export const findSettings = async (context, payload) => {
   try {
-    return await api.axios().get(`/api/users/findSetting/${payload.uid}`)
+    return await api.axios().get(`/api/users/findSetting/${payload.uid}`);
   } catch (err) {
-    api._handleError(err)
+    api._handleError(err);
   }
-}
+};
 
 /**
  * Get Settings
@@ -119,11 +85,11 @@ export const findSettings = async (context, payload) => {
  */
 export const updateSettings = async (context, payload) => {
   try {
-    await api.axios().post(`/api/users/updateSettings`,  payload )
+    await api.axios().post(`/api/users/updateSettings`, payload);
   } catch (err) {
-    api._handleError(err)
+    api._handleError(err);
   }
-}
+};
 
 /**
  * Delete file
@@ -131,21 +97,21 @@ export const updateSettings = async (context, payload) => {
  * @param payload
  */
 export const deleteFile = (context, payload) => {
-  const file = payload
+  const file = payload;
   return new Promise((resolve, reject) => {
     api
       .axios()
       .delete('/api/delete/' + file.path)
       .then(response => {
-        context.state.showConfirmDeleteModal = false
-        resolve(response)
+        context.state.showConfirmDeleteModal = false;
+        resolve(response);
       })
       .catch(error => {
-        api._handleError(error)
-        reject(error)
-      })
-  })
-}
+        api._handleError(error);
+        reject(error);
+      });
+  });
+};
 
 /**
  * Create directory
@@ -153,8 +119,8 @@ export const deleteFile = (context, payload) => {
  * @param payload
  */
 export const createDirectory = (context, payload) => {
-  context.commit(types.SET_IS_LOADING, true)
-  const path = context.state.selectedDirectory
+  context.commit(types.SET_IS_LOADING, true);
+  const path = context.state.selectedDirectory;
   api
     .axios()
     .put(`/api/createDirectory/${path}`, payload)
@@ -162,19 +128,19 @@ export const createDirectory = (context, payload) => {
       var data = {
         data: response.data.message,
         color: 'success'
-      }
-      context.state.showCreateFolderModal = false
-      context.commit(types.SHOW_SNACKBAR, data)
+      };
+      context.state.showCreateFolderModal = false;
+      context.commit(types.SHOW_SNACKBAR, data);
       context.dispatch('update', {
         path: context.state.selectedDirectory
-      })
+      });
     })
     .catch(error => {
-      api._handleError(error)
-    })
+      api._handleError(error);
+    });
 
-  context.commit(types.SET_IS_LOADING, false)
-}
+  context.commit(types.SET_IS_LOADING, false);
+};
 
 /**
  * Rename
@@ -182,7 +148,7 @@ export const createDirectory = (context, payload) => {
  * @param payload
  */
 export const rename = (context, payload) => {
-  context.commit(types.SET_IS_LOADING, true)
+  context.commit(types.SET_IS_LOADING, true);
   api
     .axios()
     .put(`/api/rename/${payload.path}`, payload)
@@ -190,18 +156,18 @@ export const rename = (context, payload) => {
       var data = {
         data: response.data.message,
         color: 'success'
-      }
-      context.state.showRenameModal = false
-      context.commit(types.SHOW_SNACKBAR, data)
+      };
+      context.state.showRenameModal = false;
+      context.commit(types.SHOW_SNACKBAR, data);
       context.dispatch('update', {
         path: context.state.selectedDirectory
-      })
+      });
     })
     .catch(error => {
-      api._handleError(error)
-    })
-  context.commit(types.SET_IS_LOADING, false)
-}
+      api._handleError(error);
+    });
+  context.commit(types.SET_IS_LOADING, false);
+};
 
 /**
  * Signiup
@@ -211,11 +177,11 @@ export const rename = (context, payload) => {
  */
 export const signup = async (context, payload) => {
   try {
-    return await api.axios().post('/api/users', payload)
+    return await api.axios().post('/api/users', payload);
   } catch (err) {
-    api._handleError(err)
+    api._handleError(err);
   }
-}
+};
 
 /**
  * Download a file
@@ -227,9 +193,9 @@ export const download = (context, payload) => {
     data: 'Preparing download.',
     color: 'default',
     time: 0
-  }
+  };
 
-  context.commit(types.SHOW_SNACKBAR, data)
+  context.commit(types.SHOW_SNACKBAR, data);
 
   if (payload.length == 1) {
     api
@@ -238,14 +204,14 @@ export const download = (context, payload) => {
         responseType: 'blob'
       })
       .then(response => {
-        FileSaver.saveAs(new Blob([response.data]), payload[0].name)
-        context.commit(types.HIDE_SNACKBAR)
+        FileSaver.saveAs(new Blob([response.data]), payload[0].name);
+        context.commit(types.HIDE_SNACKBAR);
       })
       .catch(error => {
-        api._handleError(error)
-      })
+        api._handleError(error);
+      });
   } else {
-    const path = context.state.selectedDirectory
+    const path = context.state.selectedDirectory;
 
     api
       .axios()
@@ -262,11 +228,11 @@ export const download = (context, payload) => {
         FileSaver.saveAs(
           new Blob([response.data]),
           'Media_Drive_' + new Date() + '.zip'
-        )
-        context.commit(types.HIDE_SNACKBAR)
+        );
+        context.commit(types.HIDE_SNACKBAR);
       })
       .catch(error => {
-        api._handleError(error)
-      })
+        api._handleError(error);
+      });
   }
-}
+};

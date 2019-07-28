@@ -201,14 +201,40 @@ export default {
       }
     },
     processUpload: async function(formData) {
+      const userId = this.$api.webStorage.local.get("$userId");
+
+      const VIDEO_EXT = ["video/mp4", "video/x-msvideo"];
+      const AUDIO_EXT = [
+        "audio/mpeg",
+        "audio/vnd.wav",
+        "audio/mp4",
+        "audio/ogg"
+      ];
+
+      let type = "";
+
+      if (VIDEO_EXT.indexOf(this.$refs.inputFile.files[0].type) != -1) {
+        type = "video";
+      } else if (AUDIO_EXT.indexOf(this.$refs.inputFile.files[0].type) != -1) {
+        type = "audio";
+      }
+
       try {
-        await this.$api.axios().post(`/api/actions/upload`, formData, {
-          retry: 3,
-          retryDelay: 1000,
-          onUploadProgress: e => {
-            this.uploadPercent = Math.round((e.loaded * 100) / e.total);
-          }
-        });
+        const uploadedVideo = await this.$api
+          .axios()
+          .post(`/api/actions/upload/${type}/${userId}`, formData, {
+            retry: 3,
+            retryDelay: 1000,
+            onUploadProgress: e => {
+              this.uploadPercent = Math.round((e.loaded * 100) / e.total);
+            }
+          });
+
+        const videoThumb = await this.$api
+          .axios()
+          .get(`/api/actions/genrateThumbnail/${uploadedVideo.data.video.id}`);
+
+          console.log(videoThumb)
       } catch (err) {
         this.$api._handleError(err);
       }

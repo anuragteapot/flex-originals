@@ -35,8 +35,8 @@ export default {
    * @param state
    * @param payload
    */
-  [types.SELECT_DIRECTORY]: (state, payload) => {
-    state.selectedDirectory = payload
+  [types.SET_CONTENT]: (state, payload) => {
+    state.content = payload
   },
 
   /**

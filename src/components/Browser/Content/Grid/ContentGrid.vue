@@ -3,31 +3,16 @@
     <div class="grid_section files">
       <h1>Recents</h1>
       <div class="fo-content__container">
-        <music-thumb :src="src" :lazySrc="lazySrc" ></music-thumb>
-        <music-thumb :src="src" :lazySrc="lazySrc" ></music-thumb>
-      </div>
-      <h1>Videos</h1>
-      <div class="fo-content__container">
-        <video-thumb :src="srcv" :lazySrc="lazySrc" hover></video-thumb>
-        <video-thumb :src="srcv" :lazySrc="lazySrc" hover></video-thumb>
-        <video-thumb :src="srcv" :lazySrc="lazySrc" hover></video-thumb>
-        <video-thumb :src="srcv" :lazySrc="lazySrc" hover></video-thumb>
-        <video-thumb :src="srcv" :lazySrc="lazySrc" hover></video-thumb>
-        <video-thumb :src="srcv" :lazySrc="lazySrc" hover></video-thumb>
-      </div>
-      <h1>Music</h1>
-      <div class="fo-content__container">
-        <music-thumb :src="src" :lazySrc="lazySrc" hover></music-thumb>
-        <music-thumb :src="src" :lazySrc="lazySrc" hover></music-thumb>
-        <music-thumb :src="src" :lazySrc="lazySrc" hover></music-thumb>
-        <music-thumb :src="src" :lazySrc="lazySrc" hover></music-thumb>
-        <music-thumb :src="src" :lazySrc="lazySrc" hover></music-thumb>
         <music-thumb :src="src" :lazySrc="lazySrc"></music-thumb>
-
-        <music-thumb :src="src" :lazySrc="lazySrc" hover></music-thumb>
-        <music-thumb :src="src" :lazySrc="lazySrc" hover></music-thumb>
-        <music-thumb :src="src" :lazySrc="lazySrc" hover></music-thumb>
-        <music-thumb :src="src" :lazySrc="lazySrc" hover></music-thumb>
+        <music-thumb :src="src" :lazySrc="lazySrc"></music-thumb>
+      </div>
+      <h1 v-if="content.video.length > 0">Videos</h1>
+      <div class="fo-content__container" v-if="content.video.length > 0">
+        <video-thumb v-for="item in content.video" :key="item.id" :src="item.thumbImage || src" :lazySrc="lazySrc" :item="item" hover></video-thumb>
+      </div>
+      <h1 v-if="content.audio.length > 0">Music</h1>
+      <div class="fo-content__container" v-if="content.audio.length > 0">
+        <music-thumb  v-for="item in content.audio" :key="item.id" :src="item.thumbImage || src" :lazySrc="lazySrc" :item="item" hover></music-thumb>
       </div>
     </div>
   </div>
@@ -41,10 +26,14 @@ import videoThumb from "./../../Items/VideoItem";
 export default {
   name: "media-content-grid",
   data: () => ({
-    src: "/public/sample.jpeg",
-    srcv: "/public/qq.webp",
+    src: "/public/icons/logo.png",
     lazySrc: "/public/icons/audio.svg"
   }),
+  computed: {
+    content() {
+      return this.$store.state.content;
+    }
+  },
   components: {
     videoThumb,
     musicThumb

@@ -30,7 +30,7 @@
       <img
         class="avatar"
         alt="Avatar"
-        :src="settings.profileAvatar"
+        :src="settings.profileAvatar || '/public/icons/logo.png'"
         @click="$router.push('/app/@channel')"
         style="cursor:pointer"
       />

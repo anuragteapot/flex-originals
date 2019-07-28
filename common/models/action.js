@@ -5,6 +5,7 @@ const fs = require('fs-extra');
 const helper = require('./../../server/helper-util');
 const path = require('path');
 const app = require('../../server/server');
+const ThumbnailGenerator = require('../../server/API/Video');
 
 const VIDEO_EXT = ['video/mp4', 'video/x-msvideo'];
 const AUDIO_EXT = ['audio/mpeg', 'audio/vnd.wav', 'audio/mp4', 'audio/ogg'];
@@ -71,11 +72,17 @@ module.exports = function(Action) {
             return res.json({
               video
             });
-          } else if (type === 'image' && IMAGE_EXT.indexOf(req.file.mimetype)!== -1) {
+          } else if (
+            type === 'image' &&
+            IMAGE_EXT.indexOf(req.file.mimetype) !== -1
+          ) {
             return res.json({
               res: req.file
             });
-          } else if (type === 'audio' && AUDIO_EXT.indexOf(req.file.mimetype) !== -1) {
+          } else if (
+            type === 'audio' &&
+            AUDIO_EXT.indexOf(req.file.mimetype) !== -1
+          ) {
             const audio = await Audios.create({
               audioOwnerId: req.params.id,
               audioFile: req.file.path,
@@ -119,5 +126,164 @@ module.exports = function(Action) {
       type: 'string'
     },
     http: { path: '/upload/:type/:id', verb: 'post' }
+  });
+
+  Action.genrateThumbnail = async id => {
+    const Videos = app.models.Videos;
+
+    try {
+      let video = await Videos.findOne({
+        where: { id }
+      });
+
+      try {
+        const tg = new ThumbnailGenerator({
+          sourcePath: video.videoMeta.path,
+          thumbnailPath: video.videoMeta.destination,
+          size: '200x200',
+          count: 3
+        });
+
+        const thumb = await tg.generate();
+        const thumbnails = thumb.map(x =>
+          path.join(video.videoMeta.destination, x)
+        );
+        return { thumbnails };
+      } catch (err) {
+        return { err };
+      }
+    } catch (err) {
+      return { err };
+    }
+  };
+
+  Action.remoteMethod('genrateThumbnail', {
+    description: 'Method to create video thumnails.',
+    accepts: [
+      {
+        arg: 'id',
+        type: 'string',
+        required: true
+      }
+    ],
+    returns: {
+      type: 'object',
+      root: true
+    },
+    http: {
+      path: '/genrateThumbnail/:id',
+      verb: 'get'
+    }
+  });
+
+  Action.processVideo = async id => {
+    const Videos = app.models.Videos;
+
+    try {
+      let video = await Videos.findOne({
+        where: { id }
+      });
+
+      try {
+        const tg = new ThumbnailGenerator({
+          sourcePath: video.videoMeta.path,
+          destinationPath: video.videoMeta.destination,
+          size: '200x200',
+          count: 3
+        });
+
+        const compressVideo = await tg.resizeVideo(720);
+        return { compressVideo };
+      } catch (err) {
+        return { err };
+      }
+    } catch (err) {
+      return { err };
+    }
+  };
+
+  Action.remoteMethod('processVideo', {
+    description: 'Method to process video and generate lower version.',
+    accepts: [
+      {
+        arg: 'id',
+        type: 'string',
+        required: true
+      }
+    ],
+    returns: {
+      type: 'object',
+      root: true
+    },
+    http: {
+      path: '/processVideo/:id',
+      verb: 'get'
+    }
+  });
+
+  Action.getContent = async (id, limit) => {
+    const Videos = app.models.Videos;
+    const Audios = app.models.Audio;
+
+    if (id) {
+      const video = await Videos.find({
+        fields: {
+          videoOwnerId: true,
+          id: true,
+          name: true,
+          videoFile: true,
+          thumbImage: true
+        },
+        where: { videoOwnerId: id, visibility: 1 },
+        limit: limit
+      });
+      const audio = await Audios.find({
+        fields: {
+          audioOwnerId: true,
+          id: true,
+          name: true,
+          audioFile: true,
+          thumbImage: true
+        },
+        where: { audioOwnerId: id, visibility: 1 },
+        limit: limit
+      });
+      return { video, audio };
+    } else {
+      const video = await Videos.find({
+        fields: { id: true, name: true, videoFile: true, thumbImage: true },
+        where: { visibility: 1 },
+        limit: limit / 2
+      });
+      const audio = await Audios.find({
+        fields: { id: true, name: true, audioFile: true, thumbImage: true },
+        where: { visibility: 1 },
+        limit: limit / 2
+      });
+      return { video, audio };
+    }
+  };
+
+  Action.remoteMethod('getContent', {
+    description: 'Method to process video and generate lower version.',
+    accepts: [
+      {
+        arg: 'id',
+        type: 'string'
+      },
+      {
+        arg: 'limit',
+        type: 'string',
+        required: true
+      }
+    ],
+    returns: {
+      type: 'object',
+      root: true
+    },
+    http: {
+      path: '/getContent/:limit/:id?',
+      verb: 'get'
+    }
   });
 };

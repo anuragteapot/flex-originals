@@ -45,7 +45,9 @@
             <i class="fab fa-google"></i>
           </li>
           <li>
-            <i class="fab fa-github"></i>
+            <a href="http://github.com/anu1601cs" target="_blank">
+              <i class="fab fa-github"></i>
+            </a>
           </li>
         </ul>
       </div>

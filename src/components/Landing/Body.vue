@@ -11,14 +11,15 @@
       </div>
       <div class="home__container">
         <div class="home__inner">
-          <h1>Built for developers</h1>
+          <h1>Built for Content Creators</h1>
           <p>
-            GitHub is a development platform inspired by the way you work. From
-            <a
+            Flex Originals is streaming platform for creators, show your talent to everyone in world and 
+            enjoy music & videos and share them to world.
+            <!-- <a
               href="/open-source"
               class="text-white jumbotron-link"
             >open source</a> to
-            <a href="/business" class="text-white jumbotron-link">business</a>, you can host and review code, manage projects, and build software alongside 36 million&nbsp;developers.
+            <a href="/business" class="text-white jumbotron-link">business</a>, you can host and review code, manage projects, and build software alongside 36 million&nbsp;developers.-->
           </p>
         </div>
       </div>

@@ -1,33 +1,37 @@
-import FfmpegCommand from 'fluent-ffmpeg'
-import Promise from 'bluebird'
-import _ from 'lodash'
-import del from 'del'
+const FfmpegCommand = require('fluent-ffmpeg');
+const spawn = require('child_process').spawn;
+const path = require('path');
+const fs = require('fs-extra');
+const Promise = require('bluebird');
+const _ = require('lodash');
+const del = require('del');
 
 /**
  * @class ThumbnailGenerator
  */
-export class ThumbnailGenerator {
+module.exports = class ThumbnailGenerator {
   /**
    * @constructor
    *
    * @param {String} [opts.sourcePath] - 'full path to video file'
-   * @param {String} [opts.thumbnailPath] - 'path to where thumbnail(s) should be saved'
+   * @param {String} [opts.destinationPath] - 'path to where thumbnail(s) should be saved'
    * @param {Number} [opts.percent]
    * @param {String} [opts.size]
    * @param {Logger} [opts.logger]
    */
   constructor(opts) {
-    this.sourcePath = opts.sourcePath
-    this.thumbnailPath = opts.thumbnailPath
-    this.percent = `${opts.percent}%` || '90%'
-    this.logger = opts.logger || null
-    this.size = opts.size || '320x240'
-    this.fileNameFormat = '%b-thumbnail-%r-%000i'
-    this.tmpDir = opts.tmpDir || '/tmp'
+    this.sourcePath = opts.sourcePath;
+    this.count = opts.count || 3;
+    this.destinationPath = opts.destinationPath;
+    this.percent = `${opts.percent}%` || '90%';
+    this.logger = opts.logger || null;
+    this.size = opts.size || '320x240';
+    this.fileNameFormat = '%b-thumbnail-%r-%000i';
+    this.tmpDir = opts.tmpDir || '/tmp';
 
     // by include deps here, it is easier to mock them out
-    this.FfmpegCommand = FfmpegCommand
-    this.del = del
+    this.FfmpegCommand = FfmpegCommand;
+    this.del = del;
   }
 
   /**
@@ -41,7 +45,7 @@ export class ThumbnailGenerator {
     return new this.FfmpegCommand({
       source: this.sourcePath,
       logger: this.logger
-    })
+    });
   }
 
   /**
@@ -62,7 +66,7 @@ export class ThumbnailGenerator {
    */
   generateOneByPercent(percent, opts) {
     if (percent < 0 || percent > 100) {
-      return Promise.reject(new Error('Percent must be a value from 0-100'))
+      return Promise.reject(new Error('Percent must be a value from 0-100'));
     }
 
     return this.generate(
@@ -70,7 +74,7 @@ export class ThumbnailGenerator {
         count: 1,
         timestamps: [`${percent}%`]
       })
-    ).then(result => result.pop())
+    ).then(result => result.pop());
   }
 
   /**
@@ -89,11 +93,11 @@ export class ThumbnailGenerator {
    * @async
    */
   generateOneByPercentCb(percent, opts, cb) {
-    const callback = cb || opts
+    const callback = cb || opts;
 
     this.generateOneByPercent(percent, opts)
       .then(result => callback(null, result))
-      .catch(callback)
+      .catch(callback);
   }
 
   /**
@@ -114,32 +118,32 @@ export class ThumbnailGenerator {
    */
   generate(opts) {
     const defaultSettings = {
-      folder: this.thumbnailPath,
-      count: 10,
+      folder: this.destinationPath,
+      count: this.count,
       size: this.size,
       filename: this.fileNameFormat,
       logger: this.logger
-    }
+    };
 
-    const ffmpeg = this.getFfmpegInstance()
-    const settings = _.assignIn(defaultSettings, opts)
-    let filenameArray = []
+    const ffmpeg = this.getFfmpegInstance();
+    const settings = _.assignIn(defaultSettings, opts);
+    let filenameArray = [];
 
     return new Promise((resolve, reject) => {
       function complete() {
-        resolve(filenameArray)
+        resolve(filenameArray);
       }
 
       function filenames(fns) {
-        filenameArray = fns
+        filenameArray = fns;
       }
 
       ffmpeg
         .on('filenames', filenames)
         .on('end', complete)
         .on('error', reject)
-        .screenshots(settings)
-    })
+        .screenshots(settings);
+    });
   }
 
   /**
@@ -160,11 +164,11 @@ export class ThumbnailGenerator {
    * @async
    */
   generateCb(opts, cb) {
-    const callback = cb || opts
+    const callback = cb || opts;
 
     this.generate(opts)
       .then(result => callback(null, result))
-      .catch(callback)
+      .catch(callback);
   }
 
   /**
@@ -182,26 +186,26 @@ export class ThumbnailGenerator {
    * @public
    */
   generatePalette(opts) {
-    const ffmpeg = this.getFfmpegInstance()
+    const ffmpeg = this.getFfmpegInstance();
     const defaultOpts = {
       videoFilters: 'fps=10,scale=320:-1:flags=lanczos,palettegen'
-    }
-    const conf = _.assignIn(defaultOpts, opts)
-    const inputOptions = ['-y']
-    const outputOptions = [`-vf ${conf.videoFilters}`]
-    const output = `${this.tmpDir}/palette-${Date.now()}.png`
+    };
+    const conf = _.assignIn(defaultOpts, opts);
+    const inputOptions = ['-y'];
+    const outputOptions = [`-vf ${conf.videoFilters}`];
+    const output = `${this.tmpDir}/palette-${Date.now()}.png`;
 
     return new Promise((resolve, reject) => {
       function complete() {
-        resolve(output)
+        resolve(output);
       }
 
       if (conf.offset) {
-        inputOptions.push(`-ss ${conf.offset}`)
+        inputOptions.push(`-ss ${conf.offset}`);
       }
 
       if (conf.duration) {
-        inputOptions.push(`-t ${conf.duration}`)
+        inputOptions.push(`-t ${conf.duration}`);
       }
 
       ffmpeg
@@ -210,8 +214,8 @@ export class ThumbnailGenerator {
         .on('end', complete)
         .on('error', reject)
         .output(output)
-        .run()
-    })
+        .run();
+    });
   }
   /**
    * Method to generate the palette from a video (required for creating gifs)
@@ -229,11 +233,11 @@ export class ThumbnailGenerator {
    * @public
    */
   generatePaletteCb(opts, cb) {
-    const callback = cb || opts
+    const callback = cb || opts;
 
     this.generatePalette(opts)
       .then(result => callback(null, result))
-      .catch(callback)
+      .catch(callback);
   }
 
   /**
@@ -251,41 +255,41 @@ export class ThumbnailGenerator {
    * @public
    */
   generateGif(opts) {
-    const ffmpeg = this.getFfmpegInstance()
+    const ffmpeg = this.getFfmpegInstance();
     const defaultOpts = {
       fps: 0.75,
       scale: 180,
       speedMultiplier: 4,
       deletePalette: true
-    }
-    const conf = _.assignIn(defaultOpts, opts)
-    const inputOptions = []
+    };
+    const conf = _.assignIn(defaultOpts, opts);
+    const inputOptions = [];
     const outputOptions = [
       `-filter_complex fps=${conf.fps},setpts=(1/${conf.speedMultiplier})*PTS,scale=${conf.scale}:-1:flags=lanczos[x];[x][1:v]paletteuse`
-    ]
-    const outputFileName = conf.fileName || `video-${Date.now()}.gif`
-    const output = `${this.thumbnailPath}/${outputFileName}`
-    const d = this.del
+    ];
+    const outputFileName = conf.fileName || `video-${Date.now()}.gif`;
+    const output = `${this.destinationPath}/${outputFileName}`;
+    const d = this.del;
 
     function createGif(paletteFilePath) {
       if (conf.offset) {
-        inputOptions.push(`-ss ${conf.offset}`)
+        inputOptions.push(`-ss ${conf.offset}`);
       }
 
       if (conf.duration) {
-        inputOptions.push(`-t ${conf.duration}`)
+        inputOptions.push(`-t ${conf.duration}`);
       }
 
       return new Promise((resolve, reject) => {
-        outputOptions.unshift(`-i ${paletteFilePath}`)
+        outputOptions.unshift(`-i ${paletteFilePath}`);
 
         function complete() {
           if (conf.deletePalette === true) {
             d.sync([paletteFilePath], {
               force: true
-            })
+            });
           }
-          resolve(output)
+          resolve(output);
         }
 
         ffmpeg
@@ -294,11 +298,11 @@ export class ThumbnailGenerator {
           .on('end', complete)
           .on('error', reject)
           .output(output)
-          .run()
-      })
+          .run();
+      });
     }
 
-    return this.generatePalette().then(createGif)
+    return this.generatePalette().then(createGif);
   }
 
   /**
@@ -315,87 +319,69 @@ export class ThumbnailGenerator {
    * @public
    */
   generateGifCb(opts, cb) {
-    const callback = cb || opts
+    const callback = cb || opts;
 
     this.generateGif(opts)
       .then(result => callback(null, result))
-      .catch(callback)
+      .catch(callback);
   }
-}
 
-// /**
-//  * @class VideoCompresser
-//  */
-// export class VideoCompresser {
-//   getRate() {
-//     const spawn = require('child_process').spawn
-//     const parent = process.argv[2]
-//     let videos = []
+  /**
+   * Method to create a short gif thumbnail from an mp4 video
+   *
+   * @method resizeVideo
+   *
+   * @param {Number} video
+   * @param {Number} outputdir
+   * @param {Number} quality
+   *
+   * @public
+   */
+  resizeVideo(quality) {
+    const video = this.sourcePath;
+    const outputdir = this.destinationPath;
 
-//     if (process.argv[2]) {
-//       // Parent Path
-//       const start = parseInt(process.argv[3])
-//       const end = parseInt(process.argv[4])
-//       for (let i = start; i <= end; i++) {
-//         videos.push(i)
-//       }
-//       videos.reverse()
-//       processVideos()
-//     } else {
-//       // Parent Path is required
-//       console.log('Parent Folder is required')
-//     }
+    if (!video || !outputdir) {
+      return false;
+    }
 
-//     function resizeVideo(video, quality) {
-//       const p = new Promise((resolve, reject) => {
-//         const ffmpeg = spawn('ffmpeg', [
-//           '-i',
-//           `${parent}/${video}.mp4`,
-//           '-codec:v',
-//           'libx264',
-//           '-profile:v',
-//           'main',
-//           '-preset',
-//           'slow',
-//           '-b:v',
-//           '400k',
-//           '-maxrate',
-//           '400k',
-//           '-bufsize',
-//           '800k',
-//           '-vf',
-//           `scale=-2:${quality}`,
-//           '-threads',
-//           '0',
-//           '-b:a',
-//           '128k',
-//           `${parent}/transcoded/${video}_${quality}.mp4`
-//         ])
-//         ffmpeg.stderr.on('data', data => {
-//           console.log(`${data}`)
-//         })
-//         ffmpeg.on('close', code => {
-//           resolve()
-//         })
-//       })
-//       return p
-//     }
+    const output = outputdir || this.tmpDir;
+    const videoName = path.basename(video);
 
-//     function processVideos() {
-//       let video = videos.pop()
-//       if (video) {
-//         resizeVideo(video, 720).then(() => {
-//           // 720p video all done
-//           resizeVideo(video, 480).then(() => {
-//             // 480p video all done
-//             resizeVideo(video, 360).then(() => {
-//               // 360p video all done
-//               console.log(`Completed Video Number - ${video}`)
-//               processVideos()
-//             })
-//           })
-//         })
-//       }
-//     }
-//   }
-// }
+    if (!fs.existsSync(`${output}/transcoded`)) {
+      fs.mkdirSync(`${output}/transcoded`);
+    }
+
+    return new Promise(resolve => {
+      const ffmpeg = spawn('ffmpeg', [
+        '-i',
+        video,
+        '-codec:v',
+        'libx264',
+        '-profile:v',
+        'main',
+        '-preset',
+        'slow',
+        '-b:v',
+        '400k',
+        '-maxrate',
+        '400k',
+        '-bufsize',
+        '800k',
+        '-vf',
+        `scale=-2:${quality}`,
+        '-threads',
+        '0',
+        '-b:a',
+        '128k',
+        `${output}/transcoded/${quality}_${videoName}`
+      ]);
+      ffmpeg.stderr.on('data', data => {
+        console.log(`${data}`);
+      });
+      ffmpeg.on('close', () => {
+        resolve(`${output}/transcoded/${quality}_${videoName}`);
+      });
+    });
+  }
+};

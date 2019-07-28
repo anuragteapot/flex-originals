@@ -1,8 +1,8 @@
 version: '2'
 services:
-  lazydrive:
-    container_name: lazydrive
-    image: lazydrive
+  flexoriginals:
+    container_name: flexoriginals
+    image: flexoriginals
     restart: always
     build: .
     ports:

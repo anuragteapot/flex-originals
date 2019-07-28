@@ -11,8 +11,6 @@ module.exports = function(Audio) {
     });
 
     audio.name = audioData.name;
-    audio.audioMeta = audioData.audioMeta;
-    audio.audioFile = audioData.audioFile;
     audio.visibility = audioData.visibility;
     audio.description = audioData.description;
     audio.thumbImage = audioData.thumbImage;

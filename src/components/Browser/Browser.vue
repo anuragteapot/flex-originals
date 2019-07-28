@@ -92,12 +92,9 @@ export default {
       const settings = await this.$store.dispatch("findSettings", {
         uid: this.$api.webStorage.local.get("$userId")
       });
-
       this.$store.commit(types.SET_SETTINGS, settings);
     }
-
     const content = await this.$store.dispatch("getContent", {});
-    console.log(content.data);
     this.$store.commit(types.SET_CONTENT, content.data);
   }
 };

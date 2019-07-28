@@ -50,6 +50,12 @@
           "/public"
         ],
         "params": "$!../assets"
+      },
+      {
+        "paths": [
+          "/uploads"
+        ],
+        "params": "$!../uploads"
       }
     ]
   },

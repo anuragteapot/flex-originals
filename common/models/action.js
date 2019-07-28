@@ -139,7 +139,7 @@ module.exports = function(Action) {
       try {
         const tg = new ThumbnailGenerator({
           sourcePath: video.videoMeta.path,
-          thumbnailPath: video.videoMeta.destination,
+          destinationPath: video.videoMeta.destination,
           size: '200x200',
           count: 3
         });

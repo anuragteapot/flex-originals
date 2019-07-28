@@ -11,8 +11,6 @@ module.exports = function(Videos) {
     });
 
     video.name = videoData.name;
-    video.videoMeta = videoData.videoMeta;
-    video.videoFile = videoData.videoFile;
     video.visibility = videoData.visibility;
     video.description = videoData.description;
     video.thumbImage = videoData.thumbImage;

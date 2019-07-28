@@ -38,23 +38,28 @@
                   </div>
                 </div>
                 <h3>Select Thumbnail</h3>
-                <div class="video__thumbnails">
-                  <img class="fo-image" src="/public/qq.webp" alt="thumbnail" />
-                </div>
-                <div class="video__thumbnails">
-                  <img class="fo-image" src="/public/qq.webp" alt="thumbnail" />
-                </div>
-                <div class="video__thumbnails">
-                  <img class="fo-image" src="/public/qq.webp" alt="thumbnail" />
+                <div class="video__thumbnails" v-for="(thumb, i) in thumbnails" :key="i">
+                  <img
+                    class="fo-image"
+                    :src="`/${thumb}`"
+                    alt="thumbnail"
+                    @click="videoData.thumbImage = thumb"
+                  />
                 </div>
                 <div class="upload__video__settings">
                   <div class="video__title">
                     <label for="videoTitle">Video Title</label>
-                    <input name="videoTitle" type="text" placeholder="Video Title" />
+                    <input
+                      v-model="videoData.name"
+                      name="videoTitle"
+                      type="text"
+                      placeholder="Video Title"
+                    />
                   </div>
                   <div class="video__description">
                     <label for="videoDescription">Video Description</label>
                     <textarea
+                      v-model="videoData.description"
                       rows="10"
                       name="videoDescription"
                       type="text"
@@ -63,52 +68,61 @@
                   </div>
                   <div class="video__tags">
                     <label for="videoTags">Video Tags</label>
-                    <input name="videoTags" type="text" placeholder="Video Tags" />
+                    <input
+                      v-model="videoData.tags"
+                      name="videoTags"
+                      type="text"
+                      placeholder="Video Tags"
+                    />
                   </div>
                   <div class="form-item">
-                    <label class="form-item__label">Text information</label>
+                    <label class="form-item__label">Visibility</label>
                     <div class="form-item__control">
-                      <select class="control control--select">
-                        <option selected="selected">Public</option>
-                        <option>Private</option>
+                      <select class="control control--select" v-model="videoData.visibility">
+                        <option value="1" selected="selected">Public</option>
+                        <option value="0">Private</option>
                       </select>
                     </div>
                   </div>
-                  <div class="form-item">
+                  <!-- <div class="form-item">
                     <label class="form-item__label">Premier</label>
                     <div class="form-item__control toggle">
                       <div class="toggle__handle"></div>
                     </div>
-                  </div>
+                  </div>-->
                 </div>
               </div>
               <div class="grid grid--half">
                 <h3>Advanced Settings</h3>
                 <div class="form-item">
                   <label class="form-item__label">Keep all my liked private</label>
-                  <div class="form-item__control toggle">
-                    <div class="toggle__handle"></div>
+                  <div
+                    class="form-item__control toggle"
+                    :class="videoData.likedPrivate ? 'is-on' : ''"
+                    @click="videoData.likedPrivate = !videoData.likedPrivate"
+                  >
+                    <div class="toggle__handle is-on"></div>
                   </div>
                 </div>
                 <div class="checkbox">
-                  <input id="one" type="checkbox" />
+                  <input id="one" type="checkbox" v-model="videoData.allowComments" />
                   <span class="check"></span>
                   <label for="one">Allow Comments</label>
                 </div>
                 <div class="checkbox">
-                  <input id="two" type="checkbox" />
+                  <input id="two" type="checkbox" v-model="videoData.ratings" />
                   <span class="check"></span>
                   <label for="two">Users can view ratings for this video</label>
                 </div>
                 <div class="checkbox">
-                  <input id="three" type="checkbox" />
+                  <input id="three" type="checkbox" v-model="videoData.agerestriction" />
                   <span class="check"></span>
                   <label for="three">Age restrictions</label>
                 </div>
                 <div class="form-item">
                   <label class="form-item__label">Category</label>
                   <div class="form-item__control">
-                    <select class="control control--select">
+                    <select class="control control--select" v-model="videoData.category">
                       <option selected="selected">People & Blog</option>
                       <option>Gamming</option>
                       <option>Education</option>
@@ -119,15 +133,13 @@
                 <div class="form-item">
                   <label class="form-item__label">Licence and rights ownership</label>
                   <div class="form-item__control">
-                    <select class="control control--select">
-                      <option selected="selected">People & Blog</option>
-                      <option>Gamming</option>
-                      <option>Education</option>
-                      <option>Comedy</option>
+                    <select class="control control--select" v-model="videoData.licence">
+                      <option selected="selected">Flex Originals</option>
+                      <option>Other Creators</option>
                     </select>
                   </div>
                 </div>
-                <button class="success" @click="finilize">Publish</button>
+                <button class="success" @click="finilize()">Publish</button>
               </div>
             </div>
           </div>
@@ -147,7 +159,26 @@ export default {
     return {
       isUploading: false,
       uploadPercent: 0,
-      done: false
+      done: false,
+      videoId: null,
+      thumbnails: [
+        "public/loading.gif",
+        "public/loading.gif",
+        "public/loading.gif"
+      ],
+      videoData: {
+        name: "",
+        agerestriction: false,
+        description: "",
+        tags: "",
+        thumbImage: "",
+        visibility: 1,
+        likedPrivate: false,
+        allowComments: true,
+        ratings: true,
+        category: "People & Blog",
+        licence: "Flex Originals"
+      }
     };
   },
   methods: {
@@ -230,11 +261,13 @@ export default {
             }
           });
 
+        this.videoId = uploadedVideo.data.video.id;
+
         const videoThumb = await this.$api
           .axios()
           .get(`/api/actions/genrateThumbnail/${uploadedVideo.data.video.id}`);
 
-          console.log(videoThumb)
+        this.thumbnails = videoThumb.data.thumbnails;
       } catch (err) {
         this.$api._handleError(err);
       }
@@ -271,9 +304,30 @@ export default {
         return "Sure?";
       }
     },
-    finilize() {
-      this.done = true;
-      window.removeEventListener("beforeunload", this.beforeunload);
+    finilize: async function() {
+      try {
+        const publishedVideo = await this.$api.axios().post(
+          `/api/videos/publish`,
+          { id: this.videoId, videoData: this.videoData },
+          {
+            retry: 3,
+            retryDelay: 1000
+          }
+        );
+
+        const data = {
+          data: `Saved.`,
+          color: "success"
+        };
+
+        this.$store.commit(types.SHOW_SNACKBAR, data);
+        this.done = true;
+        window.removeEventListener("beforeunload", this.beforeunload);
+        console.log(publishedVideo);
+      } catch (err) {
+        this.$api._handleError(err);
+        console.log(err);
+      }
     }
   }
 };

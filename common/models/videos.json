@@ -27,7 +27,7 @@
     "visibility": {
       "type": "number",
       "required": true,
-      "default": 1
+      "default": 0
     },
     "description": {
       "type": "string"

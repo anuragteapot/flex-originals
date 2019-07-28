@@ -10,7 +10,7 @@
 
     <div class="lazy-collection">
       <div class="server focusable" role="button" aria-label="My Server" aria-selected="true">
-        <div class="server-icon" @click="$router.push('/app/@watch')">
+        <div class="server-icon" @click="$router.push('/app/@home?filter=video')">
           <i class="fas fa-video" style="color:red;"></i>
         </div>
       </div>

@@ -286,4 +286,40 @@ module.exports = function(Action) {
       verb: 'get'
     }
   });
+
+  Action.getVideo = async id => {
+    const Videos = app.models.Videos;
+
+    if (id) {
+      return await Videos.findOne({
+        fields: {
+          videoOwnerId: true,
+          id: true,
+          name: true,
+          videoFile: true,
+          thumbImage: true
+        },
+        where: { id, visibility: 1 }
+      });
+    }
+  };
+
+  Action.remoteMethod('getVideo', {
+    description: 'Method to get the video info.',
+    accepts: [
+      {
+        arg: 'id',
+        type: 'string',
+        required: true
+      }
+    ],
+    returns: {
+      type: 'object',
+      root: true
+    },
+    http: {
+      path: '/getVideo/:id',
+      verb: 'get'
+    }
+  });
 };

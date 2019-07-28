@@ -35,6 +35,23 @@
     .left {
       width: 75%;
 
+      .video__unavaliable{
+        position: relative;
+        display: block;
+        text-align: center;
+        width: 100%;
+        padding: 25%;
+        margin: auto;
+        background: black;
+        font-size: 13px;
+        overflow: hidden;
+        font-family: Arial;
+        
+        p {
+          font-size: 30px;
+        }
+      }
+
       .video_actions {
         padding: 20px 0;
 

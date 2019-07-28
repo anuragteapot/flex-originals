@@ -8,11 +8,26 @@
       </div>
       <h1 v-if="content.video.length > 0">Videos</h1>
       <div class="fo-content__container" v-if="content.video.length > 0">
-        <video-thumb v-for="item in content.video" :key="item.id" :src="item.thumbImage || src" :lazySrc="lazySrc" :item="item" hover></video-thumb>
+        <video-thumb
+          v-for="item in content.video"
+          :key="item.id"
+          :src="'/' + item.thumbImage || src"
+          :lazySrc="lazySrc"
+          :item="item"
+          hover
+        ></video-thumb>
       </div>
       <h1 v-if="content.audio.length > 0">Music</h1>
       <div class="fo-content__container" v-if="content.audio.length > 0">
-        <music-thumb  v-for="item in content.audio" :key="item.id" :src="item.thumbImage || src" :lazySrc="lazySrc" :item="item" hover></music-thumb>
+        <music-thumb
+          v-for="item in content.audio"
+          :key="item.id"
+          :src="'/' + item.thumbImage || src"
+          :lazySrc="lazySrc"
+          :item="item"
+          hover
+          @click="$router.push('/app/@song')"
+        ></music-thumb>
       </div>
     </div>
   </div>

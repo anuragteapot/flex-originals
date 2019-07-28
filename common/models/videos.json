@@ -33,7 +33,7 @@
       "type": "string"
     },
     "thumbImage": {
-      "type": "object"
+      "type": "string"
     },
     "tags": {
       "type": "string"

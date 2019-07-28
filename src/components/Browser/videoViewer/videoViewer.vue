@@ -6,10 +6,11 @@
           <div class="card__body">
             <div class="container">
               <div class="grid grid--half left">
-                <lazy-video-player
-                  src="https://player.vimeo.com/external/194837908.sd.mp4?s=c350076905b78c67f74d7ee39fdb4fef01d12420&profile_id=164"
-                ></lazy-video-player>
-                <div class="video_actions">
+                <div class="video__unavaliable" v-if="videoUnavaliable">
+                  <p> <i class="fas fa-exclamation-circle"></i> Video unavaliable</p>
+                </div>
+                <lazy-video-player :src="videoSource" v-if="!videoUnavaliable"></lazy-video-player>
+                <div class="video_actions" v-if="!videoUnavaliable">
                   <p class="video__name">Anurag</p>
                   <div class="video__analytics__info">
                     <div class="left">
@@ -181,7 +182,7 @@
                   </div>
                 </div>
               </div>
-              <div class="grid grid--half right">
+              <div class="grid grid--half right" v-if="!videoUnavaliable">
                 <video-suggestions :src="src" :lazySrc="lazySrc"></video-suggestions>
                 <video-suggestions :src="src" :lazySrc="lazySrc"></video-suggestions>
                 <video-suggestions :src="src" :lazySrc="lazySrc"></video-suggestions>
@@ -209,7 +210,9 @@ export default {
   name: "media-settings",
   data: () => ({
     src: "/public/qq.webp",
-    lazySrc: "/public/icons/music.svg"
+    lazySrc: "/public/icons/music.svg",
+    videoSource: "",
+    videoUnavaliable: false
   }),
   components: {
     videoSuggestions
@@ -224,6 +227,19 @@ export default {
         this.$router.push("/app/@home?u=logout");
         this.$api.auth.logout();
       }
+    }
+  },
+  async beforeMount() {
+    if (this.$route.query.v) {
+      const video = await this.$api
+        .axios()
+        .get(`/api/actions/getVideo/${this.$route.query.v}`);
+      if (!video.data) {
+        this.videoUnavaliable = true;
+      }
+      this.videoSource = "/" + video.data.videoFile;
+    } else {
+      this.$router.push("/@error");
     }
   }
 };

@@ -305,6 +305,9 @@ export default {
       }
     },
     finilize: async function() {
+      if (!this.videoData.thumbImage) {
+        this.videoData.thumbImage = this.thumbnails[0];
+      }
       try {
         const publishedVideo = await this.$api.axios().post(
           `/api/videos/publish`,
@@ -314,16 +317,17 @@ export default {
             retryDelay: 1000
           }
         );
-
         const data = {
           data: `Saved.`,
           color: "success"
         };
-
         this.$store.commit(types.SHOW_SNACKBAR, data);
         this.done = true;
         window.removeEventListener("beforeunload", this.beforeunload);
-        console.log(publishedVideo);
+
+        setTimeout(() => {
+          window.location.href = `/app/@watch?v=${publishedVideo.data.id}`;
+        }, 1000);
       } catch (err) {
         this.$api._handleError(err);
         console.log(err);

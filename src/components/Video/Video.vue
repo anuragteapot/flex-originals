@@ -17,7 +17,7 @@
     <span :class="`large-play ${!isPlaying && !loading ? '' : 'hidden'}`">
       <i @click="togglePlay" class="fas fa-play" aria-hidden="true"></i>
     </span>
-    <div v-show="loading" class="loader-6 center">
+    <div v-show="loading" class="loader-1 center">
       <span></span>
     </div>
     <div :class="`control-bar ${videoActive || !isPlaying ? 'active' : ''}`">
@@ -241,13 +241,9 @@ export default {
       this.curTime = curmins + ":" + cursecs;
     },
     handleProgress() {
+      this.loading = false;
       const percent = (this.video.currentTime / this.video.duration) * 100;
       this.progressBar = `${percent}%`;
-      if (this.errorOccured) {
-        this.loading = true;
-      } else {
-        this.loading = false;
-      }
     },
     detectKeypress(event) {
       if (event.keyCode == 32) {

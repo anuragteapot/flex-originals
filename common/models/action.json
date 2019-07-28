@@ -53,6 +53,13 @@
       "principalId": "$everyone",
       "permission": "ALLOW",
       "property": "getContent"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW",
+      "property": "getVideo"
     }
   ],
   "methods": {}

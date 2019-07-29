@@ -14,9 +14,9 @@
       ref="videoViewer"
       @click="togglePlay"
     ></video>
-    <span :class="`large-play ${!isPlaying && !loading ? '' : 'hidden'}`">
+    <!-- <span :class="`large-play ${!isPlaying && !loading ? '' : 'hidden'}`">
       <i @click="togglePlay" class="fas fa-play" aria-hidden="true"></i>
-    </span>
+    </span>-->
     <div v-show="loading" class="loader-1 center">
       <span></span>
     </div>
@@ -139,6 +139,7 @@ export default {
     src(val) {
       this.video.src = val;
       this.video.load();
+      this.video.play();
     },
     videoActive() {
       this.reset();
@@ -268,6 +269,10 @@ export default {
       this.isPlaying = false;
     },
     loadeddata() {
+      this.video.play();
+      this.hasEnded = false;
+      this.videoActive = false;
+      this.isPlaying = true;
       this.loading = false;
     },
     loadedmetadata() {

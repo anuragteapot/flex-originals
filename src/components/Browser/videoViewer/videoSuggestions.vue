@@ -1,10 +1,10 @@
 <template>
   <div class="v-thumb">
-    <div class="video__thumbnail">
+    <div class="video__thumbnail" @click="$router.push(`/app/@watch?v=${item.id}`)">
       <lazy-image :src="src" :lazySrc="lazySrc"></lazy-image>
     </div>
     <div class="video__info">
-      <p class="title">Christian</p>
+      <p class="title">{{ item.name }}</p>
       <p class="views">Alenter</p>
     </div>
   </div>
@@ -25,7 +25,8 @@ export default {
     },
     gradient: String,
     lazySrc: String,
-    srcset: String
+    srcset: String,
+    item: Object
   }
 };
 </script>

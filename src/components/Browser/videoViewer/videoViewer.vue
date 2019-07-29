@@ -7,7 +7,9 @@
             <div class="container">
               <div class="grid grid--half left">
                 <div class="video__unavaliable" v-if="videoUnavaliable">
-                  <p> <i class="fas fa-exclamation-circle"></i> Video unavaliable</p>
+                  <p>
+                    <i class="fas fa-exclamation-circle"></i> Video unavaliable
+                  </p>
                 </div>
                 <lazy-video-player :src="videoSource" v-if="!videoUnavaliable"></lazy-video-player>
                 <div class="video_actions" v-if="!videoUnavaliable">
@@ -183,17 +185,13 @@
                 </div>
               </div>
               <div class="grid grid--half right" v-if="!videoUnavaliable">
-                <video-suggestions :src="src" :lazySrc="lazySrc"></video-suggestions>
-                <video-suggestions :src="src" :lazySrc="lazySrc"></video-suggestions>
-                <video-suggestions :src="src" :lazySrc="lazySrc"></video-suggestions>
-                <video-suggestions :src="src" :lazySrc="lazySrc"></video-suggestions>
-                <video-suggestions :src="src" :lazySrc="lazySrc"></video-suggestions>
-                <video-suggestions :src="src" :lazySrc="lazySrc"></video-suggestions>
-
-                <video-suggestions :src="src" :lazySrc="lazySrc"></video-suggestions>
-                <video-suggestions :src="src" :lazySrc="lazySrc"></video-suggestions>
-                <video-suggestions :src="src" :lazySrc="lazySrc"></video-suggestions>
-                <video-suggestions :src="src" :lazySrc="lazySrc"></video-suggestions>
+                <video-suggestions
+                  v-for="item in videoSuggestions"
+                  :src="'/' + item.thumbImage"
+                  :key="item.id"
+                  :lazySrc="lazySrc"
+                  :item="item"
+                ></video-suggestions>
               </div>
             </div>
           </div>
@@ -205,15 +203,28 @@
 
 <script>
 import videoSuggestions from "./videoSuggestions";
-
+import * as types from './../../../store/mutation-types'
 export default {
   name: "media-settings",
   data: () => ({
     src: "/public/qq.webp",
     lazySrc: "/public/icons/music.svg",
     videoSource: "",
+    videoId: "",
     videoUnavaliable: false
   }),
+  watch:{
+   '$route' () {
+     this.init()
+    }
+  },
+  computed: {
+    videoSuggestions() {
+      return this.$store.state.content.video.filter(
+        item => item.id !== this.$route.query.v
+      );
+    }
+  },
   components: {
     videoSuggestions
   },
@@ -227,10 +238,10 @@ export default {
         this.$router.push("/app/@home?u=logout");
         this.$api.auth.logout();
       }
-    }
-  },
-  async beforeMount() {
+    },
+    async init(){
     if (this.$route.query.v) {
+      this.$store.commit(types.SET_IS_LOADING, true);
       const video = await this.$api
         .axios()
         .get(`/api/actions/getVideo/${this.$route.query.v}`);
@@ -241,6 +252,11 @@ export default {
     } else {
       this.$router.push("/@error");
     }
+    this.$store.commit(types.SET_IS_LOADING, false);
+    }
+  },
+  async beforeMount() {
+    this.init();
   }
 };
 </script>

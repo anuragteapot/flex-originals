@@ -136,21 +136,25 @@ module.exports = function(Action) {
         where: { id }
       });
 
-      try {
-        const tg = new ThumbnailGenerator({
-          sourcePath: video.videoMeta.path,
-          destinationPath: video.videoMeta.destination,
-          size: '200x200',
-          count: 3
-        });
+      if (video.videoMeta) {
+        try {
+          const tg = new ThumbnailGenerator({
+            sourcePath: video.videoMeta.path,
+            destinationPath: video.videoMeta.destination,
+            size: '170x100',
+            count: 3
+          });
 
-        const thumb = await tg.generate();
-        const thumbnails = thumb.map(x =>
-          path.join(video.videoMeta.destination, x)
-        );
-        return { thumbnails };
-      } catch (err) {
-        return { err };
+          const thumb = await tg.generate();
+          const thumbnails = thumb.map(x =>
+            path.join(video.videoMeta.destination, x)
+          );
+          return { thumbnails };
+        } catch (err) {
+          return { err };
+        }
+      } else {
+        return { thumbnails: [] };
       }
     } catch (err) {
       return { err };
@@ -184,18 +188,22 @@ module.exports = function(Action) {
         where: { id }
       });
 
-      try {
-        const tg = new ThumbnailGenerator({
-          sourcePath: video.videoMeta.path,
-          destinationPath: video.videoMeta.destination,
-          size: '200x200',
-          count: 3
-        });
+      if (video.videoMeta) {
+        try {
+          const tg = new ThumbnailGenerator({
+            sourcePath: video.videoMeta.path,
+            destinationPath: video.videoMeta.destination,
+            size: '200x200',
+            count: 3
+          });
 
-        const compressVideo = await tg.resizeVideo(720);
-        return { compressVideo };
-      } catch (err) {
-        return { err };
+          const compressVideo = await tg.resizeVideo(720);
+          return { compressVideo };
+        } catch (err) {
+          return { err };
+        }
+      } else {
+        return { compressVideo: '' };
       }
     } catch (err) {
       return { err };

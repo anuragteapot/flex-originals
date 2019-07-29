@@ -48,10 +48,10 @@ export default {
       return this.$store.state.content;
     },
     ritem(){
-      return [{
+      return {
         id:'2mxmd2msk3',
-        title:'Anurag'
-      }]
+        title:'Recent'
+      }
     }
   },
   components: {

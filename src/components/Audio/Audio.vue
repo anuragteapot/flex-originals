@@ -241,6 +241,10 @@ export default {
       this.audio.loop = false;
     }, 500);
 
+    if(!this.$route.query.a) {
+      this.$router.push("/app/@error");
+    }
+
     // this.$nextTick(()=>{
     //       this.changeSong();
     //   this.audio.loop = false;

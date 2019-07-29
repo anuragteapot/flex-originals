@@ -15,7 +15,7 @@
         </div>
       </div>
       <div class="server focusable" role="button" aria-label="My Server" aria-selected="true">
-        <div class="server-icon" @click="$router.push('/app/@song')">
+        <div class="server-icon" @click="$router.push('/app/@home?filter=music')">
           <i class="fas fa-music"></i>
         </div>
       </div>

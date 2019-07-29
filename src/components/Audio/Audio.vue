@@ -236,8 +236,15 @@ export default {
     }
   },
   mounted: function() {
-    this.changeSong();
-    this.audio.loop = false;
+    setTimeout(() => {
+      this.changeSong();
+      this.audio.loop = false;
+    }, 500);
+
+    // this.$nextTick(()=>{
+    //       this.changeSong();
+    //   this.audio.loop = false;
+    // })
     // window.addEventListener("mousedown", function(event) {
     //   if (!isDraggable(event.target)) return false;
 

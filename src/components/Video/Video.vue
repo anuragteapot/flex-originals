@@ -267,6 +267,7 @@ export default {
     handleEnded() {
       this.hasEnded = true;
       this.isPlaying = false;
+      this.$emit('handleEnded');
     },
     loadeddata() {
       this.video.play();

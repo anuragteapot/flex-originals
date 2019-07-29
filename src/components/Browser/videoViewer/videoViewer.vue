@@ -11,7 +11,11 @@
                     <i class="fas fa-exclamation-circle"></i> Video unavaliable
                   </p>
                 </div>
-                <lazy-video-player :src="videoSource" v-if="!videoUnavaliable"></lazy-video-player>
+                <lazy-video-player
+                  :src="videoSource"
+                  v-if="!videoUnavaliable"
+                  @handleEnded="handleEnded"
+                ></lazy-video-player>
                 <div class="video_actions" v-if="!videoUnavaliable">
                   <p class="video__name">Anurag</p>
                   <div class="video__analytics__info">
@@ -185,6 +189,13 @@
                 </div>
               </div>
               <div class="grid grid--half right" v-if="!videoUnavaliable">
+                <div class="v-auto-play">
+                  <p>Auto Play</p>
+                  <label class="switch">
+                    <input type="checkbox" v-model="autoPlay" />
+                    <div></div>
+                  </label>
+                </div>
                 <video-suggestions
                   v-for="item in videoSuggestions"
                   :src="'/' + item.thumbImage"
@@ -203,19 +214,20 @@
 
 <script>
 import videoSuggestions from "./videoSuggestions";
-import * as types from './../../../store/mutation-types'
+import * as types from "./../../../store/mutation-types";
 export default {
   name: "media-settings",
   data: () => ({
+    autoPlay: false,
     src: "/public/qq.webp",
     lazySrc: "/public/icons/music.svg",
     videoSource: "",
     videoId: "",
     videoUnavaliable: false
   }),
-  watch:{
-   '$route' () {
-     this.init()
+  watch: {
+    $route() {
+      this.init();
     }
   },
   computed: {
@@ -229,6 +241,15 @@ export default {
     videoSuggestions
   },
   methods: {
+    handleEnded() {
+      const videos = this.$store.state.content.video;
+      if (this.autoPlay && this.videoSuggestions.length > 0) {
+        const newVideoId = videos.findIndex(x => x.id === this.$route.query.v) + 1;
+        if(newVideoId < videos.length) {
+          this.$router.push(`/app/@watch?v=${videos[newVideoId].id}`);
+        }
+      }
+    },
     async logout() {
       try {
         await this.$store.dispatch("logout");
@@ -239,20 +260,20 @@ export default {
         this.$api.auth.logout();
       }
     },
-    async init(){
-    if (this.$route.query.v) {
-      this.$store.commit(types.SET_IS_LOADING, true);
-      const video = await this.$api
-        .axios()
-        .get(`/api/actions/getVideo/${this.$route.query.v}`);
-      if (!video.data) {
-        this.videoUnavaliable = true;
+    async init() {
+      if (this.$route.query.v) {
+        this.$store.commit(types.SET_IS_LOADING, true);
+        const video = await this.$api
+          .axios()
+          .get(`/api/actions/getVideo/${this.$route.query.v}`);
+        if (!video.data) {
+          this.videoUnavaliable = true;
+        }
+        this.videoSource = "/" + video.data.videoFile;
+      } else {
+        this.$router.push("/@error");
       }
-      this.videoSource = "/" + video.data.videoFile;
-    } else {
-      this.$router.push("/@error");
-    }
-    this.$store.commit(types.SET_IS_LOADING, false);
+      this.$store.commit(types.SET_IS_LOADING, false);
     }
   },
   async beforeMount() {

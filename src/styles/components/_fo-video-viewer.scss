@@ -378,6 +378,13 @@
       flex: 1;
       overflow-y: scroll;
 
+      .v-auto-play{
+        padding: 5px 0px;
+        p{
+          padding-bottom: 10px;
+        }
+      }
+
       .v-thumb {
         display: flex;
         width: 100%;

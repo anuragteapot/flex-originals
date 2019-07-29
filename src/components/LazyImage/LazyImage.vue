@@ -1,6 +1,6 @@
 <template>
   <div
-    :class="`fo-image fo-background ${hover ? 'hover' : 'not'}`"
+    :class="`fo-image fo-background ${hover ? 'hover' : 'not'} ${active ? 'active': ''}`"
     ref="lazyBackground"
     :alt="alt"
   >
@@ -29,6 +29,7 @@ export default {
     },
     hover: Boolean,
     lazySrc: String,
+    active: Boolean,
     srcset: String
   },
   computed: {

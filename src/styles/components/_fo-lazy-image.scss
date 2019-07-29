@@ -9,7 +9,7 @@
   position: relative;
 }
 
-.fo-image.hover:hover::before {
+.fo-image.hover:hover::before, .fo-image.active::before {
   content: "";
   position: absolute;
   top: 0;

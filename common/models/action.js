@@ -1,6 +1,9 @@
+/* eslint-disable no-unused-vars */
 'use strict';
 
 const multer = require('multer');
+const aws = require('aws-sdk');
+const multerS3 = require('multer-s3');
 const fs = require('fs-extra');
 const helper = require('./../../server/helper-util');
 const path = require('path');
@@ -17,6 +20,14 @@ const IMAGE_EXT = [
   'image/png'
 ];
 const EXTENSION = ['.png', '.jpeg', '.mp4', '.mp3', '.ogg', '.gif'];
+/**
+ * PROFILE IMAGE STORING STARTS
+ */
+const s3 = new aws.S3({
+  accessKeyId: 'AKIA5HHMIXVQQUAJ7PQC',
+  secretAccessKey: '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',
+  Bucket: 'flexoriginals'
+});
 
 module.exports = function(Action) {
   const storage = multer.diskStorage({
@@ -35,6 +46,26 @@ module.exports = function(Action) {
 
     filename: (req, file, cb) => {
       cb(null, file.originalname);
+    }
+  });
+
+  const s3Storage = multerS3({
+    s3: s3,
+    bucket: 'flexoriginals',
+    acl: 'public-read',
+    key: function(req, file, cb) {
+      const userId = req.params.id;
+      const dirPath = `uploads/${userId}/${helper.randomId()}/${
+        req.params.type
+      }/`;
+      cb(
+        null,
+        dirPath +
+          path.basename(file.originalname, path.extname(file.originalname)) +
+          '-' +
+          Date.now() +
+          path.extname(file.originalname)
+      );
     }
   });
 
@@ -60,7 +91,7 @@ module.exports = function(Action) {
         return res.json(err);
       } else {
         const { type } = req.params;
-
+        // req.file.path = req.file.location;
         try {
           if (type == 'video' && VIDEO_EXT.indexOf(req.file.mimetype) !== -1) {
             const video = await Videos.create({

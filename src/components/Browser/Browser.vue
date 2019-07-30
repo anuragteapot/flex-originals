@@ -31,7 +31,7 @@ import upload from "./Upload/Upload";
 import watch from "./videoViewer/videoViewer";
 import asideAction from "./Aside/AsideAction";
 import asideDes from "./Aside/AsideDes";
-import toolbar from "./../Browser/Tollbar/Toolbar";
+import toolbar from "./../Browser/Toolbar/Toolbar";
 import editvideo from "./../Browser/EditVideo/EditVideo";
 import { mapGetters } from "vuex";
 

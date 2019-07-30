@@ -34,6 +34,7 @@
           <i class="fas fa-search" style="color:#f19600"></i>
         </div>
       </div>
+
       <div
         v-if="selecteditems.length == 1"
         @click="$router.push(`/app/@editvideo?v=${selecteditems[0].id}`)"
@@ -48,7 +49,7 @@
       </div>
 
       <div
-       v-if="selecteditems.length > 0"
+        v-if="selecteditems.length > 0"
         class="server focusable"
         role="button"
         aria-label="My Server"
@@ -74,6 +75,17 @@
           <i class="fas fa-plus" style="color:#00b0f4;"></i>
         </div>
       </div>
+      <div
+        class="server focusable"
+        role="button"
+        aria-label="My Server"
+        aria-selected="true"
+        v-if="!isAuth"
+      >
+        <div class="server-icon" @click="$router.push('/login')">
+          <i class="fas fa-sign-in-alt"></i>
+        </div>
+      </div>
     </div>
   </aside>
 </template>
@@ -86,6 +98,9 @@ export default {
   computed: {
     selecteditems() {
       return this.$store.state.selectedItems;
+    },
+    isAuth() {
+      return this.$store.state.isAuthenticated;
     }
   },
   methods: {

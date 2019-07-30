@@ -252,6 +252,7 @@ export default {
         "audio/mpeg",
         "audio/vnd.wav",
         "audio/mp4",
+        "audio/mp3",
         "audio/ogg"
       ];
 
@@ -261,6 +262,16 @@ export default {
         type = "video";
       } else if (AUDIO_EXT.indexOf(this.$refs.inputFile.files[0].type) != -1) {
         type = "audio";
+      }
+
+      if (!type) {
+        const data = {
+          data: `File not allowed.`,
+          color: "error"
+        };
+
+        this.$store.commit(types.SHOW_SNACKBAR, data);
+        return false;
       }
 
       try {

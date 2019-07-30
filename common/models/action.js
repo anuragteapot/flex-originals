@@ -11,7 +11,7 @@ const app = require('../../server/server');
 const ThumbnailGenerator = require('../../server/API/Video');
 
 const VIDEO_EXT = ['video/mp4', 'video/x-msvideo'];
-const AUDIO_EXT = ['audio/mpeg', 'audio/vnd.wav', 'audio/mp4', 'audio/ogg'];
+const AUDIO_EXT = ['audio/mpeg', 'audio/vnd.wav', 'audio/mp4', 'audio/ogg',  "audio/mp3"];
 const IMAGE_EXT = [
   'image/gif',
   'image/jpeg',

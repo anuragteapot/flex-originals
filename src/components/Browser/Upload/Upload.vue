@@ -262,6 +262,7 @@ export default {
           });
 
         this.videoId = uploadedVideo.data.video.id;
+        this.videoData.name = uploadedVideo.data.video.name;
 
         const videoThumb = await this.$api
           .axios()

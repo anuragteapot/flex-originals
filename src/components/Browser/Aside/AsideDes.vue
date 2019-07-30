@@ -35,8 +35,8 @@
         style="cursor:pointer"
       />
       <div class="features-footer-details">
-        <span class="username">{{user.realm}}</span>
-        <span class="tag">{{user.username}}</span>
+        <span class="username">{{user.realm || 'Anonymous'}}</span>
+        <span class="tag">{{user.username || 'Flex'}}</span>
       </div>
       <div class="features-footer-controls button-group">
         <button role="button" aria-label="Mute" class="button button-mute">

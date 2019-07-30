@@ -57,10 +57,13 @@
               style="color: lightgreen;"
             ></i>
           </p>
+          <button class="follow" style="background:red;" v-if="editMode" @click="onEditMode">
+            <i class="far fa-edit"></i> Edit Mode On
+          </button>
           <button
             class="follow"
             style="background:#7289da;"
-            v-if="authUser === user.id"
+            v-else-if="authUser === user.id"
             @click="onEditMode"
           >
             <i class="far fa-edit"></i> Edit channel
@@ -118,7 +121,12 @@ export default {
     onScroll: api.debounce(function() {}, 300),
     async onEditMode() {
       if ((await this.$api.isLogged()) && this.authUser === this.user.id) {
-        this.$store.commit(types.SET_EDIT_MODE, true);
+        if (this.editMode) {
+          this.$store.commit(types.SELECT_BROWSER_ITEM, false);
+          this.$store.commit(types.SET_EDIT_MODE, false);
+        } else {
+          this.$store.commit(types.SET_EDIT_MODE, true);
+        }
       }
     }
   },

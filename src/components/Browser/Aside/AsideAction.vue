@@ -31,16 +31,29 @@
       </div>
       <div class="server focusable" role="button" aria-label="My Server" aria-selected="true">
         <div class="server-icon">
-          <i class="fas fa-arrow-down" style="color:#04fb8a;"></i>
-        </div>
-      </div>
-      <div class="server focusable" role="button" aria-label="My Server" aria-selected="true">
-        <div class="server-icon">
           <i class="fas fa-search" style="color:#f19600"></i>
         </div>
       </div>
+      <div
+        v-if="selecteditems.length == 1"
+        @click="$router.push(`/app/@editvideo?v=${selecteditems[0].id}`)"
+        class="server focusable"
+        role="button"
+        aria-label="My Server"
+        aria-selected="true"
+      >
+        <div class="server-icon">
+          <i class="fas fa-edit" style="color:#04fb8a;"></i>
+        </div>
+      </div>
 
-      <div class="server focusable" role="button" aria-label="My Server" aria-selected="true">
+      <div
+        class="server focusable"
+        role="button"
+        aria-label="My Server"
+        aria-selected="true"
+        @click="deleteItem"
+      >
         <div class="server-icon">
           <i class="fas fa-trash" style="color:red;"></i>
         </div>
@@ -65,9 +78,19 @@
 </template>
 
 <script>
+import * as types from "./../../../store/mutation-types";
+
 export default {
   name: "lazy-aside",
+  computed: {
+    selecteditems() {
+      return this.$store.state.selectedItems;
+    }
+  },
   methods: {
+    deleteItem() {
+      this.$store.commit(types.SHOW_MODAL, { state: true, type: "MDelete" });
+    },
     fileUpload: async function() {
       if (await this.$api.isLogged()) {
         this.$router.push(`/app/@upload`);

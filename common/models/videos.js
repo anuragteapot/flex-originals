@@ -50,4 +50,66 @@ module.exports = function(Videos) {
       verb: 'post'
     }
   });
+
+  Videos.deleteItem = async id => {
+    if (!id) {
+      throw new Error('User Id is required.', {}, 500);
+    }
+
+    let video = await Videos.findOne({
+      where: { id }
+    });
+
+    video.visibility = 2;
+    video.save();
+    return { message: 'Success' }
+  };
+
+  Videos.remoteMethod('deleteItem', {
+    description: 'Method to delete the video.',
+    accepts: [
+      {
+        arg: 'id',
+        type: 'string',
+        required: true
+      }
+    ],
+    returns: {
+      type: 'object',
+      root: true
+    },
+    http: {
+      path: '/deleteItem',
+      verb: 'post'
+    }
+  });
+
+  Videos.getVideoInfo = async id => {
+    if (!id) {
+      throw new Error('User Id is required.', {}, 500);
+    }
+
+    return await Videos.findOne({
+      where: { id }
+    });
+  };
+
+  Videos.remoteMethod('getVideoInfo', {
+    description: 'Method to get Video Info',
+    accepts: [
+      {
+        arg: 'id',
+        type: 'string',
+        required: true
+      }
+    ],
+    returns: {
+      type: 'object',
+      root: true
+    },
+    http: {
+      path: '/getVideoInfo/:id',
+      verb: 'get'
+    }
+  });
 };

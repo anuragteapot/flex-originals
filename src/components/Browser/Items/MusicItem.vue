@@ -7,6 +7,16 @@
         hover
         :active="item.id == $route.query.a || selected"
       ></lazy-image>
+      <div class="now playing bar" v-show="item.id == $route.query.a">
+        <span class="bar n1"></span>
+        <span class="bar n2"></span>
+        <span class="bar n3"></span>
+        <span class="bar n4"></span>
+        <span class="bar n5"></span>
+        <span class="bar n6"></span>
+        <span class="bar n7"></span>
+        <span class="bar n8"></span>
+      </div>
       <i class="far fa-2x fa-check-circle" v-if="selected"></i>
       <i
         class="fas fa-play fa-2x file-icon"
@@ -48,17 +58,28 @@ export default {
       return this.$store.state.editMode;
     },
     selected() {
-      return this.$store.state.selectedItems.indexOf(this.item.id) !== -1
-        ? true
-        : false;
+      const res = this.$store.state.selectedItems.filter(item => {
+        return item.id === this.item.id;
+      });
+      return res.length === 1 ? true : false;
     }
   },
   methods: {
     open() {
       if (!this.editMode) {
-        this.$router.push(`/app/@watch?v=${this.item.id}`);
+        this.$router.push(`/app/@song?a=${this.item.id}`);
       } else {
-        this.$store.commit(types.SELECT_BROWSER_ITEM, this.item.id);
+        if (this.selected) {
+          this.$store.commit(types.UNSELECT_BROWSER_ITEM, {
+            id: this.item.id,
+            type: "audio"
+          });
+        } else {
+          this.$store.commit(types.SELECT_BROWSER_ITEM, {
+            id: this.item.id,
+            type: "audio"
+          });
+        }
       }
     },
     getName: function() {

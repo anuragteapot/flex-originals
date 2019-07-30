@@ -2,15 +2,16 @@
   <div class="lazy-delete">
     <section class="form">
       <div class="inner">
-        <div class="header">Delete this item?</div>
+        <div class="header" v-if="selectedItems.length > 1">Delete these items?</div>
+        <div class="header" v-else>Delete this item?</div>
         <div class="body">
           Are you sure you want to delete
-          <strong>FlareTV Community</strong>? You won't be able to rejoin this server unless you are re-invited.
+          <strong>{{selectedItems.length}} item</strong> ? You won't be able to recover this item.
         </div>
         <div class="footer">
           <div style="text-align:right">
             <button type="button" @click="hide">Cancel</button>
-            <button type="submit" class="danger">Delete</button>
+            <button type="submit" class="danger" @click="deleteItem">Delete</button>
           </div>
         </div>
       </div>
@@ -24,7 +25,6 @@ import * as types from "./../../../store/mutation-types";
 export default {
   name: "model-delete",
   data: () => ({}),
-
   props: {
     text: {
       type: String,
@@ -32,34 +32,40 @@ export default {
       default: "Are you sure want to delete ?"
     }
   },
-
-  computed: {},
-
+  computed: {
+    selectedItems() {
+      return this.$store.state.selectedItems;
+    }
+  },
   methods: {
     hide: function() {
       this.$store.commit(types.HIDE_MODAL);
     },
-    deleteFile: async function() {
+    deleteItem: async function() {
       this.$store.commit(types.SET_IS_LOADING, true);
-      let response = "";
-      const items = this.$store.state.selectedItems;
 
-      for (var i = 0; i < items.length; i++) {
-        const item = items[i];
-        response = await this.$store.dispatch("deleteFile", item);
+      for (let i = 0; i < this.selectedItems.length; i++) {
+        try {
+          await this.$store.dispatch("deleteItem", this.selectedItems[i]);
+          var data = {
+            data: "Done!",
+            color: "success"
+          };
+          this.$store.commit(types.SET_IS_LOADING, false);
+          this.$store.commit(types.SHOW_SNACKBAR, data);
+          this.$store.commit(types.UNSELECT_ALL_BROWSER_ITEMS);
+          this.hide();
+          if (this.$route.params.id) {
+            const content = await this.$store.dispatch("getContent", {
+              userId: this.$route.params.id
+            });
+
+            this.$store.commit(types.SET_CONTENT, content.data);
+          }
+        } catch (err) {
+          console.log(err);
+        }
       }
-
-      this.$store.commit(types.UNSELECT_ALL_BROWSER_ITEMS);
-
-      var data = {
-        data: response.data.message,
-        color: "success"
-      };
-      this.$store.commit(types.SET_IS_LOADING, false);
-      this.$store.commit(types.SHOW_SNACKBAR, data);
-      this.$store.dispatch("update", {
-        path: this.$store.state.selectedDirectory
-      });
     }
   }
 };

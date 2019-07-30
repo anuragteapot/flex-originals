@@ -92,6 +92,20 @@
       "principalId": "$owner",
       "permission": "ALLOW",
       "property": "publish"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$owner",
+      "permission": "ALLOW",
+      "property": "deleteItem"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$owner",
+      "permission": "ALLOW",
+      "property": "getVideoInfo"
     }
   ],
   "methods": {}

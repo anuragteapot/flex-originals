@@ -188,11 +188,10 @@ export default {
    * @param payload the item
    */
   [types.SELECT_BROWSER_ITEM]: (state, payload) => {
-    if (state.selectedItems.indexOf(payload) === -1) {
-      state.selectedItems.push(payload);
+    if (!payload) {
+      state.selectedItems = [];
     } else {
-      const index = state.selectedItems.indexOf(payload);
-      state.selectedItems.splice(index, 1);
+      state.selectedItems.push(payload);
     }
   },
 

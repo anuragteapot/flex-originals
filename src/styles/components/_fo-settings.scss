@@ -51,7 +51,7 @@
         flex-direction: column;
       }
 
-      button {
+      .fo-settings-button {
         background-color: $color-primary;
         color: #fff;
         border: 0;
@@ -63,7 +63,7 @@
         border-radius: 3px;
       }
 
-      button:hover {
+      .fo-settings-button:hover {
         opacity: 0.8;
       }
 

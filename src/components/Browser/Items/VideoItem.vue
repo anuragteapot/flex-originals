@@ -37,9 +37,10 @@ export default {
       return this.$store.state.editMode;
     },
     selected() {
-      return this.$store.state.selectedItems.indexOf(this.item.id) !== -1
-        ? true
-        : false;
+      const res = this.$store.state.selectedItems.filter(item => {
+        return item.id === this.item.id;
+      });
+      return res.length === 1 ? true : false;
     }
   },
   methods: {
@@ -47,7 +48,17 @@ export default {
       if (!this.editMode) {
         this.$router.push(`/app/@watch?v=${this.item.id}`);
       } else {
-        this.$store.commit(types.SELECT_BROWSER_ITEM, this.item.id);
+        if (this.selected) {
+          this.$store.commit(types.UNSELECT_BROWSER_ITEM, {
+            id: this.item.id,
+            type: "video"
+          });
+        } else {
+          this.$store.commit(types.SELECT_BROWSER_ITEM, {
+            id: this.item.id,
+            type: "video"
+          });
+        }
       }
     },
     getName: function() {

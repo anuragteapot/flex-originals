@@ -1,6 +1,6 @@
 <template>
   <div
-    :class="`video ${videoActive || !isPlaying ? 'active' : ''}`"
+    :class="`video ${videoActive || !isPlaying ? 'fo-video-active' : ''}`"
     ref="player"
     @mouseover="videoActive = true"
     @mouseleave="videoActive = false"
@@ -20,8 +20,8 @@
     <div v-show="loading" class="loader-1 center">
       <span></span>
     </div>
-    <div :class="`control-bar ${videoActive || !isPlaying ? 'active' : ''}`">
-      <div class="button-bar">
+    <div :class="`control-bar ${videoActive || !isPlaying ? 'fo-video-active' : ''}`">
+      <div class="fo-video-player-button-bar">
         <i v-if="hasEnded" @click="togglePlay" class="fas fa-redo" aria-hidden="true"></i>
         <i v-else-if="!isPlaying" @click="togglePlay" class="fas fa-play" aria-hidden="true"></i>
         <i v-else-if="isPlaying" @click="togglePlay" class="fas fa-pause" aria-hidden="true"></i>
@@ -30,7 +30,7 @@
           @mouseover="audioActive = true"
           @mouseleave="audioActive = false"
         >
-          <i class="fa fa-volume-up toggle" aria-hidden="true"></i>
+          <i class="fa fa-volume-up fo-video-player-toggle " aria-hidden="true"></i>
           <div class="rail" ref="rail" @click="findVolume">
             <div ref="inaudible" class="inaudible"></div>
             <div ref="audible" class="audible"></div>
@@ -110,6 +110,10 @@ export default {
   },
   props: {
     src: String,
+    disablekey:{
+      type: Boolean,
+      default: false
+    },  
     playbackRates: {
       type: Array,
       default: function() {
@@ -247,6 +251,9 @@ export default {
       this.progressBar = `${percent}%`;
     },
     detectKeypress(event) {
+      if(this.disablekey){
+        return;
+      }
       if (event.keyCode == 32) {
         event.preventDefault();
         this.togglePlay();

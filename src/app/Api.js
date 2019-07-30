@@ -229,6 +229,7 @@ class Api {
    *
    */
   _handleError(error) {
+    store.commit(types.SET_IS_LOADING, false);
     try {
       var errorData = {
         data: error.response.data.error.message,

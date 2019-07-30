@@ -32,12 +32,20 @@ import watch from "./videoViewer/videoViewer";
 import asideAction from "./Aside/AsideAction";
 import asideDes from "./Aside/AsideDes";
 import toolbar from "./../Browser/Tollbar/Toolbar";
+import editvideo from "./../Browser/EditVideo/EditVideo";
 import { mapGetters } from "vuex";
 
 export default {
   name: "media-browser",
   data() {
     return {};
+  },
+  watch: {
+    $route() {
+      this.$store.commit(types.SET_EDIT_MODE, false);
+      this.$store.commit(types.SELECT_BROWSER_ITEM, false);
+      this.$store.commit(types.HIDE_MODAL);
+    }
   },
   components: {
     home,
@@ -47,7 +55,8 @@ export default {
     channel,
     asideAction,
     asideDes,
-    toolbar
+    toolbar,
+    editvideo
   },
   computed: {
     ...mapGetters(["isMobile", "isLoading", "appDrawer"]),

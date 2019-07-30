@@ -6,11 +6,7 @@
           <div class="card__body">
             <div class="container">
               <div class="grid grid--half">
-                <lazy-video-player
-                  :src="videoSource"
-                  v-if="!videoUnavaliable"
-                  :disablekey="true"
-                ></lazy-video-player>
+                <lazy-video-player :src="videoSource" v-if="!videoUnavaliable" :disablekey="true"></lazy-video-player>
                 <h3>Select Thumbnail (Auto generate not avaliable yet.)</h3>
                 <div class="video__thumbnails" v-for="(thumb, i) in thumbnails" :key="i">
                   <img
@@ -134,7 +130,7 @@ export default {
       isAllowed: false,
       isUploading: false,
       uploadPercent: 0,
-      videoSource:'',
+      videoSource: "",
       videoUnavaliable: false,
       done: false,
       videoId: null,
@@ -190,19 +186,25 @@ export default {
     async init() {
       if (this.$route.query.v) {
         this.$store.commit(types.SET_IS_LOADING, true);
-        const video = await this.$api
-          .axios()
-          .get(`/api/videos/getVideoInfo/${this.$route.query.v}`);
-        if (!video.data) {
-          this.videoUnavaliable = true;
+
+        try {
+          const video = await this.$api
+            .axios()
+            .get(`/api/videos/getVideoInfo/${this.$route.query.v}`);
+
+          if (!video.data) {
+            this.videoUnavaliable = true;
+          }
+          if (video.data.videoFile.includes("https")) {
+            this.videoSource = video.data.videoFile;
+          } else {
+            this.videoSource = "/" + video.data.videoFile;
+          }
+          this.videoId = video.data.id;
+          this.videoData = Object.assign(this.videoData, video.data);
+        } catch (err) {
+          this.$api._handleError(err);
         }
-        if (video.data.videoFile.includes("https")) {
-          this.videoSource = video.data.videoFile;
-        } else {
-          this.videoSource = "/" + video.data.videoFile;
-        }
-        this.videoId = video.data.id;
-        this.videoData = Object.assign(this.videoData, video.data);
       } else {
         this.$router.push("/@error");
       }

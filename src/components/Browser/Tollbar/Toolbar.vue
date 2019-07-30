@@ -1,6 +1,6 @@
 <template>
   <menu type="toolbar" class="menu">
-    <div @click="toggleMenu" style="cursor: pointer;">
+    <div @click="toggleMenu" style="cursor: pointer;" v-if="isAuthenticated">
       <i class="fas fa-align-justify"></i>
     </div>
     <span class="menu__button">
@@ -37,7 +37,7 @@ import * as types from "./../../../store/mutation-types";
 export default {
   name: "toolbar",
   computed: {
-    ...mapGetters(["isMobile", "isLoading", "appDrawer"])
+    ...mapGetters(["isMobile", "isLoading", "appDrawer", "isAuthenticated"])
   },
   methods: {
     toggleMenu: function() {

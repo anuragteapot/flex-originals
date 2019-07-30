@@ -14,6 +14,7 @@
                 <lazy-video-player
                   :src="videoSource"
                   v-if="!videoUnavaliable"
+                  :autoPlay="true"
                   @handleEnded="handleEnded"
                 ></lazy-video-player>
                 <div class="video_actions" v-if="!videoUnavaliable">
@@ -244,8 +245,9 @@ export default {
     handleEnded() {
       const videos = this.$store.state.content.video;
       if (this.autoPlay && this.videoSuggestions.length > 0) {
-        const newVideoId = videos.findIndex(x => x.id === this.$route.query.v) + 1;
-        if(newVideoId < videos.length) {
+        const newVideoId =
+          videos.findIndex(x => x.id === this.$route.query.v) + 1;
+        if (newVideoId < videos.length) {
           this.$router.push(`/app/@watch?v=${videos[newVideoId].id}`);
         }
       }
@@ -263,21 +265,23 @@ export default {
     async init() {
       if (this.$route.query.v) {
         this.$store.commit(types.SET_IS_LOADING, true);
-        const video = await this.$api
+      
+      const video = await this.$api
           .axios()
           .get(`/api/actions/getVideo/${this.$route.query.v}`);
+        this.$store.commit(types.SET_IS_LOADING, false);
+
         if (!video.data) {
           this.videoUnavaliable = true;
         }
-        if(video.data.videoFile.includes('https')) {
+        if (video.data.videoFile.includes("https")) {
           this.videoSource = video.data.videoFile;
         } else {
-          this.videoSource = '/' + video.data.videoFile;
+          this.videoSource = "/" + video.data.videoFile;
         }
       } else {
         this.$router.push("/@error");
       }
-      this.$store.commit(types.SET_IS_LOADING, false);
     }
   },
   async beforeMount() {

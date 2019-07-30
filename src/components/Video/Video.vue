@@ -30,7 +30,7 @@
           @mouseover="audioActive = true"
           @mouseleave="audioActive = false"
         >
-          <i class="fa fa-volume-up fo-video-player-toggle " aria-hidden="true"></i>
+          <i class="fa fa-volume-up fo-video-player-toggle" aria-hidden="true"></i>
           <div class="rail" ref="rail" @click="findVolume">
             <div ref="inaudible" class="inaudible"></div>
             <div ref="audible" class="audible"></div>
@@ -110,10 +110,14 @@ export default {
   },
   props: {
     src: String,
-    disablekey:{
+    disablekey: {
       type: Boolean,
       default: false
-    },  
+    },
+    autoPlay: {
+      type: Boolean,
+      default: false
+    },
     playbackRates: {
       type: Array,
       default: function() {
@@ -143,7 +147,6 @@ export default {
     src(val) {
       this.video.src = val;
       this.video.load();
-      this.video.play();
     },
     videoActive() {
       this.reset();
@@ -251,7 +254,7 @@ export default {
       this.progressBar = `${percent}%`;
     },
     detectKeypress(event) {
-      if(this.disablekey){
+      if (this.disablekey) {
         return;
       }
       if (event.keyCode == 32) {
@@ -274,13 +277,15 @@ export default {
     handleEnded() {
       this.hasEnded = true;
       this.isPlaying = false;
-      this.$emit('handleEnded');
+      this.$emit("handleEnded");
     },
     loadeddata() {
-      this.video.play();
-      this.hasEnded = false;
-      this.videoActive = false;
-      this.isPlaying = true;
+      if (this.autoPlay) {
+        this.video.play();
+        this.hasEnded = false;
+        this.videoActive = false;
+        this.isPlaying = true;
+      }
       this.loading = false;
     },
     loadedmetadata() {

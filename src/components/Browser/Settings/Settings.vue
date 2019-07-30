@@ -209,7 +209,6 @@ export default {
   methods: {
     async logout() {
       await this.$api.logout();
-      this.$router.push("/app/@home?u=logout");
     },
     deleteAllSession() {
       this.$store.commit(types.SHOW_MODAL, { state: true, type: "MDelete" });

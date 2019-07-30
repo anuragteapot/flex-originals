@@ -7,5 +7,5 @@ export const persistedStateOptions = {
     'isAuthenticated',
     'user',
   ],
-  storage: window.sessionStorage
+  storage: window.localStorage
 }

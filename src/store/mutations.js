@@ -285,17 +285,10 @@ export default {
    * Show the info bar
    * @param state
    */
-  [types.IS_AUTHENTICATED]: state => {
-    state.showInfoBar = true;
-  },
-
-  /**
-   * Show the info bar
-   * @param state
-   */
-  [types.HIDE_INFOBAR]: (state, payload) => {
+  [types.IS_AUTHENTICATED]: (state, payload) => {
     state.isAuthenticated = payload;
   },
+
 
   /**
    * Define the list grid view

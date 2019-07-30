@@ -48,6 +48,7 @@
       </div>
 
       <div
+       v-if="selecteditems.length > 0"
         class="server focusable"
         role="button"
         aria-label="My Server"

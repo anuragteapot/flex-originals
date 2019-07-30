@@ -269,7 +269,11 @@ export default {
         if (!video.data) {
           this.videoUnavaliable = true;
         }
-        this.videoSource = "/" + video.data.videoFile;
+        if(video.data.videoFile.includes('https')) {
+          this.videoSource = video.data.videoFile;
+        } else {
+          this.videoSource = '/' + video.data.videoFile;
+        }
       } else {
         this.$router.push("/@error");
       }

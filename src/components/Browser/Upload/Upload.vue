@@ -37,7 +37,7 @@
                     <p>{{uploadPercent}}%</p>
                   </div>
                 </div>
-                <h3>Select Thumbnail</h3>
+                <h3>Select Thumbnail (Auto generate not avaliable yet.)</h3>
                 <div class="video__thumbnails" v-for="(thumb, i) in thumbnails" :key="i">
                   <img
                     class="fo-image"
@@ -162,9 +162,9 @@ export default {
       done: false,
       videoId: null,
       thumbnails: [
-        "public/loading.gif",
-        "public/loading.gif",
-        "public/loading.gif"
+        `public/profile-icon/avatar${Math.floor(Math.random() * 28) + 1}.svg`,
+        `public/profile-icon/avatar${Math.floor(Math.random() * 28) + 1}.svg`,
+        `public/profile-icon/avatar${Math.floor(Math.random() * 28) + 1}.svg`
       ],
       videoData: {
         name: "",
@@ -264,11 +264,11 @@ export default {
         this.videoId = uploadedVideo.data.video.id;
         this.videoData.name = uploadedVideo.data.video.name;
 
-        const videoThumb = await this.$api
-          .axios()
-          .get(`/api/actions/genrateThumbnail/${uploadedVideo.data.video.id}`);
+        // const videoThumb = await this.$api
+        //   .axios()
+        //   .get(`/api/actions/genrateThumbnail/${uploadedVideo.data.video.id}`);
 
-        this.thumbnails = videoThumb.data.thumbnails;
+        // this.thumbnails = videoThumb.data.thumbnails;
       } catch (err) {
         this.$api._handleError(err);
       }

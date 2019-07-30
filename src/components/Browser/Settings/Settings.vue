@@ -23,7 +23,7 @@
                       <p>{{ user.email}}</p>
                     </div>
                     <div class="username__info">
-                      <button class="info" @click="logout">Log Out</button>
+                      <button class="fo-settings-button  info" @click="logout">Log Out</button>
                     </div>
                   </div>
                   <!-- <label class="form-item__label">Start at login</label>
@@ -162,13 +162,16 @@
                 <p>
                   <small>This will sign you out of sessions in other browsers or on other computers.</small>
                 </p>
-                <button class="success">Enable Two-Factor Auth</button>
+                <button class="fo-settings-button success">Enable Two-Factor Auth</button>
 
                 <p>Sign out of all other sessions</p>
                 <p>
                   <small>This will sign you out of sessions in other browsers or on other computers.</small>
                 </p>
-                <button class="warning" @click="deleteAllSession">Sign out other sessions</button>
+                <button
+                  class="fo-settings-button warning"
+                  @click="deleteAllSession"
+                >Sign out other sessions</button>
                 <h3>Danger Zone</h3>
                 <p>
                   <small>
@@ -176,8 +179,8 @@
                     Once you delete a repository, there is no going back. Please be certain.
                   </small>
                 </p>
-                <button class="danger">Deactivate Account</button>
-                <button class="danger">Delete Account</button>
+                <button class="fo-settings-button danger">Deactivate Account</button>
+                <button class="fo-settings-button danger">Delete Account</button>
               </div>
             </div>
           </div>

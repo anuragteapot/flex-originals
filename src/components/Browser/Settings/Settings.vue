@@ -19,8 +19,8 @@
                       <!-- <span class="avatar__change">Change Avatar</span> -->
                     </div>
                     <div class="email__info">
-                      <p>Anurag Kumar</p>
-                      <p>anuragvns1111@gmail.com</p>
+                      <p>{{user.realm}} ({{user.username }})</p>
+                      <p>{{ user.email}}</p>
                     </div>
                     <div class="username__info">
                       <button class="info" @click="logout">Log Out</button>
@@ -103,8 +103,8 @@
                 </div>
               </div>
               <div class="grid grid--half">
-                <h3>Performance</h3>
-                <div class="form-item">
+                <!-- <h3>Performance</h3> -->
+                <!-- <div class="form-item">
                   <label class="form-item__label">Threshold level</label>
                   <div class="form-item__control">
                     <small>
@@ -116,10 +116,10 @@
                   </div>
                   <div class="slider">
                     <input class="slider__input" type="range" value="50" min="0" max="100" />
-                    <!-- <div ref="sliderPos" class="slider__positive" style="width: 50%;"></div>  -->
+                    <div ref="sliderPos" class="slider__positive" style="width: 50%;"></div> 
                   </div>
-                </div>
-                <p>
+                </div>-->
+                <!-- <p>
                   <small>If the available memory goes below this amount, the status bar text will turn red.</small>
                 </p>
                 <div class="form-item">
@@ -156,7 +156,7 @@
                 </div>
                 <p>
                   <small>If the available memory goes below this amount, the status bar text will turn red.</small>
-                </p>
+                </p>-->
                 <h3>Security</h3>
                 <p>Two-factor authentication</p>
                 <p>
@@ -198,6 +198,9 @@ export default {
   computed: {
     settings() {
       return this.$store.state.settings;
+    },
+    user() {
+      return this.$store.state.user;
     }
   },
   methods: {
@@ -209,7 +212,7 @@ export default {
       this.$store.commit(types.SHOW_MODAL, { state: true, type: "MDelete" });
     },
     async save() {
-      const payload =  {};
+      const payload = {};
       payload.id = this.$api.webStorage.local.get("$userId");
       payload.newSettings = this.settings;
       await this.$store.dispatch("updateSettings", payload);

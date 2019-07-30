@@ -1,8 +1,9 @@
 <template>
   <div class="content-v-thumb">
-    <div class="video__thumbnail" @click="$router.push(`/app/@watch?v=${item.id}`)">
-      <lazy-image :src="src" :lazySrc="lazySrc" hover></lazy-image>
-      <i class="fas fa-play fa-2x file-icon" aria-hidden="true"></i>
+    <div class="video__thumbnail" @click="open">
+      <lazy-image :src="src" :lazySrc="lazySrc" hover :active="selected"></lazy-image>
+      <i class="far fa-2x fa-check-circle" v-if="selected"></i>
+      <i class="fas fa-play fa-2x file-icon" aria-hidden="true" v-if="!editMode"></i>
       <div class="video__info">
         <p class="title">{{getName()}}</p>
         <p class="views">Alenter</p>
@@ -12,6 +13,8 @@
 </template>
 
 <script>
+import * as types from "./../../../store/mutation-types";
+
 export default {
   name: "videoThumbs",
   data() {
@@ -29,7 +32,24 @@ export default {
     srcset: String,
     item: Object
   },
+  computed: {
+    editMode() {
+      return this.$store.state.editMode;
+    },
+    selected() {
+      return this.$store.state.selectedItems.indexOf(this.item.id) !== -1
+        ? true
+        : false;
+    }
+  },
   methods: {
+    open() {
+      if (!this.editMode) {
+        this.$router.push(`/app/@watch?v=${this.item.id}`);
+      } else {
+        this.$store.commit(types.SELECT_BROWSER_ITEM, this.item.id);
+      }
+    },
     getName: function() {
       const len = 20;
       if (this.item.name.length >= len) {
@@ -37,7 +57,7 @@ export default {
       } else {
         return this.item.name;
       }
-    },
+    }
   }
 };
 </script>

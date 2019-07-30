@@ -89,7 +89,7 @@ module.exports = function(Action) {
         callback(null, true);
       },
       limits: {
-        fileSize: 1024
+        fileSize: 1024 * 1024 * 1024
       }
     }).single('file');
 
@@ -270,8 +270,39 @@ module.exports = function(Action) {
   Action.getContent = async (id, limit) => {
     const Videos = app.models.Videos;
     const Audios = app.models.Audio;
+    const User = app.models.User;
+    const Settings = app.models.Settings;
 
     if (id) {
+      const user = await User.findOne({
+        fields: {
+          id: true,
+          username: true,
+          realm: true,
+          email: true
+        },
+        where: { id }
+      });
+
+      if (!user) {
+        throw new Error('User not found.', {}, 404);
+      }
+
+      const settings = await Settings.findOne({
+        fields: {
+          id: true,
+          verifiedChannel: true,
+          followers: true,
+          profileAvatar: true,
+          facebook: true,
+          instagram: true,
+          redit: true,
+          twitter: true,
+          linkedin: true
+        },
+        where: { ownerId: user.id }
+      });
+
       const video = await Videos.find({
         fields: {
           videoOwnerId: true,
@@ -294,7 +325,7 @@ module.exports = function(Action) {
         where: { audioOwnerId: id, visibility: 1 },
         limit: limit
       });
-      return { video, audio };
+      return { video, audio, user, settings };
     } else {
       const video = await Videos.find({
         fields: { id: true, name: true, videoFile: true, thumbImage: true },

@@ -31,12 +31,12 @@
         class="avatar"
         alt="Avatar"
         :src="settings.profileAvatar || '/public/icons/logo.png'"
-        @click="$router.push('/app/@channel')"
+        @click="$router.push(`/app/@channel/${user.id}`)"
         style="cursor:pointer"
       />
       <div class="features-footer-details">
-        <span class="username">Anurag Kumar</span>
-        <span class="tag">anu1601cs</span>
+        <span class="username">{{user.realm}}</span>
+        <span class="tag">{{user.username}}</span>
       </div>
       <div class="features-footer-controls button-group">
         <button role="button" aria-label="Mute" class="button button-mute">
@@ -62,9 +62,12 @@
 export default {
   name: "lazy-aside",
   methods: {},
-  computed:{
+  computed: {
     settings() {
       return this.$store.state.settings;
+    },
+    user() {
+      return this.$store.state.user;
     }
   }
 };

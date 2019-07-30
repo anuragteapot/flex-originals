@@ -4,32 +4,76 @@
       <div class="profile__banner">
         <div class="profile__banner__background">
           <div class="profile__avatar">
-            <img :src="settings.profileAvatar" />
+            <img :src="channelInfo.profileAvatar" />
           </div>
           <div class="social__media">
-            <i class="fab fa-facebook-square" style="font-size:20px"></i>
-            <i class="fab fa-instagram" style="font-size:20px"></i>
-            <i class="fab fa-twitter-square" style="font-size:20px"></i>
-            <i class="fab fa-reddit-square" style="font-size:20px"></i>
-            <i class="fab fa-linkedin" style="font-size:20px"></i>
+            <a
+              v-show="channelInfo.facebook"
+              :href="channelInfo.facebook"
+              target="_blank"
+              style="color:white"
+            >
+              <i class="fab fa-facebook-square" style="font-size:20px"></i>
+            </a>
+            <a
+              v-show="channelInfo.instagram"
+              :href="channelInfo.instagram"
+              target="_blank"
+              style="color:white"
+            >
+              <i class="fab fa-instagram" style="font-size:20px"></i>
+            </a>
+            <a
+              v-show="channelInfo.twitter"
+              :href="channelInfo.twitter"
+              target="_blank"
+              style="color:white"
+            >
+              <i class="fab fa-twitter-square" style="font-size:20px"></i>
+            </a>
+            <a
+              v-show="channelInfo.redit"
+              :href="channelInfo.redit"
+              target="_blank"
+              style="color:white"
+            >
+              <i class="fab fa-reddit-square" style="font-size:20px"></i>
+            </a>
+            <a
+              v-show="channelInfo.linkedin"
+              :href="channelInfo.linkedin"
+              target="_blank"
+              style="color:white"
+            >
+              <i class="fab fa-linkedin" style="font-size:20px"></i>
+            </a>
           </div>
           <p class="channel__name">
-            Anurag Kumar
+            {{channelUser.realm}} ({{channelUser.username}})
             <i
+              v-show="channelInfo.verifiedChannel"
               aria-label="verified"
               class="fas fa-certificate"
               style="color: lightgreen;"
             ></i>
           </p>
-          <button class="follow">
+          <button
+            class="follow"
+            style="background:#7289da;"
+            v-if="authUser === user.id"
+            @click="onEditMode"
+          >
+            <i class="far fa-edit"></i> Edit channel
+          </button>
+          <button class="follow" v-else>
             <i class="far fa-star"></i> Follow
           </button>
-          <span class="followers">1212121212 followers</span>
+          <span class="followers">{{channelInfo.followers }} followers</span>
         </div>
       </div>
       <content-grid></content-grid>
     </div>
-    <lazy-audio-player v-if="layout == 'song'" />
+    <lazy-audio-player v-if="layout === 'song'" />
   </section>
 </template>
 
@@ -41,7 +85,9 @@ import contentGrid from "./../Content/Grid/ContentGrid";
 export default {
   name: "media-content",
   data: () => ({
-    active: false
+    active: false,
+    channelInfo: {},
+    channelUser: ""
   }),
   computed: {
     layout() {
@@ -54,126 +100,26 @@ export default {
     },
     settings() {
       return this.$store.state.settings;
+    },
+    authUser() {
+      return this.$api.webStorage.local.get("$userId");
+    },
+    user() {
+      return this.$store.state.user;
+    },
+    editMode() {
+      return this.$store.state.editMode;
     }
   },
   components: {
     contentGrid
   },
   methods: {
-    doThis: function(path) {
-      if (path) {
-        this.$router.push({
-          path: `/drive/u/0/folder/${path}`
-        });
-      } else {
-        this.$router.push({
-          path: `/drive/u/0/my-drive`
-        });
+    onScroll: api.debounce(function() {}, 300),
+    async onEditMode() {
+      if ((await this.$api.isLogged()) && this.authUser === this.user.id) {
+        this.$store.commit(types.SET_EDIT_MODE, true);
       }
-    },
-    onScroll: api.debounce(function() {
-      if (window.innerHeight + window.scrollY >= document.body.scrollHeight) {
-        this.$store.state.loadLimit = this.$store.state.loadLimit + 10;
-
-        const dir = this.$route.params.dir;
-        const path = this.$route.params.path;
-
-        this.$store.commit(types.SET_IS_LOADING, true);
-        if (dir !== undefined && path == "folder") {
-          this.$store.dispatch("update", { path: dir });
-        } else {
-          this.$store.dispatch("update", { path: "my-drive" });
-        }
-      }
-    }, 300),
-    // Listeners for drag and drop
-    onDragEnter: function(event) {
-      event.stopPropagation();
-      return false;
-    },
-
-    // Notify user when file is over the drop area
-    onDragOver: function(event) {
-      event.preventDefault();
-      document.querySelector(".media-dragoutline").classList.add("active");
-      return false;
-    },
-
-    /* Upload files */
-    dragUpload: async function() {
-      let uploadSuccess = 0;
-      while (this.$store.state.uploadItems.length > 0) {
-        const item = this.$store.state.uploadItems.shift();
-        const formData = item.file;
-        const uploadPath = item.path;
-
-        try {
-          await this.$store.dispatch("upload", { formData, uploadPath });
-          uploadSuccess = uploadSuccess + 1;
-        } catch (error) {
-          console.error(error);
-        }
-
-        this.$store.dispatch("update", {
-          path: this.$store.state.selectedDirectory
-        });
-      }
-      var data = {
-        data: `${uploadSuccess} files uploaded.`,
-        color: "success"
-      };
-
-      this.$store.commit(types.SHOW_SNACKBAR, data);
-      this.$store.commit(types.SET_IS_UPLOADING, 2);
-    },
-
-    onDrop: function(event) {
-      event.preventDefault();
-      const uploadPath = this.$store.state.selectedDirectory;
-
-      if (
-        event.dataTransfer &&
-        event.dataTransfer.files &&
-        event.dataTransfer.files.length > 0
-      ) {
-        for (var i = 0; i < event.dataTransfer.files.length; i++) {
-          let file = event.dataTransfer.files[i];
-          document
-            .querySelector(".media-dragoutline")
-            .classList.remove("active");
-
-          const formData = new FormData();
-          const item = {};
-
-          formData.append("files", file);
-          item.id = file.name + i + file.lastModified + file.size + Date.now();
-          item.icon = "assessment";
-          item.file = formData;
-          item.path = uploadPath;
-          item.type = "file";
-          item.iconClass = "grey lighten-1 white--text";
-          item.title = file.name;
-          item.subtitle = "";
-          item.size = file.size;
-          item.uploadPercent = 0;
-
-          this.$store.state.uploadItems.push(item);
-          this.$store.state.uploadItemsMenu.push(item);
-        }
-        if (this.$store.state.isUploading !== true) {
-          this.$emit("tiggerdragUpload");
-        }
-      }
-
-      document.querySelector(".media-dragoutline").classList.remove("active");
-    },
-
-    // Reset the drop area border
-    onDragLeave: function(event) {
-      event.stopPropagation();
-      event.preventDefault();
-      document.querySelector(".media-dragoutline").classList.remove("active");
-      return false;
     }
   },
   created() {
@@ -181,6 +127,18 @@ export default {
   },
   destroyed() {
     window.removeEventListener("scroll", this.onScroll, false);
+  },
+  async mounted() {
+    if (this.$route.params.id) {
+      const content = await this.$store.dispatch("getContent", {
+        userId: this.$route.params.id
+      });
+
+      this.channelUser = content.data.user;
+      this.channelInfo = content.data.settings;
+
+      this.$store.commit(types.SET_CONTENT, content.data);
+    }
   }
 };
 </script>

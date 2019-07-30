@@ -35,54 +35,67 @@ export default {
    * @param state
    * @param payload
    */
+  [types.SET_USER]: (state, payload) => {
+    state.user = payload;
+  },
+
+  /**
+   * Select a directory
+   * @param state
+   * @param payload
+   */
+  [types.SET_EDIT_MODE]: (state, payload) => {
+    state.editMode = payload;
+  },
+
+  /**
+   * Select a directory
+   * @param state
+   * @param payload
+   */
   [types.SET_CONTENT]: (state, payload) => {
     const sampleAudio = [
       {
-        id:'mdkin2n3jnsd2',
+        id: 'mdkin2n3jnsd2',
         title: 'rockstar',
         artist: 'Post Malone, 21 Savage',
-        thumbImage:
-          '/public/profile-icon/avatar8.svg',
+        thumbImage: '/public/profile-icon/avatar8.svg',
         audioFile:
           'https://s3-us-west-2.amazonaws.com/s.cdpn.io/308622/Post%20Malone%20-%20rockstar%20ft.%2021%20Savage%20(1).mp3',
         color: '#c3af50'
       },
       {
-        id:'2msdnoasd923nn',
+        id: '2msdnoasd923nn',
         title: 'Let You Down',
         artist: 'NF',
-        thumbImage:
-          '/public/profile-icon/avatar4.svg',
+        thumbImage: '/public/profile-icon/avatar4.svg',
         audioFile:
           'https://s3-us-west-2.amazonaws.com/s.cdpn.io/308622/NF%20-%20Let%20You%20Down.mp3',
         color: '#25323b'
       },
       {
-        id:'2jdn09nsdnb2n',
+        id: '2jdn09nsdnb2n',
         title: 'Silence',
         artist: 'Marshmello, Khalid',
-        thumbImage:
-          '/public/profile-icon/avatar3.svg',
+        thumbImage: '/public/profile-icon/avatar3.svg',
         audioFile:
           'https://s3-us-west-2.amazonaws.com/s.cdpn.io/308622/Marshmello%20-%20Silence%20ft.%20Khalid.mp3',
         color: '#c1c1c1'
       },
       {
-        id:'dfmdms8ndnd',
+        id: 'dfmdms8ndnd',
         title: 'I Fall Apart',
         artist: 'Post Malone',
-        thumbImage:
-          '/public/profile-icon/avatar1.svg',
+        thumbImage: '/public/profile-icon/avatar1.svg',
         audioFile:
           'https://s3-us-west-2.amazonaws.com/s.cdpn.io/308622/Post%20Malone%20-%20I%20Fall%20Apart.mp3',
         color: '#cd4829'
       },
       {
-        id:'3mma9nd3j33',
+        id: '3mma9nd3j33',
         title: 'Fireproof',
         artist: 'VAX, Teddy Sky',
-        thumbImage:
-          '/public/profile-icon/avatar2.svg',
+        thumbImage: '/public/profile-icon/avatar2.svg',
         audioFile:
           'https://s3-us-west-2.amazonaws.com/s.cdpn.io/308622/VAX%20-%20Fireproof%20Feat%20Teddy%20Sky.mp3',
         color: '#5d0126'
@@ -175,7 +188,12 @@ export default {
    * @param payload the item
    */
   [types.SELECT_BROWSER_ITEM]: (state, payload) => {
-    state.selectedItems.push(payload);
+    if (state.selectedItems.indexOf(payload) === -1) {
+      state.selectedItems.push(payload);
+    } else {
+      const index = state.selectedItems.indexOf(payload);
+      state.selectedItems.splice(index, 1);
+    }
   },
 
   /**

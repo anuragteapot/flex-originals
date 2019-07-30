@@ -42,7 +42,7 @@ export default [
     }
   },
   {
-    path: '/app/@channel',
+    path: '/app/@channel/:id',
     name: '@channel',
     component: () =>
       import(/* webpackChunkName: "browser" */ './../views/Browser.vue')

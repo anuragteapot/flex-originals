@@ -192,7 +192,8 @@ class Api {
 
       if (userId) {
         try {
-          await this.axios().get(`/api/users/${userId}`)
+          const user = await this.axios().get(`/api/users/${userId}`)
+          store.commit(types.SET_USER, user.data);
           store.commit(types.IS_AUTHENTICATED, true)
           return Promise.resolve(true)
         } catch (err) {
@@ -236,7 +237,7 @@ class Api {
     } catch (err) {
       console.log(err)
     }
-
+    
     switch (error.response.status) {
       case 400:
         this.logout()
@@ -246,6 +247,7 @@ class Api {
       case 404:
         errorData.data = 'Something went wrong.'
         store.commit(types.SHOW_SNACKBAR, errorData)
+        router.push('/@error');
         break
       case 401:
         this.logout()
@@ -254,6 +256,7 @@ class Api {
       case 500:
         errorData.data = error.response.statusText
         store.commit(types.SHOW_SNACKBAR, errorData)
+        router.push('/@error');
         break
       default:
         store.commit(types.SHOW_SNACKBAR, errorData)

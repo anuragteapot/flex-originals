@@ -239,7 +239,7 @@ export default {
     setTimeout(() => {
       this.changeSong();
       this.audio.loop = false;
-    }, 500);
+    }, 100);
 
     if(!this.$route.query.a) {
       this.$router.push("/app/@error");

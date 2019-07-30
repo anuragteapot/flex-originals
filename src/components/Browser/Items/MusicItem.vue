@@ -1,9 +1,18 @@
 <template>
   <div class="content-m-thumb">
-    <div class="music__thumbnail" @click="$router.push(`/app/@song?a=${item.id}`)">
-      <lazy-image :src="src" :lazySrc="lazySrc" hover :active="item.id == $route.query.a"></lazy-image>
-      <!-- <i class="fas fa-pause-circle fa-3x file-icon-play" ></i> -->
-      <i class="fas fa-play fa-3x file-icon" v-if="item.id !== $route.query.a" aria-hidden="true"></i>
+    <div class="music__thumbnail" @click="open">
+      <lazy-image
+        :src="src"
+        :lazySrc="lazySrc"
+        hover
+        :active="item.id == $route.query.a || selected"
+      ></lazy-image>
+      <i class="far fa-2x fa-check-circle" v-if="selected"></i>
+      <i
+        class="fas fa-play fa-2x file-icon"
+        v-if="item.id !== $route.query.a && !editMode"
+        aria-hidden="true"
+      ></i>
       <div class="audio__info">
         <p class="title">{{getName()}}</p>
         <p class="views">alenter</p>
@@ -13,6 +22,8 @@
 </template>
 
 <script>
+import * as types from "./../../../store/mutation-types";
+
 export default {
   name: "music-thumnail",
   data() {
@@ -32,7 +43,24 @@ export default {
     sizes: String,
     item: Object
   },
+  computed: {
+    editMode() {
+      return this.$store.state.editMode;
+    },
+    selected() {
+      return this.$store.state.selectedItems.indexOf(this.item.id) !== -1
+        ? true
+        : false;
+    }
+  },
   methods: {
+    open() {
+      if (!this.editMode) {
+        this.$router.push(`/app/@watch?v=${this.item.id}`);
+      } else {
+        this.$store.commit(types.SELECT_BROWSER_ITEM, this.item.id);
+      }
+    },
     getName: function() {
       const len = 20;
       if (this.item.title.length >= len) {

@@ -18,7 +18,7 @@
             @dragover="onDragOver"
             @dragleave="onDragLeave"
           >
-            <i class="fas fa-cloud-upload-alt fa-4x" @click="$refs.inputFile.click()"></i>
+            <i class="fas fa-cloud-upload-alt fa-4x" @click="openSelect"></i>
             <br />
             <h1>DRAG & DROP</h1>
             <p>to upload your video/music or click</p>
@@ -157,6 +157,7 @@ export default {
   name: "upload",
   data() {
     return {
+      isAllowed: false,
       isUploading: false,
       uploadPercent: 0,
       done: false,
@@ -182,6 +183,18 @@ export default {
     };
   },
   methods: {
+    openSelect() {
+      if (this.isAllowed) {
+        this.$refs.inputFile.click();
+      } else {
+        const data = {
+          data: `Your upload limit exceed`,
+          color: "error"
+        };
+
+        this.$store.commit(types.SHOW_SNACKBAR, data);
+      }
+    },
     // Listeners for drag and drop
     onDragEnter: function(event) {
       event.stopPropagation();
@@ -333,6 +346,21 @@ export default {
         this.$api._handleError(err);
         console.log(err);
       }
+    }
+  },
+  async mounted() {
+    const storage = await this.$store.dispatch(
+      "getUserStorage",
+      this.$api.webStorage.local.get("$userId")
+    );
+
+    const limit =
+      process.env.NODE_ENV === "production" ? 262854847 : 26285484700;
+
+    if (storage.data.totalStorage > limit) {
+      this.isAllowed = false;
+    } else {
+      this.isAllowed = true;
     }
   }
 };

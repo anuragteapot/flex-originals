@@ -22,6 +22,24 @@ export const getContent = async (context, payload) => {
     api._handleError(err);
   }
 };
+
+/**
+ * Get contents
+ * @param commit
+ * @param payload
+ */
+export const getUserStorage = async (context, payload) => {
+  try {
+    return await api
+      .axios()
+      .get(
+        `/api/actions/getUserStorage/${payload}`
+      );
+  } catch (err) {
+    api._handleError(err);
+  }
+};
+
 /**
  * Login
  * @param commit

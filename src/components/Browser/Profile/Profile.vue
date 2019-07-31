@@ -63,7 +63,7 @@
           <button
             class="follow"
             style="background:#7289da;"
-            v-else-if="authUser === user.id"
+            v-else-if="authUser === channelUser.id"
             @click="onEditMode"
           >
             <i class="far fa-edit"></i> Edit channel
@@ -92,6 +92,11 @@ export default {
     channelInfo: {},
     channelUser: ""
   }),
+  watch: {
+    $route() {
+      this.init();
+    }
+  },
   computed: {
     layout() {
       const name = this.$route.name;
@@ -107,9 +112,6 @@ export default {
     authUser() {
       return this.$api.webStorage.local.get("$userId");
     },
-    user() {
-      return this.$store.state.user;
-    },
     editMode() {
       return this.$store.state.editMode;
     }
@@ -120,13 +122,27 @@ export default {
   methods: {
     onScroll: api.debounce(function() {}, 300),
     async onEditMode() {
-      if ((await this.$api.isLogged()) && this.authUser === this.user.id) {
+      if (
+        (await this.$api.isLogged()) &&
+        this.authUser === this.channelUser.id
+      ) {
         if (this.editMode) {
           this.$store.commit(types.SELECT_BROWSER_ITEM, false);
           this.$store.commit(types.SET_EDIT_MODE, false);
         } else {
           this.$store.commit(types.SET_EDIT_MODE, true);
         }
+      }
+    },
+    async init() {
+      if (this.$route.params.id) {
+        const content = await this.$store.dispatch("getContent", {
+          userId: this.$route.params.id
+        });
+
+        this.channelUser = content.data.user;
+        this.channelInfo = content.data.settings;
+        this.$store.commit(types.SET_CONTENT, content.data);
       }
     }
   },
@@ -136,17 +152,8 @@ export default {
   destroyed() {
     window.removeEventListener("scroll", this.onScroll, false);
   },
-  async mounted() {
-    if (this.$route.params.id) {
-      const content = await this.$store.dispatch("getContent", {
-        userId: this.$route.params.id
-      });
-
-      this.channelUser = content.data.user;
-      this.channelInfo = content.data.settings;
-
-      this.$store.commit(types.SET_CONTENT, content.data);
-    }
+  mounted() {
+    this.init();
   }
 };
 </script>

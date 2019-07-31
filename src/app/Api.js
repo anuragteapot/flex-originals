@@ -221,6 +221,7 @@ class Api {
     webStorage.local.destroy('created');
     webStorage.local.destroy('ttl');
     store.commit(types.IS_AUTHENTICATED, false);
+    store.commit(types.SET_USER, {});
     router.push("/app/@home?u=logout");
   }
 

@@ -45,6 +45,7 @@ export default {
       this.$store.commit(types.SET_EDIT_MODE, false);
       this.$store.commit(types.SELECT_BROWSER_ITEM, false);
       this.$store.commit(types.HIDE_MODAL);
+      this.init();
     }
   },
   components: {
@@ -94,6 +95,17 @@ export default {
           mobileState: true
         });
       }
+    },
+    async init() {
+      let content = {};
+      if (this.$route.params.id) {
+        content = await this.$store.dispatch("getContent", {
+          userId: this.$route.params.id
+        });
+      } else {
+        content = await this.$store.dispatch("getContent", {});
+      }
+      this.$store.commit(types.SET_CONTENT, content.data);
     }
   },
   async mounted() {
@@ -103,8 +115,7 @@ export default {
       });
       this.$store.commit(types.SET_SETTINGS, settings);
     }
-    const content = await this.$store.dispatch("getContent", {});
-    this.$store.commit(types.SET_CONTENT, content.data);
+    this.init();
   }
 };
 </script>

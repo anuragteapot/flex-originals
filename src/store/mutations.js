@@ -101,7 +101,7 @@ export default {
         color: '#5d0126'
       }
     ];
-    payload.audio = sampleAudio;
+    payload.audio = payload.audio.concat(sampleAudio);
     state.content = payload;
   },
 

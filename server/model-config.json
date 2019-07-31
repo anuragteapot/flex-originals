@@ -82,5 +82,9 @@
   "likeAudio": {
     "dataSource": "mongodb",
     "public": true
+  },
+  "checkOne": {
+    "dataSource": "mongodb",
+    "public": true
   }
 }

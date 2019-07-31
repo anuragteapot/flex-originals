@@ -1,7 +1,7 @@
 <template>
   <div class="music_player">
     <div class="inner">
-      <p>{{musicPlaylist[currentSong] ?  musicPlaylist[currentSong].title : 'Loading...'}}</p>
+      <p>{{musicPlaylist[currentSong] ? musicPlaylist[currentSong].title : 'Loading...'}}</p>
       <br />
       <i
         :disabled="!currentSong"
@@ -68,6 +68,12 @@ export default {
     },
     $route() {
       this.changeSong();
+    },
+    musicPlaylist(val) {
+      if (val.length > 0) {
+        this.changeSong();
+        this.audio.loop = false;
+      }
     }
   },
   computed: {
@@ -236,11 +242,6 @@ export default {
     }
   },
   async mounted() {
-    setTimeout(() => {
-      this.changeSong();
-      this.audio.loop = false;
-    }, 1000);
-
     if (!this.$route.query.a) {
       this.$router.push("/app/@error");
     }

@@ -11,7 +11,13 @@ const app = require('../../server/server');
 const ThumbnailGenerator = require('../../server/API/Video');
 
 const VIDEO_EXT = ['video/mp4', 'video/x-msvideo'];
-const AUDIO_EXT = ['audio/mpeg', 'audio/vnd.wav', 'audio/mp4', 'audio/ogg',  "audio/mp3"];
+const AUDIO_EXT = [
+  'audio/mpeg',
+  'audio/vnd.wav',
+  'audio/mp4',
+  'audio/ogg',
+  'audio/mp3'
+];
 const IMAGE_EXT = [
   'image/gif',
   'image/jpeg',
@@ -79,6 +85,8 @@ module.exports = function(Action) {
   Action.upload = (req, res) => {
     const Videos = app.models.Videos;
     const Audios = app.models.Audio;
+    const videoAnalytic = app.models.videoAnalytic;
+    const audioAnalytic = app.models.audioAnalytic;
     const upload = multer({
       storage: s3Storage,
       fileFilter: function(req, file, callback) {
@@ -107,6 +115,11 @@ module.exports = function(Action) {
               title: req.file.originalname,
               videoMeta: req.file
             });
+
+            await videoAnalytic.create({
+              videoId: video.id
+            });
+
             return res.json({
               video
             });
@@ -127,6 +140,11 @@ module.exports = function(Action) {
               title: req.file.originalname,
               audioMeta: req.file
             });
+
+            await audioAnalytic.create({
+              audioId: audio.id
+            });
+
             return res.json({
               audio
             });
@@ -410,9 +428,14 @@ module.exports = function(Action) {
 
   Action.getVideo = async id => {
     const Videos = app.models.Videos;
+    const videoAnalytic = app.models.videoAnalytic;
 
     if (id) {
-      return await Videos.findOne({
+      const analytic = await videoAnalytic.findOne({
+        where: { videoId: id }
+      });
+
+      const video = await Videos.findOne({
         fields: {
           videoOwnerId: true,
           id: true,
@@ -422,6 +445,8 @@ module.exports = function(Action) {
         },
         where: { id, visibility: 1 }
       });
+
+      return { video, analytic };
     }
   };
 
@@ -440,6 +465,49 @@ module.exports = function(Action) {
     },
     http: {
       path: '/getVideo/:id',
+      verb: 'get'
+    }
+  });
+
+  Action.getAudio = async id => {
+    const Audio = app.models.Audio;
+    const audioAnalytic = app.models.audioAnalytic;
+
+    if (id) {
+      const analytic = await audioAnalytic.findOne({
+        where: { audioId: id }
+      });
+
+      const audio = await Audio.findOne({
+        fields: {
+          audioOwnerId: true,
+          id: true,
+          name: true,
+          audioFile: true,
+          thumbImage: true
+        },
+        where: { id, visibility: 1 }
+      });
+
+      return { analytic, audio };
+    }
+  };
+
+  Action.remoteMethod('getAudio', {
+    description: 'Method to get the audio info.',
+    accepts: [
+      {
+        arg: 'id',
+        type: 'string',
+        required: true
+      }
+    ],
+    returns: {
+      type: 'object',
+      root: true
+    },
+    http: {
+      path: '/getAudio/:id',
       verb: 'get'
     }
   });

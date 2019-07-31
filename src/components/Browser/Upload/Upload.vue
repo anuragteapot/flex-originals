@@ -33,7 +33,10 @@
               <div class="grid grid--half">
                 <h3>Uploading Progress</h3>
                 <div class="video__upload__progress">
-                  <div class="upload__progress" :style="`width:${uploadPercent}%`">
+                  <div
+                    class="upload__progress"
+                    :style="`width:${uploadPercent}%; background-color:${!isProcessing ? '#43b581' :''}!important`"
+                  >
                     <p>{{uploadPercent}}%</p>
                   </div>
                 </div>
@@ -160,6 +163,7 @@ export default {
       isAllowed: false,
       isUploading: false,
       uploadPercent: 0,
+      isProcessing: true,
       done: false,
       type: "",
       uploadId: null,
@@ -310,6 +314,7 @@ export default {
         color: "success"
       };
 
+      this.isProcessing = false;
       this.$store.commit(types.SHOW_SNACKBAR, data);
       this.$refs.formFile.reset();
     },
@@ -352,7 +357,7 @@ export default {
             }
           );
           const data = {
-            data: `Saved.`,
+            data: `Published.`,
             color: "success"
           };
           this.$store.commit(types.SHOW_SNACKBAR, data);
@@ -377,7 +382,7 @@ export default {
             }
           );
           const data = {
-            data: `Saved.`,
+            data: `Published`,
             color: "success"
           };
           this.$store.commit(types.SHOW_SNACKBAR, data);

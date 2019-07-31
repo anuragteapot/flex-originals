@@ -224,6 +224,7 @@ export default {
     lazySrc: "/public/icons/music.svg",
     videoSource: "",
     videoId: "",
+    analytic:"",
     videoUnavaliable: false
   }),
   watch: {
@@ -265,20 +266,21 @@ export default {
     async init() {
       if (this.$route.query.v) {
         this.$store.commit(types.SET_IS_LOADING, true);
-      
-      const video = await this.$api
+
+        const currentVideo = await this.$api
           .axios()
           .get(`/api/actions/getVideo/${this.$route.query.v}`);
         this.$store.commit(types.SET_IS_LOADING, false);
 
-        if (!video.data) {
+        if (!currentVideo.data.video) {
           this.videoUnavaliable = true;
         }
-        if (video.data.videoFile.includes("https")) {
-          this.videoSource = video.data.videoFile;
+        if (currentVideo.data.video.videoFile.includes("https")) {
+          this.videoSource = currentVideo.data.video.videoFile;
         } else {
-          this.videoSource = "/" + video.data.videoFile;
+          this.videoSource = "/" + currentVideo.data.video.videoFile;
         }
+        this.analytic = currentVideo.data.analytic;
       } else {
         this.$router.push("/@error");
       }

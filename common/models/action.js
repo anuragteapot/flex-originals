@@ -383,7 +383,7 @@ module.exports = function(Action) {
         totalStorage += value.videoMeta.size;
       });
       audio.forEach(value => {
-        totalStorage += value.videoMeta.size;
+        totalStorage += value.audioMeta.size;
       });
       return { totalStorage };
     }

@@ -11,11 +11,6 @@
       "type": "number",
       "required": true
     },
-    "likes": {
-      "type": "number",
-      "required": true,
-      "default": 0
-    },
     "views": {
       "type": "number",
       "required": true
@@ -26,11 +21,6 @@
       "default": 0
     },
     "report": {
-      "type": "number",
-      "required": true,
-      "default": 0
-    },
-    "comments": {
       "type": "number",
       "required": true,
       "default": 0

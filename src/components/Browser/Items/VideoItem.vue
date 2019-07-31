@@ -1,7 +1,7 @@
 <template>
   <div class="content-v-thumb">
     <div class="video__thumbnail" @click="open">
-      <lazy-image :src="src" :lazySrc="lazySrc" hover :active="selected"></lazy-image>
+      <lazy-image :src="getSrc()" :lazySrc="lazySrc" hover :active="selected"></lazy-image>
       <i class="far fa-2x fa-check-circle" v-if="selected"></i>
       <i class="fas fa-play fa-2x file-icon" aria-hidden="true" v-if="!editMode"></i>
       <div class="video__info">
@@ -44,6 +44,13 @@ export default {
     }
   },
   methods: {
+       getSrc() {
+      if (this.src.includes("https")) {
+        return this.src;
+      } else {
+        return "/" + this.src;
+      }
+    },
     open() {
       if (!this.editMode) {
         this.$router.push(`/app/@watch?v=${this.item.id}`);
@@ -63,10 +70,10 @@ export default {
     },
     getName: function() {
       const len = 20;
-      if (this.item.name.length >= len) {
-        return this.item.name.substring(0, len) + "..";
+      if (this.item.title.length >= len) {
+        return this.item.title.substring(0, len) + "..";
       } else {
-        return this.item.name;
+        return this.item.title;
       }
     }
   }

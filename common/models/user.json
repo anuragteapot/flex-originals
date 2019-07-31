@@ -22,11 +22,6 @@
       "model": "videos",
       "foreignKey": "videoOwnerId"
     },
-    "follows": {
-      "type": "hasMany",
-      "model": "follow",
-      "foreignKey": "followUserId"
-    },
     "likeVideos": {
       "type": "hasMany",
       "model": "likeVideo",

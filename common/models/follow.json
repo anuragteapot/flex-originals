@@ -7,11 +7,15 @@
     "validateUpsert": true
   },
   "properties": {
-    "followedUserId": {
+    "userId": {
       "type": "string",
       "required": true
     },
-    "followUserId": {
+    "channelId": {
+      "type": "string",
+      "required": true
+    },
+    "active": {
       "type": "string",
       "required": true
     }

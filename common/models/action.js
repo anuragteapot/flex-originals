@@ -104,7 +104,7 @@ module.exports = function(Action) {
             const video = await Videos.create({
               videoOwnerId: req.params.id,
               videoFile: req.file.path,
-              name: req.file.originalname,
+              title: req.file.originalname,
               videoMeta: req.file
             });
             return res.json({
@@ -124,7 +124,7 @@ module.exports = function(Action) {
             const audio = await Audios.create({
               audioOwnerId: req.params.id,
               audioFile: req.file.path,
-              name: req.file.originalname,
+              title: req.file.originalname,
               audioMeta: req.file
             });
             return res.json({
@@ -307,7 +307,7 @@ module.exports = function(Action) {
         fields: {
           videoOwnerId: true,
           id: true,
-          name: true,
+          title: true,
           videoFile: true,
           thumbImage: true
         },
@@ -318,7 +318,7 @@ module.exports = function(Action) {
         fields: {
           audioOwnerId: true,
           id: true,
-          name: true,
+          title: true,
           audioFile: true,
           thumbImage: true
         },
@@ -328,12 +328,12 @@ module.exports = function(Action) {
       return { video, audio, user, settings };
     } else {
       const video = await Videos.find({
-        fields: { id: true, name: true, videoFile: true, thumbImage: true },
+        fields: { id: true, title: true, videoFile: true, thumbImage: true },
         where: { visibility: 1 },
         limit: limit / 2
       });
       const audio = await Audios.find({
-        fields: { id: true, name: true, audioFile: true, thumbImage: true },
+        fields: { id: true, title: true, audioFile: true, thumbImage: true },
         where: { visibility: 1 },
         limit: limit / 2
       });

@@ -10,7 +10,7 @@
     "videoOwnerId"
   ],
   "properties": {
-    "name": {
+    "title": {
       "type": "string",
       "required": true,
       "default": "Untitled"

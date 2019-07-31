@@ -2,7 +2,7 @@
   <div class="content-m-thumb">
     <div class="music__thumbnail" @click="open">
       <lazy-image
-        :src="src"
+        :src="getSrc()"
         :lazySrc="lazySrc"
         hover
         :active="item.id == $route.query.a || selected"
@@ -65,6 +65,13 @@ export default {
     }
   },
   methods: {
+    getSrc() {
+      if (this.src.includes("https")) {
+        return this.src;
+      } else {
+        return "/" + this.src;
+      }
+    },
     open() {
       if (!this.editMode) {
         this.$router.push(`/app/@song?a=${this.item.id}`);

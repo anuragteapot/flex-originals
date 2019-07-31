@@ -10,7 +10,7 @@
     "audioOwnerId"
   ],
   "properties": {
-    "name": {
+    "title": {
       "type": "string",
       "required": true,
       "default": "Untitled"
@@ -33,7 +33,7 @@
       "type": "string"
     },
     "thumbImage": {
-      "type": "object"
+      "type": "string"
     },
     "tags": {
       "type": "string"

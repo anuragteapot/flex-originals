@@ -108,14 +108,22 @@ export default {
       this.$store.commit(types.SET_CONTENT, content.data);
     }
   },
-  async mounted() {
+  async beforeMount() {
     if (this.$api.webStorage.local.get("$userId")) {
       const settings = await this.$store.dispatch("findSettings", {
         uid: this.$api.webStorage.local.get("$userId")
       });
       this.$store.commit(types.SET_SETTINGS, settings);
     }
-    this.init();
+    let content = {};
+    if (this.$route.params.id) {
+      content = await this.$store.dispatch("getContent", {
+        userId: this.$route.params.id
+      });
+    } else {
+      content = await this.$store.dispatch("getContent", {});
+    }
+    this.$store.commit(types.SET_CONTENT, content.data);
   }
 };
 </script>

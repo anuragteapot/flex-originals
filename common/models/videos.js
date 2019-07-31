@@ -10,7 +10,7 @@ module.exports = function(Videos) {
       where: { id }
     });
 
-    video.name = videoData.name;
+    video.title = videoData.title;
     video.visibility = videoData.visibility;
     video.description = videoData.description;
     video.thumbImage = videoData.thumbImage;

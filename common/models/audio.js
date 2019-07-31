@@ -10,7 +10,7 @@ module.exports = function(Audio) {
       where: { id }
     });
 
-    audio.name = audioData.name;
+    audio.title = audioData.title;
     audio.visibility = audioData.visibility;
     audio.description = audioData.description;
     audio.thumbImage = audioData.thumbImage;

@@ -239,7 +239,7 @@ export default {
   },
   methods: {
     async logout() {
-      await this.$api.logout();
+      await this.$api.logout('/app/@home?u=logout');
     },
     deleteAllSession() {
       this.$store.commit(types.SHOW_MODAL, { state: true, type: "MDelete" });

@@ -27,19 +27,19 @@
                       <span>
                         11111
                         <i class="far fa-heart"></i>
-                        Like
+                        LIKE
                       </span>
                       <span>
                         <i class="fa fa-list" aria-hidden="true"></i>
-                        Save
+                        SAVE
                       </span>
                       <span>
                         <i class="fas fa-share-alt"></i>
-                        Share
+                        SHARE
                       </span>
                       <span>
                         <i class="far fa-flag"></i>
-                        Report
+                        REPORT
                       </span>
                     </div>
                   </div>

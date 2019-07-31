@@ -271,6 +271,7 @@ export default {
 
         this.$store.commit(types.SHOW_SNACKBAR, data);
         this.$refs.formFile.reset();
+        window.removeEventListener("beforeunload", this.beforeunload);
         return false;
       }
 

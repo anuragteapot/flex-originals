@@ -209,7 +209,7 @@ class Api {
    * Logout
    *
    */
-  async logout() {
+  async logout(redirect = '/login') {
     try {
       await this.axios().post('/api/users/logout');
     } catch (err) {
@@ -222,7 +222,7 @@ class Api {
     webStorage.local.destroy('ttl');
     store.commit(types.IS_AUTHENTICATED, false);
     store.commit(types.SET_USER, {});
-    router.push("/app/@home?u=logout");
+    router.push(redirect);
   }
 
   /**

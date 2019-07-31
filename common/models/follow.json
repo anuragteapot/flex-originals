@@ -10,16 +10,14 @@
     "followedUserId": {
       "type": "string",
       "required": true
+    },
+    "followUserId": {
+      "type": "string",
+      "required": true
     }
   },
   "validations": [],
-  "relations": {
-    "user": {
-      "type": "belongsTo",
-      "model": "user",
-      "foreignKey": "followUserId"
-    }
-  },
+  "relations": {},
   "acls": [
     {
       "accessType": "*",

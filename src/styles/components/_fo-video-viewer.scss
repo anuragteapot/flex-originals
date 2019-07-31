@@ -83,7 +83,9 @@
             text-align: end;
 
             span {
+              text-transform: capitalize;
               margin: 0 5px;
+              font-size: 13px;
 
               i {
                 margin: 0 5px;
@@ -125,7 +127,7 @@
             padding: 20px 0px 40px;
 
             .follow {
-              border-radius: 5px;
+              border-radius: 2px;
               padding: 10px 25px;
               cursor: pointer;
               background-color: $color-error;

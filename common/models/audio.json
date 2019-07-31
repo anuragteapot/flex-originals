@@ -77,6 +77,11 @@
       "type": "belongsTo",
       "model": "user",
       "foreignKey": "audioOwnerId"
+    },
+    "audioanalytics": {
+      "type": "hasOne",
+      "model": "Audioanalytic",
+      "foreignKey": "audioId"
     }
   },
   "acls": [

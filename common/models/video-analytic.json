@@ -7,10 +7,6 @@
     "validateUpsert": true
   },
   "properties": {
-    "videoId": {
-      "type": "number",
-      "required": true
-    },
     "views": {
       "type": "number",
       "required": true
@@ -27,7 +23,20 @@
     }
   },
   "validations": [],
-  "relations": {},
-  "acls": [],
+  "relations": {
+    "videos": {
+      "type": "belongsTo",
+      "model": "videos",
+      "foreignKey": "videoId"
+    }
+  },
+  "acls": [
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "DENY"
+    }
+  ],
   "methods": {}
 }

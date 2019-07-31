@@ -198,4 +198,70 @@ module.exports = function(User) {
     };
     return next();
   });
+
+  User.followChannel = async (id, channelId) => {
+    const Follow = app.models.follow;
+    return Follow.create({ followUserId: id, followedUserId: channelId });
+  };
+
+  User.remoteMethod('followChannel', {
+    description: 'Method to follow channel.',
+    accepts: [
+      {
+        arg: 'id',
+        type: 'string',
+        required: true
+      },
+      {
+        arg: 'channelId',
+        type: 'string',
+        required: true
+      }
+    ],
+    returns: {
+      type: 'object',
+      root: true
+    },
+    http: {
+      path: '/followChannel',
+      verb: 'post'
+    }
+  });
+
+  User.unFollowChannel = async (id, channelId) => {
+    const Follow = app.models.follow;
+   const followInfo =  Follow.destroyAll({where : {
+    followUserId: "5d40a4952d18eb8bab6683ca",
+    // followedUserId: "5d40a4952d18eb8bab6683c2"
+   }});
+
+  //  console.log(followInfo.id)
+
+   return followInfo;
+   
+  };
+
+  User.remoteMethod('unFollowChannel', {
+    description: 'Method to un follow channel.',
+    accepts: [
+      {
+        arg: 'id',
+        type: 'string',
+        required: true
+      },
+      {
+        arg: 'channelId',
+        type: 'string',
+        required: true
+      }
+    ],
+    returns: {
+      type: 'object',
+      root: true
+    },
+    http: {
+      path: '/unFollowChannel',
+      verb: 'post'
+    }
+  });
 };

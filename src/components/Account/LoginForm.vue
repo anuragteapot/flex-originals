@@ -111,7 +111,7 @@ export default {
       this.$store.commit(types.IS_AUTHENTICATED, true);
 
       this.$nextTick(() => {
-        this.$router.push(this.$route.query.redirect || "/app/@home");
+        window.location.href = this.$route.query.redirect || "/app/@home";
       });
     },
     clear() {

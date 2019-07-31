@@ -23,7 +23,7 @@
                       <p>{{ user.email}}</p>
                     </div>
                     <div class="username__info">
-                      <button class="fo-settings-button  info" @click="logout">Log Out</button>
+                      <button class="fo-settings-button info" @click="logout">Log Out</button>
                     </div>
                   </div>
                   <!-- <label class="form-item__label">Start at login</label>
@@ -36,7 +36,7 @@
                   <div
                     class="form-item__control toggle"
                     :class="settings.emailNotification ? 'is-on' : ''"
-                    @click="settings.emailNotification = !settings.emailNotification"
+                    @click="settings.emailNotification = !settings.emailNotification; save()"
                   >
                     <div class="toggle__handle"></div>
                   </div>
@@ -55,13 +55,13 @@
                   <label class="form-item__label">Theme ( Light/Dark )</label>
                   <div
                     class="form-item__control toggle"
-                    :class="settings.emailNotification ? 'is-on' : ''"
-                    @click="settings.emailNotification = !settings.emailNotification"
+                    :class="settings.theme == 'dark' ? 'is-on' : ''"
+                    @click="settings.theme == 'dark' ? settings.theme = 'light' : settings.theme = 'dark'; save()"
                   >
                     <div class="toggle__handle"></div>
                   </div>
                 </div>
-                <div class="form-item">
+                <!-- <div class="form-item">
                   <label class="form-item__label">Show icon in dock</label>
                   <div
                     class="form-item__control toggle"
@@ -70,35 +70,66 @@
                   >
                     <div class="toggle__handle"></div>
                   </div>
-                </div>
+                </div>-->
+                <h3>Social Media Accounts</h3>
                 <div class="form-item">
-                  <label class="form-item__label">Hide &quot;Unlock Extreme&quot; button</label>
-                  <div class="form-item__control toggle">
-                    <div class="toggle__handle"></div>
-                  </div>
-                </div>
-                <h3>Desktop Status Menu</h3>
-                <div class="form-item">
-                  <label class="form-item__label">Use precentages</label>
-                  <div class="form-item__control toggle">
-                    <div class="toggle__handle"></div>
-                  </div>
-                </div>
-                <div class="form-item">
-                  <label class="form-item__label">Icon visible</label>
-                  <div class="form-item__control toggle">
-                    <div class="toggle__handle"></div>
-                  </div>
-                </div>
-                <div class="form-item">
-                  <label class="form-item__label">Text information</label>
+                  <label class="form-item__label">Facebook</label>
                   <div class="form-item__control">
-                    <select class="control control--select">
-                      <option selected="selected">Default</option>
-                      <option>Option 1</option>
-                      <option>Option 2</option>
-                      <option>Option 3</option>
-                    </select>
+                    <input
+                      @change="save()"
+                      v-model="settings.facebook"
+                      class="form-item__control__input"
+                      type="text"
+                      placeholder="Facebook Username"
+                    />
+                  </div>
+                </div>
+                <div class="form-item">
+                  <label class="form-item__label">Twitter</label>
+                  <div class="form-item__control">
+                    <input
+                      @change="save()"
+                      v-model="settings.twitter"
+                      class="form-item__control__input"
+                      type="text"
+                      placeholder="Twitter Username"
+                    />
+                  </div>
+                </div>
+                <div class="form-item">
+                  <label class="form-item__label">Redit</label>
+                  <div class="form-item__control">
+                    <input
+                      @change="save()"
+                      v-model="settings.redit"
+                      class="form-item__control__input"
+                      type="text"
+                      placeholder="Redit Username"
+                    />
+                  </div>
+                </div>
+                <div class="form-item">
+                  <label class="form-item__label">Linkdein</label>
+                  <div class="form-item__control">
+                    <input
+                      @change="save()"
+                      v-model="settings.linkedin"
+                      class="form-item__control__input"
+                      type="text"
+                      placeholder="Linkedin Username"
+                    />
+                  </div>
+                </div>
+                <div class="form-item">
+                  <label class="form-item__label">Instagram</label>
+                  <div class="form-item__control">
+                    <input
+                      @change="save()"
+                      v-model="settings.instagram"
+                      class="form-item__control__input"
+                      type="text"
+                      placeholder="Instagram Username"
+                    />
                   </div>
                 </div>
               </div>

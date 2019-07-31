@@ -9,7 +9,7 @@
           <div class="social__media">
             <a
               v-show="channelInfo.facebook"
-              :href="channelInfo.facebook"
+              :href="`https://facebook.com/${channelInfo.facebook}`"
               target="_blank"
               style="color:white"
             >
@@ -17,7 +17,7 @@
             </a>
             <a
               v-show="channelInfo.instagram"
-              :href="channelInfo.instagram"
+              :href="`https://www.instagram.com/${channelInfo.instagram}`"
               target="_blank"
               style="color:white"
             >
@@ -25,7 +25,7 @@
             </a>
             <a
               v-show="channelInfo.twitter"
-              :href="channelInfo.twitter"
+              :href="`https://twitter.com/${channelInfo.twitter}`"
               target="_blank"
               style="color:white"
             >
@@ -33,7 +33,7 @@
             </a>
             <a
               v-show="channelInfo.redit"
-              :href="channelInfo.redit"
+              :href="`https://www.reddit.com/r/${channelInfo.redit}`"
               target="_blank"
               style="color:white"
             >
@@ -41,7 +41,7 @@
             </a>
             <a
               v-show="channelInfo.linkedin"
-              :href="channelInfo.linkedin"
+              :href="`https://www.linkedin.com/in/${channelInfo.linkedin}`"
               target="_blank"
               style="color:white"
             >

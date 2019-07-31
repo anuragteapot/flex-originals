@@ -208,7 +208,6 @@ export default {
     },
     onDrop: function(event) {
       event.preventDefault();
-      this.isUploading = true;
       window.addEventListener("beforeunload", this.beforeunload);
       if (
         event.dataTransfer &&
@@ -271,8 +270,11 @@ export default {
         };
 
         this.$store.commit(types.SHOW_SNACKBAR, data);
+        this.$refs.formFile.reset();
         return false;
       }
+
+      this.isUploading = true;
 
       try {
         const uploadedVideo = await this.$api
@@ -306,7 +308,6 @@ export default {
       this.$refs.formFile.reset();
     },
     processFile: function() {
-      this.isUploading = true;
       window.addEventListener("beforeunload", this.beforeunload);
       const formData = new FormData();
       formData.append("file", this.$refs.inputFile.files[0]);

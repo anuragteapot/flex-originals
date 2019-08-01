@@ -1,24 +1,16 @@
 {
-  "name": "Audioanalytic",
-  "plural": "Audioanalytics",
+  "name": "audioAnalytic",
+  "plural": "audioAnalytics",
   "base": "PersistedModel",
   "idInjection": true,
   "options": {
     "validateUpsert": true
   },
   "properties": {
-    "audioId": {
-      "type": "number",
-      "required": true
-    },
-    "likes": {
+    "views": {
       "type": "number",
       "required": true,
       "default": 0
-    },
-    "views": {
-      "type": "number",
-      "required": true
     },
     "share": {
       "type": "number",
@@ -29,15 +21,23 @@
       "type": "number",
       "required": true,
       "default": 0
-    },
-    "comments": {
-      "type": "number",
-      "required": true,
-      "default": 0
     }
   },
   "validations": [],
-  "relations": {},
-  "acls": [],
+  "relations": {
+    "audio": {
+      "type": "belongsTo",
+      "model": "audio",
+      "foreignKey": "audioId"
+    }
+  },
+  "acls": [
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW"
+    }
+  ],
   "methods": {}
 }

@@ -198,4 +198,68 @@ module.exports = function(User) {
     };
     return next();
   });
+
+  User.followChannel = async (id, channelId) => {
+    const Follow = app.models.follow;
+    return Follow.create({ userId: id, channelId, active: true });
+  };
+
+  User.remoteMethod('followChannel', {
+    description: 'Method to follow channel.',
+    accepts: [
+      {
+        arg: 'id',
+        type: 'string',
+        required: true
+      },
+      {
+        arg: 'channelId',
+        type: 'string',
+        required: true
+      }
+    ],
+    returns: {
+      type: 'object',
+      root: true
+    },
+    http: {
+      path: '/followChannel',
+      verb: 'post'
+    }
+  });
+
+  User.unFollowChannel = async (id, channelId) => {
+    const Follow = app.models.follow;
+
+    return await Follow.find();
+  
+    // return await Follow.updateAll({
+    //   userId: id ,
+    //   channelId: channelId 
+    // }, { active: false });
+  };
+
+  User.remoteMethod('unFollowChannel', {
+    description: 'Method to un follow channel.',
+    accepts: [
+      {
+        arg: 'id',
+        type: 'string',
+        required: true
+      },
+      {
+        arg: 'channelId',
+        type: 'string',
+        required: true
+      }
+    ],
+    returns: {
+      type: 'object',
+      root: true
+    },
+    http: {
+      path: '/unFollowChannel',
+      verb: 'post'
+    }
+  });
 };

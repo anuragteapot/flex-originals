@@ -18,6 +18,9 @@ export const DECREASE_GRID_SIZE = 'DECREASE_GRID_SIZE';
 
 export const SET_CONTENT = 'SET_CONTENT';
 
+export const SET_USER = 'SET_USER';
+export const SET_EDIT_MODE = 'SET_EDIT_MODE';
+
 // Api handlers
 export const LOAD_CONTENTS_SUCCESS = 'LOAD_CONTENTS_SUCCESS';
 export const LOAD_MORE_CONTENTS_SUCCESS = 'LOAD_MORE_CONTENTS_SUCCESS';

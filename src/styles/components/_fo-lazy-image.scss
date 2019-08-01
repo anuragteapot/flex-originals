@@ -9,11 +9,21 @@
   position: relative;
 }
 
-.fo-image.hover:hover::before, .fo-image.active::before {
+.fo-image.hover:hover::before {
   content: "";
   position: absolute;
   top: 0;
   background: rgba(0, 0, 0, 0.3);
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+.fo-image.active::before{
+  content: "";
+  position: absolute;
+  top: 0;
+  background: rgba(0, 0, 0, 0.8);
   right: 0;
   bottom: 0;
   left: 0;

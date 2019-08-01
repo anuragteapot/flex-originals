@@ -19,11 +19,11 @@
                       <!-- <span class="avatar__change">Change Avatar</span> -->
                     </div>
                     <div class="email__info">
-                      <p>Anurag Kumar</p>
-                      <p>anuragvns1111@gmail.com</p>
+                      <p>{{user.realm}} ({{user.username }})</p>
+                      <p>{{ user.email}}</p>
                     </div>
                     <div class="username__info">
-                      <button class="info" @click="logout">Log Out</button>
+                      <button class="fo-settings-button info" @click="logout">Log Out</button>
                     </div>
                   </div>
                   <!-- <label class="form-item__label">Start at login</label>
@@ -36,7 +36,7 @@
                   <div
                     class="form-item__control toggle"
                     :class="settings.emailNotification ? 'is-on' : ''"
-                    @click="settings.emailNotification = !settings.emailNotification"
+                    @click="settings.emailNotification = !settings.emailNotification; save()"
                   >
                     <div class="toggle__handle"></div>
                   </div>
@@ -55,13 +55,13 @@
                   <label class="form-item__label">Theme ( Light/Dark )</label>
                   <div
                     class="form-item__control toggle"
-                    :class="settings.emailNotification ? 'is-on' : ''"
-                    @click="settings.emailNotification = !settings.emailNotification"
+                    :class="settings.theme == 'dark' ? 'is-on' : ''"
+                    @click="settings.theme == 'dark' ? settings.theme = 'light' : settings.theme = 'dark'; save()"
                   >
                     <div class="toggle__handle"></div>
                   </div>
                 </div>
-                <div class="form-item">
+                <!-- <div class="form-item">
                   <label class="form-item__label">Show icon in dock</label>
                   <div
                     class="form-item__control toggle"
@@ -70,41 +70,72 @@
                   >
                     <div class="toggle__handle"></div>
                   </div>
-                </div>
+                </div>-->
+                <h3>Social Media Accounts</h3>
                 <div class="form-item">
-                  <label class="form-item__label">Hide &quot;Unlock Extreme&quot; button</label>
-                  <div class="form-item__control toggle">
-                    <div class="toggle__handle"></div>
-                  </div>
-                </div>
-                <h3>Desktop Status Menu</h3>
-                <div class="form-item">
-                  <label class="form-item__label">Use precentages</label>
-                  <div class="form-item__control toggle">
-                    <div class="toggle__handle"></div>
-                  </div>
-                </div>
-                <div class="form-item">
-                  <label class="form-item__label">Icon visible</label>
-                  <div class="form-item__control toggle">
-                    <div class="toggle__handle"></div>
-                  </div>
-                </div>
-                <div class="form-item">
-                  <label class="form-item__label">Text information</label>
+                  <label class="form-item__label">Facebook</label>
                   <div class="form-item__control">
-                    <select class="control control--select">
-                      <option selected="selected">Default</option>
-                      <option>Option 1</option>
-                      <option>Option 2</option>
-                      <option>Option 3</option>
-                    </select>
+                    <input
+                      @change="save()"
+                      v-model="settings.facebook"
+                      class="form-item__control__input"
+                      type="text"
+                      placeholder="Facebook Username"
+                    />
+                  </div>
+                </div>
+                <div class="form-item">
+                  <label class="form-item__label">Twitter</label>
+                  <div class="form-item__control">
+                    <input
+                      @change="save()"
+                      v-model="settings.twitter"
+                      class="form-item__control__input"
+                      type="text"
+                      placeholder="Twitter Username"
+                    />
+                  </div>
+                </div>
+                <div class="form-item">
+                  <label class="form-item__label">Redit</label>
+                  <div class="form-item__control">
+                    <input
+                      @change="save()"
+                      v-model="settings.redit"
+                      class="form-item__control__input"
+                      type="text"
+                      placeholder="Redit Username"
+                    />
+                  </div>
+                </div>
+                <div class="form-item">
+                  <label class="form-item__label">Linkdein</label>
+                  <div class="form-item__control">
+                    <input
+                      @change="save()"
+                      v-model="settings.linkedin"
+                      class="form-item__control__input"
+                      type="text"
+                      placeholder="Linkedin Username"
+                    />
+                  </div>
+                </div>
+                <div class="form-item">
+                  <label class="form-item__label">Instagram</label>
+                  <div class="form-item__control">
+                    <input
+                      @change="save()"
+                      v-model="settings.instagram"
+                      class="form-item__control__input"
+                      type="text"
+                      placeholder="Instagram Username"
+                    />
                   </div>
                 </div>
               </div>
               <div class="grid grid--half">
-                <h3>Performance</h3>
-                <div class="form-item">
+                <!-- <h3>Performance</h3> -->
+                <!-- <div class="form-item">
                   <label class="form-item__label">Threshold level</label>
                   <div class="form-item__control">
                     <small>
@@ -116,10 +147,10 @@
                   </div>
                   <div class="slider">
                     <input class="slider__input" type="range" value="50" min="0" max="100" />
-                    <!-- <div ref="sliderPos" class="slider__positive" style="width: 50%;"></div>  -->
+                    <div ref="sliderPos" class="slider__positive" style="width: 50%;"></div> 
                   </div>
-                </div>
-                <p>
+                </div>-->
+                <!-- <p>
                   <small>If the available memory goes below this amount, the status bar text will turn red.</small>
                 </p>
                 <div class="form-item">
@@ -156,19 +187,22 @@
                 </div>
                 <p>
                   <small>If the available memory goes below this amount, the status bar text will turn red.</small>
-                </p>
+                </p>-->
                 <h3>Security</h3>
                 <p>Two-factor authentication</p>
                 <p>
                   <small>This will sign you out of sessions in other browsers or on other computers.</small>
                 </p>
-                <button class="success">Enable Two-Factor Auth</button>
+                <button class="fo-settings-button success">Enable Two-Factor Auth</button>
 
                 <p>Sign out of all other sessions</p>
                 <p>
                   <small>This will sign you out of sessions in other browsers or on other computers.</small>
                 </p>
-                <button class="warning" @click="deleteAllSession">Sign out other sessions</button>
+                <button
+                  class="fo-settings-button warning"
+                  @click="deleteAllSession"
+                >Sign out other sessions</button>
                 <h3>Danger Zone</h3>
                 <p>
                   <small>
@@ -176,8 +210,8 @@
                     Once you delete a repository, there is no going back. Please be certain.
                   </small>
                 </p>
-                <button class="danger">Deactivate Account</button>
-                <button class="danger">Delete Account</button>
+                <button class="fo-settings-button danger">Deactivate Account</button>
+                <button class="fo-settings-button danger">Delete Account</button>
               </div>
             </div>
           </div>
@@ -198,18 +232,20 @@ export default {
   computed: {
     settings() {
       return this.$store.state.settings;
+    },
+    user() {
+      return this.$store.state.user;
     }
   },
   methods: {
     async logout() {
-      await this.$api.logout();
-      this.$router.push("/app/@home?u=logout");
+      await this.$api.logout('/app/@home?u=logout');
     },
     deleteAllSession() {
       this.$store.commit(types.SHOW_MODAL, { state: true, type: "MDelete" });
     },
     async save() {
-      const payload =  {};
+      const payload = {};
       payload.id = this.$api.webStorage.local.get("$userId");
       payload.newSettings = this.settings;
       await this.$store.dispatch("updateSettings", payload);

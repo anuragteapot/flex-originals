@@ -14,6 +14,7 @@
                 <lazy-video-player
                   :src="videoSource"
                   v-if="!videoUnavaliable"
+                  :autoPlay="true"
                   @handleEnded="handleEnded"
                 ></lazy-video-player>
                 <div class="video_actions" v-if="!videoUnavaliable">
@@ -26,19 +27,19 @@
                       <span>
                         11111
                         <i class="far fa-heart"></i>
-                        Like
+                        LIKE
                       </span>
                       <span>
                         <i class="fa fa-list" aria-hidden="true"></i>
-                        Save
+                        SAVE
                       </span>
                       <span>
                         <i class="fas fa-share-alt"></i>
-                        Share
+                        SHARE
                       </span>
                       <span>
                         <i class="far fa-flag"></i>
-                        Report
+                        REPORT
                       </span>
                     </div>
                   </div>
@@ -223,6 +224,7 @@ export default {
     lazySrc: "/public/icons/music.svg",
     videoSource: "",
     videoId: "",
+    analytic:"",
     videoUnavaliable: false
   }),
   watch: {
@@ -244,8 +246,9 @@ export default {
     handleEnded() {
       const videos = this.$store.state.content.video;
       if (this.autoPlay && this.videoSuggestions.length > 0) {
-        const newVideoId = videos.findIndex(x => x.id === this.$route.query.v) + 1;
-        if(newVideoId < videos.length) {
+        const newVideoId =
+          videos.findIndex(x => x.id === this.$route.query.v) + 1;
+        if (newVideoId < videos.length) {
           this.$router.push(`/app/@watch?v=${videos[newVideoId].id}`);
         }
       }
@@ -263,17 +266,24 @@ export default {
     async init() {
       if (this.$route.query.v) {
         this.$store.commit(types.SET_IS_LOADING, true);
-        const video = await this.$api
+
+        const currentVideo = await this.$api
           .axios()
           .get(`/api/actions/getVideo/${this.$route.query.v}`);
-        if (!video.data) {
+        this.$store.commit(types.SET_IS_LOADING, false);
+
+        if (!currentVideo.data.video) {
           this.videoUnavaliable = true;
         }
-        this.videoSource = "/" + video.data.videoFile;
+        if (currentVideo.data.video.videoFile.includes("https")) {
+          this.videoSource = currentVideo.data.video.videoFile;
+        } else {
+          this.videoSource = "/" + currentVideo.data.video.videoFile;
+        }
+        this.analytic = currentVideo.data.analytic;
       } else {
         this.$router.push("/@error");
       }
-      this.$store.commit(types.SET_IS_LOADING, false);
     }
   },
   async beforeMount() {

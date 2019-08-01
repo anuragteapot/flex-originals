@@ -42,7 +42,16 @@ export default [
     }
   },
   {
-    path: '/app/@channel',
+    path: '/app/@editvideo',
+    name: '@editvideo',
+    component: () =>
+      import(/* webpackChunkName: "browser" */ './../views/Browser.vue'),
+    meta: {
+      requiresAuth: true
+    }
+  },
+  {
+    path: '/app/@channel/:id',
     name: '@channel',
     component: () =>
       import(/* webpackChunkName: "browser" */ './../views/Browser.vue')

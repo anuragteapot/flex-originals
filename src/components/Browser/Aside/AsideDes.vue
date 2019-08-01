@@ -1,5 +1,5 @@
 <template>
-  <aside class="features">
+  <aside class="features" v-if="isAuthenticated">
     <header class="features-header focusable">
       <h3 role="header" class="features-header-name">My Server</h3>
     </header>
@@ -31,12 +31,12 @@
         class="avatar"
         alt="Avatar"
         :src="settings.profileAvatar || '/public/icons/logo.png'"
-        @click="$router.push('/app/@channel')"
+        @click="$router.push(`/app/@channel/${user.id}`)"
         style="cursor:pointer"
       />
       <div class="features-footer-details">
-        <span class="username">Anurag Kumar</span>
-        <span class="tag">anu1601cs</span>
+        <span class="username">{{user.realm || 'Anonymous'}}</span>
+        <span class="tag">{{user.username || 'Flex'}}</span>
       </div>
       <div class="features-footer-controls button-group">
         <button role="button" aria-label="Mute" class="button button-mute">
@@ -61,10 +61,18 @@
 <script>
 export default {
   name: "lazy-aside",
-  methods: {},
-  computed:{
+  data() {
+    return {};
+  },
+  computed: {
     settings() {
       return this.$store.state.settings;
+    },
+    isAuthenticated() {
+      return this.$store.state.isAuthenticated;
+    },
+    user() {
+      return this.$store.state.user;
     }
   }
 };

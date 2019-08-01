@@ -1,4 +1,4 @@
-const _ = require('underscore')
+const _ = require('underscore');
 
 /* eslint-disable */
 
@@ -11,7 +11,7 @@ if (!window.localStorage) {
   window.localStorage = {
     getItem: function(sKey) {
       if (!sKey || !this.hasOwnProperty(sKey)) {
-        return null
+        return null;
       }
       return unescape(
         document.cookie.replace(
@@ -22,44 +22,44 @@ if (!window.localStorage) {
           ),
           '$1'
         )
-      )
+      );
     },
     key: function(nKeyId) {
       return unescape(
         document.cookie
           .replace(/\s*\=(?:.(?!;))*$/, '')
           .split(/\s*\=(?:[^;](?!;))*[^;]?;\s*/)[nKeyId]
-      )
+      );
     },
     setItem: function(sKey, sValue) {
       if (!sKey) {
-        return
+        return;
       }
       document.cookie =
         escape(sKey) +
         '=' +
         escape(sValue) +
-        '; expires=Tue, 19 Jan 2038 03:14:07 GMT; path=/'
-      this.length = document.cookie.match(/\=/g).length
+        '; expires=Tue, 19 Jan 2038 03:14:07 GMT; path=/';
+      this.length = document.cookie.match(/\=/g).length;
     },
     length: 0,
     removeItem: function(sKey) {
       if (!sKey || !this.hasOwnProperty(sKey)) {
-        return
+        return;
       }
       document.cookie =
-        escape(sKey) + '=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/'
-      this.length--
+        escape(sKey) + '=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/';
+      this.length--;
     },
     hasOwnProperty: function(sKey) {
       return new RegExp(
         '(?:^|;\\s*)' + escape(sKey).replace(/[\-\.\+\*]/g, '\\$&') + '\\s*\\='
-      ).test(document.cookie)
+      ).test(document.cookie);
     }
-  }
+  };
   window.localStorage.length = (
     document.cookie.match(/\=/g) || window.localStorage
-  ).length
+  ).length;
 }
 
 /* eslint-enable */
@@ -75,23 +75,23 @@ export const cookies = {
    * @return String|null
    */
   getAll: function() {
-    var cookies = {}
+    var cookies = {};
     _(document.cookie.split(';'))
       .chain()
       .map(function(m) {
-        return m.replace(/^\s+/, '').replace(/\s+$/, '')
+        return m.replace(/^\s+/, '').replace(/\s+$/, '');
       })
       .each(function(c) {
-        var arr = c.split('=')
-        var key = arr[0]
-        var value = null
-        var size = _.size(arr)
+        var arr = c.split('=');
+        var key = arr[0];
+        var value = null;
+        var size = _.size(arr);
         if (size > 1) {
-          value = arr.slice(1).join('')
+          value = arr.slice(1).join('');
         }
-        cookies[key] = value
-      })
-    return cookies
+        cookies[key] = value;
+      });
+    return cookies;
   },
 
   /**
@@ -101,13 +101,13 @@ export const cookies = {
    * @return String|null
    */
   get: function(name) {
-    var cookie = null
-    var list = this.getAll()
+    var cookie = null;
+    var list = this.getAll();
 
     _.each(list, function(value, key) {
-      if (key === name) cookie = value
-    })
-    return cookie
+      if (key === name) cookie = value;
+    });
+    return cookie;
   },
 
   /**
@@ -119,9 +119,10 @@ export const cookies = {
    * @return String|null
    */
   set: function(name, value, time) {
-    var today = new Date()
-    var offset = typeof time === 'undefined' ? 1000 * 60 * 60 * 24 : time * 1000
-    var expires_at = new Date(today.getTime() + offset)
+    var today = new Date();
+    var offset =
+      typeof time === 'undefined' ? 1000 * 60 * 60 * 24 : time * 1000;
+    var expires_at = new Date(today.getTime() + offset);
 
     var cookie = _.map(
       {
@@ -130,12 +131,12 @@ export const cookies = {
         path: '/'
       },
       function(value, key) {
-        return [key == 'name' ? name : key, value].join('=')
+        return [key == 'name' ? name : key, value].join('=');
       }
-    ).join(';')
+    ).join(';');
 
-    document.cookie = cookie
-    return this
+    document.cookie = cookie;
+    return this;
   },
 
   /**
@@ -145,11 +146,11 @@ export const cookies = {
    */
   destroy: function(name) {
     if (this.get(name) != '' || this.get(name) != null) {
-      this.set(name, null, -1000000)
+      this.set(name, null, -1000000);
     }
-    return this
+    return this;
   }
-}
+};
 
 /**
  * localStorage - A small class to manipulate localStorage from javascript
@@ -162,9 +163,7 @@ export const local = {
    * @return String|null
    */
   getAll: function() {
-    return Promise.resolve().then(() => {
-      return { ...localStorage }
-    })
+    return { ...localStorage };
   },
 
   /**
@@ -174,7 +173,7 @@ export const local = {
    * @return String|null
    */
   get: function(name) {
-    return localStorage.getItem(name)
+    return localStorage.getItem(name);
   },
 
   /**
@@ -185,10 +184,8 @@ export const local = {
    * @return this
    */
   set: function(name, value) {
-    return Promise.resolve().then(() => {
-      localStorage.setItem(name, value)
-      return this
-    })
+    localStorage.setItem(name, value);
+    return this;
   },
 
   /**
@@ -198,14 +195,12 @@ export const local = {
    * @return this
    */
   destroy: function(name) {
-    return Promise.resolve().then(() => {
-      if (this.get(name) != '' || this.get(name) != null) {
-        localStorage.removeItem(name)
-      }
-      return this
-    })
+    if (this.get(name) != '' || this.get(name) != null) {
+      localStorage.removeItem(name);
+    }
+    return this;
   }
-}
+};
 
 /**
  * sessionStorage - A small class to manipulate localStorage from javascript
@@ -218,8 +213,8 @@ export const session = {
    * @return String|null
    */
   getAll: function() {
-    const items = { ...sessionStorage }
-    return items
+    const items = { ...sessionStorage };
+    return items;
   },
 
   /**
@@ -229,9 +224,9 @@ export const session = {
    * @return String|null
    */
   get: function(name) {
-    var item = null
-    item = sessionStorage.getItem(name)
-    return item
+    var item = null;
+    item = sessionStorage.getItem(name);
+    return item;
   },
 
   /**
@@ -242,8 +237,8 @@ export const session = {
    * @return this
    */
   set: function(name, value) {
-    sessionStorage.setItem(name, value)
-    return this
+    sessionStorage.setItem(name, value);
+    return this;
   },
 
   /**
@@ -254,9 +249,9 @@ export const session = {
    */
   destroy: function(name) {
     if (this.get(name) != '' || this.get(name) != null) {
-      sessionStorage.removeItem(name)
+      sessionStorage.removeItem(name);
     }
-    return this
+    return this;
   },
 
   /**
@@ -266,6 +261,6 @@ export const session = {
    * @return this
    */
   destroyAll: function() {
-    sessionStorage.clear()
+    sessionStorage.clear();
   }
-}
+};

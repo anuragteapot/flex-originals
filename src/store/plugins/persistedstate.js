@@ -1,10 +1,11 @@
 // The options for persisting state
 export const persistedStateOptions = {
-  key: 'creater',
+  key: 'flexoriginals',
   paths: [
     'token',
     'appDrawer',
     'isAuthenticated',
+    'user',
   ],
-  storage: window.sessionStorage
+  storage: window.localStorage
 }

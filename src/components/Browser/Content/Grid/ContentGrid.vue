@@ -11,7 +11,7 @@
         <video-thumb
           v-for="item in content.video"
           :key="item.id"
-          :src="'/' + item.thumbImage || src"
+          :src="item.thumbImage || src"
           :lazySrc="lazySrc"
           :item="item"
           hover
@@ -40,7 +40,7 @@ import videoThumb from "./../../Items/VideoItem";
 export default {
   name: "media-content-grid",
   data: () => ({
-    src: "/public/icons/logo.png",
+    src: "public/icons/logo.png",
     lazySrc: "/public/icons/logo.png"
   }),
   computed: {

@@ -7,18 +7,10 @@
     "validateUpsert": true
   },
   "properties": {
-    "videoId": {
-      "type": "number",
-      "required": true
-    },
-    "likes": {
+    "views": {
       "type": "number",
       "required": true,
       "default": 0
-    },
-    "views": {
-      "type": "number",
-      "required": true
     },
     "share": {
       "type": "number",
@@ -29,15 +21,23 @@
       "type": "number",
       "required": true,
       "default": 0
-    },
-    "comments": {
-      "type": "number",
-      "required": true,
-      "default": 0
     }
   },
   "validations": [],
-  "relations": {},
-  "acls": [],
+  "relations": {
+    "videos": {
+      "type": "belongsTo",
+      "model": "videos",
+      "foreignKey": "videoId"
+    }
+  },
+  "acls": [
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW"
+    }
+  ],
   "methods": {}
 }

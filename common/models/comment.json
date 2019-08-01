@@ -7,14 +7,6 @@
     "validateUpsert": true
   },
   "properties": {
-    "userId": {
-      "type": "number",
-      "required": true
-    },
-    "videoId": {
-      "type": "number",
-      "required": true
-    },
     "comment": {
       "type": "string"
     },
@@ -37,14 +29,35 @@
       "type": "number",
       "required": true,
       "default": 0
-    },
-    "audioId": {
-      "type": "number",
-      "required": true
     }
   },
   "validations": [],
-  "relations": {},
-  "acls": [],
+  "relations": {
+    "user": {
+      "type": "belongsTo",
+      "model": "user",
+      "foreignKey": "commentUserId"
+    },
+    "videos": {
+      "type": "belongsTo",
+      "model": "videos",
+      "foreignKey": "commentVideoId"
+    }
+  },
+  "acls": [
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "DENY"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW",
+      "property": "getComment"
+    }
+  ],
   "methods": {}
 }

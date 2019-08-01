@@ -10,7 +10,7 @@ module.exports = function(Audio) {
       where: { id }
     });
 
-    audio.name = audioData.name;
+    audio.title = audioData.title;
     audio.visibility = audioData.visibility;
     audio.description = audioData.description;
     audio.thumbImage = audioData.thumbImage;
@@ -48,6 +48,67 @@ module.exports = function(Audio) {
     http: {
       path: '/publish',
       verb: 'post'
+    }
+  });
+
+  Audio.deleteItem = async id => {
+    if (!id) {
+      throw new Error('User Id is required.', {}, 500);
+    }
+
+    let audio = await Audio.findOne({
+      where: { id }
+    });
+    audio.visibility = 2;
+    audio.save();
+    return { message: 'Success' };
+  };
+
+  Audio.remoteMethod('deleteItem', {
+    description: 'Method to delete the audio.',
+    accepts: [
+      {
+        arg: 'id',
+        type: 'string',
+        required: true
+      }
+    ],
+    returns: {
+      type: 'object',
+      root: true
+    },
+    http: {
+      path: '/deleteItem',
+      verb: 'post'
+    }
+  });
+
+  Audio.getAudioInfo = async id => {
+    if (!id) {
+      throw new Error('User Id is required.', {}, 500);
+    }
+
+    return await Audio.findOne({
+      where: { id }
+    });
+  };
+
+  Audio.remoteMethod('getAudioInfo', {
+    description: 'Method to get Audio Info',
+    accepts: [
+      {
+        arg: 'id',
+        type: 'string',
+        required: true
+      }
+    ],
+    returns: {
+      type: 'object',
+      root: true
+    },
+    http: {
+      path: '/getAudioInfo/:id',
+      verb: 'get'
     }
   });
 };

@@ -10,7 +10,7 @@
     "videoOwnerId"
   ],
   "properties": {
-    "name": {
+    "title": {
       "type": "string",
       "required": true,
       "default": "Untitled"
@@ -77,6 +77,11 @@
       "type": "belongsTo",
       "model": "user",
       "foreignKey": "videoOwnerId"
+    },
+    "videoAnalytics": {
+      "type": "hasOne",
+      "model": "videoAnalytic",
+      "foreignKey": "videoId"
     }
   },
   "acls": [
@@ -92,6 +97,20 @@
       "principalId": "$owner",
       "permission": "ALLOW",
       "property": "publish"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$owner",
+      "permission": "ALLOW",
+      "property": "deleteItem"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$owner",
+      "permission": "ALLOW",
+      "property": "getVideoInfo"
     }
   ],
   "methods": {}

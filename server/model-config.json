@@ -67,7 +67,23 @@
     "dataSource": "mongodb",
     "public": true
   },
-  "Audioanalytic": {
+  "audioAnalytic": {
+    "dataSource": "mongodb",
+    "public": true
+  },
+  "follow": {
+    "dataSource": "mongodb",
+    "public": true
+  },
+  "likeVideo": {
+    "dataSource": "mongodb",
+    "public": true
+  },
+  "likeAudio": {
+    "dataSource": "mongodb",
+    "public": true
+  },
+  "checkOne": {
     "dataSource": "mongodb",
     "public": true
   }

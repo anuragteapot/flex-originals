@@ -2,13 +2,15 @@
 export default {
   // The loaded files
   content: {
-    video:[],
-    audio:[]
+    video: [],
+    audio: []
   },
   // Files loaded limit
   isAuthenticated: false,
   // Settings
   settings: {},
+  user: {},
+  editMode: false,
   appDrawer: {
     action: true,
     des: true,
@@ -64,4 +66,4 @@ export default {
   selectAllFolder: false,
   // The Search Query
   search: ''
-}
+};

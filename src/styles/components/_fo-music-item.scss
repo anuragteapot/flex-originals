@@ -94,6 +94,10 @@
     .audio__info {
       text-align: left;
 
+      &.light .title{
+        color: black !important;
+      }
+
       .views {
         color: gray;
         font-size: 13px;

@@ -1,4 +1,9 @@
 .video-viewer {
+
+  &.light{
+    color: #283035;
+  }
+
   .inner {
     width: 100%;
 
@@ -54,6 +59,10 @@
 
       .video_actions {
         padding: 20px 0;
+
+        &.light{
+          color: #283035;
+        }
 
         .video__analytics__info {
           display: flex;
@@ -140,6 +149,10 @@
 
           .full__video__desctiption {
             padding: 10px 0;
+
+            &.light{
+              color: #283035;
+            }
           }
 
           .show__more {
@@ -166,8 +179,8 @@
             background: transparent; 
 
             &:focus{
-              border-bottom: 1px solid $color-error;
-              background: #283035;
+              border-bottom: 1px solid grey;
+              background: transparent;
             }
           }
 
@@ -378,7 +391,6 @@
 
     .right {
       flex: 1;
-      overflow-y: scroll;
 
       .v-auto-play{
         padding: 5px 0px;
@@ -405,7 +417,7 @@
           margin-bottom: 10px;
           position: relative;
           cursor: pointer;
-          box-shadow: 0 1px 5px rgba(0, 0, 0, 0.3);
+          background-color: rgba(0, 0, 0, 0.3) !important;
         }
 
         .video__info {

@@ -1,9 +1,9 @@
 <template>
   <aside :class="`features ${theme}`" v-if="isAuthenticated">
     <header class="features-header focusable">
-      <h3 role="header" class="features-header-name">My Server</h3>
+      <h3 role="header" class="features-header-name">Flex Originals</h3>
     </header>
-    <input type="text" placeholder="Search..." />
+    <!-- <input type="text" placeholder="Search..." /> -->
     <section class="features-list">
       <header class="features-list-header focusable">
         <h5>Suscriptions</h5>

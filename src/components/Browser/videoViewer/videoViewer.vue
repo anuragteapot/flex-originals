@@ -17,7 +17,7 @@
                   :autoPlay="true"
                   @handleEnded="handleEnded"
                 ></lazy-video-player>
-                <div class="video_actions" v-if="!videoUnavaliable">
+                <div :class="`video_actions ${theme}`" v-if="!videoUnavaliable">
                   <p class="video__name">Anurag</p>
                   <div class="video__analytics__info">
                     <div class="left">
@@ -66,7 +66,7 @@
                         <i class="far fa-bell"></i>
                       </span>-->
                     </div>
-                    <div class="full__video__desctiption">
+                    <div :class="`full__video__desctiption ${theme}`">
                       Presenting Bekhayali full video song, In the voice of Arijit Singh, a song that evokes the emotion of heartbreak & love at once.
                       The upcoming Bollywood movie Kabir Singh is starring Shahid Kapoor and Kiara Advani.
                       The film is directed by Sandeep Reddy Vanga. The film is produced by Bhushan Kumar, Murad Khetani,

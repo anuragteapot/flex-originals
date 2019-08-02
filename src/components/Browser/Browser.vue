@@ -12,7 +12,7 @@
       @click="toggleMenu"
     ></div>
 
-    <aside-action v-if="!isMobile"></aside-action>
+    <aside-action v-if="!isMobile && appDrawer.des"></aside-action>
     <aside-des v-if="!isMobile && appDrawer.des"></aside-des>
 
     <div class="main-container">

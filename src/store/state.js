@@ -9,6 +9,7 @@ export default {
   isAuthenticated: false,
   // Settings
   settings: {},
+  theme: 'dark',
   user: {},
   editMode: false,
   appDrawer: {

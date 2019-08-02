@@ -1,5 +1,5 @@
 <template>
-  <aside class="lazy">
+  <aside :class="`lazy ${theme}`">
     <div class="lazy-collection">
       <div class="server focusable server-friends unread" role="button" aria-label="Friends unread">
         <div class="server-icon" @click="$router.push('/app/@home')">
@@ -101,6 +101,9 @@ export default {
     },
     isAuth() {
       return this.$store.state.isAuthenticated;
+    },
+       theme() {
+      return this.$store.state.theme;
     }
   },
   methods: {

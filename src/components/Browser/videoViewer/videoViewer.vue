@@ -34,12 +34,11 @@
                         SAVE
                       </span>
                       <span>
-                        <i class="fas fa-share-alt"></i>
+                       <i class="fas fa-share"></i>
                         SHARE
                       </span>
                       <span>
-                        <i class="far fa-flag"></i>
-                        REPORT
+                        <i class="fas fa-ellipsis-h"></i>
                       </span>
                     </div>
                   </div>

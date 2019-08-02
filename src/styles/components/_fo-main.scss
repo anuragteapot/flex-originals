@@ -43,7 +43,7 @@ body {
   background-repeat: no-repeat;
   background-size: cover;
   user-select: none;
-  font-family: "Roboto", sans-serif;
+  font-family: 'Roboto', sans-serif;
   font-size: 15px;
   height: 100%;
   width: 100%;
@@ -102,6 +102,14 @@ i:hover {
     &::-webkit-scrollbar {
       display: none;
     }
+
+    &.light {
+      background: #39424e !important;
+    }
+
+    &.dark {
+      background: #1e2124 !important;
+    }
   }
 
   .features {
@@ -109,6 +117,14 @@ i:hover {
     display: flex;
     border-right: 1px solid #18191a;
     flex-direction: column;
+
+    &.light {
+      background: #39424e !important;
+    }
+
+    &.dark {
+      background: #1e2124 !important;
+    }
 
     input {
       color: white;
@@ -201,7 +217,7 @@ i:hover {
     .channel-text.active::before,
     .channel-text:hover::before,
     .channel-text:focus::before {
-      content: " ";
+      content: ' ';
       width: 2px;
       height: 100%;
       position: absolute;
@@ -248,7 +264,7 @@ i:hover {
         position: absolute;
         top: 10px;
         right: 0;
-        content: " ";
+        content: ' ';
         width: 10px;
         height: 10px;
         opacity: 0.3;
@@ -322,6 +338,14 @@ i:hover {
     display: flex;
     align-items: center;
 
+    &.light {
+      background: #39424e !important;
+    }
+
+    &.dark {
+      background: #1e2124 !important;
+    }
+
     .menu__button {
       padding: 5px 15px;
       margin: 0 30px 0 0;
@@ -381,7 +405,6 @@ i:hover {
     margin: 0 5px 0 0;
     border-radius: 0.25rem;
 
-
     @media only screen and (max-width: 700px) {
       display: none;
     }
@@ -414,7 +437,7 @@ i:hover {
         &__background {
           width: 100%;
           height: 100%;
-          background: url("/public/b1.jpg");
+          background: url('/public/b1.jpg');
           background-position: center;
           background-repeat: no-repeat;
           background-size: cover;
@@ -510,7 +533,7 @@ i:hover {
     justify-content: center;
   }
 
-  .server .server-icon>img {
+  .server .server-icon > img {
     border-radius: inherit;
     max-width: 100%;
   }
@@ -533,7 +556,7 @@ i:hover {
     position: absolute;
     top: 20px;
     left: -15px;
-    content: " ";
+    content: ' ';
     display: block;
     width: 10px;
     height: 10px;
@@ -576,8 +599,8 @@ i:hover {
     user-select: none;
   }
 
-  .button>svg,
-  .button>img {
+  .button > svg,
+  .button > img {
     max-width: 100%;
     max-height: 100%;
   }
@@ -591,7 +614,7 @@ i:hover {
     border-right: 1px solid #1c1e21;
   }
 
-  .button-group .button+.button {
+  .button-group .button + .button {
     box-shadow: inset 1px 0 0 #393c41;
   }
 

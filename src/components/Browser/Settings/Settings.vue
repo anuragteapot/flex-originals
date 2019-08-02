@@ -248,7 +248,9 @@ export default {
       const payload = {};
       payload.id = this.$api.webStorage.local.get("$userId");
       payload.newSettings = this.settings;
-      await this.$store.dispatch("updateSettings", payload);
+     const settings = await this.$store.dispatch("updateSettings", payload);
+
+      this.$store.commit(types.SET_SETTINGS, settings);
     }
   },
   async created() {

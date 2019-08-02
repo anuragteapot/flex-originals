@@ -1,5 +1,5 @@
 <template>
-  <menu type="toolbar" class="menu">
+  <menu type="toolbar" :class="`menu ${theme}`">
     <div @click="toggleMenu" style="cursor: pointer; margin-right:30px;" v-if="isAuthenticated">
       <i class="fas fa-align-justify"></i>
     </div>
@@ -37,7 +37,10 @@ import * as types from "./../../../store/mutation-types";
 export default {
   name: "toolbar",
   computed: {
-    ...mapGetters(["isMobile", "isLoading", "appDrawer", "isAuthenticated"])
+    ...mapGetters(["isMobile", "isLoading", "appDrawer", "isAuthenticated"]),
+     theme() {
+      return this.$store.state.theme;
+    }
   },
   methods: {
     toggleMenu: function() {

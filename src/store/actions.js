@@ -96,7 +96,7 @@ export const findSettings = async (context, payload) => {
  */
 export const updateSettings = async (context, payload) => {
   try {
-    await api.axios().post(`/api/users/updateSettings`, payload);
+    return await api.axios().post(`/api/users/updateSettings`, payload);
   } catch (err) {
     api._handleError(err);
   }

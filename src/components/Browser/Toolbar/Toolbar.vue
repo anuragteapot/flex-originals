@@ -3,19 +3,19 @@
     <div @click="toggleMenu" style="cursor: pointer; margin-right:30px;" v-if="isAuthenticated">
       <i class="fas fa-align-justify"></i>
     </div>
-    <span class="menu__button">
+    <span :class="`menu__button ${theme}`">
       <i class="fas fa-fire"></i>Trending
     </span>
-    <span class="menu__button">
+    <span :class="`menu__button ${theme}`">
       <i class="far fa-clock"></i>Watch Later
     </span>
-    <span class="menu__button">
+    <span :class="`menu__button ${theme}`">
       <i class="far fa-heart"></i>Liked Videos
     </span>
-    <span class="menu__button">
+    <span :class="`menu__button ${theme}`">
       <i class="fab fa-rev"></i>New Releases
     </span>
-    <div class="menu-right">
+    <div :class="`menu-right ${theme}`">
       <span class="icon">
         <i class="fas fa-search search__icon"></i>
       </span>
@@ -37,7 +37,7 @@ import * as types from "./../../../store/mutation-types";
 export default {
   name: "toolbar",
   computed: {
-    ...mapGetters(["isMobile", "isLoading", "appDrawer", "isAuthenticated"]),
+    ...mapGetters(["isMobile", "isLoading", "appDrawer", "isAuthenticated", "theme"]),
      theme() {
       return this.$store.state.theme;
     }

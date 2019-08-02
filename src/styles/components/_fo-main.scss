@@ -77,8 +77,12 @@ i:hover {
 .fo-browser {
   height: 100%;
   width: 100%;
-  color: white !important;
+  color: white;
   display: flex;
+
+  &.light{
+    color: black !important;
+  }
 
   .main-container {
     height: 100%;
@@ -119,11 +123,9 @@ i:hover {
     flex-direction: column;
 
     &.light {
-      background: #39424e !important;
-    }
-
-    &.dark {
-      background: #1e2124 !important;
+      background: #f3f7f7 !important;
+      color: black !important;
+      border-right: 1px solid #dadada !important;
     }
 
     input {
@@ -211,6 +213,7 @@ i:hover {
     .channel-text.active,
     .channel-text:hover,
     .channel-text:focus {
+      color: white!important;
       background: linear-gradient(to right, #282b30 85%, #2e3136);
     }
 
@@ -281,13 +284,18 @@ i:hover {
       border-top: 1px solid #1c1e21;
       padding: 31px 10px;
 
+      &.light {
+        background: #f3f7f7 !important;
+        border-top: 1px solid #dadada !important;
+      }
+
       .features-footer-details {
         margin-left: 10px;
       }
 
       .features-footer-controls {
         margin-left: auto;
-        border: 1px solid #1c1e21;
+        color: white !important;
         border-radius: 4px;
         display: flex;
       }
@@ -339,11 +347,9 @@ i:hover {
     align-items: center;
 
     &.light {
-      background: #39424e !important;
-    }
-
-    &.dark {
-      background: #1e2124 !important;
+      background: #f3f7f7 !important;
+      color: #39424e !important;
+      border-bottom: 1px solid #dadada !important;
     }
 
     .menu__button {
@@ -352,6 +358,11 @@ i:hover {
       border-radius: 5px;
       cursor: pointer;
       background-color: #1e2124;
+
+      &.light {
+        background-color: #39424e !important;
+        color: white!important;
+      }
 
       &.active,
       &:hover {
@@ -385,6 +396,11 @@ i:hover {
   .menu-right {
     margin-left: auto;
 
+    &.light input {
+      background-color: #39424e !important;
+      color: white !important;
+    }
+
     .search__icon {
       display: none;
 
@@ -410,6 +426,8 @@ i:hover {
     }
   }
 
+  
+
   .menu .menu-right input:focus {
     width: 300px;
     background-color: #0e0f0f;
@@ -426,6 +444,15 @@ i:hover {
     width: 100%;
     height: 100%;
     flex-direction: column;
+
+    &.light {
+      background: #f3f7f7 !important;
+      color: #0e0f0f;
+    }
+
+    &.dark {
+      background: #252a2e !important;
+    }
 
     .inner {
       width: 100%;

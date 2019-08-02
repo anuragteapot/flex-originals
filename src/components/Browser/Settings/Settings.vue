@@ -1,15 +1,15 @@
 <template>
-  <div class="settings content">
+  <div :class="`settings content ${theme}`">
     <div class="inner">
       <div class="settings__wrapper">
-        <div class="card">
+        <div :class="`card ${theme}`">
           <div class="card__body">
-            <div class="container">
+            <div :class="`container ${theme}`">
               <div class="grid">
                 <h1>Settings</h1>
               </div>
             </div>
-            <div class="container">
+            <div :class="`container ${theme}`">
               <div class="grid grid--half">
                 <h3>General</h3>
                 <div class="form-item">
@@ -235,6 +235,9 @@ export default {
     },
     user() {
       return this.$store.state.user;
+    },
+       theme() {
+      return this.$store.state.theme;
     }
   },
   methods: {

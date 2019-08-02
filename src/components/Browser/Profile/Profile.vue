@@ -1,5 +1,5 @@
 <template>
-  <section class="content">
+  <section :class="`content ${theme}`">
     <div class="inner">
       <div class="profile__banner">
         <div class="profile__banner__background">
@@ -105,6 +105,9 @@ export default {
       } else {
         return null;
       }
+    },
+    theme() {
+      return this.$store.state.theme;
     },
     settings() {
       return this.$store.state.settings;

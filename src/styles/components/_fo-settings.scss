@@ -24,6 +24,10 @@
       color: white;
       margin-bottom: 2rem;
 
+      &.light{
+        color: black !important;
+      }
+
       &__header {
         padding: 2rem;
         display: flex;
@@ -46,6 +50,10 @@
       flex-wrap: wrap;
       flex-direction: row;
       justify-content: space-between;
+
+      &.light{
+        color: black !important;
+      }
 
       @media screen and (max-width: 900px) {
         flex-direction: column;
@@ -157,6 +165,7 @@
         background-color: #1e2124;
         padding: 20px;
         border-radius: 5px;
+        color: white!important;
 
         .account__avatar {
           width: 80px;

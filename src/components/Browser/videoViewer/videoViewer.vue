@@ -1,5 +1,5 @@
 <template>
-  <div class="video-viewer content">
+  <div :class="`video-viewer content ${theme}`">
     <div class="inner">
       <div class="video-viewer__wrapper">
         <div class="card">
@@ -236,6 +236,10 @@ export default {
       return this.$store.state.content.video.filter(
         item => item.id !== this.$route.query.v
       );
+    },
+    theme()
+    {
+      return this.$store.state.theme;
     }
   },
   components: {

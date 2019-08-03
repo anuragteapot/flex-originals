@@ -16,7 +16,7 @@
       </div>
       <div class="server focusable" role="button" aria-label="My Server" aria-selected="true">
         <div class="server-icon" @click="$router.push('/app/@home?filter=music')">
-          <i class="fas fa-music"></i>
+          <i class="fas fa-music" style="color:white;"></i>
         </div>
       </div>
       <div class="server focusable" role="button" aria-label="My Server" aria-selected="true">
@@ -26,7 +26,7 @@
       </div>
       <div class="server focusable" role="button" aria-label="My Server" aria-selected="true">
         <div class="server-icon">
-          <i class="fas fa-cloud"></i>
+          <i class="fas fa-cloud" style="color:white;"></i>
         </div>
       </div>
       <div class="server focusable" role="button" aria-label="My Server" aria-selected="true">
@@ -62,7 +62,7 @@
       </div>
       <div class="server focusable" role="button" aria-label="My Server" aria-selected="true">
         <div class="server-icon">
-          <i class="fas fa-share-alt"></i>
+          <i class="fas fa-share-alt" style="color:white;"></i>
         </div>
       </div>
       <div class="server focusable" role="button" aria-label="My Server" aria-selected="true">
@@ -102,7 +102,7 @@ export default {
     isAuth() {
       return this.$store.state.isAuthenticated;
     },
-       theme() {
+    theme() {
       return this.$store.state.theme;
     }
   },

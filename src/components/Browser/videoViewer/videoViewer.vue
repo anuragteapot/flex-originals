@@ -59,7 +59,6 @@
 
                     <div class="right">
                       <span class="follow">
-                        <i class="far fa-star"></i>
                         Follow
                       </span>
                       <!-- <span>

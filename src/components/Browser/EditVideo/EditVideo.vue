@@ -1,5 +1,5 @@
 <template>
-  <div class="settings content">
+  <div :class="`settings content ${theme}`">
     <div class="inner">
       <div class="settings__wrapper">
         <div class="card">
@@ -153,6 +153,11 @@ export default {
         licence: "Flex Originals"
       }
     };
+  },
+  computed: {
+    theme() {
+      return this.$store.state.theme;
+    }
   },
   methods: {
     finilize: async function() {

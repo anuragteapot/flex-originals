@@ -1,6 +1,5 @@
 .video-viewer {
-
-  &.light{
+  &.light {
     color: #283035;
   }
 
@@ -38,9 +37,9 @@
     }
 
     .left {
-      width: 75%;
+      width: 70%;
 
-      .video__unavaliable{
+      .video__unavaliable {
         position: relative;
         display: block;
         text-align: center;
@@ -51,7 +50,7 @@
         font-size: 13px;
         overflow: hidden;
         font-family: Arial;
-        
+
         p {
           font-size: 30px;
         }
@@ -60,7 +59,7 @@
       .video_actions {
         padding: 20px 0;
 
-        &.light{
+        &.light {
           color: #283035;
         }
 
@@ -73,7 +72,7 @@
           border-bottom: 1px solid grey;
 
           @media only screen and (max-width: 700px) {
-            font-size: 13px; 
+            font-size: 13px;
           }
 
           .left {
@@ -138,7 +137,7 @@
             .follow {
               border-radius: 2px;
               padding: 10px 50px;
-              color: white!important;
+              color: white !important;
               cursor: pointer;
               background-color: $color-error;
 
@@ -151,7 +150,7 @@
           .full__video__desctiption {
             padding: 10px 0;
 
-            &.light{
+            &.light {
               color: #283035;
             }
           }
@@ -166,7 +165,6 @@
         }
 
         .video__comments {
-
           input {
             width: 100%;
             height: 30px;
@@ -175,11 +173,11 @@
             padding: 10px;
             border: none;
             color: white;
-            font-size: 15px; 
+            font-size: 15px;
             border-bottom: 1px solid grey;
-            background: transparent; 
+            background: transparent;
 
-            &:focus{
+            &:focus {
               border-bottom: 1px solid grey;
               background: transparent;
             }
@@ -248,7 +246,7 @@
           }
 
           .comments-list li:after {
-            content: "";
+            content: '';
             display: block;
             clear: both;
             height: 0;
@@ -292,7 +290,7 @@
           }
 
           .comment-main-level:after {
-            content: "";
+            content: '';
             width: 0;
             height: 0;
             display: block;
@@ -371,7 +369,7 @@
           }
 
           .comment-box .comment-name.by-author:after {
-            content: "autor";
+            content: 'autor';
             background: #03658c;
             color: #fff;
             font-size: 12px;
@@ -393,9 +391,9 @@
     .right {
       flex: 1;
 
-      .v-auto-play{
+      .v-auto-play {
         padding: 5px 0px;
-        p{
+        p {
           padding-bottom: 10px;
         }
       }
@@ -407,8 +405,8 @@
         flex-direction: row;
 
         .video__thumbnail {
-          width: 200px;
-          height: 120px;
+          width: 180px;
+          height: 100px;
           text-align: center;
           background-repeat: no-repeat;
           background-position: center;
@@ -424,10 +422,15 @@
           font-weight: 500;
           margin-left: 10px;
           margin-bottom: 10px;
+          word-break: break-all;
+
+          p {
+            word-break: break-all;
+          }
 
           .views {
             color: gray;
-            font-size: 13px; 
+            font-size: 13px;
           }
 
           span {

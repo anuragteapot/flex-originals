@@ -188,13 +188,6 @@
                 </div>
               </div>
               <div class="grid grid--half right" v-if="!videoUnavaliable">
-                <div class="v-auto-play">
-                  <p>Auto Play</p>
-                  <label class="switch">
-                    <input type="checkbox" v-model="autoPlay" />
-                    <div></div>
-                  </label>
-                </div>
                 <video-suggestions
                   v-for="item in videoSuggestions"
                   :src="'/' + item.thumbImage"

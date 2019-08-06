@@ -208,11 +208,11 @@
 
     .tooltip .tooltiptext {
       visibility: hidden;
-      width: 50px;
+      width: 40px;
       background-color: black;
       color: #fff;
       text-align: center;
-      padding: 6px 0;
+      padding: 5px 0;
       font-size: 10px;
       position: absolute;
       border-radius: 2px;
@@ -242,7 +242,6 @@
         width: 0%;
         height: 100%;
         background: rgba(255, 255, 255, 0.3);
-        border-radius: 3px;
         z-index: 8;
       }
 

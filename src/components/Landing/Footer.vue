@@ -33,13 +33,17 @@
         <h1>Social</h1>
         <ul>
           <li>
-            <i class="fab fa-facebook-f"></i>
+            <a href="https://www.facebook.com/Anu1601cs" target="_blank">
+              <i class="fab fa-facebook-f"></i>
+            </a>
           </li>
           <li>
             <i class="fab fa-instagram"></i>
           </li>
           <li>
-            <i class="fab fa-twitter"></i>
+            <a href="https://twitter.com/Anu1601cs" target="_blank">
+              <i class="fab fa-twitter"></i>
+            </a>
           </li>
           <li>
             <i class="fab fa-google"></i>

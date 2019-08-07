@@ -13,7 +13,7 @@
         <div class="home__inner">
           <h1>Built for Content Creators</h1>
           <p>
-            Flex Originals is streaming platform for creators, show your talent to everyone in world and 
+            Flex Originals is streaming platform for creators, show your talent to everyone in world and
             enjoy music & videos and share them to world.
             <!-- <a
               href="/open-source"
@@ -30,6 +30,19 @@
           <a href="/app/@home">
             <button class="btn-hover color">Get Started</button>
           </a>
+        </div>
+      </div>
+      <br />
+      <div class="home__container">
+        <h2>Architecture of project</h2>
+        <br />
+        <img src="/public/project.png" slt="arch" />
+        <br />
+        <div class="home__inner">
+          <p>
+            This project is done because i was learning Java and Golang to know the
+            core concepts of both the languages and also i am very crusious about learning how Netflix , Youtube and microservices works.
+          </p>
         </div>
       </div>
     </section>

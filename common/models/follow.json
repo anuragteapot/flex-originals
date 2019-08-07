@@ -6,29 +6,9 @@
   "options": {
     "validateUpsert": true
   },
-  "properties": {
-    "userId": {
-      "type": "string",
-      "required": true
-    },
-    "channelId": {
-      "type": "string",
-      "required": true
-    },
-    "active": {
-      "type": "string",
-      "required": true
-    }
-  },
+  "properties": {},
   "validations": [],
   "relations": {},
-  "acls": [
-    {
-      "accessType": "*",
-      "principalType": "ROLE",
-      "principalId": "$everyone",
-      "permission": "DENY"
-    }
-  ],
+  "acls": [],
   "methods": {}
 }

@@ -429,6 +429,8 @@ module.exports = function(Action) {
   Action.getVideo = async id => {
     const Videos = app.models.Videos;
     const videoAnalytic = app.models.videoAnalytic;
+    const User = app.models.User;
+    const Settings = app.models.Settings;
 
     if (id) {
       const analytic = await videoAnalytic.findOne({
@@ -440,13 +442,42 @@ module.exports = function(Action) {
           videoOwnerId: true,
           id: true,
           name: true,
+          title: true,
           videoFile: true,
-          thumbImage: true
+          thumbImage: true,
+          description: true,
+          licence: true,
+          likedPrivate: true,
+          ratings: true,
+          agerestriction: true,
+          allowComments: true
         },
         where: { id, visibility: 1 }
       });
 
-      return { video, analytic };
+      const user = await User.findOne({
+        fields: {
+          id: true,
+          username: true,
+          realm: true
+        },
+        where: { id: video.videoOwnerId }
+      });
+
+      if (!user) {
+        throw new Error('User not found.', {}, 404);
+      }
+
+      const settings = await Settings.findOne({
+        fields: {
+          verifiedChannel: true,
+          followers: true,
+          profileAvatar: true
+        },
+        where: { ownerId: user.id }
+      });
+
+      return { video, analytic, settings, user };
     }
   };
 

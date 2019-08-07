@@ -20,7 +20,7 @@
                   <div class="video__title">
                     <label for="videoTitle">Video Title</label>
                     <input
-                      v-model="videoData.name"
+                      v-model="videoData.title"
                       name="videoTitle"
                       type="text"
                       placeholder="Video Title"

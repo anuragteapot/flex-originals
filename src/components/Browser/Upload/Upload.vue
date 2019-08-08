@@ -304,16 +304,17 @@ export default {
         if (this.type === "video") {
           this.uploadId = uploaded.data.video.id;
           this.uploadData.title = uploaded.data.video.title;
+
+          const videoThumb = await this.$api
+            .axios()
+            .get(`/api/actions/genrateThumbnail/${uploaded.data.video.id}`);
+
+          this.loadingThumbnails = videoThumb.data.thumbnails;
         } else if (this.type === "audio") {
           this.uploadId = uploaded.data.audio.id;
           this.uploadData.title = uploaded.data.audio.title;
+          this.loadingThumbnails = this.thumbnails;
         }
-
-        const videoThumb = await this.$api
-          .axios()
-          .get(`/api/actions/genrateThumbnail/${uploaded.data.video.id}`);
-
-        this.loadingThumbnails = videoThumb.data.thumbnails;
       } catch (err) {
         console.log(err);
         this.$api._handleError(err);

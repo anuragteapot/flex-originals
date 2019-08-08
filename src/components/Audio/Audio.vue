@@ -144,7 +144,7 @@ export default {
         this.stopAudio();
         this.currentSong = index;
       }
-      this.audioFile = this.musicPlaylist[this.currentSong].audioFile;
+      this.audioFile = '/' + this.musicPlaylist[this.currentSong].audioFile;
       this.audio.src = this.audioFile;
       this.audio.volume = this.volume / 10;
       if (wasPlaying) {
@@ -158,7 +158,7 @@ export default {
       return false;
     },
     getCurrentSong: function(currentSong) {
-      return this.musicPlaylist[currentSong].audioFile;
+      return '/' + this.musicPlaylist[currentSong].audioFile;
     },
     playAudio: function() {
       if (

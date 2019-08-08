@@ -41,7 +41,7 @@
                   </div>
                 </div>
                 <h3>Select Thumbnail (Auto generate not avaliable yet.)</h3>
-                <div class="video__thumbnails" v-for="(thumb, i) in thumbnails" :key="i">
+                <div class="video__thumbnails" v-for="(thumb, i) in loadingThumbnails" :key="i">
                   <img
                     class="fo-image"
                     :src="`/${thumb}`"
@@ -171,6 +171,11 @@ export default {
         `public/profile-icon/avatar${Math.floor(Math.random() * 28) + 1}.svg`,
         `public/profile-icon/avatar${Math.floor(Math.random() * 28) + 1}.svg`,
         `public/profile-icon/avatar${Math.floor(Math.random() * 28) + 1}.svg`
+      ],
+      loadingThumbnails: [
+        `public/loading.gif`,
+        `public/loading.gif`,
+        `public/loading.gif`
       ],
       uploadData: {
         title: "",
@@ -304,11 +309,11 @@ export default {
           this.uploadData.title = uploaded.data.audio.title;
         }
 
-        // const videoThumb = await this.$api
-        //   .axios()
-        //   .get(`/api/actions/genrateThumbnail/${uploadedVideo.data.video.id}`);
+        const videoThumb = await this.$api
+          .axios()
+          .get(`/api/actions/genrateThumbnail/${uploaded.data.video.id}`);
 
-        // this.thumbnails = videoThumb.data.thumbnails;
+        this.loadingThumbnails = videoThumb.data.thumbnails;
       } catch (err) {
         console.log(err);
         this.$api._handleError(err);

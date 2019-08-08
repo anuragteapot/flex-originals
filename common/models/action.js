@@ -88,7 +88,7 @@ module.exports = function(Action) {
     const videoAnalytic = app.models.videoAnalytic;
     const audioAnalytic = app.models.audioAnalytic;
     const upload = multer({
-      storage: s3Storage,
+      storage: storage,
       fileFilter: function(req, file, callback) {
         var ext = path.extname(file.originalname);
         if (EXTENSION.indexOf(ext) == -1) {
@@ -106,7 +106,7 @@ module.exports = function(Action) {
         return res.json(err);
       } else {
         const { type } = req.params;
-        req.file.path = req.file.location;
+        req.file.path = req.file.path || req.file.location;
         try {
           if (type == 'video' && VIDEO_EXT.indexOf(req.file.mimetype) !== -1) {
             const video = await Videos.create({

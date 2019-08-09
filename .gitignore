@@ -6,7 +6,6 @@ node_modules
 /build
 /client/*
 /.cache/*
-/uploads/*
 
 /tests/e2e/videos/
 /tests/e2e/screenshots/

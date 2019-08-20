@@ -258,12 +258,14 @@ export default {
     },
     async init() {
       if (this.$route.query.v) {
+        this.$api.Nprogress.start();
         this.$store.commit(types.SET_IS_LOADING, true);
 
         const currentVideo = await this.$api
           .axios()
           .get(`/api/actions/getVideo/${this.$route.query.v}`);
         this.$store.commit(types.SET_IS_LOADING, false);
+        this.$api.Nprogress.done();
 
         if (!currentVideo.data.video) {
           this.videoUnavaliable = true;

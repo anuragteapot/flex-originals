@@ -11,6 +11,7 @@ import lazyImage from "@/components/LazyImage/LazyImage";
 import app from "./app/index";
 
 import "./styles/creator.scss";
+import "./styles/vendor/nprogress/nprogress.css";
 
 Vue.use(app);
 

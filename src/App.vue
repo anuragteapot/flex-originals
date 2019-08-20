@@ -1,10 +1,5 @@
 <template>
   <div :class="`container ${theme}`">
-    <div class="progress" v-show="isLoading">
-      <div class="indeterminate">
-        <i class="fas fa-hourglass-half"></i>Loading...
-      </div>
-    </div>
     <router-view />
     <lazy-snack-bar></lazy-snack-bar>
     <lazy-model></lazy-model>

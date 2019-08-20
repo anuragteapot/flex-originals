@@ -271,8 +271,7 @@
 
         .handle {
           position: absolute;
-          display: block;
-          right: -2px;
+          display: none;
           top: -1px;
           width: 0px;
           height: 0px;
@@ -316,8 +315,12 @@
       }
 
       &:hover {
-        height: 6px;
-        top: -6px;
+        height: 5px;
+        top: -5px;
+        
+       .handle {
+            display: block;
+        }
       }
     }
   }

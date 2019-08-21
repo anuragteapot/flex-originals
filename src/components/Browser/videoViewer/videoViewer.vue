@@ -260,9 +260,9 @@ export default {
       if (this.$route.query.v) {
         this.$api.Nprogress.start();
         this.$store.commit(types.SET_IS_LOADING, true);
-        
+        let currentVideo = {};
         try {
-          const currentVideo = await this.$api
+           currentVideo = await this.$api
             .axios()
             .get(`/api/actions/getVideo/${this.$route.query.v}`);
           this.$store.commit(types.SET_IS_LOADING, false);

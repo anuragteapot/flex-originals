@@ -5,6 +5,7 @@ import router from '@/router';
 import * as types from './../store/mutation-types';
 import * as webStorage from './Storage';
 import { config } from './Config';
+import Nprogress from './nprogress.js';
 
 /**
  * Api class for communication with the server
@@ -23,7 +24,8 @@ class Api {
       'text-shadow: 1px 1px 5px rgb(249, 162, 34);' +
       'filter: dropshadow(color=rgb(249, 162, 34), offx=1, offy=1);';
     setTimeout(console.log.bind(console, '%cStop!', cssRule), 0);
-
+    
+    this.Nprogress = Nprogress;
     this.regMobile = /^\d{10}$/;
     this.regName = /^[a-zA-Z ]*$/;
     this.regEmail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;

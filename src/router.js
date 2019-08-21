@@ -2,8 +2,6 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Routers from './routers/routers'
 import { api } from './app/Api'
-import store from './store/store'
-import * as types from './store/mutation-types'
 
 Vue.use(Router)
 
@@ -14,7 +12,7 @@ const router = new Router({
 
 router.beforeEach(async (to, from, next) => {
   if (to.name) {
-    store.commit(types.SET_IS_LOADING, true)
+    api.Nprogress.start();
   }
   if (to.matched.some(record => record.meta.requiresAuth)) {
     if (!(await api.isLogged())) {
@@ -41,7 +39,7 @@ router.beforeEach(async (to, from, next) => {
 })
 
 router.afterEach(() => {
-  store.commit(types.SET_IS_LOADING, false)
+  api.Nprogress.done();
 })
 
 export default router

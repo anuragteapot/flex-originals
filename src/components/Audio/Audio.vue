@@ -1,6 +1,6 @@
 <template>
-  <div class="music_player">
-    <div class="inner">
+  <div :class="`music_player ${theme}`">
+    <div :class="`inner ${theme}`">
       <p>{{musicPlaylist[currentSong] ? musicPlaylist[currentSong].title : 'Loading...'}}</p>
       <br />
       <i
@@ -81,6 +81,9 @@ export default {
       return this.$store.state.content.audio.filter(
         item => item.id == this.$route.query.a
       );
+    },
+    theme() {
+      return this.$store.state.theme;
     },
     audio() {
       return new Audio();

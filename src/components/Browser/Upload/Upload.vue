@@ -1,5 +1,5 @@
 <template>
-  <div class="settings content">
+  <div :class="`settings content ${theme}`">
     <div class="inner">
       <div class="media-action">
         <div class="file">
@@ -186,6 +186,11 @@ export default {
         licence: "Flex Originals"
       }
     };
+  },
+  computed: {
+    theme() {
+      return this.$store.state.theme;
+    }
   },
   methods: {
     openSelect() {

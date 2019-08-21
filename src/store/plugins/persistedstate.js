@@ -6,6 +6,7 @@ export const persistedStateOptions = {
     'appDrawer',
     'isAuthenticated',
     'user',
+    'theme'
   ],
   storage: window.localStorage
 }

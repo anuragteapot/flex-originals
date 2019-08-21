@@ -4,7 +4,7 @@
       <lazy-image :src="src" :lazySrc="lazySrc"></lazy-image>
     </div>
     <div class="video__info">
-      <p class="title">{{ item.name }}</p>
+      <p class="title">{{ item.title }}</p>
       <p class="views">Alenter</p>
     </div>
   </div>

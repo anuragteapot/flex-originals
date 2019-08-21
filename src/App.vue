@@ -1,10 +1,5 @@
 <template>
-  <div class="container">
-    <div class="progress" v-show="isLoading">
-      <div class="indeterminate">
-        <i class="fas fa-hourglass-half"></i>Loading...
-      </div>
-    </div>
+  <div :class="`container ${theme}`">
     <router-view />
     <lazy-snack-bar></lazy-snack-bar>
     <lazy-model></lazy-model>
@@ -18,7 +13,7 @@ import * as types from "./store/mutation-types";
 export default {
   name: "app",
   computed: {
-    ...mapGetters(["isLoading"])
+    ...mapGetters(["isLoading", "theme"])
   },
   async beforeMount() {
     if (await this.$api.isLogged()) {

@@ -1,9 +1,9 @@
 <template>
-  <aside class="features" v-if="isAuthenticated">
+  <aside :class="`features ${theme}`" v-if="isAuthenticated">
     <header class="features-header focusable">
-      <h3 role="header" class="features-header-name">My Server</h3>
+      <h3 role="header" class="features-header-name">Flex Originals</h3>
     </header>
-    <input type="text" placeholder="Search..." />
+    <!-- <input type="text" placeholder="Search..." /> -->
     <section class="features-list">
       <header class="features-list-header focusable">
         <h5>Suscriptions</h5>
@@ -26,7 +26,7 @@
       </ul>
     </section>
 
-    <footer class="features-footer">
+    <footer :class="`features-footer ${theme}`">
       <img
         class="avatar"
         alt="Avatar"
@@ -67,6 +67,8 @@ export default {
   computed: {
     settings() {
       return this.$store.state.settings;
+    },   theme() {
+      return this.$store.state.theme;
     },
     isAuthenticated() {
       return this.$store.state.isAuthenticated;

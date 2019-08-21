@@ -64,6 +64,7 @@ export default {
    */
   [types.SET_SETTINGS]: (state, payload) => {
     state.settings = payload.data;
+    state.theme = payload.data.theme;
   },
 
   /**

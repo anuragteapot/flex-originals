@@ -200,8 +200,13 @@ module.exports = function(User) {
   });
 
   User.followChannel = async (id, channelId) => {
-    const Follow = app.models.follow;
-    return Follow.create({ userId: id, channelId, active: true });
+    const Followers = app.models.followers;
+    return Followers.create({
+      followUserId: id,
+      channelId,
+      userId: id,
+      active: true
+    });
   };
 
   User.remoteMethod('followChannel', {
@@ -229,14 +234,12 @@ module.exports = function(User) {
   });
 
   User.unFollowChannel = async (id, channelId) => {
-    const Follow = app.models.follow;
-
-    return await Follow.find();
-  
-    // return await Follow.updateAll({
-    //   userId: id ,
-    //   channelId: channelId 
-    // }, { active: false });
+    const Followers = app.models.followers;
+    return Followers.findOne({
+      where: {
+        userId: id
+      }
+    });
   };
 
   User.remoteMethod('unFollowChannel', {

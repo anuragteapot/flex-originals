@@ -1,5 +1,5 @@
 <template>
-  <div class="video-viewer content">
+  <div :class="`video-viewer content ${theme}`">
     <div class="inner">
       <div class="video-viewer__wrapper">
         <div class="card">
@@ -17,8 +17,8 @@
                   :autoPlay="true"
                   @handleEnded="handleEnded"
                 ></lazy-video-player>
-                <div class="video_actions" v-if="!videoUnavaliable">
-                  <p class="video__name">Anurag</p>
+                <div :class="`video_actions ${theme}`" v-if="!videoUnavaliable">
+                  <p class="video__name">{{ video.title}}</p>
                   <div class="video__analytics__info">
                     <div class="left">
                       <span class="video__views">11111 views</span>
@@ -34,21 +34,24 @@
                         SAVE
                       </span>
                       <span>
-                        <i class="fas fa-share-alt"></i>
+                        <i class="fas fa-share"></i>
                         SHARE
                       </span>
                       <span>
-                        <i class="far fa-flag"></i>
-                        REPORT
+                        <i class="fas fa-ellipsis-h"></i>
                       </span>
                     </div>
                   </div>
                   <div class="video__description">
                     <div class="left">
                       <div class="channel__avater">
-                        <img alt="Avatar" src="/public/atom.svg" class="avatar" />
+                        <img
+                          alt="Avatar"
+                          :src=" settings.profileAvatar || `/public/logo.png`"
+                          class="avatar"
+                        />
                         <div class="channel__name">
-                          Alenter
+                          {{user.username}}
                           <i
                             class="fas fa-certificate"
                             style="color:lightgreen"
@@ -59,22 +62,13 @@
                     </div>
 
                     <div class="right">
-                      <span class="follow">
-                        <i class="far fa-star"></i>
-                        Follow
-                      </span>
-                      <!-- <span>
-                        <i class="far fa-bell"></i>
-                      </span>-->
+                      <span class="follow">Follow</span>
                     </div>
-                    <div class="full__video__desctiption">
-                      Presenting Bekhayali full video song, In the voice of Arijit Singh, a song that evokes the emotion of heartbreak & love at once.
-                      The upcoming Bollywood movie Kabir Singh is starring Shahid Kapoor and Kiara Advani.
-                      The film is directed by Sandeep Reddy Vanga. The film is produced by Bhushan Kumar, Murad Khetani,
-                      Krishan Kumar & Ashwin Varde.
-                    </div>
-                    <p class="show__more">Show More</p>
                   </div>
+
+                  <div :class="`full__video__desctiption ${theme}`">{{ video.description}}</div>
+                  <br>
+                  <p class="show__more">Show More</p>
                   <div class="video__comments">
                     <div class="v-comment">
                       <i class="fas fa-comment"></i>
@@ -190,13 +184,6 @@
                 </div>
               </div>
               <div class="grid grid--half right" v-if="!videoUnavaliable">
-                <div class="v-auto-play">
-                  <p>Auto Play</p>
-                  <label class="switch">
-                    <input type="checkbox" v-model="autoPlay" />
-                    <div></div>
-                  </label>
-                </div>
                 <video-suggestions
                   v-for="item in videoSuggestions"
                   :src="'/' + item.thumbImage"
@@ -224,7 +211,10 @@ export default {
     lazySrc: "/public/icons/music.svg",
     videoSource: "",
     videoId: "",
-    analytic:"",
+    analytic: "",
+    user: {},
+    settings: {},
+    video: {},
     videoUnavaliable: false
   }),
   watch: {
@@ -237,6 +227,9 @@ export default {
       return this.$store.state.content.video.filter(
         item => item.id !== this.$route.query.v
       );
+    },
+    theme() {
+      return this.$store.state.theme;
     }
   },
   components: {
@@ -265,12 +258,14 @@ export default {
     },
     async init() {
       if (this.$route.query.v) {
+        this.$api.Nprogress.start();
         this.$store.commit(types.SET_IS_LOADING, true);
 
         const currentVideo = await this.$api
           .axios()
           .get(`/api/actions/getVideo/${this.$route.query.v}`);
         this.$store.commit(types.SET_IS_LOADING, false);
+        this.$api.Nprogress.done();
 
         if (!currentVideo.data.video) {
           this.videoUnavaliable = true;
@@ -281,6 +276,9 @@ export default {
           this.videoSource = "/" + currentVideo.data.video.videoFile;
         }
         this.analytic = currentVideo.data.analytic;
+        this.user = currentVideo.data.user;
+        this.settings = currentVideo.data.settings;
+        this.video = currentVideo.data.video;
       } else {
         this.$router.push("/@error");
       }

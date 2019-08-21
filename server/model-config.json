@@ -86,5 +86,9 @@
   "checkOne": {
     "dataSource": "mongodb",
     "public": true
+  },
+  "followers": {
+    "dataSource": "mongodb",
+    "public": true
   }
 }

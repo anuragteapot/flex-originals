@@ -1,5 +1,5 @@
 <template>
-  <section class="content">
+  <section :class="`content ${theme}`">
     <div class="inner">
       <content-grid></content-grid>
     </div>
@@ -25,6 +25,9 @@ export default {
       } else {
         return null;
       }
+    },
+    theme() {
+      return this.$store.state.theme;
     }
   },
   components: {
@@ -34,15 +37,13 @@ export default {
     onScroll: api.debounce(function() {
       if (window.innerHeight + window.scrollY >= document.body.scrollHeight) {
         // this.$store.state.loadLimit = this.$store.state.loadLimit + 10;
-
         // const dir = this.$route.params.dir;
         // const path = this.$route.params.path;
-
         // this.$store.commit(types.SET_IS_LOADING, true);
         // if (dir !== undefined && path == "folder") {
-          // this.$store.dispatch("update", { path: dir });
+        // this.$store.dispatch("update", { path: dir });
         // } else {
-          // this.$store.dispatch("update", { path: "my-drive" });
+        // this.$store.dispatch("update", { path: "my-drive" });
         // }
       }
     }, 300),

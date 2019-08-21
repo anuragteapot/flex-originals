@@ -4,7 +4,7 @@
       <lazy-image :src="getSrc()" :lazySrc="lazySrc" hover :active="selected"></lazy-image>
       <i class="far fa-2x fa-check-circle" v-if="selected"></i>
       <i class="fas fa-play fa-2x file-icon" aria-hidden="true" v-if="!editMode"></i>
-      <div class="video__info">
+      <div :class="`video__info ${theme}`">
         <p class="title">{{getName()}}</p>
         <p class="views">Alenter</p>
       </div>
@@ -35,6 +35,9 @@ export default {
   computed: {
     editMode() {
       return this.$store.state.editMode;
+    },
+      theme(){
+      return this.$store.state.theme;
     },
     selected() {
       const res = this.$store.state.selectedItems.filter(item => {

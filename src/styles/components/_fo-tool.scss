@@ -4,7 +4,7 @@
   font-size: 20px;
   height: 1em;
   width: 2em;
-  background: black;
+  background: rgb(224, 222, 222);
   border-radius: 1em;
 
   input {
@@ -27,7 +27,7 @@
     -webkit-transform: translate3d(100%, 0, 0);
     -moz-transform: translate3d(100%, 0, 0);
     transform: translate3d(100%, 0, 0);
-    background-color: $color-active;
+    background-color: $color-special;
   }
 }
 

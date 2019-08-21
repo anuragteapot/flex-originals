@@ -21,7 +21,6 @@
       display: block;
       width: 100%;
       margin: auto;
-      color: white;
       margin-bottom: 2rem;
 
       &__header {
@@ -46,6 +45,10 @@
       flex-wrap: wrap;
       flex-direction: row;
       justify-content: space-between;
+
+      &.light{
+        color: black !important;
+      }
 
       @media screen and (max-width: 900px) {
         flex-direction: column;
@@ -111,7 +114,7 @@
         cursor: pointer;
         display: inline-block;
         margin: 0 5px;
-        box-shadow: 0 5px 10px #1e2124;
+        background-color: rgb(201, 201, 201);
       }
 
       .upload__video__settings {
@@ -157,6 +160,7 @@
         background-color: #1e2124;
         padding: 20px;
         border-radius: 5px;
+        color: white!important;
 
         .account__avatar {
           width: 80px;
@@ -235,7 +239,7 @@
         height: 1.9rem;
         border-radius: 0.25rem;
         padding: 0 0.5rem;
-        border: none;
+        border: none; 
         background: #1e2124;
         outline: none;
         border-radius: 0.25rem;
@@ -250,7 +254,6 @@
       width: 100%;
       border-radius: 0.3rem;
       padding: 0.4rem;
-      border: 1px solid rgba(white, 0.3);
 
       option {
         color: black;

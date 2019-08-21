@@ -1,10 +1,16 @@
 <template>
   <div class="media-content-grid">
     <div class="grid_section files">
-      <h1>Recents</h1>
-      <div class="fo-content__container">
-        <music-thumb :src="src" :lazySrc="lazySrc" :item="ritem"></music-thumb>
-        <music-thumb :src="src" :lazySrc="lazySrc" :item="ritem"></music-thumb>
+      <h1 v-if="content.audio.length > 0">Recents</h1>
+      <div class="fo-content__container" v-if="content.audio.length > 0">
+         <music-thumb
+          v-for="item in content.audio"
+          :key="item.id"
+          :src="item.thumbImage || src"
+          :lazySrc="lazySrc"
+          :item="item"
+          hover
+        ></music-thumb>
       </div>
       <h1 v-if="content.video.length > 0">Videos</h1>
       <div class="fo-content__container" v-if="content.video.length > 0">

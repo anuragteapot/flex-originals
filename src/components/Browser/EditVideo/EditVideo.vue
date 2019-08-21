@@ -1,5 +1,5 @@
 <template>
-  <div class="settings content">
+  <div :class="`settings content ${theme}`">
     <div class="inner">
       <div class="settings__wrapper">
         <div class="card">
@@ -20,7 +20,7 @@
                   <div class="video__title">
                     <label for="videoTitle">Video Title</label>
                     <input
-                      v-model="videoData.name"
+                      v-model="videoData.title"
                       name="videoTitle"
                       type="text"
                       placeholder="Video Title"
@@ -153,6 +153,11 @@ export default {
         licence: "Flex Originals"
       }
     };
+  },
+  computed: {
+    theme() {
+      return this.$store.state.theme;
+    }
   },
   methods: {
     finilize: async function() {

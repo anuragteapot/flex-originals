@@ -23,7 +23,7 @@
         v-if="item.id !== $route.query.a && !editMode"
         aria-hidden="true"
       ></i>
-      <div class="audio__info">
+      <div :class="`audio__info ${theme}`">
         <p class="title">{{getName()}}</p>
         <p class="views">alenter</p>
       </div>
@@ -56,6 +56,9 @@ export default {
   computed: {
     editMode() {
       return this.$store.state.editMode;
+    },
+    theme(){
+      return this.$store.state.theme;
     },
     selected() {
       const res = this.$store.state.selectedItems.filter(item => {

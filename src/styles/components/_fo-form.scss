@@ -21,6 +21,7 @@
     border-radius: $radius;
     background-color: lighten($color-primary, 2);
     text-align: center;
+    color: rgb(213, 214, 214) !important;
 
     & > * {
       width: 100%;
@@ -37,7 +38,6 @@
       padding: 20px 30px;
       font-weight: 400;
       text-align: left;
-      color: rgb(213, 214, 214);
 
       label {
         display: block;

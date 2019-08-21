@@ -26,6 +26,11 @@
       "type": "hasMany",
       "model": "likeVideo",
       "foreignKey": "likedUserId"
+    },
+    "followers": {
+      "type": "hasMany",
+      "model": "followers",
+      "foreignKey": "followUserId"
     }
   },
   "acls": [

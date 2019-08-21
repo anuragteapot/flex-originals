@@ -9,11 +9,23 @@
   background: #252a2e;
   border-top: 1px solid #18191a;
 
+  &.light{
+    background-color: white !important;
+    color: #18191a !important; 
+    border-top:1px solid #dadada !important; 
+  }
+
   .inner {
     width: 100%;
     text-align: center;
     margin: 0 0 20px 0;
     color: white;
+    overflow: hidden !important;
+
+    &.light{
+      background-color: white !important;
+      color: #18191a !important; 
+    }
 
     .albumImage {
       width: 30px;
@@ -45,6 +57,7 @@
 
       .time {
         margin: 0 20px;
+        font-weight: bold;
       }
 
       .slider {
@@ -78,7 +91,7 @@
               width: 10px;
               height: 10px;
               float: right;
-              background: #fff;
+              background: $color-error;
               border-radius: 50%;
             }
           }

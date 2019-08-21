@@ -21,6 +21,15 @@ export const isLoading = state => {
  * @param state
  * @returns {*}
  */
+export const theme = state => {
+  return state.theme
+}
+
+/**
+ * Get the is loading.
+ * @param state
+ * @returns {*}
+ */
 export const appDrawer = state => {
   return state.appDrawer
 }

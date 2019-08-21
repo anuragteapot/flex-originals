@@ -207,12 +207,14 @@ module.exports = function(Action) {
           );
           return { thumbnails };
         } catch (err) {
+          console.log(err);
           throw new Error('File must be video type.', {}, 500);
         }
       } else {
         return { thumbnails: [] };
       }
     } catch (err) {
+      console.log(err);
       return { err };
     }
   };

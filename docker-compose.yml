@@ -9,6 +9,10 @@ services:
       - '80:3333'
     links:
       - mongo
+    volumes:
+      - ./uploads:/usr/src/uploads
+      - ./common:/usr/src/common
+      - ./server:/usr/src/server
 
   mongo:
     container_name: mongo

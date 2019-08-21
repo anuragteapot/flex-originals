@@ -456,6 +456,10 @@ module.exports = function(Action) {
         },
         where: { id, visibility: 1 }
       });
+      
+       if (!video) {
+        throw new Error('Video not found.', {}, 404);
+      }
 
       const user = await User.findOne({
         fields: {

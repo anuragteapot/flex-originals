@@ -310,6 +310,7 @@ export default {
             .get(`/api/actions/genrateThumbnail/${uploaded.data.video.id}`);
 
           this.loadingThumbnails = videoThumb.data.thumbnails;
+          this.uploadData.thumbnails = videoThumb.data.thumbnails;
         } else if (this.type === "audio") {
           this.uploadId = uploaded.data.audio.id;
           this.uploadData.title = uploaded.data.audio.title;

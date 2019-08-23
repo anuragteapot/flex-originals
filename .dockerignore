@@ -19,6 +19,7 @@ npm-debug.log
 .nyc_output
 tests
 docs
+uploads
 
 .git
 db

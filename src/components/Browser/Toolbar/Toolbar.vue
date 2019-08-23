@@ -16,16 +16,16 @@
       <i class="fab fa-rev"></i>New Releases
     </span>
     <div :class="`menu-right ${theme}`">
-      <span class="icon">
+      <!-- <span class="icon">
         <i class="fas fa-search search__icon"></i>
       </span>
       <input type="text" placeholder="Search...." />
       <span class="icon">
         <i class="fas fa-bell"></i>
-      </span>
-      <span class="icon">
+      </span> -->
+      <!-- <span class="icon">
         <i class="fas fa-ellipsis-v"></i>
-      </span>
+      </span> -->
     </div>
   </menu>
 </template>

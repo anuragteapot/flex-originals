@@ -22,6 +22,7 @@ module.exports = function(Audio) {
     audio.agerestriction = audioData.agerestriction;
     audio.ratings = audioData.ratings;
     audio.licence = audioData.licence;
+    audio.thumbnails = audioData.thumbnails;
     audio.likedPrivate = audioData.likedPrivate;
 
     return audio.save();

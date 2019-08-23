@@ -35,6 +35,12 @@
     "thumbImage": {
       "type": "string"
     },
+    "gif": {
+      "type": "string"
+    },
+    "thumbnails": {
+      "type": "object"
+    },
     "tags": {
       "type": "string"
     },

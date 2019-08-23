@@ -208,6 +208,7 @@ export default {
           this.videoId = video.data.id;
           this.videoData = Object.assign(this.videoData, video.data);
         } catch (err) {
+          this.videoUnavaliable = true;
           this.$api._handleError(err);
         }
       } else {
@@ -216,7 +217,7 @@ export default {
       this.$store.commit(types.SET_IS_LOADING, false);
     }
   },
-  async created() {
+  created() {
     this.init();
   }
 };

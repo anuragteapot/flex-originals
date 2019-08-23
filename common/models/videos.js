@@ -23,6 +23,7 @@ module.exports = function(Videos) {
     video.ratings = videoData.ratings;
     video.licence = videoData.licence;
     video.likedPrivate = videoData.likedPrivate;
+    video.thumbnails = videoData.thumbnails;
 
     return video.save();
   };

@@ -25,7 +25,7 @@
       ></i>
       <div :class="`audio__info ${theme}`">
         <p class="title">{{getName()}}</p>
-        <p class="views">{{user.username}}</p>
+        <!-- <p class="views">{{}}</p> -->
       </div>
     </div>
   </div>

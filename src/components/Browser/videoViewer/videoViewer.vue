@@ -46,6 +46,7 @@
                     <div class="left">
                       <div class="channel__avater">
                         <img
+                          @click="$router.push(`/app/@channel/${user.id}`)"
                           alt="Avatar"
                           :src=" settings.profileAvatar || `/public/logo.png`"
                           class="avatar"

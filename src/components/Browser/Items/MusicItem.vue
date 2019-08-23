@@ -25,7 +25,7 @@
       ></i>
       <div :class="`audio__info ${theme}`">
         <p class="title">{{getName()}}</p>
-        <p class="views">alenter</p>
+        <p class="views">{{user.username}}</p>
       </div>
     </div>
   </div>
@@ -51,7 +51,8 @@ export default {
     lazySrc: String,
     srcset: String,
     sizes: String,
-    item: Object
+    item: Object,
+    user: Object,
   },
   computed: {
     editMode() {

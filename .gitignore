@@ -5,6 +5,7 @@ node_modules
 /dist
 /build
 /client/*
+/uploads
 /.cache/*
 
 /tests/e2e/videos/

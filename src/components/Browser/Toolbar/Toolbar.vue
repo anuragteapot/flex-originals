@@ -1,6 +1,6 @@
 <template>
   <menu type="toolbar" :class="`menu ${theme}`">
-    <div @click="toggleMenu" style="cursor: pointer; margin-right:30px;" v-if="isAuthenticated">
+    <div @click="toggleMenu" style="cursor: pointer; margin-right:30px;">
       <i class="fas fa-align-justify"></i>
     </div>
     <span :class="`menu__button ${theme}`">

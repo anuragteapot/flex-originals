@@ -12,7 +12,7 @@
         <div class="card">
           <div
             class="upload__icon__body dragoutline"
-            v-show="!isUploading"
+            v-if="!isUploading"
             @dragenter="onDragEnter"
             @drop="onDrop"
             @dragover="onDragOver"
@@ -24,12 +24,12 @@
             <p>to upload your video/music or click</p>
           </div>
           <div class="card__body">
-            <div class="container" v-show="isUploading">
+            <div class="container" v-if="isUploading">
               <div class="grid">
                 <h1>Upload Status</h1>
               </div>
             </div>
-            <div class="container" v-show="isUploading">
+            <div class="container" v-if="isUploading">
               <div class="grid grid--half">
                 <h3>Uploading Progress</h3>
                 <div class="video__upload__progress">
@@ -42,7 +42,7 @@
                 </div>
                 <h3>Select Thumbnail</h3>
                 <div
-                  :class="`video__thumbnails ${videoData.thumbImage == thumb ? 'selected' : ''}`"
+                  :class="`video__thumbnails ${videoData && videoData.thumbImage == thumb ? 'selected' : ''}`"
                   v-for="(thumb, i) in loadingThumbnails"
                   :key="i"
                 >

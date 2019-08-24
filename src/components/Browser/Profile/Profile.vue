@@ -155,16 +155,8 @@ export default {
   destroyed() {
     window.removeEventListener("scroll", this.onScroll, false);
   },
-  async beforemount() {
-    if (this.$route.params.id) {
-      const content = await this.$store.dispatch("getContent", {
-        userId: this.$route.params.id
-      });
-
-      this.channelUser = content.data.user;
-      this.channelInfo = content.data.settings;
-      this.$store.commit(types.SET_CONTENT, content.data);
-    }
+  mounted() {
+    this.init();
   }
 };
 </script>

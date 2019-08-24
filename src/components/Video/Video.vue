@@ -170,6 +170,7 @@ export default {
       this.video.playbackRate = val;
     },
     src(val) {
+      this.loading = true;
       this.video.src = val;
       this.video.load();
     },

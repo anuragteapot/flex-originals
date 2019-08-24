@@ -357,6 +357,7 @@ export default {
     },
     seeked() {
       this.loading = false;
+      this.updateBuffer();
     },
     seeking() {
       this.loading = true;

@@ -115,6 +115,10 @@
         display: inline-block;
         margin: 0 5px;
         background-color: rgb(201, 201, 201);
+
+        &.selected{
+          opacity: 0.5;
+        }
       }
 
       .upload__video__settings {

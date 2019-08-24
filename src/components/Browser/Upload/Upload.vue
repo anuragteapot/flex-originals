@@ -40,8 +40,12 @@
                     <p>{{uploadPercent}}%</p>
                   </div>
                 </div>
-                <h3>Select Thumbnail (Auto generate not avaliable yet.)</h3>
-                <div class="video__thumbnails" v-for="(thumb, i) in loadingThumbnails" :key="i">
+                <h3>Select Thumbnail</h3>
+                <div
+                  :class="`video__thumbnails ${videoData.thumbImage == thumb ? 'selected' : ''}`"
+                  v-for="(thumb, i) in loadingThumbnails"
+                  :key="i"
+                >
                   <img
                     class="fo-image"
                     :src="`/${thumb}`"

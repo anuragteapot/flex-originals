@@ -7,8 +7,12 @@
             <div class="container">
               <div class="grid grid--half">
                 <lazy-video-player :src="videoSource" v-if="!videoUnavaliable" :disablekey="true"></lazy-video-player>
-                <h3>Select Thumbnail (Auto generate not avaliable yet.)</h3>
-                <div class="video__thumbnails" v-for="(thumb, i) in thumbnails" :key="i">
+                <h3>Select Thumbnail</h3>
+                <div
+                  :class="`video__thumbnails ${videoData.thumbImage == thumb ? 'selected' : ''}`"
+                  v-for="(thumb, i) in thumbnails"
+                  :key="i"
+                >
                   <img
                     class="fo-image"
                     :src="`/${thumb}`"

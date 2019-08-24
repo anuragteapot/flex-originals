@@ -94,9 +94,7 @@
             >{{ speed == 1 ? 'Normal' : speed + 'x' }}</a>
           </div>
         </div>
-        <div class="full">
           <i class="fas fa-expand fullscreen" @click="toggleFullscreen"></i>
-        </div>
       </div>
       <div class="seek tooltip" ref="progress" @mousedown="scrub" @mousemove="scrubForTime">
         <span class="tooltiptext" :style="`left:${tooltipPercent}`">{{tooltipTime}}</span>

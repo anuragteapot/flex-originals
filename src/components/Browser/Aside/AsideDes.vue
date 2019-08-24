@@ -1,7 +1,8 @@
 <template>
   <aside :class="`features ${theme}`" v-if="isAuthenticated">
     <header class="features-header focusable">
-      <h3 role="header" class="features-header-name">Flex Originals</h3>
+      <img class="features-header-name" src="/public/text_logo2.png" />
+      <!-- <h3 role="header" class="features-header-name">Flex Originals</h3> -->
     </header>
     <!-- <input type="text" placeholder="Search..." /> -->
     <section class="features-list">
@@ -67,7 +68,8 @@ export default {
   computed: {
     settings() {
       return this.$store.state.settings;
-    },   theme() {
+    },
+    theme() {
       return this.$store.state.theme;
     },
     isAuthenticated() {

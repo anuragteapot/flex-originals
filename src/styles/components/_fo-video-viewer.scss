@@ -409,8 +409,6 @@
       .v-thumb {
         display: flex;
         width: 100%;
-        flex-wrap: wrap;
-        flex-direction: row;
 
         .video__thumbnail {
           width: 180px;
@@ -429,6 +427,7 @@
         .video__info {
           font-weight: 500;
           margin-left: 10px;
+          flex: 1;
           margin-bottom: 10px;
           word-break: break-all;
 

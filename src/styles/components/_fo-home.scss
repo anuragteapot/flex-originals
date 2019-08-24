@@ -41,6 +41,16 @@
       .home__container {
         text-align: center;
 
+        .arc_inner{
+          padding: 0 10%;
+          margin: auto;
+          width: 100%;
+
+          img{
+            width: 100%;
+          }
+        }
+
 
         .home__inner {
           padding: 0 30%;

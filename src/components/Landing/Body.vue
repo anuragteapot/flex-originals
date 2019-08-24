@@ -36,7 +36,9 @@
       <div class="home__container">
         <h2>Architecture of project</h2>
         <br />
+        <div class="arc_inner">
         <img src="/public/project.png" slt="arch" />
+        </div>
         <br />
         <div class="home__inner">
           <p>

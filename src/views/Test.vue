@@ -34,7 +34,9 @@
       </svg>
     </div>
     <video class="p-video-player__media" ref="media">
-      <source src="http://www.tplh.net/file/sample.mp4" />
+      <source
+        src="https://player.vimeo.com/external/194837908.sd.mp4?s=c350076905b78c67f74d7ee39fdb4fef01d12420&profile_id=164"
+      />
     </video>
     <div :class="`p-video-player__control-panel ${active ? '' : 'show'}`">
       <div></div>
@@ -200,9 +202,6 @@ export default {
         this.play();
       }
     },
-    stop: function() {
-      this.pause();
-    },
     loop: function() {
       this.time = this.media.currentTime;
       if (!this.isPlaying) return;
@@ -257,7 +256,9 @@ export default {
         this.media.buffered.end &&
         this.media.duration
       ) {
-        this.bufferPercent = this.media.buffered.end(0) / this.media.duration;
+        this.bufferPercent =
+          this.media.buffered.end(this.media.buffered.length - 1) /
+          this.media.duration;
       } else if (
         this.media &&
         this.media.bytesTotal != undefined &&
@@ -270,7 +271,6 @@ export default {
     seeked() {
       this.loading = false;
       this.time = this.media.currentTime;
-      this.updateBuffer();
     },
     seeking() {
       this.loading = true;
@@ -281,8 +281,8 @@ export default {
     skipForward() {
       this.media.currentTime += parseFloat(+5);
     },
-    handleEnded(){
-      
+    handleEnded() {
+      this.loading = false;
     },
     detectKeypress(event) {
       if (this.disablekey) {
@@ -416,6 +416,12 @@ export default {
     top: -40px;
     padding: 0 20px;
     position: relative;
+
+    background: linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0) 0%,
+      rgba(0, 0, 0, 0.5) 100%
+    );
 
     &.show {
       top: -3px;

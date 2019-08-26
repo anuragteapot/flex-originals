@@ -457,6 +457,21 @@ export default {
     this.media.addEventListener("stalled", this.stalled);
     this.media.addEventListener("seeking", this.seeking);
     this.media.addEventListener("seeked", this.seeked);
+  },
+  destroyed() {
+    window.removeEventListener("resize", debounce(this.reLayoutSeekbar, 100));
+    window.removeEventListener("click", debounce(this.reLayoutSeekbar, 100));
+    window.removeEventListener("keydown", this.detectKeypress);
+    this.media.removeEventListener("timeupdate", this.currentTime);
+    this.media.removeEventListener("timeupdate", this.handleProgress);
+    this.media.removeEventListener("ended", this.handleEnded);
+    this.media.removeEventListener("error", this.handleError);
+    this.media.removeEventListener("loadeddata", this.loadeddata);
+    this.media.removeEventListener("loadedmetadata", this.loadedmetadata);
+    this.media.removeEventListener("progress", this.updateBuffer);
+    this.media.removeEventListener("stalled", this.stalled);
+    this.media.removeEventListener("seeking", this.seeking);
+    this.media.removeEventListener("seeked", this.seeked);
   }
 };
 </script>

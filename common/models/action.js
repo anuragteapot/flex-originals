@@ -1,41 +1,41 @@
 /* eslint-disable no-unused-vars */
-'use strict';
+"use strict";
 
-const multer = require('multer');
-const aws = require('aws-sdk');
-const multerS3 = require('multer-s3');
-const fs = require('fs-extra');
-const helper = require('./../../server/helper-util');
-const path = require('path');
-const app = require('../../server/server');
-const ThumbnailGenerator = require('../../server/API/Video');
+const multer = require("multer");
+const aws = require("aws-sdk");
+const multerS3 = require("multer-s3");
+const fs = require("fs-extra");
+const helper = require("./../../server/helper-util");
+const path = require("path");
+const app = require("../../server/server");
+const ThumbnailGenerator = require("../../server/API/Video");
 
-const VIDEO_EXT = ['video/mp4', 'video/x-msvideo'];
+const VIDEO_EXT = ["video/mp4", "video/x-msvideo"];
 const AUDIO_EXT = [
-  'audio/mpeg',
-  'audio/vnd.wav',
-  'audio/mp4',
-  'audio/ogg',
-  'audio/mp3'
+  "audio/mpeg",
+  "audio/vnd.wav",
+  "audio/mp4",
+  "audio/ogg",
+  "audio/mp3"
 ];
 const IMAGE_EXT = [
-  'image/gif',
-  'image/jpeg',
-  'image/svg+xml',
-  'image/x-icon',
-  'image/png'
+  "image/gif",
+  "image/jpeg",
+  "image/svg+xml",
+  "image/x-icon",
+  "image/png"
 ];
-const EXTENSION = ['.png', '.jpeg', '.mp4', '.mp3', '.ogg', '.gif'];
+const EXTENSION = [".png", ".jpeg", ".mp4", ".mp3", ".ogg", ".gif"];
 /**
  * PROFILE IMAGE STORING STARTS
  */
 const s3 = new aws.S3({
-  accessKeyId: 'AKIA5HHMIXVQQUAJ7PQC',
-  secretAccessKey: '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',
+  accessKeyId: "AKIA5HHMIXVQQUAJ7PQC",
+  secretAccessKey: "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",
   Bucket:
-    process.env.NODE_ENV === 'production'
-      ? 'flexoriginals'
-      : 'dev-flexoriginals'
+    process.env.NODE_ENV === "production"
+      ? "flexoriginals"
+      : "dev-flexoriginals"
 });
 
 module.exports = function(Action) {
@@ -43,10 +43,10 @@ module.exports = function(Action) {
     destination: (req, file, cb) => {
       const userId = req.params.id;
       const dirPath = `uploads/${userId}`;
-      fs.ensureDir('uploads', err => {
-        console.log(err) // => null
+      fs.ensureDir("uploads", err => {
+        console.log(err); // => null
         // dir has now been created, including the directory it is to be placed in
-      })      
+      });
       if (!fs.existsSync(dirPath)) {
         fs.mkdirSync(dirPath);
       }
@@ -65,10 +65,10 @@ module.exports = function(Action) {
   const s3Storage = multerS3({
     s3: s3,
     bucket:
-      process.env.NODE_ENV === 'production'
-        ? 'flexoriginals'
-        : 'dev-flexoriginals',
-    acl: 'public-read',
+      process.env.NODE_ENV === "production"
+        ? "flexoriginals"
+        : "dev-flexoriginals",
+    acl: "public-read",
     contentType: multerS3.AUTO_CONTENT_TYPE,
     key: function(req, file, cb) {
       const userId = req.params.id;
@@ -79,7 +79,7 @@ module.exports = function(Action) {
         null,
         dirPath +
           path.basename(file.originalname, path.extname(file.originalname)) +
-          '-' +
+          "-" +
           Date.now() +
           path.extname(file.originalname)
       );
@@ -96,14 +96,14 @@ module.exports = function(Action) {
       fileFilter: function(req, file, callback) {
         var ext = path.extname(file.originalname);
         if (EXTENSION.indexOf(ext) == -1) {
-          return callback(new Error('Only images are allowed'));
+          return callback(new Error("Only images are allowed"));
         }
         callback(null, true);
       },
       limits: {
         fileSize: 1024 * 1024 * 1024
       }
-    }).single('file');
+    }).single("file");
 
     upload(req, res, async err => {
       if (err) {
@@ -112,7 +112,7 @@ module.exports = function(Action) {
         const { type } = req.params;
         req.file.path = req.file.path || req.file.location;
         try {
-          if (type == 'video' && VIDEO_EXT.indexOf(req.file.mimetype) !== -1) {
+          if (type == "video" && VIDEO_EXT.indexOf(req.file.mimetype) !== -1) {
             const video = await Videos.create({
               videoOwnerId: req.params.id,
               videoFile: req.file.path,
@@ -128,14 +128,14 @@ module.exports = function(Action) {
               video
             });
           } else if (
-            type === 'image' &&
+            type === "image" &&
             IMAGE_EXT.indexOf(req.file.mimetype) !== -1
           ) {
             return res.json({
               res: req.file
             });
           } else if (
-            type === 'audio' &&
+            type === "audio" &&
             AUDIO_EXT.indexOf(req.file.mimetype) !== -1
           ) {
             const audio = await Audios.create({
@@ -155,7 +155,7 @@ module.exports = function(Action) {
           } else {
             return res.json({
               err: 400,
-              message: 'File not allowed'
+              message: "File not allowed"
             });
           }
         } catch (err) {
@@ -165,27 +165,27 @@ module.exports = function(Action) {
     });
   };
 
-  Action.remoteMethod('upload', {
-    description: 'Upload a file',
+  Action.remoteMethod("upload", {
+    description: "Upload a file",
     accepts: [
-      { arg: 'req', type: 'object', http: { source: 'req' } },
-      { arg: 'res', type: 'object', http: { source: 'res' } },
+      { arg: "req", type: "object", http: { source: "req" } },
+      { arg: "res", type: "object", http: { source: "res" } },
       {
-        arg: 'id',
-        type: 'string',
+        arg: "id",
+        type: "string",
         required: true
       },
       {
-        arg: 'type',
-        type: 'string',
+        arg: "type",
+        type: "string",
         required: true
       }
     ],
     returns: {
-      arg: 'result',
-      type: 'string'
+      arg: "result",
+      type: "string"
     },
-    http: { path: '/upload/:type/:id', verb: 'post' }
+    http: { path: "/upload/:type/:id", verb: "post" }
   });
 
   Action.genrateThumbnail = async id => {
@@ -201,7 +201,7 @@ module.exports = function(Action) {
           const tg = new ThumbnailGenerator({
             sourcePath: video.videoMeta.path,
             destinationPath: video.videoMeta.destination,
-            size: '165x100',
+            size: "165x100",
             count: 3
           });
 
@@ -212,7 +212,7 @@ module.exports = function(Action) {
           return { thumbnails };
         } catch (err) {
           console.log(err);
-          throw new Error('File must be video type.', {}, 500);
+          throw new Error("File must be video type.", {}, 500);
         }
       } else {
         return { thumbnails: [] };
@@ -223,22 +223,22 @@ module.exports = function(Action) {
     }
   };
 
-  Action.remoteMethod('genrateThumbnail', {
-    description: 'Method to create video thumnails.',
+  Action.remoteMethod("genrateThumbnail", {
+    description: "Method to create video thumnails.",
     accepts: [
       {
-        arg: 'id',
-        type: 'string',
+        arg: "id",
+        type: "string",
         required: true
       }
     ],
     returns: {
-      type: 'object',
+      type: "object",
       root: true
     },
     http: {
-      path: '/genrateThumbnail/:id',
-      verb: 'get'
+      path: "/genrateThumbnail/:id",
+      verb: "get"
     }
   });
 
@@ -255,7 +255,7 @@ module.exports = function(Action) {
           const tg = new ThumbnailGenerator({
             sourcePath: video.videoMeta.path,
             destinationPath: video.videoMeta.destination,
-            size: '200x200',
+            size: "200x200",
             count: 3
           });
 
@@ -265,29 +265,29 @@ module.exports = function(Action) {
           return { err };
         }
       } else {
-        return { compressVideo: '' };
+        return { compressVideo: "" };
       }
     } catch (err) {
       return { err };
     }
   };
 
-  Action.remoteMethod('processVideo', {
-    description: 'Method to process video and generate lower version.',
+  Action.remoteMethod("processVideo", {
+    description: "Method to process video and generate lower version.",
     accepts: [
       {
-        arg: 'id',
-        type: 'string',
+        arg: "id",
+        type: "string",
         required: true
       }
     ],
     returns: {
-      type: 'object',
+      type: "object",
       root: true
     },
     http: {
-      path: '/processVideo/:id',
-      verb: 'get'
+      path: "/processVideo/:id",
+      verb: "get"
     }
   });
 
@@ -309,7 +309,7 @@ module.exports = function(Action) {
       });
 
       if (!user) {
-        throw new Error('User not found.', {}, 404);
+        throw new Error("User not found.", {}, 404);
       }
 
       const settings = await Settings.findOne({
@@ -335,7 +335,7 @@ module.exports = function(Action) {
           videoFile: true,
           thumbImage: true
         },
-        where: { videoOwnerId: id, visibility: 1 },
+        where: { videoOwnerId: id, visibility: { lt: 2 } },
         limit: limit
       });
       const audio = await Audios.find({
@@ -346,7 +346,7 @@ module.exports = function(Action) {
           audioFile: true,
           thumbImage: true
         },
-        where: { audioOwnerId: id, visibility: 1 },
+        where: { audioOwnerId: id, visibility: { lt: 2 } },
         limit: limit
       });
       return { video, audio, user, settings };
@@ -354,37 +354,37 @@ module.exports = function(Action) {
       const video = await Videos.find({
         fields: { id: true, title: true, videoFile: true, thumbImage: true },
         where: { visibility: 1 },
-        limit: limit / 2
+        limit: limit
       });
       const audio = await Audios.find({
         fields: { id: true, title: true, audioFile: true, thumbImage: true },
         where: { visibility: 1 },
-        limit: limit / 2
+        limit: limit
       });
       return { video, audio };
     }
   };
 
-  Action.remoteMethod('getContent', {
-    description: 'Method to process video and generate lower version.',
+  Action.remoteMethod("getContent", {
+    description: "Method to process video and generate lower version.",
     accepts: [
       {
-        arg: 'id',
-        type: 'string'
+        arg: "id",
+        type: "string"
       },
       {
-        arg: 'limit',
-        type: 'string',
+        arg: "limit",
+        type: "string",
         required: true
       }
     ],
     returns: {
-      type: 'object',
+      type: "object",
       root: true
     },
     http: {
-      path: '/getContent/:limit/:id?',
-      verb: 'get'
+      path: "/getContent/:limit/:id?",
+      verb: "get"
     }
   });
 
@@ -413,22 +413,22 @@ module.exports = function(Action) {
     }
   };
 
-  Action.remoteMethod('getUserStorage', {
-    description: 'Method to get the user storage.',
+  Action.remoteMethod("getUserStorage", {
+    description: "Method to get the user storage.",
     accepts: [
       {
-        arg: 'id',
-        type: 'string',
+        arg: "id",
+        type: "string",
         required: true
       }
     ],
     returns: {
-      type: 'object',
+      type: "object",
       root: true
     },
     http: {
-      path: '/getUserStorage/:id',
-      verb: 'get'
+      path: "/getUserStorage/:id",
+      verb: "get"
     }
   });
 
@@ -460,9 +460,9 @@ module.exports = function(Action) {
         },
         where: { id, visibility: 1 }
       });
-      
-       if (!video) {
-        throw new Error('Video not found.', {}, 404);
+
+      if (!video) {
+        throw new Error("Video not found.", {}, 404);
       }
 
       const user = await User.findOne({
@@ -475,7 +475,7 @@ module.exports = function(Action) {
       });
 
       if (!user) {
-        throw new Error('User not found.', {}, 404);
+        throw new Error("User not found.", {}, 404);
       }
 
       const settings = await Settings.findOne({
@@ -491,22 +491,22 @@ module.exports = function(Action) {
     }
   };
 
-  Action.remoteMethod('getVideo', {
-    description: 'Method to get the video info.',
+  Action.remoteMethod("getVideo", {
+    description: "Method to get the video info.",
     accepts: [
       {
-        arg: 'id',
-        type: 'string',
+        arg: "id",
+        type: "string",
         required: true
       }
     ],
     returns: {
-      type: 'object',
+      type: "object",
       root: true
     },
     http: {
-      path: '/getVideo/:id',
-      verb: 'get'
+      path: "/getVideo/:id",
+      verb: "get"
     }
   });
 
@@ -534,22 +534,22 @@ module.exports = function(Action) {
     }
   };
 
-  Action.remoteMethod('getAudio', {
-    description: 'Method to get the audio info.',
+  Action.remoteMethod("getAudio", {
+    description: "Method to get the audio info.",
     accepts: [
       {
-        arg: 'id',
-        type: 'string',
+        arg: "id",
+        type: "string",
         required: true
       }
     ],
     returns: {
-      type: 'object',
+      type: "object",
       root: true
     },
     http: {
-      path: '/getAudio/:id',
-      verb: 'get'
+      path: "/getAudio/:id",
+      verb: "get"
     }
   });
 };

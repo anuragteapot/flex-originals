@@ -434,6 +434,7 @@ export default {
     this.reLayoutSeekbar();
     window.addEventListener("resize", debounce(this.reLayoutSeekbar, 100));
     window.addEventListener("click", debounce(this.reLayoutSeekbar, 100));
+    window.addEventListener("mousemove", debounce(this.reLayoutSeekbar, 200));
     document.addEventListener("mousemove", event => {
       this.moveSeekbar(event);
     });
@@ -461,6 +462,7 @@ export default {
   },
   beforeDestroy() {
     this.pause();
+    window.removeEventListener("mousemove", debounce(this.reLayoutSeekbar, 200));
     window.removeEventListener("resize", debounce(this.reLayoutSeekbar, 100));
     window.removeEventListener("click", debounce(this.reLayoutSeekbar, 100));
     window.removeEventListener("keydown", this.detectKeypress);

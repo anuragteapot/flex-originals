@@ -425,17 +425,14 @@ export default {
     },
     loadeddata() {
       if (this.autoPlay) {
-        this.media.play();
-        this.hasEnded = false;
-        this.active = false;
-        this.isPlaying = true;
+        this.playOrPause();
       }
-      this.loading = false;
     }
   },
   mounted: function() {
     this.reLayoutSeekbar();
     window.addEventListener("resize", debounce(this.reLayoutSeekbar, 100));
+    window.addEventListener("click", debounce(this.reLayoutSeekbar, 100));
     document.addEventListener("mousemove", event => {
       this.moveSeekbar(event);
     });

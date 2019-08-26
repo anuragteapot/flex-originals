@@ -11,12 +11,15 @@
                     <i class="fas fa-exclamation-circle"></i> Video unavaliable
                   </p>
                 </div>
-                <lazy-video-player
-                  :src="videoSource"
-                  v-if="!videoUnavaliable"
-                  :autoPlay="true"
-                  @handleEnded="handleEnded"
-                ></lazy-video-player>
+                <div class="video-wrapper">
+                  <lazy-video-player
+                    :src="videoSource"
+                    v-if="!videoUnavaliable"
+                    :autoPlay="true"
+                    @handleEnded="handleEnded"
+                  ></lazy-video-player>
+                </div>
+
                 <div :class="`video_actions ${theme}`" v-if="!videoUnavaliable">
                   <p class="video__name">{{ video.title}}</p>
                   <div class="video__analytics__info">
@@ -68,7 +71,7 @@
                   </div>
 
                   <div :class="`full__video__desctiption ${theme}`">{{ video.description}}</div>
-                  <br>
+                  <br />
                   <p class="show__more">Show More</p>
                   <div class="video__comments">
                     <div class="v-comment">
@@ -263,12 +266,12 @@ export default {
         this.$store.commit(types.SET_IS_LOADING, true);
         let currentVideo = {};
         try {
-           currentVideo = await this.$api
+          currentVideo = await this.$api
             .axios()
             .get(`/api/actions/getVideo/${this.$route.query.v}`);
           this.$store.commit(types.SET_IS_LOADING, false);
           this.$api.Nprogress.done();
-        } catch(err){
+        } catch (err) {
           this.videoUnavaliable = true;
           this.$store.commit(types.SET_IS_LOADING, false);
           this.$api.Nprogress.done();

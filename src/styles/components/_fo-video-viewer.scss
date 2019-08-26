@@ -38,6 +38,9 @@
     .left {
       width: 70%;
 
+      .video-wrapper {
+        min-height: 500px;
+      }
       .video__unavaliable {
         position: relative;
         display: block;

@@ -1,23 +1,11 @@
 <template>
   <div
-    :class="`video ${videoActive || !isPlaying ? 'fo-video-active' : ''}`"
+    :class="`fo-video-player ${!active ? 'no-cursor' : ''}`"
+    id="video-player"
     ref="player"
-    @mouseover="videoActive = true"
-    @mouseleave="videoActive = false"
+    @mousemove="makeActive(); active = true; "
   >
-    <video
-      @contextmenu.prevent
-      :src="src"
-      :style="`${loading ? 'opacity: 0.1!important;' : ''}`"
-      class="visible"
-      controlslist="nodownload"
-      ref="videoViewer"
-      @click="togglePlay"
-    ></video>
-    <!-- <span :class="`large-play ${!isPlaying && !loading ? '' : 'hidden'}`">
-      <i @click="togglePlay" class="fas fa-play" aria-hidden="true"></i>
-    </span>-->
-    <div v-show="loading" class="video-loader center">
+    <div :class="`fo-video-loader`" v-show="loading">
       <svg
         version="1.1"
         id="L9"
@@ -30,7 +18,7 @@
         xml:space="preserve"
       >
         <path
-          fill="#fff"
+          fill="white"
           d="M73,50c0-12.7-10.3-23-23-23S27,37.3,27,50 M30.9,50c0-10.5,8.5-19.1,19.1-19.1S69.1,39.5,69.1,50"
         >
           <animateTransform
@@ -45,90 +33,162 @@
         </path>
       </svg>
     </div>
-    <div :class="`control-bar ${videoActive || !isPlaying ? 'fo-video-active' : ''}`">
-      <div class="fo-video-player-button-bar">
-        <i v-if="hasEnded" @click="togglePlay" class="fas fa-redo" aria-hidden="true"></i>
-        <i v-else-if="!isPlaying" @click="togglePlay" class="fas fa-play" aria-hidden="true"></i>
-        <i v-else-if="isPlaying" @click="togglePlay" class="fas fa-pause" aria-hidden="true"></i>
+    <video :src="src" class="fo-video-player__media" ref="media" @click="playOrPause"></video>
+    <div :class="`fo-video-player-menu volume ${volumesettings ? 'active' : ''}`">
+      <input
+        v-model="volume"
+        min="0"
+        max="1"
+        step="0.1"
+        class="volumeslider"
+        type="range"
+        orient="vertical"
+      />
+    </div>
+    <div
+      :class="`fo-video-player-menu settings ${opensettingspb || opensettings || opensettingsq ? 'active' : ''}`"
+    >
+      <nav :class="`${active && opensettings ? 'menu-active' : ''}`">
+        <ul v-if="!opensettingspb && !opensettingsq">
+          <li>
+            <a href="#">
+              Auto Play
+              <span class="fo-video-player__right">
+                <label class="switch">
+                  <input type="checkbox" />
+                  <div></div>
+                </label>
+              </span>
+            </a>
+          </li>
+          <li>
+            <a @click="opensettingspb = !  opensettingspb">
+              Playback Speed
+              <span
+                class="fo-video-player__right"
+              >{{playbackRate == 1 ? 'Normal' : playbackRate + 'x' }}</span>
+            </a>
+          </li>
+          <li>
+            <a href="#" @click="opensettingsq = !opensettingsq">
+              Quality
+              <span class="fo-video-player__right">1080p</span>
+            </a>
+          </li>
+        </ul>
+        <ul v-else-if="opensettingsq">
+          <li>
+            <a href="#" @click="opensettingsq = !  opensettingsq">
+              <i class="fas fa-chevron-left"></i> Quality
+            </a>
+          </li>
+          <li>
+            <a href="#">1080p</a>
+          </li>
+          <li>
+            <a href="#">720p</a>
+          </li>
+          <li>
+            <a href="#">440p</a>
+          </li>
+          <li>
+            <a href="#">114p</a>
+          </li>
+        </ul>
+        <ul v-else>
+          <li>
+            <a href="#" @click="opensettingspb = !  opensettingspb">
+              <i class="fas fa-chevron-left"></i> Playback Speed
+            </a>
+          </li>
+          <li v-for="rate in playbackRates" :key="rate">
+            <a
+              @click="playbackRate = rate; opensettingspb = !  opensettingspb;"
+            >{{rate == 1 ? 'Normal' : rate + 'x' }}</a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <div :class="`fo-video-player__control-panel ${active ? '' : 'show'}`">
+      <div></div>
+      <div
+        :class="`fo-video-player__seekbar-wrap ${active ? '' : 'show'}`"
+        id="video-player-media"
+        @mousedown="grabSeekbar"
+        @touchstart="grabSeekbar"
+        @touchmove="moveSeekbar"
+        @touchend="releaseSeekbar"
+        ref="seekbar"
+      >
         <div
-          :class="`volume ${audioActive ? 'shift' : ''}`"
-          @mouseover="audioActive = true"
-          @mouseleave="audioActive = false"
-        >
-          <i class="fa fa-volume-up fo-video-player-toggle" aria-hidden="true"></i>
-          <div class="rail" ref="rail" @click="findVolume">
-            <div ref="inaudible" class="inaudible"></div>
-            <div ref="audible" class="audible"></div>
-            <div ref="grip" class="grip"></div>
-          </div>
-        </div>
-        <span :class="`time ${audioActive ? 'shift' : ''}`">
-          <span>{{curTime}}</span>
-          &nbsp;
-          <span>/</span>
-          &nbsp;
-          <span>{{durTime}}</span>
-        </span>
-
-        <div class="dropup v-quality">
-          <button class="dropbtn" @click="changeQuality = !changeQuality">{{videoQualityName}}</button>
-          <div :class="`dropup-content ${changeQuality ? 'open' : ''}`">
-            <a
-              v-for="quality in videoQuality"
-              :key="quality.name"
-              @click="setQuality(quality); changeQuality = !changeQuality"
-            >{{ quality.name }}</a>
-          </div>
-        </div>
-
-        <div class="dropup">
-          <button
-            class="dropbtn"
-            @click="changePlayBack = !changePlayBack"
-          >{{playbackRate == 1 ? 'Normal' : playbackRate + 'x'}}</button>
-          <div :class="`dropup-content ${changePlayBack ? 'open' : ''}`">
-            <a
-              v-for="speed in playbackRates"
-              :key="speed"
-              @click="setPlayBackRates(speed); changePlayBack = !changePlayBack"
-            >{{ speed == 1 ? 'Normal' : speed + 'x' }}</a>
-          </div>
-        </div>
-          <i class="fas fa-expand fullscreen" @click="toggleFullscreen"></i>
+          class="fo-video-player__seekbar-current"
+          :style="{ transform: &quot;scaleX(&quot; + getProgressRate + &quot;)&quot; }"
+        ></div>
+        <div class="fo-video-player__seekbar-back"></div>
+        <div
+          class="fo-video-player__buffer-back"
+          :style="{ transform: &quot;scaleX(&quot; + bufferPercent + &quot;)&quot; }"
+        ></div>
       </div>
-      <div class="seek tooltip" ref="progress" @mousedown="scrub" @mousemove="scrubForTime">
-        <span class="tooltiptext" :style="`left:${tooltipPercent}`">{{tooltipTime}}</span>
-        <div class="buffer" :style="`width:${bufferPercent}%`"></div>
-        <div class="watched" :style="`width: ${progressBar};`">
-          <i class="handle"></i>
+      <div class="fo-video-player__control-wrap" v-show="active">
+        <div class="fo-video-player__left">
+          <i class="fas fa-step-backward"></i>
+          <i v-if="!isPlaying" class="fa fa-play" @click="playOrPause"></i>
+          <i v-else class="fa fa-pause" @click="playOrPause"></i>
+          <i class="fas fa-step-forward"></i>
+          <span class="fo-video-player__time-current">{{ getCurrentTime }} / {{getDuration}}</span>
+        </div>
+        <div class="fo-video-player__right">
+          <i class="far fa-closed-captioning"></i>
+          <i class="fas fa-volume-up" @click="volumesettings = !volumesettings"></i>
+          <i
+            :class="`fas fa-cog ${opensettings ? 'rotate-45' : '' }`"
+            @click="opensettings = !opensettings"
+          ></i>
+          <i class="far fa-clone" @click="pip"></i>
+          <i v-if="!fullscreen" class="fas fa-expand" @click="openFullscreen"></i>
+          <i v-else class="fas fa-compress" @click="closeFullscreen"></i>
         </div>
       </div>
     </div>
   </div>
 </template>
 <script>
+const debounce = function(func, wait, immediate) {
+  var timeout;
+  return function() {
+    var context = this;
+    var args = arguments;
+    var later = function() {
+      timeout = null;
+      if (!immediate) func.apply(context, args);
+    };
+    var callNow = immediate && !timeout;
+    clearTimeout(timeout);
+    timeout = setTimeout(later, wait);
+    if (callNow) func.apply(context, args);
+  };
+};
 export default {
-  name: "lazy-video",
   data() {
     return {
-      videoQualityName: "Auto",
-      audioActive: false,
-      videoActive: false,
-      loading: true,
-      errorOccured: false,
-      changePlayBack: false,
-      changeQuality: false,
-      playbackRate: 1.0,
-      isPlaying: false,
-      mousedown: false,
-      curTime: "00:00",
-      durTime: "00:00",
-      volume: 0.5,
+      volume: 1,
+      volumesettings: false,
+      opensettingsq: false,
+      opensettingspb: false,
+      opensettings: false,
+      fullscreen: false,
+      active: true,
       hasEnded: false,
+      playbackRate: 1,
+      seekbarWidth: 0,
+      seekbarOffsetX: 0,
+      time: 0,
+      duration: 0,
+      loading: false,
       bufferPercent: 0,
-      progressBar: "0%",
-      tooltipTime: "0%",
-      tooltipPercent: "3%"
+      isPlaying: false,
+      isGrabbingSeekbar: false
     };
   },
   props: {
@@ -162,120 +222,191 @@ export default {
   },
   watch: {
     volume(val) {
-      this.video.volume = val;
+      this.media.volume = val;
     },
     playbackRate(val) {
-      this.video.playbackRate = val;
+      this.media.playbackRate = val;
     },
     src(val) {
       this.loading = true;
-      this.video.src = val;
-      this.video.load();
-    },
-    videoActive() {
-      this.reset();
+      this.media.src = val;
+      this.media.load();
     }
   },
   computed: {
-    video() {
-      return this.$refs.videoViewer;
+    getProgressRate: function() {
+      return this.time / this.duration;
     },
-    progress() {
-      return this.$refs.progress;
+    getCurrentTime: function() {
+      return this.convertSecondsToTime(this.time);
     },
-    player() {
-      return this.$refs.player;
+    getDuration: function() {
+      return this.convertSecondsToTime(this.duration);
+    },
+    media: function() {
+      return this.$refs.media;
+    },
+    seekbar: function() {
+      return this.$refs.seekbar;
     }
   },
   methods: {
+    async pip() {
+      try {
+        if (this.media !== document.pictureInPictureElement)
+          await this.media.requestPictureInPicture();
+        else await document.exitPictureInPicture();
+      } catch (error) {
+      } finally {
+      }
+    },
     reset() {
-      this.changePlayBack = false;
-      this.changeQuality = false;
+      this.opensettingsq = false;
+      this.opensettingspb = false;
+      this.opensettings = false;
+      this.volumesettings = false;
+      this.active = false;
     },
-    handleError() {
-      this.errorOccured = true;
+    makeActive: debounce(function() {
+      if (this.isPlaying) {
+        this.reset();
+      }
+    }, 5000),
+    closeFullscreen() {
+      if (document.exitFullscreen) {
+        document.exitFullscreen();
+      } else if (document.mozCancelFullScreen) {
+        /* Firefox */
+        document.mozCancelFullScreen();
+      } else if (document.webkitExitFullscreen) {
+        /* Chrome, Safari and Opera */
+        document.webkitExitFullscreen();
+      } else if (document.msExitFullscreen) {
+        /* IE/Edge */
+        document.msExitFullscreen();
+      }
     },
-    togglePlay() {
-      if (this.video.paused) {
-        this.video.play();
-        this.hasEnded = false;
-        this.videoActive = false;
-        this.isPlaying = true;
+    openFullscreen() {
+      if (this.$refs.player.requestFullScreen) {
+        this.$refs.player.requestFullScreen();
+      } else if (this.$refs.player.webkitRequestFullScreen) {
+        this.$refs.player.webkitRequestFullScreen();
+      } else if (this.$refs.player.mozRequestFullScreen) {
+        this.$refs.player.mozRequestFullScreen();
+      }
+    },
+    play: function() {
+      this.media.play();
+      this.isPlaying = true;
+      this.loop();
+    },
+    pause: function() {
+      this.media.pause();
+      this.isPlaying = false;
+    },
+    playOrPause: function() {
+      this.opensettingsq = false;
+      this.opensettingspb = false;
+      this.opensettings = false;
+      this.volumesettings = false;
+      if (this.isPlaying) {
+        this.active = true;
+        this.pause();
       } else {
-        this.video.pause();
-        this.hasEnded = false;
-        this.isPlaying = false;
+        this.makeActive();
+        this.play();
       }
     },
-    setQuality(quality) {
-      const storeTime = this.video.currentTime;
-      this.video.src = quality.src;
-      this.video.currentTime = storeTime;
-      this.videoQualityName = quality.name;
-      this.video.load();
-      this.togglePlay();
+    loop: function() {
+      this.time = this.media.currentTime;
+      if (!this.isPlaying) return;
+      requestAnimationFrame(() => {
+        this.loop();
+      });
     },
-    findVolume(event) {
-      var perc = Math.floor(
-        (event.offsetX / this.$refs.rail.offsetWidth) * 100
-      );
-      this.$refs.grip.style.left = `${perc}%`;
-
-      var vol = this.video.volume;
-      if (perc > 1 && perc < 99) {
-        vol = perc / 100;
-      }
-      this.video.volume = vol;
+    grabSeekbar: function(event) {
+      event.preventDefault();
+      this.isGrabbingSeekbar = true;
+      this.time = this.media.currentTime =
+        (event.layerX / this.seekbarWidth) * this.duration;
+      this.media.pause();
     },
-    scrub(e) {
-      const scrubTime =
-        (e.offsetX / this.progress.offsetWidth) * this.video.duration;
-      this.video.currentTime = scrubTime;
+    moveSeekbar: function(event) {
+      event.preventDefault();
+      if (!this.isGrabbingSeekbar) return;
+      this.time = this.media.currentTime =
+        ((event.clientX - this.seekbarOffsetX - window.pageXOffset) /
+          this.seekbarWidth) *
+        this.duration;
     },
-    scrubForTime(e) {
-      const scrubTime =
-        (e.offsetX / this.progress.offsetWidth) * this.video.duration;
-      const percent = (scrubTime / this.video.duration) * 100;
-
-      let curmins = Math.floor(scrubTime / 60);
-      let cursecs = Math.floor(scrubTime - curmins * 60);
-
-      if (cursecs < 10) {
-        cursecs = "0" + cursecs;
-      }
-
-      if (curmins < 10) {
-        curmins = "0" + curmins;
-      }
-      this.tooltipTime = curmins + ":" + cursecs;
-      this.tooltipPercent = `${percent - 1.7}%`;
-    },
-    toggleFullscreen() {
-      if (this.player.requestFullScreen) {
-        this.player.requestFullScreen();
-      } else if (this.player.webkitRequestFullScreen) {
-        this.player.webkitRequestFullScreen();
-      } else if (this.player.mozRequestFullScreen) {
-        this.player.mozRequestFullScreen();
+    releaseSeekbar: function(event) {
+      event.preventDefault();
+      this.isGrabbingSeekbar = false;
+      if (this.isPlaying) {
+        this.media.play();
       }
     },
-    currentTime() {
-      var curmins = Math.floor(this.video.currentTime / 60);
-      var cursecs = Math.floor(this.video.currentTime - curmins * 60);
-
-      if (cursecs < 10) {
-        cursecs = "0" + cursecs;
+    reLayoutSeekbar: function() {
+      if (window.innerHeight == screen.height) {
+        this.fullscreen = true;
+      } else {
+        this.fullscreen = false;
       }
 
-      if (curmins < 10) {
-        curmins = "0" + curmins;
+      this.seekbarWidth = this.seekbar.clientWidth;
+      this.seekbarOffsetX = this.seekbar.getBoundingClientRect().left;
+    },
+    convertSecondsToTime: function(time) {
+      let seconds = Math.floor(time % 60);
+      if (seconds < 10) seconds = "0" + seconds;
+      let minutes = Math.floor((time / 60) % 60);
+      return `${minutes}:${seconds}`;
+    },
+    stalled() {
+      this.loading = true;
+    },
+    setPlayBackRates(val) {
+      this.media.playbackRate = val;
+      this.playbackRate = val;
+    },
+    updateBuffer() {
+      if (
+        this.media &&
+        this.media.buffered &&
+        this.media.buffered.length > 0 &&
+        this.media.buffered.end &&
+        this.media.duration
+      ) {
+        this.bufferPercent =
+          this.media.buffered.end(this.media.buffered.length - 1) /
+          this.media.duration;
+      } else if (
+        this.media &&
+        this.media.bytesTotal != undefined &&
+        this.media.bytesTotal > 0 &&
+        this.media.bufferedBytes != undefined
+      ) {
+        this.bufferPercent = this.media.bufferedBytes / this.media.bytesTotal;
       }
-      this.curTime = curmins + ":" + cursecs;
+    },
+    seeked() {
+      // this.loading = false;
+      this.time = this.media.currentTime;
+    },
+    seeking() {
+      // this.loading = true;
+    },
+    skipBack() {
+      this.media.currentTime += parseFloat(-5);
+    },
+    skipForward() {
+      this.media.currentTime += parseFloat(+5);
+    },
+    handleEnded() {
+      this.loading = false;
     },
     handleProgress() {
       this.loading = false;
-      const percent = (this.video.currentTime / this.video.duration) * 100;
-      this.progressBar = `${percent}%`;
     },
     detectKeypress(event) {
       if (this.disablekey) {
@@ -283,7 +414,7 @@ export default {
       }
       if (event.keyCode == 32) {
         event.preventDefault();
-        this.togglePlay();
+        this.playOrPause();
       } else if (event.keyCode == 39) {
         event.preventDefault();
         this.skipForward();
@@ -292,101 +423,43 @@ export default {
         this.skipBack();
       }
     },
-    skipBack() {
-      this.video.currentTime += parseFloat(-5);
-    },
-    skipForward() {
-      this.video.currentTime += parseFloat(+5);
-    },
-    handleEnded() {
-      this.hasEnded = true;
-      this.isPlaying = false;
-      this.$emit("handleEnded");
-    },
     loadeddata() {
       if (this.autoPlay) {
-        this.video.play();
+        this.media.play();
         this.hasEnded = false;
-        this.videoActive = false;
+        this.active = false;
         this.isPlaying = true;
       }
       this.loading = false;
-    },
-    loadedmetadata() {
-      var durmins = Math.floor(this.video.duration / 60);
-      var dursecs = Math.floor(this.video.duration - durmins * 60);
-      if (dursecs < 10) {
-        dursecs = "0" + dursecs;
-      }
-      if (durmins < 10) {
-        durmins = "0" + durmins;
-      }
-      this.durTime = durmins + ":" + dursecs;
-    },
-    stalled() {
-      this.loading = true;
-    },
-    setPlayBackRates(val) {
-      this.video.playbackRate = val;
-      this.playbackRate = val;
-    },
-    updateBuffer() {
-      if (
-        this.video &&
-        this.video.buffered &&
-        this.video.buffered.length > 0 &&
-        this.video.buffered.end &&
-        this.video.duration
-      ) {
-        this.bufferPercent = this.video.buffered.end(0) / this.video.duration;
-      } else if (
-        this.video &&
-        this.video.bytesTotal != undefined &&
-        this.video.bytesTotal > 0 &&
-        this.video.bufferedBytes != undefined
-      ) {
-        this.bufferPercent = this.video.bufferedBytes / this.video.bytesTotal;
-      }
-
-      if (this.bufferPercent) {
-        this.bufferPercent = 100 * Math.min(1, Math.max(0, this.bufferPercent));
-      } else {
-        this.bufferPercent = 100;
-      }
-    },
-    seeked() {
-      this.loading = false;
-      this.updateBuffer();
-    },
-    seeking() {
-      this.loading = true;
     }
   },
-  mounted() {
+  mounted: function() {
+    this.reLayoutSeekbar();
+    window.addEventListener("resize", debounce(this.reLayoutSeekbar, 100));
+    document.addEventListener("mousemove", event => {
+      this.moveSeekbar(event);
+    });
+    document.addEventListener("mouseup", event => {
+      this.releaseSeekbar(event);
+    });
+    this.media.addEventListener("loadedmetadata", () => {
+      this.duration = this.media.duration;
+    });
+    this.media.addEventListener("ended", () => {
+      this.media.currentTime = 0;
+      this.isPlaying = false;
+    });
+
     window.addEventListener("keydown", this.detectKeypress);
-    this.video.addEventListener("timeupdate", this.currentTime);
-    this.video.addEventListener("timeupdate", this.handleProgress);
-    this.video.addEventListener("ended", this.handleEnded);
-    this.video.addEventListener("error", this.handleError);
-    this.video.addEventListener("loadeddata", this.loadeddata);
-    this.video.addEventListener("loadedmetadata", this.loadedmetadata);
-    this.video.addEventListener("progress", this.updateBuffer);
-    this.video.addEventListener("stalled", this.stalled);
-    this.video.addEventListener("seeking", this.seeking);
-    this.video.addEventListener("seeked", this.seeked);
-  },
-  destroyed() {
-    window.removeEventListener("keydown", this.detectKeypress);
-    this.video.removeEventListener("timeupdate", this.currentTime);
-    this.video.removeEventListener("timeupdate", this.handleProgress);
-    this.video.removeEventListener("ended", this.handleEnded);
-    this.video.removeEventListener("error", this.handleError);
-    this.video.removeEventListener("loadeddata", this.loadeddata);
-    this.video.removeEventListener("loadedmetadata", this.loadedmetadata);
-    this.video.removeEventListener("progress", this.updateBuffer);
-    this.video.removeEventListener("stalled", this.stalled);
-    this.video.removeEventListener("seeking", this.seeking);
-    this.video.removeEventListener("seeked", this.seeked);
+    this.media.addEventListener("timeupdate", this.handleProgress);
+    this.media.addEventListener("ended", this.handleEnded);
+    this.media.addEventListener("error", this.handleError);
+    this.media.addEventListener("loadeddata", this.loadeddata);
+    this.media.addEventListener("loadedmetadata", this.loadedmetadata);
+    this.media.addEventListener("progress", this.updateBuffer);
+    this.media.addEventListener("stalled", this.stalled);
+    this.media.addEventListener("seeking", this.seeking);
+    this.media.addEventListener("seeked", this.seeked);
   }
 };
 </script>

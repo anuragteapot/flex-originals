@@ -458,7 +458,8 @@ export default {
     this.media.addEventListener("seeking", this.seeking);
     this.media.addEventListener("seeked", this.seeked);
   },
-  destroyed() {
+  beforeDestroy() {
+    this.pause();
     window.removeEventListener("resize", debounce(this.reLayoutSeekbar, 100));
     window.removeEventListener("click", debounce(this.reLayoutSeekbar, 100));
     window.removeEventListener("keydown", this.detectKeypress);

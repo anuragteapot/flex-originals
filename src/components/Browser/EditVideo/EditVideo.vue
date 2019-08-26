@@ -6,7 +6,9 @@
           <div class="card__body">
             <div class="container">
               <div class="grid grid--half">
-                <lazy-video-player :src="videoSource" v-if="!videoUnavaliable" :disablekey="true"></lazy-video-player>
+                <div class="video-wrapper">
+                  <lazy-video-player :src="videoSource" v-if="!videoUnavaliable" :disablekey="true"></lazy-video-player>
+                </div>
                 <h3>Select Thumbnail</h3>
                 <div
                   :class="`video__thumbnails ${videoData.thumbImage == thumb ? 'selected' : ''}`"

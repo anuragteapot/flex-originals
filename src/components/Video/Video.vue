@@ -425,7 +425,8 @@ export default {
     },
     loadeddata() {
       if (this.autoPlay) {
-        this.playOrPause();
+        this.makeActive();
+        this.play();
       }
     }
   },

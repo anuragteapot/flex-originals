@@ -188,7 +188,7 @@ module.exports = class ThumbnailGenerator {
   generatePalette(opts) {
     const ffmpeg = this.getFfmpegInstance();
     const defaultOpts = {
-      videoFilters: 'fps=10,scale=320:-1:flags=lanczos,palettegen'
+      videoFilters: 'fps=60,scale=720:-1:flags=lanczos,palettegen'
     };
     const conf = _.assignIn(defaultOpts, opts);
     const inputOptions = ['-y'];

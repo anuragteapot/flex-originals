@@ -19,7 +19,7 @@ Vue.use(app);
 Vue.component("lazySnackBar", Snackbar);
 Vue.component("lazyModel", Model);
 Vue.component("lazyAudioPlayer", AudioPlayer);
-Vue.component("lazyVideoPlayer", VideoPlayer);
+Vue.component("foVideoPlayer", VideoPlayer);
 Vue.component("lazyImage", lazyImage);
 
 Vue.config.productionTip = false;

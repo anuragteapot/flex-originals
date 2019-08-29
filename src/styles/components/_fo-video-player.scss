@@ -5,6 +5,11 @@
   height: 100%;
   color: white !important;
 
+  .video__error {
+    width: 100%;
+    height: 100%;
+  }
+
   @media only screen and (max-width: 600px) {
     .fa-clone,
     .fa-step-backward,

@@ -5,7 +5,7 @@
     ref="player"
     @mousemove="makeActive(); active = true; "
   >
-    <div :class="`fo-video-loader`" v-show="loading">
+    <div :class="`fo-video-loader`" v-show="loading && !error">
       <svg
         version="1.1"
         id="L9"
@@ -33,7 +33,8 @@
         </path>
       </svg>
     </div>
-    <video :src="src" class="fo-video-player__media" ref="media" @click="playOrPause"></video>
+    <video v-if="!error" :src="src" class="fo-video-player__media" ref="media" @click="playOrPause"></video>
+    <img v-if="error" class="video__error" src="/public/videoerror.gif" />
     <div :class="`fo-video-player-menu volume ${volumesettings ? 'active' : ''}`">
       <input
         v-model="volume"
@@ -201,6 +202,10 @@ export default {
       type: Boolean,
       default: false
     },
+    error: {
+      type: Boolean,
+      default: false
+    },
     playbackRates: {
       type: Array,
       default: function() {
@@ -228,6 +233,7 @@ export default {
       this.media.playbackRate = val;
     },
     src(val) {
+      if (this.error) return 0;
       this.loading = true;
       this.media.src = val;
       this.media.load();
@@ -424,6 +430,7 @@ export default {
       }
     },
     loadeddata() {
+      if (this.error) return 0;
       if (this.autoPlay) {
         this.makeActive();
         this.play();
@@ -431,6 +438,7 @@ export default {
     }
   },
   mounted: function() {
+    if (this.error) return 0;
     this.reLayoutSeekbar();
     window.addEventListener("resize", debounce(this.reLayoutSeekbar, 100));
     window.addEventListener("click", debounce(this.reLayoutSeekbar, 100));
@@ -462,7 +470,10 @@ export default {
   },
   beforeDestroy() {
     this.pause();
-    window.removeEventListener("mousemove", debounce(this.reLayoutSeekbar, 200));
+    window.removeEventListener(
+      "mousemove",
+      debounce(this.reLayoutSeekbar, 200)
+    );
     window.removeEventListener("resize", debounce(this.reLayoutSeekbar, 100));
     window.removeEventListener("click", debounce(this.reLayoutSeekbar, 100));
     window.removeEventListener("keydown", this.detectKeypress);

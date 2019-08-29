@@ -12,12 +12,12 @@
                   </p>
                 </div>
                 <div class="video-wrapper">
-                  <lazy-video-player
+                  <fo-video-player
                     :src="videoSource"
                     v-if="!videoUnavaliable"
                     :autoPlay="true"
                     @handleEnded="handleEnded"
-                  ></lazy-video-player>
+                  ></fo-video-player>
                 </div>
 
                 <div :class="`video_actions ${theme}`" v-if="!videoUnavaliable">

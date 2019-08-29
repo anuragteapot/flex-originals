@@ -7,7 +7,12 @@
 
 module.exports = function(server) {
   // Install a `/` route that returns server status
-  var router = server.loopback.Router()
+  var router = server.loopback.Router();
 
-  server.use(router)
-}
+  router.get('/embed', function(req, res) {
+    res.removeHeader('X-Frame-Options');
+    res.redirect('/embed');
+  });
+
+  server.use(router);
+};

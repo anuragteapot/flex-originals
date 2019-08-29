@@ -2,6 +2,7 @@
   width: 100%;
   position: relative;
   display: block;
+  overflow: hidden;
   height: 100%;
   color: white !important;
 
@@ -104,7 +105,7 @@
     background: linear-gradient(
       to bottom,
       rgba(0, 0, 0, 0) 0%,
-      rgba(0, 0, 0, 0.5) 100%
+      rgba(0, 0, 0, 0.9) 100%
     );
 
     &.show {

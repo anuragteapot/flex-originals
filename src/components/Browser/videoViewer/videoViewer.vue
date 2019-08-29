@@ -277,7 +277,7 @@ export default {
           this.$api.Nprogress.done();
         }
 
-        if (!currentVideo.data.video) {
+        if (!currentVideo.data) {
           this.videoUnavaliable = true;
         }
         if (currentVideo.data.video.videoFile.includes("https")) {

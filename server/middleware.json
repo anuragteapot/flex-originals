@@ -14,7 +14,7 @@
     "helmet#xssFilter": {},
     "helmet#frameguard": {
       "params": {
-        "action": "allow-from"
+        "action": "sameorigin"
       }
     },
     "helmet#hsts": {

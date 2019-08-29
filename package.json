@@ -30,7 +30,7 @@
     "express-history-api-fallback": "^2.2.1",
     "file-saver": "^2.0.2",
     "fluent-ffmpeg": "^2.1.2",
-    "helmet": "^3.20.0",
+    "helmet": "^3.20.1",
     "isomorphic-fetch": "^2.2.1",
     "jwt-decode": "^2.2.0",
     "lodash": "^4.17.15",

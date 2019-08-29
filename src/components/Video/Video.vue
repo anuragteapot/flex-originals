@@ -1,6 +1,6 @@
 <template>
   <div
-    :class="`fo-video-player ${!active ? 'no-cursor' : ''}`"
+    :class="`fo-video-player ${!active || error ? 'no-cursor' : ''}`"
     id="video-player"
     ref="player"
     @mousemove="makeActive(); active = true; "

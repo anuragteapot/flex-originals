@@ -56,7 +56,7 @@
               Auto Play
               <span class="fo-video-player__right">
                 <label class="switch">
-                  <input type="checkbox" />
+                  <input name="autoplay" v-model="autoPlayNext" type="checkbox" />
                   <div></div>
                 </label>
               </span>
@@ -242,6 +242,14 @@ export default {
   computed: {
     getProgressRate: function() {
       return this.time / this.duration;
+    },
+    autoPlayNext: {
+      get() {
+        return this.$store.state.autoplay;
+      },
+      set(val) {
+        this.$store.state.autoplay = val;
+      }
     },
     getCurrentTime: function() {
       return this.convertSecondsToTime(this.time);

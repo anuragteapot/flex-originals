@@ -2,7 +2,6 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  outline: none;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
@@ -140,7 +139,6 @@ p {
       height: 2em;
       padding: 0 0.5rem;
       border: none;
-      outline: none;
       background-color: #1e2124;
 
       &:focus {
@@ -281,7 +279,7 @@ p {
       margin-top: auto;
       background: #252a2e;
       border-top: 1px solid #1c1e21;
-      padding: 35px 10px;
+      padding: 31px 10px;
 
       &.light {
         background: white !important;
@@ -410,7 +408,6 @@ p {
     padding: 0 0.5rem;
     border: none;
     background: #1e2124;
-    outline: none;
     margin: 0 5px 0 0;
     border-radius: 0.25rem;
 
@@ -476,7 +473,6 @@ p {
 
           .follow {
             border-radius: 5px;
-            outline: none;
             border: none;
             color: white;
             border-radius: 20px;

@@ -7,6 +7,7 @@ export default {
   },
   // Files loaded limit
   isAuthenticated: false,
+  autoplay: true,
   // Settings
   settings: {},
   theme: 'dark',

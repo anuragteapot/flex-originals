@@ -210,7 +210,6 @@ import * as types from "./../../../store/mutation-types";
 export default {
   name: "media-settings",
   data: () => ({
-    autoPlay: false,
     src: "/public/qq.webp",
     lazySrc: "/public/icons/music.svg",
     videoSource: "",
@@ -231,6 +230,9 @@ export default {
       return this.$store.state.content.video.filter(
         item => item.id !== this.$route.query.v
       );
+    },
+    autoPlay() {
+      return this.$store.state.autoplay;
     },
     theme() {
       return this.$store.state.theme;

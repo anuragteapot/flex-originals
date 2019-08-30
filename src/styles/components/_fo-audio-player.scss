@@ -64,7 +64,6 @@
 
       .slider {
         appearance: none;
-        outline: none;
         width: 100%;
         margin: auto;
         height: 4px;
@@ -74,14 +73,12 @@
         background: rgb(104, 103, 103);
 
         .buffer {
-          outline: none;
           height: 4px;
           z-index: 46;
           border-radius: 4px;
           background: grey;
 
           .audio-progress {
-            outline: none;
             height: 4px;
             border-radius: 4px;
             z-index: 45;

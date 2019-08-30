@@ -20,7 +20,7 @@
       flex-direction: row;
       justify-content: space-between;
 
-      @media screen and (max-width: 1000px) {
+      @media screen and (max-width: 900px) {
         flex-direction: column;
       }
     }
@@ -29,7 +29,7 @@
       margin-bottom: 15px;
       position: relative;
 
-      @media screen and (max-width: 1000px) {
+      @media screen and (max-width: 900px) {
         max-width: 100%;
       }
     }
@@ -40,7 +40,7 @@
       .video-wrapper {
         padding: 10px;
 
-        @media screen and (max-width: 1000px) {
+        @media screen and (max-width: 900px) {
           padding: 0;
         }
       }

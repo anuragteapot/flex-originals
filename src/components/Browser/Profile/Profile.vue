@@ -48,7 +48,7 @@
               <i class="fab fa-linkedin" style="font-size:20px"></i>
             </a>
           </div>
-          <p class="channel__name">
+          <p class="channel__name" v-show="channelUser.username">
             {{channelUser.realm}} ({{channelUser.username}})
             <i
               v-show="channelInfo.verifiedChannel"

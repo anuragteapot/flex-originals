@@ -1,17 +1,33 @@
 <template>
-  <div class="lazy-delete">
+  <div class="lazy-share">
     <section class="form">
       <div class="inner">
-        <div class="header" v-if="selectedItems.length > 1">Delete these items?</div>
-        <div class="header" v-else>Delete this item?</div>
+        <div class="header">Share this video</div>
         <div class="body">
-          Are you sure you want to delete
-          <strong>{{selectedItems.length}} item</strong> ? You won't be able to recover this item.
+          <div class="social-share">
+            <ul>
+              <li>
+                <a href="https://www.facebook.com/Anu1601cs" target="_blank">
+                  <i class="fab fa-facebook-f"></i>
+                </a>
+              </li>
+              <li>
+                <i class="fab fa-instagram"></i>
+              </li>
+              <li>
+                <a href="https://twitter.com/Anu1601cs" target="_blank">
+                  <i class="fab fa-twitter"></i>
+                </a>
+              </li>
+              <li>
+                <i class="fab fa-google"></i>
+              </li>
+            </ul>
+          </div>
         </div>
         <div class="footer">
           <div style="text-align:right">
-            <button type="button" @click="hide">Cancel</button>
-            <button type="submit" class="danger" @click="deleteItem">Delete</button>
+            <button type="button" @click="hide">Close</button>
           </div>
         </div>
       </div>
@@ -23,7 +39,7 @@
 import * as types from "./../../../store/mutation-types";
 
 export default {
-  name: "model-delete",
+  name: "model-share",
   data: () => ({}),
   props: {
     text: {

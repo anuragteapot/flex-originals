@@ -39,6 +39,29 @@
       font-weight: 400;
       text-align: left;
 
+      .social-share {
+        display: block;
+        width: 100%;
+        text-align: center !important;
+        color: white;
+
+        ul {
+          list-style-type: none;
+          margin: 0;
+          padding: 0;
+
+          li {
+            display: inline-block;
+            padding-right: 20px !important;
+
+            i {
+              font-size: 30px;
+              color: white;
+            }
+          }
+        }
+      }
+
       label {
         display: block;
         margin-bottom: 7px;
@@ -63,7 +86,7 @@
         font-size: 16px;
         color: white;
 
-        &:not([type="submit"]) {
+        &:not([type='submit']) {
           margin-bottom: 20px;
           box-shadow: inset 0 0 10px 0 rgba(0, 0, 0, 0.2);
 

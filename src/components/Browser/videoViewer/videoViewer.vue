@@ -33,10 +33,10 @@
                         LIKE
                       </span>
                       <span>
-                        <i class="fa fa-list" aria-hidden="true"></i>
+                        <i class="fa fa-list"></i>
                         SAVE
                       </span>
-                      <span>
+                      <span @click="share()">
                         <i class="fas fa-share"></i>
                         SHARE
                       </span>
@@ -240,6 +240,12 @@ export default {
     videoSuggestions
   },
   methods: {
+    share() {
+      this.$store.commit(types.SHOW_MODAL, {
+        state: true,
+        type: "MShareModal"
+      });
+    },
     handleEnded() {
       const videos = this.$store.state.content.video;
       if (this.autoPlay && this.videoSuggestions.length > 0) {

@@ -418,6 +418,7 @@ export default {
     },
     handleEnded() {
       this.loading = false;
+      this.$emit("handleEnded");
     },
     handleProgress() {
       this.loading = false;

@@ -2,8 +2,8 @@
   display: inline-block;
 
   .video__thumbnail {
-    width: 165px;
-    height: 100px;
+    width: 190px;
+    height: 110px;
     text-align: center;
     background-repeat: no-repeat;
     background-position: center;
@@ -12,8 +12,8 @@
     margin: 5px 7px 50px 7px;
     position: relative;
     cursor: pointer;
-    background-color: rgba(0,0,0,.3);
-    // box-shadow: 0 14px 28px 0 rgba(0,0,0,.3);
+    background-color: rgba(0,0,0,.1);
+
 
     .video__info {
       text-align: left;

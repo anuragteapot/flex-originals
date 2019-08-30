@@ -3,7 +3,6 @@
     <div class="inner">
       <content-grid></content-grid>
     </div>
-    <lazy-audio-player v-if="layout == 'song'" />
   </section>
 </template>
 

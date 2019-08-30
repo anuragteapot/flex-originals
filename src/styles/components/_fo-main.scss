@@ -6,25 +6,25 @@
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
-/* width */
-::-webkit-scrollbar {
-  width: 5px;
-}
+// /* width */
+// ::-webkit-scrollbar {
+//   // width: 5px;
+// }
 
-/* Track */
-::-webkit-scrollbar-track {
-  background: #252a2e;
-}
+// /* Track */
+// ::-webkit-scrollbar-track {
+//   background: #252a2e;
+// }
 
-/* Handle */
-::-webkit-scrollbar-thumb {
-  background: rgb(71, 71, 71);
-}
+// /* Handle */
+// ::-webkit-scrollbar-thumb {
+//   background: rgb(71, 71, 71);
+// }
 
-/* Handle on hover */
-::-webkit-scrollbar-thumb:hover {
-  background: #555;
-}
+// /* Handle on hover */
+// ::-webkit-scrollbar-thumb:hover {
+//   background: #555;
+// }
 
 *,
 ::after,
@@ -57,7 +57,7 @@ i:hover {
   opacity: 0.8;
 }
 
-p{
+p {
   font-weight: bold;
 }
 
@@ -83,11 +83,11 @@ p{
   width: 100%;
   display: flex;
 
-  &.light{
+  &.light {
     color: black !important;
   }
 
-  &.dark{
+  &.dark {
     color: white !important;
   }
 
@@ -219,7 +219,7 @@ p{
     .channel-text.active,
     .channel-text:hover,
     .channel-text:focus {
-      color: white!important;
+      color: white !important;
       background: linear-gradient(to right, #282b30 85%, #2e3136);
     }
 
@@ -281,7 +281,7 @@ p{
       margin-top: auto;
       background: #252a2e;
       border-top: 1px solid #1c1e21;
-      padding: 31px 10px;
+      padding: 35px 10px;
 
       &.light {
         background: white !important;
@@ -338,7 +338,7 @@ p{
   }
 
   .menu {
-    flex: 0 0 57px;
+    flex: 0 0 58px;
     padding: 0 20px 0 20px;
     background: #252a2e;
     border-bottom: 1px solid #18191a;
@@ -359,7 +359,7 @@ p{
       background-color: #1e2124;
 
       &.light {
-        color: white!important;
+        color: white !important;
       }
 
       &.active,
@@ -419,8 +419,6 @@ p{
     }
   }
 
-  
-
   .menu .menu-right input:focus {
     width: 300px;
     background-color: #0e0f0f;
@@ -433,10 +431,10 @@ p{
 
   .content {
     background: #252a2e;
-    display: flex;
     width: 100%;
     height: 100%;
-    flex-direction: column;
+    flex: 1 1;
+    overflow-y: auto;
 
     &.light {
       background: #f3f7f7 !important;

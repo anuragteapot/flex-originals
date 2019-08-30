@@ -11,7 +11,7 @@
                     <i class="fas fa-exclamation-circle"></i> Video unavaliable
                   </p>
                 </div>
-                <div class="video-wrapper">
+                <div :class="`video-wrapper ${ isMobile ? 'mobile' : ''}`">
                   <fo-video-player
                     :src="videoSource"
                     v-if="!videoUnavaliable"
@@ -206,6 +206,7 @@
 
 <script>
 import videoSuggestions from "./videoSuggestions";
+import { mapGetters } from "vuex";
 import * as types from "./../../../store/mutation-types";
 export default {
   name: "media-settings",
@@ -226,6 +227,7 @@ export default {
     }
   },
   computed: {
+  ...mapGetters(["isMobile"]),
     videoSuggestions() {
       return this.$store.state.content.video.filter(
         item => item.id !== this.$route.query.v

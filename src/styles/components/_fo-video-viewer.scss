@@ -96,7 +96,6 @@
 
           .right {
             text-align: end;
-            padding: 10px;
 
             span {
               text-transform: capitalize;
@@ -404,6 +403,7 @@
 
     .right {
       flex: 1;
+      padding: 10px;
 
       .v-auto-play {
         padding: 5px 0px;

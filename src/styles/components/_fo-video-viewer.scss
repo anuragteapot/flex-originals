@@ -39,10 +39,10 @@
 
       .video-wrapper {
         padding: 10px;
-
-        @media screen and (max-width: 900px) {
-          padding: 0;
-        }
+      }
+      
+      .mobile {
+         padding: 0!important;
       }
 
       .video__unavaliable {

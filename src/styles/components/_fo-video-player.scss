@@ -33,6 +33,41 @@
     margin: auto;
     height: 100px;
     width: 100px;
+
+    svg#catchup-spinner {
+      width: 3.75em;
+      transform-origin: center;
+      animation: rotate 2s linear infinite;
+      max-width: 5em;
+      display: block;
+    }
+    svg#catchup-spinner circle {
+      fill: none;
+      stroke: rgb(255, 255, 255);
+      stroke-width: 3;
+      stroke-dasharray: 1, 200;
+      stroke-dashoffset: 0;
+      stroke-linecap: round;
+      animation: dash 1.5s ease-in-out infinite;
+    }
+    @keyframes rotate {
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+    @keyframes dash {
+      0% {
+        stroke-dasharray: 1, 200;
+        stroke-dashoffset: 0;
+      }
+      50% {
+        stroke-dasharray: 90, 200;
+        stroke-dashoffset: -35px;
+      }
+      100% {
+        stroke-dashoffset: -125px;
+      }
+    }
   }
 
   .fo-video-player__media {
@@ -104,7 +139,7 @@
     background: linear-gradient(
       to bottom,
       rgba(0, 0, 0, 0) 0%,
-      rgba(0, 0, 0, 0.9) 100%
+      rgba(0, 0, 0, 0.8) 100%
     );
 
     &.show {

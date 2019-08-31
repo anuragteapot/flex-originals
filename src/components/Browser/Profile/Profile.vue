@@ -155,7 +155,7 @@ export default {
   destroyed() {
     window.removeEventListener("scroll", this.onScroll, false);
   },
-  mounted() {
+  beforeMount() {
     this.init();
   }
 };

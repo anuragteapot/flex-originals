@@ -31,14 +31,13 @@
     z-index: 5;
     position: absolute;
     margin: auto;
-    height: 100px;
-    width: 100px;
+    height: 80px;
+    width: 80px;
 
     svg#catchup-spinner {
-      width: 3.75em;
       transform-origin: center;
       animation: rotate 2s linear infinite;
-      max-width: 5em;
+      max-width: 80px;
       display: block;
     }
     svg#catchup-spinner circle {

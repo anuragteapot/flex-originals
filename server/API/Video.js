@@ -49,6 +49,54 @@ module.exports = class ThumbnailGenerator {
   }
 
   /**
+   * Method to generate one thumbnail by being given a time value.
+   *
+   * @method generateOneByTime
+   *
+   * @param {String} time
+   * @param {String} [opts.folder]
+   * @param {String} [opts.size] - 'i.e. 320x320'
+   * @param {String} [opts.filename]
+   *
+   * @return {Promise}
+   *
+   * @public
+   *
+   * @async
+   */
+  generateOneByTime(time, opts) {
+    return this.generate(
+      _.assignIn(opts, {
+        count: 1,
+        timestamps: [`${time}`]
+      })
+    ).then(result => result.pop());
+  }
+
+  /**
+   * Method to generate one thumbnail by being given a time value.
+   *
+   * @method generateOneByTimeCb
+   *
+   * @param {String} time
+   * @param {Object} [opts]
+   * @param {Function} cb (err, string)
+   *
+   * @return {Void}
+   *
+   * @public
+   *
+   * @async
+   */
+  generateOneByTimeCb(time, opts, cb) {
+    const callback = cb || opts;
+
+    this.generateOneByTime(time, opts)
+      .then(result => callback(null, result))
+      .catch(callback);
+  }
+
+  /**
    * Method to generate one thumbnail by being given a percentage value.
    *
    * @method generateOneByPercent
@@ -121,7 +169,7 @@ module.exports = class ThumbnailGenerator {
       folder: this.destinationPath,
       count: this.count,
       size: this.size,
-      filename: this.fileNameFormat,
+      filename: opts.fileNameFormat || this.fileNameFormat,
       logger: this.logger
     };
 

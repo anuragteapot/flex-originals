@@ -7,7 +7,7 @@
             <div class="container">
               <div class="grid grid--half">
                 <div class="video-wrapper">
-                  <lazy-video-player :src="videoSource" v-if="!videoUnavaliable" :disablekey="true"></lazy-video-player>
+                  <fo-video-player :src="videoSource" v-if="!videoUnavaliable" :disablekey="true"></fo-video-player>
                 </div>
                 <h3>Select Thumbnail</h3>
                 <div

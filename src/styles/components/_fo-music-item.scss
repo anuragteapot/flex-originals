@@ -12,7 +12,7 @@
     margin: 5px 7px 50px 7px;
     position: relative;
     cursor: pointer;
-    background-color: rgba(0,0,0,.1);
+    background-color: rgba(0, 0, 0, 0.1);
 
     .playing {
       margin: auto;
@@ -93,7 +93,7 @@
     .audio__info {
       text-align: left;
 
-      &.light .title{
+      &.light .title {
         color: black !important;
       }
 

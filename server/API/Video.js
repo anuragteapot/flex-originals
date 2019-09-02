@@ -169,7 +169,7 @@ module.exports = class ThumbnailGenerator {
       folder: this.destinationPath,
       count: this.count,
       size: this.size,
-      filename: opts.fileNameFormat || this.fileNameFormat,
+      filename: this.fileNameFormat,
       logger: this.logger
     };
 

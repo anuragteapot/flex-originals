@@ -6,9 +6,26 @@
   "options": {
     "validateUpsert": true
   },
-  "properties": {},
+  "properties": {
+    "visibility": {
+      "type": "number",
+      "required": true,
+      "default": 1
+    }
+  },
   "validations": [],
-  "relations": {},
+  "relations": {
+    "user": {
+      "type": "belongsTo",
+      "model": "user",
+      "foreignKey": "followOwnerId"
+    },
+    "channel": {
+      "type": "belongsTo",
+      "model": "user",
+      "foreignKey": "channel"
+    }
+  },
   "acls": [],
   "methods": {}
 }

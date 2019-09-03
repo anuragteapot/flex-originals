@@ -1,10 +1,10 @@
 <template>
   <div class="v-thumb">
-    <router-link :to="`/app/@watch?v=${item.id}`">
-      <div class="video__thumbnail" ˝>
+    <div class="video__thumbnail">
+      <router-link :to="`/app/@watch?v=${item.id}`">
         <lazy-image :src="src" :lazySrc="lazySrc"></lazy-image>
-      </div>
-    </router-link>
+      </router-link>
+    </div>
     <div class="video__info">
       <p class="title">{{ item.title }}</p>
       <p class="views">

@@ -399,8 +399,8 @@ export default {
     },
     handleProgress() {
       if (
-        this.time >= Math.floor(this.duration / 2) &&
-        this.time <= Math.ceil(this.duration / 2)
+        Math.floor(this.time) >= Math.floor(this.duration / 2) - 5 &&
+        Math.floor(this.time) <= Math.ceil(this.duration / 2) + 5
       ) {
         if (Math.floor(this.time) != 0) {
           this.$emit("halfTime");

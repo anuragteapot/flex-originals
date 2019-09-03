@@ -398,7 +398,10 @@ export default {
       this.$emit("handleEnded");
     },
     handleProgress() {
-      if (Math.floor(this.time) == Math.floor(this.duration / 2)) {
+      if (
+        this.time >= Math.floor(this.duration / 2) &&
+        this.time <= Math.ceil(this.duration / 2)
+      ) {
         if (Math.floor(this.time) != 0) {
           this.$emit("halfTime");
         }

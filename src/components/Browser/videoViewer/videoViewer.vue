@@ -48,12 +48,13 @@
                   <div class="video__description">
                     <div class="left">
                       <div class="channel__avater">
-                        <img
-                          @click="$router.push(`/app/@channel/${user.id}`)"
-                          alt="Avatar"
-                          :src=" settings.profileAvatar || `/public/logo.png`"
-                          class="avatar"
-                        />
+                        <router-link :to="`/app/@channel/${user.id}`">
+                          <img
+                            alt="Avatar"
+                            :src=" settings.profileAvatar || `/public/logo.png`"
+                            class="avatar"
+                          />
+                        </router-link>
 
                         <div class="channel__name">
                           {{user.realm}}

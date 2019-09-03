@@ -1,7 +1,7 @@
 <template>
   <div class="media-content-grid">
     <div class="grid_section files">
-      <h1 v-if="content.audio.length > 0">Recents</h1>
+      <h1 v-if="content.audio.length > 0">Recommended</h1>
       <div class="fo-content__container" v-if="content.audio.length > 0">
          <music-thumb
           v-for="item in content.audio"

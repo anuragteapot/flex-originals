@@ -328,6 +328,7 @@ module.exports = function(Action) {
       });
 
       const video = await Videos.find({
+        include: ['videoAnalytics', 'user'],
         fields: {
           videoOwnerId: true,
           id: true,
@@ -339,6 +340,7 @@ module.exports = function(Action) {
         limit: limit
       });
       const audio = await Audios.find({
+        include: ['audioAnalytics', 'user'],
         fields: {
           audioOwnerId: true,
           id: true,
@@ -352,12 +354,26 @@ module.exports = function(Action) {
       return { video, audio, user, settings };
     } else {
       const video = await Videos.find({
-        fields: { id: true, title: true, videoFile: true, thumbImage: true },
+        include: ['videoAnalytics', 'user'],
+        fields: {
+          videoOwnerId: true,
+          id: true,
+          title: true,
+          videoFile: true,
+          thumbImage: true
+        },
         where: { visibility: 1 },
         limit: limit
       });
       const audio = await Audios.find({
-        fields: { id: true, title: true, audioFile: true, thumbImage: true },
+        include: ['audioAnalytics', 'user'],
+        fields: {
+          audioOwnerId: true,
+          id: true,
+          title: true,
+          audioFile: true,
+          thumbImage: true
+        },
         where: { visibility: 1 },
         limit: limit
       });

@@ -398,6 +398,11 @@ export default {
       this.$emit("handleEnded");
     },
     handleProgress() {
+      if (Math.floor(this.time) == Math.floor(this.duration / 2)) {
+        if (Math.floor(this.time) != 0) {
+          this.$emit("halfTime");
+        }
+      }
       this.loading = false;
     },
     detectKeypress(event) {
@@ -415,7 +420,7 @@ export default {
         this.skipBack();
       }
     },
-    loadeddata() {
+    loadedmetadata() {
       if (this.error) return 0;
       if (this.autoPlay) {
         this.makeActive();

@@ -2,6 +2,7 @@
   <div
     :class="`fo-image fo-background ${hover ? 'hover' : 'not'} ${active ? 'active': ''}`"
     ref="lazyBackground"
+    @click="$emit('click')"
     :alt="alt"
   >
     <div v-if="isLoading && !lazySrc" class="loader-1 center">

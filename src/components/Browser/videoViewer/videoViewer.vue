@@ -17,6 +17,7 @@
                     v-if="!videoUnavaliable"
                     :autoPlay="true"
                     @handleEnded="handleEnded"
+                    @halfTime="halfTime"
                   ></fo-video-player>
                 </div>
 
@@ -24,11 +25,10 @@
                   <p class="video__name">{{ video.title}}</p>
                   <div class="video__analytics__info">
                     <div class="left">
-                      <span class="video__views">11111 views</span>
+                      <span class="video__views">{{analytic.views}} views</span>
                     </div>
                     <div class="right">
                       <span>
-                        11111
                         <i class="far fa-heart"></i>
                         LIKE
                       </span>
@@ -54,17 +54,15 @@
                           :src=" settings.profileAvatar || `/public/logo.png`"
                           class="avatar"
                         />
+
                         <div class="channel__name">
+                          {{user.realm}}
+                          <br />
                           {{user.username}}
-                          <i
-                            class="fas fa-certificate"
-                            style="color:lightgreen"
-                            aria-label="verified"
-                          ></i>
                         </div>
+                        <img src="/public/verified.svg" style="width:20px!important" />
                       </div>
                     </div>
-
                     <div class="right">
                       <span class="follow">Follow</span>
                     </div>
@@ -206,6 +204,7 @@
 
 <script>
 import videoSuggestions from "./videoSuggestions";
+import { api } from "./../../../app/Api";
 import { mapGetters } from "vuex";
 import * as types from "./../../../store/mutation-types";
 export default {
@@ -227,7 +226,7 @@ export default {
     }
   },
   computed: {
-  ...mapGetters(["isMobile"]),
+    ...mapGetters(["isMobile"]),
     videoSuggestions() {
       return this.$store.state.content.video.filter(
         item => item.id !== this.$route.query.v
@@ -250,6 +249,15 @@ export default {
         type: "MShareModal"
       });
     },
+    halfTime: api.debounce(async function() {
+      try {
+        await this.$api
+          .axios()
+          .post(`/api/videoAnalytics/updateViews`, { id: this.video.id });
+      } catch (err) {
+        console.log(err);
+      }
+    }, 2000),
     handleEnded() {
       const videos = this.$store.state.content.video;
       if (this.autoPlay && this.videoSuggestions.length > 0) {

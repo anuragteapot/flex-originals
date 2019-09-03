@@ -1,12 +1,17 @@
 <template>
   <div class="content-v-thumb">
-    <div class="video__thumbnail" @click="open">
-      <lazy-image :src="getSrc()" :lazySrc="lazySrc" hover :active="selected"></lazy-image>
+    <div class="video__thumbnail">
+      <lazy-image :src="getSrc()" :lazySrc="lazySrc" hover :active="selected" @click="open"></lazy-image>
       <i class="far fa-2x fa-check-circle" v-if="selected"></i>
       <i class="fas fa-play fa-2x file-icon" aria-hidden="true" v-if="!editMode"></i>
       <div :class="`video__info ${theme}`">
         <p class="title">{{getName()}}</p>
-        <p class="views">Alenter</p>
+        <p class="views">
+          {{ item.user.username }}
+          <img src="/public/verified.svg" width="10" height="10" />
+          <br />
+          {{ item.videoAnalytics.views }} views
+        </p>
       </div>
     </div>
   </div>
@@ -36,7 +41,7 @@ export default {
     editMode() {
       return this.$store.state.editMode;
     },
-      theme(){
+    theme() {
       return this.$store.state.theme;
     },
     selected() {
@@ -47,7 +52,7 @@ export default {
     }
   },
   methods: {
-       getSrc() {
+    getSrc() {
       if (this.src.includes("https")) {
         return this.src;
       } else {

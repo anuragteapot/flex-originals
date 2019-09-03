@@ -50,12 +50,11 @@
           </div>
           <p class="channel__name" v-show="channelUser.username">
             {{channelUser.realm}} ({{channelUser.username}})
-            <i
-              v-show="channelInfo.verifiedChannel"
-              aria-label="verified"
-              class="fas fa-certificate"
-              style="color: lightgreen;"
-            ></i>
+            <img
+              src="/public/verified.svg"
+              width="20"
+              height="20"
+            />
           </p>
           <button class="follow" style="background:red;" v-if="editMode" @click="onEditMode">
             <i class="far fa-edit"></i> Edit Mode On

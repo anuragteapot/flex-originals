@@ -5,7 +5,12 @@
     </div>
     <div class="video__info">
       <p class="title">{{ item.title }}</p>
-      <p class="views">Alenter</p>
+        <p class="views">
+          {{ item.user.username }}
+          <img src="/public/verified.svg" width="10" height="10" />
+          <br />
+          {{ item.videoAnalytics.views }} views
+        </p>
     </div>
   </div>
 </template> 

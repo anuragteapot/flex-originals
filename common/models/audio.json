@@ -84,9 +84,9 @@
       "model": "user",
       "foreignKey": "audioOwnerId"
     },
-    "audioanalytics": {
+    "audioAnalytics": {
       "type": "hasOne",
-      "model": "Audioanalytic",
+      "model": "audioAnalytic",
       "foreignKey": "audioId"
     }
   },

@@ -1,10 +1,11 @@
 <template>
   <div class="content-m-thumb">
-    <div class="music__thumbnail" @click="open">
+    <div class="music__thumbnail">
       <lazy-image
         :src="getSrc()"
         :lazySrc="lazySrc"
         hover
+        @click="open"
         :active="item.id == $route.query.a || selected"
       ></lazy-image>
       <div class="now playing bar" v-show="item.id == $route.query.a">
@@ -25,7 +26,12 @@
       ></i>
       <div :class="`audio__info ${theme}`">
         <p class="title">{{getName()}}</p>
-        <!-- <p class="views">{{}}</p> -->
+        <p class="views">
+          {{ item.user.username }}
+          <img src="/public/verified.svg" width="10" height="10" />
+          <br />
+          {{ item.videoAnalytics ? item.videoAnalytics.views : '0' }} views
+        </p>
       </div>
     </div>
   </div>
@@ -52,13 +58,13 @@ export default {
     srcset: String,
     sizes: String,
     item: Object,
-    user: Object,
+    user: Object
   },
   computed: {
     editMode() {
       return this.$store.state.editMode;
     },
-    theme(){
+    theme() {
       return this.$store.state.theme;
     },
     selected() {

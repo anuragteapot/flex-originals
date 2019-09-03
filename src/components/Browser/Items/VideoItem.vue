@@ -10,7 +10,7 @@
           {{ item.user.username }}
           <img src="/public/verified.svg" width="10" height="10" />
           <br />
-          {{ item.videoAnalytics.views }} views
+          {{  item.videoAnalytics ? item.videoAnalytics.views : '0' }} views
         </p>
       </div>
     </div>

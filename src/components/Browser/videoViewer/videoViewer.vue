@@ -59,12 +59,18 @@
                           {{user.realm}}
                           <br />
                           {{user.username}}
+                          <br />
                         </div>
                         <img src="/public/verified.svg" style="width:20px!important" />
                       </div>
+                      <p class="published">Published {{ $api.time_ago(new Date(video.published)) }}</p>
                     </div>
                     <div class="right">
-                      <span class="follow">Follow</span>
+                      <span class="edit__video" v-if="user.id == loggedUser.id">
+                        <router-link :to="`/app/@editvideo?v=${this.video.id}`">Edit Video</router-link>
+                      </span>
+                      <span class="following" v-else-if="following" @click="unFollow">Following</span>
+                      <span class="follow" v-else-if="!following" @click="follow">Follow</span>
                     </div>
                   </div>
 
@@ -210,6 +216,7 @@ import * as types from "./../../../store/mutation-types";
 export default {
   name: "media-settings",
   data: () => ({
+    following: false,
     src: "/public/qq.webp",
     lazySrc: "/public/icons/music.svg",
     videoSource: "",
@@ -237,12 +244,41 @@ export default {
     },
     theme() {
       return this.$store.state.theme;
+    },
+    loggedUser() {
+      return this.$store.state.user;
     }
   },
   components: {
     videoSuggestions
   },
   methods: {
+    async unFollow() {
+      const follow = await this.$store.dispatch("unFollow", {
+        followId: this.loggedUser.id,
+        channelId: this.user.id
+      });
+
+      this.following = follow.data.SUCCESS;
+
+      const res = await this.$store.dispatch("getFollowers", {
+        followId: this.loggedUser.id
+      });
+      this.$store.commit(types.SET_FOLLOWING, res.data);
+    },
+    async follow() {
+      const follow = await this.$store.dispatch("doFollow", {
+        followId: this.loggedUser.id,
+        channelId: this.user.id
+      });
+
+      this.following = follow.data.SUCCESS;
+
+      const res = await this.$store.dispatch("getFollowers", {
+        followId: this.loggedUser.id
+      });
+      this.$store.commit(types.SET_FOLLOWING, res.data);
+    },
     share() {
       this.$store.commit(types.SHOW_MODAL, {
         state: true,
@@ -307,6 +343,13 @@ export default {
         this.user = currentVideo.data.user;
         this.settings = currentVideo.data.settings;
         this.video = currentVideo.data.video;
+
+        const follow = await this.$store.dispatch("getFollow", {
+          followId: this.loggedUser.id,
+          channelId: this.user.id
+        });
+
+        this.following = follow.data.SUCCESS;
       } else {
         this.$router.push("/@error");
       }

@@ -1,13 +1,23 @@
 <template>
   <div class="content-m-thumb">
     <div class="music__thumbnail">
+      <router-link :to="`/app/@song?a=${item.id}`" v-show="!this.editMode">
+        <lazy-image
+          :src="getSrc()"
+          :lazySrc="lazySrc"
+          hover
+          :active="item.id == $route.query.a || selected"
+        ></lazy-image>
+      </router-link>
       <lazy-image
+        v-show="this.editMode"
         :src="getSrc()"
         :lazySrc="lazySrc"
         hover
         @click="open"
         :active="item.id == $route.query.a || selected"
       ></lazy-image>
+
       <div class="now playing bar" v-show="item.id == $route.query.a">
         <span class="bar n1"></span>
         <span class="bar n2"></span>
@@ -30,7 +40,7 @@
           {{ item.user.username }}
           <img src="/public/verified.svg" width="10" height="10" />
           <br />
-          {{ item.videoAnalytics ? item.videoAnalytics.views : '0' }} views
+          {{ item.videoAnalytics ? item.videoAnalytics.views : '0' }} views . {{ $api.time_ago(new Date(item.published)) }}
         </p>
       </div>
     </div>
@@ -83,20 +93,16 @@ export default {
       }
     },
     open() {
-      if (!this.editMode) {
-        this.$router.push(`/app/@song?a=${this.item.id}`);
+      if (this.selected) {
+        this.$store.commit(types.UNSELECT_BROWSER_ITEM, {
+          id: this.item.id,
+          type: "audio"
+        });
       } else {
-        if (this.selected) {
-          this.$store.commit(types.UNSELECT_BROWSER_ITEM, {
-            id: this.item.id,
-            type: "audio"
-          });
-        } else {
-          this.$store.commit(types.SELECT_BROWSER_ITEM, {
-            id: this.item.id,
-            type: "audio"
-          });
-        }
+        this.$store.commit(types.SELECT_BROWSER_ITEM, {
+          id: this.item.id,
+          type: "audio"
+        });
       }
     },
     getName: function() {

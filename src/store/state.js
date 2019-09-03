@@ -18,6 +18,7 @@ export default {
     des: true,
     mobileState: false
   },
+  following:[],
   // The currently selected items
   selectedItems: [],
   // The currently selected items

@@ -44,6 +44,15 @@ export default {
    * @param state
    * @param payload
    */
+  [types.SET_FOLLOWING]: (state, payload) => {
+    state.following = payload;
+  },
+
+  /**
+   * Select a directory
+   * @param state
+   * @param payload
+   */
   [types.SET_EDIT_MODE]: (state, payload) => {
     state.editMode = payload;
   },
@@ -241,7 +250,6 @@ export default {
   [types.IS_AUTHENTICATED]: (state, payload) => {
     state.isAuthenticated = payload;
   },
-
 
   /**
    * Define the list grid view

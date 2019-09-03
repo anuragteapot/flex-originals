@@ -1,7 +1,17 @@
 <template>
   <div class="content-v-thumb">
     <div class="video__thumbnail">
-      <lazy-image :src="getSrc()" :lazySrc="lazySrc" hover :active="selected" @click="open"></lazy-image>
+      <router-link :to="`/app/@watch?v=${item.id}`" v-show="!this.editMode">
+        <lazy-image :src="getSrc()" :lazySrc="lazySrc" hover :active="selected"></lazy-image>
+      </router-link>
+      <lazy-image
+        v-show="this.editMode"
+        :src="getSrc()"
+        :lazySrc="lazySrc"
+        hover
+        :active="selected"
+        @click="open"
+      ></lazy-image>
       <i class="far fa-2x fa-check-circle" v-if="selected"></i>
       <i class="fas fa-play fa-2x file-icon" aria-hidden="true" v-if="!editMode"></i>
       <div :class="`video__info ${theme}`">
@@ -10,7 +20,7 @@
           {{ item.user.username }}
           <img src="/public/verified.svg" width="10" height="10" />
           <br />
-          {{  item.videoAnalytics ? item.videoAnalytics.views : '0' }} views
+          {{ item.videoAnalytics ? item.videoAnalytics.views : '0' }} views . {{ $api.time_ago(new Date(item.published)) }}
         </p>
       </div>
     </div>
@@ -60,20 +70,16 @@ export default {
       }
     },
     open() {
-      if (!this.editMode) {
-        this.$router.push(`/app/@watch?v=${this.item.id}`);
+      if (this.selected) {
+        this.$store.commit(types.UNSELECT_BROWSER_ITEM, {
+          id: this.item.id,
+          type: "video"
+        });
       } else {
-        if (this.selected) {
-          this.$store.commit(types.UNSELECT_BROWSER_ITEM, {
-            id: this.item.id,
-            type: "video"
-          });
-        } else {
-          this.$store.commit(types.SELECT_BROWSER_ITEM, {
-            id: this.item.id,
-            type: "video"
-          });
-        }
+        this.$store.commit(types.SELECT_BROWSER_ITEM, {
+          id: this.item.id,
+          type: "video"
+        });
       }
     },
     getName: function() {

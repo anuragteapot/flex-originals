@@ -140,7 +140,7 @@ module.exports = function(Follow) {
       historyCheck.save();
     }
 
-    return { SUCCESS: true };
+    return { SUCCESS: false };
   };
 
   Follow.remoteMethod('unFollow', {

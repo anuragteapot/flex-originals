@@ -6,9 +6,7 @@
   "options": {
     "validateUpsert": true
   },
-  "hidden": [
-    "videoOwnerId"
-  ],
+  "hidden": ["videoOwnerId"],
   "properties": {
     "title": {
       "type": "string",
@@ -75,6 +73,11 @@
       "type": "boolean",
       "required": true,
       "default": false
+    },
+    "published": {
+      "type": "date",
+      "required": true,
+      "default": "$now"
     }
   },
   "validations": [],

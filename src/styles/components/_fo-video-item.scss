@@ -11,43 +11,41 @@
     display: inline-block;
     margin: 5px 7px 50px 7px;
     position: relative;
-    cursor: pointer;
-    background-color: rgba(0,0,0,.1);
-
+    background-color: rgba(0, 0, 0, 0.1);
 
     .video__info {
       text-align: left;
 
-      &.light .title{
+      &.light .title {
         color: black !important;
       }
 
-      .views{
-        color: rgb(189, 188, 188);
+      .views {
+        color: grey;
         font-weight: normal !important;
-        font-size: 13px; 
+        font-size: 13px;
       }
     }
-  
-      p {
-        bottom: -30px;
-        color: white;
-        width: 100%;
-      }
 
-      i {
-        margin: auto;
-        top: 50%;
-        left: 50%;
-        margin-left: -15px;
-        margin-top: -15px;
-        position: absolute;
-        color: white;
-      }
+    p {
+      bottom: -30px;
+      color: white;
+      width: 100%;
+    }
+
+    i {
+      margin: auto;
+      top: 50%;
+      left: 50%;
+      margin-left: -15px;
+      margin-top: -15px;
+      position: absolute;
+      color: white;
+    }
   }
 
   .lazy-background::before {
-    content: "";
+    content: '';
     position: absolute;
     top: 0;
     background: rgba(0, 0, 0, 0.1);

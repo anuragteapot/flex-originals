@@ -18,6 +18,8 @@ export const DECREASE_GRID_SIZE = 'DECREASE_GRID_SIZE';
 
 export const SET_CONTENT = 'SET_CONTENT';
 
+export const SET_FOLLOWING = 'SET_FOLLOWING';
+
 export const SET_USER = 'SET_USER';
 export const SET_EDIT_MODE = 'SET_EDIT_MODE';
 

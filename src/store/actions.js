@@ -1,6 +1,69 @@
 /** @format */
 
 import { api } from '../app/Api';
+
+/**
+ * Get contents
+ * @param commit
+ * @param payload
+ */
+export const getFollowers = async (context, payload) => {
+  try {
+    return await api
+      .axios()
+      .get(`/api/follows/getFollowers/${payload.followId}`);
+  } catch (err) {
+    api._handleError(err);
+  }
+};
+
+/**
+ * Get contents
+ * @param commit
+ * @param payload
+ */
+export const unFollow = async (context, payload) => {
+  try {
+    return await api.axios().post(`/api/follows/unFollow`, {
+      channelId: payload.channelId,
+      followId: payload.followId
+    });
+  } catch (err) {
+    api._handleError(err);
+  }
+};
+
+/**
+ * Get contents
+ * @param commit
+ * @param payload
+ */
+export const doFollow = async (context, payload) => {
+  try {
+    return await api.axios().post(`/api/follows/doFollow`, {
+      channelId: payload.channelId,
+      followId: payload.followId
+    });
+  } catch (err) {
+    api._handleError(err);
+  }
+};
+
+/**
+ * Get contents
+ * @param commit
+ * @param payload
+ */
+export const getFollow = async (context, payload) => {
+  try {
+    return await api
+      .axios()
+      .get(`/api/follows/getFollow/${payload.channelId}/${payload.followId}`);
+  } catch (err) {
+    api._handleError(err);
+  }
+};
+
 /**
  * Get contents
  * @param commit

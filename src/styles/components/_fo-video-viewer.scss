@@ -40,9 +40,16 @@
       .video-wrapper {
         padding: 10px;
       }
-      
+
+      .published {
+        font-weight: normal !important;
+        padding: 10px;
+        color: gray;
+        font-size: 15px;
+      }
+
       .mobile {
-         padding: 0!important;
+        padding: 0 !important;
       }
 
       .video__unavaliable {
@@ -145,15 +152,29 @@
             text-align: end;
             padding: 20px 0px 40px;
 
-            .follow {
+            .follow,
+            .following,
+            .edit__video {
               border-radius: 2px;
               padding: 10px 50px;
               color: white !important;
               cursor: pointer;
               background-color: $color-error;
+            }
 
-              i {
-                margin: 0 5px;
+            .following {
+              background-color: rgb(97, 97, 97) !important;
+              color: #b6b6b6 !important;
+              padding: 10px 40px;
+            }
+
+            .edit__video {
+              padding: 10px 30px;
+              background-color: #109fd8 !important;
+
+              a {
+                color: black;
+                text-decoration: none;
               }
             }
           }
@@ -444,6 +465,7 @@
           .views {
             color: gray;
             font-size: 13px;
+            font-weight: normal !important;
           }
 
           span {

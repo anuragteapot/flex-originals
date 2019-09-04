@@ -3,30 +3,31 @@
     <div @click="toggleMenu" style="cursor: pointer; margin-right:30px;">
       <i class="fas fa-align-justify"></i>
     </div>
-    <span :class="`menu__button ${theme}`">
+    <button :class="`menu__button ${theme}`">
       <i class="fas fa-fire"></i>Trending
-    </span>
-    <span :class="`menu__button ${theme}`">
+    </button>
+    <button :class="`menu__button ${theme}`">
       <i class="far fa-clock"></i>Watch Later
-    </span>
-    <span :class="`menu__button ${theme}`">
+    </button>
+    <button :class="`menu__button ${theme}`">
       <i class="far fa-heart"></i>Liked Videos
-    </span>
-    <span :class="`menu__button ${theme}`">
+    </button>
+    <button :class="`menu__button ${theme}`">
       <i class="fab fa-rev"></i>New Releases
-    </span>
-    <div :class="`menu-right ${theme}`">
-      <!-- <span class="icon">
+    </button>
+    <input type="text" placeholder="Search...." />
+    <!-- <div :class="`menu-right ${theme}`"> -->
+    <!-- <span class="icon">
         <i class="fas fa-search search__icon"></i>
       </span>
       <input type="text" placeholder="Search...." />
       <span class="icon">
         <i class="fas fa-bell"></i>
-      </span> -->
-      <!-- <span class="icon">
+    </span>-->
+    <!-- <span class="icon">
         <i class="fas fa-ellipsis-v"></i>
-      </span> -->
-    </div>
+    </span>-->
+    <!-- </div> -->
   </menu>
 </template>
 
@@ -37,8 +38,14 @@ import * as types from "./../../../store/mutation-types";
 export default {
   name: "toolbar",
   computed: {
-    ...mapGetters(["isMobile", "isLoading", "appDrawer", "isAuthenticated", "theme"]),
-     theme() {
+    ...mapGetters([
+      "isMobile",
+      "isLoading",
+      "appDrawer",
+      "isAuthenticated",
+      "theme"
+    ]),
+    theme() {
       return this.$store.state.theme;
     }
   },

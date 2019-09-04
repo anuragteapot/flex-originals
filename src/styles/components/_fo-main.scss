@@ -364,6 +364,7 @@ p {
       padding: 5px 15px;
       margin: 0 30px 0 0;
       border-radius: 5px;
+      font-size: 15px;
       cursor: pointer;
       background-color: #1e2124;
 
@@ -400,19 +401,7 @@ p {
     color: #8a8e94;
   }
 
-  .menu-right {
-    margin-left: auto;
-
-    .search__icon {
-      display: none;
-
-      @media only screen and (max-width: 700px) {
-        display: inline-block;
-      }
-    }
-  }
-
-  .menu .menu-right input {
+  .menu input {
     color: white;
     height: 1.9rem;
     border-radius: 0.25rem;
@@ -427,14 +416,9 @@ p {
     }
   }
 
-  .menu .menu-right input:focus {
+  .menu input:focus {
     width: 300px;
     background-color: #0e0f0f;
-  }
-
-  .menu .menu-right .icon {
-    font-size: 20px;
-    margin: 0px 10px auto;
   }
 
   .content {

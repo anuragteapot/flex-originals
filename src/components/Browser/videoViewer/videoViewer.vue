@@ -67,11 +67,11 @@
                       <p class="published">Published {{ $api.time_ago(new Date(video.published)) }}</p>
                     </div>
                     <div class="right">
-                      <span class="edit__video" v-if="user.id == loggedUser.id">
+                      <button class="edit__video" v-if="user.id == loggedUser.id">
                         <router-link :to="`/app/@editvideo?v=${this.video.id}`">Edit Video</router-link>
-                      </span>
-                      <span class="following" v-else-if="following" @click="unFollow">Following</span>
-                      <span class="follow" v-else-if="!following" @click="follow">Follow</span>
+                      </button>
+                      <button class="following" v-else-if="following" @click="unFollow">Following</button>
+                      <button class="follow" v-else-if="!following" @click="follow">Follow</button>
                     </div>
                   </div>
 

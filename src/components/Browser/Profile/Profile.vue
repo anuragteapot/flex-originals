@@ -3,7 +3,7 @@
     <div class="inner">
       <div class="profile__banner">
         <div class="profile__banner__background">
-          <div class="profile__avatar">
+          <div v-show="channelInfo.profileAvatar" class="profile__avatar">
             <img :src="channelInfo.profileAvatar" />
           </div>
           <div class="social__media">
@@ -137,15 +137,13 @@ export default {
       }
     },
     async init() {
-      if (this.$route.params.id) {
-        const content = await this.$store.dispatch("getContent", {
-          userId: this.$route.params.id
-        });
+      const content = await this.$store.dispatch("getContent", {
+        userId: this.$route.params.id
+      });
 
-        this.channelUser = content.data.user;
-        this.channelInfo = content.data.settings;
-        this.$store.commit(types.SET_CONTENT, content.data);
-      }
+      this.channelUser = content.data.user;
+      this.channelInfo = content.data.settings;
+      this.$store.commit(types.SET_CONTENT, content.data);
     }
   },
   created() {
@@ -154,8 +152,19 @@ export default {
   destroyed() {
     window.removeEventListener("scroll", this.onScroll, false);
   },
-  beforeMount() {
-    this.init();
+  async beforeMount() {
+    let content;
+    this.$store.commit(types.SET_CONTENT, { audio: [], video: [] });
+    try {
+      content = await this.$store.dispatch("getContent", {
+        userId: this.$route.params.id
+      });
+    } catch (err) {
+      this.$api._handleError(err);
+    }
+    this.channelUser = content.data.user;
+    this.channelInfo = content.data.settings;
+    this.$store.commit(types.SET_CONTENT, content.data);
   }
 };
 </script>

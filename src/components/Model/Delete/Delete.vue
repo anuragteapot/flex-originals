@@ -52,7 +52,7 @@ export default {
             color: "success"
           };
         } catch (err) {
-          console.log(err);
+          this.$api._handleError(err);
         }
       }
 

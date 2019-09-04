@@ -321,7 +321,6 @@ export default {
           this.loadingThumbnails = this.thumbnails;
         }
       } catch (err) {
-        console.log(err);
         this.$api._handleError(err);
       }
 
@@ -410,7 +409,6 @@ export default {
           }, 1000);
         } catch (err) {
           this.$api._handleError(err);
-          console.log(err);
         }
       }
     }

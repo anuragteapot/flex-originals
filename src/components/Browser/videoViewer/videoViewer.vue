@@ -62,7 +62,7 @@
                           {{user.username}}
                           <br />
                         </div>
-                        <img src="/public/verified.svg" style="width:20px!important" />
+                        <img src="/public/verified.svg" style="width:15px!important" />
                       </div>
                       <p class="published">Published {{ $api.time_ago(new Date(video.published)) }}</p>
                     </div>
@@ -292,7 +292,7 @@ export default {
           .axios()
           .post(`/api/videoAnalytics/updateViews`, { id: this.video.id });
       } catch (err) {
-        console.log(err);
+        this.$api._handleError(err);
       }
     }, 2000),
     handleEnded() {

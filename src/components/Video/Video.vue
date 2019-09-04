@@ -248,7 +248,9 @@ export default {
           await this.media.requestPictureInPicture();
         else await document.exitPictureInPicture();
       } catch (error) {
+        console.log(error);
       } finally {
+        console.log("Mini Video");
       }
     },
     reset() {

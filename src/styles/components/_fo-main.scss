@@ -138,6 +138,10 @@ p {
       background: white !important;
       color: black !important;
       border: 1px solid #dadada !important;
+
+      .features-header {
+        border-bottom: 1px solid #dadada !important;
+      }
     }
 
     input {

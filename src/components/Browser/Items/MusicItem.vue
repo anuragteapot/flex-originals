@@ -8,6 +8,22 @@
           hover
           :active="item.id == $route.query.a || selected"
         ></lazy-image>
+        <div class="now playing bar" v-show="item.id == $route.query.a">
+          <span class="bar n1"></span>
+          <span class="bar n2"></span>
+          <span class="bar n3"></span>
+          <span class="bar n4"></span>
+          <span class="bar n5"></span>
+          <span class="bar n6"></span>
+          <span class="bar n7"></span>
+          <span class="bar n8"></span>
+        </div>
+        <i class="far fa-2x fa-check-circle" v-if="selected"></i>
+        <i
+          class="fas fa-play fa-2x file-icon"
+          v-if="item.id !== $route.query.a && !editMode"
+          aria-hidden="true"
+        ></i>
       </router-link>
       <lazy-image
         v-show="this.editMode"
@@ -18,22 +34,6 @@
         :active="item.id == $route.query.a || selected"
       ></lazy-image>
 
-      <div class="now playing bar" v-show="item.id == $route.query.a">
-        <span class="bar n1"></span>
-        <span class="bar n2"></span>
-        <span class="bar n3"></span>
-        <span class="bar n4"></span>
-        <span class="bar n5"></span>
-        <span class="bar n6"></span>
-        <span class="bar n7"></span>
-        <span class="bar n8"></span>
-      </div>
-      <i class="far fa-2x fa-check-circle" v-if="selected"></i>
-      <i
-        class="fas fa-play fa-2x file-icon"
-        v-if="item.id !== $route.query.a && !editMode"
-        aria-hidden="true"
-      ></i>
       <div :class="`audio__info ${theme}`">
         <p class="title">{{getName()}}</p>
         <p class="views">

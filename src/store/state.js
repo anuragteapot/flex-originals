@@ -10,7 +10,7 @@ export default {
   autoplay: true,
   // Settings
   settings: {},
-  theme: 'dark',
+  theme: 'light',
   user: {},
   editMode: false,
   appDrawer: {

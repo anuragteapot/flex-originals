@@ -10,7 +10,13 @@ const path = require('path');
 const app = require('../../server/server');
 const ThumbnailGenerator = require('../../server/API/Video');
 
-const VIDEO_EXT = ['video/mp4', 'video/x-msvideo'];
+const VIDEO_EXT = [
+  'video/mp4',
+  'video/x-msvideo',
+  'video/avi',
+  'application/x-troff-msvideo',
+  'video/msvideo'
+];
 const AUDIO_EXT = [
   'audio/mpeg',
   'audio/vnd.wav',
@@ -44,8 +50,7 @@ module.exports = function(Action) {
       const userId = req.params.id;
       const dirPath = `uploads/${userId}`;
       fs.ensureDir('uploads', err => {
-        console.log(err); // => null
-        // dir has now been created, including the directory it is to be placed in
+        console.log(err);
       });
       if (!fs.existsSync(dirPath)) {
         fs.mkdirSync(dirPath);
@@ -158,8 +163,12 @@ module.exports = function(Action) {
               message: 'File not allowed'
             });
           }
-        } catch (err) {
-          return res.json(err);
+        } catch (error) {
+          return res.json({
+            err: 500,
+            message: 'Server Internal Error',
+            error
+          });
         }
       }
     });
@@ -201,8 +210,8 @@ module.exports = function(Action) {
           const tg = new ThumbnailGenerator({
             sourcePath: video.videoMeta.path,
             destinationPath: video.videoMeta.destination,
-            size: '165x100',
-            count: 3
+            size: '190x110',
+            count: 4
           });
 
           const thumb = await tg.generate();
@@ -211,14 +220,12 @@ module.exports = function(Action) {
           );
           return { thumbnails };
         } catch (err) {
-          console.log(err);
-          throw new Error('File must be video type.', {}, 500);
+          throw new Error('File must be video type.');
         }
       } else {
         return { thumbnails: [] };
       }
     } catch (err) {
-      console.log(err);
       return { err };
     }
   };

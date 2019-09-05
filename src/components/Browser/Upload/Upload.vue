@@ -21,7 +21,7 @@
             <i class="fas fa-cloud-upload-alt fa-4x" @click="openSelect"></i>
             <br />
             <h1>DRAG & DROP</h1>
-            <p>to upload your video/music or click</p>
+            <p>to upload your video/music/image or click</p>
           </div>
           <div class="card__body">
             <div class="container" v-if="isUploading">
@@ -30,6 +30,9 @@
               </div>
             </div>
             <div class="container" v-if="isUploading">
+              <form enctype="multipart/form-data" ref="formFileThumbnail">
+                <input type="file" hidden ref="inputFileThumbnail" @change="processThumb" />
+              </form>
               <div class="grid grid--half">
                 <h3>Uploading Progress</h3>
                 <div class="video__upload__progress">
@@ -40,47 +43,61 @@
                     <p>{{uploadPercent}}%</p>
                   </div>
                 </div>
-                <h3>Select Thumbnail</h3>
+                <div class="thumbnails__wrapper" v-show="type == 'video'">
+                  <h3>Select Thumbnail</h3>
+                  <div
+                    :class="`video__thumbnails ${uploadData && uploadData.thumbImage == thumb ? 'selected' : ''}`"
+                    v-for="(thumb, i ) in thumbnails"
+                    :key="i"
+                  >
+                    <img
+                      class="fo-image"
+                      :src="`/${thumb}`"
+                      alt="thumbnail"
+                      @click="uploadData.thumbImage = thumb"
+                    />
+                  </div>
+                  <div
+                    class="click__wrapper video"
+                    @click="$refs.inputFileThumbnail.click()"
+                  >Upload Thumbnail</div>
+                </div>
                 <div
-                  :class="`video__thumbnails ${videoData && videoData.thumbImage == thumb ? 'selected' : ''}`"
-                  v-for="(thumb, i) in loadingThumbnails"
-                  :key="i"
+                  class="thumbnails__wrapper"
+                  v-show=" type != 'video' && (type == 'audio' || isThumbUpload ) "
                 >
-                  <img
-                    class="fo-image"
-                    :src="`/${thumb}`"
-                    alt="thumbnail"
-                    @click="uploadData.thumbImage = thumb"
-                  />
+                  <div
+                    v-show="uploadData.thumbImage == ''"
+                    class="click__wrapper"
+                    @click="$refs.inputFileThumbnail.click()"
+                  >Upload Thumbnail</div>
+                  <div class="audio__image__wrapper" v-show="uploadData.thumbImage != ''">
+                    <img
+                      @click="$refs.inputFileThumbnail.click()"
+                      class="fo-image"
+                      :src="`/${uploadData.thumbImage}`"
+                      alt="thumbnail"
+                    />
+                  </div>
                 </div>
                 <div class="upload__video__settings">
                   <div class="video__title">
-                    <label for="videoTitle">Video Title</label>
-                    <input
-                      v-model="uploadData.title"
-                      name="videoTitle"
-                      type="text"
-                      placeholder="Video Title"
-                    />
+                    <label for="videoTitle">Title</label>
+                    <input v-model="uploadData.title" name="title" type="text" placeholder="Title" />
                   </div>
                   <div class="video__description">
-                    <label for="videoDescription">Video Description</label>
+                    <label for="description">Description</label>
                     <textarea
                       v-model="uploadData.description"
                       rows="10"
-                      name="videoDescription"
+                      name="description"
                       type="text"
-                      placeholder="Video Description"
+                      placeholder="Description"
                     />
                   </div>
                   <div class="video__tags">
-                    <label for="videoTags">Video Tags</label>
-                    <input
-                      v-model="uploadData.tags"
-                      name="videoTags"
-                      type="text"
-                      placeholder="Video Tags"
-                    />
+                    <label for="tags">Tags</label>
+                    <input v-model="uploadData.tags" name="tags" type="text" placeholder="Tags" />
                   </div>
                   <div class="form-item">
                     <label class="form-item__label">Visibility</label>
@@ -91,12 +108,6 @@
                       </select>
                     </div>
                   </div>
-                  <!-- <div class="form-item">
-                    <label class="form-item__label">Premier</label>
-                    <div class="form-item__control toggle">
-                      <div class="toggle__handle"></div>
-                    </div>
-                  </div>-->
                 </div>
               </div>
               <div class="grid grid--half">
@@ -146,7 +157,11 @@
                     </select>
                   </div>
                 </div>
-                <button class="fo-settings-button success" @click="finilize()">Publish</button>
+                <button
+                  :disabled="isProcessing"
+                  class="fo-settings-button success"
+                  @click="finilize()"
+                >Publish</button>
               </div>
             </div>
           </div>
@@ -166,17 +181,14 @@ export default {
     return {
       isAllowed: false,
       isUploading: false,
+      isThumbUpload: false,
       uploadPercent: 0,
       isProcessing: true,
       done: false,
       type: "",
       uploadId: null,
       thumbnails: [
-        `public/profile-icon/avatar${Math.floor(Math.random() * 28) + 1}.svg`,
-        `public/profile-icon/avatar${Math.floor(Math.random() * 28) + 1}.svg`,
-        `public/profile-icon/avatar${Math.floor(Math.random() * 28) + 1}.svg`
-      ],
-      loadingThumbnails: [
+        `public/loading.gif`,
         `public/loading.gif`,
         `public/loading.gif`,
         `public/loading.gif`
@@ -262,10 +274,56 @@ export default {
         this.$api.auth.logout();
       }
     },
-    processUpload: async function(formData) {
+    async newThumb(formData, inputFile) {
+      const uploaded = await this.processUpload(formData, inputFile);
+      if (!uploaded) {
+        return false;
+      }
+
+      this.uploadData.thumbImage = uploaded.data.res.path;
+      this.thumbnails.push(uploaded.data.res.path);
+    },
+    upload: async function(formData, inputFile) {
+      const uploaded = await this.processUpload(formData, inputFile);
+
+      if (!uploaded) {
+        return false;
+      }
+
+      if (this.type === "video") {
+        this.uploadId = uploaded.data.video.id;
+        this.uploadData.title = uploaded.data.video.title;
+
+        const videoThumb = await this.$api
+          .axios()
+          .get(`/api/actions/genrateThumbnail/${uploaded.data.video.id}`);
+
+        this.thumbnails = videoThumb.data.thumbnails;
+        this.uploadData.thumbnails = videoThumb.data.thumbnails;
+        this.uploadData.thumbImage = videoThumb.data.thumbnails[0];
+      } else if (this.type === "audio") {
+        this.uploadId = uploaded.data.audio.id;
+        this.uploadData.title = uploaded.data.audio.title;
+      }
+      const data = {
+        data: `Uploading done!`,
+        color: "success"
+      };
+
+      this.isProcessing = false;
+      this.$store.commit(types.SHOW_SNACKBAR, data);
+      this.$refs.formFile.reset();
+    },
+    processUpload: async function(formData, inputFile) {
       const userId = this.$api.webStorage.local.get("$userId");
 
-      const VIDEO_EXT = ["video/mp4", "video/x-msvideo"];
+      const VIDEO_EXT = [
+        "video/mp4",
+        "video/x-msvideo",
+        "video/avi",
+        "application/x-troff-msvideo",
+        "video/msvideo"
+      ];
       const AUDIO_EXT = [
         "audio/mpeg",
         "audio/vnd.wav",
@@ -273,11 +331,33 @@ export default {
         "audio/mp3",
         "audio/ogg"
       ];
+      const IMAGE_EXT = [
+        "image/gif",
+        "image/jpeg",
+        "image/svg+xml",
+        "image/x-icon",
+        "image/png"
+      ];
 
-      if (VIDEO_EXT.indexOf(this.$refs.inputFile.files[0].type) != -1) {
-        this.type = "video";
-      } else if (AUDIO_EXT.indexOf(this.$refs.inputFile.files[0].type) != -1) {
-        this.type = "audio";
+      if (!this.isThumbUpload) {
+        if (VIDEO_EXT.indexOf(inputFile.files[0].type) != -1) {
+          this.type = "video";
+        } else if (AUDIO_EXT.indexOf(inputFile.files[0].type) != -1) {
+          this.type = "audio";
+        } else if (IMAGE_EXT.indexOf(inputFile.files[0].type) != -1) {
+          this.type = "image";
+        }
+      } else {
+        if (IMAGE_EXT.indexOf(inputFile.files[0].type) == -1) {
+          const data = {
+            data: `File not allowed.`,
+            color: "error"
+          };
+
+          this.$store.commit(types.SHOW_SNACKBAR, data);
+
+          return false;
+        }
       }
 
       if (!this.type) {
@@ -288,50 +368,29 @@ export default {
 
         this.$store.commit(types.SHOW_SNACKBAR, data);
         this.$refs.formFile.reset();
+        this.$refs.formFileThumbnail.reset();
         window.removeEventListener("beforeunload", this.beforeunload);
         return false;
       }
 
       this.isUploading = true;
+      let uploaded = null;
+      const uploadType = this.isThumbUpload ? "image" : this.type;
 
       try {
-        const uploaded = await this.$api
+        uploaded = await this.$api
           .axios()
-          .post(`/api/actions/upload/${this.type}/${userId}`, formData, {
+          .post(`/api/actions/upload/${uploadType}/${userId}`, formData, {
             retry: 3,
             retryDelay: 1000,
             onUploadProgress: e => {
               this.uploadPercent = Math.round((e.loaded * 100) / e.total);
             }
           });
-
-        if (this.type === "video") {
-          this.uploadId = uploaded.data.video.id;
-          this.uploadData.title = uploaded.data.video.title;
-
-          const videoThumb = await this.$api
-            .axios()
-            .get(`/api/actions/genrateThumbnail/${uploaded.data.video.id}`);
-
-          this.loadingThumbnails = videoThumb.data.thumbnails;
-          this.uploadData.thumbnails = videoThumb.data.thumbnails;
-        } else if (this.type === "audio") {
-          this.uploadId = uploaded.data.audio.id;
-          this.uploadData.title = uploaded.data.audio.title;
-          this.loadingThumbnails = this.thumbnails;
-        }
       } catch (err) {
         this.$api._handleError(err);
       }
-
-      const data = {
-        data: `File Uploaded.`,
-        color: "success"
-      };
-
-      this.isProcessing = false;
-      this.$store.commit(types.SHOW_SNACKBAR, data);
-      this.$refs.formFile.reset();
+      return uploaded;
     },
     processFile: function() {
       window.addEventListener("beforeunload", this.beforeunload);
@@ -339,8 +398,14 @@ export default {
       formData.append("file", this.$refs.inputFile.files[0]);
 
       setTimeout(() => {
-        this.processUpload(formData);
+        this.upload(formData, this.$refs.inputFile);
       }, 1000);
+    },
+    processThumb: function() {
+      this.isThumbUpload = true;
+      const formData = new FormData();
+      formData.append("file", this.$refs.inputFileThumbnail.files[0]);
+      this.newThumb(formData, this.$refs.inputFileThumbnail);
     },
     beforeunload(event) {
       event = event || window.event;
@@ -358,7 +423,9 @@ export default {
     },
     finilize: async function() {
       if (!this.uploadData.thumbImage) {
-        this.uploadData.thumbImage = this.thumbnails[0];
+        this.uploadData.thumbImage = `public/profile-icon/avatar${Math.floor(
+          Math.random() * 28
+        ) + 1}.svg`;
       }
 
       if (this.type === "video") {
@@ -371,10 +438,12 @@ export default {
               retryDelay: 1000
             }
           );
+
           const data = {
-            data: `Published.`,
+            data: `Published`,
             color: "success"
           };
+
           this.$store.commit(types.SHOW_SNACKBAR, data);
           this.done = true;
           window.removeEventListener("beforeunload", this.beforeunload);
@@ -384,7 +453,6 @@ export default {
           }, 1000);
         } catch (err) {
           this.$api._handleError(err);
-          console.log(err);
         }
       } else if (this.type === "audio") {
         try {

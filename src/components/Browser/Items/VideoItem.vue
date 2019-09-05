@@ -3,7 +3,6 @@
     <div class="video__thumbnail">
       <router-link :to="`/app/@watch?v=${item.id}`" v-show="!this.editMode">
         <lazy-image :src="getSrc()" :lazySrc="lazySrc" hover :active="selected"></lazy-image>
-        <i class="far fa-2x fa-check-circle" v-if="selected"></i>
         <i class="fas fa-play fa-2x file-icon" aria-hidden="true" v-if="!editMode"></i>
       </router-link>
       <lazy-image
@@ -14,6 +13,7 @@
         :active="selected"
         @click="open"
       ></lazy-image>
+      <i class="far fa-2x fa-check-circle" v-if="selected"></i>
       <div :class="`video__info ${theme}`">
         <p class="title">{{getName()}}</p>
         <p class="views">

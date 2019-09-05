@@ -308,7 +308,9 @@ module.exports = class ThumbnailGenerator {
       fps: 0.75,
       scale: 180,
       speedMultiplier: 4,
-      deletePalette: true
+      deletePalette: true,
+      duration: 5,
+      offset: 10
     };
     const conf = _.assignIn(defaultOpts, opts);
     const inputOptions = [];

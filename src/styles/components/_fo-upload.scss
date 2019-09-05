@@ -4,7 +4,6 @@
     text-align: center;
     padding: 180px 10px;
     margin: 5px;
-
     background-color: rgba(20, 141, 255, 0.1);
 
     h1 {
@@ -21,5 +20,45 @@
   .active {
     background-color: rgb(20, 141, 255);
     transition: 0.2ms all;
+  }
+
+  .thumbnails__wrapper {
+    width: 100%;
+    text-align: center;
+
+    .click__wrapper,
+    .audio__image__wrapper {
+      margin: auto;
+      width: 190px;
+      display: block;
+      height: 190px;
+      border: 2px dotted dodgerblue;
+      text-align: center;
+      padding: 85px 0;
+      cursor: pointer;
+
+      &:hover {
+        background-color: rgba(7, 130, 245, 0.452);
+      }
+    }
+
+    .click__wrapper {
+      &.video {
+        width: 190px !important;
+        height: auto;
+        padding: 0;
+        margin: 10px auto;
+      }
+    }
+
+    .audio__image__wrapper {
+      background-color: transparent;
+      padding: 0;
+
+      img {
+        width: 100%;
+        height: 100%;
+      }
+    }
   }
 }

@@ -280,8 +280,10 @@ export default {
         return false;
       }
 
-      this.uploadData.thumbImage = uploaded.data.res.path;
-      this.thumbnails.push(uploaded.data.res.path);
+      if (uploaded.data.res) {
+        this.uploadData.thumbImage = uploaded.data.res.path;
+        this.thumbnails.push(uploaded.data.res.path);
+      }
     },
     upload: async function(formData, inputFile) {
       const uploaded = await this.processUpload(formData, inputFile);

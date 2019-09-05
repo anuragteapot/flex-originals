@@ -33,10 +33,10 @@
           style="cursor:pointer"
         />
       </router-link>
-      <div class="features-footer-details">
+      <!-- <div class="features-footer-details">
         <span class="username">{{user.realm || 'Anonymous'}}</span>
         <span class="tag">{{user.username || 'Flex'}}</span>
-      </div>
+      </div> -->
       <div class="features-footer-controls button-group">
         <button role="button" aria-label="Mute" class="button button-mute">
           <i class="fa fa-headphones"></i>

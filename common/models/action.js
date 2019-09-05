@@ -27,11 +27,21 @@ const AUDIO_EXT = [
 const IMAGE_EXT = [
   'image/gif',
   'image/jpeg',
+  'image/jpg',
   'image/svg+xml',
   'image/x-icon',
   'image/png'
 ];
-const EXTENSION = ['.png', '.jpeg', '.mp4', '.mp3', '.ogg', '.gif'];
+const EXTENSION = [
+  '.png',
+  '.jpeg',
+  '.mp4',
+  '.mp3',
+  '.ogg',
+  '.gif',
+  '.jpg',
+  '.avi'
+];
 /**
  * PROFILE IMAGE STORING STARTS
  */

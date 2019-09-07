@@ -72,6 +72,10 @@
                       <span class="video__views">{{analytic.views}} views</span>
                     </div>
                     <div class="right">
+                       <span>
+                        <i class="far fa-heart"></i>
+                        LIKE
+                      </span>
                       <span>
                         <i class="fa fa-list"></i>
                         SAVE

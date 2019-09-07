@@ -300,11 +300,13 @@ p {
       margin-top: auto;
       background: #252a2e;
       border-top: 1px solid #1c1e21;
+      border-bottom: 1px solid #1c1e21;
       padding: 31px 10px;
 
       &.light {
         background: white !important;
         border-top: 1px solid #dadada !important;
+        border-bottom: 1px solid #dadada !important;
       }
 
       .features-footer-details {

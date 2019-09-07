@@ -63,20 +63,20 @@
     display: block;
   }
 
-  @media only screen and (max-width: 700px) {
-    .video__thumbnail {
-      width: 150px;
-      height: 90px;
-      margin: 0px 5px 40px 10px;
+//   @media only screen and (max-width: 700px) {
+//     .video__thumbnail {
+//       width: 150px;
+//       height: 90px;
+//       margin: 0px 5px 40px 10px;
 
-      i {
-        margin: auto;
-        position: absolute;
-        font-size: 30px;
-        color: white;
-        top: 30px;
-        left: 60px;
-      }
-    }
-  }
+//       i {
+//         margin: auto;
+//         position: absolute;
+//         font-size: 30px;
+//         color: white;
+//         top: 30px;
+//         left: 60px;
+//       }
+//     }
+//   }
 }

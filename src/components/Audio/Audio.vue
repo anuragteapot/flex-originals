@@ -44,6 +44,8 @@
 </template>
 
 <script>
+import { api } from "./../../app/Api";
+
 export default {
   name: "lazy-audio-player",
   data() {
@@ -144,7 +146,7 @@ export default {
         this.stopAudio();
         this.currentSong = index;
       }
-      this.audioFile = '/' + this.musicPlaylist[this.currentSong].audioFile;
+      this.audioFile = "/" + this.musicPlaylist[this.currentSong].audioFile;
       this.audio.src = this.audioFile;
       this.audio.volume = this.volume / 10;
       if (wasPlaying) {
@@ -158,7 +160,7 @@ export default {
       return false;
     },
     getCurrentSong: function(currentSong) {
-      return '/' + this.musicPlaylist[currentSong].audioFile;
+      return "/" + this.musicPlaylist[currentSong].audioFile;
     },
     playAudio: function() {
       if (
@@ -227,7 +229,27 @@ export default {
       }
       this.trackDuration = durmins + ":" + dursecs;
     },
+    halfTime: api.debounce(async function() {
+      try {
+        await this.$api.axios().post(`/api/audioAnalytics/updateViews`, {
+          id: this.musicPlaylist[this.currentSong].id
+        });
+      } catch (err) {
+        this.$api._handleError(err);
+      }
+    }, 2000),
     handleProgress() {
+      if (
+        Math.floor(this.audio.currentTime) >=
+          Math.floor(this.audio.duration / 2) - 5 &&
+        Math.floor(this.audio.currentTime) <=
+          Math.ceil(this.audio.duration / 2) + 5
+      ) {
+        if (Math.floor(this.audio.currentTime) != 0) {
+          this.halfTime();
+        }
+      }
+
       const percent = (this.audio.currentTime / this.audio.duration) * 100;
       this.currentProgressBar = parseInt(percent);
     },

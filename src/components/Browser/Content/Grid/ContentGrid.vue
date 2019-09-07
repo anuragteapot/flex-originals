@@ -1,9 +1,9 @@
 <template>
   <div class="media-content-grid">
     <div class="grid_section files">
-      <h1 v-if="content.audio.length > 0">Recommended</h1>
-      <div class="fo-content__container" v-if="content.audio.length > 0">
-         <music-thumb
+      <h1 v-if="content.audio.length > 0 && layout != 'channel'">Recommended</h1>
+      <div class="fo-content__container" v-if="content.audio.length > 0 && layout != 'channel'">
+        <music-thumb
           v-for="item in content.audio"
           :key="item.id"
           :src="item.thumbImage || src"
@@ -50,14 +50,22 @@ export default {
     lazySrc: "/public/icons/logo.png"
   }),
   computed: {
+    layout() {
+      const name = this.$route.name;
+      if (name.split("@")[1]) {
+        return name.split("@")[1];
+      } else {
+        return null;
+      }
+    },
     content() {
       return this.$store.state.content;
     },
-    ritem(){
+    ritem() {
       return {
-        id:'2mxmd2msk3',
-        title:'Recent'
-      }
+        id: "2mxmd2msk3",
+        title: "Recent"
+      };
     }
   },
   components: {

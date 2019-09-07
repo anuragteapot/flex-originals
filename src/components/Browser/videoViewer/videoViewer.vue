@@ -20,7 +20,51 @@
                     @halfTime="halfTime"
                   ></fo-video-player>
                 </div>
-
+                <!-- <div class="emoji__wrapper">
+                  <div class="emoji emoji--like">
+                    <div class="emoji__hand">
+                      <div class="emoji__thumb"></div>
+                    </div>
+                  </div>
+                  <div class="emoji emoji--love">
+                    <div class="emoji__heart"></div>
+                  </div>
+                  <div class="emoji emoji--haha">
+                    <div class="emoji__face">
+                      <div class="emoji__eyes"></div>
+                      <div class="emoji__mouth">
+                        <div class="emoji__tongue"></div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="emoji emoji--yay">
+                    <div class="emoji__face">
+                      <div class="emoji__eyebrows"></div>
+                      <div class="emoji__mouth"></div>
+                    </div>
+                  </div>
+                  <div class="emoji emoji--wow">
+                    <div class="emoji__face">
+                      <div class="emoji__eyebrows"></div>
+                      <div class="emoji__eyes"></div>
+                      <div class="emoji__mouth"></div>
+                    </div>
+                  </div>
+                  <div class="emoji emoji--sad">
+                    <div class="emoji__face">
+                      <div class="emoji__eyebrows"></div>
+                      <div class="emoji__eyes"></div>
+                      <div class="emoji__mouth"></div>
+                    </div>
+                  </div>
+                  <div class="emoji emoji--angry">
+                    <div class="emoji__face">
+                      <div class="emoji__eyebrows"></div>
+                      <div class="emoji__eyes"></div>
+                      <div class="emoji__mouth"></div>
+                    </div>
+                  </div>
+                </div> -->
                 <div :class="`video_actions ${theme}`" v-if="!videoUnavaliable">
                   <p class="video__name">{{ video.title}}</p>
                   <div class="video__analytics__info">
@@ -28,10 +72,6 @@
                       <span class="video__views">{{analytic.views}} views</span>
                     </div>
                     <div class="right">
-                      <span>
-                        <i class="far fa-heart"></i>
-                        LIKE
-                      </span>
                       <span>
                         <i class="fa fa-list"></i>
                         SAVE

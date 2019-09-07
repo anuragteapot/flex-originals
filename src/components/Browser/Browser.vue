@@ -18,7 +18,7 @@
     <div class="main-container">
       <toolbar></toolbar>
       <component v-bind:is="layout"></component>
-      <lazy-audio-player v-if="$route.name == '@song'" />
+      <lazy-audio-player v-if="$route.name == '@song'"  />
     </div>
   </div>
 </template>

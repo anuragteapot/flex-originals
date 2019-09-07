@@ -75,7 +75,6 @@
       </div>
       <content-grid></content-grid>
     </div>
-    <lazy-audio-player v-if="layout === 'song'" />
   </section>
 </template>
 
@@ -97,14 +96,6 @@ export default {
     }
   },
   computed: {
-    layout() {
-      const name = this.$route.name;
-      if (name.split("@")[1]) {
-        return name.split("@")[1];
-      } else {
-        return null;
-      }
-    },
     theme() {
       return this.$store.state.theme;
     },

@@ -5,7 +5,8 @@ module.exports = {
   pwa: {
     name: 'Flex Originals',
     themeColor: '#f72f2f',
-    msTileColor: '#000000',
+    backgroundColor: '#252a2e',
+    msTileColor: '#ffffff',
     appleMobileWebAppCapable: 'yes',
     appleMobileWebAppStatusBarStyle: 'black',
     iconPaths: {

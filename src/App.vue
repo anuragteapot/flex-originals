@@ -1,6 +1,8 @@
 <template>
   <div :class="`container ${theme}`">
-    <router-view />
+    <transition name="fade" mode="out-in">
+      <router-view />
+    </transition>
     <lazy-snack-bar></lazy-snack-bar>
     <lazy-model></lazy-model>
   </div>

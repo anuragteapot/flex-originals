@@ -57,6 +57,10 @@
         Don't have an account?
         <a href="/signup">Sign up</a>
       </p>
+      <br/>
+      <p>
+        <router-link to="/app/@home">Cancel</router-link>
+      </p>
     </div>
   </div>
 </template>

@@ -277,6 +277,7 @@ module.exports = function(Action) {
           });
 
           const compressVideo = await tg.resizeVideo(720);
+          console.log(await tg.generateGif({}));
           return { compressVideo };
         } catch (err) {
           return { err };

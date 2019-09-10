@@ -1,7 +1,7 @@
 <template>
   <div class="v-thumb">
     <div class="video__thumbnail">
-      <router-link :to="`/app/@watch?v=${item.id}`">
+      <router-link @click.native="$scrollToTop" :to="`/app/@watch?v=${item.id}`">
         <lazy-image :src="src" :lazySrc="lazySrc"></lazy-image>
       </router-link>
     </div>

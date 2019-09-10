@@ -22,6 +22,8 @@ Vue.component("lazyAudioPlayer", AudioPlayer);
 Vue.component("foVideoPlayer", VideoPlayer);
 Vue.component("lazyImage", lazyImage);
 
+Vue.prototype.$scrollToTop = () => window.scrollTo(0,0)
+
 Vue.config.productionTip = false;
 
 new Vue({

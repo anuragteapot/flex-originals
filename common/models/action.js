@@ -228,8 +228,8 @@ module.exports = function(Action) {
           const thumbnails = thumb.map(x =>
             path.join(video.videoMeta.destination, x)
           );
-	  const gif = await tg.generateGif({});
-          return { thumbnails, gif };
+	          // const gif = await tg.generateGif({});
+          return { thumbnails };
         } catch (err) {
           throw new Error('File must be video type.');
         }

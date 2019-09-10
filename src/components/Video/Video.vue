@@ -10,9 +10,35 @@
         <circle cx="50" cy="50" r="20" />
       </svg>
     </div>
-    <video v-if="!error" :src="src" class="fo-video-player__media" ref="media" @click="playOrPause"></video>
+    <video
+      @contextmenu.prevent="openContext"
+      v-if="!error"
+      :src="src"
+      class="fo-video-player__media"
+      ref="media"
+      @click="playOrPause"
+      controlsList=”nodownload”
+    ></video>
     <img v-if="error" class="video__error" src="/public/videoerror.gif" />
-    <div :class="`fo-video-player-menu volume ${volumesettings ? 'active' : ''}`">
+    <div
+      :class="`fo-video-player-menu context vactive`"
+      :style="`top: ${menuTop}px; left: ${menuLeft}px;` "
+    >
+      <nav :class="`${active && opencontextmenu ? 'menu-active' : ''}`">
+        <ul>
+          <li>
+            <a href="#" @click.prevent="copy('URL')">Copy video URL</a>
+          </li>
+          <li>
+            <a href="#" @click.prevent="copy('URL_TIME')">Copy video URL at current time</a>
+          </li>
+          <li>
+            <a href="#" @click.prevent="copy('EMBED')">Copy embed code</a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <div :class="`fo-video-player-menu volume ${volumesettings ? 'vactive' : ''}`">
       <input
         v-model="volume"
         min="0"
@@ -24,7 +50,7 @@
       />
     </div>
     <div
-      :class="`fo-video-player-menu settings ${opensettingspb || opensettings || opensettingsq ? 'active' : ''}`"
+      :class="`fo-video-player-menu settings ${opensettingspb || opensettings || opensettingsq ? 'vactive' : ''}`"
     >
       <nav :class="`${active && opensettings ? 'menu-active' : ''}`">
         <ul v-if="!opensettingspb && !opensettingsq">
@@ -150,6 +176,9 @@ const debounce = function(func, wait, immediate) {
 export default {
   data() {
     return {
+      opencontextmenu: false,
+      menuLeft: 0,
+      menuTop: 0,
       volume: 1,
       volumesettings: false,
       opensettingsq: false,
@@ -213,6 +242,9 @@ export default {
       if (this.error) return 0;
       this.loading = true;
       this.media.src = val;
+      if (this.$route.query.t) {
+        this.media.currentTime = this.$route.query.t;
+      }
       this.media.load();
     }
   },
@@ -242,6 +274,42 @@ export default {
     }
   },
   methods: {
+    copy(type) {
+      const el = document.createElement("textarea");
+
+      if (type == "URL") {
+        el.value = window.location.href;
+      } else if (type == "URL_TIME") {
+        el.value = `${window.location.href}?t=${parseInt(this.time)}`;
+      } else if (type == "EMBED") {
+        el.value = `<iframe width="950" height="550" 
+        src="https://${window.location.hostname}/embed/${this.$route.query.v}" 
+        frameborder="0" allow="accelerometer; autoplay; 
+        encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
+      }
+
+      el.setAttribute("readonly", "");
+      el.style.position = "absolute";
+      el.style.left = "-9999px";
+      document.body.appendChild(el);
+      const selected =
+        document.getSelection().rangeCount > 0
+          ? document.getSelection().getRangeAt(0)
+          : false;
+      el.select();
+      document.execCommand("copy");
+      document.body.removeChild(el);
+      if (selected) {
+        document.getSelection().removeAllRanges();
+        document.getSelection().addRange(selected);
+      }
+      this.opencontextmenu = false;
+    },
+    openContext(event) {
+      this.menuTop = event.offsetY;
+      this.menuLeft = event.offsetX;
+      this.opencontextmenu = true;
+    },
     async pip() {
       try {
         if (this.media !== document.pictureInPictureElement)
@@ -254,6 +322,7 @@ export default {
       }
     },
     reset() {
+      this.opencontextmenu = false;
       this.opensettingsq = false;
       this.opensettingspb = false;
       this.opensettings = false;
@@ -437,6 +506,7 @@ export default {
     if (this.error) return 0;
     this.reLayoutSeekbar();
     window.addEventListener("resize", debounce(this.reLayoutSeekbar, 100));
+    window.addEventListener("resize", this.reset, false);
     window.addEventListener("click", debounce(this.reLayoutSeekbar, 100));
     window.addEventListener("mousemove", debounce(this.reLayoutSeekbar, 200));
     document.addEventListener("mousemove", event => {
@@ -472,6 +542,7 @@ export default {
     );
     window.removeEventListener("resize", debounce(this.reLayoutSeekbar, 100));
     window.removeEventListener("click", debounce(this.reLayoutSeekbar, 100));
+    window.removeEventListener("resize", this.reset(), false);
     window.removeEventListener("keydown", this.detectKeypress);
     this.media.removeEventListener("timeupdate", this.currentTime);
     this.media.removeEventListener("timeupdate", this.handleProgress);

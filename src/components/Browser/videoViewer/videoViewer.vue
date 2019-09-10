@@ -241,7 +241,7 @@
                   v-for="item in videoSuggestions"
                   :src="'/' + item.thumbImage"
                   :key="item.id"
-                  :lazySrc="lazySrc"
+                  :lazySrc="item.lazySrc"
                   :item="item"
                 ></video-suggestions>
               </div>
@@ -262,8 +262,6 @@ export default {
   name: "media-settings",
   data: () => ({
     following: false,
-    src: "/public/qq.webp",
-    lazySrc: "/public/icons/music.svg",
     videoSource: "",
     videoId: "",
     analytic: "",

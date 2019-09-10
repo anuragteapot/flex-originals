@@ -5,7 +5,7 @@
     @click="$emit('click')"
     :alt="alt"
   >
-    <div v-if="isLoading && !lazySrc" class="loader-1 center">
+    <div v-if="isLoading && !lazySrc" class="loader-6 center">
       <span></span>
     </div>
   </div>

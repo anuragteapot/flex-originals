@@ -18,12 +18,6 @@
           <span class="bar n7"></span>
           <span class="bar n8"></span>
         </div>
-        <i class="far fa-2x fa-check-circle" v-if="selected"></i>
-        <i
-          class="fas fa-play fa-2x file-icon"
-          v-if="item.id !== $route.query.a && !editMode"
-          aria-hidden="true"
-        ></i>
       </router-link>
       <lazy-image
         v-show="this.editMode"
@@ -33,6 +27,12 @@
         @click="open"
         :active="item.id == $route.query.a || selected"
       ></lazy-image>
+      <i class="far fa-2x fa-check-circle" v-if="selected"></i>
+      <i
+        class="fas fa-play fa-2x file-icon"
+        v-if="item.id !== $route.query.a && !editMode"
+        aria-hidden="true"
+      ></i>
 
       <div :class="`audio__info ${theme}`">
         <p class="title">{{getName()}}</p>

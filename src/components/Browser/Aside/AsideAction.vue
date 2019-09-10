@@ -83,7 +83,7 @@
         v-if="!isAuth"
       >
         <div class="server-icon" @click="$router.push('/login')">
-          <i class="fas fa-sign-in-alt"></i>
+          <i class="fas fa-sign-in-alt" style="color:white;"></i>
         </div>
       </div>
     </div>

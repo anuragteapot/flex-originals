@@ -280,7 +280,7 @@ export default {
       if (type == "URL") {
         el.value = window.location.href;
       } else if (type == "URL_TIME") {
-        el.value = `${window.location.href}?t=${parseInt(this.time)}`;
+        el.value = `${window.location.href}&t=${parseInt(this.time)}`;
       } else if (type == "EMBED") {
         el.value = `<iframe width="950" height="550" 
         src="https://${window.location.hostname}/embed/${this.$route.query.v}" 

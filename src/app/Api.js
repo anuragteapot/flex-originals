@@ -24,7 +24,7 @@ class Api {
       'text-shadow: 1px 1px 5px rgb(249, 162, 34);' +
       'filter: dropshadow(color=rgb(249, 162, 34), offx=1, offy=1);';
     setTimeout(console.log.bind(console, '%cStop!', cssRule), 0);
-    
+
     this.Nprogress = Nprogress;
     this.regMobile = /^\d{10}$/;
     this.regName = /^[a-zA-Z ]*$/;
@@ -39,9 +39,16 @@ class Api {
       return;
     }
 
-    Notification.requestPermission(status => {
-      console.log('Notification permission status:', status);
-    });
+    if (
+      window.location.host == 'localhost' ||
+      window.location.host == 'flexoriginals.ml'
+    ) {
+      setTimeout(() => {
+        Notification.requestPermission(status => {
+          console.log('Notification permission status:', status);
+        });
+      }, 3000);
+    }
 
     if (
       typeof window !== 'undefined' &&

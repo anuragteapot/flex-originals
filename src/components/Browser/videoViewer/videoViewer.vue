@@ -64,7 +64,7 @@
                       <div class="emoji__mouth"></div>
                     </div>
                   </div>
-                </div> -->
+                </div>-->
                 <div :class="`video_actions ${theme}`" v-if="!videoUnavaliable">
                   <p class="video__name">{{ video.title}}</p>
                   <div class="video__analytics__info">
@@ -72,7 +72,7 @@
                       <span class="video__views">{{analytic.views}} views</span>
                     </div>
                     <div class="right">
-                       <span>
+                      <span>
                         <i class="far fa-heart"></i>
                         LIKE
                       </span>
@@ -100,12 +100,7 @@
                           />
                         </router-link>
 
-                        <div class="channel__name">
-                          {{user.realm}}
-                          <br />
-                          {{user.username}}
-                          <br />
-                        </div>
+                        <div class="channel__name">{{user.username}}</div>
                         <img src="/public/verified.svg" style="width:15px!important" />
                       </div>
                       <p class="published">Published {{ $api.time_ago(new Date(video.published)) }}</p>

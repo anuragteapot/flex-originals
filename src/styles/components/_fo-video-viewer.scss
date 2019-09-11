@@ -72,6 +72,11 @@
       .video_actions {
         padding: 10px;
 
+        .video__name {
+          font-weight: 500;
+          font-size: 18px;
+        }
+
         &.light {
           color: #283035;
         }
@@ -93,6 +98,7 @@
             width: 100px;
 
             .video__views {
+              font-weight: 500 !important;
               color: rgb(155, 149, 149);
             }
 
@@ -156,7 +162,7 @@
             .following,
             .edit__video {
               border-radius: 2px;
-              padding: 10px 50px;
+              padding: 10px 40px;
               font-size: 15px;
               cursor: pointer;
               border: none;

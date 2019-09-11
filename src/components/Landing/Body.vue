@@ -21,23 +21,31 @@
             >open source</a> to
             <a href="/business" class="text-white jumbotron-link">business</a>, you can host and review code, manage projects, and build software alongside 36 million&nbsp;developers.-->
           </p>
+          <a href="/app/@home">
+            <button class="btn-hover color">Get Started</button>
+          </a>
+          <iframe
+            height="550"
+            src="https://flexoriginals.ml/embed/5d757a69800a5d003c1162df"
+            frameborder="0"
+            allow="accelerometer; autoplay; 
+        encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+            width="100%"
+          ></iframe>
         </div>
       </div>
     </section>
     <section>
       <div class="home__container">
-        <div class="home__inner">
-          <a href="/app/@home">
-            <button class="btn-hover color">Get Started</button>
-          </a>
-        </div>
+        <div class="home__inner"></div>
       </div>
       <br />
       <div class="home__container">
         <h2>Architecture of project</h2>
         <br />
         <div class="arc_inner">
-        <img src="/public/project.png" slt="arch" />
+          <img src="/public/project.png" slt="arch" />
         </div>
         <br />
         <div class="home__inner">

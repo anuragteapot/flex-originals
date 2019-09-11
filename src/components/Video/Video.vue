@@ -17,11 +17,11 @@
       class="fo-video-player__media"
       ref="media"
       @click="playOrPause"
-      controlsList=”nodownload”
+      controlslist="”nodownload”"
     ></video>
     <img v-if="error" class="video__error" src="/public/videoerror.gif" />
     <div
-      :class="`fo-video-player-menu context vactive`"
+      :class="`fo-video-player-menu context ${opencontextmenu ? 'vactive' : ''}`"
       :style="`top: ${menuTop}px; left: ${menuLeft}px;` "
     >
       <nav :class="`${active && opencontextmenu ? 'menu-active' : ''}`">
@@ -367,10 +367,20 @@ export default {
       this.isPlaying = false;
     },
     playOrPause: function() {
-      this.opensettingsq = false;
-      this.opensettingspb = false;
-      this.opensettings = false;
-      this.volumesettings = false;
+      if (
+        this.opensettingsq ||
+        this.opensettingspb ||
+        this.opensettings ||
+        this.volumesettings ||
+        this.opencontextmenu
+      ) {
+        this.opensettingsq = false;
+        this.opensettingspb = false;
+        this.opensettings = false;
+        this.volumesettings = false;
+        this.opencontextmenu = false;
+        return false;
+      }
       if (this.isPlaying) {
         this.active = true;
         this.pause();

@@ -516,7 +516,7 @@ export default {
     if (this.error) return 0;
     this.reLayoutSeekbar();
     window.addEventListener("resize", debounce(this.reLayoutSeekbar, 100));
-    window.addEventListener("resize", this.reset, false);
+    // window.addEventListener("resize", this.reset, false);
     window.addEventListener("click", debounce(this.reLayoutSeekbar, 100));
     window.addEventListener("mousemove", debounce(this.reLayoutSeekbar, 200));
     document.addEventListener("mousemove", event => {
@@ -552,7 +552,7 @@ export default {
     );
     window.removeEventListener("resize", debounce(this.reLayoutSeekbar, 100));
     window.removeEventListener("click", debounce(this.reLayoutSeekbar, 100));
-    window.removeEventListener("resize", this.reset(), false);
+    // window.removeEventListener("resize", this.reset(), false);
     window.removeEventListener("keydown", this.detectKeypress);
     this.media.removeEventListener("timeupdate", this.currentTime);
     this.media.removeEventListener("timeupdate", this.handleProgress);

@@ -69,7 +69,7 @@
                   <p class="video__name">{{ video.title}}</p>
                   <div class="video__analytics__info">
                     <div class="left">
-                      <span class="video__views">{{analytic.views}} views</span>
+                      <span class="video__views">{{analytic.views}} views .  Published {{ $api.time_ago(new Date(video.published)) }}</span>
                     </div>
                     <div class="right">
                       <span>
@@ -99,11 +99,9 @@
                             class="avatar"
                           />
                         </router-link>
-
                         <div class="channel__name">{{user.username}}</div>
                         <img src="/public/verified.svg" style="width:15px!important" />
                       </div>
-                      <p class="published">Published {{ $api.time_ago(new Date(video.published)) }}</p>
                     </div>
                     <div class="right">
                       <button class="edit__video" v-if="user.id == loggedUser.id">

@@ -88,28 +88,24 @@
           font-weight: bold;
           padding: 10px 0;
           flex-direction: row;
-          border-bottom: 1px solid grey;
-
+          border-bottom: 1px solid #c5c5c5;
+          color: #4c4c4c;
+          
           @media only screen and (max-width: 700px) {
             font-size: 13px;
           }
 
-          .left {
-            width: 100px;
-
+          .left{
+            padding: 5px 0;
+            
             .video__views {
               font-weight: 500 !important;
-              color: rgb(155, 149, 149);
-            }
-
-            @media screen and (max-width: 700px) {
-              display: none;
             }
           }
 
           .right {
             text-align: end;
-            padding: 0;
+            padding: 5px 0;
 
             span {
               text-transform: capitalize;
@@ -188,10 +184,10 @@
           }
 
           .full__video__desctiption {
-            padding: 10px 0;
+             padding: 10px 20px;
 
             &.light {
-              color: #283035;
+              color: #4c4c4c;
             }
           }
 

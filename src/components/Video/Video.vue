@@ -42,8 +42,7 @@
 
     <div :class="`fo-video-player-menu seektime ${seekTime ? 'vactive' : ''}`" ref="seekTimeLeft">
       <nav :class="`${active && seekTime ? 'menu-active' : ''}`">
-        <div class="time__preview">
-          <img :src="'/' + videoInfo.thumbImage" :alt="videoInfo.titile" />
+        <div class="time__preview" :style="`background-image: url('${videoInfo.thumbImage}')`">
           <p>{{ seekTime }}</p>
         </div>
       </nav>
@@ -298,8 +297,12 @@ export default {
       const time = (event.layerX / this.seekbarWidth) * this.duration;
       this.seekTime = this.convertSecondsToTime(time);
       this.seekbarOffsetX = this.seekbar.getBoundingClientRect().left;
+      const min = event.pageX - this.seekbarOffsetX - 65;
+      const max = event.pageX - this.seekbarOffsetX - 165;
+
       this.$refs.seekTimeLeft.style.left =
-        event.pageX - this.seekbarOffsetX - 75 + "px";
+        Math.max(min, Math.min(event.pageX - this.seekbarOffsetX - 75, max)) +
+        "px";
     },
     copy(type) {
       const el = document.createElement("textarea");

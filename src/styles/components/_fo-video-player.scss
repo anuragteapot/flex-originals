@@ -289,12 +289,13 @@
 
         p {
           display: inline-block;
+          margin: auto;
           position: absolute;
           bottom: 0;
           left: 0;
           font-weight: 400;
           right: 0;
-          background-color: #000000;
+          background-color: rgba(0, 0, 0, 0.479);
         }
       }
     }

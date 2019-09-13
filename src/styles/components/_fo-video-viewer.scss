@@ -90,14 +90,14 @@
           flex-direction: row;
           border-bottom: 1px solid #c5c5c5;
           color: #4c4c4c;
-          
+
           @media only screen and (max-width: 700px) {
             font-size: 13px;
           }
 
-          .left{
+          .left {
             padding: 5px 0;
-            
+
             .video__views {
               font-weight: 500 !important;
             }
@@ -167,8 +167,8 @@
             }
 
             .following {
-              background-color: rgb(97, 97, 97) !important;
-              color: #b6b6b6 !important;
+              background-color: #b6b6b6 !important;
+              color: rgb(97, 97, 97) !important;
               padding: 10px 40px;
             }
 
@@ -184,7 +184,7 @@
           }
 
           .full__video__desctiption {
-             padding: 10px 20px;
+            padding: 10px 20px;
 
             &.light {
               color: #4c4c4c;

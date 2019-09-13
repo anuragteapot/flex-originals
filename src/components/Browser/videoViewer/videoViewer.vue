@@ -22,7 +22,15 @@
                   ></fo-video-player>
                 </div>
                 <div :class="`video_actions ${theme}`" v-if="!videoUnavaliable">
-                  <div class="feed">
+                  <p class="video__name">{{ video.title}}</p>
+                  <div class="video__analytics__info">
+                    <div class="left">
+                      <span
+                        class="video__views"
+                      >{{analytic.views}} views . Published {{ $api.time_ago(new Date(video.published)) }}</span>
+                    </div>
+                    <div class="right">
+                    <div class="feed">
                     <a class="like-btn">
                       <img src="/public/emoji/006-heart.svg" alt="like" width="25" height="25" />
                       <div class="reaction-box">
@@ -53,14 +61,6 @@
                       </div>
                     </a>
                   </div>
-                  <p class="video__name">{{ video.title}}</p>
-                  <div class="video__analytics__info">
-                    <div class="left">
-                      <span
-                        class="video__views"
-                      >{{analytic.views}} views . Published {{ $api.time_ago(new Date(video.published)) }}</span>
-                    </div>
-                    <div class="right">
                       <span>
                         <i class="fa fa-list"></i>
                         SAVE

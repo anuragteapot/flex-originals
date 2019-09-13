@@ -21,52 +21,38 @@
                     :videoInfo="video"
                   ></fo-video-player>
                 </div>
-                <!-- <div class="emoji__wrapper">
-                  <div class="emoji emoji--like">
-                    <div class="emoji__hand">
-                      <div class="emoji__thumb"></div>
-                    </div>
-                  </div>
-                  <div class="emoji emoji--love">
-                    <div class="emoji__heart"></div>
-                  </div>
-                  <div class="emoji emoji--haha">
-                    <div class="emoji__face">
-                      <div class="emoji__eyes"></div>
-                      <div class="emoji__mouth">
-                        <div class="emoji__tongue"></div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="emoji emoji--yay">
-                    <div class="emoji__face">
-                      <div class="emoji__eyebrows"></div>
-                      <div class="emoji__mouth"></div>
-                    </div>
-                  </div>
-                  <div class="emoji emoji--wow">
-                    <div class="emoji__face">
-                      <div class="emoji__eyebrows"></div>
-                      <div class="emoji__eyes"></div>
-                      <div class="emoji__mouth"></div>
-                    </div>
-                  </div>
-                  <div class="emoji emoji--sad">
-                    <div class="emoji__face">
-                      <div class="emoji__eyebrows"></div>
-                      <div class="emoji__eyes"></div>
-                      <div class="emoji__mouth"></div>
-                    </div>
-                  </div>
-                  <div class="emoji emoji--angry">
-                    <div class="emoji__face">
-                      <div class="emoji__eyebrows"></div>
-                      <div class="emoji__eyes"></div>
-                      <div class="emoji__mouth"></div>
-                    </div>
-                  </div>
-                </div>-->
                 <div :class="`video_actions ${theme}`" v-if="!videoUnavaliable">
+                  <div class="feed">
+                    <a class="like-btn">
+                      <img src="/public/emoji/006-heart.svg" alt="like" width="25" height="25" />
+                      <div class="reaction-box">
+                        <div class="reaction-icon show">
+                          <label>Like</label>
+                          <img src="/public/emoji/006-heart.svg" alt="like" />
+                        </div>
+                        <div class="reaction-icon show">
+                          <label>Love</label>
+                          <img src="/public/emoji//002-in-love.svg" alt="Love" />
+                        </div>
+                        <div class="reaction-icon show">
+                          <label>Haha</label>
+                          <img src="/public/emoji/happy.svg" alt="smiling" />
+                        </div>
+                        <div class="reaction-icon show">
+                          <label>Thinking</label>
+                          <img src="/public/emoji/001-thinking.svg" alt="wow" />
+                        </div>
+                        <div class="reaction-icon show">
+                          <label>Sad</label>
+                          <img src="/public/emoji/004-sad.svg" alt="sad" />
+                        </div>
+                        <div class="reaction-icon show">
+                          <label>Angry</label>
+                          <img src="/public/emoji/005-angry.svg" alt="angry" />
+                        </div>
+                      </div>
+                    </a>
+                  </div>
                   <p class="video__name">{{ video.title}}</p>
                   <div class="video__analytics__info">
                     <div class="left">
@@ -75,10 +61,6 @@
                       >{{analytic.views}} views . Published {{ $api.time_ago(new Date(video.published)) }}</span>
                     </div>
                     <div class="right">
-                      <span>
-                        <i class="far fa-heart"></i>
-                        LIKE
-                      </span>
                       <span>
                         <i class="fa fa-list"></i>
                         SAVE

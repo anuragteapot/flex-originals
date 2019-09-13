@@ -297,13 +297,13 @@ export default {
       const time = (event.layerX / this.seekbarWidth) * this.duration;
       this.seekTime = this.convertSecondsToTime(time);
       this.seekbarOffsetX = this.seekbar.getBoundingClientRect().left;
+      const seekbarRight = this.seekbar.getBoundingClientRect().right;
       const min = 0;
-      const max = event.pageX - this.seekbarOffsetX - 190;
-
+      const max = seekbarRight - 180;
       let value = 0;
-      // if (event.pageX - this.seekbarOffsetX - 75 < min) value = min;
-      // else if (event.pageX - this.seekbarOffsetX - 75 > max) value = max;
-      value = event.pageX - this.seekbarOffsetX - 75;
+      if (event.pageX - this.seekbarOffsetX - 75 < min) value = min;
+      else if (event.pageX - this.seekbarOffsetX - 75 > max) value = max;
+      else value = event.pageX - this.seekbarOffsetX - 75;
       this.$refs.seekTimeLeft.style.left = value + "px";
     },
     copy(type) {

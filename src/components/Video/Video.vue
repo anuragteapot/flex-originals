@@ -38,6 +38,19 @@
         </ul>
       </nav>
     </div>
+
+    <div
+      :class="`fo-video-player-menu seektime ${seekTime ? 'vactive' : ''}`"
+      :style="`left: ${seekTimeLeft}%;` "
+    >
+      <nav :class="`${active && seekTime ? 'menu-active' : ''}`">
+        <div class="time__preview">
+          <!-- <img src="" -->
+          Coming Soon..
+          <p>{{ seekTime }}</p>
+        </div>
+      </nav>
+    </div>
     <div :class="`fo-video-player-menu volume ${volumesettings ? 'vactive' : ''}`">
       <input
         v-model="volume"
@@ -122,6 +135,8 @@
         @touchstart="grabSeekbar"
         @touchmove="moveSeekbar"
         @touchend="releaseSeekbar"
+        @mousemove="getSeekTime"
+        @mouseleave="seekTime = null"
         ref="seekbar"
       >
         <div
@@ -177,6 +192,7 @@ export default {
   data() {
     return {
       opencontextmenu: false,
+      seekTimeLeft: 0,
       menuLeft: 0,
       menuTop: 0,
       volume: 1,
@@ -191,6 +207,7 @@ export default {
       seekbarWidth: 0,
       seekbarOffsetX: 0,
       time: 0,
+      seekTime: null,
       duration: 0,
       loading: false,
       bufferPercent: 0,
@@ -274,6 +291,15 @@ export default {
     }
   },
   methods: {
+    getSeekTime(event) {
+      const time = (event.layerX / this.seekbarWidth) * this.duration;
+
+      this.seekTime = this.convertSecondsToTime(time);
+      this.seekTimeLeft = Math.max(
+        0,
+        Math.min((time / this.duration) * 100 - 10, 85)
+      );
+    },
     copy(type) {
       const el = document.createElement("textarea");
 
@@ -477,6 +503,9 @@ export default {
     handleEnded() {
       this.loading = false;
       this.$emit("handleEnded");
+    },
+    handleError() {
+      // this.error = true;
     },
     handleProgress() {
       if (

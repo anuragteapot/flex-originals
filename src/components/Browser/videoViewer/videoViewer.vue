@@ -69,7 +69,9 @@
                   <p class="video__name">{{ video.title}}</p>
                   <div class="video__analytics__info">
                     <div class="left">
-                      <span class="video__views">{{analytic.views}} views .  Published {{ $api.time_ago(new Date(video.published)) }}</span>
+                      <span
+                        class="video__views"
+                      >{{analytic.views}} views . Published {{ $api.time_ago(new Date(video.published)) }}</span>
                     </div>
                     <div class="right">
                       <span>
@@ -234,7 +236,7 @@
                   v-for="item in videoSuggestions"
                   :src="'/' + item.thumbImage"
                   :key="item.id"
-                  :lazySrc="item.lazySrc"
+                  :lazySrc="item.lazySrc || lazyImage"
                   :item="item"
                 ></video-suggestions>
               </div>
@@ -257,6 +259,7 @@ export default {
     following: false,
     videoSource: "",
     videoId: "",
+    lazyImage: "/public/logo2.jpg",
     analytic: "",
     user: {},
     settings: {},

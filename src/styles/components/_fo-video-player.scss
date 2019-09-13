@@ -271,6 +271,23 @@
       transform: translateY(0);
       transform: translateY(0) scale(1);
       transition: 0.2s;
+
+      .time__preview {
+        width: 190px;
+        height: 110px;
+        border: 2px solid black;
+        text-align: center;
+
+        p{
+          display: inline-block;
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          font-weight: 400;
+          right: 0;
+          background-color: #000000;
+        }
+      }
     }
   }
 }

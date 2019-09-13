@@ -301,9 +301,9 @@ export default {
       const max = event.pageX - this.seekbarOffsetX - 190;
 
       let value = 0;
-      if (event.pageX - this.seekbarOffsetX - 75 < min) value = min;
-      else if (event.pageX - this.seekbarOffsetX - 75 > max) value = max;
-      else value = event.pageX - this.seekbarOffsetX - 75;
+      // if (event.pageX - this.seekbarOffsetX - 75 < min) value = min;
+      // else if (event.pageX - this.seekbarOffsetX - 75 > max) value = max;
+      value = event.pageX - this.seekbarOffsetX - 75;
       this.$refs.seekTimeLeft.style.left = value + "px";
     },
     copy(type) {

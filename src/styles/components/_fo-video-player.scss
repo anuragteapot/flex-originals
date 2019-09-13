@@ -6,6 +6,13 @@
   height: 100%;
   color: white !important;
 
+  .video__info__fullscreen__title {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    font-size: 25px;
+  }
+
   .video__error {
     width: 100%;
     height: 100%;
@@ -273,12 +280,14 @@
       transition: 0.2s;
 
       .time__preview {
+        margin: 0;
+        padding: 0;
         width: 190px;
         height: 110px;
         border: 2px solid black;
         text-align: center;
 
-        p{
+        p {
           display: inline-block;
           position: absolute;
           bottom: 0;

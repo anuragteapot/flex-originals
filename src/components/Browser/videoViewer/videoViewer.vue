@@ -18,6 +18,7 @@
                     :autoPlay="true"
                     @handleEnded="handleEnded"
                     @halfTime="halfTime"
+                    :videoInfo="video"
                   ></fo-video-player>
                 </div>
                 <!-- <div class="emoji__wrapper">

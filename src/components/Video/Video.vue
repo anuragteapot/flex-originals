@@ -5,6 +5,7 @@
     ref="player"
     @mousemove="makeActive(); active = true; "
   >
+    <div v-show="fullscreen && active" class="video__info__fullscreen__title">{{ videoInfo.title}}</div>
     <div :class="`fo-video-loader`" v-show="loading && !error">
       <svg id="catchup-spinner" viewBox="25 25 50 50">
         <circle cx="50" cy="50" r="20" />
@@ -39,14 +40,10 @@
       </nav>
     </div>
 
-    <div
-      :class="`fo-video-player-menu seektime ${seekTime ? 'vactive' : ''}`"
-      :style="`left: ${seekTimeLeft}%;` "
-    >
+    <div :class="`fo-video-player-menu seektime ${seekTime ? 'vactive' : ''}`" ref="seekTimeLeft">
       <nav :class="`${active && seekTime ? 'menu-active' : ''}`">
         <div class="time__preview">
-          <!-- <img src="" -->
-          Coming Soon..
+          <img :src="'/' + videoInfo.thumbImage" :alt="videoInfo.titile" />
           <p>{{ seekTime }}</p>
         </div>
       </nav>
@@ -235,6 +232,12 @@ export default {
         return [0.25, 0.5, 0.75, 1.0, 1.25, 1.5, 1.75];
       }
     },
+    videoInfo: {
+      type: Object,
+      default: function() {
+        return {};
+      }
+    },
     videoQuality: {
       type: Array,
       default: function() {
@@ -293,12 +296,10 @@ export default {
   methods: {
     getSeekTime(event) {
       const time = (event.layerX / this.seekbarWidth) * this.duration;
-
       this.seekTime = this.convertSecondsToTime(time);
-      this.seekTimeLeft = Math.max(
-        0,
-        Math.min((time / this.duration) * 100 - 10, 85)
-      );
+      this.seekbarOffsetX = this.seekbar.getBoundingClientRect().left;
+      this.$refs.seekTimeLeft.style.left =
+        event.pageX - this.seekbarOffsetX - 75 + "px";
     },
     copy(type) {
       const el = document.createElement("textarea");
@@ -488,11 +489,11 @@ export default {
       }
     },
     seeked() {
-      // this.loading = false;
+      this.loading = false;
       this.time = this.media.currentTime;
     },
     seeking() {
-      // this.loading = true;
+      this.loading = true;
     },
     skipBack() {
       this.media.currentTime += parseFloat(-5);

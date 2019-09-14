@@ -297,9 +297,9 @@ export default {
       const time = (event.layerX / this.seekbarWidth) * this.duration;
       this.seekTime = this.convertSecondsToTime(time);
       this.seekbarOffsetX = this.seekbar.getBoundingClientRect().left;
-      const seekbarRight = this.seekbar.getBoundingClientRect().right;
-      const min = 0;
-      const max = seekbarRight - 180;
+      const seekbarRight = this.$refs.player.clientWidth;
+      const min = 20;
+      const max = seekbarRight - 210;
       let value = 0;
       if (event.pageX - this.seekbarOffsetX - 75 < min) value = min;
       else if (event.pageX - this.seekbarOffsetX - 75 > max) value = max;

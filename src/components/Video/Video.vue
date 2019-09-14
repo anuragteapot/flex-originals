@@ -183,7 +183,7 @@ const debounce = function(func, wait, immediate) {
 };
 export default {
   metaInfo: {
-    title: videoInfo.title,
+    title: "Video",
     titleTemplate: "%s - Flex Originals!",
     htmlAttrs: {
       lang: "en",

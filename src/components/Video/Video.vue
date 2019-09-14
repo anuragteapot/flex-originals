@@ -1,7 +1,6 @@
 <template>
   <div
     :class="`fo-video-player ${!active || error ? 'no-cursor' : ''}`"
-    id="video-player"
     ref="player"
     @mousemove="makeActive(); active = true; "
   >
@@ -122,11 +121,9 @@
         </ul>
       </nav>
     </div>
-    <div :class="`fo-video-player__control-panel ${active ? '' : 'show'}`">
-      <div></div>
+    <div :class="`fo-video-player__control-panel`" v-show="active">
       <div
-        :class="`fo-video-player__seekbar-wrap ${active ? '' : 'show'}`"
-        id="video-player-media"
+        :class="`fo-video-player__seekbar-wrap`"
         @mousedown="grabSeekbar"
         @touchstart="grabSeekbar"
         @touchmove="moveSeekbar"
@@ -145,7 +142,7 @@
           :style="{ transform: &quot;scaleX(&quot; + bufferPercent + &quot;)&quot; }"
         ></div>
       </div>
-      <div class="fo-video-player__control-wrap" v-show="active">
+      <div class="fo-video-player__control-wrap" >
         <div class="fo-video-player__left">
           <i class="fas fa-step-backward"></i>
           <i v-if="!isPlaying" class="fa fa-play" @click="playOrPause"></i>

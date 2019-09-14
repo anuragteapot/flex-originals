@@ -1,0 +1,37 @@
+{
+  "name": "videoLike",
+  "plural": "videoLikes",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "reaction": {
+      "type": "number",
+      "required": true,
+      "default": 0
+    }
+  },
+  "validations": [],
+  "relations": {
+    "user": {
+      "type": "belongsTo",
+      "model": "user",
+      "foreignKey": "videoUserLike",
+      "options": {
+        "nestRemoting": true
+      }
+    },
+    "videos": {
+      "type": "belongsTo",
+      "model": "videos",
+      "foreignKey": "videoId",
+      "options": {
+        "nestRemoting": true
+      }
+    }
+  },
+  "acls": [],
+  "methods": {}
+}

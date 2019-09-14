@@ -1,0 +1,37 @@
+{
+  "name": "audioLike",
+  "plural": "audioLikes",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "reaction": {
+      "type": "number",
+      "required": true,
+      "default": 0
+    }
+  },
+  "validations": [],
+  "relations": {
+    "user": {
+      "type": "belongsTo",
+      "model": "user",
+      "foreignKey": "audioUserLike",
+      "options": {
+        "nestRemoting": true
+      }
+    },
+    "audio": {
+      "type": "belongsTo",
+      "model": "audio",
+      "foreignKey": "audioId",
+      "options": {
+        "nestRemoting": true
+      }
+    }
+  },
+  "acls": [],
+  "methods": {}
+}

@@ -6,7 +6,9 @@
   "options": {
     "validateUpsert": true
   },
-  "hidden": ["audioOwnerId"],
+  "hidden": [
+    "audioOwnerId"
+  ],
   "properties": {
     "title": {
       "type": "string",
@@ -91,6 +93,14 @@
       "type": "hasOne",
       "model": "audioAnalytic",
       "foreignKey": "audioId"
+    },
+    "audioLikes": {
+      "type": "hasMany",
+      "model": "audioLike",
+      "foreignKey": "audioLike",
+      "options": {
+        "nestRemoting": true
+      }
     }
   },
   "acls": [

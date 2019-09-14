@@ -32,15 +32,26 @@
       "model": "follow",
       "foreignKey": "channel"
     },
-    "likeVideos": {
-      "type": "hasMany",
-      "model": "likeVideo",
-      "foreignKey": "likedUserId"
-    },
     "followers": {
       "type": "hasMany",
       "model": "followers",
       "foreignKey": "followUserId"
+    },
+    "videoLikes": {
+      "type": "hasMany",
+      "model": "videoLike",
+      "foreignKey": "videoUserLike",
+      "options": {
+        "nestRemoting": true
+      }
+    },
+    "audioLikes": {
+      "type": "hasMany",
+      "model": "audioLike",
+      "foreignKey": "audioUserLike",
+      "options": {
+        "nestRemoting": true
+      }
     }
   },
   "acls": [

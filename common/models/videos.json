@@ -6,7 +6,9 @@
   "options": {
     "validateUpsert": true
   },
-  "hidden": ["videoOwnerId"],
+  "hidden": [
+    "videoOwnerId"
+  ],
   "properties": {
     "title": {
       "type": "string",
@@ -91,6 +93,14 @@
       "type": "hasOne",
       "model": "videoAnalytic",
       "foreignKey": "videoId"
+    },
+    "videoLikes": {
+      "type": "hasMany",
+      "model": "videoLike",
+      "foreignKey": "videoLike",
+      "options": {
+        "nestRemoting": true
+      }
     }
   },
   "acls": [

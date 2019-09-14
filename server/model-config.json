@@ -82,5 +82,13 @@
   "likeAudio": {
     "dataSource": "mongodb",
     "public": true
+  },
+  "videoLike": {
+    "dataSource": "mongodb",
+    "public": true
+  },
+  "audioLike": {
+    "dataSource": "mongodb",
+    "public": true
   }
 }

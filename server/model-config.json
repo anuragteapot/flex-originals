@@ -75,14 +75,6 @@
     "dataSource": "mongodb",
     "public": true
   },
-  "likeVideo": {
-    "dataSource": "mongodb",
-    "public": true
-  },
-  "likeAudio": {
-    "dataSource": "mongodb",
-    "public": true
-  },
   "videoLike": {
     "dataSource": "mongodb",
     "public": true

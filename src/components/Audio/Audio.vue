@@ -48,7 +48,7 @@ import { api } from "./../../app/Api";
 
 export default {
   metaInfo: {
-    title: this.musicPlaylist[currentSong].title,
+    title: musicPlaylist[currentSong].title,
     titleTemplate: "%s - Flex Originals!",
     htmlAttrs: {
       lang: "en",

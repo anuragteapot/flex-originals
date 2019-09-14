@@ -270,6 +270,10 @@
         width: 220px;
       }
     }
+    
+    .no__animation{
+      transition: none !important;
+    }
 
     .menu-active {
       opacity: 1;

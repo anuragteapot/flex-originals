@@ -30,44 +30,48 @@
                       >{{analytic.views}} views . Published {{ $api.time_ago(new Date(video.published)) }}</span>
                     </div>
                     <div class="right">
-                    <div class="feed">
-                    <a class="like-btn">
-                      <img src="/public/emoji/006-heart.svg" alt="like" width="20" height="20" />
-                      <div class="reaction-box">
-                        <div class="reaction-icon show">
-                          <label>Like</label>
-                          <img src="/public/emoji/006-heart.svg" alt="like" />
-                        </div>
-                        <div class="reaction-icon show">
-                          <label>Love</label>
-                          <img src="/public/emoji//002-in-love.svg" alt="Love" />
-                        </div>
-                        <div class="reaction-icon show">
-                          <label>Haha</label>
-                          <img src="/public/emoji/happy.svg" alt="smiling" />
-                        </div>
-                        <div class="reaction-icon show">
-                          <label>Thinking</label>
-                          <img src="/public/emoji/001-thinking.svg" alt="wow" />
-                        </div>
-                        <div class="reaction-icon show">
-                          <label>Sad</label>
-                          <img src="/public/emoji/004-sad.svg" alt="sad" />
-                        </div>
-                        <div class="reaction-icon show">
-                          <label>Angry</label>
-                          <img src="/public/emoji/005-angry.svg" alt="angry" />
-                        </div>
+                      <div class="feed">
+                        <a class="like-btn">
+                          <img src="/public/emoji/006-heart.svg" alt="like" width="20" height="20" />
+                          <div class="reaction-box">
+                            <div class="reaction-icon show">
+                              <label>Like</label>
+                              <img src="/public/emoji/006-heart.svg" alt="like" />
+                            </div>
+                            <div class="reaction-icon show">
+                              <label>Love</label>
+                              <img src="/public/emoji//002-in-love.svg" alt="Love" />
+                            </div>
+                            <div class="reaction-icon show">
+                              <label>Haha</label>
+                              <img src="/public/emoji/happy.svg" alt="smiling" />
+                            </div>
+                            <div class="reaction-icon show">
+                              <label>Thinking</label>
+                              <img src="/public/emoji/001-thinking.svg" alt="wow" />
+                            </div>
+                            <div class="reaction-icon show">
+                              <label>Sad</label>
+                              <img src="/public/emoji/004-sad.svg" alt="sad" />
+                            </div>
+                            <div class="reaction-icon show">
+                              <label>Angry</label>
+                              <img src="/public/emoji/005-angry.svg" alt="angry" />
+                            </div>
+                          </div>
+                        </a>
                       </div>
-                    </a>
-                  </div>
                       <span>
-                        <i class="fa fa-list"></i>
+                        <i class="fas fa-bookmark"></i>
                         SAVE
                       </span>
                       <span @click="share()">
                         <i class="fas fa-share"></i>
                         SHARE
+                      </span>
+                      <span>
+                        <i class="fas fa-flag"></i>
+                        Report
                       </span>
                       <span>
                         <i class="fas fa-ellipsis-h"></i>

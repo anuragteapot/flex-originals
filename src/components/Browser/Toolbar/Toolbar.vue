@@ -15,7 +15,7 @@
     <button :class="`menu__button ${theme}`">
       <i class="fab fa-rev"></i>New Releases
     </button>
-    <input type="text" placeholder="Search...." />
+    <input type="text" placeholder="Search...." v-model="search" />
     <!-- <div :class="`menu-right ${theme}`"> -->
     <!-- <span class="icon">
         <i class="fas fa-search search__icon"></i>
@@ -45,6 +45,14 @@ export default {
       "isAuthenticated",
       "theme"
     ]),
+    search: {
+      set(val) {
+        this.$store.commit(types.SET_SEARCH_QUERY, val);
+      },
+      get() {
+        return this.$store.state.search;
+      }
+    },
     theme() {
       return this.$store.state.theme;
     }

@@ -142,7 +142,7 @@
           :style="{ transform: &quot;scaleX(&quot; + bufferPercent + &quot;)&quot; }"
         ></div>
       </div>
-      <div class="fo-video-player__control-wrap" >
+      <div class="fo-video-player__control-wrap">
         <div class="fo-video-player__left">
           <i class="fas fa-step-backward"></i>
           <i v-if="!isPlaying" class="fa fa-play" @click="playOrPause"></i>
@@ -182,6 +182,14 @@ const debounce = function(func, wait, immediate) {
   };
 };
 export default {
+  metaInfo: {
+    title: this.videoInfo.title,
+    titleTemplate: "%s - Flex Originals!",
+    htmlAttrs: {
+      lang: "en",
+      amp: true
+    }
+  },
   data() {
     return {
       opencontextmenu: false,
@@ -267,6 +275,9 @@ export default {
   computed: {
     getProgressRate: function() {
       return this.time / this.duration;
+    },
+    search() {
+      return this.$store.state.search;
     },
     autoPlayNext: {
       get() {
@@ -525,6 +536,7 @@ export default {
       if (this.disablekey) {
         return;
       }
+      if (this.search != "") return false;
       if (event.keyCode == 32) {
         event.preventDefault();
         this.playOrPause();

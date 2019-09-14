@@ -47,6 +47,14 @@
 import { api } from "./../../app/Api";
 
 export default {
+  metaInfo: {
+    title: this.musicPlaylist[currentSong].title,
+    titleTemplate: "%s - Flex Originals!",
+    htmlAttrs: {
+      lang: "en",
+      amp: true
+    }
+  },
   name: "lazy-audio-player",
   data() {
     return {
@@ -79,6 +87,9 @@ export default {
     }
   },
   computed: {
+    search() {
+      return this.$store.state.search;
+    },
     musicPlaylist: function() {
       return this.$store.state.content.audio.filter(
         item => item.id == this.$route.query.a
@@ -254,6 +265,7 @@ export default {
       this.currentProgressBar = parseInt(percent);
     },
     detectKeypress(event) {
+      if (this.search != "") return false;
       if (event.keyCode == 32) {
         event.preventDefault();
         this.playAudio();

@@ -20,7 +20,7 @@ export default {
   },
   async beforeMount() {
     if (await this.$api.isLogged()) {
-      this.$router.push("/app/@home");
+      window.location.href = '/app/@home';
     }
   }
 };

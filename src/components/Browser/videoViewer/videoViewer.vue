@@ -32,7 +32,7 @@
                     <div class="right">
                     <div class="feed">
                     <a class="like-btn">
-                      <img src="/public/emoji/006-heart.svg" alt="like" width="25" height="25" />
+                      <img src="/public/emoji/006-heart.svg" alt="like" width="20" height="20" />
                       <div class="reaction-box">
                         <div class="reaction-icon show">
                           <label>Like</label>

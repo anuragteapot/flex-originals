@@ -116,7 +116,7 @@ p {
 
     &.light {
       background: white !important;
-      border: 1px solid #dadada!important;
+      border: 1px solid #dadada !important;
     }
 
     &.dark {
@@ -372,8 +372,8 @@ p {
       color: #0e0f0f;
       background: white !important;
       border-bottom: 1px solid #dadada !important;
-      border-top: 1px solid #dadada!important;
-      border-right: 1px solid #dadada!important;
+      border-top: 1px solid #dadada !important;
+      border-right: 1px solid #dadada !important;
     }
 
     .menu__button {
@@ -416,19 +416,20 @@ p {
   }
 
   .menu input {
-    color: white;
+    color: black;
     height: 1.9rem;
     border-radius: 0.25rem;
     padding: 0 0.5rem;
     border: none;
-    background: #1e2124;
     margin: 0 5px 0 0;
+    background: #fafafa;
+    border: 1px solid gray;
     border-radius: 0.25rem;
   }
 
   .menu input:focus {
     width: 300px;
-    background-color: #0e0f0f;
+    background-color: white;
   }
 
   .content {

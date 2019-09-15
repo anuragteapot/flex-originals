@@ -281,7 +281,7 @@ export default {
     src(val) {
       if (this.error) return 0;
       this.loading = true;
-      this.media.src = window.URL.createObjectURL(val);
+      this.media.src = val;
       if (this.$route.query.t) {
         this.media.currentTime = this.$route.query.t;
       }

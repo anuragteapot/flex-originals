@@ -407,13 +407,15 @@ export default {
         });
 
         this.following = follow.data.SUCCESS;
+         
+        if(this.loggedUser.id && this.video.id) {
+          const like = await this.$store.dispatch("getLike", {
+            userId: this.loggedUser.id,
+            videoId: this.video.id
+          });
 
-        const like = await this.$store.dispatch("getLike", {
-          userId: this.loggedUser.id,
-          videoId: this.video.id
-        });
-
-        this.like = like.data.REACTION;
+          this.like = like.data.REACTION;
+        }
       } else {
         this.$router.push("/@error");
       }

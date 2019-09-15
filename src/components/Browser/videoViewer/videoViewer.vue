@@ -40,15 +40,19 @@
                             height="20"
                             @click="reaction(0)"
                           />
-                          <span v-else>
-                            <i class="far fa-heart"></i>
-                          </span>
+                          <img
+                            v-else
+                            src="/public/emoji/001-no.svg"
+                            alt="like"
+                            width="20"
+                            height="20"
+                          />
                           <div class="reaction-box">
                             <div class="reaction-icon show">
                               <label>Like</label>
                               <img
                                 @click="reaction(1)"
-                                src="/public/emoji/006-heart.svg"
+                                src="/public/emoji/002-heart.svg"
                                 alt="like"
                               />
                             </div>
@@ -88,16 +92,15 @@
                         </a>
                       </div>
                       <span>
-                        <i class="far fa-bookmark"></i>
-                        SAVE
+                        <img
+                          src="/public/tool_svg/003-bookmark-white.svg"
+                          alt="like"
+                          width="20"
+                          height="20"
+                        />
                       </span>
                       <span @click="share()">
-                        <i class="fas fa-share"></i>
-                        SHARE
-                      </span>
-                      <span>
-                        <i class="fas fa-flag"></i>
-                        Report
+                        <img src="/public/tool_svg/004-share.svg" alt="like" width="20" height="20" />
                       </span>
                       <span>
                         <i class="fas fa-ellipsis-h"></i>
@@ -258,7 +261,7 @@ export default {
   name: "media-settings",
   data: () => ({
     likeMap: [
-      "/public/emoji/006-heart.svg",
+      "/public/emoji/002-heart.svg",
       "/public/emoji//002-in-love.svg",
       "/public/emoji/happy.svg",
       "/public/emoji/001-thinking.svg",

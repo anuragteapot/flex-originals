@@ -182,13 +182,29 @@ const debounce = function(func, wait, immediate) {
   };
 };
 export default {
-  metaInfo: {
-    title: "Video",
-    titleTemplate: "%s - Flex Originals!",
-    htmlAttrs: {
-      lang: "en",
-      amp: true
-    }
+  metaInfo() {
+    return {
+      title: this.videoInfo.title,
+      titleTemplate: "%s - Flex Originals!",
+      htmlAttrs: {
+        lang: "en",
+        amp: true
+      },
+      meta: [
+        { name: "description", content: this.videoInfo.description },
+        { name: "url", content: window.location.href },
+        { name: "og:title", content: this.videoInfo.title },
+        { name: "og:type", content: "Video" },
+        { name: "og:url", content: window.location.href },
+        { name: "og:site_name", content: "Flex Originals" },
+        { name: "og:image", content: "/" + this.videoInfo.thumbImage },
+        { name: "og:description", content: this.videoInfo.description },
+        { name: "og:video", content: "/" + this.videoInfo.videoFile },
+        { name: "og:video:type", content: "video/mp4" },
+        { name: "og:video:height", content: "400" },
+        { name: "og:video:width", content: "600" }
+      ]
+    };
   },
   data() {
     return {

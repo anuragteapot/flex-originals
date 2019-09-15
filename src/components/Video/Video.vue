@@ -19,7 +19,7 @@
       @click="playOrPause"
       controlslist="”nodownload”"
     ></video>
-    <img v-if="error" class="video__error" src="/public/videoerror.gif" />
+    <img v-if="error" class="video__error" src="/public/videoerror.gif" alt="videoerror"/>
     <div
       :class="`fo-video-player-menu context ${opencontextmenu ? 'vactive' : ''}`"
       :style="`top: ${menuTop}px; left: ${menuLeft}px;` "

@@ -4,7 +4,7 @@
       <div class="profile__banner">
         <div class="profile__banner__background">
           <div v-show="channelInfo.profileAvatar" class="profile__avatar">
-            <img :src="channelInfo.profileAvatar" />
+            <img :src="channelInfo.profileAvatar" alt="logo" />
           </div>
           <div class="social__media">
             <a
@@ -54,6 +54,7 @@
               src="/public/verified.svg"
               width="20"
               height="20"
+              alt="verified"
             />
           </p>
           <button class="follow" style="background:red;" v-if="editMode" @click="onEditMode">

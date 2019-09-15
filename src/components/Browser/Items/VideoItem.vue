@@ -2,7 +2,7 @@
   <div class="content-v-thumb">
     <div class="video__thumbnail">
       <router-link :to="`/app/@watch?v=${item.id}`" v-show="!this.editMode">
-        <lazy-image :src="getSrc()" :lazySrc="lazySrc" hover :active="selected"></lazy-image>
+        <lazy-image :src="getSrc()" :lazySrc="lazySrc" hover :active="selected" :alt="item.title"></lazy-image>
         <i class="fas fa-play fa-2x file-icon" aria-hidden="true" v-if="!editMode"></i>
       </router-link>
       <lazy-image
@@ -10,6 +10,7 @@
         :src="getSrc()"
         :lazySrc="lazySrc"
         hover
+        :alt="item.title"
         :active="selected"
         @click="open"
       ></lazy-image>
@@ -18,7 +19,12 @@
         <p class="title">{{getName()}}</p>
         <p class="views">
           {{ item.user.username }}
-          <img src="/public/verified.svg" width="10" height="10" />
+          <img
+            src="/public/verified.svg"
+            width="10"
+            height="10"
+            alt="verified"
+          />
           <br />
           {{ item.videoAnalytics ? item.videoAnalytics.views : '0' }} views . {{ $api.time_ago(new Date(item.published)) }}
         </p>

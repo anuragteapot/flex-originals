@@ -15,7 +15,7 @@
           <div class="home__inner">
             <h1>Verified</h1>
             <p>Congratulations your account is now verified.</p>
-            <img src="/public/icons/checkmark.svg" width="200" height="200" />
+            <img src="/public/icons/checkmark.svg" width="200" height="200"  alt="checkmark"/>
           </div>
         </div>
       </section>

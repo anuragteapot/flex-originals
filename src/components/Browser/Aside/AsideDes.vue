@@ -1,7 +1,7 @@
 <template>
   <aside :class="`features ${theme}`" v-if="isAuthenticated">
     <header class="features-header focusable">
-      <img class="features-header-name" src="/public/text_logo2.png" />
+      <img class="features-header-name" src="/public/text_logo2.png" alt="logo"/>
     </header>
     <section class="features-list">
       <header class="features-list-header focusable">

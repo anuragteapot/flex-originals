@@ -6,6 +6,7 @@
           :src="getSrc()"
           :lazySrc="lazySrc"
           hover
+          :alt="item.title"
           :active="item.id == $route.query.a || selected"
         ></lazy-image>
         <div class="now playing bar" v-show="item.id == $route.query.a">
@@ -24,6 +25,7 @@
         :src="getSrc()"
         :lazySrc="lazySrc"
         hover
+        :alt="item.title"
         @click="open"
         :active="item.id == $route.query.a || selected"
       ></lazy-image>

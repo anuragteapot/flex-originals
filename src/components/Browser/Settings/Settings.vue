@@ -15,7 +15,7 @@
                 <div class="form-item">
                   <div class="account__info">
                     <div class="avatar">
-                      <img class="account__avatar" :src="settings.profileAvatar" />
+                      <img class="account__avatar" :src="settings.profileAvatar" alt="logo"/>
                       <!-- <span class="avatar__change">Change Avatar</span> -->
                     </div>
                     <div class="email__info">

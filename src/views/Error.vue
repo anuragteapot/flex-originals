@@ -15,7 +15,7 @@
           <div class="home__inner">
             <h1>Whoops, looks like we lost one!</h1>
             <p>We cant find the page you were looking for.</p>
-            <img src="/public/icons/404.svg" width="200" height="200" />
+            <img src="/public/icons/404.svg" width="200" height="200" alt="logo" />
           </div>
         </div>
       </section>

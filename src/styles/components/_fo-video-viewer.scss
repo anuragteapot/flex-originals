@@ -108,14 +108,9 @@
             text-align: end;
             padding: 5px 0;
 
-            span {
-              text-transform: capitalize;
-              margin: 0 5px;
-              font-size: 13px;
-
-              i {
-                margin: 0 5px;
-              }
+            .video_tool {
+              margin: 0 10px;
+              cursor: pointer;
             }
           }
         }

@@ -91,20 +91,27 @@
                           </div>
                         </a>
                       </div>
-                      <span>
-                        <img
-                          src="/public/tool_svg/003-bookmark-white.svg"
-                          alt="like"
-                          width="20"
-                          height="20"
-                        />
-                      </span>
-                      <span @click="share()">
-                        <img src="/public/tool_svg/004-share.svg" alt="like" width="20" height="20" />
-                      </span>
-                      <span>
-                        <i class="fas fa-ellipsis-h"></i>
-                      </span>
+                      <img
+                        class="video_tool"
+                        src="/public/tool_svg/003-bookmark-white.svg"
+                        alt="like"
+                        width="20"
+                        height="20"
+                      />
+                      <img
+                        class="video_tool"
+                        src="/public/tool_svg/004-share.svg"
+                        alt="like"
+                        width="20"
+                        height="20"
+                      />
+                      <img
+                        class="video_tool"
+                        src="/public/tool_svg/more.svg"
+                        alt="like"
+                        width="20"
+                        height="20"
+                      />
                     </div>
                   </div>
                   <div class="video__description">

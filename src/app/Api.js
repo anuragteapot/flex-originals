@@ -202,7 +202,10 @@ class Api {
 
       if (userId) {
         try {
-          const user = await this.axios().get(`/api/users/${userId}`);
+          const user = await this.axios().get(`/api/users/${userId}`, {
+            retry: 50,
+            retryDelay: 1000
+          });
           store.commit(types.SET_USER, user.data);
           return true;
         } catch (err) {

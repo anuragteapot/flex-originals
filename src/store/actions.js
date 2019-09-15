@@ -7,6 +7,38 @@ import { api } from '../app/Api';
  * @param commit
  * @param payload
  */
+export const getLike = async (context, payload) => {
+  try {
+    return await api
+      .axios()
+      .get(`/api/videoLikes/getLike/${payload.userId}/${payload.videoId}`);
+  } catch (err) {
+    api._handleError(err);
+  }
+};
+
+/**
+ * Get contents
+ * @param commit
+ * @param payload
+ */
+export const likeEndPoint = async (context, payload) => {
+  try {
+    return await api.axios().post(`/api/videoLikes/likeEndPoint`, {
+      userId: payload.userId,
+      videoId: payload.videoId,
+      reaction: payload.reaction
+    });
+  } catch (err) {
+    api._handleError(err);
+  }
+};
+
+/**
+ * Get contents
+ * @param commit
+ * @param payload
+ */
 export const getFollowers = async (context, payload) => {
   try {
     return await api

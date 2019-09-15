@@ -32,37 +32,62 @@
                     <div class="right">
                       <div class="feed">
                         <a class="like-btn">
-                          <img src="/public/emoji/006-heart.svg" alt="like" width="20" height="20" />
+                          <img
+                            v-if="like != 0 && likeMap[like-1]"
+                            :src="likeMap[like-1]"
+                            alt="like"
+                            width="20"
+                            height="20"
+                          />
+                          <span v-else>
+                            <i class="far fa-heart"></i>
+                          </span>
                           <div class="reaction-box">
                             <div class="reaction-icon show">
                               <label>Like</label>
-                              <img src="/public/emoji/006-heart.svg" alt="like" />
+                              <img
+                                @click="reaction(1)"
+                                src="/public/emoji/006-heart.svg"
+                                alt="like"
+                              />
                             </div>
                             <div class="reaction-icon show">
                               <label>Love</label>
-                              <img src="/public/emoji//002-in-love.svg" alt="Love" />
+                              <img
+                                @click="reaction(2)"
+                                src="/public/emoji//002-in-love.svg"
+                                alt="Love"
+                              />
                             </div>
                             <div class="reaction-icon show">
                               <label>Haha</label>
-                              <img src="/public/emoji/happy.svg" alt="smiling" />
+                              <img @click="reaction(3)" src="/public/emoji/happy.svg" alt="smiling" />
                             </div>
                             <div class="reaction-icon show">
                               <label>Thinking</label>
-                              <img src="/public/emoji/001-thinking.svg" alt="wow" />
+                              <img
+                                @click="reaction(4)"
+                                src="/public/emoji/001-thinking.svg"
+                                alt="wow"
+                              />
                             </div>
                             <div class="reaction-icon show">
                               <label>Sad</label>
-                              <img src="/public/emoji/004-sad.svg" alt="sad" />
+                              <img @click="reaction(5)" src="/public/emoji/004-sad.svg" alt="sad" />
                             </div>
                             <div class="reaction-icon show">
                               <label>Angry</label>
-                              <img src="/public/emoji/005-angry.svg" alt="angry" />
+                              <img
+                                @click="reaction(6)"
+                                src="/public/emoji/005-angry.svg"
+                                alt="angry"
+                              />
                             </div>
                           </div>
                         </a>
                       </div>
                       <span>
-                        <i class="fas fa-bookmark"></i>
+                        <i class="far fa-bookmark"></i>
                         SAVE
                       </span>
                       <span @click="share()">
@@ -116,10 +141,7 @@
                         <li>
                           <div class="comment-main-level">
                             <div class="comment-avatar">
-                              <img
-                                src="http://i9.photobucket.com/albums/a88/creaticode/avatar_1_zps8e1c80cd.jpg"
-                                alt
-                              />
+                              <img :src="settings.profileAvatar" alt />
                             </div>
                             <div class="comment-box">
                               <div class="comment-head">
@@ -139,10 +161,7 @@
                           <ul class="comments-list reply-list">
                             <li>
                               <div class="comment-avatar">
-                                <img
-                                  src="http://i9.photobucket.com/albums/a88/creaticode/avatar_2_zps7de12f8b.jpg"
-                                  alt
-                                />
+                                <img :src="settings.profileAvatar" alt />
                               </div>
                               <div class="comment-box">
                                 <div class="comment-head">
@@ -163,10 +182,7 @@
                             <li>
                               <!-- Avatar -->
                               <div class="comment-avatar">
-                                <img
-                                  src="http://i9.photobucket.com/albums/a88/creaticode/avatar_1_zps8e1c80cd.jpg"
-                                  alt
-                                />
+                                <img :src="settings.profileAvatar" alt />
                               </div>
                               <div class="comment-box">
                                 <div class="comment-head">
@@ -189,10 +205,7 @@
                         <li>
                           <div class="comment-main-level">
                             <div class="comment-avatar">
-                              <img
-                                src="http://i9.photobucket.com/albums/a88/creaticode/avatar_2_zps7de12f8b.jpg"
-                                alt
-                              />
+                              <img :src="settings.profileAvatar" alt />
                             </div>
                             <div class="comment-box">
                               <div class="comment-head">
@@ -243,8 +256,17 @@ import * as types from "./../../../store/mutation-types";
 export default {
   name: "media-settings",
   data: () => ({
+    likeMap: [
+      "/public/emoji/006-heart.svg",
+      "/public/emoji//002-in-love.svg",
+      "/public/emoji/happy.svg",
+      "/public/emoji/001-thinking.svg",
+      "/public/emoji/004-sad.svg",
+      "/public/emoji/005-angry.svg"
+    ],
     following: false,
     videoSource: "",
+    like: 0,
     videoId: "",
     lazyImage: "/public/logo2.jpg",
     analytic: "",
@@ -279,6 +301,15 @@ export default {
     videoSuggestions
   },
   methods: {
+    async reaction(react) {
+      const like = await this.$store.dispatch("likeEndPoint", {
+        userId: this.loggedUser.id,
+        videoId: this.video.id,
+        reaction: react
+      });
+
+      this.like = like.data.REACTION;
+    },
     async unFollow() {
       const follow = await this.$store.dispatch("unFollow", {
         followId: this.loggedUser.id,
@@ -376,6 +407,13 @@ export default {
         });
 
         this.following = follow.data.SUCCESS;
+
+        const like = await this.$store.dispatch("getLike", {
+          userId: this.loggedUser.id,
+          videoId: this.video.id
+        });
+
+        this.like = like.data.REACTION;
       } else {
         this.$router.push("/@error");
       }

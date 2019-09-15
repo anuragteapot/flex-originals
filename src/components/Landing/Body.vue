@@ -24,15 +24,6 @@
           <a href="/app/@home">
             <button class="btn-hover color">Get Started</button>
           </a>
-          <iframe
-            height="550"
-            src="https://flexoriginals.ml/embed/5d757a69800a5d003c1162df"
-            frameborder="0"
-            allow="accelerometer; autoplay; 
-        encrypted-media; gyroscope; picture-in-picture"
-            allowfullscreen
-            width="100%"
-          ></iframe>
         </div>
       </div>
     </section>

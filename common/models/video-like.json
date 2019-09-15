@@ -18,20 +18,35 @@
     "user": {
       "type": "belongsTo",
       "model": "user",
-      "foreignKey": "videoUserLike",
-      "options": {
-        "nestRemoting": true
-      }
+      "foreignKey": "videoUserLike"
     },
     "videos": {
       "type": "belongsTo",
       "model": "videos",
-      "foreignKey": "videoId",
-      "options": {
-        "nestRemoting": true
-      }
+      "foreignKey": "videoId"
     }
   },
-  "acls": [],
+  "acls": [
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "DENY"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$authenticated",
+      "permission": "ALLOW",
+      "property": "likeEndpoint"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$authenticated",
+      "permission": "ALLOW",
+      "property": "getLike"
+    }
+  ],
   "methods": {}
 }

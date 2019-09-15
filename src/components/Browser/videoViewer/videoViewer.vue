@@ -38,9 +38,10 @@
                             alt="like"
                             width="20"
                             height="20"
+                            @click="reaction(0)"
                           />
                           <span v-else>
-                            <i class="far fa-heart" @click="reaction(0)"></i>
+                            <i class="far fa-heart"></i>
                           </span>
                           <div class="reaction-box">
                             <div class="reaction-icon show">
@@ -407,8 +408,8 @@ export default {
         });
 
         this.following = follow.data.SUCCESS;
-         
-        if(this.loggedUser.id && this.video.id) {
+
+        if (this.loggedUser.id && this.video.id) {
           const like = await this.$store.dispatch("getLike", {
             userId: this.loggedUser.id,
             videoId: this.video.id

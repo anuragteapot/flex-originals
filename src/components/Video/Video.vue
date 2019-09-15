@@ -19,7 +19,7 @@
       @click="playOrPause"
       controlslist="”nodownload”"
     ></video>
-    <img v-if="error" class="video__error" src="/public/videoerror.gif" alt="videoerror"/>
+    <img v-if="error" class="video__error" src="/public/videoerror.gif" alt="videoerror" />
     <div
       :class="`fo-video-player-menu context ${opencontextmenu ? 'vactive' : ''}`"
       :style="`top: ${menuTop}px; left: ${menuLeft}px;` "
@@ -281,7 +281,7 @@ export default {
     src(val) {
       if (this.error) return 0;
       this.loading = true;
-      this.media.src = val;
+      this.media.src = window.URL.createObjectURL(val);
       if (this.$route.query.t) {
         this.media.currentTime = this.$route.query.t;
       }

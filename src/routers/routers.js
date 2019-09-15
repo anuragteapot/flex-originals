@@ -1,119 +1,122 @@
 export default [
   {
-    path: "/",
-    name: "Landing",
+    path: '/',
+    name: 'Landing',
     component: () =>
-      import(/* webpackChunkName: "landing" */ "./../views/Landing.vue")
+      import(/* webpackChunkName: "landing" */ './../views/Landing.vue')
   },
   {
-    path: "/app/@settings",
-    name: "@settings",
+    path: '/app/@settings',
+    name: '@settings',
     component: () =>
-      import(/* webpackChunkName: "browser" */ "./../views/Browser.vue"),
+      import(/* webpackChunkName: "browser" */ './../views/Browser.vue'),
     meta: {
       requiresAuth: true
     }
   },
   {
-    path: "/app/@home",
-    name: "@home",
+    path: '/app/@home',
+    name: '@home',
     component: () =>
-      import(/* webpackChunkName: "browser" */ "./../views/Browser.vue")
+      import(/* webpackChunkName: "browser" */ './../views/Browser.vue')
   },
   {
-    path: "/app/@watch",
-    name: "@watch",
+    path: '/app/@watch',
+    name: '@watch',
     component: () =>
-      import(/* webpackChunkName: "browser" */ "./../views/Browser.vue")
+      import(/* webpackChunkName: "browser" */ './../views/Browser.vue')
   },
   {
-    path: "/app/@song",
-    name: "@song",
+    path: '/app/@song',
+    name: '@song',
     component: () =>
-      import(/* webpackChunkName: "browser" */ "./../views/Browser.vue")
+      import(/* webpackChunkName: "browser" */ './../views/Browser.vue')
   },
   {
-    path: "/embed/:v?",
-    name: "embed",
+    path: '/embed/:v?',
+    name: 'embed',
     component: () =>
-      import(/* webpackChunkName: "embed" */ "./../views/Embed.vue")
+      import(/* webpackChunkName: "embed" */ './../views/Embed.vue')
   },
   {
-    path: "/app/@upload",
-    name: "@upload",
+    path: '/app/@upload',
+    name: '@upload',
     component: () =>
-      import(/* webpackChunkName: "browser" */ "./../views/Browser.vue"),
+      import(/* webpackChunkName: "browser" */ './../views/Browser.vue'),
     meta: {
       requiresAuth: true
     }
   },
   {
-    path: "/app/@editvideo",
-    name: "@editvideo",
+    path: '/app/@editvideo',
+    name: '@editvideo',
     component: () =>
-      import(/* webpackChunkName: "browser" */ "./../views/Browser.vue"),
+      import(/* webpackChunkName: "browser" */ './../views/Browser.vue'),
     meta: {
       requiresAuth: true
     }
   },
   {
-    path: "/app/@channel/:id",
-    name: "@channel",
+    path: '/app/@channel/:id',
+    name: '@channel',
     component: () =>
-      import(/* webpackChunkName: "browser" */ "./../views/Browser.vue")
-  },
-  {
-    path: "/login",
-    name: "login",
-    component: () =>
-      import(/* webpackChunkName: "login" */ "./../views/Login.vue"),
+      import(/* webpackChunkName: "browser" */ './../views/Browser.vue'),
     meta: {
       requiresAuth: true
     }
   },
   {
-    path: "/signup",
-    name: "signup",
+    path: '/login',
+    name: 'login',
     component: () =>
-      import(/* webpackChunkName: "signup" */ "./../views/Signup.vue"),
+      import(/* webpackChunkName: "login" */ './../views/Login.vue'),
     meta: {
       requiresAuth: true
     }
   },
   {
-    path: "/verify/users/confirm",
-    name: "verify",
+    path: '/signup',
+    name: 'signup',
     component: () =>
-      import(/* webpackChunkName: "verify" */ "./../views/Verify.vue")
+      import(/* webpackChunkName: "signup" */ './../views/Signup.vue'),
+    meta: {
+      requiresAuth: true
+    }
   },
   {
-    path: "/verify/users/verified",
-    name: "verified",
+    path: '/verify/users/confirm',
+    name: 'verify',
     component: () =>
-      import(/* webpackChunkName: "verified" */ "./../views/Verified.vue")
+      import(/* webpackChunkName: "verify" */ './../views/Verify.vue')
   },
   {
-    path: "/auth",
-    name: "auth",
+    path: '/verify/users/verified',
+    name: 'verified',
     component: () =>
-      import(/* webpackChunkName: "auth" */ "./../views/Auth.vue")
+      import(/* webpackChunkName: "verified" */ './../views/Verified.vue')
   },
   {
-    path: "/test",
-    name: "test",
+    path: '/auth',
+    name: 'auth',
     component: () =>
-      import(/* webpackChunkName: "test" */ "./../views/Test.vue")
+      import(/* webpackChunkName: "auth" */ './../views/Auth.vue')
   },
   {
-    path: "/@error",
-    name: "@error",
+    path: '/test',
+    name: 'test',
     component: () =>
-      import(/* webpackChunkName: "error" */ "./../views/Error.vue")
+      import(/* webpackChunkName: "test" */ './../views/Test.vue')
   },
   {
-    path: "*",
-    name: "@pageNotFound",
+    path: '/@error',
+    name: '@error',
     component: () =>
-      import(/* webpackChunkName: "error" */ "./../views/Error.vue")
+      import(/* webpackChunkName: "error" */ './../views/Error.vue')
+  },
+  {
+    path: '*',
+    name: '@pageNotFound',
+    component: () =>
+      import(/* webpackChunkName: "error" */ './../views/Error.vue')
   }
 ];

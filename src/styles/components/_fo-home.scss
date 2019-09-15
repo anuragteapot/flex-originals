@@ -12,15 +12,21 @@
       background-color: black;
       box-shadow: 0 1px 5px 0 rgba(9, 10, 10, 0.75);
       overflow: auto;
-    }
 
-    .home__navbar a {
-      color: white;
-      float: right;
-      text-align: center;
-      padding: 20px;
-      text-decoration: none;
-      font-size: 17px;
+      img {
+        width: 250px;
+        padding: 10px;
+        margin: 0 0 0 10px;
+      }
+
+      a {
+        color: white;
+        float: right;
+        text-align: center;
+        padding: 20px;
+        text-decoration: none;
+        font-size: 17px;
+      }
     }
 
     .home__navbar a:hover {
@@ -41,19 +47,18 @@
       .home__container {
         text-align: center;
 
-        .arc_inner{
+        .arc_inner {
           padding: 0 10%;
           margin: auto;
-          width: 100%;
+          width: 90%;
 
-          img{
+          img {
             width: 100%;
           }
         }
 
-
         .home__inner {
-          padding: 0 20%;
+          padding: 10%;
           margin: auto;
           width: 100%;
 
@@ -70,9 +75,8 @@
           p {
             padding: 10px;
             font-size: 20px;
-            color: wheat;
+            color: whitesmoke;
           }
-
         }
       }
     }
@@ -101,7 +105,7 @@
         padding: 20px 0px 5px 0px;
         font-weight: normal;
         text-transform: uppercase;
-        letter-spacing: 0.250em;
+        letter-spacing: 0.25em;
       }
 
       ul {
@@ -116,24 +120,23 @@
           font-weight: bold;
           padding: 5px 0px 5px 0px;
           cursor: pointer;
-          transition: .2s;
-          -webkit-transition: .2s;
-          -moz-transition: .2s;
+          transition: 0.2s;
+          -webkit-transition: 0.2s;
+          -moz-transition: 0.2s;
         }
 
         li:hover {
           opacity: 0.5;
-          transition: .1s;
-          -webkit-transition: .1s;
-          -moz-transition: .1s;
+          transition: 0.1s;
+          -webkit-transition: 0.1s;
+          -moz-transition: 0.1s;
         }
       }
-
     }
 
     .social {
       float: right;
-      color: #000000;
+
 
       ul li {
         display: inline-block;
@@ -142,6 +145,7 @@
 
       ul li i {
         font-size: 20px;
+        color: #000000;
       }
     }
 
@@ -201,7 +205,6 @@
       width: 100%;
     }
   }
-
 }
 
 @media only screen and (max-width: 600px) {

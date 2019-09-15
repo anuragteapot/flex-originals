@@ -40,7 +40,7 @@
                             height="20"
                           />
                           <span v-else>
-                            <i class="far fa-heart"></i>
+                            <i class="far fa-heart" @click="reaction(0)"></i>
                           </span>
                           <div class="reaction-box">
                             <div class="reaction-icon show">

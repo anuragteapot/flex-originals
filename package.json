@@ -95,7 +95,8 @@
   },
   "nodemonConfig": {
     "ignore": [
-      "client/*"
+      "client/*",
+      "src/*"
     ],
     "delay": "2500"
   },

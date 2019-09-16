@@ -4,7 +4,18 @@
     ref="player"
     @mousemove="makeActive(); active = true; "
   >
-    <div v-show="fullscreen && active" class="video__info__fullscreen__title">{{ videoInfo.title}}</div>
+    <div class="fo-video-top">
+      <div v-show="fullscreen && active" class="fo-video__info__fullscreen__title">{{ videoInfo.title}}</div>
+      <div class="fo-video-watch-later">
+        <img src="/public/tool_svg/018-clock.svg" width="30"/>
+      </div>
+    </div>
+    <div class="fo-video-player-overlay" v-show="!isPlaying" @click="playOrPause"></div>
+    <div class="fo-video-player-load-play" v-show="!isPlaying">
+      <a class="video-play-button" @click="playOrPause">
+        <span></span>
+      </a>
+    </div>
     <div :class="`fo-video-loader`" v-show="loading && !error">
       <svg id="catchup-spinner" viewBox="25 25 50 50">
         <circle cx="50" cy="50" r="20" />

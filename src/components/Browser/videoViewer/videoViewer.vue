@@ -392,11 +392,9 @@ export default {
             .axios()
             .get(`/api/actions/getVideo/${this.$route.query.v}`);
           this.$store.commit(types.SET_IS_LOADING, false);
-          this.$api.Nprogress.done();
         } catch (err) {
           this.videoUnavaliable = true;
           this.$store.commit(types.SET_IS_LOADING, false);
-          this.$api.Nprogress.done();
         }
 
         if (!currentVideo.data) {
@@ -427,6 +425,8 @@ export default {
 
           this.like = like.data.REACTION;
         }
+
+        this.$api.Nprogress.done();
       } else {
         this.$router.push("/@error");
       }

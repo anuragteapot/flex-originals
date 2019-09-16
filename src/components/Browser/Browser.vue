@@ -18,7 +18,7 @@
     <div class="main-container">
       <toolbar></toolbar>
       <component v-bind:is="layout"></component>
-      <lazy-audio-player v-if="$route.name == '@song'"  />
+      <lazy-audio-player v-if="$route.name == '@song'" />
     </div>
   </div>
 </template>
@@ -110,6 +110,7 @@ export default {
     }
   },
   async beforeMount() {
+    this.$api.Nprogress.start();
     if (this.$api.webStorage.local.get("$userId")) {
       const settings = await this.$store.dispatch("findSettings", {
         uid: this.$api.webStorage.local.get("$userId")
@@ -125,6 +126,7 @@ export default {
       content = await this.$store.dispatch("getContent", {});
     }
     this.$store.commit(types.SET_CONTENT, content.data);
+    this.$api.Nprogress.done();
   }
 };
 </script>

@@ -310,8 +310,13 @@
     &.settings {
       right: 10px;
     }
+    
     &.volume {
       right: 150px;
+    }
+    
+    &.no__animation {
+      transition: none !important;
     }
 
     &.vactive {
@@ -392,10 +397,10 @@
         padding: 0;
         width: 220px;
       }
-    }
-
-    .no__animation {
-      transition: none !important;
+      
+      &.no__animation {
+        transition: none !important;
+      }
     }
 
     .menu-active {

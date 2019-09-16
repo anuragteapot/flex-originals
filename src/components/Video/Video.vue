@@ -292,6 +292,7 @@ export default {
     src(val) {
       if (this.error) return 0;
       this.loading = true;
+      this.isPlaying = false;
       this.media.src = val;
       if (this.$route.query.t) {
         this.media.currentTime = this.$route.query.t;

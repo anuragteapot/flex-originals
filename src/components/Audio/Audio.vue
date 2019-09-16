@@ -47,34 +47,9 @@
 import { api } from "./../../app/Api";
 
 export default {
-  metaInfo() {
-    return {
-      title: this.musicTitle,
-      titleTemplate: "%s - Flex Originals!",
-      htmlAttrs: {
-        lang: "en",
-        amp: true
-      },
-      meta: [
-       // { name: "description", content: this.musicPlaylist[this.currentSong].description },
-        { name: "url", content: window.location.href },
-       // { name: "image", content: "/" + this.musicPlaylist[this.currentSong].thumbImage },
-       // { name: "icon", content: "/" + this.musicPlaylist[this.currentSong].thumbImage },
-        { name: "og:title", content: this.musicTitle },
-        { name: "og:type", content: "Audio" },
-        { name: "og:url", content: window.location.href },
-        { name: "og:site_name", content: "Flex Originals" },
-   //     { name: "og:image", content: "/" + this.musicPlaylist[this.currentSong].thumbImage },
-     //   { name: "og:description", content: this.musicPlaylist[this.currentSong].description },
-      //  { name: "og:audio", content: "/" + this.musicPlaylist[this.currentSong].audioFile },
-        { name: "og:audio:type", content: "application/mp3" }
-      ]
-    };
-  },
   name: "lazy-audio-player",
   data() {
     return {
-      musicTitle: this.musicPlaylist[this.currentSong] ? this.musicPlaylist[this.currentSong].title : 'Loading...',
       imgLoaded: false,
       currentlyPlaying: false,
       currentlyStopped: false,

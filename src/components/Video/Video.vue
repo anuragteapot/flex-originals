@@ -50,7 +50,7 @@
       </nav>
     </div>
 
-    <div :class="`fo-video-player-menu seektime ${seekTime ? 'vactive' : ''}`" ref="seekTimeLeft">
+    <div :class="`fo-video-player-menu no__animation seektime ${seekTime ? 'vactive' : ''}`" ref="seekTimeLeft">
       <nav :class="`no__animation ${active && seekTime ? 'menu-active' : ''}`">
         <div class="time__preview" :style="`background-image: url('/${videoInfo.thumbImage}')`">
           <p>{{ seekTime }}</p>

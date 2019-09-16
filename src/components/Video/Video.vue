@@ -10,8 +10,8 @@
         <img src="/public/tool_svg/018-clock.svg" width="30"/>
       </div>
     </div>
-    <div class="fo-video-player-overlay" v-show="!isPlaying" @click="playOrPause"></div>
-    <div class="fo-video-player-load-play" v-show="!isPlaying">
+    <div class="fo-video-player-overlay" v-show="!isPlaying && !loading" @click="playOrPause"></div>
+    <div class="fo-video-player-load-play" v-show="!isPlaying && !loading">
       <a class="video-play-button" @click="playOrPause">
         <span></span>
       </a>
@@ -237,7 +237,7 @@ export default {
       time: 0,
       seekTime: null,
       duration: 0,
-      loading: false,
+      loading: true,
       bufferPercent: 0,
       isPlaying: false,
       isGrabbingSeekbar: false

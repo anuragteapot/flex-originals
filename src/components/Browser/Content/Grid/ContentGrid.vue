@@ -47,7 +47,7 @@ export default {
   name: "media-content-grid",
   data: () => ({
     src: "public/icons/logo.png",
-    lazySrc: "/public/logo2.jpg"
+    lazySrc: "/public/logo.png"
   }),
   computed: {
     layout() {

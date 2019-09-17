@@ -279,7 +279,7 @@ export default {
     videoSource: "",
     like: 0,
     videoId: "",
-    lazyImage: "/public/logo2.jpg",
+    lazyImage: "/public/logo.png",
     analytic: "",
     user: {},
     settings: {},

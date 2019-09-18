@@ -6,8 +6,8 @@
         <music-thumb
           v-for="item in content.audio"
           :key="item.id"
-          :src="item.thumbImage || src"
-          :lazySrc="lazySrc"
+          :src="item.thumbImage || `./../../../../assets/musicLoading.png`"
+          lazySrc="./../../../../assets/musicLoading.png"
           :item="item"
           hover
         ></music-thumb>
@@ -17,8 +17,8 @@
         <video-thumb
           v-for="item in content.video"
           :key="item.id"
-          :src="item.thumbImage || src"
-          :lazySrc="lazySrc"
+          :src="item.thumbImage || `./../../../../assets/videoLoading.png`"
+          lazySrc="./../../../../assets/videoLoading.png"
           :item="item"
           hover
         ></video-thumb>
@@ -28,11 +28,12 @@
         <music-thumb
           v-for="item in content.audio"
           :key="item.id"
-          :src="item.thumbImage || src"
-          :lazySrc="lazySrc"
+          :src="item.thumbImage || `./../../../../assets/musicLoading.png`"
+          lazySrc="./../../../../assets/musicLoading.png"
           :item="item"
           hover
         ></music-thumb>
+
       </div>
     </div>
   </div>
@@ -46,8 +47,8 @@ import videoThumb from "./../../Items/VideoItem";
 export default {
   name: "media-content-grid",
   data: () => ({
-    src: "public/icons/logo.png",
-    lazySrc: "/public/logo.png"
+    src: "./../../../../assets/musicLoading.png",
+    lazySrc: "./../../../../assets/musicLoading.png"
   }),
   computed: {
     layout() {

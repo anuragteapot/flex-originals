@@ -1,6 +1,6 @@
 <template>
   <transition name="snackbar">
-    <div v-if="active" class="snackbar" :class="classes">
+    <div v-show="active" class="snackbar" :class="classes">
       <div :class="`snackbar__wrap ${color}`">
         <div class="snackbar__body">
           <slot></slot>

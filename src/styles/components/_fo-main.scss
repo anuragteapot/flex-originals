@@ -76,6 +76,18 @@ p {
   background-color: $color-error !important;
 }
 
+.fo-button {
+  border: none;
+  background-color: transparent;
+  padding: 0;
+  color: inherit;
+  text-align: inherit;
+  font-size: 100%;
+  font-family: inherit;
+  cursor: default;
+  line-height: inherit;
+}
+
 .container,
 .fo-browser {
   height: 100%;

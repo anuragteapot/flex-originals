@@ -6,8 +6,8 @@
         <music-thumb
           v-for="item in content.audio"
           :key="item.id"
-          :src="item.thumbImage || `./../../../../assets/musicLoading.png`"
-          lazySrc="./../../../../assets/musicLoading.png"
+          :src="item.thumbImage || `./../../../assets/musicLoading.png`"
+          lazySrc="./../../../assets/musicLoading.png"
           :item="item"
           hover
         ></music-thumb>
@@ -17,8 +17,8 @@
         <video-thumb
           v-for="item in content.video"
           :key="item.id"
-          :src="item.thumbImage || `./../../../../assets/videoLoading.png`"
-          lazySrc="./../../../../assets/videoLoading.png"
+          :src="item.thumbImage || `./../../../assets/videoLoading.png`"
+          lazySrc="./../../../assets/videoLoading.png"
           :item="item"
           hover
         ></video-thumb>
@@ -28,8 +28,8 @@
         <music-thumb
           v-for="item in content.audio"
           :key="item.id"
-          :src="item.thumbImage || `./../../../../assets/musicLoading.png`"
-          lazySrc="./../../../../assets/musicLoading.png"
+          :src="item.thumbImage || `./../../../assets/musicLoading.png`"
+          lazySrc="./../../../assets/musicLoading.png"
           :item="item"
           hover
         ></music-thumb>

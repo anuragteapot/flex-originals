@@ -74,25 +74,27 @@
 
         .buffer {
           height: 4px;
-          z-index: 46;
+          z-index: 45;
+          top: 8px;
+          position: absolute;
           border-radius: 4px;
           background: grey;
+        }
 
-          .audio-progress {
-            height: 4px;
-            border-radius: 4px;
-            z-index: 45;
+        .audio-progress {
+          height: 4px;
+          border-radius: 4px;
+          z-index: 45;
+          background: $color-error;
+
+          .circle {
+            position: relative;
+            top: -3px;
+            width: 10px;
+            height: 10px;
+            float: right;
             background: $color-error;
-
-            .circle {
-              position: relative;
-              top: -3px;
-              width: 10px;
-              height: 10px;
-              float: right;
-              background: $color-error;
-              border-radius: 50%;
-            }
+            border-radius: 50%;
           }
         }
 

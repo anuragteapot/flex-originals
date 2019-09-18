@@ -20,11 +20,11 @@
       <div class="slider_container">
         <span class="time">{{ currentTime }}</span>
         <div class="slider" ref="progress" @mousedown="scrub" data-direction="horizontal">
-          <div class="buffer" :style="`width:${bufferPercent}%`">
-            <div class="audio-progress" :style="`width:${currentProgressBar}%`">
-              <div class="circle"></div>
-            </div>
+          <div class="audio-progress" :style="`width:${currentProgressBar}%`">
+            <div class="circle"></div>
           </div>
+          <!-- <div class="buffer" :style="`width:${bufferPercent}%`"> -->
+          <!-- </div> -->
         </div>
         <span class="time">{{ trackDuration }}</span>
         <i v-show="volume" class="audio-icon fa fa-volume-up" @click="volume = 0"></i>

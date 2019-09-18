@@ -348,6 +348,7 @@ module.exports = function(Action) {
 
       const video = await Videos.find({
         include: ['videoAnalytics', 'user'],
+        order: 'published DESC',
         fields: {
           published: true,
           videoOwnerId: true,
@@ -361,6 +362,7 @@ module.exports = function(Action) {
       });
       const audio = await Audios.find({
         include: ['audioAnalytics', 'user'],
+        order: 'published DESC',
         fields: {
           published: true,
           audioOwnerId: true,
@@ -376,6 +378,7 @@ module.exports = function(Action) {
     } else {
       const video = await Videos.find({
         include: ['videoAnalytics', 'user'],
+        order: 'published DESC',
         fields: {
           published: true,
           videoOwnerId: true,
@@ -389,6 +392,7 @@ module.exports = function(Action) {
       });
       const audio = await Audios.find({
         include: ['audioAnalytics', 'user'],
+        order: 'published DESC',
         fields: {
           published: true,
           audioOwnerId: true,

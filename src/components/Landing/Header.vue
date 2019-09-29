@@ -10,21 +10,23 @@
   </div>
 </template>
 <script>
-import { mapGetters } from "vuex";
+import { mapGetters } from 'vuex';
 export default {
-  name: "landing-footer",
+  name: 'landing-footer',
   computed: {
-    ...mapGetters(["isAuthenticated"])
+    ...mapGetters(['isAuthenticated']),
   },
   methods: {
     async logout() {
       try {
         await this.$api.logout();
-        window.location.href = "";
+        if (typeof window !== 'undefined') {
+          window.location.href = '';
+        }
       } catch (err) {
         console.log(err);
       }
-    }
-  }
+    },
+  },
 };
 </script>

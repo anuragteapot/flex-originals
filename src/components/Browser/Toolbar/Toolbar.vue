@@ -32,18 +32,18 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
-import * as types from "./../../../store/mutation-types";
+import { mapGetters } from 'vuex';
+import * as types from './../../../store/mutation-types';
 
 export default {
-  name: "toolbar",
+  name: 'toolbar',
   computed: {
     ...mapGetters([
-      "isMobile",
-      "isLoading",
-      "appDrawer",
-      "isAuthenticated",
-      "theme"
+      'isMobile',
+      'isLoading',
+      'appDrawer',
+      'isAuthenticated',
+      'theme',
     ]),
     search: {
       set(val) {
@@ -51,11 +51,11 @@ export default {
       },
       get() {
         return this.$store.state.search;
-      }
+      },
     },
     theme() {
       return this.$store.state.theme;
-    }
+    },
   },
   methods: {
     toggleMenu: function() {
@@ -63,23 +63,23 @@ export default {
         this.$store.commit(types.APP_DRAWER, {
           action: true,
           des: true,
-          mobileState: true
+          mobileState: true,
         });
       } else if (this.appDrawer.action) {
         this.$store.commit(types.APP_DRAWER, {
           action: false,
           des: false,
-          mobileState: false
+          mobileState: false,
         });
       } else {
         this.$store.commit(types.APP_DRAWER, {
           action: true,
           des: true,
-          mobileState: true
+          mobileState: true,
         });
       }
-    }
-  }
+    },
+  },
 };
 </script>
 

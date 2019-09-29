@@ -1,0 +1,35 @@
+# Set the default behavior, in case people don't have core.autocrlf set.
+* text=auto
+
+# Declare files that will always have LF/Unix line endings on checkout.
+*.css text eol=lf
+*.gql text eol=lf
+*.graphql text eol=lf
+*.html text eol=lf
+*.js text eol=lf
+*.jsx text eol=lf
+*.less text eol=lf
+*.lock text eol=lf
+*.scss text eol=lf
+*.sh text eol=lf
+*.svg text eol=lf
+*.txt text eol=lf
+*.vue text eol=lf
+*.yml text eol=lf
+
+# Denote all files that are truly binary and should not be modified.
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.mov binary
+*.mp4 binary
+*.mp3 binary
+*.flv binary
+*.fla binary
+*.swf binary
+*.gz binary
+*.ttf binary
+*.woff binary
+*.woff2 binary

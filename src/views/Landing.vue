@@ -7,21 +7,23 @@
 </template>
 
 <script>
-import creatorBody from "./../components/Landing/Body";
-import creatorFooter from "./../components/Landing/Footer";
-import creatorHeader from "./../components/Landing/Header";
+import creatorBody from './../components/Landing/Body';
+import creatorFooter from './../components/Landing/Footer';
+import creatorHeader from './../components/Landing/Header';
 
 export default {
-  name: "media-home",
+  name: 'media-home',
   components: {
     creatorBody,
     creatorFooter,
-    creatorHeader
+    creatorHeader,
   },
   async beforeMount() {
     if (await this.$api.isLogged()) {
-      window.location.href = '/app/@home';
+      if (typeof window !== 'undefined') {
+        window.location.href = '/app/@home';
+      }
     }
-  }
+  },
 };
 </script>

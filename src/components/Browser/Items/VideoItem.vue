@@ -34,10 +34,10 @@
 </template>
 
 <script>
-import * as types from "./../../../store/mutation-types";
+import * as types from './../../../store/mutation-types';
 
 export default {
-  name: "videoThumbs",
+  name: 'videoThumbs',
   data() {
     return {};
   },
@@ -46,12 +46,12 @@ export default {
     contain: Boolean,
     src: {
       type: [String, Object],
-      default: ""
+      default: '',
     },
     gradient: String,
     lazySrc: String,
     srcset: String,
-    item: Object
+    item: Object,
   },
   computed: {
     editMode() {
@@ -65,37 +65,37 @@ export default {
         return item.id === this.item.id;
       });
       return res.length === 1 ? true : false;
-    }
+    },
   },
   methods: {
     getSrc() {
-      if (this.src.includes("https")) {
+      if (this.src.includes('https')) {
         return this.src;
       } else {
-        return "/" + this.src;
+        return '/' + this.src;
       }
     },
     open() {
       if (this.selected) {
         this.$store.commit(types.UNSELECT_BROWSER_ITEM, {
           id: this.item.id,
-          type: "video"
+          type: 'video',
         });
       } else {
         this.$store.commit(types.SELECT_BROWSER_ITEM, {
           id: this.item.id,
-          type: "video"
+          type: 'video',
         });
       }
     },
     getName: function() {
       const len = 20;
       if (this.item.title.length >= len) {
-        return this.item.title.substring(0, len) + "..";
+        return this.item.title.substring(0, len) + '..';
       } else {
         return this.item.title;
       }
-    }
-  }
+    },
+  },
 };
 </script>

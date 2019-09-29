@@ -51,19 +51,19 @@ module.exports = {
       return url.format({
         protocol: req.protocol,
         hostname: req.hostname,
-        pathname: req.originalUrl
+        pathname: req.originalUrl,
       });
     }
     return url.format({
       protocol: req.protocol,
-      hostname: req.hostname
+      hostname: req.hostname,
     });
   },
 
   getRandomAlphaNumericString(length, charset) {
     return randomstring.generate({
       charset: charset || '0123456789abcdefghijklmnopqrstuvwxyz',
-      length: length || 8
+      length: length || 8,
     });
   },
 
@@ -75,7 +75,7 @@ module.exports = {
           return reject(err);
         }
         return resolve(data);
-      })
+      }),
     );
   },
 
@@ -86,5 +86,5 @@ module.exports = {
       .createHash('md5')
       .update(data)
       .digest('hex');
-  }
+  },
 };

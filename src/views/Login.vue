@@ -13,20 +13,20 @@
 </template>
 
 <script>
-import LoginForm from "@/components/Account/LoginForm";
+import LoginForm from '@/components/Account/LoginForm';
 
-import { mapGetters } from "vuex";
+import { mapGetters } from 'vuex';
 
 export default {
-  name: "media-home",
+  name: 'media-home',
   data() {
     return {};
   },
   components: {
-    "lazy-login": LoginForm
+    'lazy-login': LoginForm,
   },
   computed: {
-    ...mapGetters(["isAuthenticated"])
-  }
+    ...mapGetters(['isAuthenticated']),
+  },
 };
 </script>

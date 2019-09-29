@@ -33,7 +33,6 @@
           :item="item"
           hover
         ></music-thumb>
-
       </div>
     </div>
   </div>
@@ -41,20 +40,20 @@
 
 <script>
 // import * as types from "./../../../../store/mutation-types";
-import musicThumb from "./../../Items/MusicItem";
-import videoThumb from "./../../Items/VideoItem";
+import musicThumb from './../../Items/MusicItem';
+import videoThumb from './../../Items/VideoItem';
 
 export default {
-  name: "media-content-grid",
+  name: 'media-content-grid',
   data: () => ({
-    src: "./../../../../assets/musicLoading.png",
-    lazySrc: "./../../../../assets/musicLoading.png"
+    src: './../../../../assets/musicLoading.png',
+    lazySrc: './../../../../assets/musicLoading.png',
   }),
   computed: {
     layout() {
       const name = this.$route.name;
-      if (name.split("@")[1]) {
-        return name.split("@")[1];
+      if (name.split('@')[1]) {
+        return name.split('@')[1];
       } else {
         return null;
       }
@@ -64,14 +63,14 @@ export default {
     },
     ritem() {
       return {
-        id: "2mxmd2msk3",
-        title: "Recent"
+        id: '2mxmd2msk3',
+        title: 'Recent',
       };
-    }
+    },
   },
   components: {
     videoThumb,
-    musicThumb
-  }
+    musicThumb,
+  },
 };
 </script>

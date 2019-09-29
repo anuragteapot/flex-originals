@@ -1,83 +1,46 @@
-/**
- * Get the mobile or not ?
- * @param state
- * @returns {*}
- */
-export const isMobile = state => {
-  return state.isMobile
-}
+export default {
+  /**
+   * Get the mobile or not ?
+   * @param state
+   * @returns {*}
+   */
+  isMobile: state => {
+    return state.isMobile;
+  },
 
-/**
- * Get the is loading.
- * @param state
- * @returns {*}
- */
-export const isLoading = state => {
-  return state.isLoading
-}
+  /**
+   * Get the is loading.
+   * @param state
+   * @returns {*}
+   */
+  isLoading: state => {
+    return state.isLoading;
+  },
 
-/**
- * Get the is loading.
- * @param state
- * @returns {*}
- */
-export const theme = state => {
-  return state.theme
-}
+  /**
+   * Get the is loading.
+   * @param state
+   * @returns {*}
+   */
+  theme: state => {
+    return state.theme;
+  },
 
-/**
- * Get the is loading.
- * @param state
- * @returns {*}
- */
-export const appDrawer = state => {
-  return state.appDrawer
-}
+  /**
+   * Get the is loading.
+   * @param state
+   * @returns {*}
+   */
+  appDrawer: state => {
+    return state.appDrawer;
+  },
 
-/**
- * Get the is loading.
- * @param state
- * @returns {*}
- */
-export const isAuthenticated = state => {
-  return state.isAuthenticated
-}
-
-/**
- * Get the sudirectories of the currently selected directory
- * @param state
- * @param getters
- * @returns {Array|directories|{/}|computed.directories|*|Object}
- */
-// export const getSelectedDirectoryDirectories = (state) => {
-//     return state.directories.filter(
-//         directory => (directory.directory === state.selectedDirectory)
-//     );
-// }
-
-/**
- * Get the files of the currently selected directory
- * @param state
- * @param getters
- * @returns {Array|files|{}|FileList|*}
- */
-// export const getSelectedDirectoryFiles = (state) => {
-// console.log(state)
-// state.contents.files.forEach(function(element) {
-//     console.log(element);
-// });
-// }
-
-/**
- * Whether or not all items of the current directory are selected
- * @param state
- * @param getters
- * @returns Array
- */
-// export const getSelectedDirectoryContents = (state, getters) => {
-
-// return [
-//     ...getters.getSelectedDirectoryDirectories,
-//     ...getters.getSelectedDirectoryFiles,
-// ];
-// }
+  /**
+   * Get the is loading.
+   * @param state
+   * @returns {*}
+   */
+  isAuthenticated: state => {
+    return state.isAuthenticated;
+  },
+};

@@ -260,42 +260,42 @@
 </template>
 
 <script>
-import videoSuggestions from "./videoSuggestions";
-import { api } from "./../../../app/Api";
-import { mapGetters } from "vuex";
-import * as types from "./../../../store/mutation-types";
+import videoSuggestions from './videoSuggestions';
+import { api } from './../../../api/Api';
+import { mapGetters } from 'vuex';
+import * as types from './../../../store/mutation-types';
 export default {
-  name: "media-settings",
+  name: 'media-settings',
   data: () => ({
     likeMap: [
-      "/public/emoji/002-heart.svg",
-      "/public/emoji//002-in-love.svg",
-      "/public/emoji/happy.svg",
-      "/public/emoji/001-thinking.svg",
-      "/public/emoji/004-sad.svg",
-      "/public/emoji/005-angry.svg"
+      '/public/emoji/002-heart.svg',
+      '/public/emoji//002-in-love.svg',
+      '/public/emoji/happy.svg',
+      '/public/emoji/001-thinking.svg',
+      '/public/emoji/004-sad.svg',
+      '/public/emoji/005-angry.svg',
     ],
     following: false,
-    videoSource: "",
+    videoSource: '',
     like: 0,
-    videoId: "",
-    lazyImage: "/public/logo.png",
-    analytic: "",
+    videoId: '',
+    lazyImage: '/public/logo.png',
+    analytic: '',
     user: {},
     settings: {},
     video: {},
-    videoUnavaliable: false
+    videoUnavaliable: false,
   }),
   watch: {
     $route() {
       this.init();
-    }
+    },
   },
   computed: {
-    ...mapGetters(["isMobile"]),
+    ...mapGetters(['isMobile']),
     videoSuggestions() {
       return this.$store.state.content.video.filter(
-        item => item.id !== this.$route.query.v
+        item => item.id !== this.$route.query.v,
       );
     },
     autoPlay() {
@@ -306,51 +306,51 @@ export default {
     },
     loggedUser() {
       return this.$store.state.user;
-    }
+    },
   },
   components: {
-    videoSuggestions
+    videoSuggestions,
   },
   methods: {
     async reaction(react) {
-      const like = await this.$store.dispatch("likeEndPoint", {
+      const like = await this.$store.dispatch('LIKE_END_POINT', {
         userId: this.loggedUser.id,
         videoId: this.video.id,
-        reaction: react
+        reaction: react,
       });
 
       this.like = like.data.REACTION;
     },
     async unFollow() {
-      const follow = await this.$store.dispatch("unFollow", {
+      const follow = await this.$store.dispatch('UN_FOLLOW', {
         followId: this.loggedUser.id,
-        channelId: this.user.id
+        channelId: this.user.id,
       });
 
       this.following = follow.data.SUCCESS;
 
-      const res = await this.$store.dispatch("getFollowers", {
-        followId: this.loggedUser.id
+      const res = await this.$store.dispatch('GET_FOLLOWERS', {
+        followId: this.loggedUser.id,
       });
       this.$store.commit(types.SET_FOLLOWING, res.data);
     },
     async follow() {
-      const follow = await this.$store.dispatch("doFollow", {
+      const follow = await this.$store.dispatch('DO_FOLLOW', {
         followId: this.loggedUser.id,
-        channelId: this.user.id
+        channelId: this.user.id,
       });
 
       this.following = follow.data.SUCCESS;
 
-      const res = await this.$store.dispatch("getFollowers", {
-        followId: this.loggedUser.id
+      const res = await this.$store.dispatch('GET_FOLLOWERS', {
+        followId: this.loggedUser.id,
       });
       this.$store.commit(types.SET_FOLLOWING, res.data);
     },
     share() {
       this.$store.commit(types.SHOW_MODAL, {
         state: true,
-        type: "MShareModal"
+        type: 'MShareModal',
       });
     },
     halfTime: api.debounce(async function() {
@@ -374,11 +374,11 @@ export default {
     },
     async logout() {
       try {
-        await this.$store.dispatch("logout");
-        this.$router.push("/app/@home?u=logout");
+        await this.$store.dispatch('LOGOUT');
+        this.$router.push('/app/@home?u=logout');
         this.$api.auth.logout();
       } catch (err) {
-        this.$router.push("/app/@home?u=logout");
+        this.$router.push('/app/@home?u=logout');
         this.$api.auth.logout();
       }
     },
@@ -400,27 +400,27 @@ export default {
         if (!currentVideo.data) {
           this.videoUnavaliable = true;
         }
-        if (currentVideo.data.video.videoFile.includes("https")) {
+        if (currentVideo.data.video.videoFile.includes('https')) {
           this.videoSource = currentVideo.data.video.videoFile;
         } else {
-          this.videoSource = "/" + currentVideo.data.video.videoFile;
+          this.videoSource = '/' + currentVideo.data.video.videoFile;
         }
         this.analytic = currentVideo.data.analytic;
         this.user = currentVideo.data.user;
         this.settings = currentVideo.data.settings;
         this.video = currentVideo.data.video;
 
-        const follow = await this.$store.dispatch("getFollow", {
+        const follow = await this.$store.dispatch('GET_FOLLOW', {
           followId: this.loggedUser.id,
-          channelId: this.user.id
+          channelId: this.user.id,
         });
 
         this.following = follow.data.SUCCESS;
 
         if (this.loggedUser.id && this.video.id) {
-          const like = await this.$store.dispatch("getLike", {
+          const like = await this.$store.dispatch('getLike', {
             userId: this.loggedUser.id,
-            videoId: this.video.id
+            videoId: this.video.id,
           });
 
           this.like = like.data.REACTION;
@@ -428,12 +428,12 @@ export default {
 
         this.$api.Nprogress.done();
       } else {
-        this.$router.push("/@error");
+        this.$router.push('/@error');
       }
-    }
+    },
   },
   async beforeMount() {
     this.init();
-  }
+  },
 };
 </script>

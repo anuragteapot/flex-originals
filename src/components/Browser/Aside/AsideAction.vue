@@ -91,10 +91,10 @@
 </template>
 
 <script>
-import * as types from "./../../../store/mutation-types";
+import * as types from './../../../store/mutation-types';
 
 export default {
-  name: "lazy-aside",
+  name: 'lazy-aside',
   computed: {
     selecteditems() {
       return this.$store.state.selectedItems;
@@ -104,11 +104,11 @@ export default {
     },
     theme() {
       return this.$store.state.theme;
-    }
+    },
   },
   methods: {
     deleteItem() {
-      this.$store.commit(types.SHOW_MODAL, { state: true, type: "MDelete" });
+      this.$store.commit(types.SHOW_MODAL, { state: true, type: 'MDelete' });
     },
     fileUpload: async function() {
       if (await this.$api.isLogged()) {
@@ -116,7 +116,7 @@ export default {
       } else {
         this.$router.push(`/login?redirect=${this.$route.fullPath}`);
       }
-    }
-  }
+    },
+  },
 };
 </script>

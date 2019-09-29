@@ -1,24 +1,19 @@
+import { sync } from 'vuex-router-sync';
 import Vue from 'vue';
 import App from './App.vue';
-import router from './router';
-import store from './store/store';
-import './registerServiceWorker';
+import createStore from '@/store';
+import createRouter from '@/router';
+import api from './api';
 import Snackbar from '@/components/Tool/SnackBar';
 import Model from '@/components/Model/Model';
 import AudioPlayer from '@/components/Audio/Audio';
 import VideoPlayer from '@/components/Video/Video';
 import lazyImage from '@/components/LazyImage/LazyImage';
-import app from './app/index';
-import VueMeta from 'vue-meta';
 
 import './styles/creator.scss';
 import './styles/vendor/nprogress/nprogress.css';
 
-Vue.use(app);
-Vue.use(VueMeta, {
-  // optional pluginOptions
-  refreshOnceOnNavigation: true
-});
+Vue.use(api);
 
 // Load components
 Vue.component('lazySnackBar', Snackbar);
@@ -27,12 +22,20 @@ Vue.component('lazyAudioPlayer', AudioPlayer);
 Vue.component('foVideoPlayer', VideoPlayer);
 Vue.component('lazyImage', lazyImage);
 
-Vue.prototype.$scrollToTop = () => window.scrollTo(0, 0);
+export default function createApp() {
+  // create store and router instances
+  const store = createStore();
+  const router = createRouter();
 
-Vue.config.productionTip = false;
+  // sync the router with the vuex store.
+  // this registers `store.state.route`
+  sync(store, router);
 
-new Vue({
-  router,
-  store,
-  render: h => h(App)
-}).$mount('#app');
+  const app = new Vue({
+    router,
+    store,
+    render: h => h(App),
+  });
+
+  return { app, router, store };
+}

@@ -51,6 +51,6 @@
 </template>
 <script>
 export default {
-  name: "landing-body"
+  name: 'landing-body',
 };
 </script>

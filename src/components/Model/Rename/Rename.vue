@@ -19,12 +19,12 @@
 </template>
 
 <script>
-import * as types from "./../../../store/mutation-types";
+import * as types from './../../../store/mutation-types';
 
 export default {
-  name: "model-rename",
+  name: 'model-rename',
   data: () => ({
-    defaultData: ""
+    defaultData: '',
   }),
 
   computed: {
@@ -33,28 +33,28 @@ export default {
         if (this.$store.state.showRenameModal) {
           return this.$store.state.selectedItems[0].name;
         } else {
-          return "";
+          return '';
         }
       },
       set: function(data) {
         this.defaultData = data;
-      }
-    }
+      },
+    },
   },
   methods: {
     hideRenameModal: function() {
       this.$store.commit(types.HIDE_RENAME_MODAL);
     },
     rename: function() {
-      if (this.defaultData != "") {
+      if (this.defaultData != '') {
         const item = this.$store.state.selectedItems[0];
         item.newName = this.defaultData;
-        this.$store.dispatch("rename", item);
+        this.$store.dispatch('rename', item);
       } else {
         this.hideRenameModal();
       }
-    }
-  }
+    },
+  },
 };
 </script>
 <style>

@@ -13,12 +13,12 @@
 
 <script>
 export default {
-  name: "lazy-image",
+  name: 'lazy-image',
   data() {
     return {
-      currentSrc: "",
+      currentSrc: '',
       isLoading: true,
-      calculatedAspectRatio: ""
+      calculatedAspectRatio: '',
     };
   },
   props: {
@@ -26,34 +26,34 @@ export default {
     contain: Boolean,
     src: {
       type: [String, Object],
-      default: ""
+      default: '',
     },
     hover: Boolean,
     lazySrc: String,
     active: Boolean,
-    srcset: String
+    srcset: String,
   },
   computed: {
     computedAspectRatio() {
       return this.normalisedSrc.aspect;
     },
     normalisedSrc() {
-      return typeof this.src === "string"
+      return typeof this.src === 'string'
         ? {
             src: this.src,
             srcset: this.srcset,
             lazySrc: this.lazySrc,
-            aspect: Number(this.aspectRatio || this.calculatedAspectRatio)
+            aspect: Number(this.aspectRatio || this.calculatedAspectRatio),
           }
         : {
             src: this.src.src,
             srcset: this.srcset || this.src.srcset,
             lazySrc: this.lazySrc || this.src.lazySrc,
             aspect: Number(
-              this.aspectRatio || this.src.aspect || this.calculatedAspectRatio
-            )
+              this.aspectRatio || this.src.aspect || this.calculatedAspectRatio,
+            ),
           };
-    }
+    },
   },
   mounted() {
     this.init();
@@ -62,7 +62,7 @@ export default {
     cachedImage() {
       if (!(this.normalisedSrc.src || this.normalisedSrc.lazySrc)) return [];
       const src = this.isLoading ? this.normalisedSrc.lazySrc : this.currentSrc;
-      this.$refs.lazyBackground.classList.remove("fo-background");
+      this.$refs.lazyBackground.classList.remove('fo-background');
       this.$refs.lazyBackground.style.backgroundImage = `url("${src}")`;
     },
     init() {
@@ -83,9 +83,9 @@ export default {
     onError() {
       console.warn(
         `Image load failed\n\n` + `src: ${this.normalisedSrc.src}`,
-        this
+        this,
       );
-      this.$emit("error", this.src);
+      this.$emit('error', this.src);
     },
     getSrc() {
       if (this.image) this.currentSrc = this.image.currentSrc || this.image.src;
@@ -102,8 +102,8 @@ export default {
               console.log(
                 `Failed to decode image, trying to render anyway\n\n` +
                   `src: ${this.normalisedSrc.src}` +
-                  (err.message ? `\nOriginal error: ${err.message}` : ""),
-                this
+                  (err.message ? `\nOriginal error: ${err.message}` : ''),
+                this,
               );
             })
             .then(this.onLoad);
@@ -132,13 +132,13 @@ export default {
       };
 
       poll();
-    }
+    },
   },
   watch: {
     src() {
       if (!this.isLoading) this.init();
       else this.loadImage();
-    }
-  }
+    },
+  },
 };
 </script>

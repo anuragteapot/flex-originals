@@ -9,7 +9,12 @@
       <p class="title">{{ item.title }}</p>
       <p class="views">
         {{ item.user.username }}
-        <img src="/public/verified.svg" width="10" height="10" alt="verified"/>
+        <img
+          src="/public/verified.svg"
+          width="10"
+          height="10"
+          alt="verified"
+        />
         <br />
         {{ item.videoAnalytics.views }} views
         <br />
@@ -21,7 +26,7 @@
 
 <script>
 export default {
-  name: "videoViewerSuggestions",
+  name: 'videoViewerSuggestions',
   data() {
     return {};
   },
@@ -30,12 +35,12 @@ export default {
     contain: Boolean,
     src: {
       type: [String, Object],
-      default: ""
+      default: '',
     },
     gradient: String,
     lazySrc: String,
     srcset: String,
-    item: Object
-  }
+    item: Object,
+  },
 };
 </script>

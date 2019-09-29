@@ -172,11 +172,11 @@
 </template>
 
 <script>
-import * as types from "./../../../store/mutation-types";
-import { setTimeout } from "timers";
+import * as types from './../../../store/mutation-types';
+import { setTimeout } from 'timers';
 
 export default {
-  name: "upload",
+  name: 'upload',
   data() {
     return {
       isAllowed: false,
@@ -185,33 +185,33 @@ export default {
       uploadPercent: 0,
       isProcessing: true,
       done: false,
-      type: "",
+      type: '',
       uploadId: null,
       thumbnails: [
         `public/loading.gif`,
         `public/loading.gif`,
         `public/loading.gif`,
-        `public/loading.gif`
+        `public/loading.gif`,
       ],
       uploadData: {
-        title: "",
+        title: '',
         agerestriction: false,
-        description: "",
-        tags: "",
-        thumbImage: "",
+        description: '',
+        tags: '',
+        thumbImage: '',
         visibility: 1,
         likedPrivate: false,
         allowComments: true,
         ratings: true,
-        category: "People & Blog",
-        licence: "Flex Originals"
-      }
+        category: 'People & Blog',
+        licence: 'Flex Originals',
+      },
     };
   },
   computed: {
     theme() {
       return this.$store.state.theme;
-    }
+    },
   },
   methods: {
     openSelect() {
@@ -220,7 +220,7 @@ export default {
       } else {
         const data = {
           data: `Your upload limit exceed`,
-          color: "error"
+          color: 'error',
         };
 
         this.$store.commit(types.SHOW_SNACKBAR, data);
@@ -234,12 +234,14 @@ export default {
     // Notify user when file is over the drop area
     onDragOver: function(event) {
       event.preventDefault();
-      document.querySelector(".dragoutline").classList.add("active");
+      document.querySelector('.dragoutline').classList.add('active');
       return false;
     },
     onDrop: function(event) {
       event.preventDefault();
-      window.addEventListener("beforeunload", this.beforeunload);
+      if (typeof window !== 'undefined') {
+        window.addEventListener('beforeunload', this.beforeunload);
+      }
       if (
         event.dataTransfer &&
         event.dataTransfer.files &&
@@ -247,30 +249,30 @@ export default {
       ) {
         for (var i = 0; i < event.dataTransfer.files.length; i++) {
           let file = event.dataTransfer.files[i];
-          document.querySelector(".dragoutline").classList.remove("active");
+          document.querySelector('.dragoutline').classList.remove('active');
           const formData = new FormData();
-          formData.append("files", file);
+          formData.append('files', file);
           setTimeout(() => {
             this.processUpload(formData);
           }, 1000);
         }
       }
-      document.querySelector(".dragoutline").classList.remove("active");
+      document.querySelector('.dragoutline').classList.remove('active');
     },
     // Reset the drop area border
     onDragLeave: function(event) {
       event.stopPropagation();
       event.preventDefault();
-      document.querySelector(".dragoutline").classList.remove("active");
+      document.querySelector('.dragoutline').classList.remove('active');
       return false;
     },
     async logout() {
       try {
-        await this.$store.dispatch("logout");
-        this.$router.push("/app/@home?u=logout");
+        await this.$store.dispatch('LOGOUT');
+        this.$router.push('/app/@home?u=logout');
         this.$api.auth.logout();
       } catch (err) {
-        this.$router.push("/app/@home?u=logout");
+        this.$router.push('/app/@home?u=logout');
         this.$api.auth.logout();
       }
     },
@@ -292,7 +294,7 @@ export default {
         return false;
       }
 
-      if (this.type === "video") {
+      if (this.type === 'video') {
         this.uploadId = uploaded.data.video.id;
         this.uploadData.title = uploaded.data.video.title;
 
@@ -303,13 +305,13 @@ export default {
         this.thumbnails = videoThumb.data.thumbnails;
         this.uploadData.thumbnails = videoThumb.data.thumbnails;
         this.uploadData.thumbImage = videoThumb.data.thumbnails[0];
-      } else if (this.type === "audio") {
+      } else if (this.type === 'audio') {
         this.uploadId = uploaded.data.audio.id;
         this.uploadData.title = uploaded.data.audio.title;
       }
       const data = {
         data: `Uploading done!`,
-        color: "success"
+        color: 'success',
       };
 
       this.isProcessing = false;
@@ -317,43 +319,43 @@ export default {
       this.$refs.formFile.reset();
     },
     processUpload: async function(formData, inputFile) {
-      const userId = this.$api.webStorage.local.get("$userId");
+      const userId = this.$api.webStorage.local.get('$userId');
 
       const VIDEO_EXT = [
-        "video/mp4",
-        "video/x-msvideo",
-        "video/avi",
-        "application/x-troff-msvideo",
-        "video/msvideo"
+        'video/mp4',
+        'video/x-msvideo',
+        'video/avi',
+        'application/x-troff-msvideo',
+        'video/msvideo',
       ];
       const AUDIO_EXT = [
-        "audio/mpeg",
-        "audio/vnd.wav",
-        "audio/mp4",
-        "audio/mp3",
-        "audio/ogg"
+        'audio/mpeg',
+        'audio/vnd.wav',
+        'audio/mp4',
+        'audio/mp3',
+        'audio/ogg',
       ];
       const IMAGE_EXT = [
-        "image/gif",
-        "image/jpeg",
-        "image/svg+xml",
-        "image/x-icon",
-        "image/png"
+        'image/gif',
+        'image/jpeg',
+        'image/svg+xml',
+        'image/x-icon',
+        'image/png',
       ];
 
       if (!this.isThumbUpload) {
         if (VIDEO_EXT.indexOf(inputFile.files[0].type) != -1) {
-          this.type = "video";
+          this.type = 'video';
         } else if (AUDIO_EXT.indexOf(inputFile.files[0].type) != -1) {
-          this.type = "audio";
+          this.type = 'audio';
         } else if (IMAGE_EXT.indexOf(inputFile.files[0].type) != -1) {
-          this.type = "image";
+          this.type = 'image';
         }
       } else {
         if (IMAGE_EXT.indexOf(inputFile.files[0].type) == -1) {
           const data = {
             data: `File not allowed.`,
-            color: "error"
+            color: 'error',
           };
 
           this.$store.commit(types.SHOW_SNACKBAR, data);
@@ -365,19 +367,21 @@ export default {
       if (!this.type) {
         const data = {
           data: `File not allowed.`,
-          color: "error"
+          color: 'error',
         };
 
         this.$store.commit(types.SHOW_SNACKBAR, data);
         this.$refs.formFile.reset();
         this.$refs.formFileThumbnail.reset();
-        window.removeEventListener("beforeunload", this.beforeunload);
+        if (typeof window !== 'undefined') {
+          window.removeEventListener('beforeunload', this.beforeunload);
+        }
         return false;
       }
 
       this.isUploading = true;
       let uploaded = null;
-      const uploadType = this.isThumbUpload ? "image" : this.type;
+      const uploadType = this.isThumbUpload ? 'image' : this.type;
 
       try {
         uploaded = await this.$api
@@ -387,7 +391,7 @@ export default {
             retryDelay: 1000,
             onUploadProgress: e => {
               this.uploadPercent = Math.round((e.loaded * 100) / e.total);
-            }
+            },
           });
       } catch (err) {
         this.$api._handleError(err);
@@ -395,9 +399,11 @@ export default {
       return uploaded;
     },
     processFile: function() {
-      window.addEventListener("beforeunload", this.beforeunload);
+      if (typeof window !== 'undefined') {
+        window.addEventListener('beforeunload', this.beforeunload);
+      }
       const formData = new FormData();
-      formData.append("file", this.$refs.inputFile.files[0]);
+      formData.append('file', this.$refs.inputFile.files[0]);
 
       setTimeout(() => {
         this.upload(formData, this.$refs.inputFile);
@@ -406,97 +412,106 @@ export default {
     processThumb: function() {
       this.isThumbUpload = true;
       const formData = new FormData();
-      formData.append("file", this.$refs.inputFileThumbnail.files[0]);
+      formData.append('file', this.$refs.inputFileThumbnail.files[0]);
       this.newThumb(formData, this.$refs.inputFileThumbnail);
     },
     beforeunload(event) {
-      event = event || window.event;
+      if (typeof window !== 'undefined') {
+        event = event || window.event;
+      }
       // event.preventDefault();
 
       // For IE and Firefox prior to version 4
       if (event && !this.done) {
-        event.returnValue = "Sure?";
+        event.returnValue = 'Sure?';
       }
 
       // For Safari
       if (!this.done) {
-        return "Sure?";
+        return 'Sure?';
       }
     },
     finilize: async function() {
       if (!this.uploadData.thumbImage) {
         this.uploadData.thumbImage = `public/profile-icon/avatar${Math.floor(
-          Math.random() * 28
+          Math.random() * 28,
         ) + 1}.svg`;
       }
 
-      if (this.type === "video") {
+      if (this.type === 'video') {
         try {
           const publishedVideo = await this.$api.axios().post(
             `/api/videos/publish`,
             { id: this.uploadId, videoData: this.uploadData },
             {
               retry: 3,
-              retryDelay: 1000
-            }
+              retryDelay: 1000,
+            },
           );
 
           const data = {
             data: `Published`,
-            color: "success"
+            color: 'success',
           };
 
           this.$store.commit(types.SHOW_SNACKBAR, data);
           this.done = true;
-          window.removeEventListener("beforeunload", this.beforeunload);
+          if (typeof window !== 'undefined') {
+            window.removeEventListener('beforeunload', this.beforeunload);
+          }
 
           setTimeout(() => {
-            window.location.href = `/app/@watch?v=${publishedVideo.data.id}`;
+            if (typeof window !== 'undefined') {
+              window.location.href = `/app/@watch?v=${publishedVideo.data.id}`;
+            }
           }, 1000);
         } catch (err) {
           this.$api._handleError(err);
         }
-      } else if (this.type === "audio") {
+      } else if (this.type === 'audio') {
         try {
           const publishedAudio = await this.$api.axios().post(
             `/api/audios/publish`,
             { id: this.uploadId, audioData: this.uploadData },
             {
               retry: 3,
-              retryDelay: 1000
-            }
+              retryDelay: 1000,
+            },
           );
           const data = {
             data: `Published`,
-            color: "success"
+            color: 'success',
           };
           this.$store.commit(types.SHOW_SNACKBAR, data);
           this.done = true;
-          window.removeEventListener("beforeunload", this.beforeunload);
+          if (typeof window !== 'undefined') {
+            window.removeEventListener('beforeunload', this.beforeunload);
+          }
 
           setTimeout(() => {
-            window.location.href = `/app/@song?a=${publishedAudio.data.id}`;
+            if (typeof window !== 'undefined') {
+              window.location.href = `/app/@song?a=${publishedAudio.data.id}`;
+            }
           }, 1000);
         } catch (err) {
           this.$api._handleError(err);
         }
       }
-    }
+    },
   },
   async beforeMount() {
     const storage = await this.$store.dispatch(
-      "getUserStorage",
-      this.$api.webStorage.local.get("$userId")
+      'GET_USER_STORAGE',
+      this.$api.webStorage.local.get('$userId'),
     );
 
-    const limit =
-      process.env.NODE_ENV === "production" ? 262854847 : 26285484700;
+    const limit = 26285484700;
 
     if (storage.data.totalStorage > limit) {
       this.isAllowed = false;
     } else {
       this.isAllowed = true;
     }
-  }
+  },
 };
 </script>

@@ -5,7 +5,7 @@
         <div class="header">Create new Folder</div>
         <div class="body">
           <label>Folder Name</label>
-          <input type="text">
+          <input type="text" />
         </div>
         <div class="footer">
           <div style="text-align:right">
@@ -19,12 +19,12 @@
 </template>
 
 <script>
-import * as types from "./../../../store/mutation-types";
+import * as types from './../../../store/mutation-types';
 
 export default {
-  name: "modal-new-folder",
+  name: 'modal-new-folder',
   data: () => ({
-    defaultData: "Untitled Folder"
+    defaultData: 'Untitled Folder',
   }),
 
   methods: {
@@ -33,9 +33,9 @@ export default {
     },
     create: function() {
       const foldername = this.defaultData;
-      this.$store.dispatch("createDirectory", { foldername });
-    }
-  }
+      this.$store.dispatch('createDirectory', { foldername });
+    },
+  },
 };
 </script>
 

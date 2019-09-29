@@ -5,31 +5,31 @@
 </template>
 
 <script>
-import * as types from "@/store/mutation-types";
+import * as types from '@/store/mutation-types';
 export default {
-  name: "fo-embed-video",
+  name: 'fo-embed-video',
   data: () => ({
     autoPlay: false,
     error: false,
-    src: "/public/qq.webp",
-    lazySrc: "/public/icons/music.svg",
-    videoSource: "",
-    videoId: "",
-    analytic: "",
+    src: '/public/qq.webp',
+    lazySrc: '/public/icons/music.svg',
+    videoSource: '',
+    videoId: '',
+    analytic: '',
     user: {},
     settings: {},
     video: {},
-    videoUnavaliable: false
+    videoUnavaliable: false,
   }),
   watch: {
     $route() {
       this.init();
-    }
+    },
   },
   computed: {
     theme() {
       return this.$store.state.theme;
-    }
+    },
   },
   methods: {
     async init() {
@@ -53,10 +53,10 @@ export default {
           this.videoUnavaliable = true;
           return 0;
         }
-        if (currentVideo.data.video.videoFile.includes("https")) {
+        if (currentVideo.data.video.videoFile.includes('https')) {
           this.videoSource = currentVideo.data.video.videoFile;
         } else {
-          this.videoSource = "/" + currentVideo.data.video.videoFile;
+          this.videoSource = '/' + currentVideo.data.video.videoFile;
         }
         this.analytic = currentVideo.data.analytic;
         this.user = currentVideo.data.user;
@@ -65,10 +65,10 @@ export default {
       } else {
         this.error = true;
       }
-    }
+    },
   },
   async beforeMount() {
     this.init();
-  }
+  },
 };
 </script>

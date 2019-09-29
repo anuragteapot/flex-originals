@@ -7,39 +7,39 @@
 </template>
 
 <script>
-import { api } from "./../app/Api";
+import { api } from './../api/Api';
 
 export default {
-  name: "media-auth",
+  name: 'media-auth',
   data() {
     return {};
   },
   methods: {
     saveToken() {
-      const search = "?" + window.location.hash.split("#")[1];
+      const search = '?' + window.location.hash.split('#')[1];
       const urlParams = new URLSearchParams(search);
-      const accessToken = urlParams.get("access_token");
+      const accessToken = urlParams.get('access_token');
 
       if (
-        accessToken == "" ||
+        accessToken == '' ||
         accessToken == null ||
         accessToken == undefined
       ) {
-        this.$router.push("/PageNotFound");
+        this.$router.push('/PageNotFound');
       } else {
         let data = this.$store.state.settings;
         data.dropbox.accessToken = accessToken;
-        data.dropbox.uid = urlParams.get("uid");
-        data.dropbox.accountId = urlParams.get("account_id");
+        data.dropbox.uid = urlParams.get('uid');
+        data.dropbox.accountId = urlParams.get('account_id');
         data.email = api.user.userData.email;
 
         const payload = {};
 
         payload.settings = data;
-        payload.action = "set";
+        payload.action = 'set';
 
         this.$store
-          .dispatch("settings", payload)
+          .dispatch('settings', payload)
           .then(() => {
             window.close();
           })
@@ -47,10 +47,10 @@ export default {
             this.$api._handleError(err);
           });
       }
-    }
+    },
   },
   created() {
     this.saveToken();
-  }
+  },
 };
 </script>

@@ -27,24 +27,24 @@
 </template>
 
 <script>
-import creatorFooter from "./../components/Landing/Footer";
-import creatorHeader from "./../components/Landing/Header";
+import creatorFooter from './../components/Landing/Footer';
+import creatorHeader from './../components/Landing/Header';
 
 export default {
-  name: "media-home",
+  name: 'media-home',
   data() {
     return {
-      veified: 0
+      veified: 0,
     };
   },
   components: {
     creatorFooter,
-    creatorHeader
+    creatorHeader,
   },
   computed: {
     type() {
       return this.$route.params.type;
-    }
+    },
   },
   methods: {
     async verify() {
@@ -53,22 +53,22 @@ export default {
       const { redirect } = this.$route.query;
 
       try {
-        const res = await this.$store.dispatch("verify", {
+        const res = await this.$store.dispatch('VERIFY', {
           token,
           uid,
-          redirect
+          redirect,
         });
 
         if (res.status == 200) {
-          this.$router.push("/verify/users/verified");
+          this.$router.push('/verify/users/verified');
         }
       } catch (err) {
-        this.$router.push("/@error");
+        this.$router.push('/@error');
       }
-    }
+    },
   },
   mounted() {
     this.verify();
-  }
+  },
 };
 </script>

@@ -35,40 +35,11 @@
   "parse": {},
   "routes": {
     "loopback#rest": {
-      "paths": [
-        "${restApiRoot}"
-      ]
+      "paths": ["${restApiRoot}"]
     }
   },
-  "files": {
-    "loopback#static": [
-      {
-        "params": "$!../client"
-      },
-      {
-        "paths": [
-          "/public"
-        ],
-        "params": "$!../assets"
-      },
-      {
-        "paths": [
-          "/uploads"
-        ],
-        "params": "$!../uploads"
-      }
-    ]
-  },
-  "final": {
-    "express-history-api-fallback": {
-      "params": [
-        "index.html",
-        {
-          "root": "$!../client"
-        }
-      ]
-    }
-  },
+  "files": {},
+  "final": {},
   "final:after": {
     "strong-error-handler": {}
   }

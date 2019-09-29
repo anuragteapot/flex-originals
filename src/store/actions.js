@@ -1,239 +1,157 @@
-/** @format */
+import AXIOS_API from './../api/axios';
 
-import { api } from '../app/Api';
-
-/**
- * Get contents
- * @param commit
- * @param payload
- */
-export const getLike = async (context, payload) => {
-  try {
-    return await api
-      .axios()
-      .get(`/api/videoLikes/getLike/${payload.userId}/${payload.videoId}`);
-  } catch (err) {
-    api._handleError(err);
-  }
-};
-
-/**
- * Get contents
- * @param commit
- * @param payload
- */
-export const likeEndPoint = async (context, payload) => {
-  try {
-    return await api.axios().post(`/api/videoLikes/likeEndPoint`, {
-      userId: payload.userId,
-      videoId: payload.videoId,
-      reaction: payload.reaction
-    });
-  } catch (err) {
-    api._handleError(err);
-  }
-};
-
-/**
- * Get contents
- * @param commit
- * @param payload
- */
-export const getFollowers = async (context, payload) => {
-  try {
-    return await api
-      .axios()
-      .get(`/api/follows/getFollowers/${payload.followId}`);
-  } catch (err) {
-    api._handleError(err);
-  }
-};
-
-/**
- * Get contents
- * @param commit
- * @param payload
- */
-export const unFollow = async (context, payload) => {
-  try {
-    return await api.axios().post(`/api/follows/unFollow`, {
-      channelId: payload.channelId,
-      followId: payload.followId
-    });
-  } catch (err) {
-    api._handleError(err);
-  }
-};
-
-/**
- * Get contents
- * @param commit
- * @param payload
- */
-export const doFollow = async (context, payload) => {
-  try {
-    return await api.axios().post(`/api/follows/doFollow`, {
-      channelId: payload.channelId,
-      followId: payload.followId
-    });
-  } catch (err) {
-    api._handleError(err);
-  }
-};
-
-/**
- * Get contents
- * @param commit
- * @param payload
- */
-export const getFollow = async (context, payload) => {
-  try {
-    return await api
-      .axios()
-      .get(`/api/follows/getFollow/${payload.channelId}/${payload.followId}`);
-  } catch (err) {
-    api._handleError(err);
-  }
-};
-
-/**
- * Get contents
- * @param commit
- * @param payload
- */
-export const getContent = async (context, payload) => {
-  try {
-    return await api
-      .axios()
-      .get(
+export default {
+  GET_CONTENT: async (state, payload) => {
+    try {
+      return await AXIOS_API.get(
         `/api/actions/getContent/${payload.limit || 30}/${
           payload.userId ? payload.userId : ''
-        }`
+        }`,
       );
-  } catch (err) {
-    api._handleError(err);
-  }
-};
+    } catch (err) {
+      console.log(err);
+    }
+  },
 
-/**
- * Get contents
- * @param commit
- * @param payload
- */
-export const getUserStorage = async (context, payload) => {
-  try {
-    return await api.axios().get(`/api/actions/getUserStorage/${payload}`);
-  } catch (err) {
-    api._handleError(err);
-  }
-};
-
-/**
- * Login
- * @param commit
- * @param payload
- */
-export const login = async (context, payload) => {
-  try {
-    return await api.axios().post('/api/users/login', payload);
-  } catch (err) {
-    api._handleError(err);
-  }
-};
-
-/**
- * Logout
- * @param commit
- * @param payload
- */
-export const logout = async () => {
-  try {
-    return await api.axios().post('/api/users/logout');
-  } catch (err) {
-    api._handleError(err);
-  }
-};
-
-/**
- * Verify
- * @param commit
- * @param payload
- */
-export const verify = async (context, payload) => {
-  try {
-    return await api
-      .axios()
-      .get(
-        `/api/users/confirm?uid=${payload.uid}&redirect=${payload.redirect}&token=${payload.token}`
+  GET_LIKE: async (context, payload) => {
+    try {
+      return await AXIOS_API.get(
+        `/api/videoLikes/getLike/${payload.userId}/${payload.videoId}`,
       );
-  } catch (err) {
-    api._handleError(err);
-  }
-};
-
-/**
- * Get Settings
- * @param commit
- * @param payload
- */
-export const findSettings = async (context, payload) => {
-  try {
-    return await api.axios().get(`/api/users/findSetting/${payload.uid}`);
-  } catch (err) {
-    api._handleError(err);
-  }
-};
-
-/**
- * Get Settings
- * @param commit
- * @param payload
- */
-export const updateSettings = async (context, payload) => {
-  try {
-    return await api.axios().post(`/api/users/updateSettings`, payload);
-  } catch (err) {
-    api._handleError(err);
-  }
-};
-
-/**
- * Delete file
- * @param commit
- * @param payload
- */
-export const deleteItem = async (context, payload) => {
-  if (payload.type == 'audio') {
-    try {
-      return await api
-        .axios()
-        .post(`/api/audios/deleteItem`, { id: payload.id });
     } catch (err) {
-      api._handleError(err);
-      return err;
+      console.log(err);
     }
-  } else if (payload.type == 'video') {
-    try {
-      return await api
-        .axios()
-        .post(`/api/videos/deleteItem`, { id: payload.id });
-    } catch (err) {
-      api._handleError(err);
-      return err;
-    }
-  }
-};
+  },
 
-/**
- * Signiup
- *
- * @param commit
- * @param payload
- */
-export const signup = async (context, payload) => {
-  try {
-    return await api.axios().post('/api/users', payload);
-  } catch (err) {
-    api._handleError(err);
-  }
+  LIKE_END_POINT: async (context, payload) => {
+    try {
+      return await AXIOS_API.post(`/api/videoLikes/likeEndPoint`, {
+        userId: payload.userId,
+        videoId: payload.videoId,
+        reaction: payload.reaction,
+      });
+    } catch (err) {
+      console.log(err);
+    }
+  },
+
+  GET_FOLLOWERS: async (context, payload) => {
+    try {
+      return await AXIOS_API.get(
+        `/api/follows/getFollowers/${payload.followId}`,
+      );
+    } catch (err) {
+      console.log(err);
+    }
+  },
+
+  UN_FOLLOW: async (context, payload) => {
+    try {
+      return await AXIOS_API.post(`/api/follows/unFollow`, {
+        channelId: payload.channelId,
+        followId: payload.followId,
+      });
+    } catch (err) {
+      console.log(err);
+    }
+  },
+
+  DO_FOLLOW: async (context, payload) => {
+    try {
+      return await AXIOS_API.post(`/api/follows/doFollow`, {
+        channelId: payload.channelId,
+        followId: payload.followId,
+      });
+    } catch (err) {
+      console.log(err);
+    }
+  },
+
+  GET_FOLLOW: async (context, payload) => {
+    try {
+      return await AXIOS_API.get(
+        `/api/follows/getFollow/${payload.channelId}/${payload.followId}`,
+      );
+    } catch (err) {
+      console.log(err);
+    }
+  },
+
+  GET_USER_STORAGE: async (context, payload) => {
+    try {
+      return await AXIOS_API.get(`/api/actions/getUserStorage/${payload}`);
+    } catch (err) {
+      console.log(err);
+    }
+  },
+
+  LOGIN: async (context, payload) => {
+    try {
+      return await AXIOS_API.post('/api/users/login', payload);
+    } catch (err) {
+      console.log(err);
+    }
+  },
+
+  LOGOUT: async () => {
+    try {
+      return await AXIOS_API.post('/api/users/logout');
+    } catch (err) {
+      console.log(err);
+    }
+  },
+
+  VERIFY: async (context, payload) => {
+    try {
+      return await AXIOS_API.get(
+        `/api/users/confirm?uid=${payload.uid}&redirect=${payload.redirect}&token=${payload.token}`,
+      );
+    } catch (err) {
+      console.log(err);
+    }
+  },
+
+  FIND_SETTINGS: async (context, payload) => {
+    try {
+      return await AXIOS_API.get(`/api/users/findSetting/${payload.uid}`);
+    } catch (err) {
+      console.log(err);
+    }
+  },
+
+  UPDATE_SETTINGS: async (context, payload) => {
+    try {
+      return await AXIOS_API.post(`/api/users/updateSettings`, payload);
+    } catch (err) {
+      console.log(err);
+    }
+  },
+
+  DELETE_ITEM: async (context, payload) => {
+    if (payload.type == 'audio') {
+      try {
+        return await AXIOS_API.post(`/api/audios/deleteItem`, {
+          id: payload.id,
+        });
+      } catch (err) {
+        console.log(err);
+      }
+    } else if (payload.type == 'video') {
+      try {
+        return await AXIOS_API.post(`/api/videos/deleteItem`, {
+          id: payload.id,
+        });
+      } catch (err) {
+        console.log(err);
+      }
+    }
+  },
+
+  SIGNUP: async (context, payload) => {
+    try {
+      return await AXIOS_API.post('/api/users', payload);
+    } catch (err) {
+      console.log(err);
+    }
+  },
 };

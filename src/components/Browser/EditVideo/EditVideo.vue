@@ -126,44 +126,44 @@
 </template>
 
 <script>
-import * as types from "./../../../store/mutation-types";
-import { setTimeout } from "timers";
+import * as types from './../../../store/mutation-types';
+import { setTimeout } from 'timers';
 
 export default {
-  name: "upload",
+  name: 'upload',
   data() {
     return {
       isAllowed: false,
       isUploading: false,
       uploadPercent: 0,
-      videoSource: "",
+      videoSource: '',
       videoUnavaliable: false,
       done: false,
       videoId: null,
       thumbnails: [
         `public/profile-icon/avatar${Math.floor(Math.random() * 28) + 1}.svg`,
         `public/profile-icon/avatar${Math.floor(Math.random() * 28) + 1}.svg`,
-        `public/profile-icon/avatar${Math.floor(Math.random() * 28) + 1}.svg`
+        `public/profile-icon/avatar${Math.floor(Math.random() * 28) + 1}.svg`,
       ],
       videoData: {
-        name: "",
+        name: '',
         agerestriction: false,
-        description: "",
-        tags: "",
-        thumbImage: "",
+        description: '',
+        tags: '',
+        thumbImage: '',
         visibility: 1,
         likedPrivate: false,
         allowComments: true,
         ratings: true,
-        category: "People & Blog",
-        licence: "Flex Originals"
-      }
+        category: 'People & Blog',
+        licence: 'Flex Originals',
+      },
     };
   },
   computed: {
     theme() {
       return this.$store.state.theme;
-    }
+    },
   },
   methods: {
     finilize: async function() {
@@ -176,19 +176,23 @@ export default {
           { id: this.videoId, videoData: this.videoData },
           {
             retry: 3,
-            retryDelay: 1000
-          }
+            retryDelay: 1000,
+          },
         );
         const data = {
           data: `Saved.`,
-          color: "success"
+          color: 'success',
         };
         this.$store.commit(types.SHOW_SNACKBAR, data);
         this.done = true;
-        window.removeEventListener("beforeunload", this.beforeunload);
+        if (typeof window !== 'undefined') {
+          window.removeEventListener('beforeunload', this.beforeunload);
+        }
 
         setTimeout(() => {
-          window.location.href = `/app/@watch?v=${publishedVideo.data.id}`;
+          if (typeof window !== 'undefined') {
+            window.location.href = `/app/@watch?v=${publishedVideo.data.id}`;
+          }
         }, 1000);
       } catch (err) {
         this.$api._handleError(err);
@@ -206,10 +210,10 @@ export default {
           if (!video.data) {
             this.videoUnavaliable = true;
           }
-          if (video.data.videoFile.includes("https")) {
+          if (video.data.videoFile.includes('https')) {
             this.videoSource = video.data.videoFile;
           } else {
-            this.videoSource = "/" + video.data.videoFile;
+            this.videoSource = '/' + video.data.videoFile;
           }
           this.videoId = video.data.id;
           this.videoData = Object.assign(this.videoData, video.data);
@@ -218,13 +222,13 @@ export default {
           this.$api._handleError(err);
         }
       } else {
-        this.$router.push("/@error");
+        this.$router.push('/@error');
       }
       this.$store.commit(types.SET_IS_LOADING, false);
-    }
+    },
   },
   created() {
     this.init();
-  }
+  },
 };
 </script>

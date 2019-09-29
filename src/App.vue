@@ -1,5 +1,5 @@
 <template>
-  <div :class="`container ${theme}`">
+  <div id="app" :class="`container ${theme}`">
     <transition name="fade" mode="out-in">
       <router-view />
     </transition>
@@ -9,13 +9,13 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
-import * as types from "./store/mutation-types";
+import { mapGetters } from 'vuex';
+import * as types from './store/mutation-types';
 
 export default {
-  name: "app",
+  name: 'app',
   computed: {
-    ...mapGetters(["isLoading", "theme"])
+    ...mapGetters(['isLoading', 'theme']),
   },
   async beforeMount() {
     if (await this.$api.isLogged()) {
@@ -23,6 +23,6 @@ export default {
     } else {
       this.$store.commit(types.IS_AUTHENTICATED, false);
     }
-  }
+  },
 };
 </script>

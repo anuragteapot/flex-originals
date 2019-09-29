@@ -185,37 +185,37 @@ export default {
       loading: false,
       bufferPercent: 0,
       isPlaying: false,
-      isGrabbingSeekbar: false
+      isGrabbingSeekbar: false,
     };
   },
   props: {
     src: String,
     disablekey: {
       type: Boolean,
-      default: false
+      default: false,
     },
     autoPlay: {
       type: Boolean,
-      default: false
+      default: false,
     },
     playbackRates: {
       type: Array,
       default: function() {
         return [0.25, 0.5, 0.75, 1.0, 1.25, 1.5, 1.75];
-      }
+      },
     },
     videoQuality: {
       type: Array,
       default: function() {
         return [
           {
-            name: "1080p",
+            name: '1080p',
             src:
-              "https://player.vimeo.com/external/194837908.sd.mp4?s=c350076905b78c67f74d7ee39fdb4fef01d12420&profile_id=164"
-          }
+              'https://player.vimeo.com/external/194837908.sd.mp4?s=c350076905b78c67f74d7ee39fdb4fef01d12420&profile_id=164',
+          },
         ];
-      }
-    }
+      },
+    },
   },
   computed: {
     getProgressRate: function() {
@@ -232,7 +232,7 @@ export default {
     },
     seekbar: function() {
       return this.$refs.seekbar;
-    }
+    },
   },
   methods: {
     makeActive: debounce(function() {
@@ -324,7 +324,7 @@ export default {
     },
     convertSecondsToTime: function(time) {
       let seconds = Math.floor(time % 60);
-      if (seconds < 10) seconds = "0" + seconds;
+      if (seconds < 10) seconds = '0' + seconds;
       let minutes = Math.floor((time / 60) % 60);
       return `${minutes}:${seconds}`;
     },
@@ -388,44 +388,44 @@ export default {
         event.preventDefault();
         this.skipBack();
       }
-    }
+    },
   },
   mounted: function() {
     this.reLayoutSeekbar();
 
     // addEventListener
     window.addEventListener(
-      "resize",
+      'resize',
       debounce(() => {
         this.reLayoutSeekbar();
       }, 100),
-      100
+      100,
     );
-    document.addEventListener("mousemove", event => {
+    document.addEventListener('mousemove', event => {
       this.moveSeekbar(event);
     });
-    document.addEventListener("mouseup", event => {
+    document.addEventListener('mouseup', event => {
       this.releaseSeekbar(event);
     });
-    this.media.addEventListener("loadedmetadata", () => {
+    this.media.addEventListener('loadedmetadata', () => {
       this.duration = this.media.duration;
     });
-    this.media.addEventListener("ended", () => {
+    this.media.addEventListener('ended', () => {
       this.media.currentTime = 0;
       this.isPlaying = false;
     });
 
-    window.addEventListener("keydown", this.detectKeypress);
-    this.media.addEventListener("timeupdate", this.handleProgress);
-    this.media.addEventListener("ended", this.handleEnded);
-    this.media.addEventListener("error", this.handleError);
-    this.media.addEventListener("loadeddata", this.loadeddata);
-    this.media.addEventListener("loadedmetadata", this.loadedmetadata);
-    this.media.addEventListener("progress", this.updateBuffer);
-    this.media.addEventListener("stalled", this.stalled);
-    this.media.addEventListener("seeking", this.seeking);
-    this.media.addEventListener("seeked", this.seeked);
-  }
+    window.addEventListener('keydown', this.detectKeypress);
+    this.media.addEventListener('timeupdate', this.handleProgress);
+    this.media.addEventListener('ended', this.handleEnded);
+    this.media.addEventListener('error', this.handleError);
+    this.media.addEventListener('loadeddata', this.loadeddata);
+    this.media.addEventListener('loadedmetadata', this.loadedmetadata);
+    this.media.addEventListener('progress', this.updateBuffer);
+    this.media.addEventListener('stalled', this.stalled);
+    this.media.addEventListener('seeking', this.seeking);
+    this.media.addEventListener('seeked', this.seeked);
+  },
 };
 </script>
 

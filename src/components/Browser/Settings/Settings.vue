@@ -15,7 +15,7 @@
                 <div class="form-item">
                   <div class="account__info">
                     <div class="avatar">
-                      <img class="account__avatar" :src="settings.profileAvatar" alt="logo"/>
+                      <img class="account__avatar" :src="settings.profileAvatar" alt="logo" />
                       <!-- <span class="avatar__change">Change Avatar</span> -->
                     </div>
                     <div class="email__info">
@@ -222,10 +222,10 @@
 </template>
 
 <script>
-import * as types from "./../../../store/mutation-types";
+import * as types from './../../../store/mutation-types';
 
 export default {
-  name: "media-settings",
+  name: 'media-settings',
   data() {
     return {};
   },
@@ -236,32 +236,32 @@ export default {
     user() {
       return this.$store.state.user;
     },
-       theme() {
+    theme() {
       return this.$store.state.theme;
-    }
+    },
   },
   methods: {
     async logout() {
       await this.$api.logout('/app/@home?u=logout');
     },
     deleteAllSession() {
-      this.$store.commit(types.SHOW_MODAL, { state: true, type: "MDelete" });
+      this.$store.commit(types.SHOW_MODAL, { state: true, type: 'MDelete' });
     },
     async save() {
       const payload = {};
-      payload.id = this.$api.webStorage.local.get("$userId");
+      payload.id = this.$api.webStorage.local.get('$userId');
       payload.newSettings = this.settings;
-     const settings = await this.$store.dispatch("updateSettings", payload);
+      const settings = await this.$store.dispatch('UPDATE_SETTINGS', payload);
 
       this.$store.commit(types.SET_SETTINGS, settings);
-    }
+    },
   },
   async created() {
-    const settings = await this.$store.dispatch("findSettings", {
-      uid: this.$api.webStorage.local.get("$userId")
+    const settings = await this.$store.dispatch('FIND_SETTINGS', {
+      uid: this.$api.webStorage.local.get('$userId'),
     });
 
     this.$store.commit(types.SET_SETTINGS, settings);
-  }
+  },
 };
 </script>

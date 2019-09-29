@@ -50,10 +50,10 @@
 </template>
 
 <script>
-import * as types from "./../../../store/mutation-types";
+import * as types from './../../../store/mutation-types';
 
 export default {
-  name: "music-thumnail",
+  name: 'music-thumnail',
   data() {
     return {};
   },
@@ -63,14 +63,14 @@ export default {
     contain: Boolean,
     src: {
       type: [String, Object],
-      default: ""
+      default: '',
     },
     gradient: String,
     lazySrc: String,
     srcset: String,
     sizes: String,
     item: Object,
-    user: Object
+    user: Object,
   },
   computed: {
     editMode() {
@@ -84,37 +84,37 @@ export default {
         return item.id === this.item.id;
       });
       return res.length === 1 ? true : false;
-    }
+    },
   },
   methods: {
     getSrc() {
-      if (this.src.includes("https")) {
+      if (this.src.includes('https')) {
         return this.src;
       } else {
-        return "/" + this.src;
+        return '/' + this.src;
       }
     },
     open() {
       if (this.selected) {
         this.$store.commit(types.UNSELECT_BROWSER_ITEM, {
           id: this.item.id,
-          type: "audio"
+          type: 'audio',
         });
       } else {
         this.$store.commit(types.SELECT_BROWSER_ITEM, {
           id: this.item.id,
-          type: "audio"
+          type: 'audio',
         });
       }
     },
     getName: function() {
       const len = 20;
       if (this.item.title.length >= len) {
-        return this.item.title.substring(0, len) + "..";
+        return this.item.title.substring(0, len) + '..';
       } else {
         return this.item.title;
       }
-    }
-  }
+    },
+  },
 };
 </script>

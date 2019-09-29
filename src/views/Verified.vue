@@ -15,7 +15,7 @@
           <div class="home__inner">
             <h1>Verified</h1>
             <p>Congratulations your account is now verified.</p>
-            <img src="/public/icons/checkmark.svg" width="200" height="200"  alt="checkmark"/>
+            <img src="/public/icons/checkmark.svg" width="200" height="200" alt="checkmark" />
           </div>
         </div>
       </section>
@@ -34,17 +34,17 @@
 </template>
 
 <script>
-import creatorFooter from "./../components/Landing/Footer";
-import creatorHeader from "./../components/Landing/Header";
+import creatorFooter from './../components/Landing/Footer';
+import creatorHeader from './../components/Landing/Header';
 
 export default {
-  name: "media-home",
+  name: 'media-home',
   data() {
     return {};
   },
   components: {
     creatorFooter,
-    creatorHeader
-  }
+    creatorHeader,
+  },
 };
 </script>

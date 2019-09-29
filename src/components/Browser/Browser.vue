@@ -24,20 +24,20 @@
 </template>
 
 <script>
-import * as types from "./.././../store/mutation-types.js";
-import home from "./../Browser/Content/MainContent";
-import settings from "./Settings/Settings";
-import channel from "./Profile/Profile";
-import upload from "./Upload/Upload";
-import watch from "./videoViewer/videoViewer";
-import asideAction from "./Aside/AsideAction";
-import asideDes from "./Aside/AsideDes";
-import toolbar from "./../Browser/Toolbar/Toolbar";
-import editvideo from "./../Browser/EditVideo/EditVideo";
-import { mapGetters } from "vuex";
+import * as types from './.././../store/mutation-types.js';
+import home from './../Browser/Content/MainContent';
+import settings from './Settings/Settings';
+import channel from './Profile/Profile';
+import upload from './Upload/Upload';
+import watch from './videoViewer/videoViewer';
+import asideAction from './Aside/AsideAction';
+import asideDes from './Aside/AsideDes';
+import toolbar from './../Browser/Toolbar/Toolbar';
+import editvideo from './../Browser/EditVideo/EditVideo';
+import { mapGetters } from 'vuex';
 
 export default {
-  name: "media-browser",
+  name: 'media-browser',
   data() {
     return {};
   },
@@ -47,7 +47,7 @@ export default {
       this.$store.commit(types.SELECT_BROWSER_ITEM, false);
       this.$store.commit(types.HIDE_MODAL);
       this.init();
-    }
+    },
   },
   components: {
     home,
@@ -58,22 +58,22 @@ export default {
     asideAction,
     asideDes,
     toolbar,
-    editvideo
+    editvideo,
   },
   computed: {
-    ...mapGetters(["isMobile", "isLoading", "appDrawer"]),
+    ...mapGetters(['isMobile', 'isLoading', 'appDrawer']),
     layout() {
       const name = this.$route.name;
-      if (name.split("@")[1]) {
-        if (name.split("@")[1] == "song") {
-          return "home";
+      if (name.split('@')[1]) {
+        if (name.split('@')[1] == 'song') {
+          return 'home';
         } else {
-          return name.split("@")[1];
+          return name.split('@')[1];
         }
       } else {
-        return "home";
+        return 'home';
       }
-    }
+    },
   },
   methods: {
     toggleMenu: function() {
@@ -81,52 +81,52 @@ export default {
         this.$store.commit(types.APP_DRAWER, {
           action: true,
           des: true,
-          mobileState: true
+          mobileState: true,
         });
       } else if (this.appDrawer.action) {
         this.$store.commit(types.APP_DRAWER, {
           action: false,
           des: false,
-          mobileState: false
+          mobileState: false,
         });
       } else {
         this.$store.commit(types.APP_DRAWER, {
           action: true,
           des: true,
-          mobileState: true
+          mobileState: true,
         });
       }
     },
     async init() {
       let content = {};
       if (this.$route.params.id) {
-        content = await this.$store.dispatch("getContent", {
-          userId: this.$route.params.id
+        content = await this.$store.dispatch('GET_CONTENT', {
+          userId: this.$route.params.id,
         });
       } else {
-        content = await this.$store.dispatch("getContent", {});
+        content = await this.$store.dispatch('GET_CONTENT', {});
       }
       this.$store.commit(types.SET_CONTENT, content.data);
-    }
+    },
   },
   async beforeMount() {
     this.$api.Nprogress.start();
-    if (this.$api.webStorage.local.get("$userId")) {
-      const settings = await this.$store.dispatch("findSettings", {
-        uid: this.$api.webStorage.local.get("$userId")
+    if (this.$api.webStorage.local.get('$userId')) {
+      const settings = await this.$store.dispatch('FIND_SETTINGS', {
+        uid: this.$api.webStorage.local.get('$userId'),
       });
       this.$store.commit(types.SET_SETTINGS, settings);
     }
     let content = {};
     if (this.$route.params.id) {
-      content = await this.$store.dispatch("getContent", {
-        userId: this.$route.params.id
+      content = await this.$store.dispatch('GET_CONTENT', {
+        userId: this.$route.params.id,
       });
     } else {
-      content = await this.$store.dispatch("getContent", {});
+      content = await this.$store.dispatch('GET_CONTENT', {});
     }
     this.$store.commit(types.SET_CONTENT, content.data);
     this.$api.Nprogress.done();
-  }
+  },
 };
 </script>

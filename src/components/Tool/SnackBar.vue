@@ -13,33 +13,33 @@
 </template>
 
 <script>
-import * as types from "./../../store/mutation-types";
+import * as types from './../../store/mutation-types';
 
 export default {
-  name: "snackbar",
+  name: 'snackbar',
   props: {
     timeout: {
       type: Number,
-      default: 5000
+      default: 5000,
     },
     infinity: {
       type: Boolean,
-      default: false
+      default: false,
     },
     position: {
       type: String,
-      default: "bottom-center"
-    }
+      default: 'bottom-center',
+    },
   },
   data() {
     return {
-      timer: null
+      timer: null,
     };
   },
   watch: {
     active() {
       this.setTimer();
-    }
+    },
   },
   computed: {
     isMobile() {
@@ -48,11 +48,11 @@ export default {
     classes() {
       if (!this.isMobile) {
         return {
-          [`snackbar--${this.position}`]: true
+          [`snackbar--${this.position}`]: true,
         };
       } else {
         return {
-          [`snackbar--bottom-center`]: true
+          [`snackbar--bottom-center`]: true,
         };
       }
     },
@@ -63,8 +63,8 @@ export default {
       return this.$store.state.showsnackbar.color;
     },
     messagedata() {
-      return this.$store.state.showsnackbar.data || "Empty Message.";
-    }
+      return this.$store.state.showsnackbar.data || 'Empty Message.';
+    },
   },
   methods: {
     hide() {
@@ -80,7 +80,7 @@ export default {
           this.hide();
         }
       }, this.timeout);
-    }
-  }
+    },
+  },
 };
 </script>

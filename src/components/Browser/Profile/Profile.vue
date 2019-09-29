@@ -80,21 +80,21 @@
 </template>
 
 <script>
-import * as types from "./../../../store/mutation-types";
-import { api } from "./../../../app/Api.js";
-import contentGrid from "./../Content/Grid/ContentGrid";
+import * as types from './../../../store/mutation-types';
+import { api } from './../../../api/Api';
+import contentGrid from './../Content/Grid/ContentGrid';
 
 export default {
-  name: "media-content",
+  name: 'media-content',
   data: () => ({
     active: false,
     channelInfo: {},
-    channelUser: ""
+    channelUser: '',
   }),
   watch: {
     $route() {
       this.init();
-    }
+    },
   },
   computed: {
     theme() {
@@ -104,14 +104,14 @@ export default {
       return this.$store.state.settings;
     },
     authUser() {
-      return this.$api.webStorage.local.get("$userId");
+      return this.$api.webStorage.local.get('$userId');
     },
     editMode() {
       return this.$store.state.editMode;
-    }
+    },
   },
   components: {
-    contentGrid
+    contentGrid,
   },
   methods: {
     onScroll: api.debounce(function() {}, 300),
@@ -129,27 +129,31 @@ export default {
       }
     },
     async init() {
-      const content = await this.$store.dispatch("getContent", {
-        userId: this.$route.params.id
+      const content = await this.$store.dispatch('GET_CONTENT', {
+        userId: this.$route.params.id,
       });
 
       this.channelUser = content.data.user;
       this.channelInfo = content.data.settings;
       this.$store.commit(types.SET_CONTENT, content.data);
-    }
+    },
   },
   created() {
-    window.addEventListener("scroll", this.onScroll, false);
+    if (typeof window !== 'undefined') {
+      window.addEventListener('scroll', this.onScroll, false);
+    }
   },
   destroyed() {
-    window.removeEventListener("scroll", this.onScroll, false);
+    if (typeof window !== 'undefined') {
+      window.removeEventListener('scroll', this.onScroll, false);
+    }
   },
   async beforeMount() {
     let content;
     this.$store.commit(types.SET_CONTENT, { audio: [], video: [] });
     try {
-      content = await this.$store.dispatch("getContent", {
-        userId: this.$route.params.id
+      content = await this.$store.dispatch('GET_CONTENT', {
+        userId: this.$route.params.id,
       });
     } catch (err) {
       this.$api._handleError(err);
@@ -157,6 +161,6 @@ export default {
     this.channelUser = content.data.user;
     this.channelInfo = content.data.settings;
     this.$store.commit(types.SET_CONTENT, content.data);
-  }
+  },
 };
 </script>

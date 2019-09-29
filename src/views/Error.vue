@@ -34,14 +34,14 @@
 </template>
 
 <script>
-import creatorFooter from "./../components/Landing/Footer";
-import creatorHeader from "./../components/Landing/Header";
+import creatorFooter from './../components/Landing/Footer';
+import creatorHeader from './../components/Landing/Header';
 
 export default {
-  name: "media-home",
+  name: 'media-home',
   components: {
     creatorFooter,
-    creatorHeader
-  }
+    creatorHeader,
+  },
 };
 </script>

@@ -3,7 +3,7 @@ export default {
   // The loaded files
   content: {
     video: [],
-    audio: []
+    audio: [],
   },
   // Files loaded limit
   isAuthenticated: false,
@@ -16,9 +16,9 @@ export default {
   appDrawer: {
     action: true,
     des: true,
-    mobileState: false
+    mobileState: false,
   },
-  following:[],
+  following: [],
   // The currently selected items
   selectedItems: [],
   // The currently selected items
@@ -34,7 +34,7 @@ export default {
   // The state of confirm delete model
   modal: {
     state: false,
-    type: null
+    type: null,
   },
   // The state of  settings
   showSettings: false,
@@ -42,7 +42,7 @@ export default {
   showMenu: {
     state: false,
     x: 0,
-    y: 0
+    y: 0,
   },
   // The state of the infobar
   showInfoBar: false,
@@ -51,7 +51,7 @@ export default {
     state: false,
     data: '',
     color: 'default',
-    time: 6000
+    time: 6000,
   },
   // The loading state
   isLoading: false,
@@ -68,5 +68,5 @@ export default {
   // Select all folders
   selectAllFolder: false,
   // The Search Query
-  search: ''
+  search: '',
 };

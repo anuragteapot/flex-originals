@@ -61,6 +61,6 @@
 </template>
 <script>
 export default {
-  name: "landing-footer"
+  name: 'landing-footer',
 };
 </script>

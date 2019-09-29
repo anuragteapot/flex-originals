@@ -1,7 +1,7 @@
 <template>
   <aside :class="`features ${theme}`" v-if="isAuthenticated">
     <header class="features-header focusable">
-      <img class="features-header-name" src="/public/text_logo2.png" alt="logo"/>
+      <img class="features-header-name" src="/public/text_logo2.png" alt="logo" />
     </header>
     <section class="features-list">
       <header class="features-list-header focusable">
@@ -36,7 +36,7 @@
       <!-- <div class="features-footer-details">
         <span class="username">{{user.realm || 'Anonymous'}}</span>
         <span class="tag">{{user.username || 'Flex'}}</span>
-      </div> -->
+      </div>-->
       <div class="features-footer-controls button-group">
         <button role="button" aria-label="Mute" class="button button-mute">
           <i class="fa fa-headphones"></i>
@@ -58,10 +58,10 @@
 </template>
 
 <script>
-import * as types from "./../../../store/mutation-types";
+import * as types from './../../../store/mutation-types';
 
 export default {
-  name: "lazy-aside",
+  name: 'lazy-aside',
   data() {
     return {};
   },
@@ -80,13 +80,13 @@ export default {
     },
     user() {
       return this.$store.state.user;
-    }
+    },
   },
   async beforeMount() {
-    const res = await this.$store.dispatch("getFollowers", {
-      followId: this.user.id
+    const res = await this.$store.dispatch('GET_FOLLOWERS', {
+      followId: this.user.id,
     });
     this.$store.commit(types.SET_FOLLOWING, res.data);
-  }
+  },
 };
 </script>

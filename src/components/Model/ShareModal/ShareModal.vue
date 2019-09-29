@@ -36,22 +36,22 @@
 </template>
 
 <script>
-import * as types from "./../../../store/mutation-types";
+import * as types from './../../../store/mutation-types';
 
 export default {
-  name: "model-share",
+  name: 'model-share',
   data: () => ({}),
   props: {
     text: {
       type: String,
       required: false,
-      default: "Are you sure want to delete ?"
-    }
+      default: 'Are you sure want to delete ?',
+    },
   },
   computed: {
     selectedItems() {
       return this.$store.state.selectedItems;
-    }
+    },
   },
   methods: {
     hide: function() {
@@ -62,10 +62,10 @@ export default {
 
       for (let i = 0; i < this.selectedItems.length; i++) {
         try {
-          await this.$store.dispatch("deleteItem", this.selectedItems[i]);
+          await this.$store.dispatch('DELETE_ITEM', this.selectedItems[i]);
           var data = {
-            data: "Done!",
-            color: "success"
+            data: 'Done!',
+            color: 'success',
           };
         } catch (err) {
           this.$api._handleError(err);
@@ -77,13 +77,13 @@ export default {
       this.$store.commit(types.UNSELECT_ALL_BROWSER_ITEMS);
       this.hide();
       if (this.$route.params.id) {
-        const content = await this.$store.dispatch("getContent", {
-          userId: this.$route.params.id
+        const content = await this.$store.dispatch('GET_CONTENT', {
+          userId: this.$route.params.id,
         });
 
         this.$store.commit(types.SET_CONTENT, content.data);
       }
-    }
-  }
+    },
+  },
 };
 </script>

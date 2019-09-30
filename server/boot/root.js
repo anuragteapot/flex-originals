@@ -12,7 +12,7 @@ const { createRenderer, isProd, render, resolve } = require('./utils');
 const templatePath = resolve('../../src/index.template.html');
 
 const context = {
-  title: 'Vue SSR Boilerplate',
+  title: 'Flex Originals',
 };
 
 module.exports = function(server) {

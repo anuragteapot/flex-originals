@@ -593,10 +593,7 @@ export default {
   mounted: function() {
     if (this.error) return 0;
     this.reLayoutSeekbar();
-    window.addEventListener('resize', debounce(this.reLayoutSeekbar, 100));
     // window.addEventListener("resize", this.reset, false);
-    window.addEventListener('click', debounce(this.reLayoutSeekbar, 100));
-    window.addEventListener('mousemove', debounce(this.reLayoutSeekbar, 200));
     document.addEventListener('mousemove', event => {
       this.moveSeekbar(event);
     });
@@ -611,7 +608,12 @@ export default {
       this.isPlaying = false;
     });
 
-    window.addEventListener('keydown', this.detectKeypress);
+    if (typeof window != 'undefined') {
+      window.addEventListener('click', debounce(this.reLayoutSeekbar, 100));
+      window.addEventListener('mousemove', debounce(this.reLayoutSeekbar, 200));
+      window.addEventListener('resize', debounce(this.reLayoutSeekbar, 100));
+      window.addEventListener('keydown', this.detectKeypress);
+    }
     this.media.addEventListener('timeupdate', this.handleProgress);
     this.media.addEventListener('ended', this.handleEnded);
     this.media.addEventListener('error', this.handleError);
@@ -624,14 +626,16 @@ export default {
   },
   beforeDestroy() {
     this.pause();
-    window.removeEventListener(
-      'mousemove',
-      debounce(this.reLayoutSeekbar, 200),
-    );
-    window.removeEventListener('resize', debounce(this.reLayoutSeekbar, 100));
-    window.removeEventListener('click', debounce(this.reLayoutSeekbar, 100));
-    // window.removeEventListener("resize", this.reset(), false);
-    window.removeEventListener('keydown', this.detectKeypress);
+    if (typeof window != 'undefined') {
+      window.removeEventListener(
+        'mousemove',
+        debounce(this.reLayoutSeekbar, 200),
+      );
+      window.removeEventListener('resize', debounce(this.reLayoutSeekbar, 100));
+      window.removeEventListener('click', debounce(this.reLayoutSeekbar, 100));
+      // window.removeEventListener("resize", this.reset(), false);
+      window.removeEventListener('keydown', this.detectKeypress);
+    }
     this.media.removeEventListener('timeupdate', this.currentTime);
     this.media.removeEventListener('timeupdate', this.handleProgress);
     this.media.removeEventListener('ended', this.handleEnded);

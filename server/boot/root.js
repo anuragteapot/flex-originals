@@ -8,7 +8,7 @@
 const fs = require('fs');
 const loopback = require('loopback');
 const path = require('path');
-const { createRenderer, isProd, render, resolve, serve } = require('./utils');
+const { createRenderer, isProd, render, resolve } = require('./utils');
 const templatePath = resolve('../../src/index.template.html');
 
 const context = {
@@ -16,8 +16,16 @@ const context = {
 };
 
 module.exports = function(server) {
-  server.use('/dist', loopback.static(path.resolve(__dirname, './../../dist')));
   server.use('/', loopback.static(path.resolve(__dirname, './../../public')));
+  server.use(
+    '/service-worker.js',
+    loopback.static(path.resolve(__dirname, './../../dist/service-worker.js')),
+  );
+  server.use('/dist', loopback.static(path.resolve(__dirname, './../../dist')));
+  server.use(
+    '/uploads',
+    loopback.static(path.resolve(__dirname, './../../uploads')),
+  );
   server.use(
     '/public',
     loopback.static(path.resolve(__dirname, './../../assets')),

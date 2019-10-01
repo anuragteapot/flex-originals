@@ -2,6 +2,14 @@ import AXIOS_API from './../api/axios';
 import handleError from './../api/handleError';
 
 export default {
+  IS_LOGGED: async ({ commit, dispatch, state }, { userId }) => {
+    try {
+      return await AXIOS_API.get(`/api/users/${userId}`);
+    } catch (error) {
+      return new handleError(commit, dispatch, state)._handleError(error);
+    }
+  },
+
   GET_CONTENT: async ({ commit, dispatch, state }, payload) => {
     try {
       return await AXIOS_API.get(

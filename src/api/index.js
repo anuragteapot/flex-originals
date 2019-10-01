@@ -1,7 +1,7 @@
-import { api } from './Api';
+import api from './Api';
 
 export default {
-  install: function(Vue) {
-    Vue.prototype.$api = api;
+  install: function(Vue, options) {
+    Vue.prototype.$api = new api(options.store, options.router);
   },
 };

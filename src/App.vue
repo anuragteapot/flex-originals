@@ -3,8 +3,8 @@
     <transition name="fade" mode="out-in">
       <router-view />
     </transition>
-    <lazy-snack-bar></lazy-snack-bar>
-    <lazy-model></lazy-model>
+    <!-- <lazy-snack-bar></lazy-snack-bar> -->
+    <!-- <lazy-model></lazy-model> -->
   </div>
 </template>
 

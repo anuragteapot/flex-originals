@@ -1,0 +1,39 @@
+{
+  "name": "videoComment",
+  "plural": "videoComments",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "message": {
+      "type": "string",
+      "required": true
+    },
+    "report": {
+      "type": "number",
+      "required": true,
+      "default": 0
+    },
+    "vote": {
+      "type": "number",
+      "required": true,
+      "default": 0
+    },
+    "published": {
+      "type": "date",
+      "required": true
+    }
+  },
+  "validations": [],
+  "relations": {
+    "videoCommentUserId": {
+      "type": "belongsTo",
+      "model": "user",
+      "foreignKey": "videoCommentUserId"
+    }
+  },
+  "acls": [],
+  "methods": {}
+}

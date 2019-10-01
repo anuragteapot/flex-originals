@@ -5,7 +5,6 @@
 </template>
 
 <script>
-import * as types from '@/store/mutation-types';
 export default {
   name: 'fo-embed-video',
   data: () => ({
@@ -34,19 +33,13 @@ export default {
   methods: {
     async init() {
       if (this.$route.params.v) {
-        this.$api.Nprogress.start();
-        this.$store.commit(types.SET_IS_LOADING, true);
         let currentVideo = {};
         try {
           currentVideo = await this.$api
             .axios()
             .get(`/api/actions/getVideo/${this.$route.params.v}`);
-          this.$store.commit(types.SET_IS_LOADING, false);
-          this.$api.Nprogress.done();
         } catch (err) {
           this.videoUnavaliable = true;
-          this.$store.commit(types.SET_IS_LOADING, false);
-          this.$api.Nprogress.done();
         }
 
         if (!currentVideo.data) {

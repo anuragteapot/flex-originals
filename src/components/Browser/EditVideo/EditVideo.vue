@@ -200,7 +200,6 @@ export default {
     },
     async init() {
       if (this.$route.query.v) {
-        this.$store.commit(types.SET_IS_LOADING, true);
 
         try {
           const video = await this.$api
@@ -224,7 +223,6 @@ export default {
       } else {
         this.$router.push('/@error');
       }
-      this.$store.commit(types.SET_IS_LOADING, false);
     },
   },
   created() {

@@ -384,17 +384,13 @@ export default {
     },
     async init() {
       if (this.$route.query.v) {
-        this.$api.Nprogress.start();
-        this.$store.commit(types.SET_IS_LOADING, true);
         let currentVideo = {};
         try {
           currentVideo = await this.$api
             .axios()
             .get(`/api/actions/getVideo/${this.$route.query.v}`);
-          this.$store.commit(types.SET_IS_LOADING, false);
         } catch (err) {
           this.videoUnavaliable = true;
-          this.$store.commit(types.SET_IS_LOADING, false);
         }
 
         if (!currentVideo.data) {
@@ -425,8 +421,6 @@ export default {
 
           this.like = like.data.REACTION;
         }
-
-        this.$api.Nprogress.done();
       } else {
         this.$router.push('/@error');
       }

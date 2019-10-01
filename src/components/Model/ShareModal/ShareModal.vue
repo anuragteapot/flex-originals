@@ -58,7 +58,6 @@ export default {
       this.$store.commit(types.HIDE_MODAL);
     },
     deleteItem: async function() {
-      this.$store.commit(types.SET_IS_LOADING, true);
 
       for (let i = 0; i < this.selectedItems.length; i++) {
         try {
@@ -72,7 +71,6 @@ export default {
         }
       }
 
-      this.$store.commit(types.SET_IS_LOADING, false);
       this.$store.commit(types.SHOW_SNACKBAR, data);
       this.$store.commit(types.UNSELECT_ALL_BROWSER_ITEMS);
       this.hide();

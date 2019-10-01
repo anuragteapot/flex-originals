@@ -1,157 +1,158 @@
 import AXIOS_API from './../api/axios';
+import handleError from './../api/handleError';
 
 export default {
-  GET_CONTENT: async (state, payload) => {
+  GET_CONTENT: async ({ commit, dispatch, state }, payload) => {
     try {
       return await AXIOS_API.get(
         `/api/actions/getContent/${payload.limit || 30}/${
           payload.userId ? payload.userId : ''
         }`,
       );
-    } catch (err) {
-      console.log(err);
+    } catch (error) {
+      return new handleError(commit, dispatch, state)._handleError(error);
     }
   },
 
-  GET_LIKE: async (context, payload) => {
+  GET_LIKE: async ({ commit, dispatch, state }, payload) => {
     try {
       return await AXIOS_API.get(
         `/api/videoLikes/getLike/${payload.userId}/${payload.videoId}`,
       );
-    } catch (err) {
-      console.log(err);
+    } catch (error) {
+      return new handleError(commit, dispatch, state)._handleError(error);
     }
   },
 
-  LIKE_END_POINT: async (context, payload) => {
+  LIKE_END_POINT: async ({ commit, dispatch, state }, payload) => {
     try {
       return await AXIOS_API.post(`/api/videoLikes/likeEndPoint`, {
         userId: payload.userId,
         videoId: payload.videoId,
         reaction: payload.reaction,
       });
-    } catch (err) {
-      console.log(err);
+    } catch (error) {
+      return new handleError(commit, dispatch, state)._handleError(error);
     }
   },
 
-  GET_FOLLOWERS: async (context, payload) => {
+  GET_FOLLOWERS: async ({ commit, dispatch, state }, payload) => {
     try {
       return await AXIOS_API.get(
         `/api/follows/getFollowers/${payload.followId}`,
       );
-    } catch (err) {
-      console.log(err);
+    } catch (error) {
+      return new handleError(commit, dispatch, state)._handleError(error);
     }
   },
 
-  UN_FOLLOW: async (context, payload) => {
+  UN_FOLLOW: async ({ commit, dispatch, state }, payload) => {
     try {
       return await AXIOS_API.post(`/api/follows/unFollow`, {
         channelId: payload.channelId,
         followId: payload.followId,
       });
-    } catch (err) {
-      console.log(err);
+    } catch (error) {
+      return new handleError(commit, dispatch, state)._handleError(error);
     }
   },
 
-  DO_FOLLOW: async (context, payload) => {
+  DO_FOLLOW: async ({ commit, dispatch, state }, payload) => {
     try {
       return await AXIOS_API.post(`/api/follows/doFollow`, {
         channelId: payload.channelId,
         followId: payload.followId,
       });
-    } catch (err) {
-      console.log(err);
+    } catch (error) {
+      return new handleError(commit, dispatch, state)._handleError(error);
     }
   },
 
-  GET_FOLLOW: async (context, payload) => {
+  GET_FOLLOW: async ({ commit, dispatch, state }, payload) => {
     try {
       return await AXIOS_API.get(
         `/api/follows/getFollow/${payload.channelId}/${payload.followId}`,
       );
-    } catch (err) {
-      console.log(err);
+    } catch (error) {
+      return new handleError(commit, dispatch, state)._handleError(error);
     }
   },
 
-  GET_USER_STORAGE: async (context, payload) => {
+  GET_USER_STORAGE: async ({ commit, dispatch, state }, payload) => {
     try {
       return await AXIOS_API.get(`/api/actions/getUserStorage/${payload}`);
-    } catch (err) {
-      console.log(err);
+    } catch (error) {
+      return new handleError(commit, dispatch, state)._handleError(error);
     }
   },
 
-  LOGIN: async (context, payload) => {
+  LOGIN: async ({ commit, dispatch, state }, payload) => {
     try {
       return await AXIOS_API.post('/api/users/login', payload);
-    } catch (err) {
-      console.log(err);
+    } catch (error) {
+      return new handleError(commit, dispatch, state)._handleError(error);
     }
   },
 
-  LOGOUT: async () => {
+  LOGOUT: async ({ commit, dispatch, state }) => {
     try {
       return await AXIOS_API.post('/api/users/logout');
-    } catch (err) {
-      console.log(err);
+    } catch (error) {
+      return new handleError(commit, dispatch, state)._handleError(error);
     }
   },
 
-  VERIFY: async (context, payload) => {
+  VERIFY: async ({ commit, dispatch, state }, payload) => {
     try {
       return await AXIOS_API.get(
         `/api/users/confirm?uid=${payload.uid}&redirect=${payload.redirect}&token=${payload.token}`,
       );
-    } catch (err) {
-      console.log(err);
+    } catch (error) {
+      return new handleError(commit, dispatch, state)._handleError(error);
     }
   },
 
-  FIND_SETTINGS: async (context, payload) => {
+  FIND_SETTINGS: async ({ commit, dispatch, state }, payload) => {
     try {
       return await AXIOS_API.get(`/api/users/findSetting/${payload.uid}`);
-    } catch (err) {
-      console.log(err);
+    } catch (error) {
+      return new handleError(commit, dispatch, state)._handleError(error);
     }
   },
 
-  UPDATE_SETTINGS: async (context, payload) => {
+  UPDATE_SETTINGS: async ({ commit, dispatch, state }, payload) => {
     try {
       return await AXIOS_API.post(`/api/users/updateSettings`, payload);
-    } catch (err) {
-      console.log(err);
+    } catch (error) {
+      return new handleError(commit, dispatch, state)._handleError(error);
     }
   },
 
-  DELETE_ITEM: async (context, payload) => {
+  DELETE_ITEM: async ({ commit, dispatch, state }, payload) => {
     if (payload.type == 'audio') {
       try {
         return await AXIOS_API.post(`/api/audios/deleteItem`, {
           id: payload.id,
         });
-      } catch (err) {
-        console.log(err);
+      } catch (error) {
+        return new handleError(commit, dispatch, state)._handleError(error);
       }
     } else if (payload.type == 'video') {
       try {
         return await AXIOS_API.post(`/api/videos/deleteItem`, {
           id: payload.id,
         });
-      } catch (err) {
-        console.log(err);
+      } catch (error) {
+        return new handleError(commit, dispatch, state)._handleError(error);
       }
     }
   },
 
-  SIGNUP: async (context, payload) => {
+  SIGNUP: async ({ commit, dispatch, state }, payload) => {
     try {
       return await AXIOS_API.post('/api/users', payload);
-    } catch (err) {
-      console.log(err);
+    } catch (error) {
+      return new handleError(commit, dispatch, state)._handleError(error);
     }
   },
 };

@@ -3,7 +3,6 @@
 'use strict';
 
 var loopback = require('loopback');
-var path = require('path');
 var boot = require('loopback-boot');
 
 var app = (module.exports = loopback());

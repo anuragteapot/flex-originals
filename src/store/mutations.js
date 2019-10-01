@@ -2,6 +2,32 @@ import * as types from './mutation-types';
 
 export default {
   /**
+   * Show the snackbar
+   * @param state
+   */
+  [types.SHOW_SNACKBAR]: (state, payload) => {
+    state.showsnackbar.data = '';
+    state.showsnackbar.state = true;
+    state.showsnackbar.data = payload.data;
+
+    if (payload.color) {
+      state.showsnackbar.color = payload.color;
+    }
+
+    if (payload.time == 0) {
+      state.showsnackbar.time = payload.time;
+    }
+  },
+
+  /**
+   * Hide the snackbar
+   * @param state
+   */
+  [types.HIDE_SNACKBAR]: state => {
+    state.showsnackbar.state = false;
+  },
+
+  /**
    * Init
    * @param state
    * @param payload

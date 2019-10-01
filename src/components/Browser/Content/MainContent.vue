@@ -39,7 +39,6 @@ export default {
           // this.$store.state.loadLimit = this.$store.state.loadLimit + 10;
           // const dir = this.$route.params.dir;
           // const path = this.$route.params.path;
-          // this.$store.commit(types.SET_IS_LOADING, true);
           // if (dir !== undefined && path == "folder") {
           // this.$store.dispatch("update", { path: dir });
           // } else {

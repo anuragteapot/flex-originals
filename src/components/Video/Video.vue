@@ -209,10 +209,16 @@ export default {
       },
       meta: [
         { name: 'description', content: this.videoInfo.description },
-        { name: 'url', content: window.location.href },
+        {
+          name: 'url',
+          content: typeof window != 'undefined' ? window.location.href : '',
+        },
         { name: 'og:title', content: this.videoInfo.title },
         { name: 'og:type', content: 'Video' },
-        { name: 'og:url', content: window.location.href },
+        {
+          name: 'og:url',
+          content: typeof window != 'undefined' ? window.location.href : '',
+        },
         { name: 'og:site_name', content: 'Flex Originals' },
         { name: 'og:image', content: '/' + this.videoInfo.thumbImage },
         { name: 'og:description', content: this.videoInfo.description },

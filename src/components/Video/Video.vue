@@ -13,7 +13,7 @@
         <img src="/public/tool_svg/018-clock.svg" width="30" />
       </div>
     </div>
-    <div class="fo-video-player-overlay" v-show="!isPlaying && !loading" @click="playOrPause"></div>
+    <!-- <div class="fo-video-player-overlay" v-show="!isPlaying && !loading" @click="playOrPause"></div> -->
     <div class="fo-video-player-load-play" v-show="!isPlaying && !loading">
       <a class="video-play-button" @click="playOrPause">
         <span></span>
@@ -588,7 +588,7 @@ export default {
         this.skipBack();
       }
     },
-    loadedmetadata() {
+    loadeddata() {
       if (this.error) return 0;
       if (this.autoPlay) {
         this.makeActive();
@@ -643,6 +643,7 @@ export default {
       window.removeEventListener('keydown', this.detectKeypress);
     }
     this.media.removeEventListener('timeupdate', this.currentTime);
+    // this.media.removeEventListener('play', this.eventPlay);
     this.media.removeEventListener('timeupdate', this.handleProgress);
     this.media.removeEventListener('ended', this.handleEnded);
     this.media.removeEventListener('error', this.handleError);

@@ -36,14 +36,12 @@ NProgress.set = function(n) {
     bar = progress.querySelector(Settings.barSelector),
     speed = Settings.speed,
     ease = Settings.easing;
-  progress.offsetWidth;
   queue(function(next) {
     if (Settings.positionUsing === '')
       Settings.positionUsing = NProgress.getPositioningCSS();
     css(bar, barPositionCSS(n, speed, ease));
     if (n === 1) {
       css(progress, { transition: 'none', opacity: 1 });
-      progress.offsetWidth;
       setTimeout(function() {
         css(progress, {
           transition: 'all ' + speed + 'ms linear',

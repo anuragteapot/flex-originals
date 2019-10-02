@@ -4,8 +4,8 @@ import App from './App.vue';
 import createStore from '@/store';
 import createRouter from '@/router';
 import Api from './api';
-// import Snackbar from '@/components/Tool/SnackBar';
-// import Model from '@/components/Model/Model';
+import Snackbar from '@/components/Tool/SnackBar';
+import Model from '@/components/Model/Model';
 // import AudioPlayer from '@/components/Audio/Audio';
 // import VideoPlayer from '@/components/Video/Video';
 // import lazyImage from '@/components/LazyImage/LazyImage';
@@ -16,8 +16,8 @@ import './styles/vendor/nprogress/nprogress.css';
 Vue.use(Api);
 
 // Load components
-// Vue.component('lazySnackBar', Snackbar);
-// Vue.component('lazyModel', Model);
+Vue.component('lazySnackBar', Snackbar);
+Vue.component('lazyModel', Model);
 // Vue.component('lazyAudioPlayer', AudioPlayer);
 // Vue.component('foVideoPlayer', VideoPlayer);
 // Vue.component('lazyImage', lazyImage);

@@ -1,12 +1,12 @@
 /* eslint-disable no-useless-escape */
 import utils from './utils';
-import createApp from './../main'; 
+import createApp from './../main';
 import * as types from './../store/mutation-types';
 // import * as webStorage from './Storage';
 // import AXIOS_API from './axios';
 // import handleError from './handleError';
 
-const { store, router } = createApp();
+const { store } = createApp();
 export default class Api {
   /**
    * Store constructor
@@ -73,53 +73,5 @@ export default class Api {
 
       store.commit(types.SHOW_SNACKBAR, data);
     }
-  }
-
-  /**
-   * Check for logged in.
-   *
-   */
-  async isLogged() {
-    if (
-      webStorage.local.get('$accessToken') &&
-      webStorage.local.get('$userId')
-    ) {
-      const userId = webStorage.local.get('$userId');
-
-      if (userId) {
-        try {
-          const user = await AXIOS_API.get(`/api/users/${userId}`, {
-            retry: 50,
-            retryDelay: 1000,
-          });
-          store.commit(types.SET_USER, user.data);
-          return true;
-        } catch (err) {
-          this._handleError(err);
-        }
-      }
-    }
-
-    return false;
-  }
-
-  /**
-   * Logout
-   *
-   */
-  async logout() {
-    try {
-      await this.axios().post('/api/users/logout');
-    } catch (err) {
-      console.log(err);
-    }
-    webStorage.local.destroy('$accessToken');
-    webStorage.local.destroy('$userId');
-    webStorage.local.destroy('user');
-    webStorage.local.destroy('created');
-    webStorage.local.destroy('ttl');
-    store.commit(types.IS_AUTHENTICATED, false);
-    store.commit(types.SET_USER, {});
-    router.push(redirect);
   }
 }

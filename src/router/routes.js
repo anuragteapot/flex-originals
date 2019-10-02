@@ -14,12 +14,12 @@ export default [
   //     requiresAuth: true,
   //   },
   // },
-  // {
-  //   path: '/app/@home',
-  //   name: '@home',
-  //   component: () =>
-  //     import(/* webpackChunkName: "browser" */ './../views/Browser.vue'),
-  // },
+  {
+    path: '/app/@home',
+    name: '@home',
+    component: () =>
+      import(/* webpackChunkName: "browser" */ './../views/Browser.vue'),
+  },
   // {
   //   path: '/app/@watch',
   //   name: '@watch',
@@ -65,36 +65,36 @@ export default [
   //     requiresAuth: true,
   //   },
   // },
-  // {
-  //   path: '/login',
-  //   name: 'login',
-  //   component: () =>
-  //     import(/* webpackChunkName: "login" */ './../views/Login.vue'),
-  //   meta: {
-  //     requiresAuth: true,
-  //   },
-  // },
-  // {
-  //   path: '/signup',
-  //   name: 'signup',
-  //   component: () =>
-  //     import(/* webpackChunkName: "signup" */ './../views/Signup.vue'),
-  //   meta: {
-  //     requiresAuth: true,
-  //   },
-  // },
-  // {
-  //   path: '/verify/users/confirm',
-  //   name: 'verify',
-  //   component: () =>
-  //     import(/* webpackChunkName: "verify" */ './../views/Verify.vue'),
-  // },
-  // {
-  //   path: '/verify/users/verified',
-  //   name: 'verified',
-  //   component: () =>
-  //     import(/* webpackChunkName: "verified" */ './../views/Verified.vue'),
-  // },
+  {
+    path: '/login',
+    name: 'login',
+    component: () =>
+      import(/* webpackChunkName: "login" */ './../views/Login.vue'),
+    meta: {
+      requiresAuth: true,
+    },
+  },
+  {
+    path: '/signup',
+    name: 'signup',
+    component: () =>
+      import(/* webpackChunkName: "signup" */ './../views/Signup.vue'),
+    meta: {
+      requiresAuth: true,
+    },
+  },
+  {
+    path: '/verify/users/confirm',
+    name: 'verify',
+    component: () =>
+      import(/* webpackChunkName: "verify" */ './../views/Verify.vue'),
+  },
+  {
+    path: '/verify/users/verified',
+    name: 'verified',
+    component: () =>
+      import(/* webpackChunkName: "verified" */ './../views/Verified.vue'),
+  },
   // {
   //   path: '/auth',
   //   name: 'auth',

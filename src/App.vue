@@ -3,8 +3,8 @@
     <transition name="fade" mode="out-in">
       <router-view />
     </transition>
-    <!-- <lazy-snack-bar></lazy-snack-bar> -->
-    <!-- <lazy-model></lazy-model> -->
+    <lazy-snack-bar></lazy-snack-bar>
+    <lazy-model></lazy-model>
   </div>
 </template>
 
@@ -15,10 +15,10 @@ import * as types from './store/mutation-types';
 export default {
   name: 'app',
   computed: {
-    ...mapGetters(['isLoading', 'theme']),
+    ...mapGetters(['theme']),
   },
   async beforeMount() {
-    if (await this.$api.isLogged()) {
+    if (await this.$user.isLogged()) {
       this.$store.commit(types.IS_AUTHENTICATED, true);
     } else {
       this.$store.commit(types.IS_AUTHENTICATED, false);

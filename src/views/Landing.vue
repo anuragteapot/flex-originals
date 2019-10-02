@@ -18,12 +18,5 @@ export default {
     creatorFooter,
     creatorHeader,
   },
-  async beforeMount() {
-    if (await this.$api.isLogged()) {
-      if (typeof window !== 'undefined') {
-        window.location.href = '/app/@home';
-      }
-    }
-  },
 };
 </script>

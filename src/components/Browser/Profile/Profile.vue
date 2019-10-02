@@ -81,7 +81,7 @@
 
 <script>
 import * as types from './../../../store/mutation-types';
-import { api } from './../../../api/Api';
+import utils from './../../../api/utils';
 import contentGrid from './../Content/Grid/ContentGrid';
 
 export default {
@@ -114,10 +114,10 @@ export default {
     contentGrid,
   },
   methods: {
-    onScroll: api.debounce(function() {}, 300),
+    onScroll: new utils().debounce(function() {}, 300),
     async onEditMode() {
       if (
-        (await this.$api.isLogged()) &&
+        (await this.$user.isLogged()) &&
         this.authUser === this.channelUser.id
       ) {
         if (this.editMode) {

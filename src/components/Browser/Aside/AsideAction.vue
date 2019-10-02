@@ -2,22 +2,28 @@
   <aside :class="`lazy ${theme}`">
     <div class="lazy-collection">
       <div class="server focusable server-friends unread" role="button" aria-label="Friends unread">
-        <div class="server-icon" @click="$router.push('/app/@home')">
-          <img src="/public/icons/logo.png" alt="logo" />
-        </div>
+        <router-link to="/app/@home">
+          <div class="server-icon">
+            <img src="/public/icons/logo.png" alt="logo" />
+          </div>
+        </router-link>
       </div>
     </div>
 
     <div class="lazy-collection">
       <div class="server focusable" role="button" aria-label="My Server" aria-selected="true">
-        <div class="server-icon" @click="$router.push('/app/@home?filter=video')">
-          <i class="fas fa-video" style="color:red;"></i>
-        </div>
+        <router-link to="/app/@home?filter=video">
+          <div class="server-icon">
+            <i class="fas fa-video" style="color:red;"></i>
+          </div>
+        </router-link>
       </div>
       <div class="server focusable" role="button" aria-label="My Server" aria-selected="true">
-        <div class="server-icon" @click="$router.push('/app/@home?filter=music')">
-          <i class="fas fa-music" style="color:white;"></i>
-        </div>
+        <router-link to="/app/@home?filter=music">
+          <div class="server-icon">
+            <i class="fas fa-music" style="color:white;"></i>
+          </div>
+        </router-link>
       </div>
       <div class="server focusable" role="button" aria-label="My Server" aria-selected="true">
         <div class="server-icon" @click="fileUpload">
@@ -37,15 +43,16 @@
 
       <div
         v-if="selecteditems.length == 1"
-        @click="$router.push(`/app/@editvideo?v=${selecteditems[0].id}`)"
         class="server focusable"
         role="button"
         aria-label="My Server"
         aria-selected="true"
       >
-        <div class="server-icon">
-          <i class="fas fa-edit" style="color:#04fb8a;"></i>
-        </div>
+        <router-link :to="`/app/@editvideo?v=${selecteditems[0].id}`">
+          <div class="server-icon">
+            <i class="fas fa-edit" style="color:#04fb8a;"></i>
+          </div>
+        </router-link>
       </div>
 
       <div
@@ -111,7 +118,7 @@ export default {
       this.$store.commit(types.SHOW_MODAL, { state: true, type: 'MDelete' });
     },
     fileUpload: async function() {
-      if (await this.$api.isLogged()) {
+      if (await this.$user.isLogged()) {
         this.$router.push(`/app/@upload`);
       } else {
         this.$router.push(`/login?redirect=${this.$route.fullPath}`);

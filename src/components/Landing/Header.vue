@@ -18,14 +18,7 @@ export default {
   },
   methods: {
     async logout() {
-      try {
-        await this.$api.logout();
-        if (typeof window !== 'undefined') {
-          window.location.href = '';
-        }
-      } catch (err) {
-        console.log(err);
-      }
+      await this.$user.logout('/login');
     },
   },
 };

@@ -1,5 +1,6 @@
 import * as webStorage from './storage';
 import createApp from './../main';
+import * as types from './../store/mutation-types';
 const { store } = createApp();
 
 export default class user {
@@ -29,7 +30,7 @@ export default class user {
    * @param {string} key
    */
   get(key) {
-    return JSON.parse(webStorage.local.get(key));
+    return webStorage.local.get(key);
   }
 
   /**
@@ -49,6 +50,7 @@ export default class user {
     if (userId) {
       const user = await store.dispatch('IS_LOGGED', { userId });
       store.commit(types.SET_USER, user.data);
+      return true;
     }
 
     return false;
@@ -58,16 +60,13 @@ export default class user {
    * Logout
    *
    */
-  async logout() {
+  async logout(redirect = '/') {
     await store.dispatch('LOGOUT');
-
     webStorage.local.destroy('$accessToken');
     webStorage.local.destroy('$userId');
     webStorage.local.destroy('user');
     webStorage.local.destroy('created');
     webStorage.local.destroy('ttl');
-    store.commit(types.IS_AUTHENTICATED, false);
-    store.commit(types.SET_USER, {});
-    router.push(redirect);
+    window.location.href = redirect;
   }
 }

@@ -8,7 +8,7 @@
 
 <script>
 import * as types from './../../../store/mutation-types';
-import { api } from './../../../api/Api';
+import utils from './../../../api/utils';
 import contentGrid from './Grid/ContentGrid';
 
 export default {
@@ -33,7 +33,7 @@ export default {
     contentGrid,
   },
   methods: {
-    onScroll: api.debounce(function() {
+    onScroll: new utils().debounce(function() {
       if (typeof window !== 'undefined') {
         if (window.innerHeight + window.scrollY >= document.body.scrollHeight) {
           // this.$store.state.loadLimit = this.$store.state.loadLimit + 10;

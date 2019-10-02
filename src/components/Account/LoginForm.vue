@@ -97,21 +97,13 @@ export default {
         email: this.email,
         password: this.password,
       };
-      try {
-        const user = await this.$store.dispatch('LOGIN', data);
-        this.finalize(user);
-        this.loading = false;
-      } catch (err) {
-        this.loading = false;
-      }
-    },
-    async finalize(response) {
-      this.$api.webStorage.local.set('created', response.data.created);
-      this.$api.webStorage.local.set('$accessToken', response.data.id);
-      this.$api.webStorage.local.set('ttl', response.data.ttl);
-      this.$api.webStorage.local.set('$userId', response.data.userId);
-      this.$api.webStorage.local.set('user', JSON.stringify(response.data));
 
+      const user = await this.$store.dispatch('LOGIN', data);
+      this.finalize(user);
+      this.loading = false;
+    },
+    finalize(response) {
+      this.$user.auth(response.data);
       this.$store.commit(types.IS_AUTHENTICATED, true);
 
       if (typeof window !== 'undefined') {

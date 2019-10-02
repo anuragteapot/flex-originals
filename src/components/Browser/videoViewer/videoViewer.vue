@@ -261,7 +261,7 @@
 
 <script>
 import videoSuggestions from './videoSuggestions';
-import { api } from './../../../api/Api';
+import utils from './../../../api/utils';
 import { mapGetters } from 'vuex';
 import * as types from './../../../store/mutation-types';
 export default {
@@ -353,7 +353,7 @@ export default {
         type: 'MShareModal',
       });
     },
-    halfTime: api.debounce(async function() {
+    halfTime: new utils().debounce(async function() {
       try {
         await this.$api
           .axios()
@@ -372,15 +372,8 @@ export default {
         }
       }
     },
-    async logout() {
-      try {
-        await this.$store.dispatch('LOGOUT');
-        this.$router.push('/app/@home?u=logout');
-        this.$api.auth.logout();
-      } catch (err) {
-        this.$router.push('/app/@home?u=logout');
-        this.$api.auth.logout();
-      }
+    logout() {
+      this.$user.logout('/app/@home?u=logout');
     },
     async init() {
       if (this.$route.query.v) {

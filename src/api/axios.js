@@ -1,5 +1,5 @@
 import axios from 'axios';
-import * as webStorage from './Storage';
+import * as webStorage from './storage';
 
 const AXIOS_API = () => {
   axios.defaults.headers.common['authorization'] = `${webStorage.local.get(

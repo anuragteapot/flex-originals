@@ -1,5 +1,6 @@
 import AXIOS_API from './../api/axios';
 import handleError from './../api/handleError';
+import * as types from './../store/mutation-types';
 
 export default {
   IS_LOGGED: async ({ commit, dispatch, state }, { userId }) => {

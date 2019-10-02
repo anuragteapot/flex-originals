@@ -1,19 +1,18 @@
 /* eslint-disable no-useless-escape */
-import * as types from './../store/mutation-types';
 import utils from './utils';
+import createApp from './../main'; 
+import * as types from './../store/mutation-types';
 // import * as webStorage from './Storage';
 // import AXIOS_API from './axios';
 // import handleError from './handleError';
 
+const { store, router } = createApp();
 export default class Api {
   /**
    * Store constructor
    */
-  constructor(store, router) {
-    this.store = store;
-    this.router = router;
+  constructor() {
     this.utils = new utils();
-    console.log(store);
 
     const cssRule =
       'color: red;' +
@@ -57,7 +56,6 @@ export default class Api {
   }
 
   updateOnlineStatus() {
-    console.log('hello');
     const state = navigator.onLine || false;
 
     if (state == true) {
@@ -66,16 +64,14 @@ export default class Api {
         color: 'success',
       };
 
-      console.log(this.store);
-
-      this.store.commit(types.SHOW_SNACKBAR, data);
+      store.commit(types.SHOW_SNACKBAR, data);
     } else {
       const data = {
         data: 'You are offline',
         color: 'info',
       };
 
-      this.store.commit(types.SHOW_SNACKBAR, data);
+      store.commit(types.SHOW_SNACKBAR, data);
     }
   }
 
@@ -84,25 +80,25 @@ export default class Api {
    *
    */
   async isLogged() {
-    // if (
-    //   webStorage.local.get('$accessToken') &&
-    //   webStorage.local.get('$userId')
-    // ) {
-    //   const userId = webStorage.local.get('$userId');
+    if (
+      webStorage.local.get('$accessToken') &&
+      webStorage.local.get('$userId')
+    ) {
+      const userId = webStorage.local.get('$userId');
 
-    //   if (userId) {
-    //     try {
-    //       const user = await AXIOS_API.get(`/api/users/${userId}`, {
-    //         retry: 50,
-    //         retryDelay: 1000,
-    //       });
-    //       store.commit(types.SET_USER, user.data);
-    //       return true;
-    //     } catch (err) {
-    //       this._handleError(err);
-    //     }
-    //   }
-    // }
+      if (userId) {
+        try {
+          const user = await AXIOS_API.get(`/api/users/${userId}`, {
+            retry: 50,
+            retryDelay: 1000,
+          });
+          store.commit(types.SET_USER, user.data);
+          return true;
+        } catch (err) {
+          this._handleError(err);
+        }
+      }
+    }
 
     return false;
   }
@@ -112,18 +108,18 @@ export default class Api {
    *
    */
   async logout() {
-  //   try {
-  //     await this.axios().post('/api/users/logout');
-  //   } catch (err) {
-  //     console.log(err);
-  //   }
-  //   webStorage.local.destroy('$accessToken');
-  //   webStorage.local.destroy('$userId');
-  //   webStorage.local.destroy('user');
-  //   webStorage.local.destroy('created');
-  //   webStorage.local.destroy('ttl');
-  //   store.commit(types.IS_AUTHENTICATED, false);
-  //   store.commit(types.SET_USER, {});
-  //   router.push(redirect);
+    try {
+      await this.axios().post('/api/users/logout');
+    } catch (err) {
+      console.log(err);
+    }
+    webStorage.local.destroy('$accessToken');
+    webStorage.local.destroy('$userId');
+    webStorage.local.destroy('user');
+    webStorage.local.destroy('created');
+    webStorage.local.destroy('ttl');
+    store.commit(types.IS_AUTHENTICATED, false);
+    store.commit(types.SET_USER, {});
+    router.push(redirect);
   }
 }

@@ -13,6 +13,8 @@ import Api from './api';
 import './styles/creator.scss';
 import './styles/vendor/nprogress/nprogress.css';
 
+Vue.use(Api);
+
 // Load components
 // Vue.component('lazySnackBar', Snackbar);
 // Vue.component('lazyModel', Model);
@@ -24,7 +26,6 @@ export default function createApp() {
   // create store and router instances
   const store = createStore();
   const router = createRouter();
-  Vue.use(Api, { store, router });
 
   // sync the router with the vuex store.
   // this registers `store.state.route`

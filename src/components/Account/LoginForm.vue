@@ -79,15 +79,15 @@ export default {
   computed: {
     Vname: function() {
       if (!this.name) return true;
-      return this.$api.regName.test(this.name);
+      return this.$utils.regName.test(this.name);
     },
     Vemail: function() {
       if (!this.email) return true;
-      return this.$api.regEmail.test(this.email);
+      return this.$utils.regEmail.test(this.email);
     },
     VmobileNumber: function() {
       if (!this.mobileNumber) return true;
-      return this.$api.regMobile.test(this.mobileNumber);
+      return this.$utils.regMobile.test(this.mobileNumber);
     },
   },
   methods: {

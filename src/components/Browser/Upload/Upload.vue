@@ -267,14 +267,7 @@ export default {
       return false;
     },
     async logout() {
-      try {
-        await this.$store.dispatch('LOGOUT');
-        this.$router.push('/app/@home?u=logout');
-        this.$api.auth.logout();
-      } catch (err) {
-        this.$router.push('/app/@home?u=logout');
-        this.$api.auth.logout();
-      }
+      this.$user.logout('/app/@home?u=logout');
     },
     async newThumb(formData, inputFile) {
       const uploaded = await this.processUpload(formData, inputFile);
@@ -319,7 +312,7 @@ export default {
       this.$refs.formFile.reset();
     },
     processUpload: async function(formData, inputFile) {
-      const userId = this.$api.webStorage.local.get('$userId');
+      const userId = this.$user.get('$userId');
 
       const VIDEO_EXT = [
         'video/mp4',
@@ -440,7 +433,7 @@ export default {
 
       if (this.type === 'video') {
         try {
-          const publishedVideo = await this.$api.axios().post(
+          const publishedVideo = await this.$axios.post(
             `/api/videos/publish`,
             { id: this.uploadId, videoData: this.uploadData },
             {
@@ -470,7 +463,7 @@ export default {
         }
       } else if (this.type === 'audio') {
         try {
-          const publishedAudio = await this.$api.axios().post(
+          const publishedAudio = await this.$axios.post(
             `/api/audios/publish`,
             { id: this.uploadId, audioData: this.uploadData },
             {
@@ -502,7 +495,7 @@ export default {
   async beforeMount() {
     const storage = await this.$store.dispatch(
       'GET_USER_STORAGE',
-      this.$api.webStorage.local.get('$userId'),
+      this.$user.get('$userId'),
     );
 
     const limit = 26285484700;

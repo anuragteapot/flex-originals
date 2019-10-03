@@ -233,13 +233,10 @@ export default {
       this.trackDuration = durmins + ':' + dursecs;
     },
     halfTime: api.debounce(async function() {
-      try {
-        await this.$api.axios().post(`/api/audioAnalytics/updateViews`, {
-          id: this.musicPlaylist[this.currentSong].id,
-        });
-      } catch (err) {
-        this.$api._handleError(err);
-      }
+      await this.$store.dispatch(
+        'UPDATE_VIEWS_AUDIO',
+        this.musicPlaylist[this.currentSong].id,
+      );
     }, 2000),
     handleProgress() {
       if (

@@ -104,7 +104,7 @@ export default {
       return this.$store.state.settings;
     },
     authUser() {
-      return this.$api.webStorage.local.get('$userId');
+      return this.$user.get('$userId');
     },
     editMode() {
       return this.$store.state.editMode;
@@ -135,7 +135,6 @@ export default {
 
       this.channelUser = content.data.user;
       this.channelInfo = content.data.settings;
-      this.$store.commit(types.SET_CONTENT, content.data);
     },
   },
   created() {
@@ -149,18 +148,12 @@ export default {
     }
   },
   async beforeMount() {
-    let content;
     this.$store.commit(types.SET_CONTENT, { audio: [], video: [] });
-    try {
-      content = await this.$store.dispatch('GET_CONTENT', {
-        userId: this.$route.params.id,
-      });
-    } catch (err) {
-      this.$api._handleError(err);
-    }
+    const content = await this.$store.dispatch('GET_CONTENT', {
+      userId: this.$route.params.id,
+    });
     this.channelUser = content.data.user;
     this.channelInfo = content.data.settings;
-    this.$store.commit(types.SET_CONTENT, content.data);
   },
 };
 </script>

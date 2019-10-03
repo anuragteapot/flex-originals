@@ -6,13 +6,14 @@ import * as types from './../store/mutation-types';
 // import AXIOS_API from './axios';
 // import handleError from './handleError';
 
+const helper = new utils();
+
 const { store } = createApp();
 export default class Api {
   /**
    * Store constructor
    */
   constructor() {
-    this.utils = new utils();
 
     const cssRule =
       'color: red;' +
@@ -49,7 +50,7 @@ export default class Api {
       ) {
         window.sessionStorage.setItem(
           'sessionId',
-          `session-${new Date().getTime()}-${this.utils.randomChars()}`,
+          `session-${new Date().getTime()}-${helper.randomChars()}`,
         );
       }
     }

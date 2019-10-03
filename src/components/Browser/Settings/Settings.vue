@@ -242,14 +242,14 @@ export default {
   },
   methods: {
     async logout() {
-      await this.$api.logout('/app/@home?u=logout');
+      await this.$user.logout('/app/@home?u=logout');
     },
     deleteAllSession() {
       this.$store.commit(types.SHOW_MODAL, { state: true, type: 'MDelete' });
     },
     async save() {
       const payload = {};
-      payload.id = this.$api.webStorage.local.get('$userId');
+      payload.id = this.$user.get('$userId');
       payload.newSettings = this.settings;
       const settings = await this.$store.dispatch('UPDATE_SETTINGS', payload);
 
@@ -258,7 +258,7 @@ export default {
   },
   async created() {
     const settings = await this.$store.dispatch('FIND_SETTINGS', {
-      uid: this.$api.webStorage.local.get('$userId'),
+      uid: this.$user.get('$userId'),
     });
 
     this.$store.commit(types.SET_SETTINGS, settings);

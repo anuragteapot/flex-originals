@@ -1,6 +1,6 @@
 import AXIOS_API from './../api/axios';
 import handleError from './../api/handleError';
-// import * as types from './../store/mutation-types';
+import * as types from './../store/mutation-types';
 
 export default {
   IS_LOGGED: async ({ commit, dispatch, state }, { userId }) => {
@@ -13,11 +13,14 @@ export default {
 
   GET_CONTENT: async ({ commit, dispatch, state }, payload) => {
     try {
-      return await AXIOS_API.get(
+      const content = await AXIOS_API.get(
         `/api/actions/getContent/${payload.limit || 30}/${
           payload.userId ? payload.userId : ''
         }`,
       );
+
+      commit(types.SET_CONTENT, content.data);
+      return content;
     } catch (error) {
       return new handleError(commit, dispatch, state)._handleError(error);
     }
@@ -95,22 +98,6 @@ export default {
     }
   },
 
-  LOGIN: async ({ commit, dispatch, state }, payload) => {
-    try {
-      return await AXIOS_API.post('/api/users/login', payload);
-    } catch (error) {
-      return new handleError(commit, dispatch, state)._handleError(error);
-    }
-  },
-
-  LOGOUT: async ({ commit, dispatch, state }) => {
-    try {
-      return await AXIOS_API.post('/api/users/logout');
-    } catch (error) {
-      return new handleError(commit, dispatch, state)._handleError(error);
-    }
-  },
-
   VERIFY: async ({ commit, dispatch, state }, payload) => {
     try {
       return await AXIOS_API.get(
@@ -160,6 +147,42 @@ export default {
   SIGNUP: async ({ commit, dispatch, state }, payload) => {
     try {
       return await AXIOS_API.post('/api/users', payload);
+    } catch (error) {
+      return new handleError(commit, dispatch, state)._handleError(error);
+    }
+  },
+
+  UPDATE_VIEWS_AUDIO: async ({ commit, dispatch, state }, payload) => {
+    try {
+      return await AXIOS_API.post('/api/audioAnalytics/updateViews', {
+        id: payload,
+      });
+    } catch (error) {
+      return new handleError(commit, dispatch, state)._handleError(error);
+    }
+  },
+
+  UPDATE_VIEWS_VIDEO: async ({ commit, dispatch, state }, payload) => {
+    try {
+      return await AXIOS_API.post('/api/videoAnalytics/updateViews', {
+        id: payload,
+      });
+    } catch (error) {
+      return new handleError(commit, dispatch, state)._handleError(error);
+    }
+  },
+
+  LOGOUT: async ({ commit, dispatch, state }) => {
+    try {
+      return await AXIOS_API.post('/api/users/logout');
+    } catch (error) {
+      return new handleError(commit, dispatch, state)._handleError(error);
+    }
+  },
+
+  LOGIN: async ({ commit, dispatch, state }, payload) => {
+    try {
+      return await AXIOS_API.post('/api/users/login', payload);
     } catch (error) {
       return new handleError(commit, dispatch, state)._handleError(error);
     }

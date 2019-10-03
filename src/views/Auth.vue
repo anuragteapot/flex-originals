@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import { api } from './../api/Api';
+import api  from './../api/Api';
 
 export default {
   name: 'media-auth',

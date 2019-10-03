@@ -25,7 +25,7 @@
     </section>
 
     <footer :class="`features-footer ${theme}`">
-      <router-link :to="`/app/@channel/${user.id}`">
+      <router-link :to="`/app/@channel/${user.userId}`">
         <img
           class="avatar"
           alt="Avatar"
@@ -79,12 +79,12 @@ export default {
       return this.$store.state.following;
     },
     user() {
-      return this.$store.state.user;
+      return this.$user.getUser();
     },
   },
   async beforeMount() {
     const res = await this.$store.dispatch('GET_FOLLOWERS', {
-      followId: this.user.id,
+      followId: this.user.userId,
     });
     this.$store.commit(types.SET_FOLLOWING, res.data);
   },

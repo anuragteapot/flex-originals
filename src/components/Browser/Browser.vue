@@ -110,10 +110,9 @@ export default {
     },
   },
   async beforeMount() {
-    this.$api.Nprogress.start();
-    if (this.$api.webStorage.local.get('$userId')) {
+    if (this.$user.get('$userId')) {
       const settings = await this.$store.dispatch('FIND_SETTINGS', {
-        uid: this.$api.webStorage.local.get('$userId'),
+        uid: this.$user.get('$userId'),
       });
       this.$store.commit(types.SET_SETTINGS, settings);
     }
@@ -126,7 +125,6 @@ export default {
       content = await this.$store.dispatch('GET_CONTENT', {});
     }
     this.$store.commit(types.SET_CONTENT, content.data);
-    this.$api.Nprogress.done();
   },
 };
 </script>

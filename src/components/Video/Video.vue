@@ -302,7 +302,7 @@ export default {
       this.media.playbackRate = val;
     },
     src(val) {
-      if (this.error) return 0;
+      if (this.error || !val) return 0;
       this.loading = true;
       this.isPlaying = false;
       this.media.src = val;

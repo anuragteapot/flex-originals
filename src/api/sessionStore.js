@@ -1,4 +1,4 @@
-import * as webStorage from './storage';
+import * as webStorage from './webStorage';
 
 export default class sessionStore {
   set(key, value) {

@@ -1,4 +1,4 @@
-import * as webStorage from './storage';
+import * as webStorage from './webStorage';
 import createApp from './../main';
 import * as types from './../store/mutation-types';
 const { store } = createApp();

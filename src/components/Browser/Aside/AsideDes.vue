@@ -44,14 +44,11 @@
         <button role="button" aria-label="Deafen" class="button button-deafen">
           <i class="fa fa-microphone"></i>
         </button>
-        <button
-          role="button"
-          aria-label="Settings"
-          class="button button-settings"
-          @click="$router.push('/app/@settings')"
-        >
-          <i class="fa fa-cog"></i>
-        </button>
+        <router-link to="/app/@settings">
+          <button role="button" aria-label="Settings" class="button button-settings">
+            <i class="fa fa-cog"></i>
+          </button>
+        </router-link>
       </div>
     </footer>
   </aside>

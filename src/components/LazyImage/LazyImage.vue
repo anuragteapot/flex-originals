@@ -5,8 +5,8 @@
     @click="$emit('click')"
     :alt="alt"
   >
-    <div v-if="isLoading && !lazySrc" class="loader-6 center">
-      <span></span>
+    <div v-show="isLoading && !lazySrc" class="timeline-item">
+      <div class="animated-background"></div>
     </div>
   </div>
 </template>

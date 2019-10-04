@@ -7,7 +7,6 @@
           v-for="item in content.audio"
           :key="item.id"
           :src="item.thumbImage || `./../../../assets/musicLoading.png`"
-          lazySrc="./../../../assets/musicLoading.png"
           :item="item"
           hover
         ></music-thumb>
@@ -18,7 +17,6 @@
           v-for="item in content.video"
           :key="item.id"
           :src="item.thumbImage || `./../../../assets/videoLoading.png`"
-          lazySrc="./../../../assets/videoLoading.png"
           :item="item"
           hover
         ></video-thumb>
@@ -29,7 +27,6 @@
           v-for="item in content.audio"
           :key="item.id"
           :src="item.thumbImage || `./../../../assets/musicLoading.png`"
-          lazySrc="./../../../assets/musicLoading.png"
           :item="item"
           hover
         ></music-thumb>
@@ -46,8 +43,7 @@ import videoThumb from './../../Items/VideoItem';
 export default {
   name: 'media-content-grid',
   data: () => ({
-    src: './../../../../assets/musicLoading.png',
-    lazySrc: './../../../../assets/musicLoading.png',
+    src: './../../../../assets/musicLoading.png'
   }),
   computed: {
     layout() {

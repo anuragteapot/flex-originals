@@ -3,6 +3,83 @@ import handleError from './../api/handleError';
 import * as types from './../store/mutation-types';
 
 export default {
+  UPLOAD_FILE: async (
+    { commit, dispatch, state },
+    { userId, uploadType, formData },
+  ) => {
+    try {
+      return await AXIOS_API.post(
+        `/api/actions/upload/${uploadType}/${userId}`,
+        formData,
+        {
+          retry: 3,
+          retryDelay: 1000,
+          onUploadProgress: e => {
+            state.uploadPercent = Math.round((e.loaded * 100) / e.total);
+          },
+        },
+      );
+    } catch (error) {
+      return new handleError(commit, dispatch, state)._handleError(error);
+    }
+  },
+
+  GENERATE_THUMBNAILS: async ({ commit, dispatch, state }, { id }) => {
+    try {
+      return await AXIOS_API.get(`/api/actions/genrateThumbnail/${id}`);
+    } catch (error) {
+      return new handleError(commit, dispatch, state)._handleError(error);
+    }
+  },
+
+  GET_VIDEO: async ({ commit, dispatch, state }, { id }) => {
+    try {
+      return await AXIOS_API.get(`/api/actions/getVideo/${id}`);
+    } catch (error) {
+      return new handleError(commit, dispatch, state)._handleError(error);
+    }
+  },
+
+  UPDATE_VIDEO_VIEWS: async ({ commit, dispatch, state }, { id }) => {
+    try {
+      return await AXIOS_API.post(`/api/videoAnalytics/updateViews`, {
+        id,
+      });
+    } catch (error) {
+      return new handleError(commit, dispatch, state)._handleError(error);
+    }
+  },
+
+  PUBLISH_VIDEO: async ({ commit, dispatch, state }, { id, videoData }) => {
+    try {
+      return await AXIOS_API.post(
+        `/api/videos/publish`,
+        { id, videoData },
+        {
+          retry: 3,
+          retryDelay: 1000,
+        },
+      );
+    } catch (error) {
+      return new handleError(commit, dispatch, state)._handleError(error);
+    }
+  },
+
+  PUBLISH_AUDIO: async ({ commit, dispatch, state }, { id, audioData }) => {
+    try {
+      return await AXIOS_API.post(
+        `/api/audios/publish`,
+        { id, audioData },
+        {
+          retry: 3,
+          retryDelay: 1000,
+        },
+      );
+    } catch (error) {
+      return new handleError(commit, dispatch, state)._handleError(error);
+    }
+  },
+
   IS_LOGGED: async ({ commit, dispatch, state }, { userId }) => {
     try {
       return await AXIOS_API.get(`/api/users/${userId}`);

@@ -26,7 +26,7 @@
             alt="verified"
           />
           <br />
-          {{ item.videoAnalytics ? item.videoAnalytics.views : '0' }} views . {{ $api.time_ago(new Date(item.published)) }}
+          {{ item.videoAnalytics ? item.videoAnalytics.views : '0' }} views . {{ $utils.time_ago(new Date(item.published)) }}
         </p>
       </div>
     </div>

@@ -42,7 +42,7 @@
           {{ item.user.username }}
           <img src="/public/verified.svg" width="10" height="10" />
           <br />
-          {{ item.audioAnalytics ? item.audioAnalytics.views : '0' }} views . {{ $api.time_ago(new Date(item.published)) }}
+          {{ item.audioAnalytics ? item.audioAnalytics.views : '0' }} views . {{ $utils.time_ago(new Date(item.published)) }}
         </p>
       </div>
     </div>

@@ -44,7 +44,7 @@
 </template>
 
 <script>
-import { api } from './../../api/Api';
+import utils from '../../api/utils';
 
 export default {
   name: 'lazy-audio-player',
@@ -232,7 +232,7 @@ export default {
       }
       this.trackDuration = durmins + ':' + dursecs;
     },
-    halfTime: api.debounce(async function() {
+    halfTime: new utils().debounce(async function() {
       await this.$store.dispatch(
         'UPDATE_VIEWS_AUDIO',
         this.musicPlaylist[this.currentSong].id,

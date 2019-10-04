@@ -61,7 +61,11 @@ export default class user {
    *
    */
   async logout(redirect = '/') {
-    await store.dispatch('LOGOUT');
+    try {
+      await store.dispatch('LOGOUT');
+    } catch (err) {
+      window.location.href = redirect;
+    }
     webStorage.local.destroy('$accessToken');
     webStorage.local.destroy('$userId');
     webStorage.local.destroy('user');

@@ -182,7 +182,6 @@ export default {
       isAllowed: false,
       isUploading: false,
       isThumbUpload: false,
-      uploadPercent: 0,
       isProcessing: true,
       done: false,
       type: '',
@@ -211,6 +210,9 @@ export default {
   computed: {
     theme() {
       return this.$store.state.theme;
+    },
+    uploadPercent() {
+      return this.$store.state.uploadPercent;
     },
   },
   methods: {
@@ -291,9 +293,9 @@ export default {
         this.uploadId = uploaded.data.video.id;
         this.uploadData.title = uploaded.data.video.title;
 
-        const videoThumb = await this.$api
-          .axios()
-          .get(`/api/actions/genrateThumbnail/${uploaded.data.video.id}`);
+        const videoThumb = await this.$store.dispatch('GENERATE_THUMBNAILS', {
+          id: uploaded.data.video.id,
+        });
 
         this.thumbnails = videoThumb.data.thumbnails;
         this.uploadData.thumbnails = videoThumb.data.thumbnails;
@@ -376,19 +378,12 @@ export default {
       let uploaded = null;
       const uploadType = this.isThumbUpload ? 'image' : this.type;
 
-      try {
-        uploaded = await this.$api
-          .axios()
-          .post(`/api/actions/upload/${uploadType}/${userId}`, formData, {
-            retry: 3,
-            retryDelay: 1000,
-            onUploadProgress: e => {
-              this.uploadPercent = Math.round((e.loaded * 100) / e.total);
-            },
-          });
-      } catch (err) {
-        this.$api._handleError(err);
-      }
+      uploaded = await this.$store.dispatch('UPLOAD_FILE', {
+        uploadType,
+        userId,
+        formData,
+      });
+
       return uploaded;
     },
     processFile: function() {
@@ -433,14 +428,10 @@ export default {
 
       if (this.type === 'video') {
         try {
-          const publishedVideo = await this.$axios.post(
-            `/api/videos/publish`,
-            { id: this.uploadId, videoData: this.uploadData },
-            {
-              retry: 3,
-              retryDelay: 1000,
-            },
-          );
+          const publishedVideo = await this.$store.dispatch('PUBLISH_VIDEO', {
+            id: this.uploadId,
+            videoData: this.uploadData,
+          });
 
           const data = {
             data: `Published`,
@@ -463,14 +454,10 @@ export default {
         }
       } else if (this.type === 'audio') {
         try {
-          const publishedAudio = await this.$axios.post(
-            `/api/audios/publish`,
-            { id: this.uploadId, audioData: this.uploadData },
-            {
-              retry: 3,
-              retryDelay: 1000,
-            },
-          );
+          const publishedAudio = await this.$store.dispatch('PUBLISH_AUDIO', {
+            id: this.uploadId,
+            audioData: this.uploadData,
+          });
           const data = {
             data: `Published`,
             color: 'success',
@@ -493,17 +480,20 @@ export default {
     },
   },
   async beforeMount() {
-    const storage = await this.$store.dispatch(
-      'GET_USER_STORAGE',
-      this.$user.get('$userId'),
-    );
+    try {
+      const storage = await this.$store.dispatch(
+        'GET_USER_STORAGE',
+        this.$user.get('$userId'),
+      );
+      const limit = 26285484700;
 
-    const limit = 26285484700;
-
-    if (storage.data.totalStorage > limit) {
-      this.isAllowed = false;
-    } else {
-      this.isAllowed = true;
+      if (storage.data.totalStorage > limit) {
+        this.isAllowed = false;
+      } else {
+        this.isAllowed = true;
+      }
+    } catch (error) {
+      this.$user.logout('/app/@home?u=logout');
     }
   },
 };

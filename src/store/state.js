@@ -1,6 +1,6 @@
 // The initial state
 export default {
-  uploadProgess: 0,
+  uploadPercent: 0,
   // The loaded files
   content: {
     video: [],

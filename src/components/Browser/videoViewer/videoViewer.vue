@@ -27,7 +27,7 @@
                     <div class="left">
                       <span
                         class="video__views"
-                      >{{analytic.views}} views . Published {{ $api.time_ago(new Date(video.published)) }}</span>
+                      >{{analytic.views}} views . Published {{ $utils.time_ago(new Date(video.published)) }}</span>
                     </div>
                     <div class="right">
                       <div class="feed">
@@ -354,13 +354,7 @@ export default {
       });
     },
     halfTime: new utils().debounce(async function() {
-      try {
-        await this.$api
-          .axios()
-          .post(`/api/videoAnalytics/updateViews`, { id: this.video.id });
-      } catch (err) {
-        this.$api._handleError(err);
-      }
+      await this.$store.dispatch('UPDATE_VIDEO_VIEWS', { id: this.video.id });
     }, 2000),
     handleEnded() {
       const videos = this.$store.state.content.video;
@@ -379,9 +373,9 @@ export default {
       if (this.$route.query.v) {
         let currentVideo = {};
         try {
-          currentVideo = await this.$api
-            .axios()
-            .get(`/api/actions/getVideo/${this.$route.query.v}`);
+          currentVideo = await this.$store.dispatch('GET_VIDEO', {
+            id: this.$route.query.v,
+          });
         } catch (err) {
           this.videoUnavaliable = true;
         }

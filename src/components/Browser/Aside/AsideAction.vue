@@ -26,9 +26,11 @@
         </router-link>
       </div>
       <div class="server focusable" role="button" aria-label="My Server" aria-selected="true">
-        <div class="server-icon" @click="fileUpload">
-          <i class="fas fa-arrow-up" style="color:#00ffe7;"></i>
-        </div>
+        <router-link to="/app/@upload">
+          <div class="server-icon">
+            <i class="fas fa-arrow-up" style="color:#00ffe7;"></i>
+          </div>
+        </router-link>
       </div>
       <div class="server focusable" role="button" aria-label="My Server" aria-selected="true">
         <div class="server-icon">
@@ -89,9 +91,11 @@
         aria-selected="true"
         v-if="!isAuth"
       >
-        <div class="server-icon" @click="$router.push('/login')">
-          <i class="fas fa-sign-in-alt" style="color:white;"></i>
-        </div>
+        <router-link to="/login">
+          <div class="server-icon">
+            <i class="fas fa-sign-in-alt" style="color:white;"></i>
+          </div>
+        </router-link>
       </div>
     </div>
   </aside>
@@ -116,13 +120,6 @@ export default {
   methods: {
     deleteItem() {
       this.$store.commit(types.SHOW_MODAL, { state: true, type: 'MDelete' });
-    },
-    fileUpload: async function() {
-      if (await this.$user.isLogged()) {
-        this.$router.push(`/app/@upload`);
-      } else {
-        this.$router.push(`/login?redirect=${this.$route.fullPath}`);
-      }
     },
   },
 };

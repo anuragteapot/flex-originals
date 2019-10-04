@@ -59,24 +59,10 @@ export default {
   },
   methods: {
     toggleMenu: function() {
-      if (this.isMobile && !this.appDrawer.mobileState) {
-        this.$store.commit(types.APP_DRAWER, {
-          action: true,
-          des: true,
-          mobileState: true,
-        });
-      } else if (this.appDrawer.action) {
-        this.$store.commit(types.APP_DRAWER, {
-          action: false,
-          des: false,
-          mobileState: false,
-        });
+      if (this.appDrawer) {
+        this.$store.commit(types.APP_DRAWER, false);
       } else {
-        this.$store.commit(types.APP_DRAWER, {
-          action: true,
-          des: true,
-          mobileState: true,
-        });
+        this.$store.commit(types.APP_DRAWER, true);
       }
     },
   },

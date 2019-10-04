@@ -1,20 +1,19 @@
 /* eslint-disable no-useless-escape */
 import utils from './utils';
-import createApp from './../main';
-import * as types from './../store/mutation-types';
+// import createApp from '../main';
+// import * as types from '../store/mutation-types';
 // import * as webStorage from './Storage';
 // import AXIOS_API from './axios';
 // import handleError from './handleError';
 
 const helper = new utils();
 
-const { store } = createApp();
-export default class Api {
+// const { store } = createApp();
+export default class api {
   /**
    * Store constructor
    */
   constructor() {
-
     const cssRule =
       'color: red;' +
       'font-size: 60px;' +
@@ -24,9 +23,6 @@ export default class Api {
     setTimeout(console.log.bind(console, '%cStop!', cssRule), 0);
 
     if (typeof window !== 'undefined') {
-      window.addEventListener('online', this.updateOnlineStatus);
-      window.addEventListener('offline', this.updateOnlineStatus);
-
       if (!('Notification' in window)) {
         console.log('This browser does not support notifications!');
         return;
@@ -53,26 +49,6 @@ export default class Api {
           `session-${new Date().getTime()}-${helper.randomChars()}`,
         );
       }
-    }
-  }
-
-  updateOnlineStatus() {
-    const state = navigator.onLine || false;
-
-    if (state == true) {
-      const data = {
-        data: 'You are online',
-        color: 'success',
-      };
-
-      store.commit(types.SHOW_SNACKBAR, data);
-    } else {
-      const data = {
-        data: 'You are offline',
-        color: 'info',
-      };
-
-      store.commit(types.SHOW_SNACKBAR, data);
     }
   }
 }

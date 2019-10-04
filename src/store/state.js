@@ -13,11 +13,7 @@ export default {
   theme: 'light',
   user: {},
   editMode: false,
-  appDrawer: {
-    action: true,
-    des: true,
-    mobileState: false,
-  },
+  appDrawer: true,
   following: [],
   // The currently selected items
   selectedItems: [],

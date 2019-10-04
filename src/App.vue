@@ -17,7 +17,29 @@ export default {
   computed: {
     ...mapGetters(['theme']),
   },
+  methods: {
+    updateOnlineStatus() {
+      const state = navigator.onLine || false;
+      if (state == true) {
+        const data = {
+          data: 'You are online',
+          color: 'success',
+        };
+        this.$store.commit(types.SHOW_SNACKBAR, data);
+      } else {
+        const data = {
+          data: 'You are offline',
+          color: 'info',
+        };
+        this.$store.commit(types.SHOW_SNACKBAR, data);
+      }
+    },
+  },
   async beforeMount() {
+    if (typeof window !== 'undefined') {
+      window.addEventListener('online', this.updateOnlineStatus);
+      window.addEventListener('offline', this.updateOnlineStatus);
+    }
     if (await this.$user.isLogged()) {
       this.$store.commit(types.IS_AUTHENTICATED, true);
     } else {

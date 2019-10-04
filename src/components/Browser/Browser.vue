@@ -1,19 +1,15 @@
 <template>
   <div class="fo-browser">
-    <div v-if="isMobile" :class="`nav-offcanvas ${appDrawer.mobileState ? 'open' : ''}`">
+    <div v-if="isMobile" :class="`nav-offcanvas ${appDrawer ? 'open' : ''}`">
       <div class="nav-offcanvas-menu">
         <aside-action></aside-action>
         <aside-des></aside-des>
       </div>
     </div>
-    <div
-      v-if="isMobile"
-      :class="`offcanvas-overlay ${appDrawer.mobileState ? 'on' : ''}`"
-      @click="toggleMenu"
-    ></div>
+    <div v-if="isMobile" :class="`offcanvas-overlay ${appDrawer ? 'on' : ''}`" @click="toggleMenu"></div>
 
-    <aside-action v-if="!isMobile && appDrawer.des"></aside-action>
-    <aside-des v-if="!isMobile && appDrawer.des"></aside-des>
+    <aside-action v-if="!isMobile && appDrawer"></aside-action>
+    <aside-des v-if="!isMobile && appDrawer"></aside-des>
 
     <div class="main-container">
       <toolbar></toolbar>
@@ -77,24 +73,10 @@ export default {
   },
   methods: {
     toggleMenu: function() {
-      if (this.isMobile && !this.appDrawer.mobileState) {
-        this.$store.commit(types.APP_DRAWER, {
-          action: true,
-          des: true,
-          mobileState: true,
-        });
-      } else if (this.appDrawer.action) {
-        this.$store.commit(types.APP_DRAWER, {
-          action: false,
-          des: false,
-          mobileState: false,
-        });
+      if (this.appDrawer) {
+        this.$store.commit(types.APP_DRAWER, false);
       } else {
-        this.$store.commit(types.APP_DRAWER, {
-          action: true,
-          des: true,
-          mobileState: true,
-        });
+        this.$store.commit(types.APP_DRAWER, true);
       }
     },
     async init() {

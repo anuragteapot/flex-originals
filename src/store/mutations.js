@@ -107,9 +107,7 @@ export default {
    * @param state
    */
   [types.APP_DRAWER]: (state, payload) => {
-    state.appDrawer.action = payload.action;
-    state.appDrawer.des = payload.des;
-    state.appDrawer.mobileState = payload.mobileState;
+    state.appDrawer = payload;
   },
 
   /**

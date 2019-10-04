@@ -1,29 +1,10 @@
+// Set default style
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
-
-// /* width */
-// ::-webkit-scrollbar {
-//   // width: 5px;
-// }
-
-// /* Track */
-// ::-webkit-scrollbar-track {
-//   background: #252a2e;
-// }
-
-// /* Handle */
-// ::-webkit-scrollbar-thumb {
-//   background: rgb(71, 71, 71);
-// }
-
-// /* Handle on hover */
-// ::-webkit-scrollbar-thumb:hover {
-//   background: #555;
-// }
 
 *,
 ::after,
@@ -87,6 +68,16 @@ p {
   cursor: default;
   line-height: inherit;
 }
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s;
+}
+.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+  opacity: 0;
+}
+
+// Main style
 
 .container,
 .fo-browser {
@@ -178,7 +169,7 @@ p {
       display: flex;
       align-items: center;
       flex: 0 0 57px;
-      padding: 2px 24px;
+      padding: 2px 35px;
       border-bottom: 1px solid #1c1e21;
       transition: background 0.15s ease;
     }

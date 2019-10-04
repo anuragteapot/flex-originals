@@ -18,10 +18,9 @@
   .inner {
     width: 450px;
     margin: 10px;
-    border-radius: $radius;
-    background-color: lighten($color-primary, 2);
+    background-color: white;
     text-align: center;
-    color: rgb(213, 214, 214) !important;
+    color: black;
 
     & > * {
       width: 100%;
@@ -105,7 +104,6 @@
     .footer {
       flex: 0 0 auto;
       padding: 10px;
-      background-color: $color-primary;
 
       button {
         background-color: $color-primary;

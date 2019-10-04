@@ -83,10 +83,12 @@ export default {
     },
   },
   async beforeMount() {
-    const res = await this.$store.dispatch('GET_FOLLOWERS', {
-      followId: this.user.userId,
-    });
-    this.$store.commit(types.SET_FOLLOWING, res.data);
+    if (this.user) {
+      const res = await this.$store.dispatch('GET_FOLLOWERS', {
+        followId: this.user.userId,
+      });
+      this.$store.commit(types.SET_FOLLOWING, res.data);
+    }
   },
 };
 </script>

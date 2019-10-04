@@ -1,5 +1,6 @@
 // The initial state
 export default {
+  uploadProgess: 0,
   // The loaded files
   content: {
     video: [],
@@ -17,16 +18,10 @@ export default {
   following: [],
   // The currently selected items
   selectedItems: [],
-  // The currently selected items
-  uploadItems: [],
   // View
   view: 'grid',
   // The currently selected items
   uploadItemsMenu: [],
-  // The currently selected items
-  diskLoaded: [],
-  // The currently selected dir
-  selectedDirectory: 'my-drive',
   // The state of confirm delete model
   modal: {
     state: false,

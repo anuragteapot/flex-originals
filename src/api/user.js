@@ -22,7 +22,9 @@ export default class user {
    *
    */
   getUser() {
-    return JSON.parse(webStorage.local.get('user'));
+    return webStorage.local.get('user')
+      ? JSON.parse(webStorage.local.get('user'))
+      : {};
   }
 
   /**

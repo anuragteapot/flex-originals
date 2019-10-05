@@ -18,7 +18,7 @@
         <br />
         {{ item.videoAnalytics.views }} views
         <br />
-        {{ $api.time_ago(new Date(item.published)) }}
+        {{ $utils.time_ago(new Date(item.published)) }}
       </p>
     </div>
   </div>

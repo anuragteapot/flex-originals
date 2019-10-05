@@ -17,6 +17,13 @@ export default {
   computed: {
     ...mapGetters(['theme']),
   },
+  watch: {
+    $route() {
+      this.$store.commit(types.SET_EDIT_MODE, false);
+      this.$store.commit(types.SELECT_BROWSER_ITEM, false);
+      this.$store.commit(types.HIDE_MODAL);
+    },
+  },
   methods: {
     updateOnlineStatus() {
       const state = navigator.onLine || false;

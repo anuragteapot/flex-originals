@@ -8,7 +8,7 @@
   </div>
 </template>
 <script>
-import MRename from './Rename/Rename';
+import MLogin from './Login/Login';
 import MDelete from './Delete/Delete';
 import MNewFolder from './NewFolder/NewFolder';
 import MShareModal from './ShareModal/ShareModal';
@@ -16,7 +16,7 @@ import MShareModal from './ShareModal/ShareModal';
 export default {
   name: 'lazy-model',
   components: {
-    MRename,
+    MLogin,
     MDelete,
     MNewFolder,
     MShareModal,

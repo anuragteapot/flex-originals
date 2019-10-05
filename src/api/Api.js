@@ -1,10 +1,5 @@
 /* eslint-disable no-useless-escape */
 import utils from './utils';
-// import createApp from '../main';
-// import * as types from '../store/mutation-types';
-// import * as webStorage from './Storage';
-// import AXIOS_API from './axios';
-// import handleError from './handleError';
 
 const helper = new utils();
 

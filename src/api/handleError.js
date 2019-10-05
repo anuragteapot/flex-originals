@@ -39,6 +39,7 @@ export default class handleError {
       case 404:
         break;
       case 401:
+        this.commit(types.SHOW_MODAL, { state: true, type: 'MLogin' });
         break;
       case 500:
         break;

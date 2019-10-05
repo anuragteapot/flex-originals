@@ -11,7 +11,7 @@ export default {
     Vue.prototype.$user = new user();
     Vue.prototype.$axios = AXIOS_API;
     Vue.prototype.$nprogress = nprogress;
-    Vue.prototype.$sessionStore = sessionStore;
+    Vue.prototype.$sessionStore = new sessionStore();
     Vue.prototype.$utils = new utils();
   },
 };

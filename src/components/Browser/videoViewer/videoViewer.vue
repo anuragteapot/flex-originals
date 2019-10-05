@@ -305,7 +305,7 @@ export default {
       return this.$store.state.theme;
     },
     loggedUser() {
-      return this.$store.state.user;
+      return this.$user.getUser();
     },
   },
   components: {
@@ -401,7 +401,7 @@ export default {
         this.following = follow.data.SUCCESS;
 
         if (this.loggedUser.id && this.video.id) {
-          const like = await this.$store.dispatch('getLike', {
+          const like = await this.$store.dispatch('GET_LIKE', {
             userId: this.loggedUser.id,
             videoId: this.video.id,
           });

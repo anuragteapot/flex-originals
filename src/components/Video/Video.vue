@@ -26,6 +26,7 @@
     </div>
     <video
       @contextmenu.prevent="openContext"
+      preload
       v-if="!error"
       :src="src"
       class="fo-video-player__media"
@@ -59,7 +60,9 @@
     >
       <nav :class="`no__animation ${active && seekTime ? 'menu-active' : ''}`">
         <div class="time__preview" :style="`background-image: url('/${videoInfo.thumbImage}')`">
-          <p>{{ seekTime }}</p>
+          <div class="time_preview_div">
+            <p>{{ seekTime }}</p>
+          </div>
         </div>
       </nav>
     </div>
@@ -438,9 +441,22 @@ export default {
       }
     },
     play: function() {
-      this.media.play();
-      this.isPlaying = true;
-      this.loop();
+      this.media.pause();
+      const playPromise = this.media.play();
+
+      if (playPromise !== undefined) {
+        playPromise
+          .then(() => {
+            // Automatic playback started!
+            // Show playing UI.
+            this.isPlaying = true;
+            this.loop();
+          })
+          .catch(() => {
+            // Auto-play was prevented
+            // Show paused UI.
+          });
+      }
     },
     pause: function() {
       this.media.pause();

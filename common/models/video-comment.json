@@ -6,6 +6,7 @@
   "options": {
     "validateUpsert": true
   },
+  "hidden": ["report"],
   "properties": {
     "message": {
       "type": "string",
@@ -16,24 +17,57 @@
       "required": true,
       "default": 0
     },
-    "vote": {
+    "love": {
       "type": "number",
       "required": true,
       "default": 0
     },
+    "replyId": {
+      "type": "string",
+      "required": true
+    },
     "published": {
       "type": "date",
-      "required": true
+      "required": true,
+      "default": "$now"
     }
   },
   "validations": [],
   "relations": {
-    "videoCommentUserId": {
+    "user": {
       "type": "belongsTo",
       "model": "user",
       "foreignKey": "videoCommentUserId"
     }
   },
-  "acls": [],
+  "acls": [
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "DENY"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW",
+      "property": "getComments"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$authenticated",
+      "permission": "ALLOW",
+      "property": "comment"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$owner",
+      "permission": "ALLOW",
+      "property": "editComment"
+    }
+  ],
   "methods": {}
 }

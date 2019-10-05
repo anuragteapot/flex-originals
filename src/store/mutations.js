@@ -28,6 +28,14 @@ export default {
   },
 
   /**
+   * Hide the snackbar
+   * @param state
+   */
+  [types.SET_SEARCH_QUERY]: (state, payload) => {
+    state.search = payload;
+  },
+
+  /**
    * Init
    * @param state
    * @param payload

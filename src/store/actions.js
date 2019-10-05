@@ -40,6 +40,47 @@ export default {
     }
   },
 
+  ADD_VIDEO_COMMENT: async (
+    { commit, dispatch, state },
+    { userId, replyId, message },
+  ) => {
+    try {
+      return await AXIOS_API.post(`/api/videoComments/comment`, {
+        userId,
+        replyId,
+        message,
+      });
+    } catch (error) {
+      return new handleError(commit, dispatch, state)._handleError(error);
+    }
+  },
+
+  GET_VIDEO_COMMENT: async ({ commit, dispatch, state }, { id, limit }) => {
+    try {
+      return await AXIOS_API.get(
+        `/api/videoComments/getComments/${id}/${limit}`,
+      );
+    } catch (error) {
+      return new handleError(commit, dispatch, state)._handleError(error);
+    }
+  },
+
+  EDIT_VIDEO_COMMENT: async (
+    { commit, dispatch, state },
+    { id, userId, replyId, message },
+  ) => {
+    try {
+      return await AXIOS_API.put(`/api/videoComments/editComments`, {
+        id,
+        userId,
+        replyId,
+        message,
+      });
+    } catch (error) {
+      return new handleError(commit, dispatch, state)._handleError(error);
+    }
+  },
+
   UPDATE_VIDEO_VIEWS: async ({ commit, dispatch, state }, { id }) => {
     try {
       return await AXIOS_API.post(`/api/videoAnalytics/updateViews`, {

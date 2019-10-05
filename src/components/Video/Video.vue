@@ -590,7 +590,7 @@ export default {
     },
     detectKeypress(event) {
       if (this.disablekey) {
-        return;
+        return false;
       }
       if (this.search != '') return false;
       if (event.keyCode == 32) {

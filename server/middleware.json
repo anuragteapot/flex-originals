@@ -35,11 +35,12 @@
   "parse": {},
   "routes": {
     "loopback#rest": {
-      "paths": ["${restApiRoot}"]
+      "paths": [
+        "${restApiRoot}"
+      ]
     }
   },
   "files": {},
-  "final": {},
   "final:after": {
     "strong-error-handler": {}
   }

@@ -19,6 +19,7 @@
                     @handleEnded="handleEnded"
                     @halfTime="halfTime"
                     :videoInfo="video"
+                    :disablekey="comment.length > 0"
                   ></fo-video-player>
                 </div>
                 <div :class="`video_actions ${theme}`" v-if="!videoUnavaliable">
@@ -148,6 +149,7 @@
                       </div>
                       <div class="v-comment_box__wrapper">
                         <textarea
+                          v-model="comment"
                           class="v-comment__box"
                           type="text"
                           placeholder="Add your comment "
@@ -170,7 +172,7 @@
                                   <a href="http://creaticode.com/blog">Anurag Kumar</a>
                                 </h6>
                                 <span>hace 20 minutos</span>
-                                
+
                                 <i class="fa fa-heart"></i>
                               </div>
                               <div class="comment-content">
@@ -190,7 +192,7 @@
                                     <a href="http://creaticode.com/blog">Amit raj</a>
                                   </h6>
                                   <span>hace 10 minutos</span>
-                        
+
                                   <i class="fa fa-heart"></i>
                                 </div>
                                 <div class="comment-content">
@@ -211,7 +213,7 @@
                                     <a href="http://creaticode.com/blog">Anurag Kumar</a>
                                   </h6>
                                   <span>hace 10 minutos</span>
-                                  
+
                                   <i class="fa fa-heart"></i>
                                 </div>
                                 <div class="comment-content">
@@ -234,7 +236,7 @@
                                   <a href="http://creaticode.com/blog">Amit Raj</a>
                                 </h6>
                                 <span>hace 10 minutos</span>
-                                
+
                                 <i class="fa fa-heart"></i>
                               </div>
                               <div class="comment-content">
@@ -277,6 +279,7 @@ import * as types from './../../../store/mutation-types';
 export default {
   name: 'media-settings',
   data: () => ({
+    comment: '',
     likeMap: [
       '/public/emoji/002-heart.svg',
       '/public/emoji//002-in-love.svg',

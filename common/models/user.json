@@ -52,6 +52,11 @@
       "options": {
         "nestRemoting": true
       }
+    },
+    "videoComments": {
+      "type": "hasMany",
+      "model": "videoComment",
+      "foreignKey": "videoCommentUserId"
     }
   },
   "acls": [

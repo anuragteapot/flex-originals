@@ -67,10 +67,6 @@
     "dataSource": "mongodb",
     "public": true
   },
-  "comment": {
-    "dataSource": "mongodb",
-    "public": true
-  },
   "audioAnalytic": {
     "dataSource": "mongodb",
     "public": true
@@ -80,6 +76,10 @@
     "public": true
   },
   "audioLike": {
+    "dataSource": "mongodb",
+    "public": true
+  },
+  "videoComment": {
     "dataSource": "mongodb",
     "public": true
   }

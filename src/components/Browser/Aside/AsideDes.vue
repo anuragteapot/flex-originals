@@ -82,7 +82,7 @@ export default {
   async beforeMount() {
     if (this.user) {
       const res = await this.$store.dispatch('GET_FOLLOWERS', {
-        followId: this.user.userId,
+        followId: this.user.id,
       });
       this.$store.commit(types.SET_FOLLOWING, res.data);
     }

@@ -15,7 +15,7 @@
                   <fo-video-player
                     :src="videoSource"
                     v-if="!videoUnavaliable"
-                    :autoPlay="true"
+                    :autoPlay="false"
                     @handleEnded="handleEnded"
                     @halfTime="halfTime"
                     :videoInfo="video"
@@ -142,10 +142,20 @@
                   <p class="show__more">Show More</p>
                   <div class="video__comments">
                     <div class="v-comment">
-                      <i class="fas fa-comment"></i>
-                      Comments
-                      <br />
-                      <input type="text" placeholder="Add your comment " />
+                      <div class="v-comment__user">
+                        Comments as
+                        <strong>{{ user.username}}</strong>
+                      </div>
+                      <div class="v-comment_box__wrapper">
+                        <textarea
+                          class="v-comment__box"
+                          type="text"
+                          placeholder="Add your comment "
+                        ></textarea>
+                        <div class="v-comment__button">
+                          <button class="v-comment__button_submit">Comment</button>
+                        </div>
+                      </div>
                     </div>
                     <div class="comments-container">
                       <ul id="comments-list" class="comments-list">
@@ -160,7 +170,7 @@
                                   <a href="http://creaticode.com/blog">Anurag Kumar</a>
                                 </h6>
                                 <span>hace 20 minutos</span>
-                                <i class="fa fa-reply"></i>
+                                
                                 <i class="fa fa-heart"></i>
                               </div>
                               <div class="comment-content">
@@ -180,7 +190,7 @@
                                     <a href="http://creaticode.com/blog">Amit raj</a>
                                   </h6>
                                   <span>hace 10 minutos</span>
-                                  <i class="fa fa-reply"></i>
+                        
                                   <i class="fa fa-heart"></i>
                                 </div>
                                 <div class="comment-content">
@@ -201,7 +211,7 @@
                                     <a href="http://creaticode.com/blog">Anurag Kumar</a>
                                   </h6>
                                   <span>hace 10 minutos</span>
-                                  <i class="fa fa-reply"></i>
+                                  
                                   <i class="fa fa-heart"></i>
                                 </div>
                                 <div class="comment-content">
@@ -224,7 +234,7 @@
                                   <a href="http://creaticode.com/blog">Amit Raj</a>
                                 </h6>
                                 <span>hace 10 minutos</span>
-                                <i class="fa fa-reply"></i>
+                                
                                 <i class="fa fa-heart"></i>
                               </div>
                               <div class="comment-content">

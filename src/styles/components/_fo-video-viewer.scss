@@ -98,10 +98,10 @@
           .left {
             padding: 5px 0;
             width: 40%;
-            
-              @media screen and (max-width: 700px) {
-                  width: 100%;
-              }
+
+            @media screen and (max-width: 700px) {
+              width: 100%;
+            }
 
             .video__views {
               font-weight: 500 !important;
@@ -196,38 +196,19 @@
           .show__more {
             color: rgb(175, 172, 172);
             padding-top: 20px;
-            font-size: 15px;
+            font-size: 10px;
+            font-weight: normal !important;
             cursor: pointer;
-            font-weight: 500;
           }
         }
 
         .video__comments {
-          border-top: 1px solid grey;
           margin-top: 10px;
-
-          input {
-            width: 100%;
-            height: 30px;
-            margin: 10px 0 0 0;
-            padding: 10px;
-            border: none;
-            color: white;
-            font-size: 15px;
-            border-bottom: 1px solid grey;
-            background: transparent;
-
-            &:focus {
-              border-bottom: 1px solid grey;
-              background: transparent;
-            }
-          }
 
           .load__more {
             text-align: center;
             padding: 10px;
             cursor: pointer;
-            font-weight: 500;
 
             p {
               display: inline-block;
@@ -239,10 +220,44 @@
           }
 
           .v-comment {
-            padding: 10px;
+            .v-comment__user {
+              margin: 5px;
+              font-size: 10px;
 
-            i {
-              margin: 0 10px;
+              strong {
+                color: #feb000;
+              }
+            }
+            .v-comment_box__wrapper {
+              border: 1px solid black;
+
+              .v-comment__box {
+                width: 100%;
+                height: 100px;
+                padding: 10px;
+                font-size: 15px;
+                border: none;
+                outline: none;
+                position: relative;
+                resize: none;
+              }
+
+              .v-comment__button {
+                padding: 5px;
+                width: 100%;
+                text-align: right;
+
+                .v-comment__button_submit {
+                  border-radius: 2px;
+                  padding: 8px 20px;
+                  font-size: 12px;
+                  cursor: pointer;
+                  border: none;
+                  text-transform: uppercase;
+                  color: #fff !important;
+                  background-color: #feb000;
+                }
+              }
             }
           }
 

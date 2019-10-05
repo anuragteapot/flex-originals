@@ -18,12 +18,16 @@ export default class user {
     webStorage.local.set('user', JSON.stringify(user));
   }
 
+  setUser(userInfo) {
+    webStorage.local.set('userInfo', JSON.stringify(userInfo));
+  }
+
   /**
    *
    */
   getUser() {
-    return webStorage.local.get('user')
-      ? JSON.parse(webStorage.local.get('user'))
+    return webStorage.local.get('userInfo')
+      ? JSON.parse(webStorage.local.get('userInfo'))
       : {};
   }
 
@@ -52,6 +56,7 @@ export default class user {
     if (userId) {
       const user = await store.dispatch('IS_LOGGED', { userId });
       store.commit(types.SET_USER, user.data);
+      this.setUser(user.data);
       return true;
     }
 
@@ -71,6 +76,7 @@ export default class user {
     webStorage.local.destroy('$accessToken');
     webStorage.local.destroy('$userId');
     webStorage.local.destroy('user');
+    webStorage.local.destroy('userInfo');
     webStorage.local.destroy('created');
     webStorage.local.destroy('ttl');
     window.location.href = redirect;

@@ -180,7 +180,7 @@ export default {
       return this.$store.state.settings;
     },
     user() {
-      return this.$store.state.user;
+      return this.$user.getUser();
     },
     theme() {
       return this.$store.state.theme;

@@ -1,10 +1,17 @@
 import * as types from './../store/mutation-types';
-
+import * as webStorage from './webStorage';
 export default class handleError {
   constructor(commit, dispatch, state) {
     this.commit = commit;
     this.dispatch = dispatch;
     this.state = state;
+  }
+
+  /**
+   *
+   */
+  setUser(userInfo) {
+    webStorage.local.set('userInfo', JSON.stringify(userInfo));
   }
 
   /**
@@ -40,6 +47,8 @@ export default class handleError {
         break;
       case 401:
         this.commit(types.SHOW_MODAL, { state: true, type: 'MLogin' });
+        this.commit(types.SET_USER, null);
+        this.setUser(null);
         break;
       case 500:
         break;

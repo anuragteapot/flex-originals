@@ -40,6 +40,14 @@ export default {
     }
   },
 
+  GET_VIDEO_INFO: async ({ commit, dispatch, state }, { id }) => {
+    try {
+      return await AXIOS_API.get(`/api/videos/getVideoInfo/${id}`);
+    } catch (error) {
+      return new handleError(commit, dispatch, state)._handleError(error);
+    }
+  },
+
   ADD_VIDEO_COMMENT: async (
     { commit, dispatch, state },
     { userId, replyId, message },

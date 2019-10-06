@@ -1,9 +1,14 @@
+/* eslint-disable */
 import axios from 'axios';
 import * as webStorage from './webStorage';
+let PORT = 3344;
+if (process.env && process) {
+  PORT = process.env.NODE_ENV === 'production' ? 3333 : 3344;
+}
 
 const AXIOS_API = () => {
   const instance = axios.create({
-    baseURL: 'http://localhost:3344',
+    baseURL: `http://localhost:${PORT}`,
   });
 
   instance.defaults.headers.common['authorization'] = `${webStorage.local.get(

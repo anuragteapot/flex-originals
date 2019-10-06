@@ -2,14 +2,18 @@ import axios from 'axios';
 import * as webStorage from './webStorage';
 
 const AXIOS_API = () => {
-  axios.defaults.headers.common['authorization'] = `${webStorage.local.get(
+  const instance = axios.create({
+    baseURL: 'http://localhost:3344',
+  });
+
+  instance.defaults.headers.common['authorization'] = `${webStorage.local.get(
     '$accessToken',
   )}`;
-  axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
-  axios.defaults.headers.common['Content-Type'] =
+  instance.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+  instance.defaults.headers.common['Content-Type'] =
     'application/x-www-form-urlencoded';
 
-  axios.interceptors.response.use(undefined, function axiosRetryInterceptor(
+  instance.interceptors.response.use(undefined, function axiosRetryInterceptor(
     err,
   ) {
     var config = err.config;
@@ -37,11 +41,11 @@ const AXIOS_API = () => {
 
     // Return the promise in which recalls axios to retry the request
     return backoff.then(function() {
-      return axios(config);
+      return instance(config);
     });
   });
 
-  return axios;
+  return instance;
 };
 
 export default AXIOS_API();

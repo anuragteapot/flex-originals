@@ -3,7 +3,7 @@ import axios from 'axios';
 import * as webStorage from './webStorage';
 let PORT = 3344;
 if (process.env && process) {
-  PORT = process.env.NODE_ENV === 'production' ? 3333 : 3344;
+  PORT = process.env.NODE_ENV === 'production' ? 3000 : 3344;
 }
 
 const AXIOS_API = () => {

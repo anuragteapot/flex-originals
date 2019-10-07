@@ -6,8 +6,9 @@ import nprogress from './api/nprogress';
 
 // a global mixin that calls `asyncData` when a route component's params change
 Vue.mixin({
-  beforeRouteUpdate(to, from, next) {
+  async beforeEach(to, from, next) {
     const { asyncData } = this.$options;
+
     if (asyncData) {
       asyncData({
         store: this.$store,
@@ -37,6 +38,7 @@ router.onReady(() => {
   // the data that we already have. Using router.beforeResolve() so that all
   // async components are resolved.
   router.beforeResolve((to, from, next) => {
+    nprogress.start();
     const matched = router.getMatchedComponents(to);
     const prevMatched = router.getMatchedComponents(from);
     let diffed = false;
@@ -45,10 +47,10 @@ router.onReady(() => {
     });
     const asyncDataHooks = activated.map(c => c.asyncData).filter(_ => _);
     if (!asyncDataHooks.length) {
+      nprogress.done();
       return next();
     }
 
-    nprogress.start();
     Promise.all(asyncDataHooks.map(hook => hook({ store, route: to })))
       .then(() => {
         nprogress.done();

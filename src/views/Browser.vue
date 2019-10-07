@@ -21,6 +21,20 @@ export default {
       }
     }
   },
+  asyncData({
+    store,
+    route: {
+      params: { id },
+    },
+  }) {
+    if (id) {
+      return store.dispatch('GET_CONTENT', {
+        userId: id,
+      });
+    } else {
+      return store.dispatch('GET_CONTENT', {});
+    }
+  },
   methods: {
     /* eslint-disable */
     isMobile: function() {

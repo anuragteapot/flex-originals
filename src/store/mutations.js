@@ -23,6 +23,14 @@ export default {
    * Hide the snackbar
    * @param state
    */
+  [types.SET_CONTENT_USER]: (state, payload) => {
+    state.contentUser = payload;
+  },
+
+  /**
+   * Hide the snackbar
+   * @param state
+   */
   [types.HIDE_SNACKBAR]: state => {
     state.showsnackbar.state = false;
   },

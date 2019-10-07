@@ -78,7 +78,7 @@
     <div class="footer">
       <p>
         Already have an account?
-        <a href="/login">Login</a>
+        <router-link to="/login">Login</router-link>
       </p>
       <br />
       <p>

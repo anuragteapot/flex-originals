@@ -102,7 +102,7 @@ export default [
       import(/* webpackChunkName: "auth" */ './../views/Auth.vue'),
   },
   {
-    path: '/test',
+    path: '/test/:id?',
     name: 'test',
     component: () =>
       import(/* webpackChunkName: "test" */ './../views/Test.vue'),

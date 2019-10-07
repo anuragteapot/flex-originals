@@ -37,11 +37,6 @@ export default {
   data() {
     return {};
   },
-  watch: {
-    $route() {
-      this.init();
-    },
-  },
   components: {
     home,
     settings,
@@ -76,17 +71,6 @@ export default {
         this.$store.commit(types.APP_DRAWER, true);
       }
     },
-    async init() {
-      let content = {};
-      if (this.$route.params.id) {
-        content = await this.$store.dispatch('GET_CONTENT', {
-          userId: this.$route.params.id,
-        });
-      } else {
-        content = await this.$store.dispatch('GET_CONTENT', {});
-      }
-      this.$store.commit(types.SET_CONTENT, content.data);
-    },
   },
   async beforeMount() {
     if (this.$user.get('$userId')) {
@@ -95,15 +79,6 @@ export default {
       });
       this.$store.commit(types.SET_SETTINGS, settings);
     }
-    let content = {};
-    if (this.$route.params.id) {
-      content = await this.$store.dispatch('GET_CONTENT', {
-        userId: this.$route.params.id,
-      });
-    } else {
-      content = await this.$store.dispatch('GET_CONTENT', {});
-    }
-    this.$store.commit(types.SET_CONTENT, content.data);
   },
 };
 </script>

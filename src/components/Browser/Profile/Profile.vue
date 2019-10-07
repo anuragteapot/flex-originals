@@ -3,53 +3,53 @@
     <div class="inner">
       <div class="profile__banner">
         <div class="profile__banner__background">
-          <div v-show="channelInfo.profileAvatar" class="profile__avatar">
-            <img :src="channelInfo.profileAvatar" alt="logo" />
+          <div v-show="channelUser.settings.profileAvatar" class="profile__avatar">
+            <img :src="channelUser.settings.profileAvatar" alt="logo" />
           </div>
           <div class="social__media">
             <a
-              v-show="channelInfo.facebook"
-              :href="`https://facebook.com/${channelInfo.facebook}`"
+              v-show="channelUser.settings.facebook"
+              :href="`https://facebook.com/${channelUser.settings.facebook}`"
               target="_blank"
               style="color:white"
             >
               <i class="fab fa-facebook-square" style="font-size:20px"></i>
             </a>
             <a
-              v-show="channelInfo.instagram"
-              :href="`https://www.instagram.com/${channelInfo.instagram}`"
+              v-show="channelUser.settings.instagram"
+              :href="`https://www.instagram.com/${channelUser.settings.instagram}`"
               target="_blank"
               style="color:white"
             >
               <i class="fab fa-instagram" style="font-size:20px"></i>
             </a>
             <a
-              v-show="channelInfo.twitter"
-              :href="`https://twitter.com/${channelInfo.twitter}`"
+              v-show="channelUser.settings.twitter"
+              :href="`https://twitter.com/${channelUser.settings.twitter}`"
               target="_blank"
               style="color:white"
             >
               <i class="fab fa-twitter-square" style="font-size:20px"></i>
             </a>
             <a
-              v-show="channelInfo.redit"
-              :href="`https://www.reddit.com/r/${channelInfo.redit}`"
+              v-show="channelUser.settings.redit"
+              :href="`https://www.reddit.com/r/${channelUser.settings.redit}`"
               target="_blank"
               style="color:white"
             >
               <i class="fab fa-reddit-square" style="font-size:20px"></i>
             </a>
             <a
-              v-show="channelInfo.linkedin"
-              :href="`https://www.linkedin.com/in/${channelInfo.linkedin}`"
+              v-show="channelUser.settings.linkedin"
+              :href="`https://www.linkedin.com/in/${channelUser.settings.linkedin}`"
               target="_blank"
               style="color:white"
             >
               <i class="fab fa-linkedin" style="font-size:20px"></i>
             </a>
           </div>
-          <p class="channel__name" v-show="channelUser.username">
-            {{channelUser.realm}} ({{channelUser.username}})
+          <p class="channel__name" v-show="channelUser.user.username">
+            {{channelUser.user.realm}} ({{channelUser.user.username}})
             <img
               src="/public/verified.svg"
               width="20"
@@ -63,7 +63,7 @@
           <button
             class="follow"
             style="background:#7289da;"
-            v-else-if="authUser === channelUser.id"
+            v-else-if="authUser === channelUser.user.id"
             @click="onEditMode"
           >
             <i class="far fa-edit"></i> Edit channel
@@ -71,7 +71,7 @@
           <button class="follow" v-else>
             <i class="far fa-star"></i> Follow
           </button>
-          <span class="followers">{{channelInfo.followers }} followers</span>
+          <span class="followers">{{channelUser.settings.followers }} followers</span>
         </div>
       </div>
       <content-grid></content-grid>
@@ -88,8 +88,6 @@ export default {
   name: 'media-content',
   data: () => ({
     active: false,
-    channelInfo: {},
-    channelUser: '',
   }),
   watch: {
     $route() {
@@ -97,6 +95,9 @@ export default {
     },
   },
   computed: {
+    channelUser() {
+      return this.$store.state.contentUser;
+    },
     theme() {
       return this.$store.state.theme;
     },
@@ -118,7 +119,7 @@ export default {
     async onEditMode() {
       if (
         (await this.$user.isLogged()) &&
-        this.authUser === this.channelUser.id
+        this.authUser === this.channelUser.user.id
       ) {
         if (this.editMode) {
           this.$store.commit(types.SELECT_BROWSER_ITEM, false);
@@ -127,14 +128,6 @@ export default {
           this.$store.commit(types.SET_EDIT_MODE, true);
         }
       }
-    },
-    async init() {
-      const content = await this.$store.dispatch('GET_CONTENT', {
-        userId: this.$route.params.id,
-      });
-
-      this.channelUser = content.data.user;
-      this.channelInfo = content.data.settings;
     },
   },
   created() {
@@ -146,14 +139,6 @@ export default {
     if (typeof window !== 'undefined') {
       window.removeEventListener('scroll', this.onScroll, false);
     }
-  },
-  async beforeMount() {
-    this.$store.commit(types.SET_CONTENT, { audio: [], video: [] });
-    const content = await this.$store.dispatch('GET_CONTENT', {
-      userId: this.$route.params.id,
-    });
-    this.channelUser = content.data.user;
-    this.channelInfo = content.data.settings;
   },
 };
 </script>

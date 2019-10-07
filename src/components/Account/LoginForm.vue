@@ -55,7 +55,7 @@
     <div class="footer">
       <p>
         Don't have an account?
-        <a href="/signup">Sign up</a>
+        <router-link to="/signup">Sign up</router-link>
       </p>
       <br />
       <p>
@@ -98,8 +98,12 @@ export default {
         password: this.password,
       };
 
-      const user = await this.$store.dispatch('LOGIN', data);
-      this.finalize(user);
+      try {
+        const user = await this.$store.dispatch('LOGIN', data);
+        this.finalize(user);
+      } catch (err) {
+        this.loading = false;
+      }
       this.loading = false;
     },
     finalize(response) {

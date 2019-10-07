@@ -146,6 +146,13 @@ export default {
       );
 
       commit(types.SET_CONTENT, content.data);
+
+      if (payload.userId && content.data.user && content.data.settings) {
+        commit(types.SET_CONTENT_USER, {
+          user: content.data.user,
+          settings: content.data.settings,
+        });
+      }
       return content;
     } catch (error) {
       return new handleError(commit, dispatch, state)._handleError(error);

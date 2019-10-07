@@ -47,3 +47,5 @@ export const CHANGE_VIEW = 'CHANGE_VIEW';
 
 // Search Query
 export const SET_SEARCH_QUERY = 'SET_SEARCH_QUERY';
+
+export const SET_CONTENT_USER = 'SET_CONTENT_USER';

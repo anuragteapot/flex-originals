@@ -6,6 +6,10 @@ export default {
     video: [],
     audio: [],
   },
+  contentUser: {
+    user: {},
+    settings: {},
+  },
   // Files loaded limit
   isAuthenticated: false,
   autoplay: true,

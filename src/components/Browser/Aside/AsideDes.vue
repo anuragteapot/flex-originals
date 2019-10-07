@@ -25,7 +25,7 @@
     </section>
 
     <footer :class="`features-footer ${theme}`">
-      <router-link :to="`/app/@channel/${user.userId}`">
+      <router-link :to="`/app/@channel/${user.id}`">
         <img
           class="avatar"
           alt="Avatar"

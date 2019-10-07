@@ -6,7 +6,7 @@ import nprogress from './api/nprogress';
 
 // a global mixin that calls `asyncData` when a route component's params change
 Vue.mixin({
-  async beforeEach(to, from, next) {
+  beforeRouteUpdate(to, from, next) {
     const { asyncData } = this.$options;
 
     if (asyncData) {

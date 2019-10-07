@@ -21,7 +21,13 @@ export default {
       params: { id },
     },
   }) {
-    return store.dispatch('GET_CONTENT', { userId: id });
+    if (id) {
+      return store.dispatch('GET_CONTENT', {
+        userId: id,
+      });
+    } else {
+      return store.dispatch('GET_CONTENT', {});
+    }
   },
 
   data() {

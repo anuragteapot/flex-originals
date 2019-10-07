@@ -89,11 +89,6 @@ export default {
   data: () => ({
     active: false,
   }),
-  watch: {
-    $route() {
-      this.init();
-    },
-  },
   computed: {
     channelUser() {
       return this.$store.state.contentUser;

@@ -18,7 +18,6 @@
     <div class="main-container">
       <toolbar></toolbar>
       <upload></upload>
-      <lazy-audio-player v-if="$route.name == '@song'" />
     </div>
   </div>
 </template>

@@ -95,13 +95,24 @@ export default {
     }
   },
   async beforeMount() {
+    this.$store.commit(types.SET_CONTENT, {});
     if (this.$user.get('$userId')) {
       const settings = await this.$store.dispatch('FIND_SETTINGS', {
         uid: this.$user.get('$userId'),
       });
       this.$store.commit(types.SET_SETTINGS, settings);
     }
-    await this.$store.dispatch('GET_CONTENT', {});
+
+    if (this.$route.params.id) {
+      try {
+        await this.$store.dispatch('GET_CONTENT', {
+          userId: this.$route.params.id,
+        });
+      } catch (err) {
+        this.$router.push('/@error');
+        console.log(err);
+      }
+    }
   },
 };
 </script>

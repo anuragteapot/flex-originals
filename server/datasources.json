@@ -3,7 +3,7 @@
     "host": "localhost",
     "port": 27017,
     "url": "",
-    "database": "flexoriginals",
+    "database": "lazydrive",
     "password": "",
     "name": "mongodb",
     "user": "root",

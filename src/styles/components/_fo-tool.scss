@@ -38,7 +38,7 @@
     display: inline-block;
   }
 
-  input[type="radio"] {
+  input[type='radio'] {
     display: none;
 
     &:checked + label:before {
@@ -63,7 +63,7 @@
     &:before,
     &:after {
       position: absolute;
-      content: "";
+      content: '';
       border-radius: 50%;
       transition: all 0.3s ease;
       transition-property: transform, border-color;
@@ -148,7 +148,7 @@
     transition: all 0.15s cubic-bezier(0, 1.05, 0.72, 1.07);
 
     &::after {
-      content: "";
+      content: '';
       width: 100%;
       height: 100%;
       opacity: 0;
@@ -156,7 +156,7 @@
       position: absolute;
       transform: scale(0);
       background-size: 50%;
-      background-image: url("http://moiza.ir/checkmark.svg");
+      background-image: url('http://moiza.ir/checkmark.svg');
       background-repeat: no-repeat;
       background-position: center;
       transition-delay: 0.2s !important;
@@ -175,7 +175,7 @@
 .square-one {
   width: 50px;
   height: 50px;
-  background: url("/public/icons/002-play.svg");
+  background: url('/public/icons/002-play.svg');
   left: 2%;
   -webkit-transform: rotate(-65deg);
   transform: rotate(-40deg);
@@ -185,7 +185,7 @@
   width: 50px;
   height: 50px;
   top: 55%;
-  background: url("/public/icons/004-tv.svg");
+  background: url('/public/icons/004-tv.svg');
   right: 10%;
   -webkit-transform: rotate(-65deg);
   transform: rotate(-65deg);
@@ -195,7 +195,7 @@
   width: 50px;
   height: 50px;
   top: 20%;
-  background: url("/public/icons/003-microphone.svg");
+  background: url('/public/icons/003-microphone.svg');
   right: 15%;
   -webkit-transform: rotate(-65deg);
   transform: rotate(-65deg);
@@ -205,7 +205,7 @@
   width: 50px;
   height: 50px;
   bottom: 5%;
-  background: url("/public/icons/picture.svg");
+  background: url('/public/icons/picture.svg');
   left: 5%;
   -webkit-transform: rotate(-65deg);
   transform: rotate(-65deg);
@@ -243,12 +243,14 @@
 }
 
 .btn-hover.color {
-  background-image: linear-gradient(
-    to right,
-    #25aae1,
-    #40e495,
-    #30dd8a,
-    #2bb673
-  );
-  box-shadow: 0 1px 10px 0 rgba(49, 196, 190, 0.75);
+  // background-image: linear-gradient(
+  //   to right,
+  //   #25aae1,
+  //   #40e495,
+  //   #30dd8a,
+  //   #2bb673
+  // );
+  // box-shadow: 0 1px 10px 0 rgba(49, 196, 190, 0.75);
+  background-color: #ff2d55;
+  box-shadow: 0 1px 10px 0 rgba(255, 45, 85, 0.75);
 }

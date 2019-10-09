@@ -26,9 +26,7 @@
     </div>
     <video
       @contextmenu.prevent="openContext"
-      preload
       v-if="!error"
-      autoplay
       :src="src"
       class="fo-video-player__media"
       ref="media"
@@ -460,10 +458,6 @@ export default {
             this.loop();
           })
           .catch(() => {
-            this.reLayoutSeekbar();
-            setTimeout(() => {
-              this.play();
-            }, 1000);
             // Auto-play was prevented
             // Show paused UI.
           });

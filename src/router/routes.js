@@ -9,7 +9,7 @@ export default [
     path: '/app/@settings',
     name: '@settings',
     component: () =>
-      import(/* webpackChunkName: "browser" */ './../views/Browser.vue'),
+      import(/* webpackChunkName: "settings" */ './../views/Settings.vue'),
     meta: {
       requiresAuth: true,
     },
@@ -18,19 +18,19 @@ export default [
     path: '/app/@home',
     name: '@home',
     component: () =>
-      import(/* webpackChunkName: "browser" */ './../views/Browser.vue'),
+      import(/* webpackChunkName: "home" */ './../views/Home.vue'),
   },
   {
     path: '/app/@watch',
     name: '@watch',
     component: () =>
-      import(/* webpackChunkName: "browser" */ './../views/Browser.vue'),
+      import(/* webpackChunkName: "watch" */ './../views/Watch.vue'),
   },
   {
     path: '/app/@song',
     name: '@song',
     component: () =>
-      import(/* webpackChunkName: "browser" */ './../views/Browser.vue'),
+      import(/* webpackChunkName: "browser" */ './../views/Home.vue'),
   },
   {
     path: '/embed/:v?',
@@ -42,7 +42,7 @@ export default [
     path: '/app/@upload',
     name: '@upload',
     component: () =>
-      import(/* webpackChunkName: "browser" */ './../views/Browser.vue'),
+      import(/* webpackChunkName: "upload" */ './../views/Upload.vue'),
     meta: {
       requiresAuth: true,
     },
@@ -51,7 +51,7 @@ export default [
     path: '/app/@editvideo',
     name: '@editvideo',
     component: () =>
-      import(/* webpackChunkName: "browser" */ './../views/Browser.vue'),
+      import(/* webpackChunkName: "edit" */ './../views/Edit.vue'),
     meta: {
       requiresAuth: true,
     },
@@ -60,7 +60,7 @@ export default [
     path: '/app/@channel/:id',
     name: '@channel',
     component: () =>
-      import(/* webpackChunkName: "browser" */ './../views/Browser.vue'),
+      import(/* webpackChunkName: "channel" */ './../views/Channel.vue'),
     meta: {
       requiresAuth: true,
     },
@@ -117,6 +117,6 @@ export default [
     path: '*',
     name: '@pageNotFound',
     component: () =>
-      import(/* webpackChunkName: "error" */ './../views/Error.vue'),
+      import(/* webpackChunkName: "pageNotFound" */ './../views/Error.vue'),
   },
 ];

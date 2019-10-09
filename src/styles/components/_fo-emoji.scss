@@ -18,6 +18,11 @@
     left: -10px;
     display: none;
     box-shadow: 0 5px 10px rgb(94, 94, 94);
+
+    button {
+      outline: none;
+      cursor: pointer;
+    }
   }
   .like-btn .reaction-box .reaction-icon {
     width: 40px;
@@ -50,6 +55,7 @@
   }
   .like-btn:hover .reaction-box .reaction-icon:hover {
     transform: scale(1.4);
+    transition: 0.3s;
     transform-origin: bottom;
   }
   .like-btn:hover .reaction-box .reaction-icon:hover label {

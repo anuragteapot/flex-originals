@@ -17,7 +17,7 @@
 
     <div class="main-container">
       <toolbar></toolbar>
-      <component v-bind:is="layout"></component>
+      <home></home>
       <lazy-audio-player v-if="$route.name == '@song'" />
     </div>
   </div>
@@ -26,14 +26,10 @@
 <script>
 import * as types from './../store/mutation-types.js';
 import home from './../components/Browser/Content/MainContent';
-import settings from './../components/Browser/Settings/Settings';
-import channel from './../components/Browser/Profile/Profile';
-import upload from './../components/Browser/Upload/Upload';
-import watch from './../components/Browser/videoViewer/videoViewer';
 import asideAction from './../components/Browser/Aside/AsideAction';
 import asideDes from './../components/Browser/Aside/AsideDes';
 import toolbar from './../components/Browser/Toolbar/Toolbar';
-import editvideo from './../components/Browser/EditVideo/EditVideo';
+
 import { mapGetters } from 'vuex';
 
 export default {
@@ -53,29 +49,12 @@ export default {
   },
   components: {
     home,
-    settings,
-    upload,
-    watch,
-    channel,
-    asideAction,
-    asideDes,
     toolbar,
-    editvideo,
+    asideDes,
+    asideAction,
   },
   computed: {
     ...mapGetters(['isLoading', 'appDrawer']),
-    layout() {
-      const name = this.$route.name;
-      if (name.split('@')[1]) {
-        if (name.split('@')[1] == 'song') {
-          return 'home';
-        } else {
-          return name.split('@')[1];
-        }
-      } else {
-        return 'home';
-      }
-    },
   },
   methods: {
     /* eslint-disable */

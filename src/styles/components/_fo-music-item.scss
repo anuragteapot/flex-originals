@@ -93,14 +93,27 @@
     .audio__info {
       text-align: left;
 
+      .views {
+        font-weight: normal !important;
+        font-size: 13px;
+      }
+
+      p {
+        bottom: -30px;
+        color: white;
+        width: 100%;
+      }
+
       &.light .title {
         color: black !important;
       }
 
-      .views {
-        color: #383838;
-        font-weight: normal !important;
-        font-size: 13px;
+      &.dark .views {
+        color: #f1ebeb !important;
+      }
+
+      &.light .views {
+        color: #383838 !important;
       }
     }
 
@@ -143,20 +156,20 @@
     display: block;
   }
 
-//   @media only screen and (max-width: 700px) {
-//     .music__thumbnail {
-//       width: 150px;
-//       height: 150px;
-//       margin: 0px 5px 40px 10px;
+  //   @media only screen and (max-width: 700px) {
+  //     .music__thumbnail {
+  //       width: 150px;
+  //       height: 150px;
+  //       margin: 0px 5px 40px 10px;
 
-//       i {
-//         margin: auto;
-//         position: absolute;
-//         font-size: 40px;
-//         color: white;
-//         top: 50px;
-//         left: 60px;
-//       }
-//     }
-//   }
+  //       i {
+  //         margin: auto;
+  //         position: absolute;
+  //         font-size: 40px;
+  //         color: white;
+  //         top: 50px;
+  //         left: 60px;
+  //       }
+  //     }
+  //   }
 }

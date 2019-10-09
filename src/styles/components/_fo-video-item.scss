@@ -13,18 +13,31 @@
     margin: 5px 5px 50px 5px;
     position: relative;
     background-color: rgba(0, 0, 0, 0.1);
-
+    
     .video__info {
       text-align: left;
+
+      .views {
+        font-weight: normal !important;
+        font-size: 13px;
+      }
+
+      p {
+        bottom: -30px;
+        color: white;
+        width: 100%;
+      }
 
       &.light .title {
         color: black !important;
       }
 
-      .views {
-        color: #383838;
-        font-weight: normal !important;
-        font-size: 13px;
+      &.dark .views {
+        color: #f1ebeb !important;
+      }
+
+      &.light .views {
+        color: #383838 !important;
       }
     }
 

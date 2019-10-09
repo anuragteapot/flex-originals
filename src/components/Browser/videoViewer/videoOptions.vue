@@ -1,8 +1,5 @@
 <template>
   <div class="video__options">
-    <div class="video__reactions__emoji">
-      <p>111k</p>
-    </div>
     <button class="fo-button video-option" aria-label="save">
       <svg
         version="1.1"

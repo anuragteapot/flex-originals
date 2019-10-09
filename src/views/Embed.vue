@@ -37,7 +37,7 @@ export default {
         
         try {
           currentVideo = await this.$store.dispatch('GET_VIDEO', {
-            id: this.$route.query.v,
+            id: this.$route.params.v,
           });
         } catch (err) {
           this.videoUnavaliable = true;

@@ -88,7 +88,6 @@ export default {
       });
       this.$store.commit(types.SET_SETTINGS, settings);
     }
-    await this.$store.dispatch('GET_CONTENT', {});
   },
   created() {
     if (typeof window !== 'undefined') {

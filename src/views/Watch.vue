@@ -50,5 +50,8 @@ export default {
       }
     },
   },
+  async beforeMount() {
+    await this.$store.dispatch('GET_CONTENT', {});
+  },
 };
 </script>

@@ -6,11 +6,7 @@
         <aside-des></aside-des>
       </div>
     </div>
-    <div
-      v-if="isMobile"
-      :class="`offcanvas-overlay ${appDrawer ? 'on' : ''}`"
-      @click="toggleMenu"
-    ></div>
+    <div v-if="isMobile" :class="`offcanvas-overlay ${appDrawer ? 'on' : ''}`" @click="toggleMenu"></div>
 
     <aside-action v-if="!isMobile && appDrawer"></aside-action>
     <aside-des v-if="!isMobile && appDrawer"></aside-des>
@@ -54,6 +50,10 @@ export default {
         this.$store.commit(types.APP_DRAWER, true);
       }
     },
+  },
+
+  async beforeMount() {
+    await this.$store.dispatch('GET_CONTENT', {});
   },
 };
 </script>

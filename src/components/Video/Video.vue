@@ -28,6 +28,7 @@
       @contextmenu.prevent="openContext"
       preload
       v-if="!error"
+      autoplay
       :src="src"
       class="fo-video-player__media"
       ref="media"
@@ -61,7 +62,7 @@
       <nav :class="`no__animation ${active && seekTime ? 'menu-active' : ''}`">
         <div class="time__preview" :style="`background-image: url('/${videoInfo.thumbImage}')`">
           <div class="time_preview_div">
-            <p>{{ seekTime }}</p>
+            <span>{{ seekTime }}</span>
           </div>
         </div>
       </nav>
@@ -453,6 +454,10 @@ export default {
             this.loop();
           })
           .catch(() => {
+            this.reLayoutSeekbar();
+            setTimeout(() => {
+              this.play();
+            }, 1000);
             // Auto-play was prevented
             // Show paused UI.
           });
@@ -573,6 +578,8 @@ export default {
     },
     handleEnded() {
       this.loading = false;
+      this.media.currentTime = 0;
+      this.isPlaying = false;
       this.$emit('handleEnded');
     },
     handleError() {
@@ -611,23 +618,19 @@ export default {
         this.play();
       }
     },
+    loadedmetadata() {
+      this.duration = this.media.duration;
+    },
   },
   mounted: function() {
     if (this.error) return 0;
     this.reLayoutSeekbar();
-    // window.addEventListener("resize", this.reset, false);
+
     document.addEventListener('mousemove', event => {
       this.moveSeekbar(event);
     });
     document.addEventListener('mouseup', event => {
       this.releaseSeekbar(event);
-    });
-    this.media.addEventListener('loadedmetadata', () => {
-      this.duration = this.media.duration;
-    });
-    this.media.addEventListener('ended', () => {
-      this.media.currentTime = 0;
-      this.isPlaying = false;
     });
 
     if (typeof window != 'undefined') {
@@ -655,11 +658,10 @@ export default {
       );
       window.removeEventListener('resize', debounce(this.reLayoutSeekbar, 100));
       window.removeEventListener('click', debounce(this.reLayoutSeekbar, 100));
-      // window.removeEventListener("resize", this.reset(), false);
+      window.removeEventListener('resize', debounce(this.reLayoutSeekbar, 100));
       window.removeEventListener('keydown', this.detectKeypress);
     }
     this.media.removeEventListener('timeupdate', this.currentTime);
-    // this.media.removeEventListener('play', this.eventPlay);
     this.media.removeEventListener('timeupdate', this.handleProgress);
     this.media.removeEventListener('ended', this.handleEnded);
     this.media.removeEventListener('error', this.handleError);

@@ -284,9 +284,6 @@ export default {
         }
       }
     },
-    logout() {
-      this.$user.logout('/app/@home?u=logout');
-    },
     async init() {
       if (this.$route.query.v) {
         this.$store.commit(types.APP_DRAWER, false);
@@ -312,12 +309,13 @@ export default {
         this.settings = currentVideo.data.settings;
         this.video = currentVideo.data.video;
 
-        const follow = await this.$store.dispatch('GET_FOLLOW', {
-          followId: this.loggedUser.id,
-          channelId: this.user.id,
-        });
-
-        this.following = follow.data.SUCCESS;
+        if (this.loggedUser.id) {
+          const follow = await this.$store.dispatch('GET_FOLLOW', {
+            followId: this.loggedUser.id,
+            channelId: this.user.id,
+          });
+          this.following = follow.data.SUCCESS;
+        }
       } else {
         this.$router.push('/@error');
       }

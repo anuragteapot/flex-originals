@@ -1,6 +1,6 @@
 <template>
   <div class="embed__video">
-    <fo-video-player :error="error" :src="videoSource" v-if="!videoUnavaliable" :autoPlay="false"></fo-video-player>
+    <fo-video-player  :embed="true" :videoInfo="video" :error="error" :src="videoSource" v-if="!videoUnavaliable" :autoPlay="false"></fo-video-player>
   </div>
 </template>
 
@@ -34,10 +34,11 @@ export default {
     async init() {
       if (this.$route.params.v) {
         let currentVideo = {};
+        
         try {
-          currentVideo = await this.$api
-            .axios()
-            .get(`/api/actions/getVideo/${this.$route.params.v}`);
+          currentVideo = await this.$store.dispatch('GET_VIDEO', {
+            id: this.$route.query.v,
+          });
         } catch (err) {
           this.videoUnavaliable = true;
         }

@@ -86,7 +86,7 @@
       display: block;
       width: 80px;
       height: 80px;
-      background: #ba1f24;
+      background: $color-theme;
       border-radius: 50%;
       animation: pulse-border 1500ms ease-out infinite;
     }
@@ -101,13 +101,13 @@
       display: block;
       width: 80px;
       height: 80px;
-      background: #fa183d;
+      background: $color-theme;
       border-radius: 50%;
       transition: all 200ms;
     }
 
     .video-play-button:hover:after {
-      background-color: darken(#fa183d, 10%);
+      background-color: darken($color-theme, 10%);
     }
 
     .video-play-button img {
@@ -139,6 +139,18 @@
         opacity: 0;
       }
     }
+
+    // .video-overlay {
+    //   position: fixed;
+    //   z-index: -1;
+    //   top: 0;
+    //   bottom: 0;
+    //   left: 0;
+    //   right: 0;
+    //   background: rgba(0, 0, 0, 0.8);
+    //   opacity: 0;
+    //   transition: all ease 500ms;
+    // }
   }
 
   .fo-video-loader {
@@ -231,20 +243,20 @@
 
   .fo-video-player__buffer-back {
     z-index: 1;
-    background-color: rgb(255, 0, 0);
+    background-color: $color-theme;
     transform: scaleX(0);
     transform-origin: left;
-    background-color: rgba(221, 221, 221, 0.4);
+    background-color: rgba(221, 221, 221, 0.8);
   }
   .fo-video-player__seekbar-current {
     z-index: 2;
-    background-color: rgb(255, 0, 0);
+    background-color: $color-theme;
     transform: scaleX(0);
     transform-origin: left;
   }
 
   .fo-video-player__seekbar-back {
-    background-color: rgba(221, 221, 221, 0.3);
+    background-color: rgba(221, 221, 221, 0.4);
   }
 
   .fo-video-player__control-panel {
@@ -263,6 +275,20 @@
       padding: 3px 0;
       background: transparent;
       transition: bottom 0.5s ease-in-out;
+    }
+
+    .fo-video-player__watch__on {
+      display: inline-block;
+      position: absolute;
+      bottom: 45px;
+      right: 15px;
+      text-align: right;
+      padding: 5px;
+
+      a {
+        text-decoration: none;
+        color: white;
+      }
     }
   }
 
@@ -349,7 +375,7 @@
         -webkit-transform: translate3d(100%, 0, 0);
         -moz-transform: translate3d(100%, 0, 0);
         transform: translate3d(100%, 0, 0);
-        background-color: red;
+        background-color: $color-theme;
       }
     }
 
@@ -357,7 +383,7 @@
       opacity: 0;
       z-index: -1;
       visibility: hidden;
-      background: rgb(19, 18, 18);
+      background: rgba(32, 32, 32, 1);
       transition: 0.2s ease-out;
       box-shadow: 0 16px 32px rgba(0, 0, 0, 0.25);
       transform: translateY(50px) scale(0.5);
@@ -407,22 +433,15 @@
         border: 2px solid black;
         text-align: center;
 
-        .time_preview_div {
+        p {
           display: inline-block;
           margin: auto;
           position: absolute;
           bottom: 0;
           left: 0;
+          font-weight: 400;
           right: 0;
-
-          span {
-            border-radius: 1px;
-            font-weight: 400;
-            font-size: 12px;
-            display: inline-block;
-            padding: 2px 5px;
-            background-color: rgba(20, 19, 19, 0.7);
-          }
+          background-color: rgba(0, 0, 0, 0.479);
         }
       }
     }

@@ -143,6 +143,12 @@
       </nav>
     </div>
     <div :class="`fo-video-player__control-panel`" v-show="active">
+      <h1 class="fo-video-player__watch__on" v-show="embed">
+        <a
+          :href="`https://flexoriginals.ml/app/@watch?v=${videoInfo.id}`"
+          target="_blank"
+        >Flex Originals</a>
+      </h1>
       <div
         :class="`fo-video-player__seekbar-wrap`"
         @mousedown="grabSeekbar"

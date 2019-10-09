@@ -7,9 +7,14 @@ if (process.env && process) {
 }
 
 const AXIOS_API = () => {
-  const instance = axios.create({
-    baseURL: `http://localhost:${PORT}`,
-  });
+  let instance = null;
+  if (process.env.NODE_ENV === 'production') {
+    instance = axios.create({});
+  } else {
+    instance = axios.create({
+      baseURL: `http://localhost:${PORT}`,
+    });
+  }
 
   instance.defaults.headers.common['authorization'] = `${webStorage.local.get(
     '$accessToken',

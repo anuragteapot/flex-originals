@@ -21,9 +21,9 @@
             >open source</a> to
             <a href="/business" class="text-white jumbotron-link">business</a>, you can host and review code, manage projects, and build software alongside 36 million&nbsp;developers.-->
           </p>
-          <a href="/app/@home">
+          <router-link to="/app/@home">
             <button class="btn-hover color">Get Started</button>
-          </a>
+          </router-link>
         </div>
       </div>
     </section>

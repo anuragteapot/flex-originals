@@ -15,7 +15,7 @@
                   <fo-video-player
                     :src="videoSource"
                     v-if="!videoUnavaliable"
-                    :autoPlay="false"
+                    :autoPlay="true"
                     @handleEnded="handleEnded"
                     @halfTime="halfTime"
                     :videoInfo="video"
@@ -32,7 +32,7 @@
                     </div>
                     <div class="right">
                       <div class="feed">
-                        <a class="like-btn">
+                        <button class="like-btn fo-button">
                           <img
                             v-if="like != 0 && likeMap[like-1]"
                             :src="likeMap[like-1]"
@@ -90,29 +90,109 @@
                               />
                             </div>
                           </div>
-                        </a>
+                        </button>
                       </div>
-                      <img
-                        class="video_tool"
-                        src="/public/tool_svg/003-bookmark-white.svg"
-                        alt="like"
-                        width="20"
-                        height="20"
-                      />
-                      <img
-                        class="video_tool"
-                        src="/public/tool_svg/004-share.svg"
-                        alt="like"
-                        width="20"
-                        height="20"
-                      />
-                      <img
-                        class="video_tool"
-                        src="/public/tool_svg/more.svg"
-                        alt="like"
-                        width="20"
-                        height="20"
-                      />
+                      <button class="fo-button video-option" aria-label="save">
+                        <svg
+                          version="1.1"
+                          id="Capa_1"
+                          xmlns="http://www.w3.org/2000/svg"
+                          xmlns:xlink="http://www.w3.org/1999/xlink"
+                          x="0px"
+                          y="0px"
+                          width="20px"
+                          height="20px"
+                          viewBox="0 0 431.972 431.972"
+                          style="enable-background:new 0 0 431.972 431.972;"
+                          xml:space="preserve"
+                        >
+                          <g>
+                            <path
+                              d="M393.146,14.279c-3.713-5.333-8.713-9.233-14.989-11.707c-3.997-1.711-8.186-2.568-12.565-2.568V0H66.378
+		c-4.377,0-8.562,0.857-12.56,2.568c-6.28,2.472-11.278,6.377-14.989,11.707c-3.71,5.33-5.568,11.228-5.568,17.701v368.019
+		c0,6.475,1.858,12.371,5.568,17.706c3.711,5.329,8.709,9.233,14.989,11.704c3.994,1.711,8.183,2.566,12.56,2.566
+		c8.949,0,16.844-3.142,23.698-9.418l125.91-121.062l125.91,121.065c6.663,6.081,14.562,9.127,23.695,9.127
+		c4.76,0,8.948-0.756,12.565-2.279c6.276-2.471,11.276-6.375,14.989-11.711c3.71-5.328,5.564-11.225,5.564-17.699V31.98
+		C398.71,25.507,396.852,19.609,393.146,14.279z M362.166,391.139L241.397,275.224l-25.411-24.264l-25.409,24.264L69.809,391.139
+		V36.549h292.357V391.139L362.166,391.139z"
+                            />
+                          </g>
+                          <g />
+                          <g />
+                          <g />
+                          <g />
+                          <g />
+                          <g />
+                          <g />
+                          <g />
+                          <g />
+                          <g />
+                          <g />
+                          <g />
+                          <g />
+                          <g />
+                          <g />
+                        </svg>
+                      </button>
+                      <button class="fo-button video-option" aria-label="share">
+                        <svg
+                          id="Capa_1"
+                          enable-background="new 0 0 551.13 551.13"
+                          height="20"
+                          viewBox="0 0 551.13 551.13"
+                          width="20"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            d="m465.016 172.228h-51.668v34.446h34.446v310.011h-344.457v-310.011h34.446v-34.446h-51.669c-9.52 0-17.223 7.703-17.223 17.223v344.456c0 9.52 7.703 17.223 17.223 17.223h378.902c9.52 0 17.223-7.703 17.223-17.223v-344.456c0-9.52-7.703-17.223-17.223-17.223z"
+                          />
+                          <path
+                            d="m258.342 65.931v244.08h34.446v-244.08l73.937 73.937 24.354-24.354-115.514-115.514-115.514 115.514 24.354 24.354z"
+                          />
+                        </svg>
+                      </button>
+                      <button class="fo-button video-option" aria-label="more">
+                        <svg
+                          version="1.1"
+                          id="Capa_1"
+                          xmlns="http://www.w3.org/2000/svg"
+                          xmlns:xlink="http://www.w3.org/1999/xlink"
+                          x="0px"
+                          y="0px"
+                          width="20px"
+                          height="20px"
+                          viewBox="0 0 60 60"
+                          style="enable-background:new 0 0 60 60;"
+                          xml:space="preserve"
+                        >
+                          <g>
+                            <path
+                              d="M8,22c-4.411,0-8,3.589-8,8s3.589,8,8,8s8-3.589,8-8S12.411,22,8,22z"
+                            />
+                            <path
+                              d="M52,22c-4.411,0-8,3.589-8,8s3.589,8,8,8s8-3.589,8-8S56.411,22,52,22z"
+                            />
+                            <path
+                              d="M30,22c-4.411,0-8,3.589-8,8s3.589,8,8,8s8-3.589,8-8S34.411,22,30,22z"
+                            />
+                          </g>
+                          <g />
+                          <g />
+                          <g />
+                          <g />
+                          <g />
+                          <g />
+                          <g />
+                          <g />
+                          <g />
+                          <g />
+                          <g />
+                          <g />
+                          <g />
+                          <g />
+                          <g />
+                        </svg>
+                      </button>
                     </div>
                   </div>
                   <div class="video__description">

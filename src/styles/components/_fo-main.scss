@@ -37,6 +37,11 @@ i:hover {
   opacity: 0.8;
 }
 
+a {
+  text-decoration: none;
+  color: white;
+}
+
 p {
   font-weight: bold;
 }
@@ -640,11 +645,6 @@ p {
 
   .button-group .button + .button {
     box-shadow: inset 1px 0 0 #393c41;
-  }
-
-  svg[id] {
-    width: 0;
-    position: absolute;
   }
 
   @-webkit-keyframes server-hover-in {

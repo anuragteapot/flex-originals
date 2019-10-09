@@ -488,6 +488,7 @@ export default {
     loop: function() {
       this.time = this.media.currentTime;
       if (!this.isPlaying) return;
+      this.loading = false;
       requestAnimationFrame(() => {
         this.loop();
       });
@@ -586,7 +587,6 @@ export default {
           this.$emit('halfTime');
         }
       }
-      this.loading = false;
     },
     detectKeypress(event) {
       if (this.disablekey) {

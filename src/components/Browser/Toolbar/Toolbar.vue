@@ -60,9 +60,11 @@ export default {
   methods: {
     toggleMenu: function() {
       if (this.appDrawer) {
+        window.localStorage.setItem('APP_DRAWER', false);
         this.$store.commit(types.APP_DRAWER, false);
       } else {
         this.$store.commit(types.APP_DRAWER, true);
+        window.localStorage.setItem('APP_DRAWER', true);
       }
     },
   },

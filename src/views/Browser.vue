@@ -51,20 +51,6 @@ export default {
       }
     }
   },
-  asyncData({
-    store,
-    route: {
-      params: { id },
-    },
-  }) {
-    if (id) {
-      return store.dispatch('GET_CONTENT', {
-        userId: id,
-      });
-    } else {
-      return store.dispatch('GET_CONTENT', {});
-    }
-  },
   components: {
     home,
     settings,
@@ -137,6 +123,7 @@ export default {
       });
       this.$store.commit(types.SET_SETTINGS, settings);
     }
+    await this.$store.dispatch('GET_CONTENT', {});
   },
 };
 </script>

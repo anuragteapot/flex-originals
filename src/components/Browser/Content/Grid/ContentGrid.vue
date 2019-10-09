@@ -1,5 +1,23 @@
 <template>
   <div class="media-content-grid">
+    <div class="loading--media" v-show="content.audio.length == 0 && content.video.length == 0">
+      <div class="spinner">
+        <div class="lds-spinner">
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+      </div>
+    </div>
     <div class="grid_section files">
       <h1 v-if="content.audio.length > 0 && layout != 'channel'">Recommended</h1>
       <div class="fo-content__container" v-if="content.audio.length > 0 && layout != 'channel'">
@@ -43,7 +61,7 @@ import videoThumb from './../../Items/VideoItem';
 export default {
   name: 'media-content-grid',
   data: () => ({
-    src: './../../../../assets/musicLoading.png'
+    src: './../../../../assets/musicLoading.png',
   }),
   computed: {
     layout() {

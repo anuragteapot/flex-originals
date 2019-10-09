@@ -2,10 +2,10 @@
   <div class="home__header">
     <div class="home__navbar">
       <img class="features-header-name" src="/public/text_logo2.png" alt="logo" />
-      <a v-show="!isAuthenticated" href="/signup">Sign Up</a>
-      <a v-show="!isAuthenticated" href="/login">Login</a>
+      <router-link v-show="!isAuthenticated" to="/signup">Sign Up</router-link>
+      <router-link v-show="!isAuthenticated" to="/login">Login</router-link>
       <a href @click.prevent="logout()" v-show="isAuthenticated">Logout</a>
-      <a href="/">Home</a>
+      <router-link to="/">Home</router-link>
     </div>
   </div>
 </template>
@@ -18,7 +18,7 @@ export default {
   },
   methods: {
     async logout() {
-      await this.$user.logout('/login');
+      await this.$user.logout('/app/@home');
     },
   },
 };

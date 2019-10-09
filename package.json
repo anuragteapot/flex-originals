@@ -6,9 +6,9 @@
   "license": "MIT",
   "main": "server/server.js",
   "scripts": {
-    "start:staging": "cross-env NODE_ENV=production MONGODB_HOST=localhost PORT=3333 node . & cross-env NODE_ENV=production PORT=3333 node client",
-    "start:prod": "cross-env NODE_ENV=production PORT=3333 node . & cross-env NODE_ENV=production PORT=3333 node client",
-    "staging": "npm run build && cross-env NODE_ENV=production PORT=3333 npm run start:staging",
+    "start:staging": "cross-env NODE_ENV=production MONGODB_HOST=localhost node . & cross-env NODE_ENV=production PORT=3333 node client",
+    "start:prod": "cross-env NODE_ENV=production node . & cross-env NODE_ENV=production PORT=3333 node client",
+    "staging": "npm run build && cross-env NODE_ENV=production npm run start:staging",
     "prod": "npm run build && cross-env NODE_ENV=production PORT=3333 npm run start:prod",
     "dev": "cross-env NODE_ENV=development nodemon node . & cross-env NODE_ENV=development node client",
     "build": "rimraf dist && npm run build:client && npm run build:server",

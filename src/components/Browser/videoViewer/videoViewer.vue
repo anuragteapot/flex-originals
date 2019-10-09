@@ -259,7 +259,6 @@
                   v-for="item in videoSuggestions"
                   :src="'/' + item.thumbImage"
                   :key="item.id"
-                  :lazySrc="item.lazySrc || lazyImage"
                   :item="item"
                 ></video-suggestions>
               </div>

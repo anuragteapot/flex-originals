@@ -273,6 +273,10 @@ export default {
       type: Boolean,
       default: false,
     },
+    embed: {
+      type: Boolean,
+      default: false,
+    },
     error: {
       type: Boolean,
       default: false,

@@ -433,15 +433,22 @@
         border: 2px solid black;
         text-align: center;
 
-        span {
+        .time_preview_div {
           display: inline-block;
           margin: auto;
           position: absolute;
           bottom: 0;
           left: 0;
-          font-weight: 400;
           right: 0;
-          background-color: rgba(0, 0, 0, 0.479);
+
+          span {
+            border-radius: 1px;
+            font-weight: 400;
+            font-size: 12px;
+            display: inline-block;
+            padding: 2px 5px;
+            background-color: rgba(20, 19, 19, 0.7);
+          }
         }
       }
     }

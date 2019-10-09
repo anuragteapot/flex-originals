@@ -1,7 +1,7 @@
 <template>
   <section :class="`content ${theme}`">
     <div class="inner">
-      <div class="profile__banner">
+      <div class="profile__banner" v-show="channelUser.user.username">
         <div class="profile__banner__background">
           <div v-show="channelUser.settings.profileAvatar" class="profile__avatar">
             <img :src="channelUser.settings.profileAvatar" alt="logo" />

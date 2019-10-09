@@ -1,6 +1,6 @@
 <template>
   <div :class="`settings content ${theme}`">
-    <div class="inner">
+    <div class="inner" v-show="user.username">
       <div class="settings__wrapper">
         <div :class="`card ${theme}`">
           <div class="card__body">
@@ -15,8 +15,9 @@
                 <div class="form-item">
                   <div class="account__info">
                     <div class="avatar">
-                      <img class="account__avatar" :src="settings.profileAvatar" alt="logo" />
-                      <!-- <span class="avatar__change">Change Avatar</span> -->
+                      <div class="account__avatar" alt="logo">
+                        <lazy-image :src="settings.profileAvatar"></lazy-image>
+                      </div>
                     </div>
                     <div class="email__info">
                       <p>{{user.realm}} ({{user.username }})</p>
@@ -26,10 +27,6 @@
                       <button class="fo-settings-button info" @click="logout">Log Out</button>
                     </div>
                   </div>
-                  <!-- <label class="form-item__label">Start at login</label>
-                  <div class="form-item__control toggle">
-                    <div class="toggle__handle"></div>
-                  </div>-->
                 </div>
                 <div class="form-item">
                   <label class="form-item__label">Enable Email Notifications</label>

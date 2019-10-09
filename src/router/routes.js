@@ -69,19 +69,13 @@ export default [
     path: '/login',
     name: 'login',
     component: () =>
-      import(/* webpackChunkName: "login" */ './../views/Login.vue'),
-    meta: {
-      requiresAuth: true,
-    },
+      import(/* webpackChunkName: "login" */ './../views/Login.vue')
   },
   {
     path: '/signup',
     name: 'signup',
     component: () =>
-      import(/* webpackChunkName: "signup" */ './../views/Signup.vue'),
-    meta: {
-      requiresAuth: true,
-    },
+      import(/* webpackChunkName: "signup" */ './../views/Signup.vue')
   },
   {
     path: '/verify/users/confirm',

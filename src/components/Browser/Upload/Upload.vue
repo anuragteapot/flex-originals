@@ -1,6 +1,6 @@
 <template>
   <div :class="`settings content ${theme}`">
-    <div class="inner">
+    <div class="inner" v-show="isAllowed">
       <div class="media-action">
         <div class="file">
           <form enctype="multipart/form-data" ref="formFile">

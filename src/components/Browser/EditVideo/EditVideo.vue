@@ -1,6 +1,6 @@
 <template>
   <div :class="`settings content ${theme}`">
-    <div class="inner">
+    <div class="inner" v-show="isAllowed">
       <div class="settings__wrapper">
         <div class="card">
           <div class="card__body">
@@ -169,21 +169,6 @@ export default {
     },
   },
   methods: {
-    openSelect() {
-      if (this.isAllowed) {
-        this.$refs.inputFile.click();
-      } else {
-        const data = {
-          data: `Your upload limit exceed`,
-          color: 'error',
-        };
-
-        this.$store.commit(types.SHOW_SNACKBAR, data);
-      }
-    },
-    async logout() {
-      this.$user.logout('/app/@home?u=logout');
-    },
     async newThumb(formData, inputFile) {
       const uploaded = await this.processUpload(formData, inputFile);
       if (!uploaded) {
@@ -399,6 +384,7 @@ export default {
           this.uploadData.videoFile = '/' + video.data.videoFile;
         }
         this.type = 'video';
+        this.isAllowed = true;
       } catch (err) {
         this.$router.push('/@error');
       }

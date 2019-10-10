@@ -1,5 +1,5 @@
 import AXIOS_API from './../api/axios';
-import AXIOS_API_SERVER from './../api/axiosServer';
+// import AXIOS_API_SERVER from './../api/axiosServer';
 import handleError from './../api/handleError';
 import * as types from './../store/mutation-types';
 

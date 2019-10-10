@@ -10,7 +10,7 @@ const AXIOS_API = () => {
   let instance = null;
   if (process.env.NODE_ENV === 'production') {
     instance = axios.create({
-    baseURL: `http://localhost:3000`,
+    //baseURL: `http://localhost:3000`,
     });
   } else {
     instance = axios.create({

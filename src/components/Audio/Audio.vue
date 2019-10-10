@@ -272,27 +272,8 @@ export default {
       this.$router.push('/app/@error');
     }
 
-    // this.$nextTick(()=>{
-    //       this.changeSong();
-    //   this.audio.loop = false;
-    // })
-    // window.addEventListener("mousedown", function(event) {
-    //   if (!isDraggable(event.target)) return false;
+    this.changeSong();
 
-    //   currentlyDragged = event.target;
-    //   let handleMethod = currentlyDragged.dataset.method;
-
-    //   this.addEventListener("mousemove", window[handleMethod], false);
-
-    //   window.addEventListener(
-    //     "mouseup",
-    //     () => {
-    //       currentlyDragged = false;
-    //       window.removeEventListener("mousemove", window[handleMethod], false);
-    //     },
-    //     false
-    //   );
-    // });
     if (typeof window !== 'undefined') {
       window.addEventListener('keydown', this.detectKeypress);
     }

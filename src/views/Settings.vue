@@ -27,7 +27,7 @@ import toolbar from './../components/Browser/Toolbar/Toolbar';
 import { mapGetters } from 'vuex';
 
 export default {
-  name: 'media-browser',
+  name: 'fo-settings',
   data() {
     return {
       appDrawer: false,

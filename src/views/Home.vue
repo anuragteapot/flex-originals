@@ -14,7 +14,6 @@
     <div class="main-container">
       <toolbar @toggleAppDrawer="toggleAppDrawer"></toolbar>
       <home></home>
-      <lazy-audio-player v-if="$route.name == '@song'" />
     </div>
   </div>
 </template>
@@ -28,7 +27,7 @@ import toolbar from './../components/Browser/Toolbar/Toolbar';
 import { mapGetters } from 'vuex';
 
 export default {
-  name: 'media-browser',
+  name: 'fo-home',
   data() {
     return {
       appDrawer: false,

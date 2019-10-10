@@ -18,7 +18,7 @@ import LoginForm from '@/components/Account/LoginForm';
 import { mapGetters } from 'vuex';
 
 export default {
-  name: 'media-home',
+  name: 'fo-login',
   data() {
     return {};
   },

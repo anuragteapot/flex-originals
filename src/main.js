@@ -23,9 +23,9 @@ import './styles/vendor/nprogress/nprogress.css';
 Vue.use(Api);
 
 // Load components
-Vue.component('lazySnackBar', Snackbar);
-Vue.component('lazyModel', Model);
-Vue.component('lazyAudioPlayer', AudioPlayer);
+Vue.component('foSnackBar', Snackbar);
+Vue.component('foModel', Model);
+Vue.component('foAudioPlayer', AudioPlayer);
 Vue.component('foVideoPlayer', VideoPlayer);
 Vue.component('lazyImage', lazyImage);
 Vue.component('emojiLike', emojiLike);

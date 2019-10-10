@@ -30,7 +30,7 @@ export default [
     path: '/app/@song',
     name: '@song',
     component: () =>
-      import(/* webpackChunkName: "browser" */ './../views/Home.vue'),
+      import(/* webpackChunkName: "song" */ './../views/Song.vue'),
   },
   {
     path: '/embed/:v?',

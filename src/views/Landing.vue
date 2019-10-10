@@ -12,7 +12,7 @@ import creatorFooter from './../components/Landing/Footer';
 import creatorHeader from './../components/Landing/Header';
 
 export default {
-  name: 'media-home',
+  name: 'fo-landing',
   components: {
     creatorBody,
     creatorFooter,

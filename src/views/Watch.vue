@@ -36,16 +36,9 @@ export default {
       appDrawer: false,
     };
   },
-  // asyncData({
-  //   store,
-  //   route: {
-  //     query: { v },
-  //   },
-  // }) {
-  //   return store.dispatch('GET_VIDEO', {
-  //     id: v,
-  //   });
-  // },
+  asyncData({ isServer, store }) {
+    return store.dispatch('GET_CONTENT', { isServer });
+  },
   components: {
     watch,
     toolbar,
@@ -70,7 +63,7 @@ export default {
     },
   },
   async beforeMount() {
-    await this.$store.dispatch('GET_CONTENT', {});
+    // await this.$store.dispatch('GET_CONTENT', {});
     if (typeof window !== 'undefined') {
       window.localStorage.removeItem('APP_DRAWER');
       if (window.localStorage.getItem('APP_DRAWER')) {

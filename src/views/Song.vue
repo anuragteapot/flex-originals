@@ -47,6 +47,9 @@ export default {
   computed: {
     ...mapGetters(['isLoading', 'isMobile']),
   },
+  asyncData({ isServer, store }) {
+    return store.dispatch('GET_CONTENT', { isServer });
+  },
   methods: {
     toggleAppDrawer: function(val) {
       this.appDrawer = val;
@@ -62,7 +65,7 @@ export default {
     },
   },
   async beforeMount() {
-    await this.$store.dispatch('GET_CONTENT', {});
+    // await this.$store.dispatch('GET_CONTENT', {});
     if (typeof window !== 'undefined') {
       if (window.localStorage.getItem('APP_DRAWER')) {
         this.appDrawer = true;

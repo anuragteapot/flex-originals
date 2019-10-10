@@ -6,7 +6,7 @@
           <div class="card__body">
             <div class="container">
               <div class="grid grid--half left">
-                <div class="video__unavaliable" v-if="videoUnavaliable">
+                <div class="video__unavaliable" v-show="videoUnavaliable">
                   <p>
                     <i class="fas fa-exclamation-circle"></i> Video unavaliable
                   </p>
@@ -14,7 +14,7 @@
                 <div v-if="!isMobile" :class="`video-wrapper ${ isMobile ? 'mobile' : ''}`">
                   <fo-video-player
                     :src="videoSource"
-                    v-if="!videoUnavaliable"
+                    v-show="!videoUnavaliable"
                     :autoPlay="true"
                     @handleEnded="handleEnded"
                     @halfTime="halfTime"
@@ -25,7 +25,7 @@
                 <div v-else class="video-wrapper">
                   <default-video-player :src="videoSource"></default-video-player>
                 </div>
-                <div :class="`video_actions ${theme}`" v-if="!videoUnavaliable">
+                <div :class="`video_actions ${theme}`" v-show="!videoUnavaliable">
                   <p class="video__name">{{ video.title}}</p>
                   <div class="video__analytics__info">
                     <div class="left">
@@ -57,7 +57,7 @@
                         <router-link :to="`/app/@editvideo?v=${this.video.id}`">Edit Video</router-link>
                       </button>
                       <button class="following" v-else-if="following" @click="unFollow">Following</button>
-                      <button class="follow" v-else-if="!following" @click="follow">Follow</button>
+                      <button class="follow" v-else="!following" @click="follow">Follow</button>
                     </div>
                   </div>
 
@@ -177,7 +177,7 @@
                   </div>
                 </div>
               </div>
-              <div class="grid grid--half right" v-if="!videoUnavaliable">
+              <div class="grid grid--half right" v-show="!videoUnavaliable">
                 <video-suggestions
                   v-for="item in videoSuggestions"
                   :src="'/' + item.thumbImage"

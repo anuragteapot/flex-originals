@@ -42,6 +42,12 @@ export default {
   computed: {
     ...mapGetters(['isLoading', 'isMobile']),
   },
+   // We only fetch the item itself before entering the view, because
+  // it might take a long time to load threads with hundreds of comments
+  // due to how the HN Firebase API works.
+  asyncData ({ store }) {
+    return store.dispatch('GET_CONTENT', {});
+  },
   methods: {
     toggleAppDrawer: function(val) {
       this.appDrawer = val;
@@ -57,7 +63,7 @@ export default {
     },
   },
   async beforeMount() {
-    await this.$store.dispatch('GET_CONTENT', {});
+   // await this.$store.dispatch('GET_CONTENT', {});
     if (typeof window !== 'undefined') {
       if (window.localStorage.getItem('APP_DRAWER')) {
         this.appDrawer = true;

@@ -16,6 +16,16 @@ import emojiSad from './components/Emoji/Sad';
 import emojiThinking from './components/Emoji/Thinking';
 import emojiAngry from './components/Emoji/Angry';
 import emojiNoLike from './components/Emoji/noLike';
+import Play from './components/Svg/Play';
+import Forward from './components/Svg/Forward';
+import Backward from './components/Svg/Backward';
+import Pause from './components/Svg/Pause';
+import Screen from './components/Svg/Screen';
+import Settings from './components/Svg/Settings';
+import Volume from './components/Svg/Volume';
+import FullScreen from './components/Svg/FullScreen';
+import MiniPlayer from './components/Svg/MiniPlayer';
+import Subtitle from './components/Svg/Subtitle';
 
 import './styles/creator.scss';
 import './styles/vendor/nprogress/nprogress.css';
@@ -35,6 +45,17 @@ Vue.component('emojiSad', emojiSad);
 Vue.component('emojiThinking', emojiThinking);
 Vue.component('emojiAngry', emojiAngry);
 Vue.component('emojiNoLike', emojiNoLike);
+Vue.component('foPlay', Play);
+Vue.component('foSettings', Settings);
+Vue.component('foBackward', Backward);
+Vue.component('foSettings', Settings);
+Vue.component('foVolume', Volume);
+Vue.component('foPause', Pause);
+Vue.component('foForward', Forward);
+Vue.component('foScreen', Screen);
+Vue.component('foFullScreen', FullScreen);
+Vue.component('foMiniPlayer', MiniPlayer);
+Vue.component('foSubtitle', Subtitle);
 
 export default function createApp() {
   // create store and router instances

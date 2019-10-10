@@ -169,22 +169,28 @@
       </div>
       <div class="fo-video-player__control-wrap">
         <div class="fo-video-player__left">
-          <i class="fas fa-step-backward"></i>
-          <i v-if="!isPlaying" class="fa fa-play" @click="playOrPause"></i>
-          <i v-else class="fa fa-pause" @click="playOrPause"></i>
-          <i class="fas fa-step-forward"></i>
-          <span class="fo-video-player__time-current">{{ getCurrentTime }} / {{getDuration}}</span>
+          <fo-backward width="36px" height="36px"></fo-backward>
+          <fo-play v-if="!isPlaying" width="36px" height="36px" @click="playOrPause"></fo-play>
+          <fo-pause v-else width="36px" height="36px" @click="playOrPause"></fo-pause>
+          <fo-forward width="36px" height="36px"></fo-forward>
+
+          <div class="fo-time-display">
+            <span class="fo-time-current">{{ getCurrentTime }}</span>
+            <span class="fo-time-separator">&nbsp;/&nbsp;</span>
+            <span class="fo-time-duration">{{ getDuration }}</span>
+          </div>
         </div>
         <div class="fo-video-player__right">
-          <i class="far fa-closed-captioning"></i>
-          <i class="fas fa-volume-up" @click="volumesettings = !volumesettings"></i>
-          <i
+          <fo-subtitle width="36px" height="36px"></fo-subtitle>
+          <fo-volume width="36px" height="36px" @click="volumesettings = !volumesettings"></fo-volume>
+          <!-- <i
             :class="`fas fa-cog ${opensettings ? 'rotate-45' : '' }`"
             @click="opensettings = !opensettings"
-          ></i>
-          <i class="far fa-clone" @click="pip"></i>
-          <i v-if="!fullscreen" class="fas fa-expand" @click="openFullscreen"></i>
-          <i v-else class="fas fa-compress" @click="closeFullscreen"></i>
+          ></i>-->
+          <fo-settings width="36px" height="36px" @click="opensettings = !opensettings"></fo-settings>
+          <fo-mini-player width="36px" height="36px" @click="pip"></fo-mini-player>
+          <fo-screen v-if="!fullscreen" width="36px" height="36px" @click="openFullscreen"></fo-screen>
+          <fo-full-screen v-else width="36px" height="36px" @click="closeFullscreen"></fo-full-screen>
         </div>
       </div>
     </div>

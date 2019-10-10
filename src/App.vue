@@ -1,9 +1,9 @@
 <template>
   <div id="app" :class="`container ${theme}`">
     <!-- <transition name="fade" mode="out-in"> -->
-      <router-view />
+    <router-view />
     <!-- </transition> -->
-    <fo-snack-bar><fo-snack-bar>
+    <fo-snack-bar></fo-snack-bar>
     <fo-model></fo-model>
   </div>
 </template>

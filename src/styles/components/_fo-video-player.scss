@@ -211,7 +211,7 @@
   .fo-video-player__seekbar-wrap {
     cursor: pointer;
     position: relative;
-    padding: 7px 0;
+    padding: 5px 0;
     top: -10px;
 
     &.show {
@@ -220,13 +220,13 @@
 
     &:hover {
       top: -12px;
-      transition: top 0.15s;
+      transition: top 0.2s;
 
       .fo-video-player__seekbar-current,
       .fo-video-player__seekbar-back,
       .fo-video-player__buffer-back {
         height: 6px;
-        transition: height 0.15s;
+        transition: height 0.2s;
       }
     }
   }
@@ -263,7 +263,7 @@
     left: 0;
     right: 0;
     bottom: 0;
-    padding: 10px 20px;
+    padding: 0 20px;
     position: absolute;
     background: linear-gradient(
       to bottom,
@@ -310,8 +310,13 @@
     }
   }
 
-  .fo-video-player__time-current {
-    margin: 0 0.5em;
+  .fo-time-display {
+    font-size: 109%;
+    display: inline-block;
+    vertical-align: top;
+    padding: 0 5px;
+    white-space: nowrap;
+    line-height: 35px;
   }
 
   .fo-video-player-menu {

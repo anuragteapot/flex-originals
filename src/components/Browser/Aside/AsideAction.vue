@@ -44,13 +44,13 @@
       </div>
 
       <div
-        v-if="selecteditems.length == 1"
+        v-show="selecteditems.length == 1"
         class="server focusable"
         role="button"
         aria-label="My Server"
         aria-selected="true"
       >
-        <router-link :to="`/app/@editvideo?v=${selecteditems[0].id}`">
+        <router-link :to="`/app/@editvideo?v=${ selecteditems[0] ? selecteditems[0].id : '' }`">
           <div class="server-icon">
             <i class="fas fa-edit" style="color:#04fb8a;"></i>
           </div>
@@ -58,7 +58,7 @@
       </div>
 
       <div
-        v-if="selecteditems.length > 0"
+        v-show="selecteditems.length > 0"
         class="server focusable"
         role="button"
         aria-label="My Server"
@@ -89,7 +89,7 @@
         role="button"
         aria-label="My Server"
         aria-selected="true"
-        v-if="!isAuth"
+        v-show="!isAuth"
       >
         <router-link to="/login">
           <div class="server-icon">

@@ -53,11 +53,11 @@
                       </div>
                     </div>
                     <div class="right">
-                      <button class="edit__video" v-if="user.id == loggedUser.id">
+                      <button class="edit__video" v-show="user.id == loggedUser.id">
                         <router-link :to="`/app/@editvideo?v=${this.video.id}`">Edit Video</router-link>
                       </button>
-                      <button class="following" v-else-if="following" @click="unFollow">Following</button>
-                      <button class="follow" v-else="!following" @click="follow">Follow</button>
+                      <button class="following" v-show="(user.id != loggedUser.id) && following" @click="unFollow">Following</button>
+                      <button class="follow" v-show="(user.id != loggedUser.id) && !following" @click="follow">Follow</button>
                     </div>
                   </div>
 

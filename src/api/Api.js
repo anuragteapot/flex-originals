@@ -29,7 +29,7 @@ export default class api {
       ) {
         setTimeout(() => {
           Notification.requestPermission(status => {
-            console.log('Notification permission status:', status);
+//             console.log('Notification permission status:', status);
           });
         }, 3000);
       }

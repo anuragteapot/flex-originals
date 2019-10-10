@@ -1,5 +1,5 @@
 <template>
-  <aside :class="`features ${theme}`">
+  <aside :class="`features ${theme}`" v-show="user.id !== ''">
     <header class="features-header focusable">
       <img class="features-header-name" src="/public/text_logo2.png" alt="logo" />
     </header>

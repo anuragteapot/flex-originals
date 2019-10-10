@@ -48,16 +48,16 @@ export default {
   // We only fetch the item itself before entering the view, because
   // it might take a long time to load threads with hundreds of comments
   // due to how the HN Firebase API works.
-  asyncData({
-    store,
-    route: {
-      params: { id },
-    },
-  }) {
-    return store.dispatch('GET_CONTENT', {
-      userId: id,
-    });
-  },
+  // asyncData({
+  //   store,
+  //   route: {
+  //     params: { id },
+  //   },
+  // }) {
+  //   return store.dispatch('GET_CONTENT', {
+  //     userId: id,
+  //   });
+  // },
   methods: {
     toggleAppDrawer: function(val) {
       this.appDrawer = val;
@@ -81,16 +81,16 @@ export default {
       }
     }
 
-    // if (this.$route.params.id) {
-    //   try {
-    //     await this.$store.dispatch('GET_CONTENT', {
-    //       userId: this.$route.params.id,
-    //     });
-    //   } catch (err) {
-    //     this.$router.push('/@error');
-    //     console.log(err);
-    //   }
-    // }
+    if (this.$route.params.id) {
+      try {
+        await this.$store.dispatch('GET_CONTENT', {
+          userId: this.$route.params.id,
+        });
+      } catch (err) {
+        this.$router.push('/@error');
+        console.log(err);
+      }
+    }
   },
 };
 </script>

@@ -140,7 +140,7 @@ export default {
 
   GET_CONTENT: async ({ commit, dispatch, state }, payload) => {
     try {
-      const content = await AXIOS_API_SERVER.get(
+      const content = await AXIOS_API.get(
         `/api/actions/getContent/${payload.limit || 30}/${
           payload.userId ? payload.userId : ''
         }`,

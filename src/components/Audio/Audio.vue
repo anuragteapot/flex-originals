@@ -272,7 +272,7 @@ export default {
       this.$router.push('/app/@error');
     }
 
-    this.changeSong();
+    // this.changeSong();
 
     if (typeof window !== 'undefined') {
       window.addEventListener('keydown', this.detectKeypress);

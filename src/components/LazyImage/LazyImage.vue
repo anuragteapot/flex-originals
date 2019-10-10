@@ -81,10 +81,12 @@ export default {
       this.cachedImage();
     },
     onError() {
-      console.warn(
+      // if (process.env.NODE_ENV !== 'production') {
+      console.error(
         `Image load failed\n\n` + `src: ${this.normalisedSrc.src}`,
         this,
       );
+      // }
       this.$emit('error', this.src);
     },
     getSrc() {
@@ -99,12 +101,14 @@ export default {
           image
             .decode()
             .catch(err => {
-              console.log(
+              // if (process.env.NODE_ENV !== 'production') {
+              console.warn(
                 `Failed to decode image, trying to render anyway\n\n` +
                   `src: ${this.normalisedSrc.src}` +
                   (err.message ? `\nOriginal error: ${err.message}` : ''),
                 this,
               );
+              // }
             })
             .then(this.onLoad);
         } else {

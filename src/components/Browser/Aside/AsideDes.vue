@@ -1,5 +1,5 @@
 <template>
-  <aside :class="`features ${theme}`" v-if="isAuthenticated">
+  <aside :class="`features ${theme}`" v-if="user.id != ''">
     <header class="features-header focusable">
       <img class="features-header-name" src="/public/text_logo2.png" alt="logo" />
     </header>
@@ -60,7 +60,9 @@ import * as types from './../../../store/mutation-types';
 export default {
   name: 'lazy-aside',
   data() {
-    return {};
+    return {
+      user: {},
+    };
   },
   computed: {
     settings() {
@@ -69,22 +71,19 @@ export default {
     theme() {
       return this.$store.state.theme;
     },
-    isAuthenticated() {
-      return this.$store.state.isAuthenticated;
-    },
     channels() {
       return this.$store.state.following;
     },
-    user() {
-      return this.$user.getUser();
-    },
   },
   async beforeMount() {
-    if (this.user) {
-      const res = await this.$store.dispatch('GET_FOLLOWERS', {
-        followId: this.user.id,
-      });
-      this.$store.commit(types.SET_FOLLOWING, res.data);
+    if (typeof window != 'undefined') {
+      this.user = window.localStorage.getItem('userInfo');
+      if (this.user) {
+        const res = await this.$store.dispatch('GET_FOLLOWERS', {
+          followId: this.user.id,
+        });
+        this.$store.commit(types.SET_FOLLOWING, res.data);
+      }
     }
   },
 };

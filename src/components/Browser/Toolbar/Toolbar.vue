@@ -37,14 +37,13 @@ import * as types from './../../../store/mutation-types';
 
 export default {
   name: 'toolbar',
+  data() {
+    return {
+      appDrawer: false,
+    };
+  },
   computed: {
-    ...mapGetters([
-      'isMobile',
-      'isLoading',
-      'appDrawer',
-      'isAuthenticated',
-      'theme',
-    ]),
+    ...mapGetters(['isMobile', 'isLoading', 'isAuthenticated', 'theme']),
     search: {
       set(val) {
         this.$store.commit(types.SET_SEARCH_QUERY, val);
@@ -60,13 +59,20 @@ export default {
   methods: {
     toggleMenu: function() {
       if (this.appDrawer) {
-        window.localStorage.setItem('APP_DRAWER', false);
-        this.$store.commit(types.APP_DRAWER, false);
+        this.$emit('toggleAppDrawer', false);
+        this.appDrawer = false;
+        window.localStorage.removeItem('APP_DRAWER');
       } else {
-        this.$store.commit(types.APP_DRAWER, true);
+        this.$emit('toggleAppDrawer', true);
+        this.appDrawer = true;
         window.localStorage.setItem('APP_DRAWER', true);
       }
     },
+  },
+  beforeMount() {
+    if (typeof window !== 'undefined') {
+      this.appDrawer = window.localStorage.getItem('APP_DRAWER');
+    }
   },
 };
 </script>

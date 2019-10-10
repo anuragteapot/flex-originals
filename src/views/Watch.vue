@@ -12,14 +12,13 @@
     <aside-des v-if="!isMobile && appDrawer"></aside-des>
 
     <div class="main-container">
-      <toolbar></toolbar>
+      <toolbar @toggleAppDrawer="toggleAppDrawer"></toolbar>
       <watch></watch>
     </div>
   </div>
 </template>
 
 <script>
-import * as types from './../store/mutation-types.js';
 import watch from './../components/Browser/videoViewer/videoViewer';
 import asideAction from './../components/Browser/Aside/AsideAction';
 import asideDes from './../components/Browser/Aside/AsideDes';
@@ -30,7 +29,9 @@ import { mapGetters } from 'vuex';
 export default {
   name: 'media-browser',
   data() {
-    return {};
+    return {
+      appDrawer: false,
+    };
   },
   components: {
     watch,
@@ -39,19 +40,32 @@ export default {
     asideAction,
   },
   computed: {
-    ...mapGetters(['isLoading', 'appDrawer', 'isMobile']),
+    ...mapGetters(['isLoading', 'isMobile']),
   },
   methods: {
+    toggleAppDrawer: function(val) {
+      this.appDrawer = val;
+    },
     toggleMenu: function() {
       if (this.appDrawer) {
-        this.$store.commit(types.APP_DRAWER, false);
+        this.appDrawer = false;
+        window.localStorage.removeItem('APP_DRAWER');
       } else {
-        this.$store.commit(types.APP_DRAWER, true);
+        this.appDrawer = true;
+        window.localStorage.setItem('APP_DRAWER', true);
       }
     },
   },
   async beforeMount() {
     await this.$store.dispatch('GET_CONTENT', {});
+    if (typeof window !== 'undefined') {
+      window.localStorage.removeItem('APP_DRAWER');
+      if (window.localStorage.getItem('APP_DRAWER')) {
+        this.appDrawer = true;
+      } else {
+        this.appDrawer = false;
+      }
+    }
   },
 };
 </script>

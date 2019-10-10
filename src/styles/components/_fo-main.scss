@@ -73,6 +73,10 @@ p {
   cursor: default;
   line-height: inherit;
   overflow: hidden;
+  
+  &.overflow {
+    overflow: visible !important;
+  }
 }
 
 .fade-enter-active,

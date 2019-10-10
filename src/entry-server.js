@@ -40,6 +40,7 @@ export default context => {
           ({ asyncData }) =>
             asyncData &&
             asyncData({
+              isServer: true,
               store,
               route: router.currentRoute,
             }),

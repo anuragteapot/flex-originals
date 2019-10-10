@@ -1,5 +1,5 @@
 import AXIOS_API from './../api/axios';
-// import AXIOS_API_SERVER from './../api/axiosServer';
+import AXIOS_API_SERVER from './../api/axiosServer';
 import handleError from './../api/handleError';
 import * as types from './../store/mutation-types';
 
@@ -138,17 +138,26 @@ export default {
     }
   },
 
-  GET_CONTENT: async ({ commit, dispatch, state }, payload) => {
+  GET_CONTENT: async (
+    { commit, dispatch, state },
+    { userId, limit, isServer },
+  ) => {
     try {
-      const content = await AXIOS_API.get(
-        `/api/actions/getContent/${payload.limit || 30}/${
-          payload.userId ? payload.userId : ''
-        }`,
-      );
+      let content = undefined;
+
+      if (isServer) {
+        content = await AXIOS_API_SERVER.get(
+          `/api/actions/getContent/${limit || 30}/${userId ? userId : ''}`,
+        );
+      } else {
+        content = await AXIOS_API.get(
+          `/api/actions/getContent/${limit || 30}/${userId ? userId : ''}`,
+        );
+      }
 
       commit(types.SET_CONTENT, content.data);
 
-      if (payload.userId && content.data.user && content.data.settings) {
+      if (userId && content.data.user && content.data.settings) {
         commit(types.SET_CONTENT_USER, {
           user: content.data.user,
           settings: content.data.settings,

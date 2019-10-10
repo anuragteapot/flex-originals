@@ -10,6 +10,7 @@ Vue.mixin({
 
     if (asyncData) {
       asyncData({
+        isServer: false,
         store: this.$store,
         route: to,
       })
@@ -48,7 +49,9 @@ router.onReady(() => {
       return next();
     }
 
-    Promise.all(asyncDataHooks.map(hook => hook({ store, route: to })))
+    Promise.all(
+      asyncDataHooks.map(hook => hook({ isServer: false, store, route: to })),
+    )
       .then(() => {
         next();
       })

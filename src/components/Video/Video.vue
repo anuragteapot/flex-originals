@@ -31,7 +31,7 @@
       class="fo-video-player__media"
       ref="media"
       @click="playOrPause"
-      controlslist="”nodownload”"
+      controlslist="nodownload"
     ></video>
     <img v-if="error" class="video__error" src="/public/videoerror.gif" alt="videoerror" />
     <div

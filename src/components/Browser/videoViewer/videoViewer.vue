@@ -11,7 +11,7 @@
                     <i class="fas fa-exclamation-circle"></i> Video unavaliable
                   </p>
                 </div>
-                <div :class="`video-wrapper ${ isMobile ? 'mobile' : ''}`">
+                <div v-if="!isMobile" :class="`video-wrapper ${ isMobile ? 'mobile' : ''}`">
                   <fo-video-player
                     :src="videoSource"
                     v-if="!videoUnavaliable"
@@ -21,6 +21,9 @@
                     :videoInfo="video"
                     :disablekey="comment.length > 0"
                   ></fo-video-player>
+                </div>
+                <div v-else class="video-wrapper">
+                  <default-video-player :src="videoSource"></default-video-player>
                 </div>
                 <div :class="`video_actions ${theme}`" v-if="!videoUnavaliable">
                   <p class="video__name">{{ video.title}}</p>

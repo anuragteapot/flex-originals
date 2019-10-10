@@ -33,6 +33,16 @@ export default {
       appDrawer: false,
     };
   },
+  asyncData({
+    store,
+    route: {
+      query: { v },
+    },
+  }) {
+    return store.dispatch('GET_VIDEO', {
+      id: v,
+    });
+  },
   components: {
     watch,
     toolbar,

@@ -10,7 +10,7 @@
               </form>
               <div class="grid grid--half">
                 <div class="video-wrapper" v-if="uploadData.videoFile">
-                  <fo-video-player :src="uploadData.videoFile" :disablekey="true"></fo-video-player>
+                  <default-video-player :src="uploadData.videoFile"></default-video-player>
                 </div>
                 <div class="thumbnails__wrapper" v-show="type == 'video'">
                   <h3>Select Thumbnail</h3>

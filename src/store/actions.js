@@ -1,4 +1,5 @@
 import AXIOS_API from './../api/axios';
+import AXIOS_API_SERVER from './../api/axiosServer';
 import handleError from './../api/handleError';
 import * as types from './../store/mutation-types';
 
@@ -139,7 +140,7 @@ export default {
 
   GET_CONTENT: async ({ commit, dispatch, state }, payload) => {
     try {
-      const content = await AXIOS_API.get(
+      const content = await AXIOS_API_SERVER.get(
         `/api/actions/getContent/${payload.limit || 30}/${
           payload.userId ? payload.userId : ''
         }`,

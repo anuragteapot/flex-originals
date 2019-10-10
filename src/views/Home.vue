@@ -1,15 +1,19 @@
 <template>
   <div class="fo-browser">
-    <div v-if="isMobile" :class="`nav-offcanvas ${appDrawer ? 'open' : ''}`">
+    <div v-show="isMobile" :class="`nav-offcanvas ${appDrawer ? 'open' : ''}`">
       <div class="nav-offcanvas-menu">
         <aside-action></aside-action>
         <aside-des></aside-des>
       </div>
     </div>
-    <div v-if="isMobile" :class="`offcanvas-overlay ${appDrawer ? 'on' : ''}`" @click="toggleMenu"></div>
+    <div
+      v-show="isMobile"
+      :class="`offcanvas-overlay ${appDrawer ? 'on' : ''}`"
+      @click="toggleMenu"
+    ></div>
 
-    <aside-action v-if="!isMobile && appDrawer"></aside-action>
-    <aside-des v-if="!isMobile && appDrawer"></aside-des>
+    <aside-action v-show="!isMobile && appDrawer"></aside-action>
+    <aside-des v-show="!isMobile && appDrawer"></aside-des>
 
     <div class="main-container">
       <toolbar @toggleAppDrawer="toggleAppDrawer"></toolbar>
@@ -30,7 +34,7 @@ export default {
   name: 'fo-home',
   data() {
     return {
-      appDrawer: false,
+      appDrawer: true,
     };
   },
   components: {
@@ -42,12 +46,12 @@ export default {
   computed: {
     ...mapGetters(['isLoading', 'isMobile']),
   },
-   // We only fetch the item itself before entering the view, because
+  // We only fetch the item itself before entering the view, because
   // it might take a long time to load threads with hundreds of comments
   // due to how the HN Firebase API works.
- // asyncData ({ store }) {
-  //  return store.dispatch('GET_CONTENT', {});
- // },
+  asyncData({ store }) {
+    return store.dispatch('GET_CONTENT', {});
+  },
   methods: {
     toggleAppDrawer: function(val) {
       this.appDrawer = val;
@@ -63,7 +67,7 @@ export default {
     },
   },
   async beforeMount() {
-   await this.$store.dispatch('GET_CONTENT', {});
+    // await this.$store.dispatch('GET_CONTENT', {});
     if (typeof window !== 'undefined') {
       if (window.localStorage.getItem('APP_DRAWER')) {
         this.appDrawer = true;

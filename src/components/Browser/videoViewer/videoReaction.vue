@@ -1,13 +1,13 @@
 <template>
   <div class="feed">
     <button class="like-btn fo-button">
-      <emoji-like v-if="like-1 == 0"></emoji-like>
-      <emoji-love v-else-if="like-1 == 1"></emoji-love>
-      <emoji-laughing v-else-if="like-1 == 2"></emoji-laughing>
-      <emoji-thinking v-else-if="like-1 == 3"></emoji-thinking>
-      <emoji-sad v-else-if="like-1 == 4"></emoji-sad>
-      <emoji-angry v-else-if="like-1 == 5"></emoji-angry>
-      <emoji-no-like v-else></emoji-no-like>
+      <emoji-like v-show="like-1 == 0"></emoji-like>
+      <emoji-love v-show="like-1 == 1"></emoji-love>
+      <emoji-laughing v-show="like-1 == 2"></emoji-laughing>
+      <emoji-thinking v-show="like-1 == 3"></emoji-thinking>
+      <emoji-sad v-show="like-1 == 4"></emoji-sad>
+      <emoji-angry v-show="like-1 == 5"></emoji-angry>
+      <emoji-no-like v-show="like -1 == -1"></emoji-no-like>
       <div class="reaction-box">
         <div class="reaction-icon show">
           <label>Like</label>

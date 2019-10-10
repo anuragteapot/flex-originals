@@ -29,10 +29,10 @@
         @click="open"
         :active="item.id == $route.query.a || selected"
       ></lazy-image>
-      <i class="far fa-2x fa-check-circle" v-if="selected"></i>
+      <i class="far fa-2x fa-check-circle" v-show="selected"></i>
       <i
         class="fas fa-play fa-2x file-icon"
-        v-if="item.id !== $route.query.a && !editMode"
+        v-show="item.id !== $route.query.a && !editMode"
         aria-hidden="true"
       ></i>
 

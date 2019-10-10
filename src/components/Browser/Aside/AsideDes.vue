@@ -1,5 +1,5 @@
 <template>
-  <aside :class="`features ${theme}`" v-if="user.id != ''">
+  <aside :class="`features ${theme}`" v-if="user.id !== ''">
     <header class="features-header focusable">
       <img class="features-header-name" src="/public/text_logo2.png" alt="logo" />
     </header>
@@ -77,7 +77,7 @@ export default {
   },
   async beforeMount() {
     if (typeof window != 'undefined') {
-      this.user = window.localStorage.getItem('userInfo');
+      this.user = this.$user.getUser();
       if (this.user) {
         const res = await this.$store.dispatch('GET_FOLLOWERS', {
           followId: this.user.id,

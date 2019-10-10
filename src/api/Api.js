@@ -28,7 +28,7 @@ export default class api {
         window.location.host == 'flexoriginals.ml'
       ) {
         setTimeout(() => {
-          Notification.requestPermission(status => {
+          Notification.requestPermission(() => {
 //             console.log('Notification permission status:', status);
           });
         }, 3000);

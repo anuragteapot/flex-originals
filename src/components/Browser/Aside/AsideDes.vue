@@ -1,5 +1,5 @@
 <template>
-  <aside :class="`features ${theme}`" v-show="user.id">
+  <aside :class="`features ${theme}`" v-show="isAuth">
     <header class="features-header focusable">
       <img class="features-header-name" src="/public/text_logo2.png" alt="logo" />
     </header>
@@ -68,6 +68,9 @@ export default {
     },
     theme() {
       return this.$store.state.theme;
+    },
+    isAuth() {
+      return this.$store.state.isAuthenticated;
     },
     channels() {
       return this.$store.state.following;

@@ -74,14 +74,12 @@ export default {
   },
   asyncData({
     store,
-    isServer,
-    route: {
-      params: { id },
-    },
+    isServer
   }) {
     if(store.state.user.id) {
     return store.dispatch('FIND_SETTINGS', {
         uid: store.state.user.id,
+        isServer
       });
       } else {
         return Promise.resolve();

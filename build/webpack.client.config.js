@@ -1,27 +1,27 @@
-const webpack = require("webpack");
-const merge = require("webpack-merge");
-const VueSSRClientPlugin = require("vue-server-renderer/client-plugin");
-const baseConfig = require("./webpack.base.config");
-const SWPrecachePlugin = require("sw-precache-webpack-plugin");
+const webpack = require('webpack');
+const merge = require('webpack-merge');
+const VueSSRClientPlugin = require('vue-server-renderer/client-plugin');
+const baseConfig = require('./webpack.base.config');
+const SWPrecachePlugin = require('sw-precache-webpack-plugin');
 
 const config = merge(baseConfig, {
   entry: {
-    app: "./src/entry-client.js",
+    app: './src/entry-client.js',
   },
 
   optimization: {
     runtimeChunk: {
       // extract webpack runtime & manifest to avoid vendor chunk hash changing
       // on every build.
-      name: "manifest",
+      name: 'manifest',
     },
 
     // extract vendor chunks for better caching
     splitChunks: {
-      chunks: "initial",
+      chunks: 'initial',
       cacheGroups: {
         vendor: {
-          name: "vendor",
+          name: 'vendor',
           test(module) {
             // a module is extracted into the vendor chunk if...
             return (
@@ -38,29 +38,33 @@ const config = merge(baseConfig, {
 
   plugins: [
     new webpack.DefinePlugin({
-      "process.env.VUE_ENV": '"client"',
-      "process.browser": true,
-      "process.client": true,
-      "process.server": false,
+      'process.env.VUE_ENV': '"client"',
+      'process.browser': true,
+      'process.client': true,
+      'process.server': false,
     }),
 
     new VueSSRClientPlugin(),
   ],
 });
 
-if (process.env.NODE_ENV === "production") {
+if (process.env.NODE_ENV === 'production') {
   config.plugins.push(
     // auto generate service worker
     new SWPrecachePlugin({
-      cacheId: "vue-flex",
-      filename: "service-worker.js",
+      cacheId: 'vue-flex',
+      filename: 'service-worker.js',
       minify: true,
       dontCacheBustUrlsMatching: /./,
       staticFileGlobsIgnorePatterns: [/\.map$/, /\.json$/],
       runtimeCaching: [
         {
-          urlPattern: "/",
-          handler: "networkFirst",
+          urlPattern: '/',
+          handler: 'networkFirst',
+        },
+        {
+          urlPattern: '/app/@home',
+          handler: 'networkFirst',
         },
       ],
     }),

@@ -392,7 +392,6 @@
           }
 
           .comment-box .comment-name {
-            color: white;
             font-size: 14px;
             font-weight: 700;
             float: left;
@@ -400,7 +399,7 @@
           }
 
           .comment-box .comment-name a {
-            color: white;
+            color: black;
             text-decoration: none;
           }
 
@@ -415,7 +414,6 @@
           .comment-box .comment-content {
             padding: 12px;
             font-size: 15px;
-            color: #949191;
             -webkit-border-radius: 0 0 4px 4px;
             -moz-border-radius: 0 0 4px 4px;
             border-radius: 0 0 4px 4px;
@@ -423,14 +421,12 @@
 
           .comment-box .comment-name.by-author,
           .comment-box .comment-name.by-author a {
-            color: white;
             text-decoration: none;
           }
 
           .comment-box .comment-name.by-author:after {
             content: 'autor';
-            background: #03658c;
-            color: #fff;
+            background: $color-theme;
             font-size: 12px;
             padding: 3px 5px;
             font-weight: 700;

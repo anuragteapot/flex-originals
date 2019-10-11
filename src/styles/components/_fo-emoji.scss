@@ -6,8 +6,10 @@
     outline: none;
     padding: 0 10px;
     cursor: pointer;
+    overflow: visible !important;
     z-index: 50;
   }
+
   .like-btn .reaction-box {
     width: 290px;
     height: 55px;

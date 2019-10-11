@@ -62,6 +62,13 @@ p {
   background-color: $color-error !important;
 }
 
+body:not(.user-is-tabbing) button:focus,
+body:not(.user-is-tabbing) input:focus,
+body:not(.user-is-tabbing) select:focus,
+body:not(.user-is-tabbing) textarea:focus {
+  outline: none;
+}
+
 .fo-button {
   border: none;
   background-color: transparent;
@@ -73,7 +80,7 @@ p {
   cursor: default;
   line-height: inherit;
   overflow: hidden;
-  
+
   &.overflow {
     overflow: visible !important;
   }
@@ -429,15 +436,14 @@ p {
   }
 
   .menu input {
-    color: black;
     height: 1.9rem;
-    border-radius: 0.25rem;
-    padding: 0 0.5rem;
+    // border-radius: 0.25rem;
+    padding: 0 1rem;
     border: none;
     margin: 0 5px 0 0;
     background: #fafafa;
-    border: 1px solid gray;
-    border-radius: 0.25rem;
+    border: 1px solid lightgrey;
+    // border-radius: 0.25rem;
   }
 
   .menu input:focus {

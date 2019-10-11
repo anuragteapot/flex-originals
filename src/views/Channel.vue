@@ -3,7 +3,7 @@
     <div v-show="isMobile" :class="`nav-offcanvas ${appDrawer ? 'open' : ''}`">
       <div class="nav-offcanvas-menu">
         <aside-action></aside-action>
-        <aside-des></aside-des>
+        <aside-des v-show="isAuthenticated"></aside-des>
       </div>
     </div>
     <div
@@ -13,7 +13,7 @@
     ></div>
 
     <aside-action v-show="!isMobile && appDrawer"></aside-action>
-    <aside-des v-show="!isMobile && appDrawer"></aside-des>
+    <aside-des v-show="!isMobile && appDrawer && isAuthenticated"></aside-des>
     <div class="main-container">
       <toolbar @toggleAppDrawer="toggleAppDrawer"></toolbar>
       <channel></channel>
@@ -43,7 +43,7 @@ export default {
     asideAction,
   },
   computed: {
-    ...mapGetters(['isLoading', 'isMobile']),
+    ...mapGetters(['isLoading', 'isMobile', 'isAuthenticated']),
   },
   // We only fetch the item itself before entering the view, because
   // it might take a long time to load threads with hundreds of comments

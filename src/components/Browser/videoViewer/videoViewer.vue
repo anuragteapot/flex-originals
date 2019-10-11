@@ -22,7 +22,7 @@
                     :disablekey="comment.length > 0"
                   ></fo-video-player>
                 </div>
-                <div v-else class="video-wrapper">
+                <div v-else :class="`video-wrapper ${ isMobile ? 'mobile' : ''}`">
                   <default-video-player :src="videoSource"></default-video-player>
                 </div>
                 <div :class="`video_actions ${theme}`" v-show="!videoUnavaliable">
@@ -56,8 +56,16 @@
                       <button class="edit__video" v-show="user.id == loggedUser.id">
                         <router-link :to="`/app/@editvideo?v=${this.video.id}`">Edit Video</router-link>
                       </button>
-                      <button class="following" v-show="(user.id != loggedUser.id) && following" @click="unFollow">Following</button>
-                      <button class="follow" v-show="(user.id != loggedUser.id) && !following" @click="follow">Follow</button>
+                      <button
+                        class="following"
+                        v-show="(user.id != loggedUser.id) && following"
+                        @click="unFollow"
+                      >Following</button>
+                      <button
+                        class="follow"
+                        v-show="(user.id != loggedUser.id) && !following"
+                        @click="follow"
+                      >Follow</button>
                     </div>
                   </div>
 
@@ -92,19 +100,16 @@
                             <div class="comment-box">
                               <div class="comment-head">
                                 <h6 class="comment-name by-author">
-                                  <a href="http://creaticode.com/blog">Anurag Kumar</a>
+                                  <a href="https://anu1601cs.github.io/my_web/">Anurag Kumar</a>
                                 </h6>
-                                <span>hace 20 minutos</span>
+                                <span>Just now</span>
 
                                 <i class="fa fa-heart"></i>
                               </div>
-                              <div class="comment-content">
-                                Presenting Bekhayali full video song, In the voice of Arijit Singh, a song that evokes the emotion of heartbreak & love at once.
-                                The upcoming Bollywood movie Kabir Singh is starring Shahid Kapoor and Kiara Advani.
-                              </div>
+                              <div class="comment-content">Comment feature coming soon.... :)</div>
                             </div>
                           </div>
-                          <ul class="comments-list reply-list">
+                          <!-- <ul class="comments-list reply-list">
                             <li>
                               <div class="comment-avatar">
                                 <img :src="settings.profileAvatar" alt />
@@ -112,7 +117,7 @@
                               <div class="comment-box">
                                 <div class="comment-head">
                                   <h6 class="comment-name">
-                                    <a href="http://creaticode.com/blog">Amit raj</a>
+                                    <a href="https://anu1601cs.github.io/my_web/">Amit raj</a>
                                   </h6>
                                   <span>hace 10 minutos</span>
 
@@ -126,14 +131,13 @@
                             </li>
 
                             <li>
-                              <!-- Avatar -->
                               <div class="comment-avatar">
                                 <img :src="settings.profileAvatar" alt />
                               </div>
                               <div class="comment-box">
                                 <div class="comment-head">
                                   <h6 class="comment-name by-author">
-                                    <a href="http://creaticode.com/blog">Anurag Kumar</a>
+                                    <a href="https://anu1601cs.github.io/my_web/">Anurag Kumar</a>
                                   </h6>
                                   <span>hace 10 minutos</span>
 
@@ -145,10 +149,10 @@
                                 </div>
                               </div>
                             </li>
-                          </ul>
+                          </ul>-->
                         </li>
 
-                        <li>
+                        <!-- <li>
                           <div class="comment-main-level">
                             <div class="comment-avatar">
                               <img :src="settings.profileAvatar" alt />
@@ -156,7 +160,7 @@
                             <div class="comment-box">
                               <div class="comment-head">
                                 <h6 class="comment-name">
-                                  <a href="http://creaticode.com/blog">Amit Raj</a>
+                                  <a href="https://anu1601cs.github.io/my_web/">Amit Raj</a>
                                 </h6>
                                 <span>hace 10 minutos</span>
 
@@ -168,7 +172,7 @@
                               </div>
                             </div>
                           </div>
-                        </li>
+                        </li>-->
                       </ul>
                     </div>
                     <div class="load__more">
@@ -207,7 +211,6 @@ export default {
     following: false,
     videoSource: '',
     videoId: '',
-    lazyImage: '/public/logo.png',
     analytic: '',
     user: {},
     settings: {},

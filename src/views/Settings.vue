@@ -46,19 +46,6 @@ export default {
   computed: {
     ...mapGetters(['isLoading', 'isMobile', 'isAuthenticated']),
   },
-    asyncData({
-    store,
-    isServer
-  }) {
-    if(store.state.user.id) {
-    return store.dispatch('FIND_SETTINGS', {
-        uid: store.state.user.id,
-        isServer
-      });
-      } else {
-        return Promise.resolve();
-      }
-  },
   methods: {
     toggleAppDrawer: function(val) {
       this.appDrawer = val;

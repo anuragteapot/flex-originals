@@ -199,12 +199,12 @@ export default {
       this.$store.commit(types.SET_SETTINGS, settings);
     },
   },
- // async beforeMount() {
- //   const settings = await this.$store.dispatch('FIND_SETTINGS', {
-  //    uid: this.$user.get('$userId'),
-  //  });
+ async beforeMount() {
+   const settings = await this.$store.dispatch('FIND_SETTINGS', {
+     uid: this.$user.get('$userId'),
+    });
 
-   // this.$store.commit(types.SET_SETTINGS, settings);
- // },
+   this.$store.commit(types.SET_SETTINGS, settings);
+ },
 };
 </script>

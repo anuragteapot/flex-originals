@@ -60,10 +60,7 @@ export default [
     path: '/app/@channel/:id',
     name: '@channel',
     component: () =>
-      import(/* webpackChunkName: "channel" */ './../views/Channel.vue'),
-    meta: {
-      requiresAuth: true,
-    },
+      import(/* webpackChunkName: "channel" */ './../views/Channel.vue')
   },
   {
     path: '/login',

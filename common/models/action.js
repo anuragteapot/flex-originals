@@ -367,6 +367,7 @@ module.exports = function(Action) {
           audioOwnerId: true,
           id: true,
           title: true,
+          audioFile: true,
           thumbImage: true
         },
         where: { audioOwnerId: id, visibility: { lt: 2 } },

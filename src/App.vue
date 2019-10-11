@@ -72,6 +72,21 @@ export default {
       window.removeEventListener('resize', this.onResize);
     }
   },
+  asyncData({
+    store,
+    isServer,
+    route: {
+      params: { id },
+    },
+  }) {
+    if(store.state.user.id) {
+    return store.dispatch('FIND_SETTINGS', {
+        uid: store.state.user.id,
+      });
+      } else {
+        return Promise.resolve();
+      }
+  },
   async beforeMount() {
     if (typeof window !== 'undefined') {
       window.addEventListener('online', this.updateOnlineStatus);
@@ -82,12 +97,12 @@ export default {
     } else {
       this.$store.commit(types.IS_AUTHENTICATED, false);
     }
-    if (this.$user.get('$userId')) {
-      const settings = await this.$store.dispatch('FIND_SETTINGS', {
-        uid: this.$user.get('$userId'),
-      });
-      this.$store.commit(types.SET_SETTINGS, settings);
-    }
+   // if (this.$user.get('$userId')) {
+   //   const settings = await this.$store.dispatch('FIND_SETTINGS', {
+    //    uid: this.$user.get('$userId'),
+    //  });
+    //  this.$store.commit(types.SET_SETTINGS, settings);
+   // }
   },
   created() {
     if (typeof window !== 'undefined') {

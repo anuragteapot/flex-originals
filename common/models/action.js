@@ -354,7 +354,6 @@ module.exports = function(Action) {
           videoOwnerId: true,
           id: true,
           title: true,
-          videoFile: true,
           thumbImage: true
         },
         where: { videoOwnerId: id, visibility: { lt: 2 } },
@@ -368,7 +367,6 @@ module.exports = function(Action) {
           audioOwnerId: true,
           id: true,
           title: true,
-          audioFile: true,
           thumbImage: true
         },
         where: { audioOwnerId: id, visibility: { lt: 2 } },
@@ -384,7 +382,6 @@ module.exports = function(Action) {
           videoOwnerId: true,
           id: true,
           title: true,
-          videoFile: true,
           thumbImage: true
         },
         where: { visibility: 1 },

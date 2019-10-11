@@ -23,7 +23,7 @@
                   ></fo-video-player>
                 </div>
                 <div v-else :class="`video-wrapper ${ isMobile ? 'mobile' : ''}`">
-                  <default-video-player :src="videoSource"></default-video-player>
+                  <default-video-player v-show="!videoUnavaliable" :src="videoSource"></default-video-player>
                 </div>
                 <div :class="`video_actions ${theme}`" v-show="!videoUnavaliable">
                   <p class="video__name">{{ video.title}}</p>

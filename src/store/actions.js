@@ -251,9 +251,19 @@ export default {
     }
   },
 
-  FIND_SETTINGS: async ({ commit, dispatch, state }, payload) => {
+  FIND_SETTINGS: async ({ commit, dispatch, state }, { uid, isServer }) => {
     try {
-      return await AXIOS_API.get(`/api/users/findSetting/${payload.uid}`);
+      let settings = undefined;
+      
+      
+      if (isServer) {
+        settings = await AXIOS_API_SERVER.get(`/api/users/findSetting/${uid}`);
+      } else {
+        settings = await AXIOS_API.get(`/api/users/findSetting/${uid}`);
+      }
+      
+      commit(types.SET_SETTINGS, settings);
+      return settings;
     } catch (error) {
       return new handleError(commit, dispatch, state)._handleError(error);
     }

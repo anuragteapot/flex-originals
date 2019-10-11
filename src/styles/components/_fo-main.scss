@@ -396,19 +396,18 @@ body:not(.user-is-tabbing) textarea:focus {
       border-right: 1px solid #dadada !important;
     }
 
-    .menu__button {
-      padding: 5px 15px;
-      margin: 0 30px 0 0;
-      border-radius: 5px;
-      font-size: 15px;
-      cursor: pointer;
-      border: none;
-      background-color: #1e2124;
-      color: white;
+  .menu__button {
+    padding: 5px 15px;
+    margin: 0 30px 0 0;
+    border-radius: 5px;
+    font-size: 15px;
+    cursor: pointer;
+    border: 1px solid lightgrey;
+    background-color: #fafafa;
 
       &.active,
       &:hover {
-        background-color: #0e0f0f;
+        background-color: lightgrey;
       }
 
       i {

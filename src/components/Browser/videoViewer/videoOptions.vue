@@ -100,5 +100,11 @@
 <script>
 export default {
   name: 'video-options',
+  props: {
+    video: {
+      type: Object,
+      default: null,
+    },
+  },
 };
 </script>

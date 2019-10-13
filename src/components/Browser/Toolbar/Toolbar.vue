@@ -61,7 +61,7 @@ export default {
       if (this.appDrawer) {
         this.$emit('toggleAppDrawer', false);
         this.appDrawer = false;
-        window.localStorage.removeItem('APP_DRAWER');
+        window.localStorage.setItem('APP_DRAWER', false);
       } else {
         this.$emit('toggleAppDrawer', true);
         this.appDrawer = true;
@@ -71,7 +71,13 @@ export default {
   },
   beforeMount() {
     if (typeof window !== 'undefined') {
-      this.appDrawer = window.localStorage.getItem('APP_DRAWER');
+      if (window.localStorage.getItem('APP_DRAWER') == true) {
+        this.appDrawer = true;
+      } else if (window.localStorage.getItem('APP_DRAWER') == false) {
+        this.appDrawer = false;
+      } else {
+        this.appDrawer = true;
+      }
     }
   },
 };

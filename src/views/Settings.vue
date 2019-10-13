@@ -53,7 +53,7 @@ export default {
     toggleMenu: function() {
       if (this.appDrawer) {
         this.appDrawer = false;
-        window.localStorage.removeItem('APP_DRAWER');
+        window.localStorage.setItem('APP_DRAWER', false);
       } else {
         this.appDrawer = true;
         window.localStorage.setItem('APP_DRAWER', true);
@@ -62,10 +62,12 @@ export default {
   },
   async beforeMount() {
     if (typeof window !== 'undefined') {
-      if (window.localStorage.getItem('APP_DRAWER')) {
+      if (window.localStorage.getItem('APP_DRAWER') == true) {
         this.appDrawer = true;
-      } else {
+      } else if (window.localStorage.getItem('APP_DRAWER') == false) {
         this.appDrawer = false;
+      } else {
+        this.appDrawer = true;
       }
     }
   },

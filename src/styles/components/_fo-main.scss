@@ -435,14 +435,13 @@ body:not(.user-is-tabbing) textarea:focus {
   }
 
   .menu input {
-    height: 1.9rem;
-    // border-radius: 0.25rem;
+    height: 2rem;
+    border-radius: 0.25rem;
     padding: 0 1rem;
     border: none;
     margin: 0 5px 0 0;
     background: #fafafa;
     border: 1px solid lightgrey;
-    // border-radius: 0.25rem;
   }
 
   .menu input:focus {

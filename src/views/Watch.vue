@@ -56,7 +56,7 @@ export default {
     toggleMenu: function() {
       if (this.appDrawer) {
         this.appDrawer = false;
-        window.localStorage.removeItem('APP_DRAWER');
+        window.localStorage.setItem('APP_DRAWER', false);
       } else {
         this.appDrawer = true;
         window.localStorage.setItem('APP_DRAWER', true);
@@ -67,7 +67,7 @@ export default {
     // await this.$store.dispatch('GET_CONTENT', {});
     if (typeof window !== 'undefined') {
       window.localStorage.removeItem('APP_DRAWER');
-      if (window.localStorage.getItem('APP_DRAWER')) {
+      if (window.localStorage.getItem('APP_DRAWER') == true) {
         this.appDrawer = true;
       } else {
         this.appDrawer = false;

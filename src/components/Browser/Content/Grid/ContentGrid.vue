@@ -1,5 +1,8 @@
 <template>
   <div class="media-content-grid">
+    <!-- <div class="home__ advertisement__video">
+      <video src=""></video>
+    </div> -->
     <div class="loading--media" v-show="content.audio.length == 0 && content.video.length == 0">
       <div class="spinner">
         <div class="lds-spinner">

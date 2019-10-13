@@ -43,7 +43,7 @@ export default {
     };
   },
   computed: {
-    ...mapGetters(['isMobile', 'isLoading', 'isAuthenticated', 'theme']),
+    ...mapGetters(['isMobile', 'isAuthenticated', 'theme']),
     search: {
       set(val) {
         this.$store.commit(types.SET_SEARCH_QUERY, val);

@@ -39,8 +39,6 @@ export default {
     x: 0,
     y: 0,
   },
-  // The state of the infobar
-  showInfoBar: false,
   // The snackbar
   showsnackbar: {
     state: false,
@@ -56,12 +54,6 @@ export default {
   isMobile: false,
   // Token
   token: '',
-  // Select all files
-  selectAllFile: false,
-  // Select all files
-  selectAll: false,
-  // Select all folders
-  selectAllFolder: false,
   // The Search Query
   search: '',
 };

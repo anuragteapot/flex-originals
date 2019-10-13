@@ -44,7 +44,7 @@ export default {
     asideAction,
   },
   computed: {
-    ...mapGetters(['isLoading', 'isMobile', 'isAuthenticated']),
+    ...mapGetters(['isMobile', 'isAuthenticated']),
   },
   methods: {
     toggleAppDrawer: function(val) {

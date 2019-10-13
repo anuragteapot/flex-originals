@@ -44,7 +44,7 @@ export default {
     asideAction,
   },
   computed: {
-    ...mapGetters(['isLoading', 'isMobile', 'isAuthenticated']),
+    ...mapGetters(['isMobile', 'isAuthenticated']),
   },
   // We only fetch the item itself before entering the view, because
   // it might take a long time to load threads with hundreds of comments

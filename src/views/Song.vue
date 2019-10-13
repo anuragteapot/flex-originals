@@ -45,7 +45,7 @@ export default {
     asideAction,
   },
   computed: {
-    ...mapGetters(['isLoading', 'isMobile', 'isAuthenticated']),
+    ...mapGetters(['isMobile', 'isAuthenticated']),
   },
   asyncData({ isServer, store }) {
     return store.dispatch('GET_CONTENT', { isServer });

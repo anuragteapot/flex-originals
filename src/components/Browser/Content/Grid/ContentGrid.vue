@@ -15,7 +15,7 @@
         playsinline
         preload="metadata"
         style="object-fit: cover;"
-        src="/public/feature_video.mp4"
+        src="/public/320_feature_video.mp4"
         muted
       ></video>
     </div>

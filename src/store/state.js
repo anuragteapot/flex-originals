@@ -56,4 +56,16 @@ export default {
   token: '',
   // The Search Query
   search: '',
+  player: {
+    audio: {
+      data: {},
+      volume: 5,
+      isPlaying: false,
+    },
+    video: {
+      data: {},
+      volume: 5,
+      isPlaying: false,
+    },
+  },
 };

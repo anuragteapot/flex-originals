@@ -86,7 +86,7 @@
                           placeholder="Add your comment "
                         ></textarea>
                         <div class="v-comment__button">
-                          <button class="v-comment__button_submit">Comment</button>
+                          <button class="v-comment__button_submit" @click="doComment">Comment</button>
                         </div>
                       </div>
                     </div>
@@ -245,6 +245,11 @@ export default {
     videoReactions,
   },
   methods: {
+    doComment(){
+
+      console.log(this.$store.state.user.id);
+
+    },
     async unFollow() {
       const follow = await this.$store.dispatch('UN_FOLLOW', {
         followId: this.loggedUser.id,

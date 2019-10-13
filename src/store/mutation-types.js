@@ -23,6 +23,10 @@ export const SET_USER = 'SET_USER';
 export const SET_FOLLOWING = 'SET_FOLLOWING';
 export const SET_EDIT_MODE = 'SET_EDIT_MODE';
 
+export const SET_PLAYER = 'SET_PLAYER';
+export const SET_PLAYER_ACTION = 'SET_PLAYER_ACTION';
+
+
 // Confirm Folder Menu
 export const APP_DRAWER = 'APP_DRAWER';
 

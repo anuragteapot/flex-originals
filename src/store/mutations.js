@@ -196,4 +196,32 @@ export default {
       state.selectedItems = [];
     }
   },
+
+  /**
+   * Select browser items
+   * @param state
+   * @param payload the items
+   */
+  [types.SET_PLAYER]: (state, { type, data }) => {
+    if (type == 'audio') {
+      state.player.audio.data = data;
+    } else if (type == 'video') {
+      state.player.video.data = data;
+    }
+  },
+
+  /**
+   * Select browser items
+   * @param state
+   * @param payload the items
+   */
+  [types.SET_PLAYER_ACTION]: (state, { type, volume, isPlaying }) => {
+    if (type == 'audio') {
+      state.player.audio.volume = volume;
+      state.player.audio.isPlaying = isPlaying;
+    } else if (type == 'video') {
+      state.player.video.volume = volume;
+      state.player.video.isPlaying = isPlaying;
+    }
+  },
 };

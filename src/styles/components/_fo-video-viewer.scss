@@ -400,7 +400,6 @@
           }
 
           .comment-box .comment-name a {
-            color: black;
             text-decoration: none;
           }
 
@@ -426,7 +425,7 @@
           }
 
           .comment-box .comment-name.by-author:after {
-            content: 'autor';
+            content: 'Creator Flex Originals';
             background: $color-theme;
             font-size: 12px;
             padding: 3px 5px;

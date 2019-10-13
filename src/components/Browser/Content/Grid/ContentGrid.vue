@@ -1,8 +1,24 @@
 <template>
   <div class="media-content-grid">
-    <!-- <div class="home__ advertisement__video">
-      <video src=""></video>
-    </div> -->
+    <div class="home__advertisement__video" v-show=" !isMobile && $route.name == '@home'">
+      <div class="feature__text">
+        <p>INTRODUCING</p>
+        <h1>Flex Originals</h1>
+        <button class="fo-button">Learn More</button>
+      </div>
+      <video
+        ref="featureVideo"
+        class="feature__video"
+        controlslist="nodownload"
+        crossorigin="anonymous"
+        loop
+        playsinline
+        preload="metadata"
+        style="object-fit: cover;"
+        src="/public/feature_video.mp4"
+        muted
+      ></video>
+    </div>
     <div class="loading--media" v-show="content.audio.length == 0 && content.video.length == 0">
       <div class="spinner">
         <div class="lds-spinner">
@@ -60,6 +76,7 @@
 // import * as types from "./../../../../store/mutation-types";
 import musicThumb from './../../Items/MusicItem';
 import videoThumb from './../../Items/VideoItem';
+import { mapGetters } from 'vuex';
 
 export default {
   name: 'media-content-grid',
@@ -67,6 +84,7 @@ export default {
     src: './../../../../assets/musicLoading.png',
   }),
   computed: {
+    ...mapGetters(['isMobile', 'isAuthenticated']),
     layout() {
       const name = this.$route.name;
       if (name.split('@')[1]) {
@@ -88,6 +106,12 @@ export default {
   components: {
     videoThumb,
     musicThumb,
+  },
+  mounted() {
+    this.$refs.featureVideo.load();
+    setTimeout(() => {
+      this.$refs.featureVideo.play();
+    }, 5000);
   },
 };
 </script>

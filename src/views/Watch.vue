@@ -67,7 +67,7 @@ export default {
     // await this.$store.dispatch('GET_CONTENT', {});
     if (typeof window !== 'undefined') {
       window.localStorage.removeItem('APP_DRAWER');
-      if (window.localStorage.getItem('APP_DRAWER') == true) {
+      if (window.localStorage.getItem('APP_DRAWER') == 'true') {
         this.appDrawer = true;
       } else {
         this.appDrawer = false;

@@ -62,9 +62,9 @@ export default {
   },
   async beforeMount() {
     if (typeof window !== 'undefined') {
-      if (window.localStorage.getItem('APP_DRAWER') == true) {
+      if (window.localStorage.getItem('APP_DRAWER') == 'true') {
         this.appDrawer = true;
-      } else if (window.localStorage.getItem('APP_DRAWER') == false) {
+      } else if (window.localStorage.getItem('APP_DRAWER') == 'false') {
         this.appDrawer = false;
       } else {
         this.appDrawer = true;

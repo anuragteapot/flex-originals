@@ -62,10 +62,6 @@ if (process.env.NODE_ENV === 'production') {
           urlPattern: '/',
           handler: 'networkFirst',
         },
-        {
-          urlPattern: '/app/@home',
-          handler: 'networkFirst',
-        },
       ],
     }),
   );

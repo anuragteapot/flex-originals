@@ -25,14 +25,14 @@ export default class api {
 
       window.addEventListener('keydown', this.handleFirstTab);
 
-      if (
-        window.location.host == 'localhost' ||
-        window.location.host == 'flexoriginals.ml'
-      ) {
-        Notification.requestPermission(() => {
-          //             console.log('Notification permission status:', status);
-        });
-      }
+      // if (
+      //   window.location.host == 'localhost' ||
+      //   window.location.host == 'flexoriginals.ml'
+      // ) {
+      //   Notification.requestPermission(() => {
+      //     //             console.log('Notification permission status:', status);
+      //   });
+      // }
 
       if (
         (window.sessionStorage &&

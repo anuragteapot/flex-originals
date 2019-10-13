@@ -47,8 +47,8 @@ export default class handleError {
         break;
       case 401:
         this.commit(types.SHOW_MODAL, { state: true, type: 'MLogin' });
-        this.commit(types.SET_USER, null);
-        this.setUser(null);
+        this.commit(types.SET_USER, {});
+        this.setUser({});
         break;
       case 500:
         break;

@@ -107,11 +107,20 @@ export default {
     videoThumb,
     musicThumb,
   },
-  mounted() {
-    this.$refs.featureVideo.load();
+  methods:{
+   loadeddata(){
     setTimeout(() => {
       this.$refs.featureVideo.play();
     }, 5000);
+   }
   },
+  mounted() {
+    this.$refs.featureVideo.load();
+    this.media.addEventListener('loadeddata', this.loadeddata);
+  },
+  
+  beforeDestroy() {
+   this.media.removeEventListener('loadeddata', this.loadeddata);
+  }
 };
 </script>

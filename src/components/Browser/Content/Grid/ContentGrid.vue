@@ -116,11 +116,11 @@ export default {
   },
   mounted() {
     this.$refs.featureVideo.load();
-    this.media.addEventListener('loadeddata', this.loadeddata);
+    this.$refs.featureVideo.addEventListener('loadeddata', this.loadeddata);
   },
   
   beforeDestroy() {
-   this.media.removeEventListener('loadeddata', this.loadeddata);
+   this.$refs.featureVideo.removeEventListener('loadeddata', this.loadeddata);
   }
 };
 </script>

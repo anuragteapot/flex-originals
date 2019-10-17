@@ -5,7 +5,7 @@
       <router-link v-show="!isAuthenticated" to="/signup">Sign Up</router-link>
       <router-link v-show="!isAuthenticated" to="/login">Login</router-link>
       <a href @click.prevent="logout()" v-show="isAuthenticated">Logout</a>
-      <router-link to="/">Home</router-link>
+      <a href="https://github.com/anu1601cs">Github</a>
     </div>
   </div>
 </template>

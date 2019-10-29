@@ -32,11 +32,11 @@
           </div>
         </router-link>
       </div>
-      <div class="server focusable" role="button" aria-label="My Server" aria-selected="true">
+      <!-- <div class="server focusable" role="button" aria-label="My Server" aria-selected="true">
         <div class="server-icon">
           <i class="fas fa-cloud" style="color:white;"></i>
         </div>
-      </div>
+      </div> -->
       <div class="server focusable" role="button" aria-label="My Server" aria-selected="true">
         <div class="server-icon">
           <i class="fas fa-search" style="color:#f19600"></i>

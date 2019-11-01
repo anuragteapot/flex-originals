@@ -14,7 +14,7 @@
 <a href="https://youtu.be/z9oHNzA4pTk">Demo</a>
 
 <p align="center">
-  <img width="100%"  src="docs/images/3.png">
+  <img width="100%"  src="docs/images/3.jpg">
 </p>
 
 **Flex Originals** is an **opensource** project. Contributions are welcome

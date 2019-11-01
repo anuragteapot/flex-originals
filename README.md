@@ -37,6 +37,10 @@
 
 ## Project Setup & Scripts
 
+1. ffmpeg
+2. Ngnix Server
+3. Docker & Compose
+
 You can run the following scripts with `yarn` or `npm` like `yarn install`
 
 | Script       | Description                                          |

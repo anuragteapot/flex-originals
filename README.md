@@ -29,9 +29,11 @@
 
 1. Improve UI
 2. Improve Server
-3. Add redis
-4. Add video and audio processing.
-5. Make distributed server.
+3. Improve CDN
+4. Improve Players Video & Audio
+5. Add redis
+6. Add video and audio processing.
+7. Make distributed server.
 
 ## Project Setup & Scripts
 

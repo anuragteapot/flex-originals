@@ -13,7 +13,9 @@
 
 <a href="https://youtu.be/z9oHNzA4pTk">Demo</a>
 
-> **Note:** This loopback branch is under development because of addition of new UI, Loopback,Docker, Micro service and many more cool new features but, this was managed my small community :( LAMO Its me only :P
+<p align="center">
+  <img width="100%"  src="docs/images/3.png">
+</p>
 
 **Flex Originals** is an **opensource** project. Contributions are welcome
 
@@ -24,11 +26,6 @@
 3. Add redis
 4. Add video and audio processing.
 5. Make distributed server.
-
-- Fork the repo and star it :star:
-- Open issues :boom:
-- Raise PRs for issues :raised_hand:
-- Help on documentation :page_facing_up:
 
 ## Project Setup & Scripts
 
@@ -43,5 +40,10 @@ You can run the following scripts with `yarn` or `npm` like `yarn install`
 | `lint`       | Run eslint for the entire project                    |
 | `test`       | Run all tests                                        |
 | `test:watch` | Start tests in watch mode                            |
+
+- Fork the repo and star it :star:
+- Open issues :boom:
+- Raise PRs for issues :raised_hand:
+- Help on documentation :page_facing_up:
 
 Copyright (c) 2019, Anurag Kumar [Anurag Kumar](http://github.com/anu1601cs/)

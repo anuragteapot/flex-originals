@@ -17,6 +17,12 @@
   <img width="100%"  src="docs/images/3.jpg">
 </p>
 
+<h2 align="center">Architecture of project</h2>
+
+<p align="center">
+  <img width="100%"  src="docs/images/project.png">
+</p>
+
 **Flex Originals** is an **opensource** project. Contributions are welcome
 
 **Road Map**

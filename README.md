@@ -41,6 +41,7 @@
 1. ffmpeg
 2. Ngnix Server
 3. Docker & Compose
+4. MongoDB
 
 You can run the following scripts with `yarn` or `npm` like `yarn install`
 

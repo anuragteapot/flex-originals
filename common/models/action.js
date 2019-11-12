@@ -46,12 +46,12 @@ const EXTENSION = [
  * PROFILE IMAGE STORING STARTS
  */
 const s3 = new aws.S3({
-  accessKeyId: 'AKIA5HHMIXVQQUAJ7PQC',
-  secretAccessKey: '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',
+  accessKeyId: 'AKIA5HLLMXVQQUAJ7PQC',
+  secretAccessKey: '/i9vPu5dnksajNLUp8LjKBnb94rzAE/u80mjr9mVEq',
   Bucket:
     process.env.NODE_ENV === 'production'
-      ? 'flexoriginals'
-      : 'dev-flexoriginals'
+      ? 'flexo'
+      : 'dev-flexo'
 });
 
 module.exports = function(Action) {
@@ -81,8 +81,8 @@ module.exports = function(Action) {
     s3: s3,
     bucket:
       process.env.NODE_ENV === 'production'
-        ? 'flexoriginals'
-        : 'dev-flexoriginals',
+        ? 'flexor'
+        : 'dev-flexo',
     acl: 'public-read',
     contentType: multerS3.AUTO_CONTENT_TYPE,
     key: function(req, file, cb) {

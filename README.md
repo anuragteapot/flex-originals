@@ -3,11 +3,8 @@
 </p>
 
 <p align="center">
-<!-- <img src="https://travis-ci.org/lazyDrive/drive.svg?branch=loopback" alt="License"> -->
 <a href="https://discord.gg/4vgmhkK"><img src="https://img.shields.io/badge/chat-on%20discord-7289da.svg" alt="Chat"></a>
 <a href="https://circleci.com/gh/Anu1601CS/flex-originals/"><img src="https://circleci.com/gh/Anu1601CS/flex-originals/tree/feature.svg?style=svg" alt="Chat"></a>
-  <!-- <img src="https://circleci.com/gh/lazyDrive/drive.svg?style=svg"> -->
-  <!-- <img src="https://badges.greenkeeper.io/lazyDrive/drive.svg" alt="Greenkeeper badge"> -->
 </p> 
 
 <h2 align="center">Flex Originals</h2>

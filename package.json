@@ -60,7 +60,7 @@
     "@babel/preset-env": "^7.5.5",
     "@vue/test-utils": "^1.0.0-beta.29",
     "autoprefixer": "^9.6.1",
-    "nodemon": "^1.19.2",
+    "nodemon": "^2.0.0",
     "lint-staged": "^9.2.5",
     "babel-core": "^7.0.0-0",
     "babel-eslint": "^10.0.2",

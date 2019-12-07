@@ -69,23 +69,14 @@ If the installation was successful, you should be able to run the following comm
 If you need to update `npm`, you can make it using `npm`! Cool right? After running the following command, just open again the command line and be happy.<br>
     `$ npm install npm -g`
 ### MongoDB Project Setup
-> RUNNING
- - For command line options invoke:
-    `$ ./mongod --help`
- - To run a single server database:
-    `$ sudo mkdir -p /data/db`
-    `$ ./mongod`
-    `$ # The mongo javascript shell connects to localhost and test database by default:<br>
-     $ ./mongo`
+Follow this to install MongoDB in your computer.
+`https://docs.mongodb.com/manual/installation/`
+
 > INSTALLING COMPASS
  - You can install compass using the install_compass script packaged with MongoDB:<br>
     `$ ./install_compass`
   This will download the appropriate MongoDB Compass package for your platform
   and install it.
-> DRIVERS
-  - Client drivers for most programming languages are available at
-  `https://docs.mongodb.com/manual/applications/drivers/.` Use the shell
-  ("mongo") for administrative tasks.
 ### FFmpeg Project Setup
 - Download a static build.
 - Use 7-Zip to unpack it in the folder of your choice.

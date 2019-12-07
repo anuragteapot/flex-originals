@@ -70,7 +70,8 @@ If you need to update `npm`, you can make it using `npm`! Cool right? After runn
     `$ npm install npm -g`
 ### MongoDB Project Setup
 Follow this to install MongoDB in your computer.
-`https://docs.mongodb.com/manual/installation/`
+
+[official MongoDB website ](https://docs.mongodb.com/manual/installation/)
 
 > INSTALLING COMPASS
  - You can install compass using the install_compass script packaged with MongoDB:<br>

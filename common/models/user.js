@@ -6,7 +6,7 @@ const app = require('../../server/server');
 const senderAddress = 'noreply@flexoriginales.com';
 
 module.exports = function(User) {
-  User.afterRemote('create', function(context, user, next) {
+  User.afterRemote('create', async function(context, user, next) {
     const Settings = app.models.Settings;
 
     var options = {
@@ -22,11 +22,11 @@ module.exports = function(User) {
       port: process.env.NODE_ENV === 'production' ? '80' : '8080',
       redirect: '/',
       restApiRoot: '/verify',
-      user: user
+      user: user,
     };
 
     const profileAvatar = `/public/profile-icon/avatar${Math.floor(
-      Math.random() * 28
+      Math.random() * 28,
     ) + 1}.svg`;
 
     Settings.upsert({
@@ -40,23 +40,38 @@ module.exports = function(User) {
       twitter: '',
       redit: '',
       linkedin: '',
-      profileAvatar
+      profileAvatar,
     });
 
-    user.verify(options, function(err) {
-      if (err) {
-        User.deleteById(user.id);
-        return next(err);
-      }
+    if (process.env.NODE_ENV === 'production') {
+      user.verify(options, function(err) {
+        if (err) {
+          User.deleteById(user.id);
+          return next(err);
+        }
+        context.result = {
+          title: 'Signed up successfully',
+          content:
+            'Please check your email and click on the verification link ' +
+            'before logging in.',
+          redirectTo: '/',
+        };
+        return next();
+      });
+    } else {
+      //
+      const tempUser = await User.findById(user.id);
+      tempUser.emailVerified = true;
+      tempUser.save();
+
       context.result = {
         title: 'Signed up successfully',
-        content:
-          'Please check your email and click on the verification link ' +
-          'before logging in.',
-        redirectTo: '/'
+        content: 'Signed up successfully for development environment.',
+        redirectTo: '/',
       };
+
       return next();
-    });
+    }
   });
 
   // Method to render
@@ -68,7 +83,7 @@ module.exports = function(User) {
       content:
         'Please check your email and click on the verification link ' +
         'before logging in',
-      redirectTo: '/'
+      redirectTo: '/',
     };
     return next();
   });
@@ -98,12 +113,12 @@ module.exports = function(User) {
         to: ctx.email,
         from: senderAddress,
         subject: 'Password reset',
-        html: html
+        html: html,
       },
       function(err) {
         if (err) return console.log('> error sending password reset email');
         console.log('> sending password reset email to:', ctx.email);
-      }
+      },
     );
   });
 
@@ -121,17 +136,17 @@ module.exports = function(User) {
       {
         arg: 'id',
         type: 'string',
-        required: true
-      }
+        required: true,
+      },
     ],
     returns: {
       type: 'object',
-      root: true
+      root: true,
     },
     http: {
       path: '/findSetting/:id',
-      verb: 'get'
-    }
+      verb: 'get',
+    },
   });
 
   User.updateSetting = async (id, newSettings) => {
@@ -159,22 +174,22 @@ module.exports = function(User) {
       {
         arg: 'id',
         type: 'string',
-        required: true
+        required: true,
       },
       {
         arg: 'newSettings',
         type: 'object',
-        required: true
-      }
+        required: true,
+      },
     ],
     returns: {
       type: 'object',
-      root: true
+      root: true,
     },
     http: {
       path: '/updateSettings',
-      verb: 'post'
-    }
+      verb: 'post',
+    },
   });
 
   //render UI page after password change
@@ -183,7 +198,7 @@ module.exports = function(User) {
       title: 'Password changed successfully',
       content: 'Please login again withu new password',
       redirectTo: '/',
-      redirectToLinkText: 'Log in'
+      redirectToLinkText: 'Log in',
     };
     return next();
   });
@@ -194,7 +209,7 @@ module.exports = function(User) {
       title: 'Password reset success',
       content: 'Your password has been reset successfully',
       redirectTo: '/',
-      redirectToLinkText: 'Log in'
+      redirectToLinkText: 'Log in',
     };
     return next();
   });
@@ -205,7 +220,7 @@ module.exports = function(User) {
       followUserId: id,
       channelId,
       userId: id,
-      active: true
+      active: true,
     });
   };
 
@@ -215,30 +230,30 @@ module.exports = function(User) {
       {
         arg: 'id',
         type: 'string',
-        required: true
+        required: true,
       },
       {
         arg: 'channelId',
         type: 'string',
-        required: true
-      }
+        required: true,
+      },
     ],
     returns: {
       type: 'object',
-      root: true
+      root: true,
     },
     http: {
       path: '/followChannel',
-      verb: 'post'
-    }
+      verb: 'post',
+    },
   });
 
   User.unFollowChannel = async (id, channelId) => {
     const Followers = app.models.followers;
     return Followers.findOne({
       where: {
-        userId: id
-      }
+        userId: id,
+      },
     });
   };
 
@@ -248,21 +263,21 @@ module.exports = function(User) {
       {
         arg: 'id',
         type: 'string',
-        required: true
+        required: true,
       },
       {
         arg: 'channelId',
         type: 'string',
-        required: true
-      }
+        required: true,
+      },
     ],
     returns: {
       type: 'object',
-      root: true
+      root: true,
     },
     http: {
       path: '/unFollowChannel',
-      verb: 'post'
-    }
+      verb: 'post',
+    },
   });
 };

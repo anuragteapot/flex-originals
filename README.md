@@ -51,10 +51,57 @@ You can run the following scripts with `yarn` or `npm` like `yarn install`
 | `lint`       | Run eslint for the entire project                    |
 | `test`       | Run all tests                                        |
 | `test:watch` | Start tests in watch mode                            |
+### Project Setup
+### Node
+- Node installation on Windows
+  Just go on [official Node.js website](https://nodejs.org/) and download the installer.
+Also, be sure to have `git` available in your PATH, `npm` might need it (You can find git [here](https://git-scm.com/)).
+- Node installation on Ubuntu
+  You can install nodejs and npm easily with apt install, just run the following commands.
+      `$ sudo apt install nodejs`
+      `$ sudo apt install npm`
+- Other Operating Systems
+  You can find more information about the installation on the [official Node.js website](https://nodejs.org/) and the [official NPM website](https://npmjs.org/).
+If the installation was successful, you should be able to run the following command.M<br>
+    `$ node --version`
 
-- Fork the repo and star it :star:
+    `$ npm --version`
+If you need to update `npm`, you can make it using `npm`! Cool right? After running the following command, just open again the command line and be happy.<br>
+    `$ npm install npm -g`
+### MongoDB Project Setup
+Follow this to install MongoDB in your computer.
+
+[official MongoDB website ](https://docs.mongodb.com/manual/installation/)
+
+> INSTALLING COMPASS
+ - You can install compass using the install_compass script packaged with MongoDB:<br>
+    `$ ./install_compass`
+  This will download the appropriate MongoDB Compass package for your platform
+  and install it.
+### FFmpeg Project Setup
+- Download a static build.
+- Use 7-Zip to unpack it in the folder of your choice.
+- Open a command prompt with administrator's rights.
+<b>NOTE: Use CMD.exe, do not use Powershell!</b> The syntax for accessing environment variables is different from the command shown in Step 4 - running it in Powershell will overwrite your System PATH with a bad value.
+- Run the command (see note below; in Win10, you might want to use the Environmental Variables area of the Windows Control Panel to update PATH):
+`setx /M PATH "path\to\ffmpeg\bin;%PATH%"`.Do not run setx if you have more than 1024 characters in your system PATH variable.
+- Installing FFmpeg in Ubuntu<br>  
+`sudo apt-get update`  
+`sudo apt-get install ffmpeg` 
+`sudo apt-get install frei0r-plugins`  
+
+### Contributing 
 - Open issues :boom:
 - Raise PRs for issues :raised_hand:
-- Help on documentation :page_facing_up:
+- Fork the repo and star it :star:<br>
+	![image](https://user-images.githubusercontent.com/41269164/70351301-a1f78f80-188e-11ea-9ed2-c7677bf25ea2.png)
+- Clone the repo :
+	`https://github.com/NJACKWinterOfCode/flex-originals.git`<br>
+- Run :
+	`npm install`
+- To start development mode run:
+	`npm run dev`
+- For production run in docker `sudo docker-compose up --build -d` with nginix server to reverse proxy to ports use this [settings](https://github.com/NJACKWinterOfCode/flex-originals/blob/feature/scripts/default).
+
 
 Copyright (c) 2019, Anurag Kumar [Anurag Kumar](http://github.com/anu1601cs/)

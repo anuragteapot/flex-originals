@@ -2,16 +2,8 @@
   &.light {
     color: #283035;
   }
-
   .inner {
     width: 100%;
-
-    .card {
-      display: block;
-      width: 100%;
-      margin: auto;
-      margin-bottom: 2rem;
-    }
 
     .container {
       display: flex;
@@ -27,7 +19,6 @@
 
     .grid {
       margin-bottom: 15px;
-      position: relative;
 
       @media screen and (max-width: 900px) {
         max-width: 100%;
@@ -88,7 +79,7 @@
           font-weight: bold;
           padding: 10px 0;
           flex-direction: row;
-          border-bottom: 1px solid #c5c5c5;
+          border: 1px solid $border-color;
           color: #4c4c4c;
 
           @media only screen and (max-width: 700px) {
@@ -111,330 +102,6 @@
           .right {
             text-align: end;
             padding: 5px 0;
-
-            .video-option {
-              margin: 0 10px;
-              cursor: pointer;
-            }
-
-            .video__reactions__emoji {
-              display: inline-block;
-            }
-          }
-        }
-
-        .video__description {
-          display: flex;
-          width: 100%;
-          flex-wrap: wrap;
-          font-weight: 500;
-          padding: 10px 0;
-          flex-direction: row;
-
-          .left {
-            flex: 1 !important;
-
-            .channel__avater {
-              display: flex;
-              width: 100%;
-              cursor: pointer;
-              flex-wrap: wrap;
-
-              img {
-                width: 50px;
-                height: 50px;
-                border-radius: 50%;
-                &:hover {
-                  opacity: 0.8;
-                }
-              }
-
-              .channel__name {
-                margin: auto 10px;
-              }
-            }
-          }
-
-          .right {
-            text-align: end;
-
-            .follow,
-            .following,
-            .edit__video {
-              border-radius: 2px;
-              padding: 10px 30px;
-              font-size: 15px;
-              cursor: pointer;
-              font-weight: 500;
-              border: none;
-              text-transform: uppercase;
-              color: #fff !important;
-              background-color: #ff2d55;
-            }
-
-            .following {
-              background-color: #b6b6b6 !important;
-              color: rgb(97, 97, 97) !important;
-              padding: 10px 20px;
-            }
-
-            .edit__video {
-              padding: 10px 30px;
-              background-color: #109fd8 !important;
-
-              a {
-                color: black;
-                text-decoration: none;
-              }
-            }
-          }
-
-          .full__video__desctiption {
-            padding: 10px 20px;
-
-            &.light {
-              color: #4c4c4c;
-            }
-          }
-
-          .show__more {
-            color: rgb(175, 172, 172);
-            padding-top: 20px;
-            font-size: 10px;
-            font-weight: normal !important;
-            cursor: pointer;
-          }
-        }
-
-        .video__comments {
-          margin-top: 10px;
-
-          .load__more {
-            text-align: center;
-            padding: 10px;
-            cursor: pointer;
-
-            p {
-              display: inline-block;
-            }
-
-            &:hover {
-              opacity: 0.8;
-            }
-          }
-
-          .v-comment {
-            .v-comment__user {
-              margin: 5px;
-              font-size: 10px;
-
-              strong {
-                color: #feb000;
-              }
-            }
-            .v-comment_box__wrapper {
-              border: 1px solid black;
-
-              .v-comment__box {
-                width: 100%;
-                height: 100px;
-                padding: 10px;
-                font-size: 15px;
-                border: none;
-                outline: none;
-                position: relative;
-                resize: none;
-                font-family: inherit;
-              }
-
-              .v-comment__button {
-                padding: 5px;
-                width: 100%;
-                text-align: right;
-
-                .v-comment__button_submit {
-                  border-radius: 2px;
-                  padding: 8px 20px;
-                  font-size: 12px;
-                  cursor: pointer;
-                  border: none;
-                  text-transform: uppercase;
-                  color: #fff !important;
-                  background-color: #feb000;
-                }
-              }
-            }
-          }
-
-          ul {
-            list-style-type: none;
-          }
-
-          .comments-container {
-            width: 100%;
-          }
-
-          .comments-container h1 {
-            font-size: 36px;
-            color: #283035;
-            font-weight: 400;
-          }
-
-          .comments-container h1 a {
-            font-size: 18px;
-            font-weight: 700;
-          }
-
-          .comments-list {
-            margin-top: 30px;
-            position: relative;
-
-            i {
-              margin: 5px;
-            }
-          }
-
-          .reply-list:before,
-          .reply-list:after {
-            display: none;
-          }
-
-          .comments-list li {
-            margin-bottom: 15px;
-            display: block;
-            position: relative;
-          }
-
-          .comments-list li:after {
-            content: '';
-            display: block;
-            clear: both;
-            height: 0;
-            width: 0;
-          }
-
-          .reply-list {
-            padding-left: 50px;
-            clear: both;
-            margin-top: 15px;
-
-            .comment-avatar {
-              width: 30px !important;
-              height: 30px !important;
-              border-radius: 50%;
-            }
-          }
-
-          .comments-list .comment-avatar {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            position: relative;
-            z-index: 99;
-            float: left;
-            -webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
-            -moz-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
-            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
-            overflow: hidden;
-          }
-
-          .comments-list .comment-avatar img {
-            width: 100%;
-            height: 100%;
-          }
-
-          .reply-list .comment-avatar {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-          }
-
-          .comment-main-level:after {
-            content: '';
-            width: 0;
-            height: 0;
-            display: block;
-            clear: both;
-          }
-
-          .comments-list .comment-box {
-            float: left;
-            position: relative;
-          }
-
-          .comments-list .comment-box:before {
-            border-width: 11px 13px 11px 0;
-            border-color: transparent rgba(0, 0, 0, 0.05);
-            left: -12px;
-          }
-
-          .comment-box .comment-head {
-            padding: 10px 12px;
-            overflow: hidden;
-            -webkit-border-radius: 4px 4px 0 0;
-            -moz-border-radius: 4px 4px 0 0;
-            border-radius: 4px 4px 0 0;
-          }
-
-          .comment-box .comment-head i {
-            float: right;
-            margin-left: 14px;
-            position: relative;
-            top: 2px;
-            color: #a6a6a6;
-            cursor: pointer;
-            -webkit-transition: color 0.3s ease;
-            -o-transition: color 0.3s ease;
-            transition: color 0.3s ease;
-          }
-
-          .comment-box .comment-head i:hover {
-            color: #03658c;
-          }
-
-          .comment-box .comment-name {
-            font-size: 14px;
-            font-weight: 700;
-            float: left;
-            margin-right: 10px;
-          }
-
-          .comment-box .comment-name a {
-            text-decoration: none;
-          }
-
-          .comment-box .comment-head span {
-            float: left;
-            color: #999;
-            font-size: 13px;
-            position: relative;
-            top: 1px;
-          }
-
-          .comment-box .comment-content {
-            padding: 12px;
-            font-size: 15px;
-            -webkit-border-radius: 0 0 4px 4px;
-            -moz-border-radius: 0 0 4px 4px;
-            border-radius: 0 0 4px 4px;
-          }
-
-          .comment-box .comment-name.by-author,
-          .comment-box .comment-name.by-author a {
-            text-decoration: none;
-            color: black;
-          }
-
-          .comment-box .comment-name.by-author:after {
-            content: 'Creator Flex Originals';
-            background: $color-theme;
-            font-size: 12px;
-            padding: 3px 5px;
-            font-weight: 700;
-            margin-left: 10px;
-            -webkit-border-radius: 3px;
-            -moz-border-radius: 3px;
-            border-radius: 3px;
           }
         }
       }
@@ -448,51 +115,55 @@
       flex: 1;
       padding: 10px;
 
-      .v-auto-play {
-        padding: 5px 0px;
-        p {
-          padding-bottom: 10px;
-        }
-      }
+      .video__comment {
+        display: block;
+        border: 1px solid $border-color;
+        height: 100%;
 
-      .v-thumb {
-        display: flex;
-        width: 100%;
+        .video__comment__inner {
+          .video__profile__action {
+            display: flex;
+            border-bottom: 1px solid $border-color;
+            padding: 5px;
 
-        .video__thumbnail {
-          width: 180px;
-          height: 100px;
-          text-align: center;
-          background-repeat: no-repeat;
-          background-position: center;
-          background-size: cover;
-          display: inline-block;
-          margin-bottom: 10px;
-          position: relative;
-          cursor: pointer;
-          background-color: rgba(0, 0, 0, 0.3) !important;
-        }
+            .left {
+              .channel__avater {
+                display: flex;
+                flex-wrap: wrap;
+                cursor: pointer;
 
-        .video__info {
-          font-weight: 500;
-          margin-left: 10px;
-          flex: 1;
-          margin-bottom: 10px;
-          word-break: break-all;
+                img {
+                  width: 40px;
+                  height: 40px;
+                  border-radius: 50%;
+                  &:hover {
+                    opacity: 0.8;
+                  }
+                }
 
-          p {
-            word-break: break-all;
-          }
+                .channel__name {
+                  margin: auto 10px;
+                  font-weight: 700;
+                }
+              }
+            }
 
-          .views {
-            color: #383838;
-            font-size: 13px;
-            font-weight: normal !important;
-          }
+            .right {
+              text-align: end;
+              padding: 0;
+              margin: auto;
 
-          span {
-            color: gray;
-            font-size: 15px;
+              .follow {
+                border-radius: 3px;
+                padding: 5px 20px;
+                font-size: medium;
+                cursor: pointer;
+                font-weight: 700;
+                border: none;
+                color: #fff;
+                background-color: #ff2d55;
+              }
+            }
           }
         }
       }

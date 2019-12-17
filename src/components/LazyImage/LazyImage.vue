@@ -1,6 +1,10 @@
 <template>
   <div
-    :class="`fo-image fo-background ${hover ? 'hover' : 'not'} ${active ? 'active': ''}`"
+    :class="
+      `fo-image fo-background ${hover ? 'hover' : 'not'} ${
+        active ? 'active' : ''
+      }`
+    "
     ref="lazyBackground"
     @click="$emit('click')"
     :alt="alt"
@@ -82,10 +86,10 @@ export default {
     },
     onError() {
       // if (process.env.NODE_ENV !== 'production') {
-      console.error(
-        `Image load failed\n\n` + `src: ${this.normalisedSrc.src}`,
-        this,
-      );
+      // console.error(
+      //   `Image load failed\n\n` + `src: ${this.normalisedSrc.src}`,
+      //   this,
+      // );
       // }
       this.$emit('error', this.src);
     },

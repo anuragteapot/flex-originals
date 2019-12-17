@@ -1,5 +1,3 @@
-
-
 // form
 $header-height: 40px;
 $footer-height: 55px;
@@ -15,11 +13,20 @@ $color-warn: #faa61a;
 $color-error: #ff002f;
 $color-theme: #ff2d55;
 
-$bp-large: (min-width: 940px);
-$bp-medium: (min-width: 320px);
-$breakpoints: ('large': $bp-large, 'medium': $bp-medium);
+$bp-large: (
+  min-width: 940px,
+);
+$bp-medium: (
+  min-width: 320px,
+);
+$breakpoints: (
+  'large': $bp-large,
+  'medium': $bp-medium,
+);
 
 $radio-border-color: rgba(0, 0, 0, 0.54);
 $radio-size: 20px;
 $radio-checked-size: 10px;
 $radio-ripple-size: 15px;
+
+$border-color: rgb(226, 226, 226);

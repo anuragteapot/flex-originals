@@ -69,6 +69,7 @@
                 <div class="video__comment__box">
                   <div class="left">
                     <textarea
+                      v-model="comment"
                       class="video_comment_input"
                       placeholder="Add a comment..."
                     ></textarea>

@@ -28,7 +28,7 @@
               ></default-video-player>
             </div>
             <div :class="`video_actions ${theme}`" v-show="!videoUnavaliable">
-              <p class="video__name">{{ video.title }}</p>
+              <p class="video__title">{{ video.title }}</p>
               <div class="video__analytics__info">
                 <div class="left">
                   <span class="video__views"
@@ -60,8 +60,22 @@
                     </div>
                   </div>
                   <div class="right">
-                    <button class="follow">
+                    <button class="follow danger">
                       Follow
+                    </button>
+                  </div>
+                </div>
+                <div class="video__comment__message"></div>
+                <div class="video__comment__box">
+                  <div class="left">
+                    <textarea
+                      class="video_comment_input"
+                      placeholder="Add a comment..."
+                    ></textarea>
+                  </div>
+                  <div class="right">
+                    <button class="fo-button post">
+                      Post
                     </button>
                   </div>
                 </div>
@@ -69,6 +83,7 @@
             </div>
           </div>
         </div>
+        <!-- <video-suggestions :item="item"></video-suggestions> -->
       </div>
     </div>
   </div>

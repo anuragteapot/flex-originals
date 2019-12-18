@@ -19,6 +19,7 @@
 
     .grid {
       margin-bottom: 15px;
+      position: relative;
 
       @media screen and (max-width: 900px) {
         max-width: 100%;
@@ -30,13 +31,6 @@
 
       .video-wrapper {
         padding: 10px;
-      }
-
-      .published {
-        font-weight: normal !important;
-        padding: 10px;
-        color: gray;
-        font-size: 15px;
       }
 
       .mobile {
@@ -63,7 +57,7 @@
       .video_actions {
         padding: 10px;
 
-        .video__name {
+        .video__title {
           font-weight: 500;
           font-size: 18px;
         }
@@ -79,7 +73,7 @@
           font-weight: bold;
           padding: 10px 0;
           flex-direction: row;
-          border: 1px solid $border-color;
+          border-bottom: 1px solid $border-color;
           color: #4c4c4c;
 
           @media only screen and (max-width: 700px) {
@@ -114,6 +108,7 @@
     .right {
       flex: 1;
       padding: 10px;
+      // padding-left: 0;
 
       .video__comment {
         display: block;
@@ -121,16 +116,18 @@
         height: 100%;
 
         .video__comment__inner {
+          height: 100%;
+          display: block;
+
           .video__profile__action {
             display: flex;
-            border-bottom: 1px solid $border-color;
             padding: 5px;
+            border-bottom: 1px solid $border-color;
 
             .left {
               .channel__avater {
                 display: flex;
                 flex-wrap: wrap;
-                cursor: pointer;
 
                 img {
                   width: 40px;
@@ -142,6 +139,7 @@
                 }
 
                 .channel__name {
+                  cursor: pointer;
                   margin: auto 10px;
                   font-weight: 700;
                 }
@@ -158,10 +156,57 @@
                 padding: 5px 20px;
                 font-size: medium;
                 cursor: pointer;
-                font-weight: 700;
+                font-weight: 600;
                 border: none;
                 color: #fff;
-                background-color: #ff2d55;
+              }
+            }
+          }
+
+          .video__comment__message {
+            min-height: 300px;
+          }
+
+          .video__comment__box {
+            bottom: 10px;
+            left: 10px;
+            right: 10px;
+            display: flex;
+            position: absolute;
+            border-top: 1px solid $border-color;
+
+            .left {
+              width: 80%;
+
+              .video_comment_input {
+                display: inline-block;
+                width: 100%;
+                height: 100%;
+                font-size: 15px;
+                resize: none;
+                padding: 5px;
+                border: 0;
+                border-left: 1px solid $border-color;
+                border-bottom: 1px solid $border-color;
+                outline: none;
+                background-color: #fafafa;
+              }
+            }
+
+            .right {
+              text-align: end;
+
+              .post {
+                margin: auto;
+                cursor: pointer;
+                outline: none;
+                padding: 10px;
+                font-weight: 600;
+                color: $color-error;
+
+                &:hover {
+                  opacity: 0.5;
+                }
               }
             }
           }

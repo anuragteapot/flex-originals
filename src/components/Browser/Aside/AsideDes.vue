@@ -1,7 +1,9 @@
 <template>
   <aside :class="`features ${theme}`">
     <header class="features-header focusable">
-      <img class="features-header-name" src="/public/text_logo2.png" alt="logo" />
+      <div class="features-header-name">
+        <h1>Flex Originals</h1>
+      </div>
     </header>
     <section class="features-list">
       <header class="features-list-header focusable">
@@ -45,7 +47,11 @@
           <i class="fa fa-microphone"></i>
         </button>
         <router-link to="/app/@settings">
-          <button role="button" aria-label="Settings" class="button button-settings">
+          <button
+            role="button"
+            aria-label="Settings"
+            class="button button-settings"
+          >
             <i class="fa fa-cog"></i>
           </button>
         </router-link>

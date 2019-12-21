@@ -160,7 +160,9 @@
         <div
           class="fo-video-player__seekbar-current"
           :style="{ transform: &quot;scaleX(&quot; + getProgressRate + &quot;)&quot; }"
-        ></div>
+        >
+        <span></span>
+        </div>
         <div class="fo-video-player__seekbar-back"></div>
         <div
           class="fo-video-player__buffer-back"

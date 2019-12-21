@@ -27,26 +27,6 @@
         </div>
       </div>
     </section>
-    <section>
-      <div class="home__container">
-        <div class="home__inner"></div>
-      </div>
-      <br />
-      <div class="home__container">
-        <h2>Architecture of project</h2>
-        <br />
-        <div class="arc_inner">
-          <img src="/public/project.png" slt="arch" />
-        </div>
-        <br />
-        <div class="home__inner">
-          <p>
-            This project is done because i was learning Java and Golang to know the
-            core concepts of both the languages and also i am very crusious about learning how Netflix , Youtube and microservices works.
-          </p>
-        </div>
-      </div>
-    </section>
   </div>
 </template>
 <script>

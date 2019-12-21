@@ -34,7 +34,7 @@
     "theme": {
       "type": "string",
       "required": true,
-      "default": "dark"
+      "default": "light"
     },
     "profileAvatar": {
       "type": "string",

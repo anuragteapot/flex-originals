@@ -29,7 +29,6 @@ import MiniPlayer from './components/Svg/MiniPlayer';
 import Subtitle from './components/Svg/Subtitle';
 
 import './styles/creator.scss';
-import './styles/vendor/nprogress/nprogress.css';
 
 Vue.use(Api);
 

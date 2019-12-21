@@ -1,9 +1,9 @@
 <template>
   <div id="app" :class="`container ${theme}`">
     <!-- <transition name="fade" mode="out-in"> -->
-    <router-view />
+      <router-view />
     <!-- </transition> -->
-    <fo-snack-bar></fo-snack-bar>
+    <fo-snack-bar position="bottom-left"></fo-snack-bar>
     <fo-model></fo-model>
   </div>
 </template>
@@ -72,19 +72,19 @@ export default {
       window.removeEventListener('resize', this.onResize);
     }
   },
-//  asyncData({
-//    store,
-//    isServer
-//  }) {
- //   if(store.state.user.id) {
- //   return store.dispatch('FIND_SETTINGS', {
- //       uid: store.state.user.id,
- //       isServer
- //     });
- //     } else {
-//        return Promise.resolve();
- //     }
- // },
+  //  asyncData({
+  //    store,
+  //    isServer
+  //  }) {
+  //   if(store.state.user.id) {
+  //   return store.dispatch('FIND_SETTINGS', {
+  //       uid: store.state.user.id,
+  //       isServer
+  //     });
+  //     } else {
+  //        return Promise.resolve();
+  //     }
+  // },
   async beforeMount() {
     if (typeof window !== 'undefined') {
       window.addEventListener('online', this.updateOnlineStatus);
@@ -97,7 +97,7 @@ export default {
     }
     if (this.$user.get('$userId')) {
       const settings = await this.$store.dispatch('FIND_SETTINGS', {
-       uid: this.$user.get('$userId'),
+        uid: this.$user.get('$userId'),
       });
       this.$store.commit(types.SET_SETTINGS, settings);
     }

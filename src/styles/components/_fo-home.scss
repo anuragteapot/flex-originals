@@ -14,10 +14,15 @@
       box-shadow: 0 1px 5px 0 rgba(9, 10, 10, 0.75);
       overflow: auto;
 
-      img {
-        width: 250px;
+      .features-header-name {
+        color: $color-theme;
+        font-size: 16px;
+        font-weight: 700;
+        text-transform: uppercase;
+        display: inline-block;
         padding: 10px;
         margin: 0 0 0 10px;
+        user-select: none;
       }
 
       a {
@@ -59,7 +64,7 @@
         }
 
         .home__inner {
-          padding: 10%;
+          padding: 10% 10% 15% 10%;
           margin: auto;
           width: 100%;
 
@@ -137,7 +142,6 @@
 
     .social {
       float: right;
-
 
       ul li {
         display: inline-block;

@@ -1,7 +1,9 @@
 <template>
   <div class="home__header">
     <div class="home__navbar">
-      <img class="features-header-name" src="/public/text_logo2.png" alt="logo" />
+      <div class="features-header-name">
+        <h1>Flex originals</h1>
+      </div>
       <router-link v-show="!isAuthenticated" to="/signup">Sign Up</router-link>
       <router-link v-show="!isAuthenticated" to="/login">Login</router-link>
       <a href @click.prevent="logout()" v-show="isAuthenticated">Logout</a>

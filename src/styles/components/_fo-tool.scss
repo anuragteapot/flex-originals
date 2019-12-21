@@ -165,52 +165,6 @@
   }
 }
 
-.background-shape {
-  position: absolute;
-  background-color: red;
-  -webkit-box-sizing: border-box;
-  box-sizing: border-box;
-}
-
-.square-one {
-  width: 50px;
-  height: 50px;
-  background: url('/public/icons/002-play.svg');
-  left: 2%;
-  -webkit-transform: rotate(-65deg);
-  transform: rotate(-40deg);
-}
-
-.square-two {
-  width: 50px;
-  height: 50px;
-  top: 55%;
-  background: url('/public/icons/004-tv.svg');
-  right: 10%;
-  -webkit-transform: rotate(-65deg);
-  transform: rotate(-65deg);
-}
-
-.square-three {
-  width: 50px;
-  height: 50px;
-  top: 20%;
-  background: url('/public/icons/003-microphone.svg');
-  right: 15%;
-  -webkit-transform: rotate(-65deg);
-  transform: rotate(-65deg);
-}
-
-.square-four {
-  width: 50px;
-  height: 50px;
-  bottom: 5%;
-  background: url('/public/icons/picture.svg');
-  left: 5%;
-  -webkit-transform: rotate(-65deg);
-  transform: rotate(-65deg);
-}
-
 .btn-hover {
   width: 200px;
   font-size: 16px;
@@ -218,24 +172,18 @@
   color: #fff;
   cursor: pointer;
   margin: 20px;
-  height: 55px;
+  height: 50px;
   text-align: center;
   border: none;
-  background-size: 300% 100%;
-
-  border-radius: 50px;
-  moz-transition: all 0.4s ease-in-out;
-  -o-transition: all 0.4s ease-in-out;
-  -webkit-transition: all 0.4s ease-in-out;
-  transition: all 0.4s ease-in-out;
+  color: #fff;
+  border: 0;
+  outline: 0;
+  padding: 10px 30px;
+  border-radius: 3px;
 }
 
 .btn-hover:hover {
-  background-position: 100% 0;
-  moz-transition: all 0.4s ease-in-out;
-  -o-transition: all 0.4s ease-in-out;
-  -webkit-transition: all 0.4s ease-in-out;
-  transition: all 0.4s ease-in-out;
+  opacity: 0.9;
 }
 
 .btn-hover:focus {
@@ -243,14 +191,5 @@
 }
 
 .btn-hover.color {
-  // background-image: linear-gradient(
-  //   to right,
-  //   #25aae1,
-  //   #40e495,
-  //   #30dd8a,
-  //   #2bb673
-  // );
-  // box-shadow: 0 1px 10px 0 rgba(49, 196, 190, 0.75);
-  background-color: #ff2d55;
-  box-shadow: 0 1px 10px 0 rgba(255, 45, 85, 0.75);
+  background-color: $color-theme;
 }

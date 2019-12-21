@@ -6,8 +6,8 @@ module.exports = function(Follow) {
       include: ['channel'],
       where: {
         visibility: 1,
-        followOwnerId: followId
-      }
+        followOwnerId: followId,
+      },
     });
   };
 
@@ -17,17 +17,17 @@ module.exports = function(Follow) {
       {
         arg: 'followId',
         type: 'string',
-        required: true
-      }
+        required: true,
+      },
     ],
     returns: {
       type: 'object',
-      root: true
+      root: true,
     },
     http: {
       path: '/getFollowers/:followId',
-      verb: 'get'
-    }
+      verb: 'get',
+    },
   });
 
   Follow.getFollow = async (channelId, followId) => {
@@ -35,8 +35,8 @@ module.exports = function(Follow) {
       where: {
         channel: channelId,
         visibility: 1,
-        followOwnerId: followId
-      }
+        followOwnerId: followId,
+      },
     });
 
     if (f) {
@@ -52,22 +52,22 @@ module.exports = function(Follow) {
       {
         arg: 'channelId',
         type: 'string',
-        required: true
+        required: true,
       },
       {
         arg: 'followId',
         type: 'string',
-        required: true
-      }
+        required: true,
+      },
     ],
     returns: {
       type: 'object',
-      root: true
+      root: true,
     },
     http: {
       path: '/getFollow/:channelId/:followId',
-      verb: 'get'
-    }
+      verb: 'get',
+    },
   });
 
   Follow.doFollow = async (channelId, followId) => {
@@ -79,8 +79,8 @@ module.exports = function(Follow) {
       const historyCheck = await Follow.findOne({
         where: {
           channel: channelId,
-          followOwnerId: followId
-        }
+          followOwnerId: followId,
+        },
       });
 
       if (historyCheck) {
@@ -91,7 +91,7 @@ module.exports = function(Follow) {
       } else {
         const f = await Follow.create({
           channel: channelId,
-          followOwnerId: followId
+          followOwnerId: followId,
         });
 
         if (f) {
@@ -109,30 +109,30 @@ module.exports = function(Follow) {
       {
         arg: 'channelId',
         type: 'string',
-        required: true
+        required: true,
       },
       {
         arg: 'followId',
         type: 'string',
-        required: true
-      }
+        required: true,
+      },
     ],
     returns: {
       type: 'object',
-      root: true
+      root: true,
     },
     http: {
       path: '/doFollow',
-      verb: 'post'
-    }
+      verb: 'post',
+    },
   });
 
   Follow.unFollow = async (channelId, followId) => {
     const historyCheck = await Follow.findOne({
       where: {
         channel: channelId,
-        followOwnerId: followId
-      }
+        followOwnerId: followId,
+      },
     });
 
     if (historyCheck) {
@@ -149,21 +149,21 @@ module.exports = function(Follow) {
       {
         arg: 'channelId',
         type: 'string',
-        required: true
+        required: true,
       },
       {
         arg: 'followId',
         type: 'string',
-        required: true
-      }
+        required: true,
+      },
     ],
     returns: {
       type: 'object',
-      root: true
+      root: true,
     },
     http: {
       path: '/unFollow',
-      verb: 'post'
-    }
+      verb: 'post',
+    },
   });
 };

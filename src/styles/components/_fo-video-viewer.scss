@@ -108,7 +108,6 @@
     .right {
       flex: 1;
       padding: 10px;
-      // padding-left: 0;
 
       .video__comment {
         display: block;
@@ -204,7 +203,7 @@
                 outline: none;
                 padding: 10px;
                 font-weight: 600;
-                color: $color-error;
+                color: $color-theme;
 
                 &:hover {
                   opacity: 0.5;

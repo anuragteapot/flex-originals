@@ -60,7 +60,7 @@
                     </div>
                   </div>
                   <div class="right">
-                    <button class="follow danger">
+                    <button class="follow theme">
                       Follow
                     </button>
                   </div>

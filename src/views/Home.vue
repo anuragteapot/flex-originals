@@ -3,7 +3,7 @@
     <div v-show="isMobile" :class="`nav-offcanvas ${appDrawer ? 'open' : ''}`">
       <div class="nav-offcanvas-menu">
         <aside-action></aside-action>
-        <aside-des v-show="isAuthenticated"></aside-des>
+        <aside-des></aside-des>
       </div>
     </div>
     <div
@@ -13,7 +13,7 @@
     ></div>
 
     <aside-action v-show="!isMobile && appDrawer"></aside-action>
-    <aside-des v-show="!isMobile && appDrawer && isAuthenticated"></aside-des>
+    <aside-des v-show="!isMobile && appDrawer"></aside-des>
 
     <div class="main-container">
       <toolbar @toggleAppDrawer="toggleAppDrawer"></toolbar>

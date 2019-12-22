@@ -2,24 +2,33 @@
   <div
     :class="`fo-video-player ${!active || error ? 'no-cursor' : ''}`"
     ref="player"
-    @mousemove="makeActive(); active = true; "
+    @mousemove="
+      makeActive();
+      active = true;
+    "
   >
     <div class="fo-video-top">
       <div
         v-show="fullscreen && active"
         class="fo-video__info__fullscreen__title"
-      >{{ videoInfo.title}}</div>
+      >
+        {{ videoInfo.title }}
+      </div>
       <div class="fo-video-watch-later">
         <img src="/public/tool_svg/018-clock.svg" width="30" />
       </div>
     </div>
-    <!-- <div class="fo-video-player-overlay" v-show="!isPlaying && !loading" @click="playOrPause"></div> -->
+    <div
+      class="fo-video-player-overlay"
+      v-show="!isPlaying && !loading"
+      @click="playOrPause"
+    ></div>
     <div class="fo-video-player-load-play" v-show="!isPlaying && !loading">
       <a class="video-play-button" @click="playOrPause">
         <span></span>
       </a>
     </div>
-    <div :class="`fo-video-loader`" v-show="loading && !error">
+    <div :class="`fo-video-loader`" v-show="loading && src && !error">
       <svg id="catchup-spinner" viewBox="25 25 50 50">
         <circle cx="50" cy="50" r="20" />
       </svg>
@@ -33,10 +42,17 @@
       @click="playOrPause"
       controlslist="nodownload"
     ></video>
-    <img v-if="error" class="video__error" src="/public/videoerror.gif" alt="videoerror" />
+    <img
+      v-if="error"
+      class="video__error"
+      src="/public/videoerror.gif"
+      alt="videoerror"
+    />
     <div
-      :class="`fo-video-player-menu context ${opencontextmenu ? 'vactive' : ''}`"
-      :style="`top: ${menuTop}px; left: ${menuLeft}px;` "
+      :class="
+        `fo-video-player-menu context ${opencontextmenu ? 'vactive' : ''}`
+      "
+      :style="`top: ${menuTop}px; left: ${menuLeft}px;`"
     >
       <nav :class="`${active && opencontextmenu ? 'menu-active' : ''}`">
         <ul>
@@ -44,7 +60,9 @@
             <a href="#" @click.prevent="copy('URL')">Copy video URL</a>
           </li>
           <li>
-            <a href="#" @click.prevent="copy('URL_TIME')">Copy video URL at current time</a>
+            <a href="#" @click.prevent="copy('URL_TIME')"
+              >Copy video URL at current time</a
+            >
           </li>
           <li>
             <a href="#" @click.prevent="copy('EMBED')">Copy embed code</a>
@@ -54,18 +72,27 @@
     </div>
 
     <div
-      :class="`fo-video-player-menu no__animation seektime ${seekTime ? 'vactive' : ''}`"
+      :class="
+        `fo-video-player-menu no__animation seektime ${
+          seekTime ? 'vactive' : ''
+        }`
+      "
       ref="seekTimeLeft"
     >
       <nav :class="`no__animation ${active && seekTime ? 'menu-active' : ''}`">
-        <div class="time__preview" :style="`background-image: url('/${videoInfo.thumbImage}')`">
+        <div
+          class="time__preview"
+          :style="`background-image: url('/${videoInfo.thumbImage}')`"
+        >
           <div class="time_preview_div">
             <span>{{ seekTime }}</span>
           </div>
         </div>
       </nav>
     </div>
-    <div :class="`fo-video-player-menu volume ${volumesettings ? 'vactive' : ''}`">
+    <div
+      :class="`fo-video-player-menu volume ${volumesettings ? 'vactive' : ''}`"
+    >
       <input
         v-model="volume"
         min="0"
@@ -77,7 +104,11 @@
       />
     </div>
     <div
-      :class="`fo-video-player-menu settings ${opensettingspb || opensettings || opensettingsq ? 'vactive' : ''}`"
+      :class="
+        `fo-video-player-menu settings ${
+          opensettingspb || opensettings || opensettingsq ? 'vactive' : ''
+        }`
+      "
     >
       <nav :class="`${active && opensettings ? 'menu-active' : ''}`">
         <ul v-if="!opensettingspb && !opensettingsq">
@@ -86,18 +117,22 @@
               Auto Play
               <span class="fo-video-player__right">
                 <label class="switch">
-                  <input name="autoplay" v-model="autoPlayNext" type="checkbox" />
+                  <input
+                    name="autoplay"
+                    v-model="autoPlayNext"
+                    type="checkbox"
+                  />
                   <div></div>
                 </label>
               </span>
             </a>
           </li>
           <li>
-            <a @click="opensettingspb = !  opensettingspb">
+            <a @click="opensettingspb = !opensettingspb">
               Playback Speed
-              <span
-                class="fo-video-player__right"
-              >{{playbackRate == 1 ? 'Normal' : playbackRate + 'x' }}</span>
+              <span class="fo-video-player__right">{{
+                playbackRate == 1 ? 'Normal' : playbackRate + 'x'
+              }}</span>
             </a>
           </li>
           <li>
@@ -109,7 +144,7 @@
         </ul>
         <ul v-else-if="opensettingsq">
           <li>
-            <a href="#" @click="opensettingsq = !  opensettingsq">
+            <a href="#" @click="opensettingsq = !opensettingsq">
               <i class="fas fa-chevron-left"></i> Quality
             </a>
           </li>
@@ -128,14 +163,18 @@
         </ul>
         <ul v-else>
           <li>
-            <a href="#" @click="opensettingspb = !  opensettingspb">
+            <a href="#" @click="opensettingspb = !opensettingspb">
               <i class="fas fa-chevron-left"></i> Playback Speed
             </a>
           </li>
           <li v-for="rate in playbackRates" :key="rate">
             <a
-              @click="playbackRate = rate; opensettingspb = !  opensettingspb;"
-            >{{rate == 1 ? 'Normal' : rate + 'x' }}</a>
+              @click="
+                playbackRate = rate;
+                opensettingspb = !opensettingspb;
+              "
+              >{{ rate == 1 ? 'Normal' : rate + 'x' }}</a
+            >
           </li>
         </ul>
       </nav>
@@ -145,7 +184,8 @@
         <a
           :href="`https://flexoriginals.ml/app/@watch?v=${videoInfo.id}`"
           target="_blank"
-        >Flex Originals</a>
+          >Flex Originals</a
+        >
       </h1>
       <div
         :class="`fo-video-player__seekbar-wrap`"
@@ -159,21 +199,31 @@
       >
         <div
           class="fo-video-player__seekbar-current"
-          :style="{ transform: &quot;scaleX(&quot; + getProgressRate + &quot;)&quot; }"
+          :style="{ transform: 'scaleX(' + getProgressRate + ')' }"
         >
-        <span></span>
+          <span></span>
         </div>
         <div class="fo-video-player__seekbar-back"></div>
         <div
           class="fo-video-player__buffer-back"
-          :style="{ transform: &quot;scaleX(&quot; + bufferPercent + &quot;)&quot; }"
+          :style="{ transform: 'scaleX(' + bufferPercent + ')' }"
         ></div>
       </div>
       <div class="fo-video-player__control-wrap">
         <div class="fo-video-player__left">
           <fo-backward width="36px" height="36px"></fo-backward>
-          <fo-play v-if="!isPlaying" width="36px" height="36px" @click="playOrPause"></fo-play>
-          <fo-pause v-else width="36px" height="36px" @click="playOrPause"></fo-pause>
+          <fo-play
+            v-if="!isPlaying"
+            width="36px"
+            height="36px"
+            @click="playOrPause"
+          ></fo-play>
+          <fo-pause
+            v-else
+            width="36px"
+            height="36px"
+            @click="playOrPause"
+          ></fo-pause>
           <fo-forward width="36px" height="36px"></fo-forward>
 
           <div class="fo-time-display">
@@ -184,15 +234,37 @@
         </div>
         <div class="fo-video-player__right">
           <fo-subtitle width="36px" height="36px"></fo-subtitle>
-          <fo-volume width="36px" height="36px" @click="volumesettings = !volumesettings"></fo-volume>
+          <fo-volume
+            width="36px"
+            height="36px"
+            @click="volumesettings = !volumesettings"
+          ></fo-volume>
           <!-- <i
             :class="`fas fa-cog ${opensettings ? 'rotate-45' : '' }`"
             @click="opensettings = !opensettings"
           ></i>-->
-          <fo-settings width="36px" height="36px" @click="opensettings = !opensettings"></fo-settings>
-          <fo-mini-player width="36px" height="36px" @click="pip"></fo-mini-player>
-          <fo-screen v-if="!fullscreen" width="36px" height="36px" @click="openFullscreen"></fo-screen>
-          <fo-full-screen v-else width="36px" height="36px" @click="closeFullscreen"></fo-full-screen>
+          <fo-settings
+            width="36px"
+            height="36px"
+            @click="opensettings = !opensettings"
+          ></fo-settings>
+          <fo-mini-player
+            width="36px"
+            height="36px"
+            @click="pip"
+          ></fo-mini-player>
+          <fo-screen
+            v-if="!fullscreen"
+            width="36px"
+            height="36px"
+            @click="openFullscreen"
+          ></fo-screen>
+          <fo-full-screen
+            v-else
+            width="36px"
+            height="36px"
+            @click="closeFullscreen"
+          ></fo-full-screen>
         </div>
       </div>
     </div>
@@ -412,9 +484,19 @@ export default {
     },
     async pip() {
       try {
-        if (this.media !== document.pictureInPictureElement)
-          await this.media.requestPictureInPicture();
-        else await document.exitPictureInPicture();
+        if (this.media !== document.pictureInPictureElement) {
+          try {
+            this.media.webkitSetPresentationMode(
+              this.media.webkitPresentationMode === 'picture-in-picture'
+                ? 'inline'
+                : 'picture-in-picture',
+            );
+          } catch (err) {
+            await this.media.requestPictureInPicture();
+          }
+        } else {
+          await document.exitPictureInPicture();
+        }
       } catch (error) {
         console.log(error);
       } finally {

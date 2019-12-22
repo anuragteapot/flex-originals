@@ -27,7 +27,7 @@
     </section>
 
     <footer :class="`features-footer ${theme}`">
-      <router-link :to="`/app/@channel/${user.id}`">
+      <router-link v-show="user.id" :to="`/app/@channel/${user.id}`">
         <img
           class="avatar"
           alt="Avatar"
@@ -35,6 +35,13 @@
           style="cursor:pointer"
         />
       </router-link>
+      <img
+        v-show="!user.id"
+        class="avatar"
+        alt="Avatar"
+        :src="'/public/icons/logo.png'"
+        style="cursor:pointer"
+      />
       <div class="features-footer-details">
         <span class="username">{{ user.realm || 'Anonymous' }}</span>
         <span class="tag">{{ user.username || 'Flex' }}</span>

@@ -41,12 +41,12 @@
 
   .fo-video-player-overlay {
     position: absolute;
-    z-index: 5;
+    // z-index: 5;
     top: 0;
     bottom: 0;
     left: 0;
     right: 0;
-    background: rgba(0, 0, 0, 0.8);
+    background: rgba(0, 0, 0, 0.5);
     transition: all ease 500ms;
   }
 
@@ -88,7 +88,7 @@
       height: 80px;
       background: $color-theme;
       border-radius: 50%;
-      animation: pulse-border 1500ms ease-out infinite;
+      animation: pulse-border 1300ms ease-out infinite;
     }
 
     .video-play-button:after {
@@ -139,18 +139,6 @@
         opacity: 0;
       }
     }
-
-    // .video-overlay {
-    //   position: fixed;
-    //   z-index: -1;
-    //   top: 0;
-    //   bottom: 0;
-    //   left: 0;
-    //   right: 0;
-    //   background: rgba(0, 0, 0, 0.8);
-    //   opacity: 0;
-    //   transition: all ease 500ms;
-    // }
   }
 
   .fo-video-loader {

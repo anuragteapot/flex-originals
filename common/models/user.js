@@ -6,7 +6,7 @@ const app = require('../../server/server');
 const senderAddress = 'noreply@flexoriginales.com';
 
 module.exports = function(User) {
-  User.afterRemote('create', async function(context, user, next) {
+  User.afterRemote('create', function(context, user, next) {
     const Settings = app.models.Settings;
 
     var options = {
@@ -43,7 +43,6 @@ module.exports = function(User) {
       profileAvatar,
     });
 
-    // if (process.env.NODE_ENV === 'production') {
     user.verify(options, function(err) {
       if (err) {
         User.deleteById(user.id);
@@ -58,20 +57,6 @@ module.exports = function(User) {
       };
       return next();
     });
-    // } else {
-    //   //
-    //   const tempUser = await User.findById(user.id);
-    //   tempUser.emailVerified = true;
-    //   tempUser.save();
-
-    //   context.result = {
-    //     title: 'Signed up successfully',
-    //     content: 'Signed up successfully for development environment.',
-    //     redirectTo: '/',
-    //   };
-
-    //   return next();
-    // }
   });
 
   // Method to render

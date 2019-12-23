@@ -43,35 +43,35 @@ module.exports = function(User) {
       profileAvatar,
     });
 
-    if (process.env.NODE_ENV === 'production') {
-      user.verify(options, function(err) {
-        if (err) {
-          User.deleteById(user.id);
-          return next(err);
-        }
-        context.result = {
-          title: 'Signed up successfully',
-          content:
-            'Please check your email and click on the verification link ' +
-            'before logging in.',
-          redirectTo: '/',
-        };
-        return next();
-      });
-    } else {
-      //
-      const tempUser = await User.findById(user.id);
-      tempUser.emailVerified = true;
-      tempUser.save();
-
+    // if (process.env.NODE_ENV === 'production') {
+    user.verify(options, function(err) {
+      if (err) {
+        User.deleteById(user.id);
+        return next(err);
+      }
       context.result = {
         title: 'Signed up successfully',
-        content: 'Signed up successfully for development environment.',
+        content:
+          'Please check your email and click on the verification link ' +
+          'before logging in.',
         redirectTo: '/',
       };
-
       return next();
-    }
+    });
+    // } else {
+    //   //
+    //   const tempUser = await User.findById(user.id);
+    //   tempUser.emailVerified = true;
+    //   tempUser.save();
+
+    //   context.result = {
+    //     title: 'Signed up successfully',
+    //     content: 'Signed up successfully for development environment.',
+    //     redirectTo: '/',
+    //   };
+
+    //   return next();
+    // }
   });
 
   // Method to render

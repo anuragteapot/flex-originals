@@ -67,7 +67,7 @@
                   >
                     <img
                       class="fo-image"
-                      :src="`/${thumb}`"
+                      :src="this.getUrl(thumb)"
                       alt="thumbnail"
                       @click="uploadData.thumbImage = thumb"
                     />
@@ -97,7 +97,7 @@
                     <img
                       @click="$refs.inputFileThumbnail.click()"
                       class="fo-image"
-                      :src="`/${uploadData.thumbImage}`"
+                      :src="his.getUrl(uploadData.thumbImage)"
                       alt="thumbnail"
                     />
                   </div>
@@ -275,6 +275,9 @@ export default {
     },
   },
   methods: {
+    getUrl(path) {
+      return `http://localhost:3355/f.img?mimetype=image/jpg&media=${path}`;
+    },
     openSelect() {
       if (this.isAllowed) {
         this.$refs.inputFile.click();

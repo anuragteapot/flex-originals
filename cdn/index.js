@@ -6,10 +6,10 @@ const ora = require('ora');
 const spinner = ora('Starting server.').start();
 
 const server = http.createServer(app);
-const port = process.env.PORT || 8080;
+const port = process.env.CDN_PORT || 3355;
 
 function onListening() {
-  spinner.text = `CLIENT Server started at http://localhost:${port}`;
+  spinner.text = `CDN Server started at http://localhost:${port}`;
   spinner.color = 'green';
   spinner.succeed();
 }

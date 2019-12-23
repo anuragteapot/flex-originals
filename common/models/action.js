@@ -15,14 +15,14 @@ const VIDEO_EXT = [
   'video/x-msvideo',
   'video/avi',
   'application/x-troff-msvideo',
-  'video/msvideo'
+  'video/msvideo',
 ];
 const AUDIO_EXT = [
   'audio/mpeg',
   'audio/vnd.wav',
   'audio/mp4',
   'audio/ogg',
-  'audio/mp3'
+  'audio/mp3',
 ];
 const IMAGE_EXT = [
   'image/gif',
@@ -30,7 +30,7 @@ const IMAGE_EXT = [
   'image/jpg',
   'image/svg+xml',
   'image/x-icon',
-  'image/png'
+  'image/png',
 ];
 const EXTENSION = [
   '.png',
@@ -40,7 +40,7 @@ const EXTENSION = [
   '.ogg',
   '.gif',
   '.jpg',
-  '.avi'
+  '.avi',
 ];
 /**
  * PROFILE IMAGE STORING STARTS
@@ -48,10 +48,7 @@ const EXTENSION = [
 const s3 = new aws.S3({
   accessKeyId: 'AKIA5HLLMXVQQUAJ7PQC',
   secretAccessKey: '/i9vPu5dnksajNLUp8LjKBnb94rzAE/u80mjr9mVEq',
-  Bucket:
-    process.env.NODE_ENV === 'production'
-      ? 'flexo'
-      : 'dev-flexo'
+  Bucket: process.env.NODE_ENV === 'production' ? 'flexo' : 'dev-flexo',
 });
 
 module.exports = function(Action) {
@@ -74,15 +71,12 @@ module.exports = function(Action) {
 
     filename: (req, file, cb) => {
       cb(null, file.originalname);
-    }
+    },
   });
 
   const s3Storage = multerS3({
     s3: s3,
-    bucket:
-      process.env.NODE_ENV === 'production'
-        ? 'flexor'
-        : 'dev-flexo',
+    bucket: process.env.NODE_ENV === 'production' ? 'flexor' : 'dev-flexo',
     acl: 'public-read',
     contentType: multerS3.AUTO_CONTENT_TYPE,
     key: function(req, file, cb) {
@@ -96,9 +90,9 @@ module.exports = function(Action) {
           path.basename(file.originalname, path.extname(file.originalname)) +
           '-' +
           Date.now() +
-          path.extname(file.originalname)
+          path.extname(file.originalname),
       );
-    }
+    },
   });
 
   Action.upload = (req, res) => {
@@ -116,8 +110,8 @@ module.exports = function(Action) {
         callback(null, true);
       },
       limits: {
-        fileSize: 1024 * 1024 * 1024
-      }
+        fileSize: 1024 * 1024 * 1024,
+      },
     }).single('file');
 
     upload(req, res, async err => {
@@ -126,28 +120,31 @@ module.exports = function(Action) {
       } else {
         const { type } = req.params;
         req.file.path = req.file.path || req.file.location;
+
+        const filePath = Buffer.from(req.file.path).toString('base64');
+
         try {
           if (type == 'video' && VIDEO_EXT.indexOf(req.file.mimetype) !== -1) {
             const video = await Videos.create({
               videoOwnerId: req.params.id,
-              videoFile: req.file.path,
+              videoFile: filePath,
               title: req.file.originalname,
-              videoMeta: req.file
+              videoMeta: req.file,
             });
 
             await videoAnalytic.create({
-              videoId: video.id
+              videoId: video.id,
             });
 
             return res.json({
-              video
+              video,
             });
           } else if (
             type === 'image' &&
             IMAGE_EXT.indexOf(req.file.mimetype) !== -1
           ) {
             return res.json({
-              res: req.file
+              res: req.file,
             });
           } else if (
             type === 'audio' &&
@@ -155,29 +152,29 @@ module.exports = function(Action) {
           ) {
             const audio = await Audios.create({
               audioOwnerId: req.params.id,
-              audioFile: req.file.path,
+              audioFile: filePath,
               title: req.file.originalname,
-              audioMeta: req.file
+              audioMeta: req.file,
             });
 
             await audioAnalytic.create({
-              audioId: audio.id
+              audioId: audio.id,
             });
 
             return res.json({
-              audio
+              audio,
             });
           } else {
             return res.json({
               err: 400,
-              message: 'File not allowed'
+              message: 'File not allowed',
             });
           }
         } catch (error) {
           return res.json({
             err: 500,
             message: 'Server Internal Error',
-            error
+            error,
           });
         }
       }
@@ -192,19 +189,19 @@ module.exports = function(Action) {
       {
         arg: 'id',
         type: 'string',
-        required: true
+        required: true,
       },
       {
         arg: 'type',
         type: 'string',
-        required: true
-      }
+        required: true,
+      },
     ],
     returns: {
       arg: 'result',
-      type: 'string'
+      type: 'string',
     },
-    http: { path: '/upload/:type/:id', verb: 'post' }
+    http: { path: '/upload/:type/:id', verb: 'post' },
   });
 
   Action.genrateThumbnail = async id => {
@@ -212,7 +209,7 @@ module.exports = function(Action) {
 
     try {
       let video = await Videos.findOne({
-        where: { id }
+        where: { id },
       });
 
       if (VIDEO_EXT.indexOf(video.videoMeta.mimetype) !== -1) {
@@ -221,14 +218,16 @@ module.exports = function(Action) {
             sourcePath: video.videoMeta.path,
             destinationPath: video.videoMeta.destination,
             size: '190x110',
-            count: 4
+            count: 4,
           });
 
           const thumb = await tg.generate();
           const thumbnails = thumb.map(x =>
-            path.join(video.videoMeta.destination, x)
+            Buffer.from(path.join(video.videoMeta.destination, x)).toString(
+              'base64',
+            ),
           );
-	          // const gif = await tg.generateGif({});
+          // const gif = await tg.generateGif({});
           return { thumbnails };
         } catch (err) {
           throw new Error('File must be video type.');
@@ -247,17 +246,17 @@ module.exports = function(Action) {
       {
         arg: 'id',
         type: 'string',
-        required: true
-      }
+        required: true,
+      },
     ],
     returns: {
       type: 'object',
-      root: true
+      root: true,
     },
     http: {
       path: '/genrateThumbnail/:id',
-      verb: 'get'
-    }
+      verb: 'get',
+    },
   });
 
   Action.processVideo = async id => {
@@ -265,7 +264,7 @@ module.exports = function(Action) {
 
     try {
       let video = await Videos.findOne({
-        where: { id }
+        where: { id },
       });
 
       if (video.videoMeta) {
@@ -274,11 +273,11 @@ module.exports = function(Action) {
             sourcePath: video.videoMeta.path,
             destinationPath: video.videoMeta.destination,
             size: '200x200',
-            count: 3
+            count: 3,
           });
 
           const compressVideo = await tg.resizeVideo(720);
-       //   console.log(await tg.generateGif({}));
+          //   console.log(await tg.generateGif({}));
           return { compressVideo };
         } catch (err) {
           return { err };
@@ -297,17 +296,17 @@ module.exports = function(Action) {
       {
         arg: 'id',
         type: 'string',
-        required: true
-      }
+        required: true,
+      },
     ],
     returns: {
       type: 'object',
-      root: true
+      root: true,
     },
     http: {
       path: '/processVideo/:id',
-      verb: 'get'
-    }
+      verb: 'get',
+    },
   });
 
   Action.getContent = async (id, limit) => {
@@ -322,9 +321,9 @@ module.exports = function(Action) {
           id: true,
           username: true,
           realm: true,
-          email: true
+          email: true,
         },
-        where: { id }
+        where: { id },
       });
 
       if (!user) {
@@ -341,9 +340,9 @@ module.exports = function(Action) {
           instagram: true,
           redit: true,
           twitter: true,
-          linkedin: true
+          linkedin: true,
         },
-        where: { ownerId: user.id }
+        where: { ownerId: user.id },
       });
 
       const video = await Videos.find({
@@ -354,10 +353,10 @@ module.exports = function(Action) {
           videoOwnerId: true,
           id: true,
           title: true,
-          thumbImage: true
+          thumbImage: true,
         },
         where: { videoOwnerId: id, visibility: { lt: 2 } },
-        limit: limit
+        limit: limit,
       });
       const audio = await Audios.find({
         include: ['audioAnalytics', 'user'],
@@ -368,10 +367,10 @@ module.exports = function(Action) {
           id: true,
           title: true,
           audioFile: true,
-          thumbImage: true
+          thumbImage: true,
         },
         where: { audioOwnerId: id, visibility: { lt: 2 } },
-        limit: limit
+        limit: limit,
       });
       return { video, audio, user, settings };
     } else {
@@ -383,10 +382,10 @@ module.exports = function(Action) {
           videoOwnerId: true,
           id: true,
           title: true,
-          thumbImage: true
+          thumbImage: true,
         },
         where: { visibility: 1 },
-        limit: limit
+        limit: limit,
       });
       const audio = await Audios.find({
         include: ['audioAnalytics', 'user'],
@@ -397,10 +396,11 @@ module.exports = function(Action) {
           id: true,
           title: true,
           audioFile: true,
-          thumbImage: true
+          audioMeta: true,
+          thumbImage: true,
         },
         where: { visibility: 1 },
-        limit: limit
+        limit: limit,
       });
       return { video, audio };
     }
@@ -411,22 +411,22 @@ module.exports = function(Action) {
     accepts: [
       {
         arg: 'id',
-        type: 'string'
+        type: 'string',
       },
       {
         arg: 'limit',
         type: 'string',
-        required: true
-      }
+        required: true,
+      },
     ],
     returns: {
       type: 'object',
-      root: true
+      root: true,
     },
     http: {
       path: '/getContent/:limit/:id?',
-      verb: 'get'
-    }
+      verb: 'get',
+    },
   });
 
   Action.getUserStorage = async id => {
@@ -436,11 +436,11 @@ module.exports = function(Action) {
     if (id) {
       const video = await Videos.find({
         fields: { videoMeta: true },
-        where: { videoOwnerId: id }
+        where: { videoOwnerId: id },
       });
       const audio = await Audios.find({
         fields: { audioMeta: true },
-        where: { audioOwnerId: id }
+        where: { audioOwnerId: id },
       });
 
       let totalStorage = 0;
@@ -460,17 +460,17 @@ module.exports = function(Action) {
       {
         arg: 'id',
         type: 'string',
-        required: true
-      }
+        required: true,
+      },
     ],
     returns: {
       type: 'object',
-      root: true
+      root: true,
     },
     http: {
       path: '/getUserStorage/:id',
-      verb: 'get'
-    }
+      verb: 'get',
+    },
   });
 
   Action.getVideo = async id => {
@@ -481,7 +481,7 @@ module.exports = function(Action) {
 
     if (id) {
       const analytic = await videoAnalytic.findOne({
-        where: { videoId: id }
+        where: { videoId: id },
       });
 
       const video = await Videos.findOne({
@@ -493,14 +493,15 @@ module.exports = function(Action) {
           title: true,
           videoFile: true,
           thumbImage: true,
+          videoMeta: true,
           description: true,
           licence: true,
           likedPrivate: true,
           ratings: true,
           agerestriction: true,
-          allowComments: true
+          allowComments: true,
         },
-        where: { id, visibility: 1 }
+        where: { id, visibility: 1 },
       });
 
       if (!video) {
@@ -511,9 +512,9 @@ module.exports = function(Action) {
         fields: {
           id: true,
           username: true,
-          realm: true
+          realm: true,
         },
-        where: { id: video.videoOwnerId }
+        where: { id: video.videoOwnerId },
       });
 
       if (!user) {
@@ -524,9 +525,9 @@ module.exports = function(Action) {
         fields: {
           verifiedChannel: true,
           followers: true,
-          profileAvatar: true
+          profileAvatar: true,
         },
-        where: { ownerId: user.id }
+        where: { ownerId: user.id },
       });
 
       return { video, analytic, settings, user };
@@ -539,17 +540,17 @@ module.exports = function(Action) {
       {
         arg: 'id',
         type: 'string',
-        required: true
-      }
+        required: true,
+      },
     ],
     returns: {
       type: 'object',
-      root: true
+      root: true,
     },
     http: {
       path: '/getVideo/:id',
-      verb: 'get'
-    }
+      verb: 'get',
+    },
   });
 
   Action.getAudio = async id => {
@@ -558,7 +559,7 @@ module.exports = function(Action) {
 
     if (id) {
       const analytic = await audioAnalytic.findOne({
-        where: { audioId: id }
+        where: { audioId: id },
       });
 
       const audio = await Audio.findOne({
@@ -568,9 +569,10 @@ module.exports = function(Action) {
           name: true,
           published: true,
           audioFile: true,
-          thumbImage: true
+          audioMeta: true,
+          thumbImage: true,
         },
-        where: { id, visibility: 1 }
+        where: { id, visibility: 1 },
       });
 
       return { analytic, audio };
@@ -583,16 +585,16 @@ module.exports = function(Action) {
       {
         arg: 'id',
         type: 'string',
-        required: true
-      }
+        required: true,
+      },
     ],
     returns: {
       type: 'object',
-      root: true
+      root: true,
     },
     http: {
       path: '/getAudio/:id',
-      verb: 'get'
-    }
+      verb: 'get',
+    },
   });
 };

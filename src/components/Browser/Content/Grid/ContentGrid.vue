@@ -1,6 +1,9 @@
 <template>
   <div class="media-content-grid">
-    <div class="home__advertisement__video" v-show=" !isMobile && $route.name == '@home'">
+    <div
+      class="home__advertisement__video"
+      v-show="!isMobile && $route.name == '@home'"
+    >
       <div class="feature__text">
         <p>INTRODUCING</p>
         <h1>Flex Originals</h1>
@@ -19,7 +22,10 @@
         muted
       ></video>
     </div>
-    <div class="loading--media" v-show="content.audio.length == 0 && content.video.length == 0">
+    <div
+      class="loading--media"
+      v-show="content.audio.length == 0 && content.video.length == 0"
+    >
       <div class="spinner">
         <div class="lds-spinner">
           <div></div>
@@ -38,12 +44,17 @@
       </div>
     </div>
     <div class="grid_section files">
-      <h1 v-if="content.audio.length > 0 && layout != 'channel'">Recommended</h1>
-      <div class="fo-content__container" v-if="content.audio.length > 0 && layout != 'channel'">
+      <h1 v-if="content.audio.length > 0 && layout != 'channel'">
+        Recommended
+      </h1>
+      <div
+        class="fo-content__container"
+        v-if="content.audio.length > 0 && layout != 'channel'"
+      >
         <music-thumb
           v-for="item in content.audio"
           :key="item.id"
-          :src="item.thumbImage || `./../../../assets/musicLoading.png`"
+          :src="getUrl(item.thumbImage)"
           :item="item"
           hover
         ></music-thumb>
@@ -53,7 +64,7 @@
         <video-thumb
           v-for="item in content.video"
           :key="item.id"
-          :src="item.thumbImage || `./../../../assets/videoLoading.png`"
+          :src="getUrl(item.thumbImage)"
           :item="item"
           hover
         ></video-thumb>
@@ -63,7 +74,7 @@
         <music-thumb
           v-for="item in content.audio"
           :key="item.id"
-          :src="item.thumbImage || `./../../../assets/musicLoading.png`"
+          :src="getUrl(item.thumbImage)"
           :item="item"
           hover
         ></music-thumb>
@@ -107,20 +118,27 @@ export default {
     videoThumb,
     musicThumb,
   },
-  methods:{
-   loadeddata(){
-    setTimeout(() => {
-      this.$refs.featureVideo.play();
-    }, 5000);
-   }
+  methods: {
+    getUrl(path) {
+      if (path == '') {
+        return path;
+      } else {
+        return `http://localhost:3355/f.img?mimetype=image/png&media=${path}`;
+      }
+    },
+    loadeddata() {
+      setTimeout(() => {
+        this.$refs.featureVideo.play();
+      }, 5000);
+    },
   },
   mounted() {
     this.$refs.featureVideo.load();
     this.$refs.featureVideo.addEventListener('loadeddata', this.loadeddata);
   },
-  
+
   beforeDestroy() {
-   this.$refs.featureVideo.removeEventListener('loadeddata', this.loadeddata);
-  }
+    this.$refs.featureVideo.removeEventListener('loadeddata', this.loadeddata);
+  },
 };
 </script>

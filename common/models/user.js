@@ -43,20 +43,49 @@ module.exports = function(User) {
       profileAvatar,
     });
 
-    user.verify(options, function(err) {
-      if (err) {
-        User.deleteById(user.id);
-        return next(err);
-      }
-      context.result = {
-        title: 'Signed up successfully',
-        content:
-          'Please check your email and click on the verification link ' +
-          'before logging in.',
-        redirectTo: '/',
-      };
-      return next();
-    });
+    if (process.env.NODE_ENV === 'production') {
+      user.verify(options, function(err) {
+        if (err) {
+          User.deleteById(user.id);
+          return next(err);
+        }
+        context.result = {
+          title: 'Signed up successfully',
+          content:
+            'Please check your email and click on the verification link ' +
+            'before logging in.',
+          redirectTo: '/',
+        };
+        return next();
+      });
+    } else {
+      User.findById(user.id, function(err, instance) {
+        instance.emailVerified = true;
+        instance.save();
+
+        context.result = {
+          title: 'Signed up successfully',
+          content: 'Signed up successfully for development environment.',
+          redirectTo: '/',
+        };
+        return next();
+      });
+    }
+
+    // user.verify(options, function(err) {
+    //   if (err) {
+    //     User.deleteById(user.id);
+    //     return next(err);
+    //   }
+    //   context.result = {
+    //     title: 'Signed up successfully',
+    //     content:
+    //       'Please check your email and click on the verification link ' +
+    //       'before logging in.',
+    //     redirectTo: '/',
+    //   };
+    //   return next();
+    // });
   });
 
   // Method to render

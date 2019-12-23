@@ -82,7 +82,9 @@
       <nav :class="`no__animation ${active && seekTime ? 'menu-active' : ''}`">
         <div
           class="time__preview"
-          :style="`background-image: url('/${videoInfo.thumbImage}')`"
+          :style="
+            `background-image: url('${this.getUrl(videoInfo.thumbImage)}')`
+          "
         >
           <div class="time_preview_div">
             <span>{{ seekTime }}</span>
@@ -433,6 +435,13 @@ export default {
     },
   },
   methods: {
+    getUrl(path) {
+      if (path == '') {
+        return path;
+      } else {
+        return `http://localhost:3355/f.img?mimetype=image/png&media=${path}`;
+      }
+    },
     getSeekTime(event) {
       const time = (event.layerX / this.seekbarWidth) * this.duration;
       this.seekTime = this.convertSecondsToTime(time);

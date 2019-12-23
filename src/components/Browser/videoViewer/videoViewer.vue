@@ -12,7 +12,7 @@
               :class="`video-wrapper ${isMobile ? 'mobile' : ''}`"
             >
               <fo-video-player
-                :src="videoSource"
+                :src="this.getUrl(videoSource)"
                 v-show="!videoUnavaliable"
                 :autoPlay="true"
                 @handleEnded="handleEnded"
@@ -24,7 +24,7 @@
             <div v-else :class="`video-wrapper ${isMobile ? 'mobile' : ''}`">
               <default-video-player
                 v-show="!videoUnavaliable"
-                :src="videoSource"
+                :src="this.getUrl(videoSource)"
               ></default-video-player>
             </div>
             <div :class="`video_actions ${theme}`" v-show="!videoUnavaliable">
@@ -138,6 +138,13 @@ export default {
     // videoReactions,
   },
   methods: {
+    getUrl(path) {
+      if (path == '') {
+        return path;
+      } else {
+        return `http://localhost:3355/videoplayback?mimetype=video/mp4&id=1234&media=${path}`;
+      }
+    },
     doComment() {
       console.log(this.$store.state.user.id);
     },
@@ -201,11 +208,9 @@ export default {
         if (!currentVideo.data) {
           this.videoUnavaliable = true;
         }
-        if (currentVideo.data.video.videoFile.includes('https')) {
-          this.videoSource = currentVideo.data.video.videoFile;
-        } else {
-          this.videoSource = '/' + currentVideo.data.video.videoFile;
-        }
+
+        this.videoSource = currentVideo.data.video.videoFile;
+
         this.analytic = currentVideo.data.analytic;
         this.user = currentVideo.data.user;
         this.settings = currentVideo.data.settings;

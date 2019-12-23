@@ -67,7 +67,7 @@
                   >
                     <img
                       class="fo-image"
-                      :src="this.getUrl(thumb)"
+                      :src="getUrl(thumb)"
                       alt="thumbnail"
                       @click="uploadData.thumbImage = thumb"
                     />
@@ -97,7 +97,7 @@
                     <img
                       @click="$refs.inputFileThumbnail.click()"
                       class="fo-image"
-                      :src="his.getUrl(uploadData.thumbImage)"
+                      :src="getUrl(uploadData.thumbImage)"
                       alt="thumbnail"
                     />
                   </div>
@@ -246,10 +246,10 @@ export default {
       type: '',
       uploadId: null,
       thumbnails: [
-        `public/loading.gif`,
-        `public/loading.gif`,
-        `public/loading.gif`,
-        `public/loading.gif`,
+        `/public/loading.gif`,
+        `/public/loading.gif`,
+        `/public/loading.gif`,
+        `/public/loading.gif`,
       ],
       uploadData: {
         title: '',
@@ -276,7 +276,11 @@ export default {
   },
   methods: {
     getUrl(path) {
-      return `http://localhost:3355/f.img?mimetype=image/jpg&media=${path}`;
+      if (path == '/public/loading.gif' || path == '') {
+        return path;
+      } else {
+        return `http://localhost:3355/f.img?mimetype=image/png&media=${path}`;
+      }
     },
     openSelect() {
       if (this.isAllowed) {

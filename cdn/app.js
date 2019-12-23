@@ -10,6 +10,7 @@ const app = express();
 
 const cdn = require('./cdn');
 app.get('/videoplayback', cdn.serveVideo);
+app.get('/audioplayback', cdn.serveVideo);
 app.get('/f.img', cdn.serveImage);
 
 app.use(compression());

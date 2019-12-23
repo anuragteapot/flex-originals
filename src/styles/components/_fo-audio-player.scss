@@ -4,7 +4,7 @@
   z-index: 50;
   padding: 0.9em 0px;
   min-width: 1000px;
-  background: #252a2e;
+  background: #121214;
   border-top: 1px solid #18191a;
   border-bottom: 1px solid #18191a;
   border-right: 1px solid #18191a;
@@ -85,7 +85,7 @@
           height: 4px;
           border-radius: 4px;
           z-index: 45;
-          background: $color-error;
+          background: $color-theme;
 
           .circle {
             position: relative;
@@ -94,14 +94,14 @@
             width: 10px;
             height: 10px;
             float: right;
-            background: $color-error;
+            background: $color-theme;
             border-radius: 50%;
           }
         }
 
         &.audio {
           width: 15%;
-          background: $color-error;
+          background: $color-theme;
         }
       }
 

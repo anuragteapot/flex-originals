@@ -1,11 +1,11 @@
 <template>
   <aside :class="`features ${theme}`">
-    <header class="features-header focusable">
+    <header :class="`features-header focusable ${theme}`">
       <div class="features-header-name">
         <h1>Flex Originals</h1>
       </div>
     </header>
-    <section class="features-list">
+    <section :class="`features-list ${theme}`">
       <header class="features-list-header focusable">
         <h5>FOLLOWING</h5>
       </header>

@@ -142,17 +142,18 @@ body:not(.user-is-tabbing) textarea:focus {
     }
 
     &.dark {
-      background: #17171b !important;
+      background: #121214 !important;
     }
   }
 
   .features {
-    background: $theme-dark;
+    background: #f2f3f5;
     display: flex;
     border: 0;
     flex-direction: column;
 
     &.dark {
+      background: #17171b;
       a {
         color: white !important;
       }
@@ -182,6 +183,10 @@ body:not(.user-is-tabbing) textarea:focus {
       text-align: center;
       border-bottom: 1px solid $border-color;
       transition: background 0.15s ease;
+
+      &.dark {
+        border: 0;
+      }
     }
 
     .features-list-text,

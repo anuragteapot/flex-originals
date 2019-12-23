@@ -19,7 +19,6 @@ app.use(favicon(resolve('../public/favicon.ico')));
 app.use('/', serve('../public'));
 app.use('/dist', serve('../dist'));
 app.use('/service-worker.js', serve('../dist/service-worker.js'));
-app.use('/uploads', serve('../uploads'));
 app.use('/public', serve('../assets'));
 
 let renderer;

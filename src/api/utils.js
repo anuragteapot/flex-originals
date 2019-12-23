@@ -1,10 +1,15 @@
-/* eslint-disable no-useless-escape */
+/* eslint-disable */
 export default class utils {
   constructor() {
     this.regMobile = /^\d{10}$/;
     this.regName = /^[a-zA-Z ]*$/;
     this.regEmail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
     this.regDate = /^\d{4}[./-]\d{2}[./-]\d{2}$/;
+
+    if (process.env && process) {
+      this.CDN =
+        process.env.NODE_ENV === 'production' ? '' : 'http://localhost:3355';
+    }
   }
   randomChars(len = 6) {
     let text = '';
@@ -14,6 +19,20 @@ export default class utils {
       text += possible.charAt(Math.floor(Math.random() * possible.length));
 
     return text;
+  }
+
+  getUrl(path, type) {
+    if (path == '/public/loading.gif' || path == '') {
+      return path;
+    } else {
+      if (type == 'image') {
+        return `${this.CDN}/f.img?mimetype=image/png&media=${path}`;
+      } else if (type == 'video') {
+        return `${this.CDN}/videoplayback?mimetype=video/mp4&id=1234&media=${path}`;
+      } else if (type == 'audio') {
+        return `${this.CDN}/audioplayback?mimetype=audio/mp3&id=1234&media=${path}`;
+      }
+    }
   }
 
   getUidV4() {

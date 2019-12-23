@@ -62,6 +62,12 @@
           font-size: 18px;
         }
 
+        &.dark {
+          .video__analytics__info {
+            border-bottom: 1px solid #1c1c1d !important;
+          }
+        }
+
         &.light {
           color: #283035;
         }
@@ -114,6 +120,26 @@
         border: 1px solid $border-color;
         height: 100%;
 
+        &.dark {
+          border: none;
+          background: #121214;
+          border: 1px solid #1c1c1d;
+
+          .video_comment_input {
+            background: #121214 !important;
+            border: 1px solid #1c1c1d !important;
+            color: white !important;
+          }
+
+          .video__comment__box {
+            border-top: 1px solid #1c1c1d !important;
+          }
+
+          .video__profile__action {
+            border-bottom: 1px solid #1c1c1d !important;
+          }
+        }
+
         .video__comment__inner {
           height: 100%;
           display: block;
@@ -133,7 +159,7 @@
                   height: 40px;
                   border-radius: 50%;
                   border: 1px solid $border-color;
-                  
+
                   &:hover {
                     opacity: 0.8;
                   }

@@ -376,17 +376,18 @@
       opacity: 0;
       z-index: -1;
       visibility: hidden;
-      background: rgba(32, 32, 32, 1);
+      background: rgba(0, 0, 0, 0.9);
       transition: 0.2s ease-out;
-      box-shadow: 0 16px 32px rgba(0, 0, 0, 0.25);
+      // box-shadow: 0 16px 32px rgba(0, 0, 0, 0.25);
       transform: translateY(50px) scale(0.5);
       transition: 0.2s;
       & a {
         text-decoration: none;
         color: #fff;
         display: block;
-        font-size: 12px;
+        font-size: 13px;
         padding: 10px;
+        font-weight: 500;
         text-align: left;
 
         .fo-video-player__right {
@@ -394,8 +395,7 @@
         }
 
         &:hover {
-          background: darken(#414040, 6%);
-          transition: 0.2s ease;
+          background: rgba(255, 255, 255, 0.1);
         }
       }
       ul {

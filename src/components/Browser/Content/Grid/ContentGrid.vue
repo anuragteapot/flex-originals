@@ -54,7 +54,7 @@
         <music-thumb
           v-for="item in content.audio"
           :key="item.id"
-          :src="getUrl(item.thumbImage)"
+          :src="$utils.getUrl(item.thumbImage, 'image')"
           :item="item"
           hover
         ></music-thumb>
@@ -64,7 +64,7 @@
         <video-thumb
           v-for="item in content.video"
           :key="item.id"
-          :src="getUrl(item.thumbImage)"
+          :src="$utils.getUrl(item.thumbImage, 'image')"
           :item="item"
           hover
         ></video-thumb>
@@ -74,7 +74,7 @@
         <music-thumb
           v-for="item in content.audio"
           :key="item.id"
-          :src="getUrl(item.thumbImage)"
+          :src="$utils.getUrl(item.thumbImage, 'image')"
           :item="item"
           hover
         ></music-thumb>

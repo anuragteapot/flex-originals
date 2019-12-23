@@ -67,7 +67,7 @@
                   >
                     <img
                       class="fo-image"
-                      :src="getUrl(thumb)"
+                      :src="$utils.getUrl(thumb, 'image')"
                       alt="thumbnail"
                       @click="uploadData.thumbImage = thumb"
                     />
@@ -97,7 +97,7 @@
                     <img
                       @click="$refs.inputFileThumbnail.click()"
                       class="fo-image"
-                      :src="getUrl(uploadData.thumbImage)"
+                      :src="$utils.getUrl(uploadData.thumbImage, 'image')"
                       alt="thumbnail"
                     />
                   </div>
@@ -275,13 +275,6 @@ export default {
     },
   },
   methods: {
-    getUrl(path) {
-      if (path == '/public/loading.gif' || path == '') {
-        return path;
-      } else {
-        return `http://localhost:3355/f.img?mimetype=image/png&media=${path}`;
-      }
-    },
     openSelect() {
       if (this.isAllowed) {
         this.$refs.inputFile.click();
@@ -345,6 +338,10 @@ export default {
       }
 
       if (uploaded.data.res) {
+        // eslint-disable-next-line no-undef
+        uploaded.data.res.path = Buffer.from(uploaded.data.res.path).toString(
+          'base64',
+        );
         this.uploadData.thumbImage = uploaded.data.res.path;
         this.thumbnails.push(uploaded.data.res.path);
       }

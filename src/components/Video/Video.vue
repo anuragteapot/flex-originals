@@ -83,7 +83,10 @@
         <div
           class="time__preview"
           :style="
-            `background-image: url('${this.getUrl(videoInfo.thumbImage)}')`
+            `background-image: url('${$utils.getUrl(
+              videoInfo.thumbImage,
+              'image',
+            )}')`
           "
         >
           <div class="time_preview_div">

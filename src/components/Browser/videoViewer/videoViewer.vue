@@ -12,7 +12,7 @@
               :class="`video-wrapper ${isMobile ? 'mobile' : ''}`"
             >
               <fo-video-player
-                :src="this.getUrl(videoSource)"
+                :src="$utils.getUrl(videoSource, 'video')"
                 v-show="!videoUnavaliable"
                 :autoPlay="true"
                 @handleEnded="handleEnded"
@@ -24,7 +24,7 @@
             <div v-else :class="`video-wrapper ${isMobile ? 'mobile' : ''}`">
               <default-video-player
                 v-show="!videoUnavaliable"
-                :src="this.getUrl(videoSource)"
+                :src="$utils.getUrl(videoSource, 'video')"
               ></default-video-player>
             </div>
             <div :class="`video_actions ${theme}`" v-show="!videoUnavaliable">
@@ -37,14 +37,14 @@
                   >
                 </div>
                 <div class="right">
-                  <video-reactions :video="video"></video-reactions>
-                  <video-options :video="video"></video-options>
+                  <!-- <video-reactions :video="video"></video-reactions> -->
+                  <!-- <video-options :video="video"></video-options> -->
                 </div>
               </div>
             </div>
           </div>
           <div class="grid grid--half right" v-show="!videoUnavaliable">
-            <div class="video__comment">
+            <div :class="`video__comment ${theme}`">
               <div class="video__comment__inner">
                 <div class="video__profile__action">
                   <div class="left">
@@ -138,13 +138,6 @@ export default {
     // videoReactions,
   },
   methods: {
-    getUrl(path) {
-      if (path == '') {
-        return path;
-      } else {
-        return `http://localhost:3355/videoplayback?mimetype=video/mp4&id=1234&media=${path}`;
-      }
-    },
     doComment() {
       console.log(this.$store.state.user.id);
     },

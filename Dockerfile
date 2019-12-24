@@ -8,7 +8,7 @@ RUN apt-get -y update
 RUN apt-get -y upgrade
 RUN apt-get install -y ffmpeg
 
-RUN npm install
+RUN sudo npm install --unsafe-perm
 
 COPY . .
 

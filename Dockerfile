@@ -8,6 +8,8 @@ RUN apt-get -y update
 RUN apt-get -y upgrade
 RUN apt-get install -y ffmpeg
 
+RUN npm install -g --unsafe-perm node-sass --save
+
 RUN npm install --unsafe-perm
 
 COPY . .

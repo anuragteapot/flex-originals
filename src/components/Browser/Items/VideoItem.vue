@@ -96,7 +96,7 @@ export default {
       }
     },
     getName: function() {
-      const len = 20;
+      const len = 30;
       if (this.item.title.length >= len) {
         return this.item.title.substring(0, len) + '..';
       } else {

@@ -10,6 +10,7 @@ module.exports = {
     name: "mongodb",
     connector: "mongodb",
     useNewUrlParser: true,
-    connectionTimeout: 30000
+    useUnifiedTopology: true,
+    connectionTimeout: 3000
   }
 };

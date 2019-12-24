@@ -4,6 +4,8 @@
 
 var loopback = require('loopback');
 var boot = require('loopback-boot');
+const ora = require('ora');
+const spinner = ora('Starting server.').start();
 
 var app = (module.exports = loopback());
 
@@ -13,10 +15,14 @@ app.start = function() {
     app.emit('started');
     var baseUrl = app.get('url').replace(/\/$/, '');
     console.log('-------------------------------------------------------');
-    console.log('Web server listening at: %s', baseUrl);
+    spinner.text = `WEB Server started at: ${baseUrl}`;
+    spinner.color = 'green';
+    spinner.succeed();
     if (app.get('loopback-component-explorer')) {
       var explorerPath = app.get('loopback-component-explorer').mountPath;
-      console.log('Browse your REST API at %s%s', baseUrl, explorerPath);
+      spinner.text = `Browse your REST API at: ${baseUrl}${explorerPath}`;
+      spinner.color = 'green';
+      spinner.succeed();
       console.log('-------------------------------------------------------');
     }
   });

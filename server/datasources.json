@@ -8,6 +8,7 @@
     "name": "mongodb",
     "user": "root",
     "useNewUrlParser": true,
+    "useUnifiedTopology": true,
     "connector": "mongodb"
   },
   "emailDs": {

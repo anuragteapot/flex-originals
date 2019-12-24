@@ -1,32 +1,30 @@
 .feed {
+  position: relative;
+
   .like-btn {
-    position: absolute;
-    right: 250px;
-    text-align: left;
+    position: relative;
     outline: none;
-    padding: 0 10px;
-    cursor: pointer;
-    overflow: visible !important;
-    z-index: 50;
+    display: inline-block;
   }
 
-  .like-btn .reaction-box {
+  .reaction-box {
     width: 290px;
     height: 55px;
     position: absolute;
     background: #ffffff;
+    display: block;
     border-radius: 28px;
     top: -55px;
     left: -10px;
     display: none;
-    box-shadow: 0 5px 10px rgb(94, 94, 94);
+    box-shadow: 0 0px 10px rgb(146, 146, 146);
 
     button {
       outline: none;
       cursor: pointer;
     }
   }
-  .like-btn .reaction-box .reaction-icon {
+  .reaction-box .reaction-icon {
     width: 40px;
     height: 40px;
     display: inline-block;
@@ -37,7 +35,7 @@
     opacity: 0;
     transform: translate(0, 100px) scale(0);
   }
-  .like-btn .reaction-box .reaction-icon label {
+  .reaction-box .reaction-icon label {
     padding: 3px 5px 3px 5px;
     position: relative;
     top: -10px;
@@ -48,19 +46,19 @@
     background: #fff;
     visibility: hidden;
   }
-  .like-btn:hover .reaction-box {
-    display: block;
+  .reaction-box.show {
+    display: inline-block;
   }
-  .like-btn:hover .reaction-box .reaction-icon.show {
+  .reaction-box .reaction-icon.show {
     opacity: 1;
     transform: translate(0, 0) scale(1);
   }
-  .like-btn:hover .reaction-box .reaction-icon:hover {
+  .reaction-box .reaction-icon:hover {
     transform: scale(1.4);
     transition: 0.3s;
     transform-origin: bottom;
   }
-  .like-btn:hover .reaction-box .reaction-icon:hover label {
+  .reaction-box .reaction-icon:hover label {
     visibility: visible;
   }
 }

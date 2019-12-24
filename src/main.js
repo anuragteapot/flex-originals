@@ -27,6 +27,7 @@ import Volume from './components/Svg/Volume';
 import FullScreen from './components/Svg/FullScreen';
 import MiniPlayer from './components/Svg/MiniPlayer';
 import Subtitle from './components/Svg/Subtitle';
+import Verified from './components/Svg/Verified';
 
 import './styles/creator.scss';
 
@@ -46,17 +47,18 @@ Vue.component('emojiSad', emojiSad);
 Vue.component('emojiThinking', emojiThinking);
 Vue.component('emojiAngry', emojiAngry);
 Vue.component('emojiNoLike', emojiNoLike);
-Vue.component('foPlay', Play);
-Vue.component('foSettings', Settings);
-Vue.component('foBackward', Backward);
-Vue.component('foSettings', Settings);
-Vue.component('foVolume', Volume);
-Vue.component('foPause', Pause);
-Vue.component('foForward', Forward);
-Vue.component('foScreen', Screen);
-Vue.component('foFullScreen', FullScreen);
-Vue.component('foMiniPlayer', MiniPlayer);
-Vue.component('foSubtitle', Subtitle);
+Vue.component('foSvgPlay', Play);
+Vue.component('foSvgSettings', Settings);
+Vue.component('foSvgBackward', Backward);
+Vue.component('foSvgSettings', Settings);
+Vue.component('foSvgVolume', Volume);
+Vue.component('foSvgPause', Pause);
+Vue.component('foSvgForward', Forward);
+Vue.component('foSvgScreen', Screen);
+Vue.component('foSvgFullScreen', FullScreen);
+Vue.component('foSvgMiniPlayer', MiniPlayer);
+Vue.component('foSvgSubtitle', Subtitle);
+Vue.component('foSvgVerified', Verified);
 
 export default function createApp() {
   // create store and router instances

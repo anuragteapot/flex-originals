@@ -23,7 +23,7 @@
 </template>
 
 <script>
-import watch from './../components/Browser/videoViewer/videoViewer';
+import watch from './../components/Browser/VideoViewer/VideoViewer';
 import asideAction from './../components/Browser/Aside/AsideAction';
 import asideDes from './../components/Browser/Aside/AsideDes';
 import toolbar from './../components/Browser/Toolbar/Toolbar';

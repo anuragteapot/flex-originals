@@ -216,20 +216,30 @@
       </div>
       <div class="fo-video-player__control-wrap">
         <div class="fo-video-player__left">
-          <fo-backward width="36px" height="36px"></fo-backward>
-          <fo-play
+          <fo-svg-backward
+            width="36px"
+            height="36px"
+            cursor="pointer"
+          ></fo-svg-backward>
+          <fo-svg-play
             v-if="!isPlaying"
             width="36px"
+            cursor="pointer"
             height="36px"
             @click="playOrPause"
-          ></fo-play>
-          <fo-pause
+          ></fo-svg-play>
+          <fo-svg-pause
             v-else
             width="36px"
+            cursor="pointer"
             height="36px"
             @click="playOrPause"
-          ></fo-pause>
-          <fo-forward width="36px" height="36px"></fo-forward>
+          ></fo-svg-pause>
+          <fo-svg-forward
+            width="36px"
+            height="36px"
+            cursor="pointer"
+          ></fo-svg-forward>
 
           <div class="fo-time-display">
             <span class="fo-time-current">{{ getCurrentTime }}</span>
@@ -238,38 +248,47 @@
           </div>
         </div>
         <div class="fo-video-player__right">
-          <fo-subtitle width="36px" height="36px"></fo-subtitle>
-          <fo-volume
+          <fo-svg-subtitle
             width="36px"
             height="36px"
+            cursor="pointer"
+          ></fo-svg-subtitle>
+          <fo-svg-volume
+            width="36px"
+            height="36px"
+            cursor="pointer"
             @click="volumesettings = !volumesettings"
-          ></fo-volume>
+          ></fo-svg-volume>
           <!-- <i
             :class="`fas fa-cog ${opensettings ? 'rotate-45' : '' }`"
             @click="opensettings = !opensettings"
           ></i>-->
-          <fo-settings
+          <fo-svg-settings
             width="36px"
             height="36px"
+            cursor="pointer"
             @click="opensettings = !opensettings"
-          ></fo-settings>
-          <fo-mini-player
+          ></fo-svg-settings>
+          <fo-svg-mini-player
             width="36px"
             height="36px"
+            cursor="pointer"
             @click="pip"
-          ></fo-mini-player>
-          <fo-screen
+          ></fo-svg-mini-player>
+          <fo-svg-screen
             v-if="!fullscreen"
             width="36px"
             height="36px"
+            cursor="pointer"
             @click="openFullscreen"
-          ></fo-screen>
-          <fo-full-screen
+          ></fo-svg-screen>
+          <fo-svg-full-screen
             v-else
             width="36px"
+            cursor="pointer"
             height="36px"
             @click="closeFullscreen"
-          ></fo-full-screen>
+          ></fo-svg-full-screen>
         </div>
       </div>
     </div>

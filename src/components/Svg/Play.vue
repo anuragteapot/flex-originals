@@ -1,7 +1,7 @@
 <template>
   <button
     :class="`fo-button ${customClass}`"
-    :style="`height:${height}; width:${height}`"
+    :style="`height:${height}; width:${height}; cursor:${cursor}`"
     @click="$emit('click')"
   >
     <svg height="100%" version="1.1" viewBox="0 0 36 36" width="100%">
@@ -19,6 +19,10 @@
 export default {
   name: 'svg-play',
   props: {
+    cursor: {
+      type: String,
+      default: '',
+    },
     height: {
       type: [String],
       default: '40px',

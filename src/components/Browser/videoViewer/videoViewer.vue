@@ -37,63 +37,27 @@
                   >
                 </div>
                 <div class="right">
-                  <!-- <video-reactions :video="video"></video-reactions> -->
+                  <video-reactions :video="video"></video-reactions>
                   <!-- <video-options :video="video"></video-options> -->
                 </div>
               </div>
             </div>
           </div>
           <div class="grid grid--half right" v-show="!videoUnavaliable">
-            <div :class="`video__comment ${theme}`">
-              <div class="video__comment__inner">
-                <div class="video__profile__action">
-                  <div class="left">
-                    <div class="channel__avater">
-                      <router-link :to="`/app/@channel/${user.id}`">
-                        <img
-                          alt="Avatar"
-                          :src="settings.profileAvatar || `/public/logo.png`"
-                          class="avatar"
-                        />
-                      </router-link>
-                      <div class="channel__name">{{ user.username }}</div>
-                    </div>
-                  </div>
-                  <div class="right">
-                    <button class="follow theme">
-                      Follow
-                    </button>
-                  </div>
-                </div>
-                <div class="video__comment__message"></div>
-                <div class="video__comment__box">
-                  <div class="left">
-                    <textarea
-                      v-model="comment"
-                      class="video_comment_input"
-                      placeholder="Add a comment..."
-                    ></textarea>
-                  </div>
-                  <div class="right">
-                    <button class="fo-button post">
-                      Post
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
+            <video-comment></video-comment>
           </div>
         </div>
-        <!-- <video-suggestions :item="item"></video-suggestions> -->
+        <video-suggestions></video-suggestions>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-// import videoSuggestions from './videoSuggestions';
-// import videoOptions from './videoOptions';
-// import videoReactions from './videoReaction';
+import videoSuggestions from './Suggestions';
+import videoComment from './Comment';
+// import videoOptions from './Options';
+import videoReactions from './Reaction';
 import utils from './../../../api/utils';
 import { mapGetters } from 'vuex';
 import * as types from './../../../store/mutation-types';
@@ -133,9 +97,10 @@ export default {
     },
   },
   components: {
-    // videoSuggestions,
+    videoSuggestions,
+    videoComment,
     // videoOptions,
-    // videoReactions,
+    videoReactions,
   },
   methods: {
     doComment() {

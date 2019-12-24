@@ -1,5 +1,5 @@
 <template>
-  <button class="fo-button">
+  <button class="fo-button" :style="`cursor:${cursor}`">
     <svg
       version="1.1"
       id="Layer_1"
@@ -7,8 +7,8 @@
       xmlns:xlink="http://www.w3.org/1999/xlink"
       x="0px"
       y="0px"
-      width="40px"
-      height="40px"
+      :width="width"
+      :height="height"
       viewBox="0 0 473.931 473.931"
       style="enable-background:new 0 0 473.931 473.931;"
       xml:space="preserve"
@@ -56,5 +56,19 @@
 <script>
 export default {
   name: 'emoji-love',
+  props: {
+    cursor: {
+      type: String,
+      default: '',
+    },
+    height: {
+      type: [String],
+      default: '40px',
+    },
+    width: {
+      type: [String],
+      default: '40px',
+    },
+  },
 };
 </script>

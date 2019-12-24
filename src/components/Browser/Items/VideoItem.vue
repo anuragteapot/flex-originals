@@ -29,12 +29,7 @@
         <p class="title">{{ getName() }}</p>
         <p class="views">
           {{ item.user.username }}
-          <img
-            src="/public/verified.svg"
-            width="10"
-            height="10"
-            alt="verified"
-          />
+          <fo-svg-verified width="10" height="10"></fo-svg-verified>
           <br />
           {{ item.videoAnalytics ? item.videoAnalytics.views : '0' }} views .
           {{ $utils.time_ago(new Date(item.published)) }}

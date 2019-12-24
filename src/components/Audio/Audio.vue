@@ -144,10 +144,6 @@ export default {
       ) {
         this.bufferPercent = this.audio.buffered.end(0) / this.audio.duration;
       }
-      // Some browsers (e.g., FF3.6 and Safari 5) cannot calculate target.bufferered.end()
-      // to be anything other than 0. If the byte count is available we use this instead.
-      // Browsers that support the else if do not seem to have the bufferedBytes value and
-      // should skip to there. Tested in Safari 5, Webkit head, FF3.6, Chrome 6, IE 7/8.
       else if (
         this.audio &&
         this.audio.bytesTotal != undefined &&
@@ -185,7 +181,7 @@ export default {
         this.musicPlaylist[this.currentSong].audioFile,
         'audio',
       );
-      
+
       this.audio.src = this.audioFile;
       this.audio.volume = this.volume / 10;
       if (wasPlaying) {
@@ -311,7 +307,11 @@ export default {
       this.$router.push('/app/@error');
     }
 
-    // this.changeSong();
+    // const audio = await this.$store.dispatch('GET_AUDIO', {
+    //   id: this.$route.query.a,
+    // });
+
+    // console.log(audio);
 
     if (typeof window !== 'undefined') {
       window.addEventListener('keydown', this.detectKeypress);

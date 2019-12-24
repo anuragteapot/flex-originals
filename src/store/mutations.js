@@ -198,7 +198,7 @@ export default {
   },
 
   /**
-   * Select browser items
+   * Player
    * @param state
    * @param payload the items
    */
@@ -211,7 +211,7 @@ export default {
   },
 
   /**
-   * Select browser items
+   * Player
    * @param state
    * @param payload the items
    */

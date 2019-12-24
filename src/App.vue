@@ -1,8 +1,6 @@
 <template>
   <div id="app" :class="`container ${theme}`">
-    <!-- <transition name="fade" mode="out-in"> -->
-      <router-view />
-    <!-- </transition> -->
+    <router-view />
     <fo-snack-bar position="bottom-left"></fo-snack-bar>
     <fo-model></fo-model>
   </div>
@@ -72,19 +70,6 @@ export default {
       window.removeEventListener('resize', this.onResize);
     }
   },
-  //  asyncData({
-  //    store,
-  //    isServer
-  //  }) {
-  //   if(store.state.user.id) {
-  //   return store.dispatch('FIND_SETTINGS', {
-  //       uid: store.state.user.id,
-  //       isServer
-  //     });
-  //     } else {
-  //        return Promise.resolve();
-  //     }
-  // },
   async beforeMount() {
     if (typeof window !== 'undefined') {
       window.addEventListener('online', this.updateOnlineStatus);

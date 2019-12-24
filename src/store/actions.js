@@ -41,6 +41,14 @@ export default {
     }
   },
 
+  GET_AUDIO: async ({ commit, dispatch, state }, { id }) => {
+    try {
+      return await AXIOS_API.get(`/api/actions/getAudio/${id}`);
+    } catch (error) {
+      return new handleError(commit, dispatch, state)._handleError(error);
+    }
+  },
+
   GET_VIDEO_INFO: async ({ commit, dispatch, state }, { id }) => {
     try {
       return await AXIOS_API.get(`/api/videos/getVideoInfo/${id}`);

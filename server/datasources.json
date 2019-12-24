@@ -24,8 +24,8 @@
           "rejectUnauthorized": true
         },
         "auth": {
-          "user": "flexoriginals@gmail.com",
-          "pass": "anurag99uzumymw"
+          "user": "dummy@gmail.com",
+          "pass": "dummy"
         }
       }
     ]

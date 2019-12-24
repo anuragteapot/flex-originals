@@ -355,11 +355,16 @@ body:not(.user-is-tabbing) textarea:focus {
         border-radius: 4px;
         display: flex;
       }
-
+      
       .features-footer-controls .button {
+        background-color: #d4d7dc;
         display: block;
         width: 32px;
         height: 32px;
+
+        &:hover {
+          background-color: #e7e9eb;
+        }
       }
 
       .avatar {
@@ -378,7 +383,7 @@ body:not(.user-is-tabbing) textarea:focus {
       }
 
       .tag {
-        color: rgba(138, 135, 135, 0.45);
+        color: rgba(231, 231, 231, 0.45);
         font-size: 0.7rem;
       }
     }
@@ -416,7 +421,7 @@ body:not(.user-is-tabbing) textarea:focus {
 
       &.active,
       &:hover {
-        background-color: lightgrey;
+        background-color: #eef1f5
       }
 
       i {
@@ -447,9 +452,11 @@ body:not(.user-is-tabbing) textarea:focus {
     height: 2rem;
     border-radius: 0.25rem;
     padding: 0 1rem;
+    font-size: 16;
+    font-weight: 500;
     border: none;
     margin: 0 5px 0 0;
-    background: #fafafa;
+    background: #d4d7dc;
     border: 1px solid lightgrey;
   }
 

@@ -59,12 +59,16 @@ export default {
   player: {
     audio: {
       data: {},
+      queue: [],
       volume: 5,
+      background: false,
       isPlaying: false,
     },
     video: {
       data: {},
+      queue: [],
       volume: 5,
+      background: false,
       isPlaying: false,
     },
   },

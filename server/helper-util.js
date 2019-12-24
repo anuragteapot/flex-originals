@@ -71,7 +71,6 @@ module.exports = {
     return new Promise((resolve, reject) =>
       connector.query(sql, params, (err, data) => {
         if (err) {
-          console.log(err); // eslint-disable-line no-console
           return reject(err);
         }
         return resolve(data);

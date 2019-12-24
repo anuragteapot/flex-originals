@@ -15,6 +15,7 @@ services:
       - ./uploads:/usr/src/uploads
       - ./common:/usr/src/common
       - ./server:/usr/src/server
+      - ./dist:/usr/src/dist
 
   mongo:
     container_name: mongo

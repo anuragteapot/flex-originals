@@ -24,48 +24,19 @@
 
       p {
         bottom: -30px;
-        color: white;
         width: 100%;
       }
-
-      &.light .title {
-        color: black !important;
-      }
-
-      &.dark .views {
-        color: #f1ebeb !important;
-      }
-
-      &.light .views {
-        color: #383838 !important;
-      }
-    }
-
-    p {
-      bottom: -30px;
-      color: white;
-      width: 100%;
     }
 
     i {
+      color: white;
       margin: auto;
       top: 50%;
       left: 50%;
       margin-left: -15px;
       margin-top: -15px;
       position: absolute;
-      color: white;
     }
-
-    // @media screen and (min-width: 768px) {
-    //   width: 305px;
-    //   height: 170px;
-    // }
-
-    // @media screen and (min-width: 1200px) {
-    //   width: 305px;
-    //   height: 170px;
-    // }
   }
 
   .lazy-background::before {

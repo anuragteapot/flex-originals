@@ -1,15 +1,15 @@
 <template>
-  <div :class="`settings content ${theme}`">
+  <div class="settings content">
     <div class="inner" v-show="user.username">
       <div class="settings__wrapper">
-        <div :class="`card ${theme}`">
+        <div class="card">
           <div class="card__body">
-            <div :class="`container ${theme}`">
+            <div class="container">
               <div class="grid">
                 <h1>Settings</h1>
               </div>
             </div>
-            <div :class="`container ${theme}`">
+            <div class="container">
               <div class="grid grid--half">
                 <h3>General</h3>
                 <div class="form-item">
@@ -20,30 +20,42 @@
                       </div>
                     </div>
                     <div class="email__info">
-                      <p>{{user.realm}} ({{user.username }})</p>
-                      <p>{{ user.email}}</p>
+                      <p>{{ user.realm }} ({{ user.username }})</p>
+                      <p>{{ user.email }}</p>
                     </div>
                     <div class="username__info">
-                      <button class="fo-settings-button info" @click="logout">Log Out</button>
+                      <button class="fo-settings-button info" @click="logout">
+                        Log Out
+                      </button>
                     </div>
                   </div>
                 </div>
                 <div class="form-item">
-                  <label class="form-item__label">Enable Email Notifications</label>
+                  <label class="form-item__label"
+                    >Enable Email Notifications</label
+                  >
                   <div
                     class="form-item__control toggle"
                     :class="settings.emailNotification ? 'is-on' : ''"
-                    @click="settings.emailNotification = !settings.emailNotification; save()"
+                    @click="
+                      settings.emailNotification = !settings.emailNotification;
+                      save();
+                    "
                   >
                     <div class="toggle__handle"></div>
                   </div>
                 </div>
                 <div class="form-item">
-                  <label class="form-item__label">Enable Desktop Notifications</label>
+                  <label class="form-item__label"
+                    >Enable Desktop Notifications</label
+                  >
                   <div
                     class="form-item__control toggle"
                     :class="settings.desktopNotification ? 'is-on' : ''"
-                    @click="settings.desktopNotification = !settings.desktopNotification; save()"
+                    @click="
+                      settings.desktopNotification = !settings.desktopNotification;
+                      save();
+                    "
                   >
                     <div class="toggle__handle"></div>
                   </div>
@@ -53,7 +65,12 @@
                   <div
                     class="form-item__control toggle"
                     :class="settings.theme == 'dark' ? 'is-on' : ''"
-                    @click="settings.theme == 'dark' ? settings.theme = 'light' : settings.theme = 'dark'; save()"
+                    @click="
+                      settings.theme == 'dark'
+                        ? (settings.theme = 'light')
+                        : (settings.theme = 'dark');
+                      save();
+                    "
                   >
                     <div class="toggle__handle"></div>
                   </div>
@@ -134,27 +151,41 @@
                 <h3>Security</h3>
                 <p>Two-factor authentication</p>
                 <p>
-                  <small>This will sign you out of sessions in other browsers or on other computers.</small>
+                  <small
+                    >This will sign you out of sessions in other browsers or on
+                    other computers.</small
+                  >
                 </p>
-                <button class="fo-settings-button success">Enable Two-Factor Auth</button>
+                <button class="fo-settings-button success">
+                  Enable Two-Factor Auth
+                </button>
 
                 <p>Sign out of all other sessions</p>
                 <p>
-                  <small>This will sign you out of sessions in other browsers or on other computers.</small>
+                  <small
+                    >This will sign you out of sessions in other browsers or on
+                    other computers.</small
+                  >
                 </p>
                 <button
                   class="fo-settings-button warning"
                   @click="deleteAllSession"
-                >Sign out other sessions</button>
+                >
+                  Sign out other sessions
+                </button>
                 <h3>Danger Zone</h3>
                 <p>
                   <small>
-                    Delete this repository
-                    Once you delete a repository, there is no going back. Please be certain.
+                    Delete this repository Once you delete a repository, there
+                    is no going back. Please be certain.
                   </small>
                 </p>
-                <button class="fo-settings-button danger">Deactivate Account</button>
-                <button class="fo-settings-button danger">Delete Account</button>
+                <button class="fo-settings-button danger">
+                  Deactivate Account
+                </button>
+                <button class="fo-settings-button danger">
+                  Delete Account
+                </button>
               </div>
             </div>
           </div>
@@ -199,12 +230,12 @@ export default {
       this.$store.commit(types.SET_SETTINGS, settings);
     },
   },
- async beforeMount() {
-   const settings = await this.$store.dispatch('FIND_SETTINGS', {
-     uid: this.$user.get('$userId'),
+  async beforeMount() {
+    const settings = await this.$store.dispatch('FIND_SETTINGS', {
+      uid: this.$user.get('$userId'),
     });
 
-   this.$store.commit(types.SET_SETTINGS, settings);
- },
+    this.$store.commit(types.SET_SETTINGS, settings);
+  },
 };
 </script>

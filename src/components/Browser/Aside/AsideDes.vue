@@ -1,11 +1,11 @@
 <template>
-  <aside :class="`features ${theme}`">
-    <header :class="`features-header focusable ${theme}`">
+  <aside class="features">
+    <header class="features-header focusable">
       <div class="features-header-name">
         <h1>Flex Originals</h1>
       </div>
     </header>
-    <section :class="`features-list ${theme}`">
+    <section class="features-list">
       <header class="features-list-header focusable">
         <h5>FOLLOWING</h5>
       </header>
@@ -26,7 +26,7 @@
       </ul>
     </section>
 
-    <footer :class="`features-footer ${theme}`">
+    <footer class="features-footer">
       <router-link v-show="user.id" :to="`/app/@channel/${user.id}`">
         <img
           class="avatar"
@@ -78,9 +78,6 @@ export default {
   computed: {
     settings() {
       return this.$store.state.settings;
-    },
-    theme() {
-      return this.$store.state.theme;
     },
     channels() {
       return this.$store.state.following;

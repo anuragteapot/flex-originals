@@ -1,6 +1,6 @@
 <template>
-  <div :class="`music_player ${theme}`">
-    <div :class="`inner ${theme}`">
+  <div class="music_player">
+    <div class="inner">
       <p>
         {{
           musicPlaylist[currentSong]
@@ -118,9 +118,6 @@ export default {
         item => item.id == this.$route.query.a,
       );
     },
-    theme() {
-      return this.$store.state.theme;
-    },
     audio() {
       return new Audio();
     },
@@ -143,8 +140,7 @@ export default {
         this.audio.duration
       ) {
         this.bufferPercent = this.audio.buffered.end(0) / this.audio.duration;
-      }
-      else if (
+      } else if (
         this.audio &&
         this.audio.bytesTotal != undefined &&
         this.audio.bytesTotal > 0 &&

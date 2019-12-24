@@ -46,10 +46,6 @@
       flex-direction: row;
       justify-content: space-between;
 
-      &.light {
-        color: black !important;
-      }
-
       @media screen and (max-width: 900px) {
         flex-direction: column;
       }
@@ -135,7 +131,6 @@
             margin: 10px 0;
             border-radius: $radius;
             border: 1px solid lightgray;
-            // background-color: $color-primary;
             font-size: 16px;
 
             &:not([type='submit']) {

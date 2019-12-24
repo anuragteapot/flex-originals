@@ -1,5 +1,5 @@
 <template>
-  <section :class="`content ${theme}`">
+  <section class="content">
     <div class="inner">
       <content-grid></content-grid>
     </div>
@@ -24,9 +24,6 @@ export default {
       } else {
         return null;
       }
-    },
-    theme() {
-      return this.$store.state.theme;
     },
   },
   components: {

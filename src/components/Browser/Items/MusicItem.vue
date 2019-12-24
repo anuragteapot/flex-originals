@@ -36,11 +36,11 @@
         aria-hidden="true"
       ></i>
 
-      <div :class="`audio__info ${theme}`">
+      <div class="audio__info ">
         <p class="title">{{ getName() }}</p>
         <p class="views">
           {{ item.user.username }}
-         <fo-svg-verified width="10" height="10"></fo-svg-verified>
+          <fo-svg-verified width="10" height="10"></fo-svg-verified>
           <br />
           {{ item.audioAnalytics ? item.audioAnalytics.views : '0' }} views .
           {{ $utils.time_ago(new Date(item.published)) }}
@@ -76,9 +76,6 @@ export default {
   computed: {
     editMode() {
       return this.$store.state.editMode;
-    },
-    theme() {
-      return this.$store.state.theme;
     },
     selected() {
       const res = this.$store.state.selectedItems.filter(item => {

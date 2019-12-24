@@ -25,11 +25,6 @@ export default {
       this.init();
     },
   },
-  computed: {
-    theme() {
-      return this.$store.state.theme;
-    },
-  },
   methods: {
     async init() {
       if (this.$route.params.v) {

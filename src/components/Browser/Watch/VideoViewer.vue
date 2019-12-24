@@ -1,5 +1,5 @@
 <template>
-  <div :class="`video-viewer content ${theme}`">
+  <div class="video-viewer content">
     <div class="inner">
       <div class="video-viewer__wrapper">
         <div class="container">
@@ -27,7 +27,7 @@
                 :src="$utils.getUrl(videoSource, 'video')"
               ></default-video-player>
             </div>
-            <div :class="`video_actions ${theme}`" v-show="!videoUnavaliable">
+            <div class="video_actions" v-show="!videoUnavaliable">
               <p class="video__title">{{ video.title }}</p>
               <div class="video__analytics__info">
                 <div class="left">
@@ -88,9 +88,6 @@ export default {
     },
     autoPlay() {
       return this.$store.state.autoplay;
-    },
-    theme() {
-      return this.$store.state.theme;
     },
     loggedUser() {
       return this.$user.getUser();

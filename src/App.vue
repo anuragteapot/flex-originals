@@ -1,5 +1,5 @@
 <template>
-  <div id="app" :class="`container ${theme}`">
+  <div id="app" :class="`app-container ${theme}`">
     <router-view />
     <fo-snack-bar position="bottom-left"></fo-snack-bar>
     <fo-model></fo-model>

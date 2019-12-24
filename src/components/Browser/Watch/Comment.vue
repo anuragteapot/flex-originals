@@ -1,5 +1,5 @@
 <template>
-  <div :class="`video__comment ${theme}`">
+  <div class="video__comment">
     <div class="video__comment__inner">
       <div class="video__profile__action">
         <div class="left">
@@ -51,10 +51,5 @@ export default {
     settings: {},
   }),
   props: {},
-  computed: {
-    theme() {
-      return this.$store.state.theme;
-    },
-  },
 };
 </script>

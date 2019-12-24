@@ -1,9 +1,12 @@
 <template>
-  <section :class="`content ${theme}`">
+  <section class="content">
     <div class="inner">
       <div class="profile__banner" v-show="channelUser.user.username">
         <div class="profile__banner__background">
-          <div v-show="channelUser.settings.profileAvatar" class="profile__avatar">
+          <div
+            v-show="channelUser.settings.profileAvatar"
+            class="profile__avatar"
+          >
             <img :src="channelUser.settings.profileAvatar" alt="logo" />
           </div>
           <div class="social__media">
@@ -17,7 +20,9 @@
             </a>
             <a
               v-show="channelUser.settings.instagram"
-              :href="`https://www.instagram.com/${channelUser.settings.instagram}`"
+              :href="
+                `https://www.instagram.com/${channelUser.settings.instagram}`
+              "
               target="_blank"
               style="color:white"
             >
@@ -41,7 +46,9 @@
             </a>
             <a
               v-show="channelUser.settings.linkedin"
-              :href="`https://www.linkedin.com/in/${channelUser.settings.linkedin}`"
+              :href="
+                `https://www.linkedin.com/in/${channelUser.settings.linkedin}`
+              "
               target="_blank"
               style="color:white"
             >
@@ -49,7 +56,7 @@
             </a>
           </div>
           <p class="channel__name" v-show="channelUser.user.username">
-            {{channelUser.user.realm}} ({{channelUser.user.username}})
+            {{ channelUser.user.realm }} ({{ channelUser.user.username }})
             <img
               src="/public/verified.svg"
               width="20"
@@ -57,7 +64,12 @@
               alt="verified"
             />
           </p>
-          <button class="follow" style="background:red;" v-if="editMode" @click="onEditMode">
+          <button
+            class="follow"
+            style="background:red;"
+            v-if="editMode"
+            @click="onEditMode"
+          >
             <i class="far fa-edit"></i> Edit Mode On
           </button>
           <button
@@ -71,7 +83,9 @@
           <button class="follow" v-else>
             <i class="far fa-star"></i> Follow
           </button>
-          <span class="followers">{{channelUser.settings.followers }} followers</span>
+          <span class="followers"
+            >{{ channelUser.settings.followers }} followers</span
+          >
         </div>
       </div>
       <content-grid></content-grid>
@@ -92,9 +106,6 @@ export default {
   computed: {
     channelUser() {
       return this.$store.state.contentUser;
-    },
-    theme() {
-      return this.$store.state.theme;
     },
     settings() {
       return this.$store.state.settings;

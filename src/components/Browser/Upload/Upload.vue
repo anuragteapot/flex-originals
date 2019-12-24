@@ -1,5 +1,5 @@
 <template>
-  <div :class="`settings content ${theme}`">
+  <div class="settings content">
     <div class="inner" v-show="isAllowed">
       <div class="media-action">
         <div class="file">
@@ -267,9 +267,6 @@ export default {
     };
   },
   computed: {
-    theme() {
-      return this.$store.state.theme;
-    },
     uploadPercent() {
       return this.$store.state.uploadPercent;
     },

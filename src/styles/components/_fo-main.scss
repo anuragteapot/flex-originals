@@ -93,24 +93,84 @@ body:not(.user-is-tabbing) textarea:focus {
 .fade-leave-active {
   transition: opacity 0.5s;
 }
-.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+.fade-enter,
+.fade-leave-to {
   opacity: 0;
 }
 
 // Main style
 
-.container,
+.app-container,
 .fo-browser {
   height: 100%;
   width: 100%;
   display: flex;
 
-  &.light {
-    color: black !important;
-  }
+  // Place dark things
 
   &.dark {
     color: white !important;
+
+    .lazy {
+      background: #121214 !important;
+    }
+
+    .features {
+      background: #17171b !important;
+      a {
+        color: white !important;
+      }
+    }
+
+    .features-header {
+      border: 0 !important;
+    }
+
+    .features-footer {
+      background: $theme-dark !important;
+    }
+
+    .content {
+      background: $theme-dark !important;
+    }
+
+    .menu {
+      background: $theme-dark !important;
+      border-bottom: 1px solid #18191a !important;
+      border-top: 1px solid #18191a !important;
+      border-right: 1px solid #18191a !important;
+    }
+
+    .music_player {
+      background: #121214 !important;
+      border-top: 1px solid #18191a !important;
+      border-bottom: 1px solid #18191a !important;
+      border-right: 1px solid #18191a !important;
+    }
+
+    .video__analytics__info {
+      border-bottom: 1px solid #1c1c1d !important;
+    }
+
+    .video__comment {
+      border: none !important;
+      background: #121214 !important;
+      border: 1px solid #1c1c1d !important;
+    }
+
+    .video_comment_input {
+      background: #121214 !important;
+      border: 1px solid #1c1c1d !important;
+      color: white !important;
+    }
+
+    .video__comment__box {
+      border-top: 1px solid #1c1c1d !important;
+    }
+
+    .video__profile__action {
+      border-bottom: 1px solid #1c1c1d !important;
+    }
   }
 
   .main-container {
@@ -128,21 +188,12 @@ body:not(.user-is-tabbing) textarea:focus {
     flex-direction: column;
     align-items: center;
     overflow-y: auto;
-    // border: 1px solid #18191a;
     padding: 10px 0;
     -ms-overflow-style: none;
+    background: #e3e5e8;
 
     &::-webkit-scrollbar {
       display: none;
-    }
-
-    &.light {
-      background: #e3e5e8;
-      border: 1px solid #dadada;
-    }
-
-    &.dark {
-      background: #121214 !important;
     }
   }
 
@@ -151,18 +202,6 @@ body:not(.user-is-tabbing) textarea:focus {
     display: flex;
     border: 0;
     flex-direction: column;
-
-    &.dark {
-      background: #17171b;
-      a {
-        color: white !important;
-      }
-    }
-
-    &.light {
-      background: #f2f3f5;
-      color: black;
-    }
 
     input {
       color: white;
@@ -183,10 +222,6 @@ body:not(.user-is-tabbing) textarea:focus {
       text-align: center;
       border-bottom: 1px solid $border-color;
       transition: background 0.15s ease;
-
-      &.dark {
-        border: 0;
-      }
     }
 
     .features-list-text,
@@ -322,7 +357,7 @@ body:not(.user-is-tabbing) textarea:focus {
       display: flex;
       align-items: center;
       margin-top: auto;
-      background: $theme-dark;
+      background: #ebedef;
       border: 0;
       padding: 10px;
 
@@ -341,10 +376,6 @@ body:not(.user-is-tabbing) textarea:focus {
         user-select: none;
       }
 
-      &.light {
-        background: #ebedef;
-      }
-
       .features-footer-details {
         padding: 5px;
       }
@@ -355,7 +386,7 @@ body:not(.user-is-tabbing) textarea:focus {
         border-radius: 4px;
         display: flex;
       }
-      
+
       .features-footer-controls .button {
         background-color: #d4d7dc;
         display: block;
@@ -392,20 +423,12 @@ body:not(.user-is-tabbing) textarea:focus {
   .menu {
     flex: 0 0 57px;
     padding: 0 20px;
-    background: $theme-dark;
-    border-bottom: 1px solid #18191a;
-    border-top: 1px solid #18191a;
-    border-right: 1px solid #18191a;
     display: flex;
     align-items: center;
-
-    &.light {
-      color: #0e0f0f;
-      background: white !important;
-      border-bottom: 1px solid $border-color;
-      border-top: 1px solid $border-color;
-      border-right: 1px solid $border-color;
-    }
+    background: white !important;
+    border-bottom: 1px solid $border-color;
+    border-top: 1px solid $border-color;
+    border-right: 1px solid $border-color;
 
     .menu__button {
       padding: 5px 15px;
@@ -421,7 +444,7 @@ body:not(.user-is-tabbing) textarea:focus {
 
       &.active,
       &:hover {
-        background-color: #eef1f5
+        background-color: #eef1f5;
       }
 
       i {
@@ -466,20 +489,11 @@ body:not(.user-is-tabbing) textarea:focus {
   }
 
   .content {
-    background: #252a2e;
+    background: #fafafa;
     width: 100%;
     height: 100%;
     flex: 1 1;
     overflow-y: auto;
-
-    &.light {
-      background: #fafafa !important;
-      color: #0e0f0f;
-    }
-
-    &.dark {
-      background: $theme-dark !important;
-    }
 
     .inner {
       width: 100%;

@@ -25,7 +25,7 @@
         @click="open"
       ></lazy-image>
       <i class="far fa-2x fa-check-circle" v-show="selected"></i>
-      <div :class="`video__info ${theme}`">
+      <div class="video__info ">
         <p class="title">{{ getName() }}</p>
         <p class="views">
           {{ item.user.username }}
@@ -62,9 +62,6 @@ export default {
   computed: {
     editMode() {
       return this.$store.state.editMode;
-    },
-    theme() {
-      return this.$store.state.theme;
     },
     selected() {
       const res = this.$store.state.selectedItems.filter(item => {

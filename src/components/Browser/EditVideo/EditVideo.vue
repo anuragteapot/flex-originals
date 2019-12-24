@@ -1,5 +1,5 @@
 <template>
-  <div :class="`settings content ${theme}`">
+  <div class="settings content">
     <div class="inner" v-show="isAllowed">
       <div class="settings__wrapper">
         <div class="card">
@@ -219,11 +219,6 @@ export default {
         licence: 'Flex Originals',
       },
     };
-  },
-  computed: {
-    theme() {
-      return this.$store.state.theme;
-    },
   },
   methods: {
     async newThumb(formData, inputFile) {

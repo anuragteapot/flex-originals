@@ -4,30 +4,16 @@
   z-index: 50;
   padding: 0.9em 0px;
   min-width: 1000px;
-  background: #121214;
-  border-top: 1px solid #18191a;
-  border-bottom: 1px solid #18191a;
-  border-right: 1px solid #18191a;
-
-  &.light {
-    background-color: white !important;
-    color: #18191a !important;
-    border-top: 1px solid #dadada !important;
-    border-bottom: 1px solid #dadada !important;
-    border-right: 1px solid #dadada !important;
-  }
+  background: white;
+  border-top: 1px solid #dadada;
+  border-bottom: 1px solid #dadada;
+  border-right: 1px solid #dadada;
 
   .inner {
     width: 100%;
     text-align: center;
     margin: 0 0 20px 0;
-    color: white;
-    overflow: hidden !important;
-
-    &.light {
-      background-color: white !important;
-      color: #18191a !important;
-    }
+    overflow: hidden;
 
     .albumImage {
       width: 30px;
@@ -89,7 +75,7 @@
 
           .circle {
             position: relative;
-            right:-6px;
+            right: -6px;
             top: -3px;
             width: 10px;
             height: 10px;

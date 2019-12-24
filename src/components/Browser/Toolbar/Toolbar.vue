@@ -64,6 +64,7 @@ export default {
   },
   beforeMount() {
     if (typeof window !== 'undefined') {
+      if (this.$route.name == '@watch') return false;
       if (window.localStorage.getItem('APP_DRAWER') == 'true') {
         this.appDrawer = true;
       } else if (window.localStorage.getItem('APP_DRAWER') == 'false') {

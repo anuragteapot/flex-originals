@@ -44,9 +44,6 @@ export default {
   computed: {
     ...mapGetters(['isMobile', 'isAuthenticated']),
   },
-  // We only fetch the item itself before entering the view, because
-  // it might take a long time to load threads with hundreds of comments
-  // due to how the HN Firebase API works.
   asyncData({ isServer, store }) {
     return store.dispatch('GET_CONTENT', { isServer });
   },
@@ -65,8 +62,8 @@ export default {
     },
   },
   async beforeMount() {
-    // await this.$store.dispatch('GET_CONTENT', {});
     if (typeof window !== 'undefined') {
+      if (this.$route.name == '@watch') return false;
       if (window.localStorage.getItem('APP_DRAWER') == 'true') {
         this.appDrawer = true;
       } else if (window.localStorage.getItem('APP_DRAWER') == 'false') {

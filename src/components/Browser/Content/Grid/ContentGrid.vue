@@ -2,7 +2,7 @@
   <div class="media-content-grid">
     <div
       class="home__advertisement__video"
-      v-show="!isMobile && $route.name == '@home'"
+      v-if="!isMobile && $route.name == '@home'"
     >
       <div class="feature__text">
         <p>INTRODUCING</p>
@@ -133,12 +133,16 @@ export default {
     },
   },
   mounted() {
+  if(this.$refs.featureVideo) {
     this.$refs.featureVideo.load();
     this.$refs.featureVideo.addEventListener('loadeddata', this.loadeddata);
+    }
   },
 
   beforeDestroy() {
-    this.$refs.featureVideo.removeEventListener('loadeddata', this.loadeddata);
+   if(this.$refs.featureVideo) {
+      this.$refs.featureVideo.removeEventListener('loadeddata', this.loadeddata);
+    }
   },
 };
 </script>

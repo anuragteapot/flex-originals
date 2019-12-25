@@ -22,7 +22,7 @@ export default class utils {
   }
 
   getUrl(path, type) {
-    if (path == '/public/loading.gif' || path == '') {
+    if (path == '/public/loading.gif' || !path || path == '' ) {
       return path;
     } else {
       if (type == 'image') {

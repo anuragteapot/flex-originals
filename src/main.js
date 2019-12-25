@@ -28,6 +28,7 @@ import FullScreen from './components/Svg/FullScreen';
 import MiniPlayer from './components/Svg/MiniPlayer';
 import Subtitle from './components/Svg/Subtitle';
 import Verified from './components/Svg/Verified';
+import ThreeDot from './components/Svg/ThreeDot';
 
 import './styles/creator.scss';
 
@@ -59,6 +60,7 @@ Vue.component('foSvgFullScreen', FullScreen);
 Vue.component('foSvgMiniPlayer', MiniPlayer);
 Vue.component('foSvgSubtitle', Subtitle);
 Vue.component('foSvgVerified', Verified);
+Vue.component('foSvgThreeDot', ThreeDot);
 
 export default function createApp() {
   // create store and router instances

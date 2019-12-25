@@ -171,6 +171,12 @@ body:not(.user-is-tabbing) textarea:focus {
     .video__profile__action {
       border-bottom: 1px solid #1c1c1d !important;
     }
+
+    .video__comment_render {
+      &:hover {
+        background: #232327 !important;
+      }
+    }
   }
 
   .main-container {
@@ -202,6 +208,7 @@ body:not(.user-is-tabbing) textarea:focus {
     display: flex;
     border: 0;
     flex-direction: column;
+    min-width: 230px;
 
     input {
       color: white;
@@ -394,7 +401,8 @@ body:not(.user-is-tabbing) textarea:focus {
         height: 32px;
 
         &:hover {
-          background-color: #e7e9eb;
+          background-color: #e6e6e6;
+          border: 1px solid #b4b4b4;
         }
       }
 

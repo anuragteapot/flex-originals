@@ -158,6 +158,61 @@
 
           .video__comment__message {
             min-height: 300px;
+            max-height: 500px;
+            overflow-y: scroll;
+            z-index: -5;
+
+            ul {
+              list-style-type: none;
+              padding: 10px;
+
+              .video__comment_render {
+                display: flex;
+                padding: 5px;
+
+                &:hover {
+                  background: #dbdbdb;
+                }
+
+                .left {
+                  width: 95% !important;
+
+                  .channel__avater {
+                    display: flex;
+                    flex-wrap: wrap;
+
+                    img {
+                      width: 25px;
+                      height: 25px;
+                      border-radius: 50%;
+
+                      &:hover {
+                        opacity: 0.8;
+                      }
+                    }
+
+                    .channel__name {
+                      cursor: pointer;
+                      font-size: 13px;
+                      margin: auto 10px;
+                      font-weight: 500;
+                    }
+                    .message {
+                      margin: auto 5px;
+                      font-size: 13px;
+                      display: inline-block;
+                      font-weight: normal;
+                    }
+                  }
+                }
+
+                .right {
+                  text-align: end;
+                  padding: 0;
+                  margin: auto;
+                }
+              }
+            }
           }
 
           .video__comment__box {
@@ -182,7 +237,28 @@
                 border-left: 1px solid $border-color;
                 border-bottom: 1px solid $border-color;
                 outline: none;
-                background-color: #fafafa;
+                background: #fafafa;
+
+                &::-webkit-input-placeholder {
+                  /* Chrome/Opera/Safari */
+                  color: lightgrey;
+                  font-weight: 500;
+                }
+                &::-moz-placeholder {
+                  /* Firefox 19+ */
+                  color: lightgrey;
+                  font-weight: 500;
+                }
+                &:-ms-input-placeholder {
+                  /* IE 10+ */
+                  color: lightgrey;
+                  font-weight: 500;
+                }
+                &:-moz-placeholder {
+                  /* Firefox 18- */
+                  color: lightgrey;
+                  font-weight: 500;
+                }
               }
             }
 

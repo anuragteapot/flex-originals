@@ -1,0 +1,10 @@
+{
+    "scss.lint.duplicateProperties": "error",
+    "prettier.jsxSingleQuote": true,
+    "prettier.singleQuote": true,
+    "prettier.trailingComma": "es5",
+    "prettier.vueIndentScriptAndStyle": true,
+    "prettier.useTabs": true,
+    "vetur.format.defaultFormatter.html": "prettier",
+    "vsintellicode.features.python.deepLearning": "enabled"
+}

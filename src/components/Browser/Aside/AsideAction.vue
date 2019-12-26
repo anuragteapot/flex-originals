@@ -2,12 +2,12 @@
   <aside class="lazy">
     <div class="lazy-collection">
       <div
-        class="server focusable server-friends unread"
+        class="channel focusable channel-friends unread"
         role="button"
         aria-label="Friends unread"
       >
         <router-link to="/app/@home">
-          <div class="server-icon">
+          <div class="channel-icon">
             <img src="/public/icons/logo.png" alt="logo" />
           </div>
         </router-link>
@@ -16,62 +16,62 @@
 
     <div class="lazy-collection">
       <div
-        class="server focusable"
+        class="channel focusable"
         role="button"
-        aria-label="My Server"
+        aria-label="My channel"
         aria-selected="true"
       >
         <router-link to="/app/@home?filter=video">
-          <div class="server-icon">
+          <div class="channel-icon">
             <i class="fas fa-video" style="color:red;"></i>
           </div>
         </router-link>
       </div>
       <div
-        class="server focusable"
+        class="channel focusable"
         role="button"
-        aria-label="My Server"
+        aria-label="My channel"
         aria-selected="true"
       >
         <router-link to="/app/@home?filter=music">
-          <div class="server-icon">
+          <div class="channel-icon">
             <i class="fas fa-music" style="color:white;"></i>
           </div>
         </router-link>
       </div>
       <div
-        class="server focusable"
+        class="channel focusable"
         role="button"
-        aria-label="My Server"
+        aria-label="My channel"
         aria-selected="true"
       >
         <router-link to="/app/@upload">
-          <div class="server-icon">
+          <div class="channel-icon">
             <i class="fas fa-arrow-up" style="color:#00ffe7;"></i>
           </div>
         </router-link>
       </div>
-      <!-- <div class="server focusable" role="button" aria-label="My Server" aria-selected="true">
-        <div class="server-icon">
+      <!-- <div class="channel focusable" role="button" aria-label="My channel" aria-selected="true">
+        <div class="channel-icon">
           <i class="fas fa-cloud" style="color:white;"></i>
         </div>
       </div> -->
       <div
-        class="server focusable"
+        class="channel focusable"
         role="button"
-        aria-label="My Server"
+        aria-label="My channel"
         aria-selected="true"
       >
-        <div class="server-icon">
+        <div class="channel-icon">
           <i class="fas fa-search" style="color:#f19600"></i>
         </div>
       </div>
 
       <div
         v-show="selecteditems.length == 1"
-        class="server focusable"
+        class="channel focusable"
         role="button"
-        aria-label="My Server"
+        aria-label="My channel"
         aria-selected="true"
       >
         <router-link
@@ -79,7 +79,7 @@
             `/app/@editvideo?v=${selecteditems[0] ? selecteditems[0].id : ''}`
           "
         >
-          <div class="server-icon">
+          <div class="channel-icon">
             <i class="fas fa-edit" style="color:#04fb8a;"></i>
           </div>
         </router-link>
@@ -87,55 +87,55 @@
 
       <div
         v-show="selecteditems.length > 0"
-        class="server focusable"
+        class="channel focusable"
         role="button"
-        aria-label="My Server"
+        aria-label="My channel"
         aria-selected="true"
         @click="deleteItem"
       >
-        <div class="server-icon">
+        <div class="channel-icon">
           <i class="fas fa-trash" style="color:red;"></i>
         </div>
       </div>
       <div
-        class="server focusable"
+        class="channel focusable"
         role="button"
-        aria-label="My Server"
+        aria-label="My channel"
         aria-selected="true"
       >
-        <div class="server-icon">
+        <div class="channel-icon">
           <i class="fas fa-share-alt" style="color:white;"></i>
         </div>
       </div>
       <div
-        class="server focusable"
+        class="channel focusable"
         role="button"
-        aria-label="My Server"
+        aria-label="My channel"
         aria-selected="true"
       >
-        <div class="server-icon">
+        <div class="channel-icon">
           <i class="fas fa-eye" style="color:lightgreen;"></i>
         </div>
       </div>
       <div
-        class="server focusable"
+        class="channel focusable"
         role="button"
-        aria-label="My Server"
+        aria-label="My channel"
         aria-selected="true"
       >
-        <div class="server-icon">
+        <div class="channel-icon">
           <i class="fas fa-plus" style="color:#00b0f4;"></i>
         </div>
       </div>
       <div
-        class="server focusable"
+        class="channel focusable"
         role="button"
-        aria-label="My Server"
+        aria-label="My channel"
         aria-selected="true"
         v-show="!isAuth"
       >
         <router-link to="/login">
-          <div class="server-icon">
+          <div class="channel-icon">
             <i class="fas fa-sign-in-alt" style="color:white;"></i>
           </div>
         </router-link>

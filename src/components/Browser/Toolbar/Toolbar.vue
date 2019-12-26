@@ -30,6 +30,7 @@
 <script>
 import { mapGetters } from 'vuex';
 import * as types from './../../../store/mutation-types';
+import utils from './../../../api/utils';
 
 export default {
   name: 'toolbar',
@@ -61,6 +62,11 @@ export default {
         window.localStorage.setItem('APP_DRAWER', true);
       }
     },
+    onresize: new utils().debounce(async function(event) {
+      if (this.appDrawer && event.target.innerWidth < 1000) {
+        this.toggleMenu();
+      }
+    }, 100),
   },
   beforeMount() {
     if (typeof window !== 'undefined') {
@@ -72,6 +78,16 @@ export default {
       } else {
         this.appDrawer = true;
       }
+    }
+  },
+  created() {
+    if (typeof window != 'undefined') {
+      window.addEventListener('resize', this.onresize);
+    }
+  },
+  beforeDestroy() {
+    if (typeof window != 'undefined') {
+      window.removeEventListener('resize', this.onresize);
     }
   },
 };

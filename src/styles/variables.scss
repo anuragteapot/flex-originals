@@ -16,14 +16,14 @@ $color-theme: #934cfd;
 $theme-dark: #131418;
 
 $bp-large: (
-  min-width: 940px,
+	min-width: 940px,
 );
 $bp-medium: (
-  min-width: 320px,
+	min-width: 320px,
 );
 $breakpoints: (
-  'large': $bp-large,
-  'medium': $bp-medium,
+	'large': $bp-large,
+	'medium': $bp-medium,
 );
 
 $radio-border-color: rgba(0, 0, 0, 0.54);
@@ -35,5 +35,5 @@ $border-color: rgb(226, 226, 226);
 $border-color-dark: #292a2b;
 
 [v-cloak] {
-  display: none;
+	display: none;
 }

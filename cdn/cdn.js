@@ -6,7 +6,7 @@ exports.serveVideo = (req, res, next) => {
 
   if (!mimetype || !id || !media) {
     return next({
-      status: 500,
+      status: 404,
       message: 'Fucked Up!',
     });
   }
@@ -14,7 +14,7 @@ exports.serveVideo = (req, res, next) => {
   fs.readFile(path, err => {
     if (err) {
       return next({
-        status: 500,
+        status: 404,
         message: 'Fucked Up!',
       });
     } else {
@@ -61,7 +61,7 @@ exports.serveImage = (req, res, next) => {
 
   if (!mimetype || !media) {
     return next({
-      status: 500,
+      status: 404,
       message: 'Fucked Up!',
     });
   }
@@ -69,7 +69,7 @@ exports.serveImage = (req, res, next) => {
   fs.readFile(path, err => {
     if (err) {
       return next({
-        status: 500,
+        status: 404,
         message: 'Fucked Up!',
       });
     } else {

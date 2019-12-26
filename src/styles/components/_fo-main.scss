@@ -15,7 +15,6 @@
 
 html,
 body {
-  background-repeat: no-repeat, repeat;
   -webkit-font-smoothing: antialiased;
   backface-visibility: none;
   -moz-osx-font-smoothing: grayscale;
@@ -167,7 +166,6 @@ body:not(.user-is-tabbing) textarea:focus {
     }
 
     .video__comment {
-      border: none !important;
       background: #121214 !important;
       border: 1px solid #1c1c1d !important;
     }
@@ -415,7 +413,7 @@ body:not(.user-is-tabbing) textarea:focus {
         height: 32px;
 
         &:hover {
-          background-color: #e6e6e6;
+          background-color: #eef1f5;
           border: 1px solid #b4b4b4;
         }
       }
@@ -499,7 +497,6 @@ body:not(.user-is-tabbing) textarea:focus {
     padding: 0 1rem;
     font-size: 15px;
     font-weight: 500;
-    border: none;
     margin: 0 5px 0 0;
     background: #d4d7dc;
     border: 1px solid lightgrey;
@@ -547,7 +544,6 @@ body:not(.user-is-tabbing) textarea:focus {
           }
 
           .follow {
-            border-radius: 5px;
             border: none;
             color: white;
             border-radius: 20px;
@@ -592,7 +588,7 @@ body:not(.user-is-tabbing) textarea:focus {
     }
   }
 
-  .server {
+  .channel {
     width: 50px;
     height: 50px;
     border-radius: 25px;
@@ -603,12 +599,7 @@ body:not(.user-is-tabbing) textarea:focus {
     position: relative;
   }
 
-  .server:not(.active) {
-    -webkit-animation: server-hover-out 0.6s ease;
-    animation: server-hover-out 0.6s ease;
-  }
-
-  .server .server-icon {
+  .channel .channel-icon {
     border-radius: inherit;
     width: 100%;
     height: 100%;
@@ -617,26 +608,26 @@ body:not(.user-is-tabbing) textarea:focus {
     justify-content: center;
   }
 
-  .server .server-icon > img {
+  .channel .channel-icon > img {
     border-radius: inherit;
     max-width: 100%;
   }
 
-  .server.server-friends {
+  .channel.channel-friends {
     margin-bottom: 20px;
     text-align: center;
   }
 
-  .server.server-friends svg {
+  .channel.channel-friends svg {
     max-width: 60%;
     max-height: 60%;
   }
 
-  .server.server-friends.active::before {
+  .channel.channel-friends.active::before {
     display: none;
   }
 
-  .server::before {
+  .channel::before {
     position: absolute;
     top: 20px;
     left: -15px;
@@ -647,22 +638,22 @@ body:not(.user-is-tabbing) textarea:focus {
     border-radius: 25px;
   }
 
-  .server.active {
+  .channel.active {
     border-radius: 15px;
     background-color: #7289da;
   }
 
-  .server.unread::before {
+  .channel.unread::before {
     background: #8a8e94;
   }
 
-  .server.active::before {
+  .channel.active::before {
     background: #fff;
     height: 40px;
     top: 5px;
   }
 
-  .server.active.unread::before {
+  .channel.active.unread::before {
     transition: all 0.2s ease-in-out;
   }
 }

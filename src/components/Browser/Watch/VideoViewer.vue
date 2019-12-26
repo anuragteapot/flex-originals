@@ -44,7 +44,13 @@
             </div>
           </div>
           <div class="grid grid--half right" v-show="!videoUnavaliable">
-            <video-comment></video-comment>
+            <video-comment
+              @comment="
+                val => {
+                  comment = val;
+                }
+              "
+            ></video-comment>
           </div>
         </div>
         <video-suggestions></video-suggestions>

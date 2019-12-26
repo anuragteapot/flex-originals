@@ -707,7 +707,8 @@ export default {
 			this.isPlaying = false;
 			this.$emit('handleEnded');
 		},
-		handleError() {
+		handleError(event) {
+			console.log(event)
 			// this.error = true;
 		},
 		handleProgress() {

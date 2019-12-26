@@ -42,12 +42,8 @@
                 <h3>Uploading Progress</h3>
                 <div class="video__upload__progress">
                   <div
-                    class="upload__progress"
-                    :style="
-                      `width:${uploadPercent}%; background-color:${
-                        !isProcessing ? '#43b581' : ''
-                      }!important`
-                    "
+                    :class="`upload__progress ${!isProcessing ? 'done' : ''}`"
+                    :style="`width:${uploadPercent}%;`"
                   >
                     <p>{{ uploadPercent }}%</p>
                   </div>

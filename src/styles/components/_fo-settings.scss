@@ -101,6 +101,11 @@
           text-align: center;
           -webkit-transition: width 1s;
           transition: width 1s;
+
+          &.done {
+            background-color: $color-active;
+            box-shadow: 0px 0px 10px $color-active;
+          }
         }
       }
 
@@ -233,9 +238,7 @@
       }
 
       &__control__input {
-        // color: white;
         height: 1.9rem;
-        border-radius: 0.25rem;
         padding: 0 0.5rem;
         border: 1px solid lightgrey;
         font-family: inherit;

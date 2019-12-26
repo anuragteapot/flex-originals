@@ -157,10 +157,21 @@
           }
 
           .video__comment__message {
-            min-height: 300px;
+            min-height: 500px;
             max-height: 500px;
             overflow-y: scroll;
             z-index: -5;
+
+            .settings {
+              // position: absolute;
+              // left: 0;
+              // right: 0;
+              // top: 0;
+              // bottom: 0;
+              // background-color: rgba(0, 0, 0, 0.233);
+              // display: inline-block;
+              // margin: auto;
+            }
 
             ul {
               list-style-type: none;
@@ -175,7 +186,7 @@
                 }
 
                 .left {
-                  width: 95% !important;
+                  width: 85% !important;
 
                   .channel__avater {
                     display: flex;
@@ -194,9 +205,17 @@
                     .channel__name {
                       cursor: pointer;
                       font-size: 13px;
+                      padding: 2px;
+                      border-radius: 2px;
                       margin: auto 10px;
                       font-weight: 500;
+
+                      &.special {
+                        background-color: $color-active;
+                        color: white;
+                      }
                     }
+
                     .message {
                       margin: auto 5px;
                       font-size: 13px;
@@ -215,12 +234,29 @@
             }
           }
 
-          .video__comment__box {
-            bottom: 10px;
-            left: 10px;
-            right: 10px;
+          .video__comment__box__settings {
+            .left {
+              width: 50%;
+            }
+
             display: flex;
-            position: absolute;
+            padding: 2px;
+            border-top: 1px solid $border-color;
+
+            .right {
+              padding: 5px;
+              text-align: end;
+
+              .chat__type {
+                margin: auto 10px;
+                font-weight: 500;
+                font-size: 13px;
+              }
+            }
+          }
+
+          .video__comment__box {
+            display: flex;
             border-top: 1px solid $border-color;
 
             .left {
@@ -231,11 +267,10 @@
                 width: 100%;
                 height: 100%;
                 font-size: 15px;
+                font-weight: 500;
                 resize: none;
                 padding: 5px;
                 border: 0;
-                border-left: 1px solid $border-color;
-                border-bottom: 1px solid $border-color;
                 outline: none;
                 background: #fafafa;
 
@@ -274,7 +309,7 @@
                 color: $color-theme;
 
                 &:hover {
-                  opacity: 0.5;
+                  color: darken($color: $color-theme, $amount: 10)
                 }
               }
             }

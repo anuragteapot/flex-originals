@@ -46,6 +46,12 @@
       padding: 10px 20px 30px 20px;
       position: relative;
 
+      .form-error {
+        input {
+          border: 2px solid $color-error !important;
+        }
+      }
+
       input {
         margin-top: 20px;
         border: 2px solid gainsboro;

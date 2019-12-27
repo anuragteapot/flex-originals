@@ -60,19 +60,19 @@ export default [
     path: '/app/@channel/:id',
     name: '@channel',
     component: () =>
-      import(/* webpackChunkName: "channel" */ './../views/Channel.vue')
+      import(/* webpackChunkName: "channel" */ './../views/Channel.vue'),
   },
   {
     path: '/login',
     name: 'login',
     component: () =>
-      import(/* webpackChunkName: "login" */ './../views/Login.vue')
+      import(/* webpackChunkName: "login" */ './../views/Login.vue'),
   },
   {
     path: '/signup',
     name: 'signup',
     component: () =>
-      import(/* webpackChunkName: "signup" */ './../views/Signup.vue')
+      import(/* webpackChunkName: "signup" */ './../views/Signup.vue'),
   },
   {
     path: '/verify/users/confirm',
@@ -91,6 +91,22 @@ export default [
     name: 'auth',
     component: () =>
       import(/* webpackChunkName: "auth" */ './../views/Auth.vue'),
+  },
+  {
+    path: '/request-password-reset',
+    name: 'request-password-reset',
+    component: () =>
+      import(
+        /* webpackChunkName: "request-password-reset" */ './../views/RequestPasswordReset.vue'
+      ),
+  },
+  {
+    path: '/change-password',
+    name: 'change-password',
+    component: () =>
+      import(
+        /* webpackChunkName: "change-password" */ './../views/ChangePassword.vue'
+      ),
   },
   {
     path: '/test/:id?',

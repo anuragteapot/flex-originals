@@ -1,5 +1,6 @@
 const config = require('../../server/config.json');
 const path = require('path');
+const fs = require('fs');
 const app = require('../../server/server');
 
 //Replace this address with your actual address
@@ -114,26 +115,53 @@ module.exports = function(User) {
 
   //send password reset link when requested
   User.on('resetPasswordRequest', function(ctx) {
-    var url = 'http://' + config.host + ':' + config.port + '/reset-password';
-    var html =
-      'Click <a href="' +
-      url +
-      '?access_token=' +
-      ctx.accessToken.id +
-      '">here</a> to reset your password';
+    var options = {
+      to: ctx.email,
+      from: senderAddress,
+      subject: 'Password Reset Request for Flex Originals',
+      host:
+        process.env.NODE_ENV === 'production'
+          ? 'flexoriginals.ml'
+          : 'localhost',
+      port: process.env.NODE_ENV === 'production' ? '80' : '8080',
+      redirect: '/',
+      restApiRoot: '/verify',
+    };
 
-    User.app.models.Email.send(
-      {
-        to: ctx.email,
-        from: senderAddress,
-        subject: 'Password reset',
-        html: html,
-      },
-      function(err) {
-        if (err) return console.log('> error sending password reset email');
-        console.log('> sending password reset email to:', ctx.email);
-      },
+    const template = path.resolve(
+      __dirname,
+      '../../server/views/mails/resetPassword.ejs',
     );
+
+    fs.readFile(template, 'utf8', function(err, data) {
+      if (err) throw err;
+
+      const url =
+        'http://' +
+        options.host +
+        ':' +
+        options.port +
+        '/change-password' +
+        '?access_token=' +
+        ctx.accessToken.id +
+        '&email=' +
+        ctx.email +
+        '&type=resetPassword';
+
+      const html = data.replace('linkToResetPassword', url);
+
+      User.app.models.Email.send(
+        {
+          to: options.to,
+          from: options.senderAddress,
+          subject: options.subject,
+          html: html,
+        },
+        function(err) {
+          if (err) return console.log('> error sending password reset email');
+        },
+      );
+    });
   });
 
   User.findSetting = async id => {

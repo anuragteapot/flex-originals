@@ -12,7 +12,6 @@
   background-attachment: fixed;
   background-size: cover;
   transform-origin: top center;
-  transform: translateY(-100vh);
   transform: translateY(#{$header-height});
 
   .inner {

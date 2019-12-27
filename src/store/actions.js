@@ -249,7 +249,7 @@ export default {
     }
   },
 
-  VERIFY: async ({ commit, dispatch, state }, payload) => {
+  VERIFY_NEW_USER: async ({ commit, dispatch, state }, payload) => {
     try {
       return await AXIOS_API.get(
         `/api/users/confirm?uid=${payload.uid}&redirect=${payload.redirect}&token=${payload.token}`,
@@ -259,17 +259,47 @@ export default {
     }
   },
 
+  RESET_PASSWORD: async ({ commit, dispatch, state }, payload) => {
+    const headers = {
+      authorization: payload.token,
+    };
+
+    try {
+      return await AXIOS_API.post(
+        `/api/users/reset-password`,
+        {
+          newPassword: payload.newPassword,
+          email: payload.email,
+        },
+        {
+          headers: headers,
+        },
+      );
+    } catch (error) {
+      return new handleError(commit, dispatch, state)._handleError(error);
+    }
+  },
+
+  REQUEST_RESET_PASSWORD: async ({ commit, dispatch, state }, payload) => {
+    try {
+      return await AXIOS_API.post(`/api/users/reset`, {
+        email: payload.email,
+      });
+    } catch (error) {
+      return new handleError(commit, dispatch, state)._handleError(error);
+    }
+  },
+
   FIND_SETTINGS: async ({ commit, dispatch, state }, { uid, isServer }) => {
     try {
       let settings = undefined;
-      
-      
+
       if (isServer) {
         settings = await AXIOS_API_SERVER.get(`/api/users/findSetting/${uid}`);
       } else {
         settings = await AXIOS_API.get(`/api/users/findSetting/${uid}`);
       }
-      
+
       commit(types.SET_SETTINGS, settings);
       return settings;
     } catch (error) {

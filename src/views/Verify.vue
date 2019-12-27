@@ -53,7 +53,7 @@ export default {
       const { redirect } = this.$route.query;
 
       try {
-        const res = await this.$store.dispatch('VERIFY', {
+        const res = await this.$store.dispatch('VERIFY_NEW_USER', {
           token,
           uid,
           redirect,

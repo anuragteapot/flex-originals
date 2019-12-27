@@ -40,7 +40,11 @@
             type="password"
             placeholder="Password"
           />
-          <span>Forget Password ?</span>
+          <span>
+            <router-link to="/request-password-reset"
+              >Forget Password ?</router-link
+            ></span
+          >
         </div>
         <button class="btn-hover color" :disabled="loading">
           <span v-show="!loading">Login</span>

@@ -150,15 +150,15 @@ body:not(.user-is-tabbing) textarea:focus {
     .menu {
       background: $theme-dark !important;
       border-bottom: 1px solid #18191a !important;
-      border-top: 1px solid #18191a !important;
-      border-right: 1px solid #18191a !important;
+    //  border-top: 1px solid #18191a !important;
+     // border-right: 1px solid #18191a !important;
     }
 
     .music_player {
       background: #121214 !important;
       border-top: 1px solid #18191a !important;
-      border-bottom: 1px solid #18191a !important;
-      border-right: 1px solid #18191a !important;
+   //   border-bottom: 1px solid #18191a !important;
+    //  border-right: 1px solid #18191a !important;
     }
 
     .video__analytics__info {
@@ -450,8 +450,8 @@ body:not(.user-is-tabbing) textarea:focus {
     align-items: center;
     background: white !important;
     border-bottom: 1px solid $border-color;
-    border-top: 1px solid $border-color;
-    border-right: 1px solid $border-color;
+  //  border-top: 1px solid $border-color;
+   // border-right: 1px solid $border-color;
 
     .menu__button {
       padding: 5px 15px;

@@ -217,7 +217,7 @@ module.exports = function(Action) {
           const tg = new ThumbnailGenerator({
             sourcePath: video.videoMeta.path,
             destinationPath: video.videoMeta.destination,
-            size: '720x400',
+            size: '700x420',
             count: 4,
           });
 

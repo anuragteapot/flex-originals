@@ -54,7 +54,7 @@
           <i class="fa fa-microphone"></i>
         </button> -->
         <router-link to="/app/@settings">
-          <fo-svg-settings cursor="pointer" theme="dark"></fo-svg-settings>
+          <fo-svg-settings cursor="pointer" theme="fo-svg-fill-dark"></fo-svg-settings>
         </router-link>
       </div>
     </footer>

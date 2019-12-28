@@ -44,7 +44,7 @@ module.exports = class ThumbnailGenerator {
   getFfmpegInstance() {
     return new this.FfmpegCommand({
       source: this.sourcePath,
-      logger: this.logger
+      logger: this.logger,
     });
   }
 
@@ -68,8 +68,8 @@ module.exports = class ThumbnailGenerator {
     return this.generate(
       _.assignIn(opts, {
         count: 1,
-        timestamps: [`${time}`]
-      })
+        timestamps: [`${time}`],
+      }),
     ).then(result => result.pop());
   }
 
@@ -120,8 +120,8 @@ module.exports = class ThumbnailGenerator {
     return this.generate(
       _.assignIn(opts, {
         count: 1,
-        timestamps: [`${percent}%`]
-      })
+        timestamps: [`${percent}%`],
+      }),
     ).then(result => result.pop());
   }
 
@@ -170,7 +170,7 @@ module.exports = class ThumbnailGenerator {
       count: this.count,
       size: this.size,
       filename: this.fileNameFormat,
-      logger: this.logger
+      logger: this.logger,
     };
 
     const ffmpeg = this.getFfmpegInstance();
@@ -236,7 +236,7 @@ module.exports = class ThumbnailGenerator {
   generatePalette(opts) {
     const ffmpeg = this.getFfmpegInstance();
     const defaultOpts = {
-      videoFilters: 'fps=60,scale=720:-1:flags=lanczos,palettegen'
+      videoFilters: 'fps=60,scale=720:-1:flags=lanczos,palettegen',
     };
     const conf = _.assignIn(defaultOpts, opts);
     const inputOptions = ['-y'];
@@ -310,12 +310,12 @@ module.exports = class ThumbnailGenerator {
       speedMultiplier: 4,
       deletePalette: true,
       duration: 5,
-      offset: 10
+      offset: 10,
     };
     const conf = _.assignIn(defaultOpts, opts);
     const inputOptions = [];
     const outputOptions = [
-      `-filter_complex fps=${conf.fps},setpts=(1/${conf.speedMultiplier})*PTS,scale=${conf.scale}:-1:flags=lanczos[x];[x][1:v]paletteuse`
+      `-filter_complex fps=${conf.fps},setpts=(1/${conf.speedMultiplier})*PTS,scale=${conf.scale}:-1:flags=lanczos[x];[x][1:v]paletteuse`,
     ];
     const outputFileName = conf.fileName || `video-${Date.now()}.gif`;
     const output = `${this.destinationPath}/${outputFileName}`;
@@ -336,7 +336,7 @@ module.exports = class ThumbnailGenerator {
         function complete() {
           if (conf.deletePalette === true) {
             d.sync([paletteFilePath], {
-              force: true
+              force: true,
             });
           }
           resolve(output);
@@ -418,13 +418,15 @@ module.exports = class ThumbnailGenerator {
         '400k',
         '-bufsize',
         '800k',
+        '-aspect',
+        '16:9',
         '-vf',
-        `scale=-2:${quality}`,
+        `scale=-2:${quality},setsar=1:1,pad=0:0:(ow-iw)/2:(oh-ih)/2`,
         '-threads',
         '0',
         '-b:a',
         '128k',
-        `${output}/transcoded/${quality}_${videoName}`
+        `${output}/transcoded/${quality}_${videoName}`,
       ]);
       ffmpeg.stderr.on('data', data => {
         console.log(`${data}`);
@@ -435,3 +437,11 @@ module.exports = class ThumbnailGenerator {
     });
   }
 };
+
+// 2160p: 3840x2160
+// 1440p: 2560x1440
+// 1080p: 1920x1080
+// 720p: 1280x720
+// 480p: 854x480
+// 360p: 640x360
+// 240p: 426x240

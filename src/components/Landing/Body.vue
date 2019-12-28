@@ -1,6 +1,6 @@
 <template>
   <div class="home__body">
-    <section>
+    <section class="intro">
       <div class="background-shapes-wrapper">
         <div class="background-shapes-container">
           <div class="background-shape square-one"></div>
@@ -13,8 +13,9 @@
         <div class="home__inner">
           <h1>Built for Content Creators</h1>
           <p>
-            Flex Originals is streaming platform for creators, show your talent to everyone in world and
-            enjoy music & videos and share them to world.
+            Flex Originals is streaming platform for creators, show your talent
+            to everyone in world and enjoy music & videos and share them to
+            world.
             <!-- <a
               href="/open-source"
               class="text-white jumbotron-link"
@@ -26,6 +27,13 @@
           </router-link>
         </div>
       </div>
+    </section>
+    <section class="api__status">
+      <h1>API Status</h1>
+      <div class="box success">Video Processing Active</div>
+      <div class="box success">CDN Active</div>
+      <div class="box success">API Active</div>
+      <div class="box warning">Messaging Under Maintenance</div>
     </section>
   </div>
 </template>

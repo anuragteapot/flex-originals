@@ -30,6 +30,34 @@
   }
 }
 
+.active__animation {
+  animation: changeColor 1s infinite;
+}
+
+@keyframes changeColor {
+  from {
+    box-shadow: 0 0 20px 3px $color-active;
+  }
+
+  to {
+    box-shadow: 0 0 5px 3px $color-active;
+  }
+}
+
+.stop__animation {
+  animation: changeColor 1s infinite;
+}
+
+@keyframes changeColor {
+  from {
+    box-shadow: 0 0 20px 3px $color-error;
+  }
+
+  to {
+    box-shadow: 0 0 5px 3px $color-error;
+  }
+}
+
 .radio {
   margin: 16px 0;
 

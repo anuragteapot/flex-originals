@@ -387,9 +387,52 @@ module.exports = class VideoProcessing {
    *
    * @public
    */
+  getVideoInfo() {
+    const video = this.sourcePath;
+
+    if (!video) {
+      return false;
+    }
+
+    // ffprobe -i 4.mp4 -v quiet -print_format json -show_format -show_streams -hide_banner
+    return new Promise(resolve => {
+      const ffmpeg = spawn('ffprobe', [
+        '-i',
+        video,
+        '-v',
+        'quiet',
+        '-print_format',
+        'json',
+        '-show_format',
+        '-show_streams',
+        '-hide_banner',
+      ]);
+      ffmpeg.stderr.on('data', data => {
+        console.log(`${data}`);
+      });
+      ffmpeg.on('close', data => {
+        resolve(data);
+        console.log(data, 'close');
+      });
+    });
+  }
+
+  /**
+   * Method to create a short gif thumbnail from an mp4 video
+   *
+   * @method resizeVideo
+   *
+   * @param {Number} video
+   * @param {Number} outputdir
+   * @param {Number} quality
+   *
+   * @public
+   */
   resizeVideo(quality) {
     const video = this.sourcePath;
     const outputdir = this.destinationPath;
+
+    // getVideoInfo();
 
     if (!video || !outputdir) {
       return false;

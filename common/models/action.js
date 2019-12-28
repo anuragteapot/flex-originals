@@ -122,13 +122,13 @@ module.exports = function(Action) {
         req.file.path = req.file.path || req.file.location;
         const filePath = Buffer.from(req.file.path).toString('base64');
 
-        // let metaData = Object.create(res.file);
+        let metaData = Object.create(req.file);
 
-        // metaData.quality = new Array();
-        // metaData.quality.push({
-        //   QUALITY: 'Original',
-        //   FILE: filePath,
-        // });
+        metaData.quality = new Array();
+        metaData.quality.push({
+          QUALITY: 'Original',
+          FILE: filePath,
+        });
 
         try {
           if (type == 'video' && VIDEO_EXT.indexOf(req.file.mimetype) !== -1) {
@@ -136,7 +136,7 @@ module.exports = function(Action) {
               videoOwnerId: req.params.id,
               videoFile: filePath,
               title: req.file.originalname,
-              videoMeta: res.file,
+              videoMeta: metaData,
             });
 
             await videoAnalytic.create({
@@ -283,7 +283,13 @@ module.exports = function(Action) {
 
           const compressVideo = await tg.resizeVideo(720);
 
-          video.videoFile = Buffer.from(compressVideo).toString('base64');
+          const filePath = Buffer.from(compressVideo).toString('base64');
+          video.videoFile = filePath;
+
+          video.videoMeta.quality.push({
+            QUALITY: '720',
+            FILE: filePath,
+          });
 
           video.save();
 

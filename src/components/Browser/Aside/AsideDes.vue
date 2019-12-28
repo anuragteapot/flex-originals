@@ -47,20 +47,14 @@
         <span class="tag">{{ user.username || 'Flex' }}</span>
       </div>
       <div class="features-footer-controls button-group">
-        <button role="button" aria-label="Mute" class="button button-mute">
+        <!-- <button role="button" aria-label="Mute" class="button button-mute">
           <i class="fa fa-headphones"></i>
         </button>
         <button role="button" aria-label="Deafen" class="button button-deafen">
           <i class="fa fa-microphone"></i>
-        </button>
+        </button> -->
         <router-link to="/app/@settings">
-          <button
-            role="button"
-            aria-label="Settings"
-            class="button button-settings"
-          >
-            <i class="fa fa-cog"></i>
-          </button>
+          <fo-svg-settings cursor="pointer" theme="dark"></fo-svg-settings>
         </router-link>
       </div>
     </footer>

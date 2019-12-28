@@ -150,15 +150,20 @@ body:not(.user-is-tabbing) textarea:focus {
     .menu {
       background: $theme-dark !important;
       border-bottom: 1px solid #18191a !important;
-    //  border-top: 1px solid #18191a !important;
-     // border-right: 1px solid #18191a !important;
+      //  border-top: 1px solid #18191a !important;
+      // border-right: 1px solid #18191a !important;
+    }
+
+    .channel {
+      background-color: rgb(32, 33, 36) !important;
+      color: lightgray !important;
     }
 
     .music_player {
       background: #121214 !important;
       border-top: 1px solid #18191a !important;
-   //   border-bottom: 1px solid #18191a !important;
-    //  border-right: 1px solid #18191a !important;
+      //   border-bottom: 1px solid #18191a !important;
+      //  border-right: 1px solid #18191a !important;
     }
 
     .video__analytics__info {
@@ -400,6 +405,7 @@ body:not(.user-is-tabbing) textarea:focus {
 
       .features-footer-details {
         padding: 5px;
+        width: 100%;
       }
 
       .features-footer-controls {
@@ -410,14 +416,16 @@ body:not(.user-is-tabbing) textarea:focus {
       }
 
       .features-footer-controls .button {
-        background-color: #d4d7dc;
+        // background-color: #d4d7dc;
+        background: transparent;
+        color: white;
         display: block;
-        width: 32px;
-        height: 32px;
+        width: 40px;
+        height: 40px;
 
         &:hover {
-          background-color: #eef1f5;
-          border: 1px solid #b4b4b4;
+          // background-color: #eef1f5;
+          // border: 1px solid #b4b4b4;
         }
       }
 
@@ -450,8 +458,8 @@ body:not(.user-is-tabbing) textarea:focus {
     align-items: center;
     background: white !important;
     border-bottom: 1px solid $border-color;
-  //  border-top: 1px solid $border-color;
-   // border-right: 1px solid $border-color;
+    //  border-top: 1px solid $border-color;
+    // border-right: 1px solid $border-color;
 
     .menu__button {
       padding: 5px 15px;
@@ -595,7 +603,7 @@ body:not(.user-is-tabbing) textarea:focus {
     width: 50px;
     height: 50px;
     border-radius: 25px;
-    background-color: #2e3136;
+    background-color: #d4d7dc;
     background-repeat: no-repeat;
     margin-bottom: 8px;
     cursor: pointer;

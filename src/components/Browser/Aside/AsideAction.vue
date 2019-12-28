@@ -23,7 +23,7 @@
       >
         <router-link to="/app/@home?filter=video">
           <div class="channel-icon">
-            <i class="fas fa-video" style="color:red;"></i>
+            <i class="fas fa-video"></i>
           </div>
         </router-link>
       </div>
@@ -35,7 +35,7 @@
       >
         <router-link to="/app/@home?filter=music">
           <div class="channel-icon">
-            <i class="fas fa-music" style="color:white;"></i>
+            <i class="fas fa-music"></i>
           </div>
         </router-link>
       </div>
@@ -47,7 +47,7 @@
       >
         <router-link to="/app/@upload">
           <div class="channel-icon">
-            <i class="fas fa-arrow-up" style="color:#00ffe7;"></i>
+            <i class="fas fa-arrow-up"></i>
           </div>
         </router-link>
       </div>
@@ -63,7 +63,7 @@
         aria-selected="true"
       >
         <div class="channel-icon">
-          <i class="fas fa-search" style="color:#f19600"></i>
+          <i class="fas fa-search"></i>
         </div>
       </div>
 
@@ -80,7 +80,7 @@
           "
         >
           <div class="channel-icon">
-            <i class="fas fa-edit" style="color:#04fb8a;"></i>
+            <i class="fas fa-edit"></i>
           </div>
         </router-link>
       </div>
@@ -94,7 +94,7 @@
         @click="deleteItem"
       >
         <div class="channel-icon">
-          <i class="fas fa-trash" style="color:red;"></i>
+          <i class="fas fa-trash"></i>
         </div>
       </div>
       <div
@@ -104,7 +104,7 @@
         aria-selected="true"
       >
         <div class="channel-icon">
-          <i class="fas fa-share-alt" style="color:white;"></i>
+          <i class="fas fa-share-alt"></i>
         </div>
       </div>
       <div
@@ -114,7 +114,7 @@
         aria-selected="true"
       >
         <div class="channel-icon">
-          <i class="fas fa-eye" style="color:lightgreen;"></i>
+          <i class="fas fa-eye"></i>
         </div>
       </div>
       <div
@@ -124,7 +124,7 @@
         aria-selected="true"
       >
         <div class="channel-icon">
-          <i class="fas fa-plus" style="color:#00b0f4;"></i>
+          <i class="fas fa-plus"></i>
         </div>
       </div>
       <div
@@ -136,7 +136,7 @@
       >
         <router-link to="/login">
           <div class="channel-icon">
-            <i class="fas fa-sign-in-alt" style="color:white;"></i>
+            <i class="fas fa-sign-in-alt"></i>
           </div>
         </router-link>
       </div>

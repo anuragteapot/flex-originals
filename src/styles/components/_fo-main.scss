@@ -120,9 +120,16 @@ body:not(.user-is-tabbing) textarea:focus {
   display: flex;
 
   // Place dark things
+  
+  &.light {
+    .fo-svg-fill-dark {
+      fill: black;  
+    }
+  }
 
   &.dark {
     color: white !important;
+    
 
     .lazy {
       background: #121214 !important;

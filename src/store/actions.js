@@ -13,7 +13,7 @@ export default {
         `/api/actions/upload/${uploadType}/${userId}`,
         formData,
         {
-          retry: 3,
+          retry: 10,
           retryDelay: 1000,
           onUploadProgress: e => {
             state.uploadPercent = Math.round((e.loaded * 100) / e.total);
@@ -27,7 +27,21 @@ export default {
 
   GENERATE_THUMBNAILS: async ({ commit, dispatch, state }, { id }) => {
     try {
-      return await AXIOS_API.get(`/api/actions/genrateThumbnail/${id}`);
+      return await AXIOS_API.get(`/api/actions/genrateThumbnail/${id}`, {
+        retry: 10,
+        retryDelay: 1000,
+      });
+    } catch (error) {
+      return new handleError(commit, dispatch, state)._handleError(error);
+    }
+  },
+
+  COMPRESS_VIDEO: async ({ commit, dispatch, state }, { id }) => {
+    try {
+      return await AXIOS_API.get(`/api/actions/processVideo/${id}`, {
+        retry: 10,
+        retryDelay: 1000,
+      });
     } catch (error) {
       return new handleError(commit, dispatch, state)._handleError(error);
     }
@@ -35,7 +49,10 @@ export default {
 
   GET_VIDEO: async ({ commit, dispatch, state }, { id }) => {
     try {
-      return await AXIOS_API.get(`/api/actions/getVideo/${id}`);
+      return await AXIOS_API.get(`/api/actions/getVideo/${id}`, {
+        retry: 10,
+        retryDelay: 1000,
+      });
     } catch (error) {
       return new handleError(commit, dispatch, state)._handleError(error);
     }
@@ -43,7 +60,10 @@ export default {
 
   GET_AUDIO: async ({ commit, dispatch, state }, { id }) => {
     try {
-      return await AXIOS_API.get(`/api/actions/getAudio/${id}`);
+      return await AXIOS_API.get(`/api/actions/getAudio/${id}`, {
+        retry: 10,
+        retryDelay: 1000,
+      });
     } catch (error) {
       return new handleError(commit, dispatch, state)._handleError(error);
     }
@@ -51,7 +71,10 @@ export default {
 
   GET_VIDEO_INFO: async ({ commit, dispatch, state }, { id }) => {
     try {
-      return await AXIOS_API.get(`/api/videos/getVideoInfo/${id}`);
+      return await AXIOS_API.get(`/api/videos/getVideoInfo/${id}`, {
+        retry: 10,
+        retryDelay: 1000,
+      });
     } catch (error) {
       return new handleError(commit, dispatch, state)._handleError(error);
     }
@@ -62,11 +85,18 @@ export default {
     { userId, replyId, message },
   ) => {
     try {
-      return await AXIOS_API.post(`/api/videoComments/comment`, {
-        userId,
-        replyId,
-        message,
-      });
+      return await AXIOS_API.post(
+        `/api/videoComments/comment`,
+        {
+          userId,
+          replyId,
+          message,
+        },
+        {
+          retry: 10,
+          retryDelay: 1000,
+        },
+      );
     } catch (error) {
       return new handleError(commit, dispatch, state)._handleError(error);
     }
@@ -76,6 +106,10 @@ export default {
     try {
       return await AXIOS_API.get(
         `/api/videoComments/getComments/${id}/${limit}`,
+        {
+          retry: 10,
+          retryDelay: 1000,
+        },
       );
     } catch (error) {
       return new handleError(commit, dispatch, state)._handleError(error);
@@ -87,12 +121,19 @@ export default {
     { id, userId, replyId, message },
   ) => {
     try {
-      return await AXIOS_API.put(`/api/videoComments/editComments`, {
-        id,
-        userId,
-        replyId,
-        message,
-      });
+      return await AXIOS_API.put(
+        `/api/videoComments/editComments`,
+        {
+          id,
+          userId,
+          replyId,
+          message,
+        },
+        {
+          retry: 10,
+          retryDelay: 1000,
+        },
+      );
     } catch (error) {
       return new handleError(commit, dispatch, state)._handleError(error);
     }
@@ -100,9 +141,16 @@ export default {
 
   UPDATE_VIDEO_VIEWS: async ({ commit, dispatch, state }, { id }) => {
     try {
-      return await AXIOS_API.post(`/api/videoAnalytics/updateViews`, {
-        id,
-      });
+      return await AXIOS_API.post(
+        `/api/videoAnalytics/updateViews`,
+        {
+          id,
+        },
+        {
+          retry: 10,
+          retryDelay: 1000,
+        },
+      );
     } catch (error) {
       return new handleError(commit, dispatch, state)._handleError(error);
     }
@@ -114,7 +162,7 @@ export default {
         `/api/videos/publish`,
         { id, videoData },
         {
-          retry: 3,
+          retry: 10,
           retryDelay: 1000,
         },
       );
@@ -129,7 +177,7 @@ export default {
         `/api/audios/publish`,
         { id, audioData },
         {
-          retry: 3,
+          retry: 10,
           retryDelay: 1000,
         },
       );
@@ -140,7 +188,10 @@ export default {
 
   IS_LOGGED: async ({ commit, dispatch, state }, { userId }) => {
     try {
-      return await AXIOS_API.get(`/api/users/${userId}`);
+      return await AXIOS_API.get(`/api/users/${userId}`, {
+        retry: 3,
+        retryDelay: 1000,
+      });
     } catch (error) {
       return new handleError(commit, dispatch, state)._handleError(error);
     }
@@ -156,10 +207,18 @@ export default {
       if (isServer) {
         content = await AXIOS_API_SERVER.get(
           `/api/actions/getContent/${limit || 30}/${userId ? userId : ''}`,
+          {
+            retry: 10,
+            retryDelay: 1000,
+          },
         );
       } else {
         content = await AXIOS_API.get(
           `/api/actions/getContent/${limit || 30}/${userId ? userId : ''}`,
+          {
+            retry: 10,
+            retryDelay: 1000,
+          },
         );
       }
 
@@ -181,6 +240,10 @@ export default {
     try {
       return await AXIOS_API.get(
         `/api/videoLikes/getLike/${payload.userId}/${payload.videoId}`,
+        {
+          retry: 10,
+          retryDelay: 1000,
+        },
       );
     } catch (error) {
       return new handleError(commit, dispatch, state)._handleError(error);
@@ -189,11 +252,18 @@ export default {
 
   LIKE_END_POINT: async ({ commit, dispatch, state }, payload) => {
     try {
-      return await AXIOS_API.post(`/api/videoLikes/likeEndPoint`, {
-        userId: payload.userId,
-        videoId: payload.videoId,
-        reaction: payload.reaction,
-      });
+      return await AXIOS_API.post(
+        `/api/videoLikes/likeEndPoint`,
+        {
+          userId: payload.userId,
+          videoId: payload.videoId,
+          reaction: payload.reaction,
+        },
+        {
+          retry: 10,
+          retryDelay: 1000,
+        },
+      );
     } catch (error) {
       return new handleError(commit, dispatch, state)._handleError(error);
     }
@@ -203,6 +273,10 @@ export default {
     try {
       return await AXIOS_API.get(
         `/api/follows/getFollowers/${payload.followId}`,
+        {
+          retry: 10,
+          retryDelay: 1000,
+        },
       );
     } catch (error) {
       return new handleError(commit, dispatch, state)._handleError(error);
@@ -211,10 +285,17 @@ export default {
 
   UN_FOLLOW: async ({ commit, dispatch, state }, payload) => {
     try {
-      return await AXIOS_API.post(`/api/follows/unFollow`, {
-        channelId: payload.channelId,
-        followId: payload.followId,
-      });
+      return await AXIOS_API.post(
+        `/api/follows/unFollow`,
+        {
+          channelId: payload.channelId,
+          followId: payload.followId,
+        },
+        {
+          retry: 10,
+          retryDelay: 1000,
+        },
+      );
     } catch (error) {
       return new handleError(commit, dispatch, state)._handleError(error);
     }
@@ -222,10 +303,17 @@ export default {
 
   DO_FOLLOW: async ({ commit, dispatch, state }, payload) => {
     try {
-      return await AXIOS_API.post(`/api/follows/doFollow`, {
-        channelId: payload.channelId,
-        followId: payload.followId,
-      });
+      return await AXIOS_API.post(
+        `/api/follows/doFollow`,
+        {
+          channelId: payload.channelId,
+          followId: payload.followId,
+        },
+        {
+          retry: 10,
+          retryDelay: 1000,
+        },
+      );
     } catch (error) {
       return new handleError(commit, dispatch, state)._handleError(error);
     }
@@ -235,6 +323,10 @@ export default {
     try {
       return await AXIOS_API.get(
         `/api/follows/getFollow/${payload.channelId}/${payload.followId}`,
+        {
+          retry: 10,
+          retryDelay: 1000,
+        },
       );
     } catch (error) {
       return new handleError(commit, dispatch, state)._handleError(error);
@@ -243,7 +335,10 @@ export default {
 
   GET_USER_STORAGE: async ({ commit, dispatch, state }, payload) => {
     try {
-      return await AXIOS_API.get(`/api/actions/getUserStorage/${payload}`);
+      return await AXIOS_API.get(`/api/actions/getUserStorage/${payload}`, {
+        retry: 10,
+        retryDelay: 1000,
+      });
     } catch (error) {
       return new handleError(commit, dispatch, state)._handleError(error);
     }
@@ -253,6 +348,10 @@ export default {
     try {
       return await AXIOS_API.get(
         `/api/users/confirm?uid=${payload.uid}&redirect=${payload.redirect}&token=${payload.token}`,
+        {
+          retry: 10,
+          retryDelay: 1000,
+        },
       );
     } catch (error) {
       return new handleError(commit, dispatch, state)._handleError(error);
@@ -272,6 +371,8 @@ export default {
           email: payload.email,
         },
         {
+          retry: 10,
+          retryDelay: 1000,
           headers: headers,
         },
       );
@@ -282,9 +383,16 @@ export default {
 
   REQUEST_RESET_PASSWORD: async ({ commit, dispatch, state }, payload) => {
     try {
-      return await AXIOS_API.post(`/api/users/reset`, {
-        email: payload.email,
-      });
+      return await AXIOS_API.post(
+        `/api/users/reset`,
+        {
+          email: payload.email,
+        },
+        {
+          retry: 10,
+          retryDelay: 1000,
+        },
+      );
     } catch (error) {
       return new handleError(commit, dispatch, state)._handleError(error);
     }
@@ -295,9 +403,15 @@ export default {
       let settings = undefined;
 
       if (isServer) {
-        settings = await AXIOS_API_SERVER.get(`/api/users/findSetting/${uid}`);
+        settings = await AXIOS_API_SERVER.get(`/api/users/findSetting/${uid}`, {
+          retry: 10,
+          retryDelay: 1000,
+        });
       } else {
-        settings = await AXIOS_API.get(`/api/users/findSetting/${uid}`);
+        settings = await AXIOS_API.get(`/api/users/findSetting/${uid}`, {
+          retry: 10,
+          retryDelay: 1000,
+        });
       }
 
       commit(types.SET_SETTINGS, settings);
@@ -309,7 +423,10 @@ export default {
 
   UPDATE_SETTINGS: async ({ commit, dispatch, state }, payload) => {
     try {
-      return await AXIOS_API.post(`/api/users/updateSettings`, payload);
+      return await AXIOS_API.post(`/api/users/updateSettings`, payload, {
+        retry: 10,
+        retryDelay: 1000,
+      });
     } catch (error) {
       return new handleError(commit, dispatch, state)._handleError(error);
     }
@@ -318,17 +435,31 @@ export default {
   DELETE_ITEM: async ({ commit, dispatch, state }, payload) => {
     if (payload.type == 'audio') {
       try {
-        return await AXIOS_API.post(`/api/audios/deleteItem`, {
-          id: payload.id,
-        });
+        return await AXIOS_API.post(
+          `/api/audios/deleteItem`,
+          {
+            id: payload.id,
+          },
+          {
+            retry: 10,
+            retryDelay: 1000,
+          },
+        );
       } catch (error) {
         return new handleError(commit, dispatch, state)._handleError(error);
       }
     } else if (payload.type == 'video') {
       try {
-        return await AXIOS_API.post(`/api/videos/deleteItem`, {
-          id: payload.id,
-        });
+        return await AXIOS_API.post(
+          `/api/videos/deleteItem`,
+          {
+            id: payload.id,
+          },
+          {
+            retry: 10,
+            retryDelay: 1000,
+          },
+        );
       } catch (error) {
         return new handleError(commit, dispatch, state)._handleError(error);
       }
@@ -337,7 +468,10 @@ export default {
 
   SIGNUP: async ({ commit, dispatch, state }, payload) => {
     try {
-      return await AXIOS_API.post('/api/users', payload);
+      return await AXIOS_API.post('/api/users', payload, {
+        retry: 10,
+        retryDelay: 1000,
+      });
     } catch (error) {
       return new handleError(commit, dispatch, state)._handleError(error);
     }
@@ -345,9 +479,16 @@ export default {
 
   UPDATE_VIEWS_AUDIO: async ({ commit, dispatch, state }, payload) => {
     try {
-      return await AXIOS_API.post('/api/audioAnalytics/updateViews', {
-        id: payload,
-      });
+      return await AXIOS_API.post(
+        '/api/audioAnalytics/updateViews',
+        {
+          id: payload,
+        },
+        {
+          retry: 10,
+          retryDelay: 1000,
+        },
+      );
     } catch (error) {
       return new handleError(commit, dispatch, state)._handleError(error);
     }
@@ -355,9 +496,16 @@ export default {
 
   UPDATE_VIEWS_VIDEO: async ({ commit, dispatch, state }, payload) => {
     try {
-      return await AXIOS_API.post('/api/videoAnalytics/updateViews', {
-        id: payload,
-      });
+      return await AXIOS_API.post(
+        '/api/videoAnalytics/updateViews',
+        {
+          id: payload,
+        },
+        {
+          retry: 10,
+          retryDelay: 1000,
+        },
+      );
     } catch (error) {
       return new handleError(commit, dispatch, state)._handleError(error);
     }
@@ -365,7 +513,14 @@ export default {
 
   LOGOUT: async ({ commit, dispatch, state }) => {
     try {
-      return await AXIOS_API.post('/api/users/logout');
+      return await AXIOS_API.post(
+        '/api/users/logout',
+        {},
+        {
+          retry: 10,
+          retryDelay: 1000,
+        },
+      );
     } catch (error) {
       return new handleError(commit, dispatch, state)._handleError(error);
     }
@@ -373,7 +528,10 @@ export default {
 
   LOGIN: async ({ commit, dispatch, state }, payload) => {
     try {
-      return await AXIOS_API.post('/api/users/login', payload);
+      return await AXIOS_API.post('/api/users/login', payload, {
+        retry: 10,
+        retryDelay: 1000,
+      });
     } catch (error) {
       return new handleError(commit, dispatch, state)._handleError(error);
     }

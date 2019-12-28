@@ -8,7 +8,7 @@ const fs = require('fs-extra');
 const helper = require('./../../server/helper-util');
 const path = require('path');
 const app = require('../../server/server');
-const ThumbnailGenerator = require('../../server/API/Video');
+const VideoProcessing = require('../../server/API/Video');
 
 const VIDEO_EXT = [
   'video/mp4',
@@ -120,8 +120,15 @@ module.exports = function(Action) {
       } else {
         const { type } = req.params;
         req.file.path = req.file.path || req.file.location;
-
         const filePath = Buffer.from(req.file.path).toString('base64');
+
+        // let metaData = Object.create(res.file);
+
+        // metaData.quality = new Array();
+        // metaData.quality.push({
+        //   QUALITY: 'Original',
+        //   FILE: filePath,
+        // });
 
         try {
           if (type == 'video' && VIDEO_EXT.indexOf(req.file.mimetype) !== -1) {
@@ -129,7 +136,7 @@ module.exports = function(Action) {
               videoOwnerId: req.params.id,
               videoFile: filePath,
               title: req.file.originalname,
-              videoMeta: req.file,
+              videoMeta: res.file,
             });
 
             await videoAnalytic.create({
@@ -214,7 +221,7 @@ module.exports = function(Action) {
 
       if (VIDEO_EXT.indexOf(video.videoMeta.mimetype) !== -1) {
         try {
-          const tg = new ThumbnailGenerator({
+          const tg = new VideoProcessing({
             sourcePath: video.videoMeta.path,
             destinationPath: video.videoMeta.destination,
             size: '700x420',
@@ -269,21 +276,23 @@ module.exports = function(Action) {
 
       if (video.videoMeta) {
         try {
-          const tg = new ThumbnailGenerator({
+          const tg = new VideoProcessing({
             sourcePath: video.videoMeta.path,
             destinationPath: video.videoMeta.destination,
-            size: '200x200',
-            count: 3,
           });
 
           const compressVideo = await tg.resizeVideo(720);
-          //   console.log(await tg.generateGif({}));
-          return { compressVideo };
+
+          video.videoFile = Buffer.from(compressVideo).toString('base64');
+
+          video.save();
+
+          return { STATUS: 'SUCCESS', QUALITY: 720 };
         } catch (err) {
           return { err };
         }
       } else {
-        return { compressVideo: '' };
+        return { STATUS: 'FAILED' };
       }
     } catch (err) {
       return { err };

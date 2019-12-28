@@ -26,7 +26,7 @@
           <div class="card__body">
             <div class="container" v-if="isUploading">
               <div class="grid">
-                <h1>Upload Status</h1>
+                <h1>Status</h1>
               </div>
             </div>
             <div class="container" v-if="isUploading">
@@ -39,7 +39,7 @@
                 />
               </form>
               <div class="grid grid--half">
-                <h3>Uploading Progress</h3>
+                <h3>{{ statusMessage }}</h3>
                 <div class="video__upload__progress">
                   <div
                     :class="`upload__progress ${!isProcessing ? 'done' : ''}`"
@@ -234,6 +234,7 @@ export default {
   name: 'upload',
   data() {
     return {
+      statusMessage: 'Pending',
       isAllowed: false,
       isUploading: false,
       isThumbUpload: false,
@@ -340,6 +341,7 @@ export default {
       }
     },
     upload: async function(formData, inputFile) {
+      this.statusMessage = 'Uploading';
       const uploaded = await this.processUpload(formData, inputFile);
 
       if (!uploaded) {
@@ -349,6 +351,12 @@ export default {
       if (this.type === 'video') {
         this.uploadId = uploaded.data.video.id;
         this.uploadData.title = uploaded.data.video.title;
+
+        this.statusMessage = 'Processing Video';
+
+        await this.$store.dispatch('COMPRESS_VIDEO', {
+          id: uploaded.data.video.id,
+        });
 
         const videoThumb = await this.$store.dispatch('GENERATE_THUMBNAILS', {
           id: uploaded.data.video.id,
@@ -361,8 +369,11 @@ export default {
         this.uploadId = uploaded.data.audio.id;
         this.uploadData.title = uploaded.data.audio.title;
       }
+
+      this.statusMessage = 'Video Done!';
+
       const data = {
-        data: `Uploading done!`,
+        data: `Video ready to publish.`,
         color: 'success',
       };
 

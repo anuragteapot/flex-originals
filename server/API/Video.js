@@ -7,9 +7,9 @@ const _ = require('lodash');
 const del = require('del');
 
 /**
- * @class ThumbnailGenerator
+ * @class VideoProcessing
  */
-module.exports = class ThumbnailGenerator {
+module.exports = class VideoProcessing {
   /**
    * @constructor
    *
@@ -421,7 +421,7 @@ module.exports = class ThumbnailGenerator {
         '-aspect',
         '16:9',
         '-vf',
-        `scale=-2:${quality},setsar=1:1,pad=0:0:(ow-iw)/2:(oh-ih)/2`,
+        `scale=-2:${quality},setsar=1:1`,
         '-threads',
         '0',
         '-b:a',

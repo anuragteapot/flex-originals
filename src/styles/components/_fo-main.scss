@@ -449,10 +449,10 @@ body:not(.user-is-tabbing) textarea:focus {
 
       .username {
         font-size: 0.8rem;
+        font-weight:500;
       }
 
       .tag {
-        color: rgba(231, 231, 231, 0.45);
         font-size: 0.7rem;
       }
     }

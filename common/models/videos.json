@@ -6,14 +6,16 @@
   "options": {
     "validateUpsert": true
   },
-  "hidden": [
-    "videoOwnerId"
-  ],
+  "hidden": ["videoOwnerId"],
   "properties": {
     "title": {
       "type": "string",
       "required": true,
       "default": "Untitled"
+    },
+    "videoDataJson": {
+      "type": "object",
+      "default": {}
     },
     "videoMeta": {
       "type": "object",

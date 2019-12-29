@@ -1,5 +1,6 @@
 const FfmpegCommand = require('fluent-ffmpeg');
 const spawn = require('child_process').spawn;
+const exec = require('child_process').exec;
 const path = require('path');
 const fs = require('fs-extra');
 const Promise = require('bluebird');
@@ -28,10 +29,36 @@ module.exports = class VideoProcessing {
     this.size = opts.size || '720x500';
     this.fileNameFormat = 'thumbnail-%r-%000i';
     this.tmpDir = opts.tmpDir || '/tmp';
+    this.qualityMap = {
+      '2160p': '3840:2160',
+      '1440p': '2560:1440',
+      '1080p': '1920:1080',
+      '720p': '1280:720',
+      '480p': '854:480',
+      '360p': '640:360',
+      '240p': '426:240',
+    };
 
     // by include deps here, it is easier to mock them out
     this.FfmpegCommand = FfmpegCommand;
     this.del = del;
+  }
+
+  /**
+   *
+   * @param {string} command
+   *
+   */
+  execute(command) {
+    return new Promise((resolve, reject) => {
+      exec(command, function(error, stdout, stderr) {
+        if (error) {
+          reject(error);
+        } else {
+          resolve(stdout);
+        }
+      });
+    });
   }
 
   /**
@@ -387,34 +414,8 @@ module.exports = class VideoProcessing {
    *
    * @public
    */
-  getVideoInfo() {
-    const video = this.sourcePath;
-
-    if (!video) {
-      return false;
-    }
-
-    // ffprobe -i 4.mp4 -v quiet -print_format json -show_format -show_streams -hide_banner
-    return new Promise(resolve => {
-      const ffmpeg = spawn('ffprobe', [
-        '-i',
-        video,
-        '-v',
-        'quiet',
-        '-print_format',
-        'json',
-        '-show_format',
-        '-show_streams',
-        '-hide_banner',
-      ]);
-      ffmpeg.stderr.on('data', data => {
-        console.log(`${data}`);
-      });
-      ffmpeg.on('close', data => {
-        resolve(data);
-        console.log(data, 'close');
-      });
-    });
+  getVideoInfo(data) {
+    return data;
   }
 
   /**
@@ -428,11 +429,33 @@ module.exports = class VideoProcessing {
    *
    * @public
    */
-  resizeVideo(quality) {
+  async resizeVideo(quality) {
     const video = this.sourcePath;
     const outputdir = this.destinationPath;
+    const scale = this.qualityMap[`${quality}p`];
 
-    // getVideoInfo();
+    console.log(`Start video resizing ${video}`);
+
+    let videoData = {};
+    try {
+      const command = `ffprobe -of json -show_streams -show_format ${video}`;
+      videoData = await this.execute(command);
+    } catch (err) {
+      return new Error('Error on retriveing video data');
+    }
+
+    const videoDataJson = JSON.parse(videoData);
+    let rotate = false;
+    if (videoDataJson && videoDataJson.streams) {
+      if (videoDataJson.streams[0]) {
+        if (
+          videoDataJson.streams[0].tags.rotate ||
+          videoDataJson.streams[0].side_data_list
+        ) {
+          rotate = true;
+        }
+      }
+    }
 
     if (!video || !outputdir) {
       return false;
@@ -445,39 +468,85 @@ module.exports = class VideoProcessing {
       fs.mkdirSync(`${output}/transcoded`);
     }
 
-    return new Promise(resolve => {
-      const ffmpeg = spawn('ffmpeg', [
-        '-i',
-        video,
-        '-codec:v',
-        'libx264',
-        '-profile:v',
-        'main',
-        '-preset',
-        'slow',
-        '-b:v',
-        '400k',
-        '-maxrate',
-        '400k',
-        '-bufsize',
-        '800k',
-        '-aspect',
-        '16:9',
-        '-vf',
-        `scale=-2:${quality},setsar=1:1`,
-        '-threads',
-        '0',
-        '-b:a',
-        '128k',
-        `${output}/transcoded/${quality}_${videoName}`,
-      ]);
-      ffmpeg.stderr.on('data', data => {
-        console.log(`${data}`);
+    if (!rotate) {
+      return new Promise(resolve => {
+        const ffmpeg = spawn('ffmpeg', [
+          '-i',
+          video,
+          '-codec:v',
+          'libx264',
+          '-profile:v',
+          'main',
+          '-preset',
+          'slow',
+          '-b:v',
+          '400k',
+          '-maxrate',
+          '400k',
+          '-bufsize',
+          '800k',
+          '-aspect',
+          '16:9',
+          '-vf',
+          `scale=${scale},setsar=1:1`,
+          '-threads',
+          '0',
+          '-b:a',
+          '128k',
+          `${output}/transcoded/${quality}_${videoName}`,
+        ]);
+        ffmpeg.stderr.on('data', data => {
+          // console.log(`${data}`);
+        });
+        ffmpeg.on('close', () => {
+          console.log(
+            `Video resizing completed ${output}/transcoded/${quality}_${videoName}`,
+          );
+          resolve({
+            compressVideo: `${output}/transcoded/${quality}_${videoName}`,
+            videoDataJson,
+          });
+        });
       });
-      ffmpeg.on('close', () => {
-        resolve(`${output}/transcoded/${quality}_${videoName}`);
+    } else {
+      return new Promise(resolve => {
+        const ffmpeg = spawn('ffmpeg', [
+          '-i',
+          video,
+          '-codec:v',
+          'libx264',
+          '-profile:v',
+          'main',
+          '-preset',
+          'slow',
+          '-b:v',
+          '400k',
+          '-maxrate',
+          '400k',
+          '-bufsize',
+          '800k',
+          '-vf',
+          `scale=${scale}:force_original_aspect_ratio=decrease,pad=${scale}:(ow-iw)/2:(oh-ih)/2`,
+          '-threads',
+          '0',
+          '-b:a',
+          '128k',
+          `${output}/transcoded/${quality}_${videoName}`,
+        ]);
+        ffmpeg.stderr.on('data', data => {
+          // console.log(`${data}`);
+        });
+        ffmpeg.on('close', () => {
+          console.log(
+            `Video resizing completed ${output}/transcoded/${quality}_${videoName}`,
+          );
+          resolve({
+            compressVideo: `${output}/transcoded/${quality}_${videoName}`,
+            videoDataJson,
+          });
+        });
       });
-    });
+    }
   }
 };
 

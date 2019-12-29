@@ -120,16 +120,15 @@ body:not(.user-is-tabbing) textarea:focus {
   display: flex;
 
   // Place dark things
-  
+
   &.light {
     .fo-svg-fill-dark {
-      fill: black !important;  
+      fill: black !important;
     }
   }
 
   &.dark {
     color: white !important;
-    
 
     .lazy {
       background: #121214 !important;
@@ -164,6 +163,13 @@ body:not(.user-is-tabbing) textarea:focus {
     .channel {
       background-color: rgb(32, 33, 36) !important;
       color: lightgray !important;
+
+      &:hover {
+        background-color: darken(
+          $color: rgb(32, 33, 36),
+          $amount: 5
+        ) !important;
+      }
     }
 
     .music_player {
@@ -184,7 +190,6 @@ body:not(.user-is-tabbing) textarea:focus {
 
     .video_comment_input {
       background: #121214 !important;
-      border: 1px solid #1c1c1d !important;
       color: white !important;
     }
 
@@ -449,7 +454,7 @@ body:not(.user-is-tabbing) textarea:focus {
 
       .username {
         font-size: 0.8rem;
-        font-weight:500;
+        font-weight: 500;
       }
 
       .tag {
@@ -615,6 +620,10 @@ body:not(.user-is-tabbing) textarea:focus {
     margin-bottom: 8px;
     cursor: pointer;
     position: relative;
+
+    &:hover {
+      background-color: darken($color: #d4d7dc, $amount: 5);
+    }
   }
 
   .channel .channel-icon {
@@ -658,7 +667,8 @@ body:not(.user-is-tabbing) textarea:focus {
 
   .channel.active {
     border-radius: 15px;
-    background-color: #7289da;
+    color: white !important;
+    background-color: $color-theme !important;
   }
 
   .channel.unread::before {

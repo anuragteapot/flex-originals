@@ -126,7 +126,7 @@ module.exports = function(Action) {
 
         metaData.quality = new Array();
         metaData.quality.push({
-          QUALITY: 'Original',
+          QUALITY: 'ORIGINAL',
           FILE: filePath,
         });
 
@@ -220,9 +220,28 @@ module.exports = function(Action) {
       });
 
       if (VIDEO_EXT.indexOf(video.videoMeta.mimetype) !== -1) {
+        const videoDataJson = video.videoDataJson;
+        let rotate = false;
+        if (videoDataJson && videoDataJson.streams) {
+          if (videoDataJson.streams[0]) {
+            if (
+              videoDataJson.streams[0].tags.rotate ||
+              videoDataJson.streams[0].side_data_list
+            ) {
+              rotate = true;
+            }
+          }
+        }
+
+        let file = video.videoMeta.path;
+
+        if (rotate) {
+          file = Buffer.from(video.videoFile, 'base64').toString('ascii');
+        }
+
         try {
           const tg = new VideoProcessing({
-            sourcePath: video.videoMeta.path,
+            sourcePath: file || video.videoMeta.path,
             destinationPath: video.videoMeta.destination,
             size: '700x420',
             count: 4,
@@ -281,10 +300,11 @@ module.exports = function(Action) {
             destinationPath: video.videoMeta.destination,
           });
 
-          const compressVideo = await tg.resizeVideo(720);
+          const { compressVideo, videoDataJson } = await tg.resizeVideo(720);
 
           const filePath = Buffer.from(compressVideo).toString('base64');
           video.videoFile = filePath;
+          video.videoDataJson = videoDataJson;
 
           video.videoMeta.quality.push({
             QUALITY: '720',

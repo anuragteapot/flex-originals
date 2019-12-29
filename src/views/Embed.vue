@@ -1,6 +1,13 @@
 <template>
   <div class="embed__video">
-    <fo-video-player  :embed="true" :videoInfo="video" :error="error" :src="$utils.getUrl(videoSource)" v-if="!videoUnavaliable" :autoPlay="false"></fo-video-player>
+    <fo-video-player
+      :embed="true"
+      :videoInfo="video"
+      :error="error"
+      :src="$utils.getUrl(videoSource, 'video')"
+      v-if="!videoUnavaliable"
+      :autoPlay="false"
+    ></fo-video-player>
   </div>
 </template>
 
@@ -29,7 +36,7 @@ export default {
     async init() {
       if (this.$route.params.v) {
         let currentVideo = {};
-        
+
         try {
           currentVideo = await this.$store.dispatch('GET_VIDEO', {
             id: this.$route.params.v,
@@ -42,11 +49,8 @@ export default {
           this.videoUnavaliable = true;
           return 0;
         }
-        if (currentVideo.data.video.videoFile.includes('https')) {
-          this.videoSource = currentVideo.data.video.videoFile;
-        } else {
-          this.videoSource = '/' + currentVideo.data.video.videoFile;
-        }
+
+        this.videoSource = currentVideo.data.video.videoFile;
         this.analytic = currentVideo.data.analytic;
         this.user = currentVideo.data.user;
         this.settings = currentVideo.data.settings;

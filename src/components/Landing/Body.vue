@@ -28,13 +28,13 @@
         </div>
       </div>
     </section>
-    <section class="api__status">
+    <!-- <section class="api__status">
       <h1>API Status</h1>
       <div class="box success">Video Processing Active</div>
       <div class="box success">CDN Active</div>
       <div class="box success">API Active</div>
       <div class="box warning">Messaging Under Maintenance</div>
-    </section>
+    </section> -->
   </div>
 </template>
 <script>

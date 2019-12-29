@@ -231,7 +231,6 @@
 
   .fo-video-player__buffer-back {
     z-index: 1;
-    background-color: $color-theme;
     transform: scaleX(0);
     transform-origin: left;
     background-color: rgba(221, 221, 221, 0.8);
@@ -269,7 +268,7 @@
     .fo-video-player__watch__on {
       display: inline-block;
       position: absolute;
-      bottom: 45px;
+      bottom: 60px;
       right: 15px;
       text-align: right;
       padding: 5px;
@@ -312,7 +311,6 @@
     position: absolute;
     bottom: 60px;
     z-index: -5;
-    transition: 0.2s ease-out;
     transition: 0.2s;
 
     &.settings {
@@ -378,7 +376,6 @@
       z-index: -1;
       visibility: hidden;
       background: rgba(0, 0, 0, 0.9);
-      transition: 0.2s ease-out;
       // box-shadow: 0 16px 32px rgba(0, 0, 0, 0.25);
       transform: translateY(50px) scale(0.5);
       transition: 0.2s;
@@ -415,7 +412,6 @@
       opacity: 1;
       z-index: 6;
       visibility: visible;
-      transform: translateY(0);
       transform: translateY(0) scale(1);
       transition: 0.2s;
 

@@ -1,11 +1,7 @@
 <template>
   <aside class="lazy">
     <div class="lazy-collection">
-      <div
-        class="channel focusable channel-friends unread"
-        role="button"
-        aria-label="Friends unread"
-      >
+      <div class="channel focusable" role="button">
         <router-link to="/app/@home">
           <div class="channel-icon">
             <img src="/public/icons/logo.png" alt="logo" />
@@ -16,7 +12,7 @@
 
     <div class="lazy-collection">
       <div
-        class="channel focusable"
+        :class="`channel focusable`"
         role="button"
         aria-label="My channel"
         aria-selected="true"
@@ -149,6 +145,11 @@ import * as types from './../../../store/mutation-types';
 
 export default {
   name: 'lazy-aside',
+  data() {
+    return {
+      isActive: false,
+    };
+  },
   computed: {
     selecteditems() {
       return this.$store.state.selectedItems;

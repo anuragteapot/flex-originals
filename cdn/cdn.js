@@ -4,6 +4,13 @@ exports.serveVideo = (req, res, next) => {
   const { mimetype, id, media, expires } = req.query;
   const path = Buffer.from(media, 'base64').toString('ascii');
 
+  if (path.split('/')[0] != 'uploads') {
+    return next({
+      status: 404,
+      message: 'Fucked Up!',
+    });
+  }
+
   if (!mimetype || !id || !media) {
     return next({
       status: 404,
@@ -58,6 +65,13 @@ exports.serveVideo = (req, res, next) => {
 exports.serveImage = (req, res, next) => {
   const { mimetype, media, expires } = req.query;
   const path = Buffer.from(media, 'base64').toString('ascii');
+
+  if (path.split('/')[0] != 'uploads') {
+    return next({
+      status: 404,
+      message: 'Fucked Up!',
+    });
+  }
 
   if (!mimetype || !media) {
     return next({

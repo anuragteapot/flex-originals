@@ -241,7 +241,7 @@ module.exports = function(Action) {
 
         try {
           const tg = new VideoProcessing({
-            sourcePath: file || video.videoMeta.path,
+            sourcePath: file,
             destinationPath: video.videoMeta.destination,
             size: '700x420',
             count: 4,

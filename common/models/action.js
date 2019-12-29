@@ -56,9 +56,7 @@ module.exports = function(Action) {
     destination: (req, file, cb) => {
       const userId = req.params.id;
       const dirPath = `uploads/${userId}`;
-      fs.ensureDir('uploads', err => {
-        console.log(err);
-      });
+      fs.ensureDir('uploads');
       if (!fs.existsSync(dirPath)) {
         fs.mkdirSync(dirPath);
       }

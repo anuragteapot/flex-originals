@@ -46,7 +46,7 @@
     width: 100%;
 
     section {
-      padding: 3%;
+      padding: 5%;
       width: 100%;
 
       .home__container {
@@ -63,7 +63,7 @@
         }
 
         .home__inner {
-          padding: 10% 10% 15% 10%;
+          padding: 10%;
           margin: auto;
           width: 100%;
 
@@ -94,6 +94,7 @@
 
     .api__status {
       text-align: center;
+      background-color: a3a2a51f;
       
       
       h1 {
@@ -104,7 +105,7 @@
       .box {
         border-radius: 3px;
         color: white;
-        padding: 20px;
+        padding: 10px;
         display: inline-block;
         margin: 10px;
         border: 0;

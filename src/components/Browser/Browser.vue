@@ -1,19 +1,19 @@
 <template>
   <div class="fo-browser">
-    <div v-show="isMobile" :class="`nav-offcanvas ${appDrawer ? 'open' : ''}`">
+    <div v-show="isMobile || $route.name == '@watch' " :class="`nav-offcanvas ${appDrawer ? 'open' : ''}`">
       <div class="nav-offcanvas-menu">
         <aside-action></aside-action>
         <aside-des></aside-des>
       </div>
     </div>
     <div
-      v-show="isMobile"
+      v-show="isMobile || $route.name == '@watch'"
       :class="`offcanvas-overlay ${appDrawer ? 'on' : ''}`"
       @click="toggleMenu"
     ></div>
 
-    <aside-action v-show="!isMobile && appDrawer"></aside-action>
-    <aside-des v-show="!isMobile && appDrawer"></aside-des>
+    <aside-action v-show="!isMobile && appDrawer && $route.name != '@watch'"></aside-action>
+    <aside-des v-show="!isMobile && appDrawer && $route.name != '@watch'"></aside-des>
 
     <div class="main-container">
       <toolbar @toggleAppDrawer="toggleAppDrawer"></toolbar>

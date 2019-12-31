@@ -1,22 +1,18 @@
 /* eslint-disable */
 import axios from 'axios';
 import * as webStorage from './webStorage';
-let PORT = 3344;
+let PORT = 3000;
 if (process.env && process) {
-  PORT = process.env.NODE_ENV === 'production' ? 3000 : 3344;
+  PORT = process.env.APP_API_PORT;
 }
 
 const AXIOS_API_SERVER = () => {
   let instance = null;
-  if (process.env.NODE_ENV === 'production') {
-    instance = axios.create({
-      baseURL: `http://localhost:3000`,
-    });
-  } else {
-    instance = axios.create({
-      baseURL: `http://localhost:${PORT}`,
-    });
-  }
+
+  instance = axios.create({
+    baseURL: `http://localhost:${PORT}`,
+  });
+
   instance.defaults.headers.common['authorization'] = `${webStorage.local.get(
     '$accessToken',
   )}`;

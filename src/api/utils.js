@@ -8,7 +8,7 @@ export default class utils {
 
     if (process.env && process) {
       this.CDN =
-        process.env.NODE_ENV === 'production' ? '' : 'http://localhost:3355';
+        process.env.NODE_ENV === 'production' ? '' : `http://localhost:${process.env.APP_CDN_PORT}`;
     }
   }
   randomChars(len = 6) {

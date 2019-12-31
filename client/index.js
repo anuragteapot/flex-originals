@@ -6,7 +6,7 @@ const ora = require('ora');
 const spinner = ora('Starting server.').start();
 
 const server = http.createServer(app);
-const port = process.env.PORT || 8080;
+const port = process.env.APP_CLIENT_PORT || 8080;
 
 function onListening() {
   spinner.text = `CLIENT Server started at http://localhost:${port}`;

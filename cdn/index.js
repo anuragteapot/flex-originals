@@ -6,7 +6,7 @@ const ora = require('ora');
 const spinner = ora('Starting server.').start();
 
 const server = http.createServer(app);
-const port = process.env.CDN_PORT || 3355;
+const port = process.env.APP_CDN_PORT || 3355;
 
 function onListening() {
   spinner.text = `CDN Server started at http://localhost:${port}`;

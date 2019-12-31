@@ -144,7 +144,7 @@ module.exports = {
           new FriendlyErrorsPlugin({
             compilationSuccessInfo: {
               messages: [
-                "Your application is running here http://localhost:8080",
+                `Your application is running here http://localhost:${process.env.APP_CLIENT_PORT}`,
               ],
             },
           }),

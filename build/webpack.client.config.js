@@ -39,6 +39,7 @@ const config = merge(baseConfig, {
   plugins: [
     new webpack.DefinePlugin({
       'process.env.VUE_ENV': '"client"',
+      'process.env.APP_API_PORT': process.env.APP_API_PORT,
       'process.browser': true,
       'process.client': true,
       'process.server': false,

@@ -14,6 +14,13 @@ app.start = function() {
   return app.listen(function() {
     app.emit('started');
     var baseUrl = app.get('url').replace(/\/$/, '');
+    console.log('---------------debug----------------------->')
+    console.log(process.env.APP_MONGO_PASS);
+    console.log(process.env.APP_MONGO_USER);
+    console.log(process.env.APP_MONGO_DB);
+    console.log(process.env.MONGO_HOST);
+    console.log('---------------debug----------------------->')
+
     console.log('-------------------------------------------------------');
     spinner.text = `WEB Server started at: ${baseUrl}`;
     spinner.color = 'green';

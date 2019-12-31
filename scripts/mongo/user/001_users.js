@@ -1,10 +1,11 @@
+// eslint-disable-next-line no-undef
 db.createUser({
-  user: process.env.APP_MONGO_USER,
-  pwd: process.env.APP_MONGO_PASS,
+  user: 'admin',
+  pwd: 'password',
   roles: [
     {
       role: 'readWrite',
-      db: process.env.APP_MONGO_DB,
+      db: 'mydatabase',
     },
   ],
 });

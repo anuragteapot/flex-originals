@@ -8,7 +8,7 @@ services:
       context: .
       dockerfile: ./Docker/CLIENT/Dockerfile
     ports:
-      - "3333:3333"
+      - "${APP_CLIENT_PORT}:${APP_CLIENT_PORT}"
     links:
       - flexapi
     volumes:
@@ -22,7 +22,7 @@ services:
       context: .
       dockerfile: ./Docker/API/Dockerfile
     ports:
-      - "3000:3000"
+      - "${APP_API_PORT}:${APP_API_PORT}"
     links:
       - mongo
     volumes:
@@ -36,7 +36,7 @@ services:
       context: .
       dockerfile: ./Docker/CDN/Dockerfile
     ports:
-      - "3355:3355"
+      - "${APP_CDN_PORT}:${APP_CDN_PORT}"
     links:
       - mongo
     volumes:

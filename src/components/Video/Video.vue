@@ -797,7 +797,6 @@ export default {
     this.media.addEventListener('seeked', this.seeked);
   },
   beforeDestroy() {
-    this.pause();
     if (typeof window != 'undefined') {
       window.removeEventListener(
         'mousemove',
@@ -822,6 +821,7 @@ export default {
     this.media.removeEventListener('stalled', this.stalled);
     this.media.removeEventListener('seeking', this.seeking);
     this.media.removeEventListener('seeked', this.seeked);
+    this.pause();
   },
 };
 </script>

@@ -1,42 +1,44 @@
-version: '3'
+version: "3"
 services:
-  flexapi:
-    container_name: flexapi
-    image: flexapi
-    restart: always
-    build: 
-      context: .
-      dockerfile: ./Docker/API/Dockerfile 
-    ports:
-      - '3000:3000'
-    links:
-      - mongo
-    volumes:
-      - ./uploads:/usr/src/uploads
-    
-  flexcdn:
-    container_name: flexcdn
-    image: flexcdn
-    restart: always
-    build: 
-      context: .
-      dockerfile: ./Docker/CDN/Dockerfile 
-    ports:
-      - '3355:3355'
-    links:
-      - mongo
-    volumes:
-      - ./uploads:/usr/src/uploads
-    
   flexclient:
     container_name: flexclient
     image: flexclient
     restart: always
-    build: 
+    build:
       context: .
       dockerfile: ./Docker/CLIENT/Dockerfile
     ports:
-      - '3333:3333'
+      - "3333:3333"
+    links:
+      - flexapi
+    volumes:
+      - ./uploads:/usr/src/uploads
+
+  flexapi:
+    container_name: flexapi
+    image: flexapi
+    restart: always
+    build:
+      context: .
+      dockerfile: ./Docker/API/Dockerfile
+    ports:
+      - "3000:3000"
+    links:
+      - mongo
+    volumes:
+      - ./uploads:/usr/src/uploads
+
+  flexcdn:
+    container_name: flexcdn
+    image: flexcdn
+    restart: always
+    build:
+      context: .
+      dockerfile: ./Docker/CDN/Dockerfile
+    ports:
+      - "3355:3355"
+    links:
+      - mongo
     volumes:
       - ./uploads:/usr/src/uploads
 
@@ -44,7 +46,7 @@ services:
     container_name: mongo
     image: mongo
     ports:
-      - '27017:27017'
+      - "27017:27017"
     environment:
       - MONGO_INITDB_ROOT_USERNAME=${MONGO_ROOT_USERNAME}
       - MONGO_INITDB_ROOT_PASSWORD=${MONGO_ROOT_PASSWORD}

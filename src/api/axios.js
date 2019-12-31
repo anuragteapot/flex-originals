@@ -8,8 +8,12 @@ if (process.env && process) {
 
 const AXIOS_API = () => {
   let instance = null;
+  
   instance = axios.create({
-    baseURL: `http://localhost:${PORT}`,
+    baseURL:
+      process.env.NODE_ENV == 'production'
+        ? `http://flexapi:${PORT}`
+        : `http://localhost:${PORT}`,
   });
 
   instance.defaults.headers.common['authorization'] = `${webStorage.local.get(

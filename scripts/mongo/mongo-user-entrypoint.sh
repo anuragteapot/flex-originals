@@ -4,7 +4,7 @@ echo 'Creating application user and db.'
  
 
 mongo ${APP_MONGO_DB} \
-        --host ${MONGO_HOST} \
+        --host localhost \
         --port ${MONGO_PORT} \
         -u ${MONGO_ROOT_USER} \
         -p ${MONGO_ROOT_PASS} \

@@ -624,7 +624,7 @@ export default {
       this.isGrabbingSeekbar = true;
       this.time = this.media.currentTime =
         (event.layerX / this.seekbarWidth) * this.duration;
-      this.media.pause();
+     // this.media.pause();
     },
     moveSeekbar: function(event) {
       event.preventDefault();

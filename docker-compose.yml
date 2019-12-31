@@ -1,21 +1,44 @@
-version: '2'
+version: '3'
 services:
-  flexoriginals:
-    container_name: flexoriginals
-    image: flexoriginals
+  flexapi:
+    container_name: flexapi
+    image: flexapi
     restart: always
-    build: .
+    build: 
+      context: .
+      dockerfile: ./Docker/API/Dockerfile 
     ports:
       - '3000:3000'
-      - '3333:3333'
+    links:
+      - mongo
+    volumes:
+      - ./uploads:/usr/src/uploads
+    
+  flexcdn:
+    container_name: flexcdn
+    image: flexcdn
+    restart: always
+    build: 
+      context: .
+      dockerfile: ./Docker/CDN/Dockerfile 
+    ports:
       - '3355:3355'
     links:
       - mongo
     volumes:
       - ./uploads:/usr/src/uploads
-      - ./common:/usr/src/common
-      - ./server:/usr/src/server
-      - ./dist:/usr/src/dist
+    
+  flexclient:
+    container_name: flexclient
+    image: flexclient
+    restart: always
+    build: 
+      context: .
+      dockerfile: ./Docker/CLIENT/Dockerfile
+    ports:
+      - '3333:3333'
+    volumes:
+      - ./uploads:/usr/src/uploads
 
   mongo:
     container_name: mongo

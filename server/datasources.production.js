@@ -4,9 +4,9 @@ module.exports = {
   mongodb: {
     host: process.env.MONGO_HOST || 'mongo',
     port: process.env.MONGO_PORT || 27017,
-    database: process.env.APP_MONGO_DATABASE || 'flexoriginals',
-    user: process.env.APP_MONGO_DATABASE_USERNAME || 'root',
-    password: process.env.APP_MONGO_DATABASE_PASSWORD || '',
+    database: process.env.APP_MONGO_DB || 'flexoriginals',
+    user: process.env.APP_MONGO_USER || 'root',
+    password: process.env.APP_MONGO_PASS || '',
     name: 'mongodb',
     connector: 'mongodb',
     useNewUrlParser: true,

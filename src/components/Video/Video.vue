@@ -743,10 +743,6 @@ export default {
     },
     loadedmetadata() {
       this.duration = this.media.duration;
-      if (this.autoPlay) {
-        this.makeActive();
-        this.play();
-      }
     },
     handlePlay() {
       this.isPlaying = true;
@@ -762,10 +758,10 @@ export default {
       this.loading = true;
     },
     handleCanPlay() {
-  //    if (this.autoPlay) {
-   //     this.makeActive();
-    //    this.play();
-    //  }
+      if (this.autoPlay) {
+        this.makeActive();
+        this.play();
+      }
     },
   },
 

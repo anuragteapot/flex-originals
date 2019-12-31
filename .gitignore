@@ -2,6 +2,7 @@
 node_modules
 /dist
 /uploads/*
+/mongodb/*
 /scripts/backups/*
 /.cache/*
 

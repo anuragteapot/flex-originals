@@ -585,9 +585,10 @@ export default {
             // Show paused UI.
           });
       }
-    },
+    }, 
     pause: function() {
       this.media.pause();
+      this.isPlaying = false;
     },
     playOrPause: function() {
       if (

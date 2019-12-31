@@ -11,7 +11,7 @@ module.exports = {
     connector: 'mongodb',
     useNewUrlParser: true,
     connectionTimeout: 3000,
-    useUnifiedTopology: true,
+    useUnifiedTopology: false,
   },
   emailDs: {
     name: 'emailDs',

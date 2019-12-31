@@ -9,7 +9,7 @@
     "user": "root",
     "useNewUrlParser": true,
     "connector": "mongodb",
-    "useUnifiedTopology": true
+    "useUnifiedTopology": false
   },
   "emailDs": {
     "name": "emailDs",

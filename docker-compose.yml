@@ -57,4 +57,4 @@ services:
       - APP_MONGO_DB=${APP_MONGO_DB}
     volumes:
       - ./mongodb/data:/data/db
-      - "./scripts/:/docker-entrypoint-initdb.d/"
+      - "./scripts/mongo/:/docker-entrypoint-initdb.d/"

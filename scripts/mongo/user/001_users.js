@@ -1,10 +1,10 @@
 db.createUser({
-  user: 'admin',
-  pwd: 'password',
+  user: process.env.APP_MONGO_USER,
+  pwd: process.env.APP_MONGO_PASS,
   roles: [
     {
       role: 'readWrite',
-      db: 'mydatabase',
+      db: process.env.APP_MONGO_DB,
     },
   ],
 });

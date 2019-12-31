@@ -52,7 +52,7 @@ export default {
   },
   methods: {
     toggleMenu: function() {
-      if (this.appDrawer) {
+      if (this.appDrawer && window.localStorage.getItem('APP_DRAWER') == 'true') {
         this.$emit('toggleAppDrawer', false);
         this.appDrawer = false;
         window.localStorage.setItem('APP_DRAWER', false);

@@ -177,13 +177,13 @@ export default {
         this.settings = currentVideo.data.settings;
         this.video = currentVideo.data.video;
 
-        if (this.loggedUser.id) {
-          const follow = await this.$store.dispatch('GET_FOLLOW', {
-            followId: this.loggedUser.id,
-            channelId: this.user.id,
-          });
-          this.following = follow.data.SUCCESS;
-        }
+        // if (this.loggedUser.id) {
+        //   const follow = await this.$store.dispatch('GET_FOLLOW', {
+        //     followId: this.loggedUser.id,
+        //     channelId: this.user.id,
+        //   });
+        //   this.following = follow.data.SUCCESS;
+        // }
       } else {
         this.$router.push('/@error');
       }

@@ -86,9 +86,9 @@
       display: block;
       width: 80px;
       height: 80px;
-      background: $color-theme;
+      // background: $color-theme;
       border-radius: 50%;
-      animation: pulse-border 1300ms ease-out infinite;
+      // animation: pulse-border 1300ms ease-out infinite;
     }
 
     .video-play-button:after {
@@ -101,13 +101,13 @@
       display: block;
       width: 80px;
       height: 80px;
-      background: $color-theme;
+      // background: $color-theme;
       border-radius: 50%;
       transition: all 200ms;
     }
 
     .video-play-button:hover:after {
-      background-color: darken($color-theme, 10%);
+      background-color: rgba(0, 0, 0, 0.5);
     }
 
     .video-play-button img {
@@ -420,7 +420,7 @@
         padding: 0;
         width: 190px;
         height: 110px;
-        border: 2px solid black;
+        border: 1px solid rgba(0, 0, 0, 0.5);
         text-align: center;
 
         .time_preview_div {
@@ -437,7 +437,7 @@
             font-size: 12px;
             display: inline-block;
             padding: 2px 5px;
-            background-color: rgba(20, 19, 19, 0.7);
+            background-color: rgba(20, 19, 19, 0.5);
           }
         }
       }

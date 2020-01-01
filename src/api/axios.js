@@ -11,10 +11,18 @@ const AXIOS_API = () => {
   
   instance = axios.create({
     baseURL:
-      process.env.NODE_ENV == 'production'
-        ? `http://flexapi:${PORT}`
-        : `http://localhost:${PORT}`,
+      process.env.NODE_ENV === 'production' ? '' : `http://localhost:${PORT}`,
   });
+  
+//  if (process.env.NODE_ENV === 'production') {
+//     instance = axios.create({
+//     //baseURL: `http://localhost:3000`,
+//     });
+//   } else {
+//     instance = axios.create({
+//       baseURL: `http://localhost:${PORT}`,
+//     });
+//   }
 
   instance.defaults.headers.common['authorization'] = `${webStorage.local.get(
     '$accessToken',

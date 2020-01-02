@@ -53,7 +53,7 @@
 -   👌 **[Preview thumbnails](#preview-thumbnails)** - support for displaying preview thumbnails 
 -   💁‍♀️ **SASS** - to include in your build processes
 
-**Road Map**
+# Road Map
 
 1. Improve UI
 2. Improve Server
@@ -63,7 +63,7 @@
 6. Add video and audio processing.
 7. Make distributed server.
 
-## Project Setup & Scripts
+# Project Setup & Scripts
 
 1. ffmpeg
 2. Ngnix Server

@@ -25,14 +25,13 @@ export default class handleError {
     }
 
     let errorData = {};
-    let statusCode = 500;
+    let statusCode = error.response.status;
 
     try {
       errorData = {
         data: error.response.data.error.message,
         color: 'error',
       };
-      statusCode = error.response.status;
     } catch (err) {
       errorData = {
         data: 'Something went wrong please try again.',
@@ -45,8 +44,12 @@ export default class handleError {
         break;
       case 404:
         break;
+      case 504:
+        errorData.data = 'Please wait.'
+        errorData.color = '';
+        break;
       case 401:
-        this.commit(types.SHOW_MODAL, { state: true, type: 'MLogin' });
+      //  this.commit(types.SHOW_MODAL, { state: true, type: 'MLogin' });
         this.commit(types.SET_USER, {});
         this.setUser({});
         break;

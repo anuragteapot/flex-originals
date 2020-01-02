@@ -3,36 +3,26 @@
     <div class="inner">
       <p>
         {{
-          musicPlaylist[currentSong]
-            ? musicPlaylist[currentSong].title
+          this.currentSong.audio
+            ? this.currentSong.audio.audioMeta.originalname
             : 'Loading...'
         }}
       </p>
       <br />
+      <i @click="prevSong()" class="fa fa-step-backward" aria-hidden="true"></i>
       <i
-        :disabled="!currentSong"
-        @click="prevSong()"
-        class="fa fa-step-backward"
-        aria-hidden="true"
-      ></i>
-      <i
-        @click="playAudio()"
-        v-show="currentlyPlaying"
+        @click="playOrPauseAudio()"
+        v-show="isPlaying"
         class="fa fa-pause"
         aria-hidden="true"
       ></i>
       <i
-        @click="playAudio()"
-        v-show="!currentlyPlaying"
+        @click="playOrPauseAudio()"
+        v-show="!isPlaying"
         class="fa fa-play"
         aria-hidden="true"
       ></i>
-      <i
-        :disabled="currentSong == musicPlaylist.length - 1"
-        @click="nextSong()"
-        class="fa fa-step-forward"
-        aria-hidden="true"
-      ></i>
+      <i @click="nextSong()" class="fa fa-step-forward" aria-hidden="true"></i>
       <div class="slider_container">
         <span class="time">{{ currentTime }}</span>
         <div
@@ -81,18 +71,15 @@ export default {
   name: 'lazy-audio-player',
   data() {
     return {
-      imgLoaded: false,
-      currentlyPlaying: false,
-      currentlyStopped: false,
       currentTime: '00:00',
-      checkingCurrentPositionInTrack: '',
       trackDuration: '00:00',
       currentProgressBar: 0,
+      isPlaying: false,
+      isLoading: true,
       volume: 10,
       bufferPercent: 0,
       isPlaylistActive: false,
-      currentSong: 0,
-      audioFile: '',
+      currentSong: {},
     };
   },
   watch: {
@@ -100,23 +87,12 @@ export default {
       this.audio.volume = val / 10;
     },
     $route() {
-      this.changeSong();
-    },
-    musicPlaylist() {
-      // if (val.length > 0) {
-      // this.playAudio();
-      // this.audio.loop = false;
-      // }
+      this.loadSong();
     },
   },
   computed: {
     search() {
       return this.$store.state.search;
-    },
-    musicPlaylist: function() {
-      return this.$store.state.content.audio.filter(
-        item => item.id == this.$route.query.a,
-      );
     },
     audio() {
       return new Audio();
@@ -155,87 +131,35 @@ export default {
         this.bufferPercent = 100;
       }
     },
-    togglePlaylist: function() {
-      this.isPlaylistActive = !this.isPlaylistActive;
-    },
     nextSong: function() {
-      if (this.currentSong < this.musicPlaylist.length - 1)
-        this.changeSong(this.currentSong + 1);
+      this.$emit('nextSong');
     },
     prevSong: function() {
-      if (this.currentSong > 0) this.changeSong(this.currentSong - 1);
+      this.$emit('prevSong');
     },
-    changeSong: function(index) {
-      const wasPlaying = this.currentlyPlaying;
-      this.coverLoaded = false;
-      if (index !== undefined) {
-        this.stopAudio();
-        this.currentSong = index;
-      }
-
-      this.audioFile = this.$utils.getUrl(
-        this.musicPlaylist[this.currentSong].audioFile,
-        'audio',
-      );
-
-      this.audio.src = this.audioFile;
-      this.audio.volume = this.volume / 10;
-      if (wasPlaying) {
-        this.playAudio();
-      }
-    },
-    isCurrentSong: function(index) {
-      if (this.currentSong == index) {
-        return true;
-      }
-      return false;
-    },
-    getCurrentSong: function(currentSong) {
-      return this.$utils.getUrl(
-        this.musicPlaylist[currentSong].audioFile,
-        'audio',
-      );
-    },
-    playAudio: function() {
-      if (
-        this.currentlyStopped == true &&
-        this.currentSong + 1 == this.musicPlaylist.length
-      ) {
-        this.currentSong = 0;
-        this.changeSong();
-      } else {
-        this.audioFile = this.$utils.getUrl(
-          this.musicPlaylist[this.currentSong].audioFile,
-          'audio',
-        );
-
-        this.audio.src = this.audioFile;
-        this.audio.volume = this.volume / 10;
-      }
-      this.currentlyStopped = false;
-    },
-    stopAudio: function() {
+    loadSong: async function() {
       this.audio.pause();
-      this.currentlyPlaying = false;
-      this.pausedMusic();
+      const audio = await this.$store.dispatch('GET_AUDIO', {
+        id: this.$route.query.a,
+      });
+
+      this.currentSong = audio.data;
+      this.audio.src = this.$utils.getUrl(
+        this.currentSong.audio.audioFile,
+        'audio',
+      );
+
+      this.audio.volume = this.volume / 10;
+    },
+    playOrPauseAudio: function() {
+      if (this.audio.paused) {
+        this.audio.play();
+      } else {
+        this.audio.pause();
+      }
     },
     handleEnded: function() {
-      if (this.currentSong + 1 == this.musicPlaylist.length) {
-        this.stopAudio();
-        this.currentlyPlaying = false;
-        this.currentlyStopped = true;
-      } else {
-        this.currentlyPlaying = false;
-        this.currentSong++;
-        this.changeSong();
-        this.playAudio();
-      }
-    },
-    onImageLoaded: function() {
-      this.imgLoaded = true;
-    },
-    pausedMusic: function() {
-      clearTimeout(this.checkingCurrentPositionInTrack);
+      this.audio.pause();
     },
     currTime() {
       let curmins = Math.floor(this.audio.currentTime / 60);
@@ -266,7 +190,7 @@ export default {
     halfTime: new utils().debounce(async function() {
       await this.$store.dispatch(
         'UPDATE_VIEWS_AUDIO',
-        this.musicPlaylist[this.currentSong].id,
+        this.currentSong.audio.id,
       );
     }, 2000),
     handleProgress() {
@@ -288,7 +212,7 @@ export default {
       if (this.search != '') return false;
       if (event.keyCode == 32) {
         event.preventDefault();
-        this.playAudio();
+        this.playOrPauseAudio();
       } else if (event.keyCode == 39) {
         event.preventDefault();
         this.nextSong();
@@ -297,9 +221,14 @@ export default {
         this.prevSong();
       }
     },
+    handlePlay() {
+      this.isPlaying = true;
+    },
+    handlePause() {
+      this.isPlaying = false;
+    },
     handleCanPlay() {
       if (this.audio.paused) {
-        this.currentlyPlaying = true;
         this.audio.play();
       }
     },
@@ -309,13 +238,7 @@ export default {
       this.$router.push('/app/@error');
     }
 
-    this.playAudio();
-
-    // const audio = await this.$store.dispatch('GET_AUDIO', {
-    //   id: this.$route.query.a,
-    // });
-
-    // console.log(audio);
+    this.loadSong();
 
     if (typeof window !== 'undefined') {
       window.addEventListener('keydown', this.detectKeypress);
@@ -323,6 +246,8 @@ export default {
     this.audio.addEventListener('ended', this.handleEnded);
     this.audio.addEventListener('timeupdate', this.currTime);
     this.audio.addEventListener('progress', this.updateBuffer);
+    this.audio.addEventListener('play', this.handlePlay);
+    this.audio.addEventListener('pause', this.handlePause);
     this.audio.addEventListener('canplay', this.handleCanPlay);
     this.audio.addEventListener('loadedmetadata', this.loadedmetadata);
     this.audio.addEventListener('timeupdate', this.handleProgress);
@@ -333,17 +258,18 @@ export default {
     },
   },
   beforeDestroy: function() {
-    this.stopAudio();
+    this.audio.pause();
     if (typeof window !== 'undefined') {
       window.removeEventListener('keydown', this.detectKeypress);
     }
     this.audio.removeEventListener('ended', this.handleEnded);
+    this.audio.removeEventListener('pause', this.handlePause);
+    this.audio.removeEventListener('play', this.handlePlay);
     this.audio.removeEventListener('timeupdate', this.currTime);
     this.audio.removeEventListener('progress', this.updateBuffer);
     this.audio.removeEventListener('canplay', this.handleCanPlay);
     this.audio.removeEventListener('loadedmetadata', this.loadedmetadata);
     this.audio.removeEventListener('timeupdate', this.handleProgress);
-    clearTimeout(this.checkingCurrentPositionInTrack);
   },
 };
 </script>

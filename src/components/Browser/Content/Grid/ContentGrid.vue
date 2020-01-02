@@ -69,7 +69,7 @@
           hover
         ></video-thumb>
       </div>
-      <h1 v-if="content.audio.length > 0">Music</h1>
+      <!-- <h1 v-if="content.audio.length > 0">Music</h1>
       <div class="fo-content__container" v-if="content.audio.length > 0">
         <music-thumb
           v-for="item in content.audio"
@@ -78,7 +78,7 @@
           :item="item"
           hover
         ></music-thumb>
-      </div>
+      </div> -->
     </div>
   </div>
 </template>

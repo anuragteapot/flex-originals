@@ -11,17 +11,47 @@
 
 <a href="https://youtu.be/z9oHNzA4pTk">Demo</a>
 
-<p align="center">
-  <img width="100%"  src="docs/images/3.jpg">
-</p>
-
 <h2 align="center">Architecture of project</h2>
-
 <p align="center">
   <img width="100%"  src="docs/images/project.png">
 </p>
 
+
+<p align="left">
+  <img width="100%"  src="docs/images/6.png">
+</p>
+
+<p align="left">
+  <img width="100%"  src="docs/images/5.png">
+</p>
+
+<p align="left">
+  <img width="100%"  src="docs/images/7.png">
+</p>
+
 **Flex Originals** is an **opensource** project. Contributions are welcome
+
+
+# Features
+ 
+-   🤟 **No Bootstrap Components Frameworks** - Written in **Vue.js** for client and **React.js** for admin and own design scss styles.
+-   📼 **Video & Audio & Image** - Share your video, audio and images.
+-   💪 **Accessible** - full support for VTT captions and screen readers
+-   🔧 **[Theme](#html)** - Dark and Light theme.
+-   😎 **Clean HTML** - uses the _right_ elements. `<input type="range">` for volume and `<progress>` for progress and well, `<button>`s for buttons. There's no
+    `<span>` or `<a href="#">` button hacks
+-   📱 **Responsive** - works with any screen size
+-   💵 **[Monetization](#ads)** - make money from your videos
+-   📹 **[Streaming](#demos)** -  streaming playback
+-   🎛 **[API](#api)** - toggle playback, volume, seeking, and more through a standardized API
+-   🔎 **[Fullscreen](#fullscreen)** - supports native fullscreen with fallback to "full window" modes
+-   ⌨️ **[Shortcuts](#shortcuts)** - supports keyboard shortcuts
+-   🖥 **Picture-in-Picture** - supports picture-in-picture mode
+-   📱 **Playsinline** - supports the `playsinline` attribute
+-   🏎 **Speed controls** - adjust speed on the fly
+-   📖 **Multiple captions** - support for multiple caption tracks
+-   👌 **[Preview thumbnails](#preview-thumbnails)** - support for displaying preview thumbnails 
+-   💁‍♀️ **SASS** - to include in your build processes
 
 **Road Map**
 

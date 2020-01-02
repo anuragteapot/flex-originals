@@ -102,11 +102,11 @@ export default {
     $route() {
       this.changeSong();
     },
-    musicPlaylist(val) {
-      if (val.length > 0) {
-        this.changeSong();
-        this.audio.loop = false;
-      }
+    musicPlaylist() {
+      // if (val.length > 0) {
+      // this.playAudio();
+      // this.audio.loop = false;
+      // }
     },
   },
   computed: {
@@ -203,12 +203,14 @@ export default {
       ) {
         this.currentSong = 0;
         this.changeSong();
-      }
-      if (!this.currentlyPlaying) {
-        this.currentlyPlaying = true;
-        this.audio.play();
       } else {
-        this.stopAudio();
+        this.audioFile = this.$utils.getUrl(
+          this.musicPlaylist[this.currentSong].audioFile,
+          'audio',
+        );
+
+        this.audio.src = this.audioFile;
+        this.audio.volume = this.volume / 10;
       }
       this.currentlyStopped = false;
     },
@@ -250,8 +252,6 @@ export default {
       this.currentTime = curmins + ':' + cursecs;
     },
     loadedmetadata() {
-      this.currentlyPlaying = true;
-      this.audio.play();
       let durmins = Math.floor(this.audio.duration / 60);
       let dursecs = Math.floor(this.audio.duration - durmins * 60);
 
@@ -297,11 +297,19 @@ export default {
         this.prevSong();
       }
     },
+    handleCanPlay() {
+      if (this.audio.paused) {
+        this.currentlyPlaying = true;
+        this.audio.play();
+      }
+    },
   },
   async mounted() {
     if (!this.$route.query.a) {
       this.$router.push('/app/@error');
     }
+
+    this.playAudio();
 
     // const audio = await this.$store.dispatch('GET_AUDIO', {
     //   id: this.$route.query.a,
@@ -315,6 +323,7 @@ export default {
     this.audio.addEventListener('ended', this.handleEnded);
     this.audio.addEventListener('timeupdate', this.currTime);
     this.audio.addEventListener('progress', this.updateBuffer);
+    this.audio.addEventListener('canplay', this.handleCanPlay);
     this.audio.addEventListener('loadedmetadata', this.loadedmetadata);
     this.audio.addEventListener('timeupdate', this.handleProgress);
   },
@@ -331,6 +340,7 @@ export default {
     this.audio.removeEventListener('ended', this.handleEnded);
     this.audio.removeEventListener('timeupdate', this.currTime);
     this.audio.removeEventListener('progress', this.updateBuffer);
+    this.audio.removeEventListener('canplay', this.handleCanPlay);
     this.audio.removeEventListener('loadedmetadata', this.loadedmetadata);
     this.audio.removeEventListener('timeupdate', this.handleProgress);
     clearTimeout(this.checkingCurrentPositionInTrack);

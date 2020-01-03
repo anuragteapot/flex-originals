@@ -16,15 +16,6 @@
   <img width="100%"  src="docs/images/project.png">
 </p>
 
-
-<p align="left">
-  <img width="100%"  src="docs/images/6.png">
-</p>
-
-<p align="left">
-  <img width="100%"  src="docs/images/5.png">
-</p>
-
 <p align="left">
   <img width="100%"  src="docs/images/7.png">
 </p>

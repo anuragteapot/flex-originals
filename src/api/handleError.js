@@ -49,7 +49,7 @@ export default class handleError {
         errorData.color = null;
         break;
       case 401:
-        this.commit(types.SHOW_MODAL, { state: true, type: 'MLogin' });
+      //  this.commit(types.SHOW_MODAL, { state: true, type: 'MLogin' });
         this.commit(types.SET_USER, {});
         this.setUser({});
         break;

@@ -15,7 +15,7 @@ const AXIOS_API_SERVER = () => {
         ? `http://flexapi:${PORT}`
         : `http://localhost:${PORT}`,
   });
-
+  
   instance.defaults.headers.common['authorization'] = `${webStorage.local.get(
     '$accessToken',
   )}`;

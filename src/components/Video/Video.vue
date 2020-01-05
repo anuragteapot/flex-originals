@@ -24,10 +24,16 @@
       v-show="!isPlaying"
       @click="playOrPause"
     ></div>
+
     <div class="fo-video-player-load-play" v-show="!isPlaying && !loading">
-      <a class="video-play-button" @click="playOrPause">
-        <span></span>
-      </a>
+      <fo-svg-play
+        v-if="!isPlaying"
+        width="100px"
+        shadow="none"
+        cursor="pointer"
+        height="100px"
+        @click="playOrPause"
+      ></fo-svg-play>
     </div>
     <div :class="`fo-video-loader`" v-show="loading">
       <svg id="catchup-spinner" viewBox="25 25 50 50">
@@ -585,7 +591,7 @@ export default {
             // Show paused UI.
           });
       }
-    }, 
+    },
     pause: function() {
       this.media.pause();
       this.isPlaying = false;
@@ -625,7 +631,7 @@ export default {
       this.isGrabbingSeekbar = true;
       this.time = this.media.currentTime =
         (event.layerX / this.seekbarWidth) * this.duration;
-     // this.media.pause();
+      // this.media.pause();
     },
     moveSeekbar: function(event) {
       event.preventDefault();

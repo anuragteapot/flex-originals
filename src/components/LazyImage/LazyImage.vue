@@ -1,14 +1,16 @@
 <template>
   <div
-    :class="
-      `fo-image fo-background ${hover ? 'hover' : 'not'} ${
-        active ? 'active' : ''
-      }`
-    "
+    :class="`fo-image ${hover ? 'hover' : 'not'} ${active ? 'active' : ''}`"
     ref="lazyBackground"
     @click="$emit('click')"
-    :alt="alt"
   >
+    <img
+      v-show="!isLoading"
+      ref="imgLazy"
+      width="100%"
+      height="100%"
+      :alt="alt"
+    />
     <div v-show="isLoading && !lazySrc" class="timeline-item">
       <div class="animated-background"></div>
     </div>
@@ -26,7 +28,10 @@ export default {
     };
   },
   props: {
-    alt: String,
+    alt: {
+      type: String,
+      default: 'Loading...',
+    },
     contain: Boolean,
     src: {
       type: [String, Object],
@@ -67,14 +72,16 @@ export default {
       if (!(this.normalisedSrc.src || this.normalisedSrc.lazySrc)) return [];
       const src = this.isLoading ? this.normalisedSrc.lazySrc : this.currentSrc;
       this.$refs.lazyBackground.classList.remove('fo-background');
-      this.$refs.lazyBackground.style.backgroundImage = `url("${src}")`;
+      this.$refs.imgLazy.src = src;
+      // this.$refs.lazyBackground.style.backgroundImage = `url("${src}")`;
     },
     init() {
       if (this.normalisedSrc.lazySrc) {
         const lazyImg = new Image();
         lazyImg.src = this.normalisedSrc.lazySrc;
         this.pollForSize(lazyImg, null);
-        this.$refs.lazyBackground.style.backgroundImage = `url("${this.normalisedSrc.lazySrc}")`;
+        this.$refs.imgLazy.src = this.normalisedSrc.lazySrc;
+        // this.$refs.lazyBackground.style.backgroundImage = `url("${this.normalisedSrc.lazySrc}")`;
       }
 
       if (this.normalisedSrc.src) this.loadImage();

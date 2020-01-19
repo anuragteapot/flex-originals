@@ -55,3 +55,4 @@ services:
     volumes:
       - ./scripts/mongo/user/001_users.js:/docker-entrypoint-initdb.d/001_users.js:ro
       - ./mongodb/data:/data/db
+      - ./mongodb/mongodb_config:/data/configdb

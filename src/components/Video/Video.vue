@@ -752,6 +752,7 @@ export default {
     },
     handlePlay() {
       this.isPlaying = true;
+      this.loop();
     },
     handlePause() {
       this.isPlaying = false;

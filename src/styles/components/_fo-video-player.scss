@@ -119,21 +119,20 @@
   .fo-video-player__seekbar-wrap {
     cursor: pointer;
     position: relative;
-    padding: 5px 0;
-    top: -10px;
+    top: -15px;
 
     &.show {
       padding: 0;
     }
 
     &:hover {
-      top: -12px;
+      top: -16px;
       transition: top 0.2s;
 
       .fo-video-player__seekbar-current,
       .fo-video-player__seekbar-back,
       .fo-video-player__buffer-back {
-        height: 6.5px;
+        height: 5px;
         transition: height 0.2s;
       }
     }

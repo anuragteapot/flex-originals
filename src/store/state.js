@@ -53,7 +53,7 @@ export default {
   // Is mobile
   isMobile: false,
   // Token
-  token: '',
+  authorization: '',
   // The Search Query
   search: '',
   player: {

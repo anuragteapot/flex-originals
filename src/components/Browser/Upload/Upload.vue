@@ -354,13 +354,13 @@ export default {
 
         this.statusMessage = 'Processing Video';
 
-      //  try {
-     //     await this.$store.dispatch('COMPRESS_VIDEO', {
-      //      id: uploaded.data.video.id,
-     //     });
-     //   } catch (err) {
-     //     console.log(err);
-       // }
+       try {
+          await this.$store.dispatch('COMPRESS_VIDEO', {
+            id: uploaded.data.video.id,
+          });
+        } catch (err) {
+          console.log(err);
+       }
 
         const videoThumb = await this.$store.dispatch('GENERATE_THUMBNAILS', {
           id: uploaded.data.video.id,

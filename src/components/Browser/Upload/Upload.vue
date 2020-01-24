@@ -551,6 +551,13 @@ export default {
       }
     },
   },
+  mounted(){
+         const data = {
+          data: 'Upload small size videos.',
+          color: 'info',
+        };
+        this.$store.commit(types.SHOW_SNACKBAR, data);
+  },
   async beforeMount() {
     try {
       const storage = await this.$store.dispatch(

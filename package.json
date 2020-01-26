@@ -50,7 +50,7 @@
     "randomstring": "^1.1.5",
     "serve-favicon": "^2.0.1",
     "strong-error-handler": "^3.0.0",
-    "sw-precache-webpack-plugin": "^0.11.5",
+    "sw-precache-webpack-plugin": "^1.0.0",
     "underscore": "^1.9.1",
     "url": "^0.11.0",
     "vue": "^2.6.10",

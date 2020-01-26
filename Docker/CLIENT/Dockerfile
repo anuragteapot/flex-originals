@@ -1,4 +1,4 @@
-FROM node:10
+FROM node:12
 
 WORKDIR /usr/src
 
@@ -11,7 +11,6 @@ RUN apt-get -y upgrade
 RUN npm install
 
 COPY . .
-
 
 EXPOSE 3333
 

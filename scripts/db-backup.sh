@@ -25,7 +25,7 @@ if [ $? = 0 ]; then
   echo ''
   printf "Starting Backup! -> ${command_type[0]}\n"
   echo ''
-  sudo docker exec -i ${command_type[0]} sh -c 'mongodump --archive' > $SCRIPTPATH/backups/$DATE/db.dump
+  sudo docker exec -i ${command_type[0]} sh -c 'mongodump --archive --host 0.0.0.0 --port 27017 -u "$APP_MONGO_USER" -p "$APP_MONGO_PASS" -d "$APP_MONGO_DB"' > $SCRIPTPATH/backups/$DATE/db.dump
   echo
   printf "Backup Successfully Done! -> ${command_type[0]} -> ${SCRIPTPATH}/backups/${DATE}/db.dump\n"
   echo ''

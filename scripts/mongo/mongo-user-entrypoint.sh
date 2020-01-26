@@ -1,12 +1,18 @@
-#!/usr/bin/env bash
+#!/bin/bash
+set -e;
+echo '-------------------------Creating new user.---------------------'
 
-echo 'Creating application user and db.'
- 
+# a default non-root role
+MONGO_NON_ROOT_ROLE="${MONGO_NON_ROOT_ROLE:-readWrite}"
 
-mongo ${APP_MONGO_DB} \
-        --host localhost \
-        --port ${MONGO_PORT} \
-        -u ${MONGO_ROOT_USER} \
-        -p ${MONGO_ROOT_PASS} \
-        --authenticationDatabase admin \
-        --eval "db.createUser({user: '${APP_MONGO_USER}', pwd: '${APP_MONGO_PASS}', roles:[{role:'dbOwner', db: '${APP_MONGO_DB}'}]});"
+if [ -n "${APP_MONGO_USER:-}" ] && [ -n "${APP_MONGO_PASS:-}" ]; then
+	"${mongo[@]}" "$APP_MONGO_DB" <<-EOJS
+		db.createUser({
+			user: $(_js_escape "$APP_MONGO_USER"),
+			pwd: $(_js_escape "$APP_MONGO_PASS"),
+			roles: [ { role: $(_js_escape "$MONGO_NON_ROOT_ROLE"), db: $(_js_escape "$APP_MONGO_DB") } ]
+			})
+	EOJS
+else
+	# print warning or kill temporary mongo and exit non-zero
+fi

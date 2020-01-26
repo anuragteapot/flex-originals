@@ -303,6 +303,7 @@ module.exports = function(Action) {
           const filePath = Buffer.from(compressVideo).toString('base64');
           video.videoFile = filePath;
           video.videoDataJson = videoDataJson;
+          video.published = true;
 
           video.videoMeta.quality.push({
             QUALITY: '720',

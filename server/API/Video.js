@@ -450,7 +450,7 @@ module.exports = class VideoProcessing {
       if (videoDataJson.streams[0]) {
         if (
           videoDataJson.streams[0].tags.rotate ||
-          videoDataJson.streams[0].side_data_list
+          videoDataJson.streams[0].side_data_list || (videoDataJson.streams[0].width < videoDataJson.streams[0].height)
         ) {
           rotate = true;
         }

@@ -44,16 +44,19 @@ services:
 
   mongo:
     container_name: mongo
+    env_file: .env
     environment:
-      MONGO_INITDB_DATABASE: ${APP_MONGO_DB}
-      MONGO_INITDB_ROOT_PASSWORD: ${APP_MONGO_PASS}
-      MONGO_INITDB_ROOT_USERNAME: ${APP_MONGO_USER}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_INITDB_ROOT_PASSWORD}
+      MONGO_INITDB_ROOT_USERNAME: ${MONGO_INITDB_ROOT_USERNAME}
+      MONGO_NON_ROOT_USERNAME: ${MONGO_NON_ROOT_USERNAME}
+      MONGO_NON_ROOT_PASSWORD: ${MONGO_NON_ROOT_PASSWORD}
+      MONGO_INITDB_DATABASE: ${MONGO_INITDB_DATABASE}
     image: mongo
     ports:
       - "27017:27017"
     restart: always
     volumes:
-      - ./scripts/mongo/mongo-user-entrypoint.sh:/docker-entrypoint-initdb.d
- #     - ./scripts/mongo/user/001_users.js:/docker-entrypoint-initdb.d/001_users.js:ro
-      - ./mongodb/data:/data/db
-      - ./mongodb/mongodb_config:/data/configdb
+      - ./scripts/mongo/mongo-user-entrypoint.sh:/docker-entrypoint-initdb.d/
+      # - ./scripts/mongo/user/001_users.js:/docker-entrypoint-initdb.d/001_users.js:ro
+      # - ./mongodb/data:/data/db
+      # - ./mongodb/mongodb_config:/data/configdb

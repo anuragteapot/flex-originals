@@ -237,15 +237,13 @@
 
           .video__comment__box__settings {
             border: 1px solid $border-color;
-            border-top:0;
+            border-top: 0;
+            display: flex;
+            padding: 2px;
             
             .left {
               width: 50%;
             }
-
-            display: flex;
-            padding: 2px;
-            border-top: 1px solid $border-color;
 
             .right {
               padding: 5px;

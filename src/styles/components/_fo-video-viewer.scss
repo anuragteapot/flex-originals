@@ -104,7 +104,6 @@
 
       .video__comment {
         display: block;
-        border: 1px solid $border-color;
         height: 100%;
 
         .video__comment__inner {
@@ -114,7 +113,7 @@
           .video__profile__action {
             display: flex;
             padding: 5px;
-            border-bottom: 1px solid $border-color;
+            border: 1px solid $border-color;
 
             .left {
               .channel__avater {
@@ -160,6 +159,8 @@
             min-height: 500px;
             max-height: 500px;
             overflow-y: scroll;
+            border: 1px solid $border-color;
+            border-top: 0;
             z-index: -5;
 
             .settings {
@@ -235,6 +236,9 @@
           }
 
           .video__comment__box__settings {
+            border: 1px solid $border-color;
+            border-top:0;
+            
             .left {
               width: 50%;
             }
@@ -257,7 +261,8 @@
 
           .video__comment__box {
             display: flex;
-            border-top: 1px solid $border-color;
+            border: 1px solid $border-color;
+            border-top: 0;
 
             .left {
               width: 80%;

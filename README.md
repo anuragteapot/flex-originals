@@ -11,7 +11,7 @@
 
 <a href="https://youtu.be/z9oHNzA4pTk">Demo</a>
 
-<h2 align="center">Architecture of project</h2>
+<h2 align="center">Microservice Architecture of project</h2>
 <p align="center">
   <img width="100%"  src="docs/images/project.png">
 </p>

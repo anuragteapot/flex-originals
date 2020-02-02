@@ -3,6 +3,7 @@ node_modules
 /dist
 /uploads/*
 /mongodb/*
+/redis/*
 /scripts/backups/*
 /.cache/*
 

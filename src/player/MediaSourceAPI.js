@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 function debounce(func, wait, immediate) {
   var timeout;
   return function() {
@@ -32,15 +33,15 @@ class MediaSourceApi {
 
   init() {
     if (
-      "MediaSource" in window &&
+      'MediaSource' in window &&
       MediaSource.isTypeSupported(this.mimeCodec)
     ) {
       this.mediaSource = new MediaSource();
       this.video.src = URL.createObjectURL(this.mediaSource);
-      this.mediaSource.addEventListener("sourceopen", this.sourceOpen);
+      this.mediaSource.addEventListener('sourceopen', this.sourceOpen);
     } else {
-      console.warn("Unsupported MIME type or codec: ", this.mimeCodec);
-      console.warn("Playing with default HTML5 Video Player");
+      console.warn('Unsupported MIME type or codec: ', this.mimeCodec);
+      console.warn('Playing with default HTML5 Video Player');
       this.video.src = this.assetURL;
     }
     return this.video;
@@ -49,8 +50,8 @@ class MediaSourceApi {
   sourceOpen = () => {
     // console.log(this.mediaSource);
     this.sourceBuffer = this.mediaSource.addSourceBuffer(this.mimeCodec);
-    this.sourceBuffer.addEventListener("update", this.sourceOnUpdate);
-    this.sourceBuffer.addEventListener("updateend", this.sourceOnUpdateEnd);
+    this.sourceBuffer.addEventListener('update', this.sourceOnUpdate);
+    this.sourceBuffer.addEventListener('updateend', this.sourceOnUpdateEnd);
 
     this.getFileLength(this.assetURL, fileLength => {
       this.totalSegments = (fileLength / 1024 / 1024).toFixed(0);
@@ -60,12 +61,12 @@ class MediaSourceApi {
       }
 
       this.segmentLength = Math.round(fileLength / this.totalSegments);
-      this.fetchRange(assetURL, 0, this.segmentLength, this.appendSegment);
+      this.fetchRange(this.assetURL, 0, this.segmentLength, this.appendSegment);
       this.requestedSegments[0] = true;
 
-      this.video.addEventListener("timeupdate", this.checkBuffer);
+      this.video.addEventListener('timeupdate', this.checkBuffer);
 
-      this.video.addEventListener("canplay", () => {
+      this.video.addEventListener('canplay', () => {
         this.segmentDuration = this.video.duration / this.totalSegments;
 
         if (this.autoPlay) {
@@ -85,9 +86,9 @@ class MediaSourceApi {
         }
       });
 
-      this.video.addEventListener("seeking", debounce(this.handleSeek, 500));
-      this.video.addEventListener("seeked", this.onSeeked);
-      this.video.addEventListener("loadeddata", this.onLoadedData);
+      this.video.addEventListener('seeking', debounce(this.handleSeek, 500));
+      this.video.addEventListener('seeked', this.onSeeked);
+      this.video.addEventListener('loadeddata', this.onLoadedData);
     });
   };
 
@@ -109,9 +110,9 @@ class MediaSourceApi {
   getFileLength = (url, cb) => {
     return new Promise((resolve, reject) => {
       const xhr = new XMLHttpRequest();
-      xhr.open("head", url);
+      xhr.open('head', url);
       xhr.onload = () => {
-        resolve(cb(xhr.getResponseHeader("content-length")));
+        resolve(cb(xhr.getResponseHeader('content-length')));
       };
       xhr.send();
     });
@@ -120,9 +121,9 @@ class MediaSourceApi {
   fetchRange = (url, start, end, cb) => {
     return new Promise((resolve, reject) => {
       const xhr = new XMLHttpRequest();
-      xhr.open("get", url);
-      xhr.responseType = "arraybuffer";
-      xhr.setRequestHeader("Range", "bytes=" + start + "-" + end);
+      xhr.open('get', url);
+      xhr.responseType = 'arraybuffer';
+      xhr.setRequestHeader('Range', 'bytes=' + start + '-' + end);
       xhr.onload = () => {
         this.bytesFetched += end - start + 1;
         resolve(cb(xhr.response));
@@ -139,14 +140,14 @@ class MediaSourceApi {
     const nextSegment = this.getNextSegment();
     if (nextSegment == this.totalSegments && this.haveAllSegments()) {
       this.mediaSource.endOfStream();
-      this.video.removeEventListener("timeupdate", this.checkBuffer);
+      this.video.removeEventListener('timeupdate', this.checkBuffer);
     } else if (this.shouldFetchNextSegment(nextSegment)) {
       this.requestedSegments[nextSegment] = true;
       this.fetchRange(
         this.assetURL,
         this.bytesFetched,
         this.bytesFetched + this.segmentLength,
-        this.appendSegment
+        this.appendSegment,
       );
     }
   };
@@ -154,9 +155,9 @@ class MediaSourceApi {
   handleSeek = async () => {
     this.seeking = true;
     const nextSegment = this.getNextSegment();
-    if (nextSegment === this.totalSegments && haveAllSegments()) {
+    if (nextSegment === this.totalSegments && this.haveAllSegments()) {
       this.mediaSource.endOfStream();
-      this.video.removeEventListener("timeupdate", this.checkBuffer);
+      this.video.removeEventListener('timeupdate', this.checkBuffer);
     } else {
       for (let segment = 1; segment < nextSegment; segment++) {
         if (this.shouldFetchNextSegment(segment)) {
@@ -166,7 +167,7 @@ class MediaSourceApi {
             this.assetURL,
             this.bytesFetched,
             this.bytesFetched + this.segmentLength,
-            this.appendSegment
+            this.appendSegment,
           );
         }
       }

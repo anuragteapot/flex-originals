@@ -1,3 +1,5 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable no-undef */
 const FfmpegCommand = require('fluent-ffmpeg');
 const spawn = require('child_process').spawn;
 const exec = require('child_process').exec;
@@ -450,7 +452,8 @@ module.exports = class VideoProcessing {
       if (videoDataJson.streams[0]) {
         if (
           videoDataJson.streams[0].tags.rotate ||
-          videoDataJson.streams[0].side_data_list || (videoDataJson.streams[0].width < videoDataJson.streams[0].height)
+          videoDataJson.streams[0].side_data_list ||
+          videoDataJson.streams[0].width < videoDataJson.streams[0].height
         ) {
           rotate = true;
         }

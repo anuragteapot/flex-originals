@@ -528,10 +528,7 @@ export default {
 
   LOGIN: async ({ commit, dispatch, state }, payload) => {
     try {
-      return await AXIOS_API.post('/api/users/login', payload, {
-        retry: 10,
-        retryDelay: 1000,
-      });
+      return await AXIOS_API.post('/api/users/login', payload);
     } catch (error) {
       return new handleError(commit, dispatch, state)._handleError(error);
     }

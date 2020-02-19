@@ -3,6 +3,7 @@
     v-show="src != ''"
     :class="`fo-video-player ${!active || error ? 'no-cursor' : ''}`"
     ref="player"
+    @mouseleave="active = false"
     @mousemove="
       makeActive();
       active = true;

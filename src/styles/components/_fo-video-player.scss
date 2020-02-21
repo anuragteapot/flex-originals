@@ -127,13 +127,14 @@
 
     &:hover {
       top: -16px;
-      transition: top 0.3s;
+      transition: top 0.3s linear;
+//        transition: opacity 0.1s linear;
 
       .fo-video-player__seekbar-current,
       .fo-video-player__seekbar-back,
       .fo-video-player__buffer-back {
         height: 5px;
-        transition: height 0.3s;
+        transition: height 0.3s linear;
       }
     }
   }

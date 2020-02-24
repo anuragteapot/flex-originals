@@ -369,6 +369,8 @@ export default {
         {
           newPassword: payload.newPassword,
           email: payload.email,
+        },{
+          headers: headers
         }
       );
     } catch (error) {

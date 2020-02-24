@@ -29,6 +29,9 @@ export default function createRouter() {
         await AXIOS_API.get(`/api/users/${userId}`);
         next();
       } catch (err) {
+         if (typeof document != 'undefined') {
+            Nprogress.done();
+         }
         window.localStorage.removeItem('$accessToken');
         window.localStorage.removeItem('$userId');
         window.localStorage.removeItem('user');

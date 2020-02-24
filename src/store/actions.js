@@ -369,12 +369,7 @@ export default {
         {
           newPassword: payload.newPassword,
           email: payload.email,
-        },
-        {
-          retry: 10,
-          retryDelay: 1000,
-          headers: headers,
-        },
+        }
       );
     } catch (error) {
       return new handleError(commit, dispatch, state)._handleError(error);
@@ -387,11 +382,7 @@ export default {
         `/api/users/reset`,
         {
           email: payload.email,
-        },
-        {
-          retry: 10,
-          retryDelay: 1000,
-        },
+        }
       );
     } catch (error) {
       return new handleError(commit, dispatch, state)._handleError(error);
@@ -403,15 +394,9 @@ export default {
       let settings = undefined;
 
       if (isServer) {
-        settings = await AXIOS_API_SERVER.get(`/api/users/findSetting/${uid}`, {
-          retry: 10,
-          retryDelay: 1000,
-        });
+        settings = await AXIOS_API_SERVER.get(`/api/users/findSetting/${uid}`);
       } else {
-        settings = await AXIOS_API.get(`/api/users/findSetting/${uid}`, {
-          retry: 10,
-          retryDelay: 1000,
-        });
+        settings = await AXIOS_API.get(`/api/users/findSetting/${uid}`);
       }
 
       commit(types.SET_SETTINGS, settings);

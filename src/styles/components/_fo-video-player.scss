@@ -155,6 +155,7 @@
     transform-origin: left;
     background-color: rgba(221, 221, 221, 0.8);
   }
+  
   .fo-video-player__seekbar-current {
     z-index: 2;
     background-color: $color-theme;
@@ -346,7 +347,7 @@
         padding: 0;
         width: 190px;
         height: 110px;
-        border: 1px solid rgba(0, 0, 0, 0.5);
+        border: 2px solid rgba(0, 0, 0, 0.8);
         text-align: center;
 
         .time_preview_div {
@@ -361,9 +362,10 @@
             border-radius: 1px;
             font-weight: 400;
             font-size: 12px;
+            font-weight: bold;
             display: inline-block;
             padding: 2px 5px;
-            background-color: rgba(20, 19, 19, 0.5);
+            background-color: rgba(0, 0, 0, 0.8);
           }
         }
       }

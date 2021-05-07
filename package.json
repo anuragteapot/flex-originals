@@ -52,7 +52,7 @@
     "serve-favicon": "^2.0.1",
     "strong-error-handler": "^3.0.0",
     "sw-precache-webpack-plugin": "^0.11.5",
-    "underscore": "^1.9.1",
+    "underscore": "^1.12.1",
     "url": "^0.11.0",
     "vue": "^2.6.10",
     "vue-meta": "^2.2.1",

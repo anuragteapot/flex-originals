@@ -33,7 +33,7 @@
     "cors": "^2.5.2",
     "crypto": "^1.0.1",
     "es6-promise": "^4.2.8",
-    "express": "^4.17.1",
+    "express": "^4.17.3",
     "fluent-ffmpeg": "^2.1.2",
     "fs-extra": "^8.1.0",
     "helmet": "^3.10.0",
